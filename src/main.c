@@ -17,12 +17,12 @@
 
 /** I N C L U D E S **********************************************************/
 #include <xc.h>
-#include <pps.h>
 #include <stdio.h>
 #include "MRF49XA.h"
 #include "IOConfig.h"
 #include "utilidades.h"
 
+#ifdef PIC24_HW
 #if defined(__PIC24FJ64GB004__)
 
 _CONFIG1(WDTPS_PS1 & FWPSA_PR32 & WINDIS_OFF & FWDTEN_OFF & ICS_PGx1 & GWRP_OFF & GCP_OFF & JTAGEN_OFF)
@@ -42,6 +42,10 @@ _FWDT(WDTPOST_PS128 & WDTPRE_PR128 & WINDIS_OFF & FWDTEN_OFF)
 _FPOR(FPWRT_PWR1 & ALTI2C_OFF)
 _FICD(ICS_PGD2 & JTAGEN_OFF)
 
+#define TRANSMITTER
+
+#endif
+#else
 #define TRANSMITTER
 
 #endif
@@ -70,6 +74,7 @@ void initRFPorts(void){
 
 void UartInit()
 {
+#ifdef PIC24_HW
     U1MODE = 0b1000000000000000;
     U1STA = 0b0000010000000000;
     U1BRG = 51; // 115k2 @ FRCPLL stock
@@ -78,13 +83,16 @@ void UartInit()
     PPSUnLock;
     iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
     PPSLock;
+#endif
 }
 /************* START OF MAIN FUNCTION ***************/
 int main ( void ){
+#ifdef PIC24_HW
 #if defined(__PIC24FJ64GB004__)
     AD1PCFG = 0xFFFF;
 #else
 	ADPCFG = 0xFFFF; // Ports as digital, not analog
+#endif
 #endif
         
         unsigned long i, j;
@@ -98,14 +106,14 @@ int main ( void ){
         TRISA &= ~(1<<10);
         LATA |= 1<<10;
 
-        printf("MRF49XA DEMO\r\n");
+       // printf("MRF49XA DEMO\r\n");
 	MRF49XA_Init();
 	InitRFData(&rfData);
 	powerState = 0;
 
             for (i = 0; i < 100; i++)
                 for (j = 0; j < 1000; j++)
-                    asm volatile("nop");
+                    Nop();
             
         MRF49XA_Reset_Radio();
         
@@ -115,7 +123,7 @@ int main ( void ){
 #ifdef TRANSMITTER
             for (i = 0; i < 100; i++)
                 for (j = 0; j < 1000; j++)
-                    asm volatile("nop");
+                    Nop();
             
             powerState ^= 1; // Toggle powerState
             AddRFData(&rfData,0x12); // First Payload Byte
@@ -126,7 +134,7 @@ int main ( void ){
             MRF49XA_Send_Packet(&rfData);
             InitRFData(&rfData);
 
-            printf("TX\r\n");
+           // printf("TX\r\n");
 
 #else
 
