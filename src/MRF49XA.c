@@ -120,38 +120,38 @@ void MRF49XA_Reset_Radio()
     SPI_Command(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
 }
 
-
 void MRF49XA_Power_Down(void)
 {
     SPI_Command(0x8201);
 }
 
-void MRF49XA_Init(){
+#define Mrf49XaDelay(n) do { \
+    for(i=0;i<n*100;i++) \
+    { \
+        for(j=0;j<1000;j++) \
+        { \
+            Nop(); \
+        } \
+    } \
+    }while(0);
 
+void Mrf49xaReset()
+{
     UI16_t i, j;
-
+    
     RF_RES = 0;
+    Mrf49XaDelay(10);
+    RF_RES = 1;
+    Mrf49XaDelay(10);
+    
+}
 
-    for(i=0;i<1000;i++)
-    {
-        for(j=0;j<1000;j++)
-        {
-            Nop();
-        }
-    }
-
-    Nop();
-    RF_RES = 1; // Release the Reset Pin
-
-    for(i=0;i<1000;i++)
-    {
-        for(j=0;j<1000;j++)
-        {
-            Nop();
-        }
-    }
-
-    SPI_Command(FIFORSTREG );
+void MRF49XA_Init()
+{
+    UI16_t i, j;
+    Mrf49xaReset();
+    
+    SPI_Command(FIFORSTREG);
     SPI_Command(FIFORSTREG | 0x0002);
     SPI_Command(GENCREG);
     SPI_Command(AFCCREG);
@@ -161,24 +161,16 @@ void MRF49XA_Init(){
     SPI_Command(RXCREG);
     SPI_Command(TXCREG);
     SPI_Command(BBFCREG);
-
-
     SPI_Command(PMCREG | 0x0020);		// turn on tx
 
-    for(i=0;i<1000;i++)
-    {
-        for(j=0;j<1000;j++)
-        {
-            Nop();
-        }
-    }
-
+    Mrf49XaDelay(5);
+    
     SPI_Command(PMCREG | 0x0080);		// turn off Tx, turn on receiver
     SPI_Command(GENCREG | 0x0040);		// enable the FIFO
     SPI_Command(FIFORSTREG);
     SPI_Command(FIFORSTREG | 0x0002);	// enable syncron latch
 
-    RF_FSEL=1; // FSEL bit in 1 to enable FIFO in software
+    RF_FSEL = 1; // Read from SPI registers.
 }
 
 #define MRF49XA_WaitOnTx() do { while (!SPI_SDI); } while (0);
@@ -191,13 +183,13 @@ void MRF49XA_Send_Packet(TRFData *RFData)
     SPI_Command(GENCREG | 0x0080);                      // Enable the Tx register
     SPI_Command(PMCREG |0x0020);                        // turn on tx
 
-    SPI_CS=0;                                           // chip select low
+    SPI_CS = 0;                                         // chip select low
     
     MRF49XA_WaitOnTx();     SPI_Write16(TXBREG | 0xAA);	// preamble
     MRF49XA_WaitOnTx();     SPI_Write(0xAA);            // preamble
     MRF49XA_WaitOnTx();     SPI_Write(0x2D);            // sync byte 1
     MRF49XA_WaitOnTx();     SPI_Write(0xD4);            // sync byte 2
-    MRF49XA_WaitOnTx();     SPI_Write(RFData->index);   // Data length
+    MRF49XA_WaitOnTx();     SPI_Write(RFData->index + 1); // Data length
     
     for (i = 0; i < RFData->index; i++)
     {
@@ -209,14 +201,13 @@ void MRF49XA_Send_Packet(TRFData *RFData)
     MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
     MRF49XA_WaitOnTx();
 
-    SPI_CS=1;						// end
+    SPI_CS = 1;						// end
 
     SPI_Command(FIFORSTREG);                            // FIFO Reset
     SPI_Command(PMCREG | 0x0080);                       // turn on receiver
     SPI_Command(GENCREG | 0x0040);                      // enable the FIFO
     SPI_Command(FIFORSTREG | 0x0002);                   // FIFO syncron latch re-enable
 
-	
 }
 
 UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
@@ -226,7 +217,7 @@ UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
 
     if(SPI_SDI)                                     // SDI = 1? Data in FIFO
     {
-        SPI_CS = 1;
+        SPI_CS  = 1;
         RF_FSEL = 0;                            // Read from FIFO instead of SPI registers
 
         if (RFData->len == 0)                    // Is this our first byte after sync? Then cover length
@@ -237,7 +228,6 @@ UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
 
             if (RFData->len < 0 || RFData->len > PAYLOAD_MAX)
             {
-                //
                 RFData->len = 0;
                 MRF49XA_Reset_Radio();
                 return NODATA;
@@ -250,7 +240,6 @@ UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
         }
         else
         {
-            // Data payload
             RFData->buffer[RFData->index] = SPI_Read();
             RFData->ChkSum = RFData->ChkSum ^ RFData->buffer[RFData->index];
             RF_FSEL = 0;
@@ -281,73 +270,16 @@ void AddRFData(TRFData *RFData, unsigned char data){
     RFData->ChkSum = RFData->ChkSum ^ data;
 }
 
-/*
-void StatusRead(void)
+
+void InitRFData(TRFData *RFData)
 {
-	unsigned char	preRF_FSEL = RF_FSEL;
-	unsigned char	preSPI_CS = SPI_CS;
-	
-	RF_FSEL = 1;
-	SPI_CS = 0;
-	
-	SPI_SDO = 0;
-	
-	TransceiverStatus.bits.RG_FF_IT = SPI_SDI;    
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.POR = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.RGUR_FFOV = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.WKUP = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.EXT = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.LBD = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.FFEM = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.RSSI_ATS = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	   
-	TransceiverStatus.bits.DQD = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.CRL = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-	
-	TransceiverStatus.bits.ATGL = SPI_SDI;
-	SPI_SCK = 1;
-	SPI_SCK = 0;
-
-	RF_FSEL = preRF_FSEL;
-	SPI_CS = preSPI_CS;
-	
-}*/
-
-void InitRFData(TRFData *RFData){
 	RFData->index       = 0;
 	RFData->len         = 0;
 	RFData->ChkSum      = 0;
 }
 
-unsigned char CalChkSum(unsigned char *buffer, unsigned char len){
+unsigned char CalChkSum(unsigned char *buffer, unsigned char len)
+{
   unsigned char i;
   unsigned char Received = 0;
   

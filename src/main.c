@@ -79,9 +79,10 @@ void UartInit()
     U1STA = 0b0000010000000000;
     U1BRG = 51; // 115k2 @ FRCPLL stock
     PORTB &= ~(1<<0);
-
+    PORTB |= 1<<1;
     PPSUnLock;
     iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
+    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
     PPSLock;
 #endif
 }
@@ -121,21 +122,16 @@ int main ( void ){
 
 
 #ifdef TRANSMITTER
-            for (i = 0; i < 100; i++)
-                for (j = 0; j < 1000; j++)
-                    Nop();
             
-            powerState ^= 1; // Toggle powerState
-            AddRFData(&rfData,0x12); // First Payload Byte
-            AddRFData(&rfData,0x34); // Second Payload Byte
-            AddRFData(&rfData,0x56); // Second Payload Byte
-            AddRFData(&rfData,0x78); // Second Payload Byte
-            AddRFData(&rfData,powerState); // Second Payload Byte
-            MRF49XA_Send_Packet(&rfData);
-            InitRFData(&rfData);
-
-           // printf("TX\r\n");
-
+            if (U1STAbits.URXDA)
+            {
+                AddRFData(&rfData,U1RXREG); // First Payload Byte
+                AddRFData(&rfData,0x00);
+                AddRFData(&rfData,0x00);
+                AddRFData(&rfData,0x00);
+                MRF49XA_Send_Packet(&rfData);
+                InitRFData(&rfData);
+            }
 #else
 
             RF_FSEL = 1;
@@ -149,16 +145,16 @@ int main ( void ){
                     case PACKET_RECEIVED: {
 
                             for(i = 0; i < rfData.len; i++)
-                                printf("0x%02X ", rfData.buffer[i]);
-                            printf("\r\n");
-
-                            if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1)) {
-                                printf("Checksum Y\r\n");
-                            } else {
-                                printf("Checksum N\r\n");
+                            {
+                                printf("0x%02X %c\r\n", rfData.buffer[i], rfData.buffer[i]);
                             }
 
-                            printf("Packet\r\n");
+                            if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1)) {
+                                //printf("Checksum Y\r\n");
+                            } else {
+                                //printf("Checksum N\r\n");
+                            }
+
                             InitRFData(&rfData); // clears indexes
                             break;
                     }

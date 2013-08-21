@@ -7,6 +7,10 @@
 #define PIC24_HW
 #endif
 
+#if defined(__dsPIC33FJ128GP804__)
+#define PIC24_HW
+#endif
+
 #ifdef PIC24_HW
 #include <pps.h>
 
