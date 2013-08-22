@@ -1,35 +1,3 @@
-/*********************************************************************
-* FileName:		 MRF49XA.c 
-* Dependencies:    See INCLUDES section below
-* Processor:       
-* Compiler:        
-* Company:         Microchip Technology, Inc.
-*
-* Software License Agreement:
-*
-* The software supplied herewith by Microchip Technology Incorporated
-* (the "Company") for its PICmicro® Microcontroller is intended and
-* supplied to you, the Company's customer, for use solely and
-* exclusively on Microchip PICmicro Microcontroller products. The
-* software is owned by the Company and/or its supplier, and is
-* protected under applicable copyright laws. All rights are reserved.
-* Any use in violation of the foregoing restrictions may subject the
-* user to criminal sanctions under applicable laws, as well as to
-* civil liability for the breach of the terms and conditions of this
-* license.
-*
-* THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES,
-* WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
-* TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-* PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
-* IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
-* CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-*********************************************************************
-* File Description:
-*
-* Change History:
-* Author               Cristian Toma
-********************************************************************/
 #include <xc.h>
 #include "IOConfig.h"
 #include "MRF49XA.h"
@@ -120,21 +88,6 @@ void MRF49XA_Reset_Radio()
     SPI_Command(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
 }
 
-void MRF49XA_Power_Down(void)
-{
-    SPI_Command(0x8201);
-}
-
-#define Mrf49XaDelay(n) do { \
-    for(i=0;i<n*100;i++) \
-    { \
-        for(j=0;j<1000;j++) \
-        { \
-            Nop(); \
-        } \
-    } \
-    }while(0);
-
 void Mrf49xaReset()
 {
     UI16_t i, j;
@@ -173,7 +126,6 @@ void MRF49XA_Init()
     RF_FSEL = 1; // Read from SPI registers.
 }
 
-#define MRF49XA_WaitOnTx() do { while (!SPI_SDI); } while (0);
 
 void MRF49XA_Send_Packet(TRFData *RFData)
 {
@@ -228,16 +180,16 @@ UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
 
             RF_FSEL = 1;
 
-            if (RFData->len < 0 || RFData->len > PAYLOAD_MAX)
+            if (RFData->len < 0 || RFData->len > PACKET_SIZE_MAX)
             {
                 RFData->len = 0;
                 MRF49XA_Reset_Radio();
-                return NODATA;
+                return RX_STATE_NONE;
             }
             else
             {
                 RFData->index = 0;
-                return DATA_RECEIVED;
+                return RX_STATE_DATA;
             }
         }
         else
@@ -250,18 +202,18 @@ UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
 
             if (RFData->index >= RFData->len)
             {
-                return PACKET_RECEIVED;
+                return RX_STATE_PACKET;
             }
             else
             {
-                return DATA_RECEIVED;
+                return RX_STATE_DATA;
             }
         }
     }
     else
     {
         SPI_CS = 1;
-        return NODATA;
+        return RX_STATE_NONE;
     }
 }
 

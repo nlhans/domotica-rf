@@ -1,21 +1,3 @@
-/*********************************************************************
- *
- *                DCC Command Station Firmware Version 1.0
- *
- *********************************************************************
- * FileName:        main.c
- * Dependencies:    See INCLUDES section below
- * Processor:       dsPIC30F3012
- * Compiler:        C30 3.05 +
- * Company:         My personal use
- *
- * Notes:						
- * Author               Date        Comment
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Ernesto Pareja       29/12/2009    Original.
- ********************************************************************/
-
-/** I N C L U D E S **********************************************************/
 #include <xc.h>
 #include <stdio.h>
 #include "MRF49XA.h"
@@ -49,26 +31,28 @@ _FICD(ICS_PGD2 & JTAGEN_OFF)
 
 #endif
 
-typedef struct {
+typedef struct
+{
 	unsigned PacketReady		: 1;
-	unsigned ResetRadio			: 1;
+	unsigned ResetRadio		: 1;
 } TFlags;
 
 TRFData rfData;
 char PacketLen;
 TFlags Flags;
 
-void initRFPorts(void){
- 	TRIS_SPI_SDI 	= INPUT_PIN;
- 	TRIS_SPI_SDO 	= OUTPUT_PIN;
- 	TRIS_SPI_SCK 	= OUTPUT_PIN;
- 	TRIS_SPI_CS  	= OUTPUT_PIN;
- 	TRIS_RF_IRQ		= INPUT_PIN;
- 	TRIS_RF_FSEL	= OUTPUT_PIN;
- 	TRIS_RF_DIO		= INPUT_PIN;
- 	TRIS_RF_RES		= OUTPUT_PIN;
- 	TRIS_RF_FINT	= INPUT_PIN;
- 	TRIS_RF_IRQ		= INPUT_PIN;
+void initRFPorts(void)
+{
+    TRIS_SPI_SDI 	= INPUT_PIN;
+    TRIS_SPI_SDO 	= OUTPUT_PIN;
+    TRIS_SPI_SCK 	= OUTPUT_PIN;
+    TRIS_SPI_CS  	= OUTPUT_PIN;
+    TRIS_RF_IRQ		= INPUT_PIN;
+    TRIS_RF_FSEL	= OUTPUT_PIN;
+    TRIS_RF_DIO		= INPUT_PIN;
+    TRIS_RF_RES		= OUTPUT_PIN;
+    TRIS_RF_FINT	= INPUT_PIN;
+    TRIS_RF_IRQ		= INPUT_PIN;
 }
 
 void UartInit()
@@ -87,97 +71,106 @@ void UartInit()
 }
 /************* START OF MAIN FUNCTION ***************/
 int main ( void ){
-#ifdef PIC24_HW
-#if defined(__PIC24FJ64GB004__)
+    #ifdef PIC24_HW
+    #if defined(__PIC24FJ64GB004__)
     AD1PCFG = 0xFFFF;
-#else
-	ADPCFG = 0xFFFF; // Ports as digital, not analog
-#endif
-#endif
-        
-        unsigned long i, j;
-//	char lenght;
-        char PackState;
-	char powerState;
+    #else
+    ADPCFG = 0xFFFF; // Ports as digital, not analog
+    #endif
+    #endif
 
-        UartInit();
-	initRFPorts();
+    unsigned long i, j;
 
-        TRISA &= ~(1<<10);
-        LATA |= 1<<10;
+    char PackState;
+    char powerState;
 
-       // printf("MRF49XA DEMO\r\n");
-	MRF49XA_Init();
-	InitRFData(&rfData);
-	powerState = 0;
+    UartInit();
+    initRFPorts();
 
-            for (i = 0; i < 100; i++)
-                for (j = 0; j < 1000; j++)
-                    Nop();
-            
-        MRF49XA_Reset_Radio();
-        
-	while (1) {
+    TRISA &= ~(1<<10);
+    LATA |= 1<<10;
+
+    MRF49XA_Init();
+    InitRFData(&rfData);
+    powerState = 0;
+
+    for (i = 0; i < 100; i++)
+    {
+        for (j = 0; j < 1000; j++)
+        {
+            Nop();
+        }
+    }
+
+    MRF49XA_Reset_Radio();
+
+    while (1)
+    {
 
 
-#ifdef TRANSMITTER
-            for (i = 0; i < 500; i++)
-                for (j = 0; j < 1000; j++)
-                    Nop();
-            
-            AddRFData(&rfData,0x12); // First Payload Byte
-            AddRFData(&rfData,0x34);
-            AddRFData(&rfData,0x56);
-            AddRFData(&rfData,0x78);
-            AddRFData(&rfData,0x90);
-            AddRFData(&rfData,0xAB);
-            AddRFData(&rfData,0xCD);
-            AddRFData(&rfData,0xEF);
-            MRF49XA_Send_Packet(&rfData);
-            InitRFData(&rfData);
-            printf("Tx\r\n");
-#else
-
-            RF_FSEL = 1;
-	SPI_SDO = 0;
-	SPI_CS	=0;							// chip select low
-	Nop();
-	while(!SPI_SDI);
-
-            PackState = MRF49XA_Receive_Packet(&rfData);
-            switch (PackState) {
-                    case PACKET_RECEIVED: {
-
-                            for(i = 0; i < rfData.len; i++)
-                            {
-                                printf("0x%02X ", rfData.buffer[i]);
-                            }
-                            if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1)) {
-                                printf("CRC Y\r\n");
-                            } else {
-                                printf("CRC N\r\n");
-                            }
-
-                            InitRFData(&rfData); // clears indexes
-                            break;
-                    }
-
-                case NODATA:
-                    i++;
-                    if (i > 100)
-                    {
-                        i=0;
-                        Flags.ResetRadio = 1;
-                    }
-                    break;
+        #ifdef TRANSMITTER
+        for (i = 0; i < 500; i++)
+        {
+            for (j = 0; j < 1000; j++)
+            {
+                Nop();
             }
-#endif
-		
-		if (Flags.ResetRadio == 1) {		
-			InitRFData(&rfData);
-			MRF49XA_Reset_Radio();
-		}
-			
-	}	
+        }
+
+        AddRFData(&rfData,0x12); // First Payload Byte
+        AddRFData(&rfData,0x34);
+        AddRFData(&rfData,0x56);
+        AddRFData(&rfData,0x78);
+        AddRFData(&rfData,0x90);
+        AddRFData(&rfData,0xAB);
+        AddRFData(&rfData,0xCD);
+        AddRFData(&rfData,0xEF);
+        MRF49XA_Send_Packet(&rfData);
+        InitRFData(&rfData);
+        //printf("Tx\r\n");
+        #else
+
+        RF_FSEL = 1;
+        SPI_SDO = 0;
+        SPI_CS	=0;							// chip select low
+        Nop();
+        while(!SPI_SDI);
+
+        PackState = MRF49XA_Receive_Packet(&rfData);
+        switch (PackState) {
+            case PACKET_RECEIVED:
+
+                for(i = 0; i < rfData.len; i++)
+                {
+                    printf("0x%02X ", rfData.buffer[i]);
+                }
+                if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1))
+                {
+                    printf("CRC Y\r\n");
+                } else {
+                    printf("CRC N\r\n");
+                }
+
+                InitRFData(&rfData); // clears indexes
+                break;
+
+            case NODATA:
+                i++;
+                if (i > 100)
+                {
+                i=0;
+                Flags.ResetRadio = 1;
+                }
+                break;
+        }
+        #endif
+
+        if (Flags.ResetRadio == 1)
+        {
+            InitRFData(&rfData);
+            MRF49XA_Reset_Radio();
+        }
+
+    }
 }
 
