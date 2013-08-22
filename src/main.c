@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include "MRF49XA.h"
 #include "IOConfig.h"
-#include "utilidades.h"
 
 #ifdef PIC24_HW
 #if defined(__PIC24FJ64GB004__)

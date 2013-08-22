@@ -2,7 +2,6 @@
 #if !defined(__MRF49XA_H)
 #define __MRF49XA_H
 
-#include "GenericTypeDefs.h"
 #include "ioconfig.h"
 #include "ConfigMRF49XA.h"
 
@@ -39,16 +38,16 @@ typedef struct
 {
     union
     {
-        BYTE    Val;
+        UI08_t Val;
         struct
         {
-            BYTE    Valid       :1;
-            BYTE    RSSI        :1;
-            BYTE    DQD         :1;
+            UI08_t Valid  :1;
+            UI08_t RSSI   :1;
+            UI08_t DQD    :1;
         } bits;
     } flags;
-    BYTE        Payload[RX_PACKET_SIZE];
-    BYTE        PayloadLen;
+    UI08_t Payload[RX_PACKET_SIZE];
+    UI08_t PayloadLen;
 } RX_PACKET;
 
 #define	FREQ_BAND_433				0x0010       //    433 MHz
