@@ -199,6 +199,8 @@ void MRF49XA_Send_Packet(TRFData *RFData)
 
     MRF49XA_WaitOnTx();     SPI_Write(CalChkSum(RFData->buffer, RFData->index));	// checksum
     MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
+    MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
+    MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
     MRF49XA_WaitOnTx();
 
     SPI_CS = 1;						// end

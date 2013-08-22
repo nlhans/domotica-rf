@@ -122,16 +122,21 @@ int main ( void ){
 
 
 #ifdef TRANSMITTER
+            for (i = 0; i < 500; i++)
+                for (j = 0; j < 1000; j++)
+                    Nop();
             
-            if (U1STAbits.URXDA)
-            {
-                AddRFData(&rfData,U1RXREG); // First Payload Byte
-                AddRFData(&rfData,0x00);
-                AddRFData(&rfData,0x00);
-                AddRFData(&rfData,0x00);
-                MRF49XA_Send_Packet(&rfData);
-                InitRFData(&rfData);
-            }
+            AddRFData(&rfData,0x12); // First Payload Byte
+            AddRFData(&rfData,0x34);
+            AddRFData(&rfData,0x56);
+            AddRFData(&rfData,0x78);
+            AddRFData(&rfData,0x90);
+            AddRFData(&rfData,0xAB);
+            AddRFData(&rfData,0xCD);
+            AddRFData(&rfData,0xEF);
+            MRF49XA_Send_Packet(&rfData);
+            InitRFData(&rfData);
+            printf("Tx\r\n");
 #else
 
             RF_FSEL = 1;
@@ -146,13 +151,12 @@ int main ( void ){
 
                             for(i = 0; i < rfData.len; i++)
                             {
-                                printf("0x%02X %c\r\n", rfData.buffer[i], rfData.buffer[i]);
+                                printf("0x%02X ", rfData.buffer[i]);
                             }
-
                             if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1)) {
-                                //printf("Checksum Y\r\n");
+                                printf("CRC Y\r\n");
                             } else {
-                                //printf("Checksum N\r\n");
+                                printf("CRC N\r\n");
                             }
 
                             InitRFData(&rfData); // clears indexes

@@ -9,15 +9,15 @@
 
 #define GENCREG 		0x8000 | XTAL_LD_CAP_125 | FREQ_BAND_868		// Cload=12.5pF TX registers & FIFO are disabled
 #define PMCREG 			0x8200		// Everything off, uC clk enabled
-#define	RXCREG      (0x9400 | LNA_GAIN | RSSI_THRESHOLD)
+#define	RXCREG      (0x9460 | LNA_GAIN | RSSI_THRESHOLD)
 //	#define RXCREG 			0x94A1		// BW=135kHz, DRSSI=-97dBm, pin8=VDI, fast VDI
 #define TXBREG 			0xB800
 #define FIFORSTREG	0xCA81		// clear the sync latch enabled, limit=8bits, disable sensitive reset
 #define BBFCREG 		0xC2AC		// Digital LPF (default), Automatic Recovery Clock
 #define AFCCREG			0xC4D7		// Auto AFC (default) , +15/-16 Fres, Output enable
 #define CFSREG 			0xA860		// Fo=915.000MHz (default)
-#define TXCREG			0x9830		// df=60kHz, Pmax, normal modulation polarity 
-#define DRSREG 			0xC623		// 9579Baud (default)
+#define TXCREG			0x9890		// df=150kHz, Pmax, normal modulation polarity
+#define DRSREG 			0xC6A3		// 9579Baud (default)
 #define	SYNBREG			0xCED4		// Syncronization Pattern (default 0xCED4)
 
 
