@@ -33,13 +33,15 @@ _FICD(ICS_PGD2 & JTAGEN_OFF)
 
 typedef struct
 {
-	unsigned PacketReady		: 1;
-	unsigned ResetRadio		: 1;
+    unsigned PacketReady		: 1;
+    unsigned ResetRadio		: 1;
 } TFlags;
 
-TRFData rfData;
 char PacketLen;
 TFlags Flags;
+
+char PackState;
+char powerState;
 
 void initRFPorts(void)
 {
@@ -53,6 +55,7 @@ void initRFPorts(void)
     TRIS_RF_RES		= OUTPUT_PIN;
     TRIS_RF_FINT	= INPUT_PIN;
     TRIS_RF_IRQ		= INPUT_PIN;
+    TRIS_RF_POWER       = OUTPUT_PIN;
 }
 
 void UartInit()
@@ -69,107 +72,70 @@ void UartInit()
     PPSLock;
 #endif
 }
-/************* START OF MAIN FUNCTION ***************/
+
+UI08_t buffer[16];
+
 int main ( void ){
+    UI08_t i, j;
     #ifdef PIC24_HW
-    #if defined(__PIC24FJ64GB004__)
-    AD1PCFG = 0xFFFF;
-    #else
-    ADPCFG = 0xFFFF; // Ports as digital, not analog
+        #if defined(__PIC24FJ64GB004__)
+        AD1PCFG = 0xFFFF;
+        #else
+        ADPCFG = 0xFFFF; // Ports as digital, not analog
+        #endif
     #endif
-    #endif
-
-    unsigned long i, j;
-
-    char PackState;
-    char powerState;
 
     UartInit();
     initRFPorts();
-
-    TRISA &= ~(1<<10);
-    LATA |= 1<<10;
+    
+    RF_POWER = 1;
 
     MRF49XA_Init();
-    InitRFData(&rfData);
-    powerState = 0;
-
-    for (i = 0; i < 100; i++)
-    {
-        for (j = 0; j < 1000; j++)
-        {
-            Nop();
-        }
-    }
-
+    printf("Hi\r\n");
+    Mrf49XaDelay(1);
+    
     MRF49XA_Reset_Radio();
 
     while (1)
     {
-
-
         #ifdef TRANSMITTER
-        for (i = 0; i < 500; i++)
-        {
-            for (j = 0; j < 1000; j++)
-            {
-                Nop();
-            }
-        }
 
-        AddRFData(&rfData,0x12); // First Payload Byte
-        AddRFData(&rfData,0x34);
-        AddRFData(&rfData,0x56);
-        AddRFData(&rfData,0x78);
-        AddRFData(&rfData,0x90);
-        AddRFData(&rfData,0xAB);
-        AddRFData(&rfData,0xCD);
-        AddRFData(&rfData,0xEF);
-        MRF49XA_Send_Packet(&rfData);
-        InitRFData(&rfData);
-        //printf("Tx\r\n");
+        buffer[0] = 0x12;
+        buffer[1] = 0x34;
+        buffer[2] = 0x56;
+        buffer[3] = 0x78;
+        buffer[4] = 0x90;
+        buffer[5] = 0xAB;
+        buffer[6] = 0xCD;
+        buffer[7] = 0xEF;
+
+        MRF49XA_TxPacket(buffer, 8);
+        
+        printf("Tx\r\n");
+        
         #else
 
-        RF_FSEL = 1;
-        SPI_SDO = 0;
-        SPI_CS	=0;							// chip select low
-        Nop();
-        while(!SPI_SDI);
+        i = MRF49XA_RxPacket(buffer);
 
-        PackState = MRF49XA_Receive_Packet(&rfData);
-        switch (PackState) {
-            case PACKET_RECEIVED:
+        if (i != 0)
+        {
+            if ((i & 0x80) == 0)
+            {
+                printf("CRC Y\t");
+            }
+            else
+            {
+                printf("CRC N\t");
+            }
+            
+            for(j = 0; j < (i&0x7F); j++)
+            {
+                printf("0x%02X ", buffer[j]);
+            }
 
-                for(i = 0; i < rfData.len; i++)
-                {
-                    printf("0x%02X ", rfData.buffer[i]);
-                }
-                if (rfData.buffer[rfData.len-1] == CalChkSum(rfData.buffer,rfData.len-1))
-                {
-                    printf("CRC Y\r\n");
-                } else {
-                    printf("CRC N\r\n");
-                }
-
-                InitRFData(&rfData); // clears indexes
-                break;
-
-            case NODATA:
-                i++;
-                if (i > 100)
-                {
-                i=0;
-                Flags.ResetRadio = 1;
-                }
-                break;
+            printf("\r\n");
         }
         #endif
-
-        if (Flags.ResetRadio == 1)
-        {
-            InitRFData(&rfData);
-            MRF49XA_Reset_Radio();
-        }
 
     }
 }

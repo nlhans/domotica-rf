@@ -5,9 +5,9 @@
 
 
 #define Mrf49XaDelay(n) do { \
-    for(i=0;i<n*100;i++) \
+    for(i=0;i<n*125;i++) \
     { \
-        for(j=0;j<1000;j++) \
+        for(j=0;j<250;j++) \
         { \
             Nop(); \
         } \
@@ -94,11 +94,7 @@ void SPI_Command(UI16_t spicmd);
 
 void MRF49XA_Init();
 void MRF49XA_Reset_Radio(void);
-void MRF49XA_Send_Packet(TRFData *RFData);
-UI08_t  MRF49XA_Receive_Packet(TRFData *RFData);
-
-void AddRFData(TRFData *RFData, unsigned char data);
-void InitRFData(TRFData *RFData);
-unsigned char CalChkSum(unsigned char *buffer, unsigned char len);
+void MRF49XA_TxPacket(UI08_t *data, UI08_t size);
+UI08_t MRF49XA_RxPacket(UI08_t *data);
 
 #endif

@@ -88,21 +88,16 @@ void MRF49XA_Reset_Radio()
     SPI_Command(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
 }
 
-void Mrf49xaReset()
-{
-    UI16_t i, j;
-    
-    RF_RES = 0;
-    Mrf49XaDelay(10);
-    RF_RES = 1;
-    Mrf49XaDelay(10);
-    
-}
-
 void MRF49XA_Init()
 {
-    UI16_t i, j;
-    Mrf49xaReset();
+    UI08_t i, j;
+    
+    // Reset the chip
+    RF_RES = 0;
+    Nop();
+    RF_RES = 1;
+
+    Mrf49XaDelay(2);
     
     SPI_Command(FIFORSTREG);
     SPI_Command(FIFORSTREG | 0x0002);
@@ -116,7 +111,7 @@ void MRF49XA_Init()
     SPI_Command(BBFCREG);
     SPI_Command(PMCREG | 0x0020);		// turn on tx
 
-    Mrf49XaDelay(5);
+    Mrf49XaDelay(2);
     
     SPI_Command(PMCREG | 0x0080);		// turn off Tx, turn on receiver
     SPI_Command(GENCREG | 0x0040);		// enable the FIFO
@@ -126,10 +121,9 @@ void MRF49XA_Init()
     RF_FSEL = 1; // Read from SPI registers.
 }
 
-
-void MRF49XA_Send_Packet(TRFData *RFData)
+void MRF49XA_TxPacket(UI08_t *data, UI08_t size)
 {
-    UI08_t i;
+    UI08_t i, crc = 0;
 
     SPI_Command(PMCREG);                                // turn off the transmitter and receiver
     SPI_Command(GENCREG | 0x0080);                      // Enable the Tx register
@@ -141,15 +135,16 @@ void MRF49XA_Send_Packet(TRFData *RFData)
     MRF49XA_WaitOnTx();     SPI_Write(0xAA);            // preamble
     MRF49XA_WaitOnTx();     SPI_Write(0x2D);            // sync byte 1
     MRF49XA_WaitOnTx();     SPI_Write(0xD4);            // sync byte 2
-    MRF49XA_WaitOnTx();     SPI_Write(RFData->index + 1); // Data length
+    MRF49XA_WaitOnTx();     SPI_Write(size + 1); // Data length
     
-    for (i = 0; i < RFData->index; i++)
+    for (i = 0; i < size; i++)
     {
         MRF49XA_WaitOnTx();
-        SPI_Write(RFData->buffer[i]);                   // write payload data
+        SPI_Write(data[i]);                   // write payload data
+        crc = crc ^ data[i];
     }
 
-    MRF49XA_WaitOnTx();     SPI_Write(CalChkSum(RFData->buffer, RFData->index));	// checksum
+    MRF49XA_WaitOnTx();     SPI_Write(crc);	// checksum
     MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
     MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
     MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
@@ -164,83 +159,69 @@ void MRF49XA_Send_Packet(TRFData *RFData)
 
 }
 
-UI08_t MRF49XA_Receive_Packet(TRFData *RFData)
+UI08_t MRF49XA_RxPacket(UI08_t *data)
 {
+    static UI08_t inPacket = 0;
+    static UI08_t length = 0;
+    static UI08_t index = 0;
+    static UI08_t crc = 0;
+    
     SPI_SDO = 0;
-    SPI_CS  = 0;					// chip select low
-
-    if(SPI_SDI)                                     // SDI = 1? Data in FIFO
+    SPI_CS  = 0;
+    Nop();
+    if(SPI_SDI)
     {
         SPI_CS  = 1;
-        RF_FSEL = 0;                            // Read from FIFO instead of SPI registers
+        RF_FSEL = 0;
 
-        if (RFData->len == 0)                    // Is this our first byte after sync? Then cover length
+        if (inPacket == 0)
         {
-            RFData->len = SPI_Read();
+            length = SPI_Read();
 
             RF_FSEL = 1;
 
-            if (RFData->len < 0 || RFData->len > PACKET_SIZE_MAX)
+            if (length > PACKET_SIZE_MAX)
             {
-                RFData->len = 0;
                 MRF49XA_Reset_Radio();
-                return RX_STATE_NONE;
             }
             else
             {
-                RFData->index = 0;
-                return RX_STATE_DATA;
+                inPacket = 1;
+                index = 0;
+                crc = 0;
             }
+            
+            return 0;
         }
         else
         {
-            RFData->buffer[RFData->index] = SPI_Read();
-            RFData->ChkSum = RFData->ChkSum ^ RFData->buffer[RFData->index];
-            RF_FSEL = 0;
+            data[index] = SPI_Read();
+            crc = crc ^ data[index];
+            index++;
+            
+            RF_FSEL = 1;
 
-            RFData->index++;
-
-            if (RFData->index >= RFData->len)
+            if (index >= length)
             {
-                return RX_STATE_PACKET;
+                inPacket = 0;
+
+                if (length == 0)
+                    return 0;
+                
+                if(crc != data[index])
+                    return length | 0x80;
+                else
+                    return length;
             }
             else
             {
-                return RX_STATE_DATA;
+                return 0;
             }
         }
     }
     else
     {
         SPI_CS = 1;
-        return RX_STATE_NONE;
+        return 0;
     }
 }
-
-void AddRFData(TRFData *RFData, unsigned char data){
-    
-    RFData->buffer[RFData->index] = data;
-    RFData->index++;
-    RFData->ChkSum = RFData->ChkSum ^ data;
-}
-
-
-void InitRFData(TRFData *RFData)
-{
-	RFData->index       = 0;
-	RFData->len         = 0;
-	RFData->ChkSum      = 0;
-}
-
-unsigned char CalChkSum(unsigned char *buffer, unsigned char len)
-{
-  unsigned char i;
-  unsigned char Received = 0;
-  
-  for (i=0;i<len;i++) {
-  	Received = Received ^ buffer[i];
-  }
-  return Received;
-
-}
-
