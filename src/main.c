@@ -23,13 +23,15 @@ _FWDT(WDTPOST_PS128 & WDTPRE_PR128 & WINDIS_OFF & FWDTEN_OFF)
 _FPOR(FPWRT_PWR1 & ALTI2C_OFF)
 _FICD(ICS_PGD2 & JTAGEN_OFF)
 
-#define TRANSMITTER
-
 #endif
 #else
 #define TRANSMITTER
+        
+ __CONFIG( FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF  );
+ __CONFIG( WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_OFF );
 
 #endif
+
 
 typedef struct
 {
@@ -83,6 +85,11 @@ int main ( void ){
         #else
         ADPCFG = 0xFFFF; // Ports as digital, not analog
         #endif
+#else
+        OSCCON = 0b01111000;
+    ANSELA = 0;
+    ANSELB = 0;
+    ANSELC = 0;
     #endif
 
     UartInit();
