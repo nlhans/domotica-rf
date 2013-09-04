@@ -2,6 +2,10 @@
 
 void SoftI2cInit(void)
 {
+    // Write '0' (=HIGH)
+    I2C_SCL = I2C_HIGH;
+    I2C_SDA = I2C_HIGH;
+    
     // Configure as inputs
     TRIS_I2C_SCL = OUTPUT_PIN;
     TRIS_I2C_SDA = OUTPUT_PIN;
@@ -11,10 +15,6 @@ void SoftI2cInit(void)
     TRIS_I2C_MIRROR_SDA = OUTPUT_PIN;
 #endif
 
-    // Write '0' (=HIGH)
-    I2C_SCL = I2C_HIGH;
-    I2C_SDA = I2C_HIGH;
-
     // Enable weak pullups
     // Should be disabled during sleep
     WP_I2C_SDA = 1; // SDA
@@ -23,8 +23,10 @@ void SoftI2cInit(void)
 
 void SoftI2cNop(void)
 {
+    UI16_t i =0;
     I2C_MIRROR();
     __delay_us(50);
+    //for (i = 0; i < 1000; i++) asm volatile("nop");
     I2C_MIRROR();
 }
 
@@ -111,10 +113,9 @@ UI08_t SoftI2cTxByte(UI08_t data)
     I2C_SCL = I2C_LOW;
     SoftI2cNop();
 
-    I2C_SDA = I2C_HIGH;
+    //I2C_SDA = I2C_HIGH;
     TRIS_I2C_SDA = INPUT_PIN;
-    SoftI2cNop();
-
+    
     I2C_SCL = I2C_HIGH;
     SoftI2cNop();
 
