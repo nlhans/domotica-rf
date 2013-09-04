@@ -1,6 +1,6 @@
 #include <xc.h>
-#include "IOConfig.h"
-#include "MRF49XA.h"
+#include "mrf49xa.h"
+
 
 UI08_t SPI_Read(void)
 {

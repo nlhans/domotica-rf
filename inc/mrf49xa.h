@@ -1,8 +1,7 @@
 #ifndef __MRF49XA_H
 #define __MRF49XA_H
 
-#include "ioconfig.h"
-
+#include "stddefs.h"
 
 #define Mrf49XaDelay(n) do { \
     for(i=0;i<n*125;i++) \
