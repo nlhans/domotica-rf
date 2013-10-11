@@ -17,8 +17,15 @@ void SoftI2cInit(void)
 
     // Enable weak pullups
     // Should be disabled during sleep
-    WP_I2C_SDA = 1; // SDA
+#ifdef WP_I2C_SDA
+    WP_I2C_SDA = 0; // SDA
     WP_I2C_SCL = 0; // SCL
+#endif
+    
+    SoftI2cStart();
+    SoftI2cTxByte(0x00);
+    SoftI2cStop();
+    
 }
 
 void SoftI2cNop(void)

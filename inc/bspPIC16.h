@@ -4,6 +4,8 @@
 // GPIO's
 #define INPUT_PIN           1
 #define OUTPUT_PIN          0
+
+// ADC
 typedef enum Pic16PortDefs_e
 {
     PA,
@@ -33,6 +35,48 @@ typedef enum AdcChannels_e
 
 // Compile the BSP c files
 #define ADC16_C
+
+// I2C
+
+//#define I2C_PK2_DEBUG
+#define I2C_PK2_MIRROR
+
+#ifdef I2C_PK2_MIRROR
+#define I2C_MIRROR() do { I2C_MIRROR_SCL = (I2C_SCL != 0)?1:0; \
+I2C_MIRROR_SDA = (I2C_SDA_READ != 0)?1:0; } while(0);
+
+#define I2C_MIRROR_SCL LATAbits.LATA0
+#define I2C_MIRROR_SDA LATAbits.LATA1
+
+#define TRIS_I2C_MIRROR_SCL TRISAbits.TRISA1           // RA1 = SCL
+#define TRIS_I2C_MIRROR_SDA TRISAbits.TRISA0           // RA0 = SDA
+#else
+#define I2C_MIRROR() // Nothing
+
+#endif
+
+#ifdef I2C_PK2_DEBUG
+#define TRIS_I2C_SCL TRISAbits.TRISA1           // RA1 = SCL
+#define TRIS_I2C_SDA TRISAbits.TRISA0           // RA0 = SDA
+
+#define I2C_SCL LATAbits.LATA1
+#define I2C_SDA LATAbits.LATA0
+#define I2C_SDA_READ PORTAbits.RA0
+
+#define WP_I2C_SCL  WPUAbits.WPUA1
+#define WP_I2C_SDA  WPUAbits.WPUA0
+
+#else
+#define TRIS_I2C_SCL TRISBbits.TRISB6
+#define TRIS_I2C_SDA TRISBbits.TRISB4
+
+#define I2C_SCL LATBbits.LATB6
+#define I2C_SDA LATBbits.LATB4
+#define I2C_SDA_READ PORTBbits.RB4
+
+#define WP_I2C_SCL  WPUBbits.WPUB6
+#define WP_I2C_SDA  WPUBbits.WPUB4
+#endif
 
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000

@@ -1,4 +1,4 @@
-#include "mcp9800.h"
+#include "devices/mcp9800.h"
 #include "bsp/softI2c.h"
 
 void Mcp9800Start(Mcp9800Resolution_t resolution)
@@ -19,9 +19,9 @@ void Mcp9800Start(Mcp9800Resolution_t resolution)
 UI16_t Mcp9800Read(void)
 {
     SoftI2cStart();
-    SoftI2cTxByte(0b10010000);
-    SoftI2cTxByte(0x00);
-    SoftI2cRepeatedStart();
+    //SoftI2cTxByte(0b10010000);
+    //SoftI2cTxByte(0x00);
+    //SoftI2cRepeatedStart();
     SoftI2cTxByte(0b10010001);
     UI08_t tempH = SoftI2cRxByte(1);
     UI08_t tempL = SoftI2cRxByte(0);

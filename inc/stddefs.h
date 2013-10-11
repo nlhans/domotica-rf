@@ -3,6 +3,9 @@
 
 #include <xc.h>
 #include <stdio.h>
+#include <string.h>
+
+#define strConcat(a,b) a##b
 
 #ifdef __PIC24FJ64GB004__
 #define PIC24

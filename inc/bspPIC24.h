@@ -31,6 +31,74 @@
 
 #include <pps.h>
 
+    // I2C
+//#define I2C_PK2_DEBUG
+//#define I2C_PK2_MIRROR
+
+#ifdef I2C_PK2_MIRROR
+#define I2C_MIRROR() do { I2C_MIRROR_SCL = (I2C_SCL != 0)?1:0; \
+I2C_MIRROR_SDA = (I2C_SDA_READ != 0)?1:0; } while(0);
+
+#define I2C_MIRROR_SCL LATBbits.LATB1
+#define I2C_MIRROR_SDA LATBbits.LATB0
+
+#define TRIS_I2C_MIRROR_SCL TRISBbits.TRISB1           // RA1 = SCL
+#define TRIS_I2C_MIRROR_SDA TRISBbits.TRISB0           // RA0 = SDA
+#else
+#define I2C_MIRROR() // Nothing
+
+#endif
+
+#ifdef I2C_PK2_DEBUG
+#define TRIS_I2C_SCL TRISAbits.TRISB2           // RA1 = SCL
+#define TRIS_I2C_SDA TRISAbits.TRISB3           // RA0 = SDA
+
+#define I2C_SCL LATBbits.LATB2
+#define I2C_SDA LATBbits.LATB3
+#define I2C_SDA_READ PORTBbits.RB3
+
+#else
+#define TRIS_I2C_SCL TRISBbits.TRISB2
+#define TRIS_I2C_SDA TRISBbits.TRISB3
+
+#define I2C_SCL LATBbits.LATB2
+#define I2C_SDA LATBbits.LATB3
+#define I2C_SDA_READ PORTBbits.RB3
+#endif
+
+// ADC
+typedef enum Pic16PortDefs_e
+{
+    PA,
+    PB,
+    PC,
+    PINT
+} Pic16PortDefs_t;
+
+typedef enum AdcChannels_e
+{
+    ADC_AN0 = 0,
+    ADC_AN1,
+    ADC_AN2,
+    ADC_AN3,
+    ADC_AN4,
+    ADC_AN5,
+    ADC_AN6,
+    ADC_AN7,
+    ADC_AN8,
+    ADC_AN9,
+    ADC_AN10,
+    ADC_AN11,
+    ADC_TEMP = 0b11101,
+    ADC_DAC  = 0b11110,
+    ADC_FVR  = 0b11111,
+} AdcChannel_t;
+
+#define BSP_HUMIDITY_ANALOG_PIN PA, 1
+#define BSP_HUMIDITY_CHANNEL    ADC_AN1
+
+
+typedef unsigned char bool_t;
 typedef unsigned char UI08_t;
 typedef unsigned int UI16_t;
 typedef unsigned long UI32_t;
@@ -38,6 +106,8 @@ typedef unsigned long UI32_t;
 typedef char I08_t;
 typedef int I16_t;
 typedef long I32_t;
+#define __delay_ms(x)
+#define __delay_us(x) do { for(i = 0; i < x; i++) asm volatile("nop"); } while(0);
 
 // PIC24FJ64GB004 / dsPIC33FJ128GP804 main controller
 
@@ -51,6 +121,7 @@ typedef long I32_t;
 #define RF_RES                  LATCbits.LATC6		// PIN_B4  MRF49XA reset
 #define RF_FINT                 PORTCbits.RC3
 #define RF_POWER                LATAbits.LATA10
+#define SENSOR_PWR              LATAbits.LATA8
 
 #define TRIS_SPI_SDO		TRISBbits.TRISB8	// PIN_F2  SDO (Out to SPI)
 #define TRIS_SPI_SDI		TRISCbits.TRISC4	// PIN_F3  SDI (IN from SPI)
@@ -62,7 +133,9 @@ typedef long I32_t;
 #define TRIS_RF_RES		TRISCbits.TRISC6	// PIN_B4  MRF49XA reset
 #define TRIS_RF_FINT		TRISCbits.TRISC3
 #define TRIS_RF_POWER           TRISAbits.TRISA10
+#define TRIS_SENSOR_PWR         TRISAbits.TRISA8
 
+#define PIC24_HW
 
 
 #endif
