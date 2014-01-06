@@ -123,6 +123,7 @@ bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accep
 void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);
 void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
 
+void tcpTick(void);
 
 #ifdef	__cplusplus
 }

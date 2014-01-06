@@ -11,8 +11,10 @@ TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 TcpConnection_t* tcpPickFreeConnection();
 TcpConnection_t* tcpMatchConnection(UI08_t* ip, UI16_t remotePort);
-
+void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags);
 void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done);
+
+void tcpCloseObj(TcpConnection_t* connection);
 
 void tcpInit()
 {
@@ -130,6 +132,7 @@ bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accep
             tcpListeners[i].acceptConnectionHandler = accept;
             tcpListeners[i].closeConnectionHandler = close;
 
+            tcpCloseObj(connection);
             connection->listener = &(tcpListeners[i]);
             connection->state = TcpListen; // this is a server
             INSIGHT(TCP_LISTEN, port);
@@ -145,16 +148,12 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
     TcpConnection_t* connection;
     TcpFlags_t flags;
 
-    UI32_t sequenceNumber, acknowledgeNumber;
-
     if(ipv4->header.protocol == Ipv4TCP)
     {
         packet->tcp.portSource          = htons(packet->tcp.portSource);
         packet->tcp.portDestination     = htons(packet->tcp.portDestination);
         packet->tcp.flags.data          = htons(packet->tcp.flags.data);
         packet->tcp.length              = htons(packet->tcp.length);
-        sequenceNumber                  = htonl(packet->tcp.sequenceNumber);
-        acknowledgeNumber               = htonl(packet->tcp.acknowledgement);
         
         INSIGHT(TCP_RX, packet->tcp.portSource, packet->tcp.portDestination, packet->tcp.flags.data, packet->tcp.length, packet->tcp.acknowledgement);
         INSIGHT(TCP_RX_FLAGS, packet->tcp.flags.bits.syn, packet->tcp.flags.bits.ack, packet->tcp.flags.bits.rst, packet->tcp.flags.bits.fin);
@@ -185,6 +184,20 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
             }
         }
 
+        tcpStatemachine(TRUE, packet, connection, flags);
+    }
+}
+
+void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags)
+{
+    EthernetIpv4_t* ipv4 = (EthernetIpv4_t*) packet;
+    UI32_t sequenceNumber, acknowledgeNumber;
+
+    if (onRx)
+    {
+        sequenceNumber                  = htonl(packet->tcp.sequenceNumber);
+        acknowledgeNumber               = htonl(packet->tcp.acknowledgement);
+
         flags.data = 0;
         flags.bits.dataOffset = 5;
         /*flags.bits.syn = 0;
@@ -194,80 +207,89 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
         packet->tcp.length = sizeof(tcpPacketBf) - sizeof(TcpPacket_t);
         packet->tcp.acknowledgement = connection->lastAcknowledgeNumber;
         packet->tcp.sequenceNumber = connection->lastSequenceNumber;
-        
-        switch(connection->state)
-        {
-            case TcpClosed:
-                if (packet->tcp.flags.bits.fin == 1)
+    }
+    switch(connection->state)
+    {
+        case TcpClosed:
+            if (!onRx) break;
+            if (packet->tcp.flags.bits.fin == 1)
+            {
+                flags.bits.ack = 1;
+                tcpTxReplyPacket(0, flags, packet, connection);
+
+                connection->state = TcpCloseWait;
+            }
+            break;
+
+        case TcpListen:
+            if (!onRx) break;
+            // Opens connection on this slot.
+            // Conditions to be met for next state:
+            if (packet->tcp.flags.bits.syn == 1)
+            {
+                // Reply
+                flags.bits.dataOffset = 6; // 4x7=28
+                //packet->tcp.sequenceNumber++;
+                packet->tcp.acknowledgement = sequenceNumber+1;
+                packet->tcp.sequenceNumber = 0xAA55AA55;
+
+                // Execute handler; if TRUE send ACK
+                // Otherwise send RST
+                if (connection->listener->acceptConnectionHandler((void*)connection))
                 {
+                    flags.bits.syn = 1;
                     flags.bits.ack = 1;
-                    tcpTxReplyPacket(0, flags, packet, connection);
-                        
-                    connection->state = TcpCloseWait;
+
+                    // Switch state to TcpSynRcvd
+                    connection->state = TcpSynRx;
+
+                    tcpListenMore(connection->listener);
                 }
-                break;
-
-            case TcpListen:
-                // Opens connection on this slot.
-                // Conditions to be met for next state:
-                if (packet->tcp.flags.bits.syn == 1)
+                else
                 {
-                    // Reply 
-                    flags.bits.dataOffset = 6; // 4x7=28
-                    //packet->tcp.sequenceNumber++;
-                    packet->tcp.acknowledgement = sequenceNumber+1;
-                    packet->tcp.sequenceNumber = 0xAA55AA55;
+                    flags.bits.rst = 1;
 
-                    // Execute handler; if TRUE send ACK
-                    // Otherwise send RST
-                    if (connection->listener->acceptConnectionHandler((void*)connection))
-                    {
-                        flags.bits.syn = 1;
-                        flags.bits.ack = 1;
-
-                        // Switch state to TcpSynRcvd
-                        connection->state = TcpSynRx;
-
-                        tcpListenMore(connection->listener);
-                    }
-                    else
-                    {
-                        flags.bits.rst = 1;
-
-                        // Switch state to TcpListen
-                        // TODO: reset connection state
-                        connection->state = TcpListen;
-                        connection->listener = NULL;
-                    }
-
-                    tcpTxReplyPacket(0, flags, packet, connection);
-                        
-                }
-                break;
-
-            case TcpSynRx:
-                // We received syn, and are awaiting for ACK
-                if (packet->tcp.flags.bits.ack == 1 &&
-                    packet->tcp.flags.bits.syn == 0)
-                {
-                    // Huuray!
-                    connection->state = TcpEstablished;
-                }
-                else if (packet->tcp.flags.bits.rst == 1)
-                {
+                    // Switch state to TcpListen
+                    // TODO: reset connection state
                     connection->state = TcpListen;
+                    connection->listener = NULL;
                 }
-                break;
 
-            case TcpEstablished:
+                tcpTxReplyPacket(0, flags, packet, connection);
+
+            }
+            break;
+
+        case TcpSynRx:
+            if (!onRx) break;
+            // We received syn, and are awaiting for ACK
+            if (packet->tcp.flags.bits.ack == 1 &&
+                packet->tcp.flags.bits.syn == 0)
+            {
+                // Huuray!
+                connection->state = TcpEstablished;
+            }
+            else if (packet->tcp.flags.bits.rst == 1)
+            {
+                connection->state = TcpListen;
+            }
+            break;
+
+        case TcpEstablished:
+            if (!onRx)
+            {
+                // TODO: Keep-alive?
+            }
+            else
+            {
                 if (packet->tcp.flags.bits.fin == 1)
                 {
                     flags.bits.ack = 1;
                     packet->tcp.acknowledgement++;
                     packet->tcp.sequenceNumber++;
-                    
+
                     tcpTxReplyPacket(0, flags, packet, connection);
-                    
+
                     connection->state = TcpCloseWait;
                 }
                 else if (packet->tcp.sequenceNumber >= connection->lastSequenceNumber)
@@ -291,107 +313,91 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
                         tcpTxReplyPacket(0, flags, packet, connection);
                         printf("TCP ACK");
                     }
-                    
+
                     //connection->lastAcknowledgeNumber = packet->tcp.acknowledgement;
                     //connection->lastSequenceNumber = packet->tcp.sequenceNumber;
 
                     connection->rxData(connection, push, ((UI08_t*)(&packet->tcp)) + headerOffset, payloadSize);
                     printf("TCP Webserver done");
                 }
-                break;
+            }
+            break;
 
-            case TcpFinWait1:
-                if (packet->tcp.flags.bits.ack == 1)
+        case TcpFinWait1:
+            if (!onRx) break;
+            if (packet->tcp.flags.bits.ack == 1)
+            {
+                if ( packet->tcp.flags.bits.fin == 0)
                 {
-                    if ( packet->tcp.flags.bits.fin == 0)
-                    {
-                        connection->state = TcpFinWait2;
-                    }
-                    else
-                    {
-                        flags.bits.ack = 1;
-                        tcpTxReplyPacket(0, flags, packet, connection);
-                        
-                        connection->state = TcpTimeWait;
-                    }
+                    connection->state = TcpFinWait2;
                 }
-                else if ( packet->tcp.flags.bits.fin == 1)
-                {
-                    flags.bits.ack = 1;
-                    packet->tcp.acknowledgement = packet->tcp.sequenceNumber+1;
-                    packet->tcp.sequenceNumber = 0xAA55AA55;
-                    tcpTxReplyPacket(0, flags, packet, connection);
-
-                    connection->state = TcpTimeWait;
-                }
-                break;
-
-            case TcpFinWait2:
-                if ( packet->tcp.flags.bits.fin == 1)
+                else
                 {
                     flags.bits.ack = 1;
                     tcpTxReplyPacket(0, flags, packet, connection);
 
                     connection->state = TcpTimeWait;
                 }
-                break;
+            }
+            else if ( packet->tcp.flags.bits.fin == 1)
+            {
+                flags.bits.ack = 1;
+                packet->tcp.acknowledgement = packet->tcp.sequenceNumber+1;
+                packet->tcp.sequenceNumber = 0xAA55AA55;
+                tcpTxReplyPacket(0, flags, packet, connection);
 
-            case TcpTimeWait:
-                if (connection->listener.closeConnectionHandler(connection))
-                {
-                    connection->state = TcpListen;
-                }
-                else
-                {
-                    connection->state = TcpClosed;
-                }
-                break;
+                connection->state = TcpTimeWait;
+            }
+            break;
 
-            case TcpCloseWait:
-                if (packet != NULL)
-                {
-                    flags.bits.rst = 1;
-                    packet->tcp.acknowledgement = 0;
-                    tcpTxReplyPacket(0, flags, packet, connection);
-                }
-                
-                if (connection->listener.closeConnectionHandler(connection))
-                {
-                    connection->state = TcpListen;
-                }
-                else
-                {
-                    connection->state = TcpClosed;
-                }
+        case TcpFinWait2:
+            if (!onRx) break;
+            if ( packet->tcp.flags.bits.fin == 1)
+            {
+                flags.bits.ack = 1;
+                tcpTxReplyPacket(0, flags, packet, connection);
 
-                // TODO: Timeout.
-                // Also raise an event about this connection being terminated
-                // So the main application can re-use this socket.
-                break;
+                connection->state = TcpTimeWait;
+            }
+            break;
 
-            case TcpLastAck:
+        case TcpTimeWait:
+            tcpCloseObj(connection);
+            break;
+
+        case TcpCloseWait:
+            if (onRx)
+            {
+                flags.bits.rst = 1;
+                packet->tcp.acknowledgement = 0;
+                tcpTxReplyPacket(0, flags, packet, connection);
+            }
+
+            tcpCloseObj(connection);
+
+            // TODO: Timeout.
+            // Also raise an event about this connection being terminated
+            // So the main application can re-use this socket.
+            break;
+
+        case TcpLastAck:
+            if (onRx)
+            {
                 if ( packet->tcp.flags.bits.ack == 1 || 1)
                 {
                     flags.bits.ack = 1;
                     tcpTxReplyPacket(0, flags, packet, connection);
 
-                    if (connection->listener.closeConnectionHandler(connection))
-                    {
-                        connection->state = TcpListen;
-                    }
-                    else
-                    {
-                        connection->state = TcpClosed;
-                    }
                 }
-                break;
+            }
+            tcpCloseObj(connection);
+            break;
 
-            default:
-                connection->state = TcpListen;//TcpClosed;
-                break;
-        }
-        INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+        default:
+            connection->state = TcpListen;//TcpClosed;
+            break;
     }
+    INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
 }
 
 UI16_t tcpCrc(TcpPacket_t* packet, UI08_t* data, UI16_t size)
@@ -476,4 +482,37 @@ void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_
     packet->ipv4.header.ID = 0;
     ipv4TxPacket(connection->remoteIp, Ipv4TCP, (EthernetIpv4_t*)packet, dataSize);
     memset(packet, 0, dataSize);
+}
+
+void tcpCloseObj(TcpConnection_t* connection)
+{
+    // Close connection, default state is Closed
+    TcpState_t state = TcpClosed;
+
+    // If server, ask application abuot closing
+    if (connection->listener != NULL &&
+        connection->listener->closeConnectionHandler(connection))
+    {
+        state = TcpListen;
+    }
+    
+    memset(connection, 0, sizeof(TcpConnection_t));
+    connection->state = state;
+}
+
+
+void tcpTick(void)
+{
+    UI08_t i = 0;
+    TcpFlags_t flags;
+    flags.data = 0;
+    // Tick each connection
+    for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
+    {
+        if(tcpConnections[i].state != TcpClosed &&
+           tcpConnections[i].state != TcpListen)
+        {
+            tcpStatemachine(FALSE, NULL, tcpConnections + i, flags);
+        }
+    }
 }

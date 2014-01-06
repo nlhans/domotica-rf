@@ -118,6 +118,14 @@ bool_t httpHandleConnection(void* con)
     return TRUE;
 }
 
+bool_t httpCloseConnection(void* con)
+{
+    TcpConnection_t* connection = (TcpConnection_t*) con;
+    connection->rxData = NULL;
+
+    return TRUE;
+}
+
 int main(void)
 {
     
@@ -172,7 +180,7 @@ int main(void)
     ipv4Init();
     icmpInit();
     tcpInit();
-    tcpListen(80, 32, httpHandleConnection);
+    tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
     //ntpInit();
     
     RF_POWER = 1;
