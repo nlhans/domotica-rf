@@ -4,6 +4,8 @@
 #include "bsp/uart.h"
 #include "insight.h"
 
+UI08_t tcpPacketBf[1024];
+
 TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
@@ -100,7 +102,7 @@ bool_t tcpListenMore(TcpListener_t* listener)
     return FALSE;
 }
 
-bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t connectHandler)
+bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close)
 {
     UI08_t i;
     TcpConnection_t* connection;
@@ -125,7 +127,8 @@ bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t conne
             tcpListeners[i].InUse = TRUE;
             tcpListeners[i].localPort = port;
             tcpListeners[i].maxConnections = maxConnections;
-            tcpListeners[i].connectionHandler = connectHandler;
+            tcpListeners[i].acceptConnectionHandler = accept;
+            tcpListeners[i].closeConnectionHandler = close;
 
             connection->listener = &(tcpListeners[i]);
             connection->state = TcpListen; // this is a server
@@ -182,12 +185,13 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
             }
         }
 
+        flags.data = 0;
         flags.bits.dataOffset = 5;
-        flags.bits.syn = 0;
+        /*flags.bits.syn = 0;
         flags.bits.ack = 0;
-        flags.bits.rst = 0;
+        flags.bits.rst = 0;*/
 
-        packet->tcp.length = 1400;
+        packet->tcp.length = sizeof(tcpPacketBf) - sizeof(TcpPacket_t);
         packet->tcp.acknowledgement = connection->lastAcknowledgeNumber;
         packet->tcp.sequenceNumber = connection->lastSequenceNumber;
         
@@ -216,7 +220,7 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
 
                     // Execute handler; if TRUE send ACK
                     // Otherwise send RST
-                    if (connection->listener->connectionHandler((void*)connection))
+                    if (connection->listener->acceptConnectionHandler((void*)connection))
                     {
                         flags.bits.syn = 1;
                         flags.bits.ack = 1;
@@ -259,11 +263,14 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
                 if (packet->tcp.flags.bits.fin == 1)
                 {
                     flags.bits.ack = 1;
+                    packet->tcp.acknowledgement++;
+                    packet->tcp.sequenceNumber++;
+                    
                     tcpTxReplyPacket(0, flags, packet, connection);
                     
                     connection->state = TcpCloseWait;
                 }
-                else
+                else if (packet->tcp.sequenceNumber >= connection->lastSequenceNumber)
                 {
                     // Record data.
                     UI08_t headerOffset = 4*packet->tcp.flags.bits.dataOffset;
@@ -272,19 +279,24 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
                     INSIGHT(DATASIZE, payloadSize);
                     UI32_t ackNumber = payloadSize + sequenceNumber;
                     INSIGHT(TCP_RX_DATA, 0);
+                    bool_t push = packet->tcp.flags.bits.psh;
 
                     flags.bits.ack = 1;
 
-                    packet->tcp.sequenceNumber = acknowledgeNumber;
-                    packet->tcp.acknowledgement = ackNumber;
+                    if(packet->tcp.acknowledgement != ackNumber)
+                    {
+                        packet->tcp.sequenceNumber = acknowledgeNumber;
+                        packet->tcp.acknowledgement = ackNumber;
 
-                    connection->lastAcknowledgeNumber = packet->tcp.acknowledgement;
-                    connection->lastSequenceNumber = packet->tcp.sequenceNumber;
-
-                    connection->rxData(connection, packet->tcp.flags.bits.psh, ((UI08_t*)(&packet->tcp)) + headerOffset, payloadSize);
+                        tcpTxReplyPacket(0, flags, packet, connection);
+                        printf("TCP ACK");
+                    }
                     
-                    tcpTxReplyPacket(0, flags, packet, connection);
+                    //connection->lastAcknowledgeNumber = packet->tcp.acknowledgement;
+                    //connection->lastSequenceNumber = packet->tcp.sequenceNumber;
 
+                    connection->rxData(connection, push, ((UI08_t*)(&packet->tcp)) + headerOffset, payloadSize);
+                    printf("TCP Webserver done");
                 }
                 break;
 
@@ -325,15 +337,36 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
                 break;
 
             case TcpTimeWait:
-                connection->state = TcpClosed;
+                if (connection->listener.closeConnectionHandler(connection))
+                {
+                    connection->state = TcpListen;
+                }
+                else
+                {
+                    connection->state = TcpClosed;
+                }
                 break;
 
             case TcpCloseWait:
-                flags.bits.rst = 1;
-                packet->tcp.acknowledgement = 0;
-                tcpTxReplyPacket(0, flags, packet, connection);
+                if (packet != NULL)
+                {
+                    flags.bits.rst = 1;
+                    packet->tcp.acknowledgement = 0;
+                    tcpTxReplyPacket(0, flags, packet, connection);
+                }
+                
+                if (connection->listener.closeConnectionHandler(connection))
+                {
+                    connection->state = TcpListen;
+                }
+                else
+                {
+                    connection->state = TcpClosed;
+                }
 
-                connection->state = TcpClosed;
+                // TODO: Timeout.
+                // Also raise an event about this connection being terminated
+                // So the main application can re-use this socket.
                 break;
 
             case TcpLastAck:
@@ -341,7 +374,15 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
                 {
                     flags.bits.ack = 1;
                     tcpTxReplyPacket(0, flags, packet, connection);
-                    connection->state = TcpClosed;
+
+                    if (connection->listener.closeConnectionHandler(connection))
+                    {
+                        connection->state = TcpListen;
+                    }
+                    else
+                    {
+                        connection->state = TcpClosed;
+                    }
                 }
                 break;
 
@@ -401,8 +442,6 @@ void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, Tc
     ipv4TxReplyPacket((EthernetIpv4_t*)packet, dataSize);
 }
 
-UI08_t tcpPacketBf[1024];
-
 void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 {
     TcpPacket_t * packet = (TcpPacket_t*) tcpPacketBf;
@@ -436,4 +475,5 @@ void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_
     // hack ipv4 id
     packet->ipv4.header.ID = 0;
     ipv4TxPacket(connection->remoteIp, Ipv4TCP, (EthernetIpv4_t*)packet, dataSize);
+    memset(packet, 0, dataSize);
 }

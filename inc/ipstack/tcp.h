@@ -15,8 +15,8 @@ extern "C" {
 #include "stddefs.h"
 #include "ipv4.h"
 
-#define TCP_MAX_LISTEN_PORTS 4
-#define TCP_MAX_CONNECTIONS 8
+#define TCP_MAX_LISTEN_PORTS 2
+#define TCP_MAX_CONNECTIONS 2
 
 typedef union TcpFlags_u
 {
@@ -99,7 +99,8 @@ typedef struct TcpListener_s
     bool_t InUse;
     UI08_t maxConnections;
     UI16_t localPort;
-    TcpConnectedHandler_t connectionHandler;
+    TcpConnectedHandler_t acceptConnectionHandler;
+    TcpConnectedHandler_t closeConnectionHandler;
 } TcpListener_t;
 
 typedef struct TcpConnection_s
@@ -117,7 +118,8 @@ typedef struct TcpConnection_s
 
 
 void tcpInit();
-bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t connectHandler);
+bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);
+
 void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);
 void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
 

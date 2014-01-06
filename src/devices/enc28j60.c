@@ -6,10 +6,9 @@
 #include "ipstack/arp.h"
 #include "insight.h"
 
+UI08_t frameBf[1100];
+
 #define ETHERNET_HANDLERS_COUNT 2
-
-
-char debugBuffer[256];
 
 typedef struct EthernetPacketHandlerInfo_s
 {
@@ -354,10 +353,13 @@ void enc28j60Initialize(UI08_t* mac)
     enc28j60WriteRegisterUint8(MAADR2, mac[3]);
     enc28j60WriteRegisterUint8(MAADR1, mac[4]);
     enc28j60WriteRegisterUint8(MAADR0, mac[5]);
+
+    // Enable interrupt when packet received
+    enc28j60BitSetRegisterUint8(EIE, (1<<6) | (1<<7));
     
     enc28j60WritePhyRegisterUint16(PHCON2, 0b000000100000000); // hdldis
-    enc28j60BitSetRegisterUint8(ECON1, 0b00000100); // hdldis
-
+    enc28j60BitSetRegisterUint8(ECON1, 0b00000100); // rxen
+    
     // set phy LED status settings:
     //enc28j60WritePhyRegisterUint16(PHLCON, 0b0000010010100000); // B: blink fast, A: link status, no stretching
 }
@@ -567,4 +569,16 @@ void enc28j60Reset(void)
     ENC28J60_CS_LOW;
     enc28j60_spi_write(SC);
     ENC28J60_CS_HIGH;
+}
+
+void enc28j60Int(UI08_t foo)
+{
+    //
+    TRISA &= ~(1<<1);
+    if ((PORTA & (1<<1)) != 0)
+        PORTA &= ~(1<<1);
+    else
+        PORTA |= 1<<1;
+    while (enc28j60PacketPending())
+        enc28j60RxFrame(frameBf, sizeof(frameBf));
 }

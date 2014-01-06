@@ -51,7 +51,7 @@ void spiInit(UI08_t port)
             IFS0bits.SPI1IF = 0;
             IEC0bits.SPI1IE = 0;
 
-            SPI1CON1 = 0b0000000100111010;
+            SPI1CON1 = 0b0000000100111011;
             SPI1CON2 = 0b0;
             SPI1STAT |= 0x1 << 15;
             break;
@@ -72,7 +72,7 @@ void spiInit(UI08_t port)
             IFS2bits.SPI2IF = 0;
             IEC2bits.SPI2IE = 0;
 
-            SPI2CON1 = 0b0000000100111010;
+            SPI2CON1 = 0b0000000100111011;
             SPI2CON2 = 0b0;
             SPI2STAT |= 0x1 << 15;
             break;

@@ -1,7 +1,8 @@
 #include "ipstack/ntp.h"
 #include "bsp/uart.h"
 #include "insight.h"
-void ntpHandlePacket (UDPPacket_t* udp, bool_t* handled);
+
+void ntpHandlePacket(UDPPacket_t* udp, bool_t* handled);
 
 UI32_t ntpTimestamp = 0;
 

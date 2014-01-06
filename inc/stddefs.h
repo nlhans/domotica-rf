@@ -8,12 +8,17 @@
 #define strConcat(a,b) a##b
 
 #ifdef __PIC24FJ64GB004__
-#define PIC24
+#define PIC24GB
     #include "bspPIC24.h"
 #define SERVER
 #endif
 #ifdef __dsPIC33FJ128GP804__
 #define dsPIC33
+    #include "bspPIC24.h"
+#define SERVER
+#endif
+#ifdef __PIC24FJ64GA004__
+#define PIC24GA
     #include "bspPIC24.h"
 #define SERVER
 #endif

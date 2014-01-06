@@ -14,9 +14,12 @@ void FlashInit(void)
     FlashCsSet(0, 1);
     asm("nop");
     FlashCsSet(0, 0);
-    spiTxByte(FLASH_PORT, 0x38); // enable Quad IO
+    spiTxByte(FLASH_PORT, 0x1D); // 0x38 enable Quad IO
+    spiRxByte(FLASH_PORT);
+    spiRxByte(FLASH_PORT);
     FlashCsSet(0, 1);
 
+    FlashReadId();
     sqiEnable(FLASH_PORT);
     
 }
@@ -89,8 +92,6 @@ void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
 }
 void FlashTxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
 {
-    UI16_t i = 0;
-
     FlashCsSet(addr, 0);
     sqiTxByte(FLASH_PORT, 0x06); // write enable
     FlashCsSet(addr, 1);
