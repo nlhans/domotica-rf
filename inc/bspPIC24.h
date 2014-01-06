@@ -18,7 +18,7 @@
 
     _CONFIG1(WINDIS_OFF & FWDTEN_OFF & ICS_PGx3 & GWRP_OFF & GCP_OFF & JTAGEN_OFF)
     _CONFIG2(POSCMOD_NONE & OSCIOFNC_OFF & FCKSM_CSDCMD & FNOSC_FRC & IESO_OFF & I2C1SEL_PRI & IOL1WAY_OFF)
-
+    
     #endif
 
     #ifdef dsPIC33
@@ -35,7 +35,9 @@
     #endif
 #endif
 
-
+#ifdef PIC24GA
+    #define F_OSC_DIV_2 ((UI32_t)4000000)
+#endif
 #include <pps.h>
 
     // I2C
@@ -101,6 +103,7 @@ typedef enum AdcChannels_e
     ADC_FVR  = 0b11111,
 } AdcChannel_t;
 
+#define BSP_TIMER_COUNT 5
 #define BSP_EXT_INT_COUNT 3 // This PIC has 3 ext interrupt lines
 
 #define BSP_HUMIDITY_ANALOG_PIN PA, 1

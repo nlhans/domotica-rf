@@ -12,6 +12,7 @@
 #include "bsp/spi.h"
 #include "bsp/interrupt.h"
 #include "bsp/softI2c.h"
+#include "bsp/timer.h"
 
 #include "ipstack/arp.h"
 #include "ipstack/ipv4.h"
@@ -88,7 +89,7 @@ void UartInit()
     PPSLock;
 
     U1STA  = (1 << 10);
-    U1BRG  = 103; // 115k2 @ FRCPLL stock
+    U1BRG  = F_OSC_DIV_2/16/9600 - 1; //103; // 115k2 @ FRCPLL stock
     U1MODE = (1 << 15);
 #endif
     printf("hello world!\r\n");
@@ -123,7 +124,22 @@ bool_t httpCloseConnection(void* con)
     TcpConnection_t* connection = (TcpConnection_t*) con;
     connection->rxData = NULL;
 
+    printf("Bye HTTPD\n");
     return TRUE;
+}
+
+bool_t ipStackTick(UI08_t i, UI16_t c)
+{
+    if (c == 500)
+    {
+        if ((PORTA & (1<<4)) == 0)
+            PORTA |= 1<<4;
+        else
+            PORTA &= ~(1<<4);
+        tcpTick();
+        return TRUE;
+    }
+    return FALSE;
 }
 
 int main(void)
@@ -153,6 +169,7 @@ int main(void)
         AdcInit();
 
     #endif
+        TRISA &= ~(1<<4);
     TRISC &= ~(1<<7);
     PORTC |= 1<<7;
 
@@ -160,6 +177,7 @@ int main(void)
     ExtIntInit();
     SoftI2cInit();
     initRFPorts();
+    TimerInitPeriodic16Isr(1, 1000, ipStackTick);
 
     PORTB |= (1<<15);
 

@@ -486,6 +486,9 @@ void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_
 
 void tcpCloseObj(TcpConnection_t* connection)
 {
+    TcpListener_t* listener = connection->listener;
+
+    printf("TCP Close\n");
     // Close connection, default state is Closed
     TcpState_t state = TcpClosed;
 
@@ -498,6 +501,9 @@ void tcpCloseObj(TcpConnection_t* connection)
     
     memset(connection, 0, sizeof(TcpConnection_t));
     connection->state = state;
+
+    if (state == TcpListen)
+        connection->listener = listener;
 }
 
 
@@ -506,12 +512,14 @@ void tcpTick(void)
     UI08_t i = 0;
     TcpFlags_t flags;
     flags.data = 0;
+    printf("---\n");
     // Tick each connection
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         if(tcpConnections[i].state != TcpClosed &&
            tcpConnections[i].state != TcpListen)
         {
+            printf("TCP Tick %d\n", i);
             tcpStatemachine(FALSE, NULL, tcpConnections + i, flags);
         }
     }
