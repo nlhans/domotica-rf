@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>../../inc/bspPIC24.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -15,6 +16,10 @@
       <logicalFolder name="f3" displayName="BSP" projectFiles="true">
         <itemPath>../../src/bsp/softI2c.c</itemPath>
         <itemPath>../../src/bsp/pic24/spi.c</itemPath>
+        <itemPath>../../src/bsp/pic24/interrupt.c</itemPath>
+        <itemPath>../../src/bsp/pic24/timer.c</itemPath>
+        <itemPath>../../src/bsp/pic24/rtos.c</itemPath>
+        <itemPath>../../src/bsp/pic24/context.s</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Devices" projectFiles="true">
         <itemPath>../../src/devices/enc28j60.c</itemPath>
@@ -30,6 +35,15 @@
         <itemPath>../../src/ipstack/tcp.c</itemPath>
         <itemPath>../../src/ipstack/udp.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f5" displayName="Profiling" projectFiles="true">
+        <itemPath>../../src/profiling/executiontime.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f6" displayName="RTOS" projectFiles="true">
+        <itemPath>../../src/rtos/task.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f4" displayName="Webserver" projectFiles="true">
+        <itemPath>../../src/webserver/router.c</itemPath>
+      </logicalFolder>
       <itemPath>../../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -40,18 +54,19 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../src</Elem>
+    <Elem>../../inc</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC24FJ64GB004</targetDevice>
+        <targetDevice>PIC24FJ64GA004</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>RealICEPlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.11</languageToolchainVersion>
+        <languageToolchainVersion>1.20</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -73,6 +88,16 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../src/ipstack/ntp.c" ex="true" overriding="false">
+        <C30>
+        </C30>
+        <C30-AS>
+        </C30-AS>
+        <C30-LD>
+        </C30-LD>
+        <C30Global>
+        </C30Global>
+      </item>
       <C30>
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
@@ -85,10 +110,10 @@
         <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-procedural-abstraction" value="false"/>
         <property key="enable-short-double" value="false"/>
-        <property key="enable-symbols" value="true"/>
+        <property key="enable-symbols" value="false"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="C:\Projects\Firmware\MRF49XA\Library\inc"/>
+                  value="C:\Projects\Firmware\domoticarf\inc"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
@@ -105,12 +130,13 @@
         <property key="oXC16gcc-sfr-warn" value="false"/>
         <property key="oXC16gcc-smar-io-lvl" value="1"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
-        <property key="optimization-level" value="s"/>
+        <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
         <property key="scalar-model" value="default"/>
         <property key="use-cci" value="false"/>
+        <property key="use-iar" value="false"/>
       </C30>
       <C30-AS>
         <property key="assembler-symbols" value=""/>
@@ -157,7 +183,7 @@
         <property key="oXC16ld-nostdlib" value="false"/>
         <property key="oXC16ld-stackguard" value="16"/>
         <property key="preprocessor-macros" value=""/>
-        <property key="remove-unused-sections" value="false"/>
+        <property key="remove-unused-sections" value="true"/>
         <property key="report-memory-usage" value="true"/>
         <property key="secure-eeprom" value="no_eeprom"/>
         <property key="secure-flash" value="no_flash"/>
@@ -176,8 +202,84 @@
         <property key="output-file-format" value="elf"/>
         <property key="save-temps" value="true"/>
       </C30Global>
-      <PICkit3PlatformTool>
-      </PICkit3PlatformTool>
+      <RealICEPlatformTool>
+        <property key="ADC 1" value="true"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="CRC" value="true"/>
+        <property key="Freeze All Other Peripherals" value="true"/>
+        <property key="I2C1" value="true"/>
+        <property key="I2C2" value="true"/>
+        <property key="INPUT CAPTURE 1" value="true"/>
+        <property key="INPUT CAPTURE 2" value="true"/>
+        <property key="INPUT CAPTURE 3" value="true"/>
+        <property key="INPUT CAPTURE 4" value="true"/>
+        <property key="INPUT CAPTURE 5" value="true"/>
+        <property key="OUTPUT COMPARE 1" value="true"/>
+        <property key="OUTPUT COMPARE 2" value="true"/>
+        <property key="OUTPUT COMPARE 3" value="true"/>
+        <property key="OUTPUT COMPARE 4" value="true"/>
+        <property key="OUTPUT COMPARE 5" value="true"/>
+        <property key="RIExTrigs.Five" value="OFF"/>
+        <property key="RIExTrigs.Four" value="OFF"/>
+        <property key="RIExTrigs.One" value="OFF"/>
+        <property key="RIExTrigs.Seven" value="OFF"/>
+        <property key="RIExTrigs.Six" value="OFF"/>
+        <property key="RIExTrigs.Three" value="OFF"/>
+        <property key="RIExTrigs.Two" value="OFF"/>
+        <property key="RIExTrigs.Zero" value="OFF"/>
+        <property key="SPI 1" value="true"/>
+        <property key="SPI 2" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="TIMER1" value="true"/>
+        <property key="TIMER2" value="true"/>
+        <property key="TIMER3" value="true"/>
+        <property key="TIMER4" value="true"/>
+        <property key="TIMER5" value="true"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="UART 1" value="true"/>
+        <property key="UART 2" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="hwtoolclock.instructionspeed" value="4"/>
+        <property key="hwtoolclock.units" value="mips"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0xabfb"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0xabfb"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="tracecontrol.collectioninterval" value="1"/>
+        <property key="tracecontrol.collectionunits" value="1"/>
+        <property key="tracecontrol.disablemacros" value="false"/>
+        <property key="tracecontrol.functionprofile.summary" value="false"/>
+        <property key="tracecontrol.include.timestamp" value="false"/>
+        <property key="tracecontrol.medium" value="0"/>
+        <property key="tracecontrol.portselect" value="0"/>
+        <property key="tracecontrol.select" value="0"/>
+        <property key="tracecontrol.spiselect" value="0"/>
+        <property key="tracecontrol.stallontracebufferfull" value="false"/>
+        <property key="tracecontrol.timerpriority" value="3"/>
+        <property key="tracecontrol.timerselect" value="0"/>
+        <property key="tracecontrol.tracebufmax" value="546000"/>
+        <property key="tracecontrol.tracefile"
+                  value="C:\Projects\Firmware\domoticarf\targets\mrf49xa_pic24\defmplabxtrace.log"/>
+        <property key="tracecontrol.tracefilemax" value="1048510"/>
+        <property key="voltagevalue" value="3.25"/>
+      </RealICEPlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>

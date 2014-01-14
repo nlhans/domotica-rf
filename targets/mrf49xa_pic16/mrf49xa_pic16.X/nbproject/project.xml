@@ -2,14 +2,14 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>mrf49xa_pic24</name>
-            <creation-uuid>9736841e-aaf7-45ba-b7c3-d0d92f76db10</creation-uuid>
+            <name>mrf49xa_pic16</name>
+            <creation-uuid>68abefea-01cf-4702-876c-1f905118eae3</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions>h</header-extensions>
-            <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <header-extensions/>
             <asminc-extensions/>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
         </data>
     </configuration>

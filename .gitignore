@@ -1,1 +1,5 @@
-MRF49XA_Library.X/
+targets/mrf49xa_pic16/mrf49xa_pic16.X/build/
+
+targets/mrf49xa_pic24/dist/
+targets/mrf49xa_pic24/disassembly/
+targets/mrf49xa_pic24/build/
