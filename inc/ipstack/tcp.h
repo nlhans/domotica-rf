@@ -16,7 +16,7 @@ extern "C" {
 #include "ipv4.h"
 
 #define TCP_MAX_LISTEN_PORTS 2
-#define TCP_MAX_CONNECTIONS 2
+#define TCP_MAX_CONNECTIONS 4
 
 typedef union TcpFlags_u
 {
@@ -88,8 +88,12 @@ typedef enum TcpState_e
     TcpTimeWait,
 
     TcpCloseWait,
-    TcpLastAck
+    TcpLastAck,
+
+    NUM_OF_TCP_STATES
 } TcpState_t;
+
+extern const char * const TcpStateStrings[NUM_OF_TCP_STATES];
 
 typedef bool_t (*TcpConnectedHandler_t) (void* connectionHandle);
 typedef void (*TcpRxDataHandler_t) (void* connectionHandle, bool_t push, UI08_t* data, UI16_t length);
@@ -116,6 +120,7 @@ typedef struct TcpConnection_s
     TcpRxDataHandler_t rxData;
 } TcpConnection_t;
 
+extern TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 void tcpInit();
 bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);

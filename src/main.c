@@ -21,11 +21,16 @@
 #include "ipstack/ntp.h"
 #include "ipstack/icpm.h"
 
-UI08_t mac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-UI08_t ip[4]            = {192, 168, 1, 123};
-UI08_t gateway[4]       = {192, 168, 1, 1};
-UI08_t pc[4]            = {192, 168, 1, 147};
-UI08_t ntpServer[4]     = {194, 171, 167, 130};
+#include "webserver/router.h"
+#include "profiling/executiontime.h"
+
+#include "rtos/task.h"
+
+const UI08_t const mac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
+const UI08_t const ip[4]            = {192, 168, 1, 123};
+const UI08_t const gateway[4]       = {192, 168, 1, 1};
+const UI08_t const pc[4]            = {192, 168, 1, 147};
+const UI08_t const ntpServer[4]     = {194, 171, 167, 130};
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
 
@@ -89,32 +94,15 @@ void UartInit()
     PPSLock;
 
     U1STA  = (1 << 10);
-    U1BRG  = F_OSC_DIV_2/16/9600 - 1; //103; // 115k2 @ FRCPLL stock
+    U1BRG  = F_OSC_DIV_2/16/19200 - 1; //103; // 115k2 @ FRCPLL stock
     U1MODE = (1 << 15);
 #endif
-    printf("hello world!\r\n");
-}
-
-const char* response = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\n\r\nHello wonderful TCP world!<br /><br/>"; //<img src=\"image.png\">";
-
-void httpHandleData(void* con, bool_t push, char* d, UI16_t s)
-{
-    if (push)
-    {
-        TcpFlags_t fl;
-        fl.data = 0;
-        fl.bits.ack = 1;
-        fl.bits.fin = 1;
-        fl.bits.psh = 1;
-
-        tcpTxPacket((UI08_t*) response, strlen(response), fl, ((TcpConnection_t*) con));
-    }
 }
 
 bool_t httpHandleConnection(void* con)
 {
     TcpConnection_t* connection = (TcpConnection_t*) con;
-    connection->rxData = httpHandleData;
+    connection->rxData = WebserverHandle;
 
     return TRUE;
 }
@@ -124,13 +112,12 @@ bool_t httpCloseConnection(void* con)
     TcpConnection_t* connection = (TcpConnection_t*) con;
     connection->rxData = NULL;
 
-    printf("Bye HTTPD\n");
     return TRUE;
 }
 
 bool_t ipStackTick(UI08_t i, UI16_t c)
 {
-    if (c == 500)
+    if (c == 50)
     {
         if ((PORTA & (1<<4)) == 0)
             PORTA |= 1<<4;
@@ -140,6 +127,51 @@ bool_t ipStackTick(UI08_t i, UI16_t c)
         return TRUE;
     }
     return FALSE;
+}
+
+RtosTask_t ledTask;
+RtosTask_t ethTask;
+UI08_t ledTaskStk[512];
+UI08_t ethTaskStk[2048];
+
+void LedTask()
+{
+    TRISA &= ~(1 << 9);
+    while(1)
+    {
+        //
+        PORTA |= 1 << 9;
+        RtosTaskDelay(500);
+        PORTA &= ~(1 << 9);
+        RtosTaskDelay(500);
+    }
+}
+
+
+void EthernetTask()
+{
+    UI16_t count = 0;
+    while(1)
+    {
+        //printf("Ethernet rocks\n");
+        enc28j60Int(0);
+        RtosTaskDelay(50);
+        if (ipStackTick(0, count))
+            count = 0;
+        else
+            count += 10;
+    }
+}
+
+void __attribute__((interrupt, no_auto_psv)) _AddressError(void)
+{
+    SR = 32;
+    while(1);
+}
+void __attribute__((interrupt, no_auto_psv)) _StackError(void)
+{
+    SR = 32;
+    while(1);
 }
 
 int main(void)
@@ -169,15 +201,16 @@ int main(void)
         AdcInit();
 
     #endif
-        TRISA &= ~(1<<4);
+    TRISA &= ~(1<<4);
     TRISC &= ~(1<<7);
     PORTC |= 1<<7;
 
     UartInit();
+
     ExtIntInit();
     SoftI2cInit();
     initRFPorts();
-    TimerInitPeriodic16Isr(1, 1000, ipStackTick);
+    //TimerInitPeriodic16Isr(1, 1000, ipStackTick);
 
     PORTB |= (1<<15);
 
@@ -185,13 +218,12 @@ int main(void)
 
     // Hook up external interrupt to enc28j60 driver
     iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    ExtIntSetup(1, enc28j60Int, TRUE);
+    //ExtIntSetup(1, enc28j60Int, TRUE);
     
     PPSLock;
 
     spiInit(1);
     //FlashInit();
-
     enc28j60Initialize(mac);
     arpInit();
     arpAnnounce(mac, ip, gateway);
@@ -199,15 +231,24 @@ int main(void)
     icmpInit();
     tcpInit();
     tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
+    
+    // Profiler.
+    Timer32Init(2, 0);
+    execTimeReset();
+
     //ntpInit();
     
     RF_POWER = 1;
     SENSOR_PWR = 1;
+
+    RtosTaskInit();
+    RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
+    RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
+    RtosTaskRun();
+
 #define TRANSMITTER
-    while(1);
     while (1)
     {
-        continue;
         #ifdef TRANSMITTER
 
         #else

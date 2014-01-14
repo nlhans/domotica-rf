@@ -3,8 +3,8 @@
 #include "ipstack/ethdefs.h"
 #include "insight.h"
 
-const UI08_t onesMac[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-const UI08_t zerosMac[6] = {0, 0, 0, 0, 0, 0};
+const UI08_t const onesMac[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+const UI08_t const zerosMac[6] = {0, 0, 0, 0, 0, 0};
 UI08_t thisIp[4];
 UI08_t thisMac[6];
 

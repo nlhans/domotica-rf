@@ -29,6 +29,9 @@ typedef struct TimerCfg_s
     };
 } TimerCfg_t;
 
+void Timer32Init(UI08_t index, UI08_t tmrDivider);
+
+void Timer16InitPeriod(UI08_t index, UI32_t period);
 void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback);
 
 #endif

@@ -4,7 +4,23 @@
 #include "bsp/uart.h"
 #include "insight.h"
 
-UI08_t tcpPacketBf[1024];
+#include "profiling/executiontime.h"
+
+const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
+    "CLOSED",
+    "LISTEN",
+    "SYN RX",
+    "SYN TX",
+    "ESTABLISHED",
+    "FIN WAIT 1",
+    "FIN WAIT 2",
+    "CLOSING",
+    "TIME WAIT",
+    "CLOSE WAIT",
+    "LAST ACK"
+};
+
+UI08_t tcpPacketBf[1500];
 
 TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
@@ -150,6 +166,8 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
 
     if(ipv4->header.protocol == Ipv4TCP)
     {
+        execProfile(TCP_HANDLE);
+
         packet->tcp.portSource          = htons(packet->tcp.portSource);
         packet->tcp.portDestination     = htons(packet->tcp.portDestination);
         packet->tcp.flags.data          = htons(packet->tcp.flags.data);
@@ -192,6 +210,8 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
 {
     EthernetIpv4_t* ipv4 = (EthernetIpv4_t*) packet;
     UI32_t sequenceNumber, acknowledgeNumber;
+
+    execProfile(TCP_STATE_MACHINE);
 
     if (onRx)
     {
@@ -311,14 +331,14 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
                         packet->tcp.acknowledgement = ackNumber;
 
                         tcpTxReplyPacket(0, flags, packet, connection);
-                        printf("TCP ACK");
                     }
 
                     //connection->lastAcknowledgeNumber = packet->tcp.acknowledgement;
                     //connection->lastSequenceNumber = packet->tcp.sequenceNumber;
 
+                    execProfile(TCP_RX_DATA_B);
                     connection->rxData(connection, push, ((UI08_t*)(&packet->tcp)) + headerOffset, payloadSize);
-                    printf("TCP Webserver done");
+                    execProfile(TCP_RX_DATA_E);
                 }
             }
             break;
@@ -438,13 +458,16 @@ void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, Tc
     packet->tcp.length = htons(packet->tcp.length);
     packet->tcp.flags.data = htons(flags.data);
     packet->tcp.crc = 0;
+    execProfile(TCP_CRC_S);
     packet->tcp.crc = ipv4Crc((UI08_t*)&(packet->ipv4.header.sourceIp), dataSize + 8) - dataSize - 6; // +8 for IP's
+    execProfile(TCP_CRC_E);
     INSIGHT(TCP_TX_REPLY, connection->remoteIp[0], connection->remoteIp[1], connection->remoteIp[2], connection->remoteIp[3], dataSize, packet->tcp.crc, flags.data);
     packet->tcp.crc = htons(packet->tcp.crc);
 
     // hack ipv4 id
     packet->ipv4.header.ID = 0;
 
+    execProfile(TCP_TX_REPLY);
     ipv4TxReplyPacket((EthernetIpv4_t*)packet, dataSize);
 }
 
@@ -480,46 +503,34 @@ void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_
 
     // hack ipv4 id
     packet->ipv4.header.ID = 0;
+    execProfile(TCP_TX_REPLY);
     ipv4TxPacket(connection->remoteIp, Ipv4TCP, (EthernetIpv4_t*)packet, dataSize);
-    memset(packet, 0, dataSize);
+    
 }
 
 void tcpCloseObj(TcpConnection_t* connection)
 {
-    TcpListener_t* listener = connection->listener;
-
-    printf("TCP Close\n");
-    // Close connection, default state is Closed
-    TcpState_t state = TcpClosed;
+    execProfile(TCP_CLOSE);
 
     // If server, ask application abuot closing
-    if (connection->listener != NULL &&
-        connection->listener->closeConnectionHandler(connection))
-    {
-        state = TcpListen;
-    }
-    
+    if (connection->listener != NULL)
+        connection->listener->closeConnectionHandler(connection);
+
     memset(connection, 0, sizeof(TcpConnection_t));
-    connection->state = state;
-
-    if (state == TcpListen)
-        connection->listener = listener;
+    connection->state = TcpClosed;
 }
-
 
 void tcpTick(void)
 {
     UI08_t i = 0;
     TcpFlags_t flags;
     flags.data = 0;
-    printf("---\n");
     // Tick each connection
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         if(tcpConnections[i].state != TcpClosed &&
            tcpConnections[i].state != TcpListen)
         {
-            printf("TCP Tick %d\n", i);
             tcpStatemachine(FALSE, NULL, tcpConnections + i, flags);
         }
     }

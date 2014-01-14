@@ -3,6 +3,8 @@
 #include "bsp/uart.h"
 #include "insight.h"
 
+#include "profiling/executiontime.h"
+
 typedef struct UDPSocketHandlerInfo_s
 {
     UI16_t port;
@@ -74,6 +76,7 @@ void udpHandlePacket (EthernetIpv4_t* ipv4, bool_t* handled)
 }
 void udpTxPacket(UDPPacket_t* packet, UI16_t size, UI08_t* ip, UI16_t port)
 {
+    execProfile(UDP_TX);
     size += sizeof(UDPPacketHeader_t);
     
     packet->udp.length = htons(size);

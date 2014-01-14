@@ -6,6 +6,8 @@
 #include "ipstack/arp.h"
 #include "insight.h"
 
+#include "profiling/executiontime.h"
+
 UI08_t frameBf[1100];
 
 #define ETHERNET_HANDLERS_COUNT 2
@@ -366,6 +368,7 @@ void enc28j60Initialize(UI08_t* mac)
 
 void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
 {
+    execProfile(ENC_TX_FRAME);
     static UI08_t controlByte = 0x00;
 
     // clear status/error flags
@@ -383,15 +386,19 @@ void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     enc28j60WriteRegisterUint16(ETXNDL, ENC28J60_TXBUF_START + length);
 
     // Control byte (0x00) + packet
+    execProfile(ENC_TX_BUFFER);
     enc28j60WriteData(ENC28J60_TXBUF_START, &controlByte, 1);
     enc28j60WriteData(ENC28J60_TXBUF_START+1, (UI08_t*)packet, length);
 
+    execProfile(ENC_TX_SEND);
     // Todo: ext interrupts
     enc28j60BitClrRegisterUint8(EIR,    0b00001010); // TX complete, TX error
     enc28j60BitSetRegisterUint8(ECON1, 0b00001000); // TXRTS
 
     while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0);
 
+    execProfile(ENC_TX_DONE);
+    
     // Todo: check interruption flags
     // Todo: report status
     INSIGHT(ENC28J60_TX, length, packet->dstMac[0], packet->dstMac[1], packet->dstMac[2], packet->dstMac[3], packet->dstMac[4], packet->dstMac[5]);
@@ -401,6 +408,7 @@ void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
 
 void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
 {
+    execProfile(ENC_TX_REPLY_FRAME);
     UI08_t tmpMac[6];
 
     // Swap MAC addresses.
@@ -425,6 +433,9 @@ void enc28j60RxFrame(UI08_t* packet, UI16_t length)
     {
         //memset(packet, 0, length); // 2 status bytes?
 
+        execTimeReset();
+        execProfile(ENC_START_PACKET);
+        
         // Move data ptr to start of packet
         enc28j60WriteRegisterUint16(ERDPTL, dataPtr);
         
@@ -453,9 +464,17 @@ void enc28j60RxFrame(UI08_t* packet, UI16_t length)
 
             //if(packetSize>sizeof(UDPPacket_t)+32)
             //    packetSize=sizeof(UDPPacket_t)+32;
+            execProfile(ENC_RX_PACKET);
+
             // Receive packet itself
+            if (packetSize-2 > length)
+            {
+                packetSize = length-2;
+            }
             enc28j60ReadData(dataPtr + 4, packet, packetSize+2-4); // -4 for CRC, +2 for some status bytes or something?
 
+            execProfile(ENC_RX_PACKET_DONE);
+            
             frame = (EthernetFrame_t*) (packet+2);
             frame-> type = htons(frame->type); // reverse byte order
             data = (UI08_t*) (packet + 2+sizeof(EthernetFrame_t));
@@ -489,6 +508,7 @@ void enc28j60RxFrame(UI08_t* packet, UI16_t length)
         packetCount = enc28j60GetPacketCount();
 
         // todo: handler?
+        execTimePrint();
     }
     
     return;

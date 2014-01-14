@@ -32,7 +32,7 @@ void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
             T3CON = ctrlReg;
             break;
         case 4:
-            T2CON = 0;
+            T4CON = 0;
             PR4 = periodReg;
             TMR4 = 0;
             T4CON = ctrlReg;
@@ -47,12 +47,30 @@ void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
     }
 }
 
+void Timer16InitPeriod(UI08_t index, UI32_t period)
+{
+    UI08_t i, tmrDivider = 0;
+    UI32_t tmrPeriod = 0;
+
+    // Calculate maximum period for each division setting
+    for (i = 0; i < 4; i++)
+    {
+        tmrPeriod = divis[i] / period;
+        if (i < 0xFFFF)
+            break;
+    }
+
+    timerSetup(index, (1<<15) | (tmrDivider << 4), tmrPeriod);
+}
+
+void Timer32Init(UI08_t index, UI08_t tmrDivider)
+{
+    timerSetup(index, (1<<15) | (1<<3) | (tmrDivider << 4), 0xFFFF);
+    timerSetup(index+1, (1<<15) | (tmrDivider << 4), 0xFFFF);
+}
 
 void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback)
 {
-    UI08_t i, tmrDivider = 0;
-    UI16_t tmrPeriod = 0;
-    
     if (hwTimers[index-1].used == TRUE || index >= BSP_TIMER_COUNT)
     {
         // TODO: Error?
@@ -61,31 +79,9 @@ void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback
     hwTimers[index-1].used = TRUE;
     hwTimers[index-1].type = Periodic16Isr;
     hwTimers[index-1].ISR.callback = callback;
-    hwTimers[index-1].ISR.period = tmrPeriod;
+    
+    Timer16InitPeriod(index, period);
 
-    // Calculate maximum period for each division setting
-    for (i = 0; i < 4; i++)
-    {
-        UI32_t maxPeriod = 0xFFFF * 1000 / (divis[i]/1000);
-        printf("CLK: %lu, Period: %lu\n", divis[i], maxPeriod);
-
-        if (maxPeriod*1000 >= period)
-        {
-            tmrDivider = i;
-            break;
-        }
-    }
-
-
-    tmrPeriod = divis[tmrDivider] / period;
-    printf("TMR: %d CLK: %lu, Period: %u\n", index, divis[tmrDivider], tmrPeriod);
-
-    //
-    timerSetup(index, (1<<15) | (tmrDivider << 4), tmrPeriod);
-
-    printf("TMR1: %u, PR1: %u, T1CON: %u\n", TMR1, PR1, T1CON);
-    printf("TMR1: %u, PR1: %u, T1CON: %u\n", TMR1, PR1, T1CON);
-    printf("TMR1: %u, PR1: %u, T1CON: %u\n", TMR1, PR1, T1CON);
     switch(index)
     {
         case 1:

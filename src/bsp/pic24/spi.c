@@ -52,7 +52,7 @@ void spiInit(UI08_t port)
             IEC0bits.SPI1IE = 0;
 
             SPI1CON1 = 0b0000000100111011;
-            SPI1CON2 = 0b0;
+            //SPI1CON2 = 0b0;
             SPI1STAT |= 0x1 << 15;
             break;
         case 2:
@@ -81,7 +81,7 @@ void spiInit(UI08_t port)
 
 void spiTxByte(UI08_t port, UI08_t byte)
 {
-    volatile UI16_t aha = 0;
+    UI16_t aha = 0;
     switch(port)
     {
         case 1:
@@ -132,19 +132,31 @@ UI08_t spiTxRxByte(UI08_t port, UI08_t byte)
 }
 void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size)
 {
-    UI08_t rxB=0;
+    UI08_t rxB = 0;
     UI16_t i = 0;
-    while(size> i)
+    if (dataRx == NULL || 0)
     {
-        if(dataTx == NULL)
-            rxB = spiTxRxByte(port, 0x00);
-        else
-            rxB = spiTxRxByte(port, dataTx[i]);
-        
-        if(dataRx != NULL)
-            dataRx[i] = rxB;
-        
-        i++;
+        while (size > i)
+        {
+            spiTxByte(port, *dataTx);
+            dataTx++;
+            i++;
+        }
+    }
+    else
+    {
+        while(size> i)
+        {
+            if(dataTx == NULL)
+                rxB = spiTxRxByte(port, 0x00);
+            else
+                rxB = spiTxRxByte(port, dataTx[i]);
+
+            if(dataRx != NULL)
+                dataRx[i] = rxB;
+
+            i++;
+        }
     }
     //
 }
