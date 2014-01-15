@@ -38,14 +38,14 @@ typedef union TcpFlags_u
 } TcpFlags_t;
 typedef struct TcpPacketHeader_s
 {
-    UI16_t portSource;
-    UI16_t portDestination;
-    UI32_t sequenceNumber;
-    UI32_t acknowledgement;
-    TcpFlags_t flags;
-    UI16_t length;
-    UI16_t crc;
-    UI16_t urgPointer;
+    UI16_t portSource;          // 2
+    UI16_t portDestination;     // 4
+    UI32_t sequenceNumber;      // 8
+    UI32_t acknowledgement;     // 12
+    TcpFlags_t flags;           // 14?
+    UI16_t length;              // 16
+    UI16_t crc;                 // 18
+    UI16_t urgPointer;          // 20
 
 } TcpPacketHeader_t;
 
@@ -126,7 +126,9 @@ void tcpInit();
 bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);
 
 void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);
-void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
+void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
+
+char* tcpGetDataPtr();
 
 void tcpTick(void);
 

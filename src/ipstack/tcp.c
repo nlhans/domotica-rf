@@ -6,6 +6,8 @@
 
 #include "profiling/executiontime.h"
 
+UI08_t* tcpPacketBf;
+
 const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
     "CLOSED",
     "LISTEN",
@@ -20,8 +22,6 @@ const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
     "LAST ACK"
 };
 
-UI08_t tcpPacketBf[1500];
-
 TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
@@ -35,6 +35,8 @@ void tcpCloseObj(TcpConnection_t* connection);
 void tcpInit()
 {
     UI08_t i = 0;
+
+    tcpPacketBf = macGetPacketBuffer();
 
     ipv4RegisterHandler(tcpPacketHandler);
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
@@ -471,10 +473,14 @@ void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, Tc
     ipv4TxReplyPacket((EthernetIpv4_t*)packet, dataSize);
 }
 
-void tcpTxPacket(UI08_t* data, UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
+char* tcpGetDataPtr()
+{
+    return (char*) (&(tcpPacketBf[sizeof(EthernetIpv4_t)+20]));
+}
+
+void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 {
     TcpPacket_t * packet = (TcpPacket_t*) tcpPacketBf;
-    memcpy(((UI08_t*)&packet->tcp.urgPointer)+2, data, dataSize);
 
     flags.bits.dataOffset = 5;
 

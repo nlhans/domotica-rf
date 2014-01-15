@@ -3,15 +3,18 @@
 
 #include "stddefs.h"
 
-#include "devices/enc28j60.h"
 #include "devices/mrf49xa.h"
 #include "devices/mcp9800.h"
-#include "devices/SST26VF032.h"
 
 #include "bsp/adc.h"
+#include "bsp/softI2c.h"
+
+#ifdef SERVER
+#include "devices/enc28j60.h"
+#include "devices/SST26VF032.h"
+
 #include "bsp/spi.h"
 #include "bsp/interrupt.h"
-#include "bsp/softI2c.h"
 #include "bsp/timer.h"
 
 #include "ipstack/arp.h"
@@ -26,17 +29,22 @@
 
 #include "rtos/task.h"
 
-const UI08_t const mac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-const UI08_t const ip[4]            = {192, 168, 1, 123};
-const UI08_t const gateway[4]       = {192, 168, 1, 1};
-const UI08_t const pc[4]            = {192, 168, 1, 147};
-const UI08_t const ntpServer[4]     = {194, 171, 167, 130};
+UI08_t ethFrameBuffer[1100];
+UI08_t mac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
+UI08_t ip[4]            = {192, 168, 1, 123};
+UI08_t gateway[4]       = {192, 168, 1, 1};
+UI08_t pc[4]            = {192, 168, 1, 147};
+UI08_t ntpServer[4]     = {194, 171, 167, 130};
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
 
-void macRxFrame(UI08_t* packet, UI16_t length)
+UI08_t* macGetPacketBuffer(void)
 {
-    enc28j60RxFrame(packet, length);
+    return enc28j60GetPacketBuffer();
+}
+void macRxFrame()
+{
+    enc28j60RxFrame();
 }
 void macTxFrame(EthernetFrame_t* packet, UI16_t length)
 {
@@ -46,6 +54,7 @@ void macTxReplyFrame(EthernetFrame_t* packet, UI16_t length)
 {
     enc28j60TxReplyFrame(packet, length);
 }
+#endif
 
 void initRFPorts(void)
 {
@@ -70,6 +79,8 @@ void initRFPorts(void)
     // Pins only dedicated on server, for like FLASH and Ethernet
 #endif
 }
+
+#ifdef SERVER
 void UartTxStr(char * str)
 {
     while(*str != '\0')
@@ -78,7 +89,6 @@ void UartTxStr(char * str)
         while ((U1STA & (1<<9)) != 0);
     }
 }
-
 
 void UartInit()
 {
@@ -102,7 +112,7 @@ void UartInit()
 bool_t httpHandleConnection(void* con)
 {
     TcpConnection_t* connection = (TcpConnection_t*) con;
-    connection->rxData = WebserverHandle;
+    connection->rxData = (TcpRxDataHandler_t) WebserverHandle;
 
     return TRUE;
 }
@@ -115,24 +125,13 @@ bool_t httpCloseConnection(void* con)
     return TRUE;
 }
 
-bool_t ipStackTick(UI08_t i, UI16_t c)
-{
-    if (c == 50)
-    {
-        if ((PORTA & (1<<4)) == 0)
-            PORTA |= 1<<4;
-        else
-            PORTA &= ~(1<<4);
-        tcpTick();
-        return TRUE;
-    }
-    return FALSE;
-}
-
 RtosTask_t ledTask;
 RtosTask_t ethTask;
-UI08_t ledTaskStk[512];
-UI08_t ethTaskStk[2048];
+UI08_t ledTaskStk[128];
+UI08_t ethTaskStk[768];
+#define ETH_TCP_TICK 0x01
+#define ETH_ENC_ISR 0x02
+#define ETH_ENC_TICK 0x04
 
 void LedTask()
 {
@@ -141,42 +140,102 @@ void LedTask()
     {
         //
         PORTA |= 1 << 9;
-        RtosTaskDelay(500);
+        RtosTaskDelay(100);
         PORTA &= ~(1 << 9);
-        RtosTaskDelay(500);
+        RtosTaskDelay(100);
+        RtosTaskSignalEvent(&ethTask, ETH_ENC_TICK);
     }
 }
 
+void EthernetTaskInit()
+{
+
+    // Connect up ENC28j60 ISR
+    PORTB |= (1<<15);
+
+    PPSUnLock;
+
+    // Hook up external interrupt to enc28j60 driver
+    iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
+    ExtIntInit();
+    ExtIntSetup(1, enc28j60Int, TRUE);
+
+    PPSLock;
+
+    // Boot the complete ethernet stack.
+    spiInit(1);
+    enc28j60Initialize(mac, ethFrameBuffer, sizeof(ethFrameBuffer));
+    arpInit();
+    arpAnnounce(mac, ip, gateway);
+    ipv4Init();
+    icmpInit();
+    tcpInit();
+    tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
+    
+}
 
 void EthernetTask()
 {
-    UI16_t count = 0;
+    TRISA &= ~(1<<4);
+    EthernetTaskInit();
     while(1)
     {
-        //printf("Ethernet rocks\n");
-        enc28j60Int(0);
-        RtosTaskDelay(50);
-        if (ipStackTick(0, count))
-            count = 0;
-        else
-            count += 10;
+#ifdef RTOS_EVENTS
+        UI16_t evt = RtosTaskWaitForEvent(ETH_TCP_TICK | ETH_ENC_ISR);
+
+        if ((PORTA & (1<<4)) != 0)
+            PORTA &= ~(1<<4);
+        else PORTA |= 1<<4;
+        
+        if ((evt & ETH_ENC_ISR)!=0 ||
+            (evt & ETH_ENC_TICK)!=0)
+        {
+            while (enc28j60PacketPending())
+            {
+                macRxFrame();
+            }
+        }
+         
+        if (evt & ETH_TCP_TICK)
+        {
+#else
+        if(1)
+        {
+#endif
+            tcpTick();
+        }
     }
 }
 
-void __attribute__((interrupt, no_auto_psv)) _AddressError(void)
+
+void enc28j60Int(UI08_t foo)
 {
-    SR = 32;
-    while(1);
-}
-void __attribute__((interrupt, no_auto_psv)) _StackError(void)
-{
-    SR = 32;
-    while(1);
+#ifdef RTOS_EVENTS
+    RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
+#else
+    while (enc28j60PacketPending())
+    {
+        macRxFrame();
+    }
+#endif
 }
 
+
+void __attribute__((interrupt)) _AddressError(void)
+{
+    while(1);
+}
+void __attribute__((interrupt)) _StackError(void)
+{
+    while(1);
+}
+void __attribute__((interrupt)) _MathError(void)
+{
+    while(1);
+}
+#endif
 int main(void)
 {
-    
     #ifdef PIC24_HW
         #if defined(__PIC24FJ64GB004__)
         AD1PCFG = 0xFFFF;
@@ -193,88 +252,57 @@ int main(void)
 
     #else
         #warning "Building for PIC16F1508"
-        OSCCON = 0b01111000;
-
+        //OSCCON = 0b01111000; // 16MHz
+            OSCCON = 0b00001000;
+            
         // ICSP ports.
         //TRISA &= ~(1<<0);
         //TRISA &= ~(1<<1);
         AdcInit();
 
     #endif
+    SoftI2cInit();
+    initRFPorts();
+
+    RF_POWER = 1;
+    SENSOR_PWR = 1;
+
+#ifdef SERVER
+
     TRISA &= ~(1<<4);
     TRISC &= ~(1<<7);
     PORTC |= 1<<7;
 
     UartInit();
 
-    ExtIntInit();
-    SoftI2cInit();
-    initRFPorts();
-    //TimerInitPeriodic16Isr(1, 1000, ipStackTick);
-
-    PORTB |= (1<<15);
-
-    PPSUnLock;
-
-    // Hook up external interrupt to enc28j60 driver
-    iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    //ExtIntSetup(1, enc28j60Int, TRUE);
-    
-    PPSLock;
-
-    spiInit(1);
-    //FlashInit();
-    enc28j60Initialize(mac);
-    arpInit();
-    arpAnnounce(mac, ip, gateway);
-    ipv4Init();
-    icmpInit();
-    tcpInit();
-    tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
-    
     // Profiler.
     Timer32Init(2, 0);
     execTimeReset();
-
-    //ntpInit();
-    
-    RF_POWER = 1;
-    SENSOR_PWR = 1;
 
     RtosTaskInit();
     RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
     RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
     RtosTaskRun();
+#else
+    UI08_t bf[8];
+    
+    bf[0] = 0x12;
+    bf[1] = 0x34;
+    bf[2] = 0x56;
+    bf[3] = 0x78;
+    bf[4] = 0x12;
+    bf[5] = 0x34;
+    bf[6] = 0x56;
+    bf[7] = 0x78;
+    
 
-#define TRANSMITTER
     while (1)
     {
-        #ifdef TRANSMITTER
-
-        #else
-
-        i = MRF49XA_RxPacket(buffer);
-
-        if (i != 0)
-        {
-            if ((i & 0x80) == 0)
-            {
-                printf("CRC Y\t");
-            }
-            else
-            {
-                printf("CRC N\t");
-            }
-            
-            for(j = 0; j < (i&0x7F); j++)
-            {
-                printf("0x%02X ", buffer[j]);
-            }
-
-            printf("\r\n");
-        }
-        #endif
-
+        SPI_Write(0x55);
     }
+#endif
+
+    //while(1);
+    return 0;
 }
 

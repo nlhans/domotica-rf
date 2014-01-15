@@ -4,7 +4,7 @@
 void RtosKernelPortInitStack(RtosTask_t* task)
 {
     UI08_t i = 0;
-    UI16_t* TOS = task->stack;
+    UI16_t* TOS = (UI16_t*)task->stack;
 
     *TOS = (int)task->method; TOS++;        // low byte PC
     *TOS = 0; TOS++;                        // high byte PC
@@ -22,7 +22,7 @@ void RtosKernelPortInitStack(RtosTask_t* task)
     *TOS = PSVPAG; TOS++;                        // PSVPAG
     *TOS = 0; TOS++;                             // Nesting depth
 
-    task->stackPosition = TOS;
+    task->stackPosition = (UI08_t*)TOS;
 }
 
 void RtosKernelPortTimerStart()

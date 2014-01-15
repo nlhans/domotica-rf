@@ -211,9 +211,10 @@ typedef enum enc28j60Registers_e
 #define enc28j60_spi_read(data) spiRxByte(enc28j60_spi_bus)
 #define enc28j60_spi_transferBytes(dataTx, dataRx, size) spiTxRxBytes(enc28j60_spi_bus, dataTx, dataRx, size)
 
-void enc28j60Initialize(UI08_t* mac);
+void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize);
 void enc28j60Reset(void);
 void enc28j60Int(UI08_t foo);
+UI08_t* enc28j60GetPacketBuffer();
 
 UI08_t enc28j60PacketPending();
 UI08_t enc28j60GetPacketCount();
@@ -221,7 +222,7 @@ UI08_t enc28j60ReadRegisterUint8(UI08_t address);
 
 UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address);
 
-void enc28j60RxFrame(UI08_t* packet, UI16_t length);
+void enc28j60RxFrame(void);
 void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length);
 void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length);
 

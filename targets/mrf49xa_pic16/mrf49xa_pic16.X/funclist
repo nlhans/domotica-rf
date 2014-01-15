@@ -1,0 +1,12 @@
+_AdcInit: CODE, 1934 0 15
+_main: CODE, 1801 0 32
+_initRFPorts: CODE, 1949 0 14
+_SPI_Write: CODE, 1963 0 62
+__initialization: CODE, 1799 0 0
+_SoftI2cNop: CODE, 1925 0 9
+_SoftI2cInit: CODE, 1833 0 17
+_SoftI2cStop: CODE, 1902 0 23
+_SoftI2cStart: CODE, 1850 0 11
+_SoftI2cTxByte: CODE, 1861 0 41
+PL2: CODE, 2025 0 23
+Total: 247

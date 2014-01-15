@@ -6,16 +6,15 @@
 #define OUTPUT_PIN          0
 
 // ADC
-typedef enum Pic16PortDefs_e
-{
+
+typedef enum Pic16PortDefs_e {
     PA,
     PB,
     PC,
     PINT
 } Pic16PortDefs_t;
 
-typedef enum AdcChannels_e
-{
+typedef enum AdcChannels_e {
     ADC_AN0 = 0,
     ADC_AN1,
     ADC_AN2,
@@ -29,8 +28,8 @@ typedef enum AdcChannels_e
     ADC_AN10,
     ADC_AN11,
     ADC_TEMP = 0b11101,
-    ADC_DAC  = 0b11110,
-    ADC_FVR  = 0b11111,
+    ADC_DAC = 0b11110,
+    ADC_FVR = 0b11111,
 } AdcChannel_t;
 
 // Compile the BSP c files
@@ -81,8 +80,8 @@ I2C_MIRROR_SDA = (I2C_SDA_READ != 0)?1:0; } while(0);
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000
 #ifdef MAIN_C
-__CONFIG( FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF  );
-__CONFIG( WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_OFF );
+__CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF);
+__CONFIG(WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_OFF);
 #endif
 
 // Standard types

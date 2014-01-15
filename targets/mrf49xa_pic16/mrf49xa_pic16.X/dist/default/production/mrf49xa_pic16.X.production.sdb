@@ -1,0 +1,295 @@
+[p LITE_MODE PRO_MODE AUTOSTATIC PIC14 PIC14E SPACEOPT ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1508 ]
+"36 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[e E4204 Pic16PortDefs_e `uc
+PA 0
+PB 1
+PC 2
+PINT 3
+]
+"71
+[e E4210 AdcChannels_e `uc
+ADC_AN0 0
+ADC_AN1 1
+ADC_AN2 2
+ADC_AN3 3
+ADC_AN4 4
+ADC_AN5 5
+ADC_AN6 6
+ADC_AN7 7
+ADC_AN8 8
+ADC_AN9 9
+ADC_AN10 10
+ADC_AN11 11
+ADC_TEMP 29
+ADC_DAC 30
+ADC_FVR 31
+]
+"5 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
+[e E4233 Mcp9800Resolution_e `uc
+Mcp9800_9bit 0
+Mcp9800_10bit 32
+Mcp9800_11bit 64
+Mcp9800_12bit 96
+]
+"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+"19
+[v _AdcGetResult AdcGetResult `T(ui  1 e 2 0 ]
+"24
+[v _AdcGo AdcGo `(v  1 e 0 0 ]
+"29
+[v _AdcIsBusy AdcIsBusy `(uc  1 e 1 0 ]
+"34
+[v _AdcPinEnable AdcPinEnable `(v  1 e 0 0 ]
+"54
+[v _AdcPinDisable AdcPinDisable `(v  1 e 0 0 ]
+"71
+[v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
+"76
+[v _AdcSample AdcSample `(ui  1 e 2 0 ]
+"4 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+[v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
+"32
+[v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
+"41
+[v _SoftI2cStart SoftI2cStart `(v  1 e 0 0 ]
+"55
+[v _SoftI2cRepeatedStart SoftI2cRepeatedStart `(v  1 e 0 0 ]
+"76
+[v _SoftI2cStop SoftI2cStop `(v  1 e 0 0 ]
+"95
+[v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
+"142
+[v _SoftI2cRxByte SoftI2cRxByte `(uc  1 e 1 0 ]
+"5 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
+[v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
+"20
+[v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
+"6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+"36
+[v _SPI_Write SPI_Write `(v  1 e 0 0 ]
+"75
+[v _SPI_Command SPI_Command `(v  1 e 0 0 ]
+"85
+[v _SPI_Write16 SPI_Write16 `(v  1 e 0 0 ]
+"91
+[v _MRF49XA_Reset_Radio MRF49XA_Reset_Radio `(v  1 e 0 0 ]
+"101
+[v _MRF49XA_Init MRF49XA_Init `(v  1 e 0 0 ]
+"134
+[v _MRF49XA_TxPacket MRF49XA_TxPacket `(v  1 e 0 0 ]
+"172
+[v _MRF49XA_RxPacket MRF49XA_RxPacket `(uc  1 e 1 0 ]
+"55 C:\Projects\Firmware\domoticarf/src/main.c
+[v _initRFPorts initRFPorts `(v  1 e 0 0 ]
+"183
+[v _main main `(i  1 e 2 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abdiv.c
+[v ___abdiv __abdiv `(c  1 e 1 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abmod.c
+[v ___abmod __abmod `(c  1 e 1 0 ]
+"34 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abtoft.c
+[v ___abtoft __abtoft `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\almod.c
+[v ___almod __almod `(l  1 e 4 0 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\atdiv.c
+[v ___atdiv __atdiv `(m  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\atmod.c
+[v ___atmod __atmod `(m  1 e 3 0 ]
+"38 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\attoft.c
+[v ___attoft __attoft `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"33 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awtoft.c
+[v ___awtoft __awtoft `(f  1 e 3 0 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\bmul.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+"63 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"87 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"50 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"52 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"16 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"17 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"45 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbmod.c
+[v ___lbmod __lbmod `(uc  1 e 1 0 ]
+"28 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbtoft.c
+[v ___lbtoft __lbtoft `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"36 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lltoft.c
+[v ___lltoft __lltoft `(f  1 e 3 0 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lmul.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ltdiv.c
+[v ___ltdiv __ltdiv `(um  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ltmod.c
+[v ___ltmod __ltmod `(um  1 e 3 0 ]
+"31 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lttoft.c
+[v ___lttoft __lttoft `(f  1 e 3 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"29 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\tmul.c
+[v ___tmul __tmul `(um  1 e 3 0 ]
+"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\wmul.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+[s S19 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"472 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic16f1508.h
+[u S25 . 1 `S19 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES25  1 e 1 @13 ]
+[s S233 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"513
+[u S242 . 1 `S233 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES242  1 e 1 @14 ]
+"1006
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+[s S49 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+]
+"1021
+[u S56 . 1 `S49 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES56  1 e 1 @140 ]
+"1055
+[v _TRISB TRISB `VEuc  1 e 1 @141 ]
+"1069
+[v _TRISBbits TRISBbits `VES25  1 e 1 @141 ]
+"1093
+[v _TRISC TRISC `VEuc  1 e 1 @142 ]
+"1110
+[v _TRISCbits TRISCbits `VES242  1 e 1 @142 ]
+"1488
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1604
+[v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
+"1623
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1642
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"1721
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
+"1767
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
+"1829
+[v _LATAbits LATAbits `VES56  1 e 1 @268 ]
+"1872
+[v _LATBbits LATBbits `VES25  1 e 1 @269 ]
+"1913
+[v _LATCbits LATCbits `VES242  1 e 1 @270 ]
+"2268
+[v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
+"2480
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2526
+[v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"2561
+[v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
+[s S66 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 WPUB4 1 0 :1:4 
+`uc 1 WPUB5 1 0 :1:5 
+`uc 1 WPUB6 1 0 :1:6 
+`uc 1 WPUB7 1 0 :1:7 
+]
+"3137
+[s S72 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 WPUB 1 0 :4:4 
+]
+[u S75 . 1 `S66 1 . 1 0 `S72 1 . 1 0 ]
+[v _WPUBbits WPUBbits `VES75  1 e 1 @525 ]
+"183 C:\Projects\Firmware\domoticarf/src/main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"259
+[v main@bf bf `[8]uc  1 a 8 4 ]
+"275
+} 0
+"36 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+[v _SPI_Write SPI_Write `(v  1 e 0 0 ]
+{
+[v SPI_Write@data data `uc  1 a 1 0 ]
+[v SPI_Write@data data `uc  1 a 1 0 ]
+"72
+} 0
+"55 C:\Projects\Firmware\domoticarf/src/main.c
+[v _initRFPorts initRFPorts `(v  1 e 0 0 ]
+{
+"76
+} 0
+"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+{
+"16
+} 0
+"4 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+[v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
+{
+"29
+} 0
+"76
+[v _SoftI2cStop SoftI2cStop `(v  1 e 0 0 ]
+{
+"92
+} 0
+"95
+[v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
+{
+[v SoftI2cTxByte@data data `uc  1 a 1 2 ]
+"96
+[v SoftI2cTxByte@i i `uc  1 a 1 3 ]
+"95
+[v SoftI2cTxByte@data data `uc  1 a 1 2 ]
+"138
+} 0
+"41
+[v _SoftI2cStart SoftI2cStart `(v  1 e 0 0 ]
+{
+"52
+} 0
+"32
+[v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
+{
+"38
+} 0

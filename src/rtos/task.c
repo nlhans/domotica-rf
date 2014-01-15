@@ -2,9 +2,8 @@
 #include "rtos/task.h"
 
 /******* TEMP *******/
-UI16_t RtosGetTime();
-UI16_t RtosTimestamp = 0;
-UI16_t RtosGetTime()
+RtosTime_t RtosTimestamp = 0;
+RtosTime_t RtosGetTime()
 {
     return RtosTimestamp;
 }
@@ -16,7 +15,7 @@ void RtosKernelStoreTask(RtosTask_t* task);
 const char* const RtosStateText[5] = {
     "SUSPENDED",
     "RUNNING",
-    "WAIT FOR TIME (%d/%d)",
+    "WAIT FOR TIME (%lu/%lu)",
     "WAIT FOR SIGNAL",
     "READY"
 };
@@ -31,6 +30,7 @@ volatile UI08_t* RtosKernelStackPos;
 volatile UI16_t RtosCriticalNesting;
 
 
+/* Idle task */
 void RtosTaskIdleFnc()
 {
     while(1)
@@ -39,11 +39,13 @@ void RtosTaskIdleFnc()
     }
 }
 
+/* Initialize task kernel */
 void RtosTaskInit()
 {
     RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
 }
 
+/* Initialize task object. */
 void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priority, UI08_t* stack, UI16_t stackSize)
 {
     if (task == &RtosTaskIdleObj)
@@ -79,18 +81,7 @@ void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priorit
 
 }
 
-void RtosTaskDelay(RtosTime_t time)
-{
-    RtosActiveTask->nextRun = RtosGetTime() + time;
-    RtosActiveTask->state = TASK_STATE_DELAY;
-    
-    RtosKernelContextSuspend();
-}
-void RtosTaskWake(RtosTask_t* task)
-{
-    RtosActiveTask->nextRun = 0;
-}
-
+/* Start task kernel */
 void RtosTaskRun()
 {
     RtosKernelRestoreTask(&RtosTaskIdleObj);
@@ -98,6 +89,22 @@ void RtosTaskRun()
     RtosKernelContextStart();
 }
 
+/* Insert a delay inside a testk. Enforces context switch, too. */
+void RtosTaskDelay(RtosTime_t time)
+{
+    RtosActiveTask->nextRun = RtosGetTime() + time;
+    RtosActiveTask->state = TASK_STATE_DELAY;
+    
+    RtosKernelContextSuspend();
+}
+
+/* Enforces a task to be run ASAP. Only works when it's set for time delay. */
+void RtosTaskWake(RtosTask_t* task)
+{
+    RtosActiveTask->nextRun = 0;
+}
+
+/* Change context. */
 void RtosTaskChange()
 {
     RtosKernelStoreTask(RtosActiveTask);
@@ -108,16 +115,35 @@ void RtosTaskChange()
     RtosTask_t* t = &RtosTaskIdleObj;
     while (t != NULL)
     {
-        if (t->nextRun <= RtosGetTime() &&
-            t->priority >= next->priority)
-            next = t;
-        t = t->list;
+        switch(t->state)
+        {
+            case TASK_STATE_DELAY:
+                if (t->nextRun > RtosGetTime())
+                {
+                    break;
+                }
+            case TASK_STATE_READY:
+                if (t->priority >= next->priority)
+                    next = t;
+                break;
+
+#ifdef RTOS_EVENTS
+            case TASK_STATE_EVENT:
+                // It's waiting forever.
+                // TODO: Add timeouts.
+                break;
+#endif
+            default:
+                //t->state = TASK_STATE_SUSPENDED;
+                break;
+        }
+        t = (RtosTask_t*)t->list;
     }
 
     RtosKernelRestoreTask(next);
 }
 
-// Location helper methods:
+/* Restore task context. */
 void RtosKernelRestoreTask(RtosTask_t* task)
 {
     RtosActiveTask = task;
@@ -126,9 +152,10 @@ void RtosKernelRestoreTask(RtosTask_t* task)
     task->state = TASK_STATE_RUNNING;
 }
 
+/* Store task context. */
 void RtosKernelStoreTask(RtosTask_t* task)
 {
-    task->stackPosition = RtosKernelStackPos;
+    task->stackPosition = (UI08_t*) RtosKernelStackPos;
     if (task->state == TASK_STATE_RUNNING)
     {
         task->state = TASK_STATE_READY;
@@ -142,3 +169,39 @@ void RtosKernelStoreTask(RtosTask_t* task)
         task->stackMaxUsage = task->stackUsage;
 #endif
 }
+
+
+#ifdef RTOS_EVENTS
+UI16_t RtosTaskWaitForEvent(UI16_t mask)
+{
+    // Suspend the current task untill the event is fired.
+    RtosActiveTask->eventMask = mask;
+    RtosActiveTask->eventStore &= ~mask;
+
+    RtosActiveTask->state = TASK_STATE_EVENT;
+
+    RtosKernelContextSuspend();
+
+    return RtosActiveTask->eventStore;
+}
+
+void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event)
+{
+    if (task == NULL)
+    {
+        //error
+    }
+    else
+    {
+        task->eventStore |= event;
+
+        if ((event & task->eventMask) != 0)
+        {
+            task->state = TASK_STATE_READY;
+        }
+    }
+    // Don't enforce a context switch. This is control of application.
+    // Moreover, enforcing context switches would make this method not safe
+    // for use in interrupts.
+}
+#endif

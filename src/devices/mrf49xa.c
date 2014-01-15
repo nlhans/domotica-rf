@@ -1,6 +1,10 @@
 #include <xc.h>
 #include "devices/mrf49xa.h"
 
+// 16MHz PIC16
+// -> 267kHz SPI clock with loop
+// -> ~460kHz SPI clockc without loop
+#define SPI_UNROLL_LOOP
 
 UI08_t SPI_Read(void)
 {
@@ -34,11 +38,24 @@ UI08_t SPI_Read(void)
 
 void SPI_Write(UI08_t data)
 {
-    UI08_t i;
 
-    SPI_SDO = 0;
     SPI_SCK = 0;
+
+#ifdef SPI_UNROLL_LOOP
+    #define SPI_TICK(a) do { if ((data & (1<<a)) != 0) SPI_SDO = 1; else SPI_SDO = 0; \
+    SPI_SCK = 1; \
+    SPI_SCK = 0; } while (0);
     
+    SPI_TICK(7);
+    SPI_TICK(6);
+    SPI_TICK(5);
+    SPI_TICK(4);
+    SPI_TICK(3);
+    SPI_TICK(2);
+    SPI_TICK(1);
+    SPI_TICK(0);
+#else
+    UI08_t i;
     for (i = 0; i < 8; i++)
     {
         if (data & 0x80)
@@ -51,15 +68,10 @@ void SPI_Write(UI08_t data)
         }
 
         SPI_SCK = 1;
-        Nop();
-
-        SPI_SCK = 0;
-
         data = data << 1;
+        SPI_SCK = 0;
     }
-
-    SPI_SDO = 0;
-
+#endif
 }
 
 void SPI_Command(UI16_t cmd)

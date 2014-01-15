@@ -8,8 +8,6 @@
 
 #include "profiling/executiontime.h"
 
-UI08_t frameBf[1100];
-
 #define ETHERNET_HANDLERS_COUNT 2
 
 typedef struct EthernetPacketHandlerInfo_s
@@ -17,6 +15,10 @@ typedef struct EthernetPacketHandlerInfo_s
     bool_t used;
     EthernetPacketHandler_t handler;
 } EthernetPacketHandlerInfo_t;
+
+UI08_t* ethPacketBuffer = NULL;
+UI16_t ethPacketBufferSize = 0;
+
 
 void enc28j60WriteUint8(UI08_t reg, UI08_t value);
 void enc28j60WriteUint16(UI08_t reg, UI16_t value);
@@ -290,12 +292,21 @@ UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
 /****               ENC28J60 User Commands functions                       ****/
 /****                                                                      ****/
 /******************************************************************************/
-void enc28j60Initialize(UI08_t* mac)
+
+UI08_t* enc28j60GetPacketBuffer()
+{
+    return ethPacketBuffer;
+}
+
+void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize)
 {
     ENC28J60_CS_HIGH; // deselect chip
 
     myMac = mac;
     memset(handlers, NULL, ETHERNET_HANDLERS_COUNT);
+
+    ethPacketBuffer = ipStackBuffer;
+    ethPacketBufferSize = bufferSize;
 
     // reset
     enc28j60Reset();
@@ -420,8 +431,12 @@ void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
     enc28j60TxFrame(frame, sizeof(EthernetFrame_t) + length);
 }
 
-void enc28j60RxFrame(UI08_t* packet, UI16_t length)
+void enc28j60RxFrame(void)
 {
+    // Buffer information, which were previously parameters.
+    UI08_t*             packet              = ethPacketBuffer;
+    UI16_t              length              = ethPacketBufferSize;
+
     UI08_t              packetCount         = enc28j60GetPacketCount();
     static UI16_t       dataPtr             = ENC28J60_RXBUF_START;
     UI08_t              packetHeader[6];
@@ -589,16 +604,4 @@ void enc28j60Reset(void)
     ENC28J60_CS_LOW;
     enc28j60_spi_write(SC);
     ENC28J60_CS_HIGH;
-}
-
-void enc28j60Int(UI08_t foo)
-{
-    //
-    TRISA &= ~(1<<1);
-    if ((PORTA & (1<<1)) != 0)
-        PORTA &= ~(1<<1);
-    else
-        PORTA |= 1<<1;
-    while (enc28j60PacketPending())
-        enc28j60RxFrame(frameBf, sizeof(frameBf));
 }
