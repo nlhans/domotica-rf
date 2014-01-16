@@ -214,6 +214,7 @@ typedef enum enc28j60Registers_e
 void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize);
 void enc28j60Reset(void);
 void enc28j60ResetRxBuffer();
+bool_t enc28j60GetOverflowStatus(void);
 void enc28j60Int(UI08_t foo);
 UI08_t* enc28j60GetPacketBuffer();
 

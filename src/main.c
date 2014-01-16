@@ -227,15 +227,15 @@ void enc28j60Int(UI08_t foo)
 }
 
 
-void __attribute__((interrupt)) _AddressError(void)
+void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
 {
     while(1);
 }
-void __attribute__((interrupt)) _StackError(void)
+void __attribute__((interrupt,no_auto_psv)) _StackError(void)
 {
     while(1);
 }
-void __attribute__((interrupt)) _MathError(void)
+void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 {
     while(1);
 }

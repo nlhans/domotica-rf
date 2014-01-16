@@ -16,7 +16,7 @@ extern "C" {
 #include "ipv4.h"
 
 #define TCP_MAX_LISTEN_PORTS 2
-#define TCP_MAX_CONNECTIONS 4
+#define TCP_MAX_CONNECTIONS 8
 
 typedef union TcpFlags_u
 {

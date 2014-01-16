@@ -163,7 +163,6 @@ void webSysTcpip(TcpConnection_t* connection, char **params)
     strcpy(webBf+webBfPos, "\r\n");
     
     tcpTxPacket(webBfPos, fl, connection);
-    tcpCloseObj(connection);
 }
 
 void webIndex(TcpConnection_t* connection, char **params)
@@ -370,6 +369,7 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
         {
             web404(connection);
         }
+        tcpCloseObj(connection);
     }
 
 }
