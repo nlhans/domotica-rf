@@ -2,7 +2,7 @@
 
 TimerCfg_t hwTimers[BSP_TIMER_COUNT];
 
-const UI32_t divis[4] = {
+const UI32_t const divis[4] = {
     F_OSC_DIV_2/1,
     F_OSC_DIV_2/8, 
     F_OSC_DIV_2/64,

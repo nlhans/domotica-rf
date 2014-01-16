@@ -1,6 +1,18 @@
 #include "stddefs.h"
 #include "rtos/task.h"
 
+// TODO: Create interrupt handlers
+// All interrupts are currently pushed on the application's task stack. 
+// This means that if any interrupt is received, even the idle stack must
+// be capable of supporting the required stack depth. Switching back to the OS
+// stack (main()) would be best, but will require the interrupt handlers to run
+// via the operating system.
+
+// TODO: Create mailboxes/IPC in addition to events.
+// Tasks should be able to create a small mailbox (e.g. 64 bytes of RAM) and
+// wait for messages, before contiuning their work. This would not only be
+// possible via own IPC implenentation and (abuse of) event handlers
+
 /******* TEMP *******/
 RtosTime_t RtosTimestamp = 0;
 RtosTime_t RtosGetTime()

@@ -141,8 +141,10 @@ void LedTask()
         //
         PORTA |= 1 << 9;
         RtosTaskDelay(100);
+
         PORTA &= ~(1 << 9);
         RtosTaskDelay(100);
+
         RtosTaskSignalEvent(&ethTask, ETH_TCP_TICK);
     }
 }
