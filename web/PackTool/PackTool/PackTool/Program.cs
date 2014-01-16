@@ -18,7 +18,13 @@ namespace PackTool
         {
             byte[] content = File.ReadAllBytes(contentPath + file);
 
-            exportList += file + "@" + offset + "\r\n";
+            // Align offset to 32
+            while (offset % 32 != 0)
+            {
+                offset++;
+            }
+
+            exportList += file + "@" + offset + " / " + (offset/32)+"\r\n";
 
             // Add inside the FLASH:
             // File content length
@@ -45,8 +51,9 @@ namespace PackTool
         {
             for (var i = 0; i < flashArray.Length; i++)
                 flashArray[i] = 0xFF;
-            
+
             addFile("favicon.ico");
+            addFile("404.html");
 
             File.WriteAllBytes("flash.bin", flashArray);
         }

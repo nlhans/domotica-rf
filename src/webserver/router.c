@@ -44,6 +44,7 @@ void webSysRtos(TcpConnection_t* connection, char **params);
     on("GET", "/sys/rtos",       ROUTE_IS_CONSTANT,      webSysRtos)  \
     on("GET", "/get/:0/:1",      ROUTE_IS_ARGS,          webTest)     \
     on("GET", "/favicon.ico",    ROUTE_IN_FLASH(0x0000), NULL)        \
+    on("GET", "/404.html",       ROUTE_IN_FLASH(0x000B), NULL)        \
     on("GET", "/",               ROUTE_IS_CONSTANT,      webIndex)    \
     
 
@@ -243,6 +244,10 @@ void webTest(TcpConnection_t* connection, char **params)
 
 void web404(TcpConnection_t * connection)
 {
+    Route_t route404;
+    route404.options.location = 11;
+    webServeFlash(connection, &route404);
+    return;
     strcpy(webBf, http404);
 
     // Tcp flags for HTTP header
