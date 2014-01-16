@@ -59,7 +59,9 @@ void spiInit(UI08_t port)
             TRISB &= ~(1<<14);   // sck
             TRISC &= ~(1<<0);    // mosi
             TRISC |= (1<<2);     // miso
-            
+
+            PORTAbits.RA0 = 1;
+            PORTAbits.RA7 = 1;
             TRISA &= ~(1<<0);   // CS1
             TRISA &= ~(1<<7);   // CS2
 
@@ -72,7 +74,12 @@ void spiInit(UI08_t port)
             IFS2bits.SPI2IF = 0;
             IEC2bits.SPI2IE = 0;
 
-            SPI2CON1 = 0b0000000100111011;
+            SPI2STAT = 0;
+            SPI2CON1 = 0;
+            SPI2CON1 = (1<<5) | (1<<8); // master SPI, output active->idle clock
+            SPI2CON1 |= 0b11011;
+
+            //SPI2CON1 = 0b0000000100111011;
             SPI2CON2 = 0b0;
             SPI2STAT |= 0x1 << 15;
             break;
@@ -159,126 +166,4 @@ void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size)
         }
     }
     //
-}
-
-/********* SQI FUNCTIONS FOR ST26 FLASH *********/
-void sqiEnable(UI08_t port)
-{
-    spiDeinit(port);
-}
-void sqiDisable(UI08_t port)
-{
-    spiInit(port);
-    LATB |= 1<<13;
-    LATC |= 1<<1;
-}
-void sqiMode(UI08_t port, bool_t isOutput)
-{
-    switch(port)
-    {
-        case 2:
-            // Set data IO to output
-            if (isOutput)
-            {
-                TRISC &= ~((1<<0) | (1<<1) | (1<<2));
-                TRISB &= ~(1<<13);
-            }
-            else
-            {
-                TRISC |= (1<<0) | (1<<1) | (1<<2);
-                TRISB |= 1<<13;
-            }
-            break;
-
-    }
-}
-
-#define sqiBitChk(byte, bit) ((byte & (1<<bit)) != 0)
-void sqiTxByte(UI08_t port, UI08_t byte)
-{
-    sqiMode(port, TRUE);
-    
-    switch(port)
-    {
-        case 2:
-                // b0 = rc0
-                // b2 = rc1
-                // b1 = rc2
-                // b3 = rb13
-                // sck = rb14
-            PORTB &= ~(1<<14);
-            if (sqiBitChk(byte, 4)) LATC |= 1<<0; else LATC &= ~(1<<0);
-            if (sqiBitChk(byte, 5)) LATC |= 1<<2; else LATC &= ~(1<<2);
-            if (sqiBitChk(byte, 6)) LATC |= 1<<1; else LATC &= ~(1<<1);
-            if (sqiBitChk(byte, 7)) LATB |= 1<<13; else LATB &= ~(1<<13);
-            PORTB |= (1<<14);
-            asm("nop");
-            PORTB &= ~(1<<14);
-            if (sqiBitChk(byte, 0)) LATC |= 1<<0; else LATC &= ~(1<<0);
-            if (sqiBitChk(byte, 1)) LATC |= 1<<2; else LATC &= ~(1<<2);
-            if (sqiBitChk(byte, 2)) LATC |= 1<<1; else LATC &= ~(1<<1);
-            if (sqiBitChk(byte, 3)) LATB |= 1<<13; else LATB &= ~(1<<13);
-            PORTB |= (1<<14);
-            asm("nop");
-            PORTB &= ~(1<<14);
-            break;
-    }
-    
-}
-UI08_t sqiRxByte(UI08_t port)
-{
-    UI08_t byte = 0;
-    
-    sqiMode(port, FALSE);
-
-    switch(port)
-    {
-        case 2:
-            PORTB &= ~(1<<14);
-            PORTB |= (1<<14);
-
-            if (sqiBitChk(PORTC, 0)) byte |= 1 << 4; // check bit 0
-            if (sqiBitChk(PORTC, 2)) byte |= 1 << 5; // check bit 0
-            if (sqiBitChk(PORTC, 1)) byte |= 1 << 6; // check bit 0
-            if (sqiBitChk(PORTB, 13)) byte |= 1 << 7; // check bit 0
-
-            PORTB &= ~(1<<14);
-            PORTB |= (1<<14);
-
-            if (sqiBitChk(PORTC, 0)) byte |= 1 << 0; // check bit 0
-            if (sqiBitChk(PORTC, 2)) byte |= 1 << 1; // check bit 0
-            if (sqiBitChk(PORTC, 1)) byte |= 1 << 2; // check bit 0
-            if (sqiBitChk(PORTB, 13)) byte |= 1 << 3; // check bit 0
-
-
-            PORTB &= ~(1<<14);
-            break;
-    }
-    
-    return byte;
-}
-
-void sqiTxRxBytes(UI08_t port, UI08_t *txBf, UI08_t *rxBf, UI16_t size)
-{
-    UI16_t i = 0;
-    if (txBf != NULL)
-    {
-        while (size > i)
-        {
-            sqiTxByte(port, txBf[i]);
-            i++;
-        }
-    }
-    else if (rxBf != NULL)
-    {
-        while (size > i)
-        {
-            rxBf[i] = sqiRxByte(port);
-            i++;
-        }
-    }
-    else
-    {
-        // ERROR
-    }
 }

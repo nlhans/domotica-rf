@@ -284,6 +284,7 @@ int main(void)
     // Profiler.
     Timer32Init(2, 0);
     execTimeReset();
+    FlashInit();
 
     RtosTaskInit();
     RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));

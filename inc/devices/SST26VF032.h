@@ -4,15 +4,32 @@
 #include "stddefs.h"
 #include "bsp/spi.h"
 
-#define FLASH_PORT 2
+#define FLASH_SPI_PORT 2
+
+// There are multiple command ID definitions because of simulation & confusing
+// of different chips.
+#define FLASH_CMD_RX_DATA 0b00000011
+
+#define FLASH_CMD_READ_ID 0b00011101
+
+#define FLASH_CMD_READ_ID_BYTES 2
+
+#define FLASH_CS2_SELECT        PORTAbits.RA7 = 0;
+#define FLASH_CS2_DESELECT      PORTAbits.RA7 = 1;
+
+#define FLASH_CS1_SELECT        PORTAbits.RA0 = 0;
+#define FLASH_CS1_DESELECT      PORTAbits.RA0 = 1;
+
+#define FLASH_CS(i, s) do { \
+if (i == 1) {if (s) FLASH_CS1_SELECT else FLASH_CS1_DESELECT } \
+else{ if (s) FLASH_CS2_SELECT else FLASH_CS2_DESELECT } } while (0); \
 
 void FlashInit(void);
+UI16_t FlashReadId(void);
+
 void FlashCsSet(UI32_t addr, bool_t state);
-UI08_t FlashRxByte(UI32_t addr);
 void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size);
-void FlashTxByte(UI32_t addr);
 void FlashTxBytes(UI32_t addr, UI08_t *bf, UI16_t size);
 void FlashEraseSector(UI32_t addr);
-UI08_t* FlashReadId(void);
 
 #endif

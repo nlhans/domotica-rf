@@ -309,7 +309,7 @@ void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize)
     ENC28J60_CS_HIGH; // deselect chip
 
     myMac = mac;
-    memset(handlers, NULL, ETHERNET_HANDLERS_COUNT);
+    memset((void*)handlers, NULL, ETHERNET_HANDLERS_COUNT);
 
     ethPacketBuffer = ipStackBuffer;
     ethPacketBufferSize = bufferSize;

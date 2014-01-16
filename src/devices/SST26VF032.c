@@ -2,122 +2,65 @@
 
 void FlashInit(void)
 {
-    TRISC &= ~(1<<1);   // SIO2
-    TRISB &= ~(1<<13);  // SIO3
+    spiInit(FLASH_SPI_PORT);
+    FLASH_CS(1, FALSE);
+    asm volatile("nop");
 
-    LATB |= 1<<13;
-    LATC |= 1<<1;
-
-    //
-    FlashCsSet(0, 1);
-    spiInit(FLASH_PORT);
-    FlashCsSet(0, 1);
-    asm("nop");
-    FlashCsSet(0, 0);
-    spiTxByte(FLASH_PORT, 0x1D); // 0x38 enable Quad IO
-    spiRxByte(FLASH_PORT);
-    spiRxByte(FLASH_PORT);
-    FlashCsSet(0, 1);
-
-    FlashReadId();
-    sqiEnable(FLASH_PORT);
-    
+    FLASH_CS(1, TRUE);
+    spiTxByte(FLASH_SPI_PORT, 0b01100010);
+    FLASH_CS(1, FALSE);
 }
 
 void FlashCsSet(UI32_t addr, bool_t state)
 {
-    //
-    // For multiple flash chips; determine which one to use.
-    //
-    if(state == 1)
+    if (addr <= 524288)
     {
-        LATA |= (1<<0) | (1<<7);
+        FLASH_CS(1, state);
     }
     else
     {
-        if(addr < 0x400000)
-            LATA &= ~(1<<0); // CS1
-        else
-            LATA &= ~(1<<7); // CS2
-        // -> 0x000000 - 0x3FFFFF = cs2
-        // -> 0x400000 - 0x7FFFFF = cs1
+        FLASH_CS(2, state);
     }
-    
 }
 
-UI08_t flashChipId[3];
-UI08_t* FlashReadId(void)
+UI16_t FlashReadId(void)
 {
-    FlashCsSet(0, 0);
+    UI16_t id = 0;
 
-    sqiTxByte(FLASH_PORT, 0xAF); // read command
-    flashChipId[0] = sqiRxByte(FLASH_PORT);
-    flashChipId[1] = sqiRxByte(FLASH_PORT);
-    flashChipId[2] = sqiRxByte(FLASH_PORT);
-    FlashCsSet(0, 1);
+    FLASH_CS(1, TRUE);
 
-    return flashChipId;
+    spiTxByte(FLASH_SPI_PORT, FLASH_CMD_READ_ID);
+    id=0;
+#if FLASH_CMD_READ_ID_BYTES == 4
+    id |= spiRxByte(FLASH_SPI_PORT) << 16;
+#endif
+#if FLASH_CMD_READ_ID_BYTES >= 3
+    id |= spiRxByte(FLASH_SPI_PORT) << 16;
+#endif
+#if FLASH_CMD_READ_ID_BYTES >= 2
+    id |= spiRxByte(FLASH_SPI_PORT) << 8;
+#endif
+#if FLASH_CMD_READ_ID_BYTES >= 1
+    id |= spiRxByte(FLASH_SPI_PORT);
+#endif
+
+    FLASH_CS(1, FALSE);
+
+    return id;
 }
-UI08_t FlashRxByte(UI32_t addr)
-{
-    sqiDisable(FLASH_PORT);
-    // Tx read
-    FlashCsSet(addr, 0);
-    
-    spiTxByte(FLASH_PORT, 0x03); // read command
-    spiTxByte(FLASH_PORT, (addr >> 16) & 0xFF);
-    spiTxByte(FLASH_PORT, (addr >> 8) & 0xFF);
-    spiTxByte(FLASH_PORT, (addr & 0xFF));
-    UI08_t data = spiRxByte(FLASH_PORT);
-    FlashCsSet(addr, 1);
 
-    sqiEnable(FLASH_PORT);
-    return data;
-}
 void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
 {
-    sqiDisable(FLASH_PORT);
-    FlashCsSet(addr, 0);
-    
-    spiTxByte(FLASH_PORT, 0x0B); // read command
-    spiTxByte(FLASH_PORT, addr >> 16);
-    spiTxByte(FLASH_PORT, addr >> 8);
-    spiTxByte(FLASH_PORT, addr & 0xFF);
-    spiTxByte(FLASH_PORT, 0x00); // dummy
+    FlashCsSet(addr, TRUE);
 
-    spiTxRxBytes(FLASH_PORT, NULL, bf, size);
-    
-    FlashCsSet(addr, 1);
-    sqiEnable(FLASH_PORT);
-}
-void FlashTxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
-{
-    FlashCsSet(addr, 0);
-    sqiTxByte(FLASH_PORT, 0x06); // write enable
-    FlashCsSet(addr, 1);
+    spiTxByte(FLASH_SPI_PORT, FLASH_CMD_RX_DATA);
 
-    asm volatile("nop");
-    
-    FlashCsSet(addr, 0);
+    spiTxByte(FLASH_SPI_PORT, (addr >> 16) & 0xFF);
+    spiTxByte(FLASH_SPI_PORT, (addr >> 8) & 0xFF);
+    spiTxByte(FLASH_SPI_PORT,  addr & 0xFF);
 
-    sqiTxByte(FLASH_PORT, 0x02); // read command
-    
-    sqiTxByte(FLASH_PORT, addr >> 16);
-    sqiTxByte(FLASH_PORT, addr >> 8);
-    sqiTxByte(FLASH_PORT, addr & 0xFF);
+    spiTxRxBytes(FLASH_SPI_PORT, NULL, bf, size);
 
-    sqiTxRxBytes(FLASH_PORT, bf, NULL, size);
+    FlashCsSet(addr, FALSE);
 
-    FlashCsSet(addr, 1);
-}
-
-void FlashEraseSector(UI32_t addr)
-{
-    //
-    FlashCsSet(addr, 0);
-    sqiTxByte(FLASH_PORT, 0x20); // erase sector
-    sqiTxByte(FLASH_PORT, addr >> 16);
-    sqiTxByte(FLASH_PORT, addr >> 8);
-    sqiTxByte(FLASH_PORT, addr & 0xFF);
-    FlashCsSet(addr, 1);
 }
