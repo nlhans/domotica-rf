@@ -131,6 +131,7 @@ void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 char* tcpGetDataPtr();
 
 void tcpTick(void);
+void tcpCloseObj(TcpConnection_t* connection);
 
 #ifdef	__cplusplus
 }

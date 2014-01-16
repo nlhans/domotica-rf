@@ -211,7 +211,7 @@ void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
 void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags)
 {
     EthernetIpv4_t* ipv4 = (EthernetIpv4_t*) packet;
-    UI32_t sequenceNumber, acknowledgeNumber;
+    UI32_t sequenceNumber = 0, acknowledgeNumber = 0;
 
     execProfile(TCP_STATE_MACHINE);
 

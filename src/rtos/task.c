@@ -84,7 +84,11 @@ void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priorit
 /* Start task kernel */
 void RtosTaskRun()
 {
-    RtosKernelRestoreTask(&RtosTaskIdleObj);
+    if (RtosTaskIdleObj.list == NULL)
+        RtosKernelRestoreTask(&RtosTaskIdleObj);
+    else
+        RtosKernelRestoreTask((RtosTask_t*)RtosTaskIdleObj.list);
+    
     RtosKernelPortTimerStart();
     RtosKernelContextStart();
 }

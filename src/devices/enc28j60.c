@@ -293,6 +293,12 @@ UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
 /****                                                                      ****/
 /******************************************************************************/
 
+bool_t enc28j60GetOverflowStatus(void)
+{
+    return FALSE;
+    //return (((enc28j60ReadRegisterUint8(EIR) & 0x1) == 0x0) ? TRUE : FALSE);
+}
+
 UI08_t* enc28j60GetPacketBuffer()
 {
     return ethPacketBuffer;
@@ -368,7 +374,8 @@ void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize)
     enc28j60WriteRegisterUint8(MAADR0, mac[5]);
 
     // Enable interrupt when packet received
-    enc28j60BitSetRegisterUint8(EIE, (1<<6) | (1<<7));
+    enc28j60BitSetRegisterUint8(EIE, (1<<7) | (1<<6) | (1<<0)); // 7=global enable, 6=packet RX, 0=packet overflow
+    enc28j60BitClrRegisterUint8(EIR, 0x7F);
     
     enc28j60WritePhyRegisterUint16(PHCON2, 0b000000100000000); // hdldis
     enc28j60BitSetRegisterUint8(ECON1, 0b00000100); // rxen
@@ -537,6 +544,24 @@ UI08_t enc28j60PacketPending()
 UI08_t enc28j60GetPacketCount()
 {
     return enc28j60ReadRegisterUint8(EPKTCNT);
+}
+
+void enc28j60ResetRxBuffer()
+{
+    //
+    while (enc28j60PacketPending())
+        enc28j60BitSetRegisterUint8(ECON2, 0b01000000); // decrease packet counter
+
+    // RX buffer
+    enc28j60WriteRegisterUint16(ERXSTL, ENC28J60_RXBUF_START);
+    enc28j60WriteRegisterUint16(ERXNDL, ENC28J60_RXBUF_END);
+    enc28j60WriteRegisterUint16(ERXRDPTL, ENC28J60_RXBUF_START);
+
+    // TX Buffer
+    enc28j60WriteRegisterUint16(ETXSTL, ENC28J60_TXBUF_START);
+    enc28j60WriteRegisterUint16(ETXNDL, ENC28J60_TXBUF_END);
+    
+    enc28j60BitClrRegisterUint8(EIR, 0x7F);
 }
 
 bool_t enc28j60RegisterTxHandler(EthernetPacketHandler_t handler)

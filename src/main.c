@@ -131,7 +131,7 @@ UI08_t ledTaskStk[128];
 UI08_t ethTaskStk[768];
 #define ETH_TCP_TICK 0x01
 #define ETH_ENC_ISR 0x02
-#define ETH_ENC_TICK 0x04
+#define ETH_ENC_ERR 0x04
 
 void LedTask()
 {
@@ -143,7 +143,7 @@ void LedTask()
         RtosTaskDelay(100);
         PORTA &= ~(1 << 9);
         RtosTaskDelay(100);
-        RtosTaskSignalEvent(&ethTask, ETH_ENC_TICK);
+        RtosTaskSignalEvent(&ethTask, ETH_TCP_TICK);
     }
 }
 
@@ -180,44 +180,48 @@ void EthernetTask()
     EthernetTaskInit();
     while(1)
     {
-#ifdef RTOS_EVENTS
-        UI16_t evt = RtosTaskWaitForEvent(ETH_TCP_TICK | ETH_ENC_ISR);
+        UI16_t evt = RtosTaskWaitForEvent(
+                ETH_TCP_TICK |
+                ETH_ENC_ERR |
+                ETH_ENC_ISR);
 
-        if ((PORTA & (1<<4)) != 0)
-            PORTA &= ~(1<<4);
-        else PORTA |= 1<<4;
-        
-        if ((evt & ETH_ENC_ISR)!=0 ||
-            (evt & ETH_ENC_TICK)!=0)
+        if ((evt & ETH_ENC_ERR) != 0)
+        {
+            enc28j60ResetRxBuffer();
+        }
+
+        if ((evt & ETH_ENC_ISR) != 0)
         {
             while (enc28j60PacketPending())
             {
                 macRxFrame();
             }
         }
-         
-        if (evt & ETH_TCP_TICK)
+
+        if ((evt & ETH_TCP_TICK) != 0)
         {
-#else
-        if(1)
-        {
-#endif
             tcpTick();
         }
+
+        if ((PORTA & (1<<4)) != 0)
+            PORTA &= ~(1<<4);
+        else
+            PORTA |= 1<<4;
     }
 }
 
 
 void enc28j60Int(UI08_t foo)
 {
-#ifdef RTOS_EVENTS
-    RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
-#else
-    while (enc28j60PacketPending())
+    if (enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
     {
-        macRxFrame();
+        RtosTaskSignalEvent(&ethTask, ETH_ENC_ERR);
+        printf("Overflow occurered\r\n");
     }
-#endif
+    else
+    {
+        RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
+    }
 }
 
 
