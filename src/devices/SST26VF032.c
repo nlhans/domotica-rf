@@ -4,11 +4,6 @@ void FlashInit(void)
 {
     spiInit(FLASH_SPI_PORT);
     FLASH_CS(1, FALSE);
-    asm volatile("nop");
-
-    FLASH_CS(1, TRUE);
-    spiTxByte(FLASH_SPI_PORT, 0b01100010);
-    FLASH_CS(1, FALSE);
 }
 
 void FlashCsSet(UI32_t addr, bool_t state)
@@ -30,7 +25,7 @@ UI16_t FlashReadId(void)
     FLASH_CS(1, TRUE);
 
     spiTxByte(FLASH_SPI_PORT, FLASH_CMD_READ_ID);
-    id=0;
+
 #if FLASH_CMD_READ_ID_BYTES == 4
     id |= spiRxByte(FLASH_SPI_PORT) << 16;
 #endif

@@ -10,6 +10,8 @@
 char * webBf;
 UI16_t webBfPos;
 
+const char* const httpSysNavBar = "<a href=\"/sys/tcpip\">Network Stack</a> | <a href=\"/sys/rtos\">RTOS Task List</a> | <a href=\"/sys/flash\">Flash</a><br />";
+
 const char* const http200 = "HTTP/1.1 200 OK\r\nContent-type: %s\r\n\r\n";
 const char* const http404 = "HTTP/1.1 404 Not Found\r\n\r\n<h1>404 Not Found</h1>The page you requested is not found, that means it doesn't exist. ";
 const char* const httpHelloWorld = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\n\r\n<h1>Hello world</h1>This is a sample page to show this actually works.";
@@ -73,11 +75,10 @@ typedef struct Route_s
 const Route_t webRoutes[NUM_OF_ROUTES] = {
     routerTable(routerIndexDef)
 };
+void webServeFlash(TcpConnection_t* connection, Route_t* route);
 
 void webSysFlash(TcpConnection_t* connection, char **params)
 {
-    UI08_t bf[8];
-    UI08_t i = 0;
     TcpFlags_t fl;
 
     // Tcp flags for HTTP header
@@ -87,11 +88,10 @@ void webSysFlash(TcpConnection_t* connection, char **params)
     fl.bits.fin = 1;
 
     webBfPos = sprintf(webBf, http200, "text/html");
-    
+
+    webBfPos += sprintf(webBf+webBfPos, httpSysNavBar);
     webBfPos += sprintf(webBf + webBfPos, "Flash ID: %X<br />", FlashReadId());
 
-    UI16_t bfSize = 512;
-    UI16_t contentIndex = 0;
     UI16_t contentLength = 0;
     UI32_t flashLocation = 0;
     UI16_t fileTypeLength = 0;
@@ -130,7 +130,8 @@ void webSysRtos(TcpConnection_t* connection, char **params)
 
     fl.bits.fin = 1;
 
-    webBfPos = sprintf(webBf, httpRtosTaskTable);
+    webBfPos = sprintf(webBf, httpSysNavBar);
+    webBfPos += sprintf(webBf+webBfPos, httpRtosTaskTable);
     while(ptr != NULL)
     {
         i++;
@@ -190,7 +191,8 @@ void webSysTcpip(TcpConnection_t* connection, char **params)
     fl.bits.fin = 1;
     
     webBfPos = sprintf(webBf, http200, "text/html");
-    webBfPos += sprintf(webBf, httpConnectionTable);
+    webBfPos += sprintf(webBf+webBfPos, httpSysNavBar);
+    webBfPos += sprintf(webBf+webBfPos, httpConnectionTable);
 
     for (i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
@@ -213,7 +215,8 @@ void webSysTcpip(TcpConnection_t* connection, char **params)
 
 void webIndex(TcpConnection_t* connection, char **params)
 {
-    strcpy(webBf, httpHelloWorld);
+    webBfPos = sprintf(webBf, httpHelloWorld);
+    webBfPos += sprintf(webBf+webBfPos, httpSysNavBar);
 
     // Tcp flags for HTTP header
     TcpFlags_t fl;
@@ -222,7 +225,7 @@ void webIndex(TcpConnection_t* connection, char **params)
     fl.bits.psh = 1;
     fl.bits.fin = 1;
 
-    tcpTxPacket(strlen(httpHelloWorld), fl, connection);
+    tcpTxPacket(webBfPos, fl, connection);
     
 }
 
@@ -309,7 +312,6 @@ void webServeFlash(TcpConnection_t* connection, Route_t* route)
     }while(contentLength > contentIndex);
 
 }
-
 
 void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
 {
