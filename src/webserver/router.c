@@ -142,14 +142,15 @@ void webSysRtos(TcpConnection_t* connection, char **params)
     webBfPos = sprintf(webBf, httpSysNavBar);
 
 #ifdef RTOS_DEBUG
+    
     webBfPos += sprintf(webBf+webBfPos, httpRtosTaskTable);
     while(ptr != NULL)
     {
         i++;
         if (ptr->state == TASK_STATE_DELAY)
         {
-            if(ptr->nextRun > RtosGetTime())
-                runTimeRemaining = (ptr->nextRun-RtosGetTime());
+            if(ptr->nextRun > RtosTimestamp)
+                runTimeRemaining = (ptr->nextRun-RtosTimestamp);
             else
                 runTimeRemaining = 0;
             sprintf(state, RtosStateText[ptr->state], runTimeRemaining, (ptr->nextRun - ptr->lastRun));
@@ -157,7 +158,7 @@ void webSysRtos(TcpConnection_t* connection, char **params)
         else
             strcpy(state, RtosStateText[ptr->state]);
 
-        loadInt = ptr->timeRan*100/RtosGetTime();
+        loadInt = ptr->timeRan*100/RtosTimestamp;
         if (loadInt == 0)
             strcpy(load, "<1%");
         else
@@ -180,11 +181,11 @@ void webSysRtos(TcpConnection_t* connection, char **params)
             ptr->timeRan, ptr->lastRun, ptr->nextRun,
             ptr->eventStore, ptr->eventMask,
             load
-                );
+        );
 
         ptr = (RtosTask_t*)ptr->list;
     }
-    webBfPos += sprintf(webBf + webBfPos, "</table>Time: %lu", RtosGetTime());
+    webBfPos += sprintf(webBf + webBfPos, "</table>Time: %lu", RtosTimestamp);
 #else
     webBfPos += sprintf(webBf+webBfPos, "<h1>No RTOS debug available</h1>");
 #endif

@@ -172,7 +172,7 @@ void RtosKernelStoreTask(RtosTask_t* task)
         task->state = TASK_STATE_READY;
     }
 #ifdef RTOS_DEBUG
-    task->lastRun = RtosGetTime();
+    task->lastRun = RtosTimestamp;
     task->timeRan++;
     //TODO: Analayze stack
     task->stackUsage = ((UI16_t)task->stackPosition - (UI16_t)task->stack);
