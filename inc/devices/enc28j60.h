@@ -207,7 +207,7 @@ typedef enum enc28j60Registers_e
 #define ENC28J60_TXBUF_END      8191
 
 #define enc28j60_spi_bus 1
-#define enc28j60_spi_write(data) (spiTxByte(enc28j60_spi_bus, data))
+#define enc28j60_spi_write(data) spiTxByte(enc28j60_spi_bus, data);
 #define enc28j60_spi_read(data) spiRxByte(enc28j60_spi_bus)
 #define enc28j60_spi_transferBytes(dataTx, dataRx, size) spiTxRxBytes(enc28j60_spi_bus, dataTx, dataRx, size)
 

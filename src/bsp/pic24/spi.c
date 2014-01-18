@@ -86,82 +86,119 @@ void spiInit(UI08_t port)
     }
 }
 
-void spiTxByte(UI08_t port, UI08_t byte)
+void spiTx1(UI08_t byte)
 {
     UI16_t aha = 0;
+    SPI1BUF = byte;
+    while(SPI1STATbits.SPIRBF == 0);
+    aha = SPI1BUF;
+}
+void spiTx2(UI08_t byte)
+{
+    UI16_t aha = 0;
+    SPI2BUF = byte;
+    while(SPI2STATbits.SPIRBF == 0);
+    aha = SPI2BUF;
+}
+
+UI08_t spiRx1()
+{
+    SPI1BUF = 0;
+    while(SPI1STATbits.SPIRBF == 0);
+    return SPI1BUF;
+}
+UI08_t spiRx2()
+{
+    SPI2BUF = 0;
+    while(SPI2STATbits.SPIRBF == 0);
+    return SPI2BUF;
+}
+
+UI08_t spiTxRx1(UI08_t byte)
+{
+    SPI1BUF = byte;
+    while(SPI1STATbits.SPIRBF == 0);
+    return SPI1BUF;
+}
+UI08_t spiTxRx2(UI08_t byte)
+{
+    SPI2BUF = byte;
+    while(SPI2STATbits.SPIRBF == 0);
+    return SPI2BUF;
+}
+
+#ifndef spiTxByte
+void spiTxByte(UI08_t port, UI08_t byte)
+{
     switch(port)
     {
         case 1:
-            SPI1BUF = byte;
-            while(SPI1STATbits.SPIRBF == 0);
-            aha = SPI1BUF;
+            spiTx1(byte);
             break;
         case 2:
-            SPI2BUF = byte;
-            while(SPI2STATbits.SPIRBF == 0);
-            aha = SPI2BUF;
+            spiTx2(byte);
             break;
     }
 }
+#endif
+
+#ifndef spiRxByte
 UI08_t spiRxByte(UI08_t port)
 {
     switch(port)
     {
         case 1:
-            SPI1BUF = 0;
-            while(SPI1STATbits.SPIRBF == 0);
-            return SPI1BUF;
+            spiRx1();
+            break;
         case 2:
-            SPI2BUF = 0;
-            while(SPI2STATbits.SPIRBF == 0);
-            return SPI2BUF;
+            spiRx2();
         default:
             return 0x5A;
     }
 }
+#endif
+
+#ifndef spiTxRxByte
 UI08_t spiTxRxByte(UI08_t port, UI08_t byte)
 {
     switch(port)
     {
         case 1:
-            SPI1BUF = byte;
-            while(SPI1STATbits.SPIRBF == 0);
-            return SPI1BUF;
-
+            return spiTxRx1(byte);
         case 2:
-            SPI2BUF = byte;
-            while(SPI2STATbits.SPIRBF == 0);
-            return SPI2BUF;
+            return spiTxRx2(byte);
 
         default:
-            return 0xFF;
+            return 0;
     }
 }
+#endif
 void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size)
 {
-    UI08_t rxB = 0;
     UI16_t i = 0;
-    if (dataRx == NULL || 0)
+    if (dataRx == NULL)
     {
-        while (size > i)
+        while (size > 0)
         {
             spiTxByte(port, *dataTx);
             dataTx++;
-            i++;
+            size--;
+        }
+    }
+    else if (dataTx == NULL)
+    {
+        while (size > 0)
+        {
+            *dataRx = spiRxByte(port);
+            dataRx++;
+            size--;
         }
     }
     else
     {
         while(size> i)
         {
-            if(dataTx == NULL)
-                rxB = spiTxRxByte(port, 0x00);
-            else
-                rxB = spiTxRxByte(port, dataTx[i]);
-
-            if(dataRx != NULL)
-                dataRx[i] = rxB;
-
+            dataRx[i] = spiTxRxByte(port, dataTx[i]);
             i++;
         }
     }

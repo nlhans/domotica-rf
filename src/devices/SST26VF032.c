@@ -50,12 +50,11 @@ void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
 
     spiTxByte(FLASH_SPI_PORT, FLASH_CMD_RX_DATA);
 
-    spiTxByte(FLASH_SPI_PORT, (addr >> 16) & 0xFF);
-    spiTxByte(FLASH_SPI_PORT, (addr >> 8) & 0xFF);
-    spiTxByte(FLASH_SPI_PORT,  addr & 0xFF);
+    spiTxByte(FLASH_SPI_PORT, (addr >> 16));
+    spiTxByte(FLASH_SPI_PORT, (addr >> 8));
+    spiTxByte(FLASH_SPI_PORT,  addr);
 
     spiTxRxBytes(FLASH_SPI_PORT, NULL, bf, size);
 
     FlashCsSet(addr, FALSE);
-
 }
