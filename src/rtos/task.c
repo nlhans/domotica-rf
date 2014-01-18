@@ -23,7 +23,7 @@ RtosTime_t RtosGetTime()
 
 void RtosKernelRestoreTask(RtosTask_t* task);
 void RtosKernelStoreTask(RtosTask_t* task);
-
+#ifdef RTOS_DEBUG
 const char* const RtosStateText[5] = {
     "SUSPENDED",
     "RUNNING",
@@ -31,6 +31,7 @@ const char* const RtosStateText[5] = {
     "WAIT FOR SIGNAL",
     "READY"
 };
+#endif
 
 RtosTask_t RtosTaskIdleObj;
 

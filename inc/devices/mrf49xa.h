@@ -3,15 +3,6 @@
 
 #include "stddefs.h"
 
-#define Mrf49XaDelay(n) do { \
-    for(i=0;i<n*125;i++) \
-    { \
-        for(j=0;j<250;j++) \
-        { \
-            Nop(); \
-        } \
-    } \
-    }while(0);
 #define MRF49XA_WaitOnTx() do { while (!SPI_SDI); } while (0);
 
 #define PACKET_SIZE_MAX         20              // 8x2 bytes + 4 bytes header/footer

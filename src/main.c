@@ -1,4 +1,3 @@
-
 #define MAIN_C
 
 #include "stddefs.h"
@@ -127,11 +126,25 @@ bool_t httpCloseConnection(void* con)
 
 RtosTask_t ledTask;
 RtosTask_t ethTask;
+RtosTask_t rfTask;
 UI08_t ledTaskStk[128];
 UI08_t ethTaskStk[768];
+UI08_t rfTaskStk[512];
 #define ETH_TCP_TICK 0x01
 #define ETH_ENC_ISR 0x02
 #define ETH_ENC_ERR 0x04
+
+#define RF_RX_PACKET 0x01
+
+void RfTask()
+{
+    //
+    while(1)
+    {
+        UI16_t evt = RtosTaskWaitForEvent(
+                RF_RX_PACKET);
+    }
+}
 
 void LedTask()
 {
@@ -287,6 +300,7 @@ int main(void)
     FlashInit();
 
     RtosTaskInit();
+    RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
     RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
     RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
     RtosTaskRun();

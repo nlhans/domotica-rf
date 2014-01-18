@@ -48,7 +48,6 @@ void webSysRtos(TcpConnection_t* connection, char **params);
     on("GET", "/favicon.ico",    ROUTE_IN_FLASH(0x0000), NULL)        \
     on("GET", "/404.html",       ROUTE_IN_FLASH(0x000B), NULL)        \
     on("GET", "/",               ROUTE_IS_CONSTANT,      webIndex)    \
-    
 
 enum
 {
@@ -131,51 +130,41 @@ void webSysRtos(TcpConnection_t* connection, char **params)
     fl.bits.fin = 1;
 
     webBfPos = sprintf(webBf, httpSysNavBar);
+
+#ifdef RTOS_DEBUG
     webBfPos += sprintf(webBf+webBfPos, httpRtosTaskTable);
     while(ptr != NULL)
     {
         i++;
-#ifdef RTOS_DEBUG
         if (ptr->state == TASK_STATE_DELAY)
             sprintf(state, RtosStateText[ptr->state], (ptr->nextRun-RtosGetTime()), (ptr->nextRun - ptr->lastRun));
         else
             strcpy(state, RtosStateText[ptr->state]);
-#else
-        strcpy(state, RtosStateText[ptr->state]);
-#endif
+
         webBfPos += sprintf(webBf+webBfPos, "<tr><td>%d</td>" // i
                 "<td>%d</td>" // priority
-#ifdef RTOS_DEBUG
                 "<td>%s</td>" // name
-#endif
                 "<td>%s</td>" // state
-#ifdef RTOS_DEBUG
                 "<td>%d / %d / %d</td>" // stack
                 "<td>%lu ticks / last %lu / next %lu</td>" // time
-#endif
-#ifdef RTOS_EVENTS
                 "<td>%X / %X</td>"
-#endif
                 "</tr>", // event
             i,
             ptr->priority,
-#ifdef RTOS_DEBUG
             ptr->name,
-#endif
-            state
-#ifdef RTOS_DEBUG
-            ,ptr->stackUsage,  ptr->stackMaxUsage, ptr->stackSize,
-            ptr->timeRan, ptr->lastRun, ptr->nextRun
-#endif
-#ifdef RTOS_EVENTS
-           ,ptr->eventStore, ptr->eventMask
-#endif
+            state,
+            ptr->stackUsage,  ptr->stackMaxUsage, ptr->stackSize,
+            ptr->timeRan, ptr->lastRun, ptr->nextRun,
+            ptr->eventStore, ptr->eventMask
                 );
 
         ptr = (RtosTask_t*)ptr->list;
     }
-
-    tcpTxPacket(strlen(webBf), fl, connection);
+#else
+    webBfPos += sprintf(webBf+webBfPos, "<h1>No RTOS debug available</h1>");
+#endif
+    
+    tcpTxPacket(webBfPos, fl, connection);
     tcpCloseObj(connection);
 }
 

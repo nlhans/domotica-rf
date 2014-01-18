@@ -45,7 +45,10 @@ typedef struct RtosTask_s
 
 } RtosTask_t;
 
+#ifdef RTOS_DEBUG
 extern const char* const RtosStateText[5];
+#endif
+
 extern RtosTask_t RtosTaskIdleObj;
 
 RtosTime_t RtosGetTime();

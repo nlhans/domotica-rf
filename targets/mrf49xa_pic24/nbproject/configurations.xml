@@ -191,7 +191,7 @@
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
         <property key="stack-size" value="16"/>
-        <property key="symbol-stripping" value=""/>
+        <property key="symbol-stripping" value="s"/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
       </C30-LD>
@@ -266,6 +266,7 @@
         <property key="tracecontrol.collectioninterval" value="1"/>
         <property key="tracecontrol.collectionunits" value="1"/>
         <property key="tracecontrol.disablemacros" value="false"/>
+        <property key="tracecontrol.functionprofile.summary" value="false"/>
         <property key="tracecontrol.include.timestamp" value="false"/>
         <property key="tracecontrol.medium" value="0"/>
         <property key="tracecontrol.portselect" value="0"/>
