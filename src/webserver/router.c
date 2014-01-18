@@ -17,7 +17,7 @@ const char* const http404 = "HTTP/1.1 404 Not Found\r\n\r\n<h1>404 Not Found</h1
 const char* const httpHelloWorld = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\n\r\n<h1>Hello world</h1>This is a sample page to show this actually works.";
 
 const char* const httpConnectionTable = "<h1>Connection list</h1><table style=\"border: 1px;\"><tr><td>#</td><td>IP</td><td>Port</td><td>State</td></tr>";
-const char* const httpRtosTaskTable = "<h1>RTOS task table</h1><table style=\"border: 1px; \"><tr><td>#</td><td>Prio</td><td>Name</td><td>State</td><td>Stack</td><td>Time</td><td>Events</td></tr>";
+const char* const httpRtosTaskTable = "<h1>RTOS task table</h1><table style=\"border: 1px; \"><tr><td>#</td><td>Prio</td><td>Name</td><td>State</td><td>Stack</td><td>Time</td><td>Events</td><td>Load %</td></tr>";
 
 void webIndex(TcpConnection_t* connection, char **params);
 void webTest(TcpConnection_t* connection, char **params);
@@ -41,12 +41,12 @@ void webSysRtos(TcpConnection_t* connection, char **params);
 #define ROUTE_IN_FLASH(addr) addr
 
 #define routerTable(on) \
+    on("GET", "/favicon.ico",    ROUTE_IN_FLASH(0x0000), NULL)        \
+    on("GET", "/404.html",       ROUTE_IN_FLASH(0x000B), NULL)        \
     on("GET", "/sys/tcpip",      ROUTE_IS_CONSTANT,      webSysTcpip) \
     on("GET", "/sys/flash",      ROUTE_IS_CONSTANT,      webSysFlash) \
     on("GET", "/sys/rtos",       ROUTE_IS_CONSTANT,      webSysRtos)  \
     on("GET", "/get/:0/:1",      ROUTE_IS_ARGS,          webTest)     \
-    on("GET", "/favicon.ico",    ROUTE_IN_FLASH(0x0000), NULL)        \
-    on("GET", "/404.html",       ROUTE_IN_FLASH(0x000B), NULL)        \
     on("GET", "/",               ROUTE_IS_CONSTANT,      webIndex)    \
 
 enum
@@ -112,11 +112,15 @@ void webSysFlash(TcpConnection_t* connection, char **params)
     tcpTxPacket(webBfPos, fl, connection);
 
 }
+
 void webSysRtos(TcpConnection_t* connection, char **params)
 {
     TcpFlags_t fl;
     UI08_t i = 0;
+    UI08_t loadInt = 0;
+    UI32_t runTimeRemaining;
     char state [32];
+    char load[4];
     RtosTask_t* ptr = &RtosTaskIdleObj;
     
     // Tcp flags for HTTP header
@@ -137,9 +141,21 @@ void webSysRtos(TcpConnection_t* connection, char **params)
     {
         i++;
         if (ptr->state == TASK_STATE_DELAY)
-            sprintf(state, RtosStateText[ptr->state], (ptr->nextRun-RtosGetTime()), (ptr->nextRun - ptr->lastRun));
+        {
+            if(ptr->nextRun > RtosGetTime())
+                runTimeRemaining = (ptr->nextRun-RtosGetTime());
+            else
+                runTimeRemaining = 0;
+            sprintf(state, RtosStateText[ptr->state], runTimeRemaining, (ptr->nextRun - ptr->lastRun));
+        }
         else
             strcpy(state, RtosStateText[ptr->state]);
+
+        loadInt = ptr->timeRan*100/RtosGetTime();
+        if (loadInt == 0)
+            strcpy(load, "<1%");
+        else
+            sprintf(load, "%d%", loadInt);
 
         webBfPos += sprintf(webBf+webBfPos, "<tr><td>%d</td>" // i
                 "<td>%d</td>" // priority
@@ -148,6 +164,7 @@ void webSysRtos(TcpConnection_t* connection, char **params)
                 "<td>%d / %d / %d</td>" // stack
                 "<td>%lu ticks / last %lu / next %lu</td>" // time
                 "<td>%X / %X</td>"
+                "<td>%s</td>"
                 "</tr>", // event
             i,
             ptr->priority,
@@ -155,11 +172,13 @@ void webSysRtos(TcpConnection_t* connection, char **params)
             state,
             ptr->stackUsage,  ptr->stackMaxUsage, ptr->stackSize,
             ptr->timeRan, ptr->lastRun, ptr->nextRun,
-            ptr->eventStore, ptr->eventMask
+            ptr->eventStore, ptr->eventMask,
+            load
                 );
 
         ptr = (RtosTask_t*)ptr->list;
     }
+    webBfPos += sprintf(webBf + webBfPos, "</table>Time: %lu", RtosGetTime());
 #else
     webBfPos += sprintf(webBf+webBfPos, "<h1>No RTOS debug available</h1>");
 #endif
