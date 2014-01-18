@@ -123,6 +123,7 @@ typedef struct TcpConnection_s
 extern TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 void tcpInit();
+void tcpHandlePacket(EthernetIpv4_t* ipv4);
 bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);
 
 void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);

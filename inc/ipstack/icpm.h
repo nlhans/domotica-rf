@@ -29,11 +29,8 @@ typedef struct ICMPPacket_s
     ICMPacketHeader_t icmp;
 } ICMPPacket_t;
 
-void icmpInit();
 void icmpPing(UI08_t* target);
-
-
-
+void icmpHandlePacket (EthernetIpv4_t* header);
 
 #ifdef	__cplusplus
 }

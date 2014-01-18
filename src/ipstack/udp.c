@@ -13,12 +13,9 @@ typedef struct UDPSocketHandlerInfo_s
 
 UDPSocketHandlerInfo_t handlers[UDP_MAX_HANDLERS];
 
-void udpHandlePacket (EthernetIpv4_t* ipv4, bool_t* handled);
-
 void udpInit()
 {
     UI08_t i = 0;
-    ipv4RegisterHandler(udpHandlePacket);
 
     while (i < UDP_MAX_HANDLERS)
     {
@@ -57,22 +54,17 @@ void udpRegisterHandler(UDPSocketHandler_t handler, UI16_t port)
     }
 }
 
-void udpHandlePacket (EthernetIpv4_t* ipv4, bool_t* handled)
+void udpHandlePacket (EthernetIpv4_t* ipv4)
 {
     UDPPacket_t* packet = (UDPPacket_t*)ipv4;
 
-    if (ipv4->header.protocol == Ipv4UDP)
-    {
-        *handled = TRUE;
+    packet->udp.portSource = htons(packet->udp.portSource);
+    packet->udp.portDestination = htons(packet->udp.portDestination);
+    packet->udp.length = htons(packet->udp.length);
 
-        packet->udp.portSource = htons(packet->udp.portSource);
-        packet->udp.portDestination = htons(packet->udp.portDestination);
-        packet->udp.length = htons(packet->udp.length);
+    INSIGHT(UDP_RX, packet->udp.portSource, packet->udp.portDestination, packet->udp.crc, packet->udp.length);
+    udpFirePacket(packet);
 
-        INSIGHT(UDP_RX, packet->udp.portSource, packet->udp.portDestination, packet->udp.crc, packet->udp.length);
-        udpFirePacket(packet);
-    }
-    
 }
 void udpTxPacket(UDPPacket_t* packet, UI16_t size, UI08_t* ip, UI16_t port)
 {

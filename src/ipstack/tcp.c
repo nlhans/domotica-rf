@@ -26,11 +26,9 @@ TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 TcpConnection_t* tcpPickFreeConnection();
+TcpConnection_t* tcpMatchPort(UI16_t localPort);
 TcpConnection_t* tcpMatchConnection(UI08_t* ip, UI16_t remotePort);
 void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags);
-void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done);
-
-void tcpCloseObj(TcpConnection_t* connection);
 
 void tcpInit()
 {
@@ -38,7 +36,6 @@ void tcpInit()
 
     tcpPacketBf = macGetPacketBuffer();
 
-    ipv4RegisterHandler(tcpPacketHandler);
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         tcpConnections[i].state = TcpClosed;
@@ -47,6 +44,52 @@ void tcpInit()
     {
         tcpListeners[i].InUse = FALSE;
     }
+}
+
+void tcpHandlePacket(EthernetIpv4_t* ipv4)
+{
+    TcpPacket_t* packet = (TcpPacket_t*) ipv4;
+    TcpConnection_t* connection;
+    TcpFlags_t flags;
+
+    execProfile(TCP_HANDLE);
+
+    packet->tcp.portSource          = htons(packet->tcp.portSource);
+    packet->tcp.portDestination     = htons(packet->tcp.portDestination);
+    packet->tcp.flags.data          = htons(packet->tcp.flags.data);
+    packet->tcp.length              = htons(packet->tcp.length);
+
+    INSIGHT(TCP_RX, packet->tcp.portSource, packet->tcp.portDestination, packet->tcp.flags.data, packet->tcp.length, packet->tcp.acknowledgement);
+    INSIGHT(TCP_RX_FLAGS, packet->tcp.flags.bits.syn, packet->tcp.flags.bits.ack, packet->tcp.flags.bits.rst, packet->tcp.flags.bits.fin);
+
+    // Determine corresponding connection slot, otherwise listener.
+    connection = tcpMatchConnection(packet->ipv4.header.sourceIp, packet->tcp.portSource);
+
+    if (connection != NULL)
+    {
+        INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+    }
+    else
+    {
+        connection = tcpMatchPort(packet->tcp.portDestination);
+
+        if (connection != NULL)
+        {
+            memcpy(connection->remoteIp, packet->ipv4.header.sourceIp, 4);
+            memcpy(connection->remoteMac, packet->ipv4.frame.srcMac, 6);
+            connection->remotePort = packet->tcp.portSource;
+            INSIGHT(TCP_RX_RESERVING);
+            INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+        }
+        else
+        {
+            INSIGHT(TCP_NO_CONNECTION);
+            return;
+        }
+    }
+
+    tcpStatemachine(TRUE, packet, connection, flags);
+    
 }
 
 TcpConnection_t* tcpPickFreeConnection()
@@ -158,54 +201,6 @@ bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accep
         }
     }
     return FALSE;
-}
-
-void tcpPacketHandler(EthernetIpv4_t* ipv4, bool_t* done)
-{
-    TcpPacket_t* packet = (TcpPacket_t*) ipv4;
-    TcpConnection_t* connection;
-    TcpFlags_t flags;
-
-    if(ipv4->header.protocol == Ipv4TCP)
-    {
-        execProfile(TCP_HANDLE);
-
-        packet->tcp.portSource          = htons(packet->tcp.portSource);
-        packet->tcp.portDestination     = htons(packet->tcp.portDestination);
-        packet->tcp.flags.data          = htons(packet->tcp.flags.data);
-        packet->tcp.length              = htons(packet->tcp.length);
-        
-        INSIGHT(TCP_RX, packet->tcp.portSource, packet->tcp.portDestination, packet->tcp.flags.data, packet->tcp.length, packet->tcp.acknowledgement);
-        INSIGHT(TCP_RX_FLAGS, packet->tcp.flags.bits.syn, packet->tcp.flags.bits.ack, packet->tcp.flags.bits.rst, packet->tcp.flags.bits.fin);
-
-        // Determine corresponding connection slot, otherwise listener.
-        connection = tcpMatchConnection(packet->ipv4.header.sourceIp, packet->tcp.portSource);
-
-        if (connection != NULL)
-        {
-            INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
-        }
-        else
-        {
-            connection = tcpMatchPort(packet->tcp.portDestination);
-
-            if (connection != NULL)
-            {
-                memcpy(connection->remoteIp, packet->ipv4.header.sourceIp, 4);
-                memcpy(connection->remoteMac, packet->ipv4.frame.srcMac, 6);
-                connection->remotePort = packet->tcp.portSource;
-                INSIGHT(TCP_RX_RESERVING);
-                INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
-            }
-            else
-            {
-                INSIGHT(TCP_NO_CONNECTION);
-                return;
-            }
-        }
-
-        tcpStatemachine(TRUE, packet, connection, flags);
-    }
 }
 
 void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags)

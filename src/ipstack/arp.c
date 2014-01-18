@@ -6,7 +6,7 @@
 const UI08_t const onesMac[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 const UI08_t const zerosMac[6] = {0, 0, 0, 0, 0, 0};
 
-void arpBuildPacket(UI08_t* senderMac, UI08_t* senderIp, UI08_t* targetMac, UI08_t* targetIp, bool_t reply);
+void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply);
 
 void arpInit()
 {
@@ -17,7 +17,7 @@ void arpInit()
     }*/
 }
 
-void arpBuildPacket(UI08_t* senderMac, UI08_t* senderIp, UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
+void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
 {
     ArpPacket_t arp;
 
@@ -27,8 +27,8 @@ void arpBuildPacket(UI08_t* senderMac, UI08_t* senderIp, UI08_t* targetMac, UI08
     arp.plen  = 4;                  // Length of IP
     arp.oper  = htons( ((reply) ? 2 : 1) );  // request or reply
 
-    memcpy(arp.sha, senderMac, 6);       // My MAC
-    memcpy(arp.spa, senderIp, 4);        // requested IP
+    memcpy(arp.sha, myMac, 6);           // My MAC
+    memcpy(arp.spa, myIp, 4);            // My IP
     memcpy(arp.tha, targetMac, 6);       // 00:00:00:00:00:00
     memcpy(arp.tpa, targetIp, 4);        // 192.168.1.1?
 
@@ -41,36 +41,25 @@ void arpBuildPacket(UI08_t* senderMac, UI08_t* senderIp, UI08_t* targetMac, UI08
 
 void arpAnnounce()
 {
-    arpBuildPacket(myMac, myIp, (UI08_t*)zerosMac, myGateway, FALSE);
+    arpBuildPacket((UI08_t*)zerosMac, myGateway, FALSE);
 
     INSIGHT(ARP_ANNOUNCE, myIp[0], myIp[1], myIp[2], myIp[3]);
 }
 
-void arpProcessPacket(EthernetFrame_t* frame, bool_t* handled)
+void arpProcessPacket(EthernetFrame_t* frame)
 {
-    ArpPacket_t* arp;
-    if (frame -> type == 0x0806)
+    ArpPacket_t* arp = (ArpPacket_t*) frame;
+    
+    if (htons(arp->oper) != 2) // this is a request
     {
-        *handled = TRUE;
+        INSIGHT(ARP_WHOHAS, arp->tpa[0],arp->tpa[1],arp->tpa[2],arp->tpa[3], (memcmp(arp->tpa, myIp, 4) == 0)?1:0,
+                            arp->spa[0],arp->spa[1],arp->spa[2],arp->spa[3])
 
-        arp = (ArpPacket_t*) frame;
-        // decode its data
-        arp->htype = htons(arp->htype);
-        arp->ptype = htons(arp->ptype);
-        arp->oper  = htons(arp->oper);
-        
-        if (arp->oper != 2) // this is a request
+        if (memcmp(arp->tpa, myIp, 4) == 0)
         {
-            INSIGHT(ARP_WHOHAS, arp->tpa[0],arp->tpa[1],arp->tpa[2],arp->tpa[3], (memcmp(arp->tpa, myIp, 4) == 0)?1:0,
-                                arp->spa[0],arp->spa[1],arp->spa[2],arp->spa[3])
-
-            if (memcmp(arp->tpa, myIp, 4) == 0)
-            {
-                // It's a match; meaning requesting a MAC address for this 'machine'
-                arpBuildPacket(myMac, myIp, arp->sha, arp->spa, TRUE);
-            }
+            // It's a match; meaning requesting a MAC address for this 'machine'
+            arpBuildPacket(arp->sha, arp->spa, TRUE);
         }
-
     }
 }
 

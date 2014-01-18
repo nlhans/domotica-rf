@@ -35,6 +35,8 @@ typedef struct UDPPacket_s
 typedef void (*UDPSocketHandler_t) (UDPPacket_t* udp, bool_t* handled);
 
 void udpInit();
+void udpHandlePacket (EthernetIpv4_t* ipv4);
+
 void udpRegisterHandler(UDPSocketHandler_t handler, UI16_t port);
 void udpTxPacket(UDPPacket_t* packet, UI16_t size, UI08_t* ip, UI16_t port);
 

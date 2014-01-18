@@ -8,36 +8,22 @@
 
 #include "profiling/executiontime.h"
 
-#define ETHERNET_HANDLERS_COUNT 2
-
-typedef struct EthernetPacketHandlerInfo_s
-{
-    bool_t used;
-    EthernetPacketHandler_t handler;
-} EthernetPacketHandlerInfo_t;
-
 UI08_t* ethPacketBuffer = NULL;
 UI16_t ethPacketBufferSize = 0;
 
+void enc28j60SetBank(enc28j60Register_t bank);
 
 void enc28j60WriteUint8(UI08_t reg, UI08_t value);
 void enc28j60WriteUint16(UI08_t reg, UI16_t value);
 UI08_t enc28j60ReadUint8(UI08_t reg);
 UI16_t enc28j60ReadUint16(UI08_t reg);
 
-
-void enc28j60SetBank(enc28j60Register_t bank);
 UI08_t enc28j60ReadRegisterUint16(UI08_t address);
 
 void enc28j60WriteRegisterUint8(UI08_t address, UI08_t value);
 void enc28j60WriteRegisterUint16(UI08_t address, UI16_t value);
 
-
-void enc28j60FireTxHandlers(EthernetFrame_t* frame);
-
 static UI08_t currentBank = 0;
-
-static EthernetPacketHandlerInfo_t handlers[ETHERNET_HANDLERS_COUNT];
 
 /******************************************************************************/
 /****                                                                      ****/
@@ -71,7 +57,6 @@ void enc28j60BitClrUint8(UI08_t reg, UI08_t value)
 
     INSIGHT(ENC28J60_BITCLR_REG, reg, value);
 }
-
 void enc28j60WriteUint16(UI08_t reg, UI16_t value)
 {
     ENC28J60_CS_LOW;
@@ -90,9 +75,6 @@ UI08_t enc28j60ReadUint8(UI08_t reg)
     enc28j60_spi_write(RCR | (reg & 0x1F));
     d = enc28j60_spi_read();
     ENC28J60_CS_HIGH;
-
-    if (reg != EIR)
-    INSIGHT(ENC28J60_READ_REG, reg, d);
 
     return d;
 }
@@ -129,6 +111,7 @@ void enc28j60SetBank(enc28j60Register_t reg)
         enc28j60_spi_write(0b00000011);
         ENC28J60_CS_HIGH;
     }
+    
     currentBank = reg.registerObj.bank & 0x3;
 
     if (currentBank > 0)
@@ -141,10 +124,8 @@ void enc28j60SetBank(enc28j60Register_t reg)
 
 }
 
-void enc28j60WriteData(UI16_t memAddress, UI08_t* bf, UI16_t size)
+void enc28j60WriteData(UI08_t* bf, UI16_t size)
 {
-    //enc28j60WriteRegisterUint16(EWRPTL, memAddress);
-
     ENC28J60_CS_LOW;
     enc28j60_spi_write(WBM | 0x1A);
     enc28j60_spi_transferBytes(bf, NULL, size);
@@ -152,15 +133,12 @@ void enc28j60WriteData(UI16_t memAddress, UI08_t* bf, UI16_t size)
 
 }
 
-void enc28j60ReadData(UI16_t memAddress, UI08_t* bf, UI16_t size)
+void enc28j60ReadData(UI08_t* bf, UI16_t size)
 {
-    enc28j60WriteRegisterUint16(ERDPTL, memAddress);
-
     ENC28J60_CS_LOW;
     enc28j60_spi_write(RBM | 0x1A);
     enc28j60_spi_transferBytes(NULL, bf, size);
     ENC28J60_CS_HIGH;
-
 }
 
 
@@ -298,16 +276,9 @@ bool_t enc28j60GetOverflowStatus(void)
     //return (((enc28j60ReadRegisterUint8(EIR) & 0x1) == 0x0) ? TRUE : FALSE);
 }
 
-UI08_t* enc28j60GetPacketBuffer()
-{
-    return ethPacketBuffer;
-}
-
 void enc28j60Initialize(UI08_t* ipStackBuffer, UI16_t bufferSize)
 {
     ENC28J60_CS_HIGH; // deselect chip
-
-    memset((void*)handlers, 0, ETHERNET_HANDLERS_COUNT);
 
     ethPacketBuffer = ipStackBuffer;
     ethPacketBufferSize = bufferSize;
@@ -403,8 +374,8 @@ void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
 
     // Control byte (0x00) + packet
     execProfile(ENC_TX_BUFFER);
-    enc28j60WriteData(ENC28J60_TXBUF_START, &controlByte, 1);
-    enc28j60WriteData(ENC28J60_TXBUF_START+1, (UI08_t*)packet, length);
+    enc28j60WriteData(&controlByte, 1);
+    enc28j60WriteData((UI08_t*)packet, length);
 
     execProfile(ENC_TX_SEND);
     // Todo: ext interrupts
@@ -447,7 +418,6 @@ void enc28j60RxFrame(void)
     UI08_t              packetHeader[6];
     EthernetFrame_t*    frame;
     UI08_t*             data;
-    bool_t              dummy = TRUE;
 
     while(packetCount > 0)
     {
@@ -460,30 +430,14 @@ void enc28j60RxFrame(void)
         enc28j60WriteRegisterUint16(ERDPTL, dataPtr);
         
         // Read the ENC header.
-        enc28j60ReadData(dataPtr, packetHeader, 6);
+        enc28j60ReadData(packetHeader, 6);
 
         UI16_t  nextPacketOffset    = packetHeader[0] | (packetHeader[1] << 8);
         UI16_t  packetSize          = packetHeader[2] | (packetHeader[3] << 8);
         UI16_t  receiveStatus       = packetHeader[4] | (packetHeader[5] << 8);
 
-        /*
-        if (nextPacketOffset == 0xFFFF && packetSize > 1518)
-        {
-            dataPtr = ENC28J60_RXBUF_START;
-            while (enc28j60GetPacketCount() != 0)
-            {
-                enc28j60BitSetRegisterUint8(ECON2, 0b01000000); // decrease packet counter
-                
-            }
-            break;
-        }
-        */
         if (((receiveStatus >> 4) & 0x1) == 0)
         {
-            // CRC error
-
-            //if(packetSize>sizeof(UDPPacket_t)+32)
-            //    packetSize=sizeof(UDPPacket_t)+32;
             execProfile(ENC_RX_PACKET);
 
             // Receive packet itself
@@ -491,22 +445,28 @@ void enc28j60RxFrame(void)
             {
                 packetSize = length-2;
             }
-            enc28j60ReadData(dataPtr + 4, packet, packetSize+2-4); // -4 for CRC, +2 for some status bytes or something?
+
+            // Set read pointer to packet
+            enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4);
+
+            // Read the data
+            enc28j60ReadData(packet, packetSize+2-4); // -4 for CRC, +2 for some status bytes or something?
 
             execProfile(ENC_RX_PACKET_DONE);
             
-            frame = (EthernetFrame_t*) (packet+2);
-            frame-> type = htons(frame->type); // reverse byte order
-            data = (UI08_t*) (packet + 2+sizeof(EthernetFrame_t));
+            frame       = (EthernetFrame_t*) (packet+2);
+            frame->type = htons(frame->type); // reverse byte order
+            data        = (UI08_t*) (packet + 2+sizeof(EthernetFrame_t));
 
             INSIGHT(ENC28J60_RX, packetSize+2-4, frame->srcMac[0], frame->srcMac[1], frame->srcMac[2], frame->srcMac[3], frame->srcMac[4], frame->srcMac[5]);
 
-            dummy = FALSE;
-            ipv4HandlePacket(frame, &dummy);
-
-            if (dummy==FALSE)
+            if (frame->type == 0x0800)
             {
-                arpProcessPacket(frame, &dummy);
+                ipv4HandlePacket(frame);
+            }
+            else if (frame->type == 0x0806)
+            {
+                arpProcessPacket(frame);
             }
             //enc28j60FireTxHandlers(frame);
 
@@ -560,57 +520,6 @@ void enc28j60ResetRxBuffer()
     enc28j60WriteRegisterUint16(ETXNDL, ENC28J60_TXBUF_END);
     
     enc28j60BitClrRegisterUint8(EIR, 0x7F);
-}
-
-bool_t enc28j60RegisterTxHandler(EthernetPacketHandler_t handler)
-{
-    UI08_t i = 0;
-
-    while (i < ETHERNET_HANDLERS_COUNT)
-    {
-        if(handlers[i].used == FALSE)
-        {
-            handlers[i].used    = TRUE;
-            handlers[i].handler = handler;
-            return TRUE;
-        }
-
-        i++;
-    }
-
-    return FALSE;
-}
-
-void enc28j60UnregisterTxHandler(EthernetPacketHandler_t handler)
-{
-    UI08_t i = 0;
-
-    while (i < ETHERNET_HANDLERS_COUNT)
-    {
-        if(handlers[i].handler == handler)
-        {
-            handlers[i].used = FALSE;
-
-        }
-
-        i++;
-    }
-}
-
-void enc28j60FireTxHandlers(EthernetFrame_t* frame)
-{
-    UI08_t i = 0;
-    bool_t done = FALSE;
-
-    while (i < ETHERNET_HANDLERS_COUNT && done == FALSE)
-    {
-        if(handlers[i].used == TRUE)
-        {
-            handlers[i].handler (frame, &done);
-        }
-
-        i++;
-    }
 }
 
 void enc28j60Reset(void)

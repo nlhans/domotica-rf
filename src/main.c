@@ -42,7 +42,7 @@ UI08_t ntpServer[4]     = {194, 171, 167, 130};
 
 UI08_t* macGetPacketBuffer(void)
 {
-    return enc28j60GetPacketBuffer();
+    return ethPacketBuffer;
 }
 void macRxFrame()
 {
@@ -169,6 +169,19 @@ void LedTask()
     }
 }
 
+void enc28j60Int(UI08_t foo)
+{
+    if (enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
+    {
+        RtosTaskSignalEvent(&ethTask, ETH_ENC_ERR);
+        printf("Overflow occurered\r\n");
+    }
+    else
+    {
+        RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
+    }
+}
+
 void EthernetTaskInit()
 {
     // Connect up ENC28j60 ISR
@@ -188,8 +201,6 @@ void EthernetTaskInit()
     enc28j60Initialize(ethFrameBuffer, sizeof(ethFrameBuffer));
     arpInit();
     arpAnnounce();
-    ipv4Init();
-    icmpInit();
     tcpInit();
     tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
     
@@ -231,19 +242,6 @@ void EthernetTask()
     }
 }
 
-
-void enc28j60Int(UI08_t foo)
-{
-    if (enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
-    {
-        RtosTaskSignalEvent(&ethTask, ETH_ENC_ERR);
-        printf("Overflow occurered\r\n");
-    }
-    else
-    {
-        RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
-    }
-}
 
 
 void __attribute__((interrupt,no_auto_psv)) _AddressError(void)

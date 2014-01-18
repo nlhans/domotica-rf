@@ -31,7 +31,7 @@ typedef struct ArpPacket_s
 } ArpPacket_t;
 
 void arpAnnounce();
-void arpProcessPacket(EthernetFrame_t* frame, bool_t* handled);
+void arpProcessPacket(EthernetFrame_t* frame);
 void arpInit();
 UI08_t* arpResolve(UI08_t* ip);
 

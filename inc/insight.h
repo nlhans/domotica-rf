@@ -64,7 +64,7 @@
 #define INSIGHT_DICT_STRING(a) 0, // INSIGHT_DICT_POINTER_WORD,
 
 #if INSIGHT_LEVEL == 0
-#define INSIGHT(code, ...) asm volatile("nop");
+#define INSIGHT(code, ...)
 #else
 #define INSIGHT(code, ...) insight_msg(strConcat(INSIGHT_, code), F_NUM, __LINE__, ##__VA_ARGS__);
 #endif

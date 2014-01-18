@@ -1,95 +1,43 @@
 #include "ipstack/ethdefs.h"
 #include "ipstack/ipv4.h"
+#include "ipstack/icpm.h"
+#include "ipstack/tcp.h"
+#include "ipstack/udp.h"
 #include "ipstack/arp.h"
 #include "bsp/uart.h"
 #include "insight.h"
 
 #include "profiling/executiontime.h"
 
-typedef struct Ipv4PacketHandlerInfo_s
-{
-    bool_t used;
-    Ipv4PacketHandler_t handler;
-} Ipv4PacketHandlerInfo_t;
-
-Ipv4PacketHandlerInfo_t Ipv4Handlers[IPV4_MAXIMUM_PROTOCOL_HANDLERS];
-
-void ipv4Init()
-{
-    UI08_t i = 0 ;
-
-    for (i = 0; i < IPV4_MAXIMUM_PROTOCOL_HANDLERS; i++)
-    {
-        Ipv4Handlers[i].used = FALSE;
-    }
-}
-
-void ipv4RegisterHandler(Ipv4PacketHandler_t myHandler)
-{
-    UI08_t i = 0;
-
-    while (i < IPV4_MAXIMUM_PROTOCOL_HANDLERS)
-    {
-        if (Ipv4Handlers[i].used == FALSE)
-        {
-            Ipv4Handlers[i].used = TRUE;
-            Ipv4Handlers[i].handler = myHandler;
-            break;
-        }
-        i++;
-    }
-}
-
-void ipv4UnregisterHandler(Ipv4PacketHandler_t myHandler)
-{
-    UI08_t i = 0;
-
-    while (i < IPV4_MAXIMUM_PROTOCOL_HANDLERS)
-    {
-        if (Ipv4Handlers[i].handler == myHandler)
-        {
-            Ipv4Handlers[i].used = FALSE;
-        }
-        i++;
-    }
-}
-
-
-void ipv4FireHandlers(EthernetIpv4_t* frame)
-{
-    execProfile(IPV4_HANDLE);
-
-    UI08_t i = 0;
-    bool_t done = FALSE;
-
-    while (i < IPV4_MAXIMUM_PROTOCOL_HANDLERS && done == FALSE)
-    {
-        if (Ipv4Handlers[i].used == TRUE)
-        {
-            Ipv4Handlers[i].handler(frame, &done);
-        }
-        i++;
-    }
-}
-
-void ipv4HandlePacket(EthernetFrame_t* frame, bool_t* handled)
+void ipv4HandlePacket(EthernetFrame_t* frame)
 {
     EthernetIpv4_t*         ipv4Header;
     UI08_t                  headerSize;
     
-    if (frame->type == 0x0800)
+    ipv4Header = (EthernetIpv4_t*) frame;
+    ipv4Header->header.length = htons(ipv4Header->header.length);
+
+    headerSize = 4 * ipv4Header->header.ihl;
+
+    INSIGHT(IPV4_RX, ipv4Header->header.length, ipv4Header->header.protocol, htons(ipv4Header->header.crc),
+    ipv4Header->header.sourceIp[0],ipv4Header->header.sourceIp[1],ipv4Header->header.sourceIp[2],ipv4Header->header.sourceIp[3]);
+
+    switch (ipv4Header->header.protocol)
     {
-        *handled = TRUE;
-        
-        ipv4Header = (EthernetIpv4_t*) frame;
-        ipv4Header->header.length = htons(ipv4Header->header.length);
+        case Ipv4TCP:
+            tcpHandlePacket(ipv4Header);
+            break;
 
-        headerSize = 4 * ipv4Header->header.ihl;
+        case Ipv4ICMP:
+            icmpHandlePacket(ipv4Header);
+            break;
 
-        INSIGHT(IPV4_RX, ipv4Header->header.length, ipv4Header->header.protocol, htons(ipv4Header->header.crc),
-        ipv4Header->header.sourceIp[0],ipv4Header->header.sourceIp[1],ipv4Header->header.sourceIp[2],ipv4Header->header.sourceIp[3]);
+        case Ipv4UDP:
+            udpHandlePacket(ipv4Header);
+            break;
 
-        ipv4FireHandlers(ipv4Header);
+        default:
+            return;
     }
     
 }
