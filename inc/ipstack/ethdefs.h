@@ -3,6 +3,11 @@
 
 #include "stddefs.h"
 
+#define ETHERNET_FRAME_SIZE 1100
+
+#define TCP_MAX_LISTEN_PORTS 2
+#define TCP_MAX_CONNECTIONS 8
+
 // http://en.wikipedia.org/wiki/Ethernet_frame
 typedef struct EthernetFrame_s
 {
@@ -23,7 +28,6 @@ typedef void (*EthernetPacketHandler_t) (EthernetFrame_t* frame, bool_t* handled
 #define htonl(x) ( ((x & 0xFF000000) >> 24) | ((x & 0x00FF0000) >> 8) | ((x & 0x0000FF00) << 8) | ((x & 0x000000FF) << 24) )
 #define htons(x) ( (( x & 0xFF00) >> 8) | ((x & 0xFF) << 8))
 
-extern UI08_t* macGetPacketBuffer();
 extern void macTxFrame(EthernetFrame_t* frame, UI16_t size);
 extern void macTxReplyFrame(EthernetFrame_t* frame, UI16_t size);
 extern void macRxFrame();
@@ -32,5 +36,7 @@ extern UI08_t myIp[4];
 extern UI08_t myMac[6];
 extern UI08_t myGateway[4];
 extern UI08_t myGatewayMac[6];
+
+extern UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
 
 #endif

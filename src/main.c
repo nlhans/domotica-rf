@@ -28,7 +28,7 @@
 
 #include "rtos/task.h"
 
-UI08_t ethFrameBuffer[1100];
+UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
 UI08_t myIp[4]            = {192, 168, 1, 123};
 UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
 UI08_t myGateway[4]       = {192, 168, 1, 1};
@@ -40,10 +40,6 @@ UI08_t ntpServer[4]     = {194, 171, 167, 130};
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
 
-UI08_t* macGetPacketBuffer(void)
-{
-    return ethPacketBuffer;
-}
 void macRxFrame()
 {
     enc28j60RxFrame();

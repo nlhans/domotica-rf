@@ -279,7 +279,7 @@ void webServeFlash(TcpConnection_t* connection, UI16_t location)
 {
     TcpFlags_t fl;
 
-    UI16_t bfSize = 512;
+    UI16_t bfSize = sizeof(ethFrameBuffer) - sizeof(TcpPacket_t);
     UI16_t contentIndex = 0;
     UI16_t contentLength = 0;
     UI32_t flashLocation = 0;

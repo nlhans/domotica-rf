@@ -8,8 +8,7 @@
 
 #include "profiling/executiontime.h"
 
-UI08_t* ethPacketBuffer = NULL;
-UI16_t ethPacketBufferSize = 0;
+const UI08_t* ethPacketBuffer = ethFrameBuffer;
 
 void enc28j60SetBank(enc28j60Register_t bank);
 
@@ -276,12 +275,9 @@ bool_t enc28j60GetOverflowStatus(void)
     //return (((enc28j60ReadRegisterUint8(EIR) & 0x1) == 0x0) ? TRUE : FALSE);
 }
 
-void enc28j60Initialize(UI08_t* ipStackBuffer, UI16_t bufferSize)
+void enc28j60Initialize()
 {
     ENC28J60_CS_HIGH; // deselect chip
-
-    ethPacketBuffer = ipStackBuffer;
-    ethPacketBufferSize = bufferSize;
 
     // reset
     enc28j60Reset();
@@ -410,8 +406,8 @@ void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
 void enc28j60RxFrame(void)
 {
     // Buffer information, which were previously parameters.
-    UI08_t*             packet              = ethPacketBuffer;
-    UI16_t              length              = ethPacketBufferSize;
+    UI08_t*             packet              = ethFrameBuffer;
+    UI16_t              length              = sizeof(ethFrameBuffer);
 
     UI08_t              packetCount         = enc28j60GetPacketCount();
     static UI16_t       dataPtr             = ENC28J60_RXBUF_START;

@@ -67,7 +67,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>RealICEPlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.20</languageToolchainVersion>
+        <languageToolchainVersion>1.21</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -266,7 +266,6 @@
         <property key="tracecontrol.collectioninterval" value="1"/>
         <property key="tracecontrol.collectionunits" value="1"/>
         <property key="tracecontrol.disablemacros" value="false"/>
-        <property key="tracecontrol.functionprofile.summary" value="false"/>
         <property key="tracecontrol.include.timestamp" value="false"/>
         <property key="tracecontrol.medium" value="0"/>
         <property key="tracecontrol.portselect" value="0"/>

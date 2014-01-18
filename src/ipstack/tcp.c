@@ -6,8 +6,6 @@
 
 #include "profiling/executiontime.h"
 
-UI08_t* tcpPacketBf;
-
 const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
     "CLOSED",
     "LISTEN",
@@ -33,8 +31,6 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
 void tcpInit()
 {
     UI08_t i = 0;
-
-    tcpPacketBf = macGetPacketBuffer();
 
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
@@ -221,7 +217,7 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
         flags.bits.ack = 0;
         flags.bits.rst = 0;*/
 
-        packet->tcp.length = sizeof(tcpPacketBf) - sizeof(TcpPacket_t);
+        packet->tcp.length = sizeof(ethFrameBuffer) - sizeof(TcpPacket_t);
         packet->tcp.acknowledgement = connection->lastAcknowledgeNumber;
         packet->tcp.sequenceNumber = connection->lastSequenceNumber;
     }
@@ -470,12 +466,12 @@ void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, Tc
 
 char* tcpGetDataPtr()
 {
-    return (char*) (&(tcpPacketBf[sizeof(EthernetIpv4_t)+20]));
+    return (char*) (&(ethFrameBuffer[sizeof(EthernetIpv4_t)+20]));
 }
 
 void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 {
-    TcpPacket_t * packet = (TcpPacket_t*) tcpPacketBf;
+    TcpPacket_t * packet = (TcpPacket_t*) ethFrameBuffer;
 
     flags.bits.dataOffset = 5;
 

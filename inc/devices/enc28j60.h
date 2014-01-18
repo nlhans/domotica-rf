@@ -211,10 +211,7 @@ typedef enum enc28j60Registers_e
 #define enc28j60_spi_read(data) spiRxByte(enc28j60_spi_bus)
 #define enc28j60_spi_transferBytes(dataTx, dataRx, size) spiTxRxBytes(enc28j60_spi_bus, dataTx, dataRx, size)
 
-extern UI08_t *ethPacketBuffer;
-extern UI16_t ethPacketBufferSize;
-
-void enc28j60Initialize(UI08_t* ipStackBuffer, UI16_t bufferSize);
+void enc28j60Initialize();
 void enc28j60Reset(void);
 void enc28j60ResetRxBuffer();
 bool_t enc28j60GetOverflowStatus(void);
