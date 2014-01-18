@@ -13,13 +13,7 @@
 // wait for messages, before contiuning their work. This would not only be
 // possible via own IPC implenentation and (abuse of) event handlers
 
-/******* TEMP *******/
 RtosTime_t RtosTimestamp = 0;
-RtosTime_t RtosGetTime()
-{
-    return RtosTimestamp;
-}
-
 
 void RtosKernelRestoreTask(RtosTask_t* task);
 void RtosKernelStoreTask(RtosTask_t* task);
@@ -109,7 +103,7 @@ void RtosTaskRun()
 /* Insert a delay inside a testk. Enforces context switch, too. */
 void RtosTaskDelay(RtosTime_t time)
 {
-    RtosActiveTask->nextRun = RtosGetTime() + time;
+    RtosActiveTask->nextRun = RtosTimestamp + time;
     RtosActiveTask->state = TASK_STATE_DELAY;
     
     RtosKernelContextSuspend();
@@ -135,7 +129,7 @@ void RtosTaskChange()
         switch(t->state)
         {
             case TASK_STATE_DELAY:
-                if (t->nextRun > RtosGetTime())
+                if (t->nextRun > RtosTimestamp)
                 {
                     break;
                 }

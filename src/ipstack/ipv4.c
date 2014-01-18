@@ -122,11 +122,10 @@ void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize)
 {
     execProfile(IPV4_TX_REPLY);
     totalSize += sizeof(EthernetIpv4Header_t);
-    UI08_t ipTmp[4];
-    // Swap source/destination
-    memcpy(ipTmp,                               ipv4Packet->header.destinationIp, 4);
+    
+    // Swap source/destination, insert my IP
     memcpy(ipv4Packet->header.destinationIp,    ipv4Packet->header.sourceIp     , 4);
-    memcpy(ipv4Packet->header.sourceIp,         ipTmp                           , 4);
+    memcpy(ipv4Packet->header.sourceIp,         myIp                            , 4);
 
     // Recalculate crc
     ipv4Packet->header.crc          = 0;
@@ -144,19 +143,18 @@ void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize)
     macTxReplyFrame((EthernetFrame_t*)ipv4Packet, totalSize);
 }
 
-const UI08_t const gw[6] = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
 void ipv4TxPacket(UI08_t* dstIp, UI08_t protocol, EthernetIpv4_t *ipv4Packet, UI16_t size)
 {
     execProfile(IPV4_TX);
     size += sizeof(EthernetIpv4Header_t);
 
     //memcpy(ipv4Packet.frame.dstMac, arpResolve(dstIp), 6);
-    memcpy(ipv4Packet->frame.dstMac, gw, 6);
-    memcpy(ipv4Packet->frame.srcMac, thisMac, 6);
+    memcpy(ipv4Packet->frame.dstMac, myGatewayMac, 6);
+    memcpy(ipv4Packet->frame.srcMac, myMac, 6);
     ipv4Packet->frame.type = htons(ProtocolIPv4);
 
     memcpy(ipv4Packet->header.destinationIp,    dstIp,  4);
-    memcpy(ipv4Packet->header.sourceIp,         thisIp, 4);
+    memcpy(ipv4Packet->header.sourceIp,         myIp, 4);
 
     ipv4Packet->header.version      = 4;
     ipv4Packet->header.ihl          = 5;

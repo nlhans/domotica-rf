@@ -30,7 +30,7 @@ typedef struct ArpPacket_s
     UI08_t tpa[4]; // ip
 } ArpPacket_t;
 
-void arpAnnounce(UI08_t* myMac, UI08_t* myIp, UI08_t* gateway);
+void arpAnnounce();
 void arpProcessPacket(EthernetFrame_t* frame, bool_t* handled);
 void arpInit();
 UI08_t* arpResolve(UI08_t* ip);

@@ -40,14 +40,18 @@ void webSysRtos(TcpConnection_t* connection, char **params);
 #define ROUTE_IS_ARGS 0x8000
 #define ROUTE_IN_FLASH(addr) addr
 
+
 #define routerTable(on) \
     on("GET", "/favicon.ico",    ROUTE_IN_FLASH(0x0000), NULL)        \
-    on("GET", "/404.html",       ROUTE_IN_FLASH(0x000B), NULL)        \
+    on("GET", "/404.html",       ROUTE_IN_FLASH(WEB_PAGE_404_FLASH), NULL)        \
     on("GET", "/sys/tcpip",      ROUTE_IS_CONSTANT,      webSysTcpip) \
     on("GET", "/sys/flash",      ROUTE_IS_CONSTANT,      webSysFlash) \
     on("GET", "/sys/rtos",       ROUTE_IS_CONSTANT,      webSysRtos)  \
     on("GET", "/get/:0/:1",      ROUTE_IS_ARGS,          webTest)     \
     on("GET", "/",               ROUTE_IS_CONSTANT,      webIndex)    \
+
+
+#define WEB_PAGE_404_FLASH 11
 
 enum
 {
@@ -74,7 +78,7 @@ typedef struct Route_s
 const Route_t webRoutes[NUM_OF_ROUTES] = {
     routerTable(routerIndexDef)
 };
-void webServeFlash(TcpConnection_t* connection, Route_t* route);
+void webServeFlash(TcpConnection_t* connection, UI16_t location);
 
 void webSysFlash(TcpConnection_t* connection, char **params)
 {
@@ -96,9 +100,9 @@ void webSysFlash(TcpConnection_t* connection, char **params)
     UI16_t fileTypeLength = 0;
     char fileType[64];
 
-    FlashRxBytes(0*32, &contentLength, 2);
-    FlashRxBytes(0*32+2, &fileTypeLength, 2);
-    FlashRxBytes(0*32+4, fileType, fileTypeLength);
+    FlashRxBytes(0*32, (UI08_t*) &contentLength, 2);
+    FlashRxBytes(0*32+2, (UI08_t*) &fileTypeLength, 2);
+    FlashRxBytes(0*32+4, (UI08_t*) fileType, fileTypeLength);
     fileType[fileTypeLength] = 0;
     flashLocation = 0 * 32 + 4 + fileTypeLength;
 
@@ -116,12 +120,14 @@ void webSysFlash(TcpConnection_t* connection, char **params)
 void webSysRtos(TcpConnection_t* connection, char **params)
 {
     TcpFlags_t fl;
+#ifdef RTOS_DEBUG
     UI08_t i = 0;
     UI08_t loadInt = 0;
     UI32_t runTimeRemaining;
     char state [32];
     char load[4];
     RtosTask_t* ptr = &RtosTaskIdleObj;
+#endif
     
     // Tcp flags for HTTP header
     fl.data = 0;
@@ -255,9 +261,7 @@ void webTest(TcpConnection_t* connection, char **params)
 
 void web404(TcpConnection_t * connection)
 {
-    Route_t route404;
-    route404.options.location = 11;
-    webServeFlash(connection, &route404);
+    webServeFlash(connection, WEB_PAGE_404_FLASH);
     return;
     strcpy(webBf, http404);
 
@@ -271,7 +275,7 @@ void web404(TcpConnection_t * connection)
     tcpTxPacket(strlen(http404), fl, connection);
 }
 
-void webServeFlash(TcpConnection_t* connection, Route_t* route)
+void webServeFlash(TcpConnection_t* connection, UI16_t location)
 {
     TcpFlags_t fl;
 
@@ -282,13 +286,11 @@ void webServeFlash(TcpConnection_t* connection, Route_t* route)
     UI16_t fileTypeLength = 0;
     char fileType[64];
 
-    FlashRxBytes(route->options.location*32, &contentLength, 2);
-    FlashRxBytes(route->options.location*32+2, &fileTypeLength, 2);
-    FlashRxBytes(route->options.location*32+4, fileType, fileTypeLength);
+    FlashRxBytes(location*32,   (UI08_t*)&contentLength, 2);
+    FlashRxBytes(location*32+2, (UI08_t*)&fileTypeLength, 2);
+    FlashRxBytes(location*32+4, (UI08_t*)fileType, fileTypeLength);
     fileType[fileTypeLength] = 0;
 
-    printf("Content Length: %d, FileType: %s (%d)\n", contentLength, fileType, fileTypeLength);
-    
     // Tcp flags for HTTP header
     fl.data = 0;
     fl.bits.ack = 1;
@@ -296,8 +298,8 @@ void webServeFlash(TcpConnection_t* connection, Route_t* route)
 
     webBfPos = sprintf(webBf, http200, fileType);
     tcpTxPacket(webBfPos, fl, connection);
-    printf("Send HTTP header\n");
-    flashLocation = route->options.location * 32 + 4 + fileTypeLength;
+
+    flashLocation = location * 32 + 4 + fileTypeLength;
 
     do
     {
@@ -307,8 +309,7 @@ void webServeFlash(TcpConnection_t* connection, Route_t* route)
             bfSize = contentLength - contentIndex;
         }
 
-        printf("reading flash @ %lu for %d bytes\n", flashLocation, bfSize);
-        FlashRxBytes(flashLocation, webBf, bfSize);
+        FlashRxBytes(flashLocation, (UI08_t*)webBf, bfSize);
         tcpTxPacket(bfSize, fl, connection);
 
         // TODO: Figure out how big our available buffer is
@@ -330,10 +331,10 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
     char webRequestType[4];
     char webRequestUri[64];
     char * strPtr = d;
-    char * routeUriPtr = NULL;
+    const char * routeUriPtr = NULL;
 
     TcpConnection_t *connection = (TcpConnection_t*) con;
-    Route_t *route;
+    const Route_t *route;
     bool_t routeMatched = FALSE;
     char* args[8];
 
@@ -464,7 +465,7 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
         {
             if (route->callback == NULL)
             {
-                webServeFlash(connection, route);
+                webServeFlash(connection, route->options.location);
             }
             else
             {

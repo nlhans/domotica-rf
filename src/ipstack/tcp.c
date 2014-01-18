@@ -1,6 +1,6 @@
 #include "ipstack/tcp.h"
-#include "ipstack/arp.h"
 #include "ipstack/ipv4.h"
+#include "ipstack/ethdefs.h"
 #include "bsp/uart.h"
 #include "insight.h"
 
@@ -491,7 +491,7 @@ void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 
     dataSize += 4 * flags.bits.dataOffset;
 
-    memcpy(packet->ipv4.header.sourceIp, thisIp, 4);
+    memcpy(packet->ipv4.header.sourceIp, myIp, 4);
     memcpy(packet->ipv4.header.destinationIp, connection->remoteIp, 4);
 
     packet->tcp.portDestination = htons(connection->remotePort);

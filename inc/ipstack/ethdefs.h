@@ -28,4 +28,9 @@ extern void macTxFrame(EthernetFrame_t* frame, UI16_t size);
 extern void macTxReplyFrame(EthernetFrame_t* frame, UI16_t size);
 extern void macRxFrame();
 
+extern UI08_t myIp[4];
+extern UI08_t myMac[6];
+extern UI08_t myGateway[4];
+extern UI08_t myGatewayMac[6];
+
 #endif

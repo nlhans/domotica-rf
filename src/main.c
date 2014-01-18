@@ -29,9 +29,12 @@
 #include "rtos/task.h"
 
 UI08_t ethFrameBuffer[1100];
-UI08_t mac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-UI08_t ip[4]            = {192, 168, 1, 123};
-UI08_t gateway[4]       = {192, 168, 1, 1};
+UI08_t myIp[4]            = {192, 168, 1, 123};
+UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
+UI08_t myGateway[4]       = {192, 168, 1, 1};
+UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
+
+// PC's in network
 UI08_t pc[4]            = {192, 168, 1, 147};
 UI08_t ntpServer[4]     = {194, 171, 167, 130};
 
@@ -141,8 +144,12 @@ void RfTask()
     //
     while(1)
     {
-        UI16_t evt = RtosTaskWaitForEvent(
-                RF_RX_PACKET);
+        UI16_t evt = RtosTaskWaitForEvent(RF_RX_PACKET);
+
+        if (evt & RF_RX_PACKET)
+        {
+            //
+        }
     }
 }
 
@@ -164,7 +171,6 @@ void LedTask()
 
 void EthernetTaskInit()
 {
-
     // Connect up ENC28j60 ISR
     PORTB |= (1<<15);
 
@@ -179,9 +185,9 @@ void EthernetTaskInit()
 
     // Boot the complete ethernet stack.
     spiInit(1);
-    enc28j60Initialize(mac, ethFrameBuffer, sizeof(ethFrameBuffer));
+    enc28j60Initialize(ethFrameBuffer, sizeof(ethFrameBuffer));
     arpInit();
-    arpAnnounce(mac, ip, gateway);
+    arpAnnounce();
     ipv4Init();
     icmpInit();
     tcpInit();
@@ -280,8 +286,8 @@ int main(void)
         AdcInit();
 
     #endif
-    SoftI2cInit();
-    initRFPorts();
+    //SoftI2cInit();
+    //initRFPorts();
 
     RF_POWER = 1;
     SENSOR_PWR = 1;
@@ -300,7 +306,7 @@ int main(void)
     FlashInit();
 
     RtosTaskInit();
-    RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
+    RtosTaskCreate(&rfTask,  "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
     RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
     RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
     RtosTaskRun();

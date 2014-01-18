@@ -35,7 +35,6 @@ void enc28j60WriteRegisterUint16(UI08_t address, UI16_t value);
 
 void enc28j60FireTxHandlers(EthernetFrame_t* frame);
 
-static UI08_t* myMac;
 static UI08_t currentBank = 0;
 
 static EthernetPacketHandlerInfo_t handlers[ETHERNET_HANDLERS_COUNT];
@@ -304,12 +303,11 @@ UI08_t* enc28j60GetPacketBuffer()
     return ethPacketBuffer;
 }
 
-void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize)
+void enc28j60Initialize(UI08_t* ipStackBuffer, UI16_t bufferSize)
 {
     ENC28J60_CS_HIGH; // deselect chip
 
-    myMac = mac;
-    memset((void*)handlers, NULL, ETHERNET_HANDLERS_COUNT);
+    memset((void*)handlers, 0, ETHERNET_HANDLERS_COUNT);
 
     ethPacketBuffer = ipStackBuffer;
     ethPacketBufferSize = bufferSize;
@@ -366,12 +364,12 @@ void enc28j60Initialize(UI08_t* mac, UI08_t* ipStackBuffer, UI16_t bufferSize)
     enc28j60WriteRegisterUint16(MAIPGL, 0xC12); // Delay between non-back-to-back packets
 
 
-    enc28j60WriteRegisterUint8(MAADR5, mac[0]);
-    enc28j60WriteRegisterUint8(MAADR4, mac[1]);
-    enc28j60WriteRegisterUint8(MAADR3, mac[2]);
-    enc28j60WriteRegisterUint8(MAADR2, mac[3]);
-    enc28j60WriteRegisterUint8(MAADR1, mac[4]);
-    enc28j60WriteRegisterUint8(MAADR0, mac[5]);
+    enc28j60WriteRegisterUint8(MAADR5, myMac[0]);
+    enc28j60WriteRegisterUint8(MAADR4, myMac[1]);
+    enc28j60WriteRegisterUint8(MAADR3, myMac[2]);
+    enc28j60WriteRegisterUint8(MAADR2, myMac[3]);
+    enc28j60WriteRegisterUint8(MAADR1, myMac[4]);
+    enc28j60WriteRegisterUint8(MAADR0, myMac[5]);
 
     // Enable interrupt when packet received
     enc28j60BitSetRegisterUint8(EIE, (1<<7) | (1<<6) | (1<<0)); // 7=global enable, 6=packet RX, 0=packet overflow

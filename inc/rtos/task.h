@@ -1,6 +1,6 @@
 #ifndef TASK_H
 #define TASK_H
-#define RTOS_DEBUG
+//#define RTOS_DEBUG
 #define RTOS_EVENTS
 
 #include "stddefs.h"
@@ -50,8 +50,7 @@ extern const char* const RtosStateText[5];
 #endif
 
 extern RtosTask_t RtosTaskIdleObj;
-
-RtosTime_t RtosGetTime();
+extern RtosTime_t RtosTimestamp;
 
 void RtosTaskInit();
 void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priority, UI08_t* stack, UI16_t stackSize);
