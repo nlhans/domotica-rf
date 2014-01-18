@@ -5,15 +5,6 @@
 #include "ipstack/ethdefs.h"
 #include "insight.h"
 
-void icmpPing(UI08_t* target)
-{
-}
-
-void icmpTxPacket(ICMPPacket_t* packet, UI08_t* ip)
-{
-    
-}
-
 void icmpHandlePacket (EthernetIpv4_t* header)
 {
     ICMPPacket_t* packet = (ICMPPacket_t*) header;

@@ -74,13 +74,8 @@ void spiInit(UI08_t port)
             IFS2bits.SPI2IF = 0;
             IEC2bits.SPI2IE = 0;
 
-            SPI2STAT = 0;
-            SPI2CON1 = 0;
-            //SPI2CON1 = (1<<5) | (1<<8); // master SPI, output active->idle clock
-            //SPI2CON1 |= 0b11011;
-
             SPI2CON1 = 0b0000000100111011;
-            SPI2CON2 = 0b0;
+            //SPI2CON2 = 0b0;
             SPI2STAT |= 0x1 << 15;
             break;
     }

@@ -16,7 +16,6 @@ void ExtIntInit(void)
 
 void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge)
 {
-    intHandlers[ind].ind = ind;
     intHandlers[ind].callback = ((callback == NULL) ? ExtIntDummy : callback);
 
     if (fallingEdge)

@@ -1,28 +1,30 @@
 #include "stddefs.h"
 #include "rtos/task.h"
 
+typedef struct RtosPic24Stack_s
+{
+    UI16_t lowPc;
+    UI16_t highPc;
+    UI16_t sr;
+    UI16_t w[15];
+    UI16_t rcount;
+    UI16_t tblpag;
+    UI16_t corcon;
+    UI16_t psvpag;
+    UI16_t nest;
+} RtosPic24Stack_t;
+
 void RtosKernelPortInitStack(RtosTask_t* task)
 {
-    UI08_t i = 0;
-    UI16_t* TOS = (UI16_t*)task->stack;
+    RtosPic24Stack_t *stack = (RtosPic24Stack_t*) task->stack;
 
-    *TOS = (int)task->method; TOS++;        // low byte PC
-    *TOS = 0; TOS++;                        // high byte PC
-    *TOS = 0; TOS++;                        // initial SR
-    *TOS = 0; TOS++;                        // W0.
+    memset(stack, 0, sizeof(RtosPic24Stack_t));
+    stack->lowPc = (UI16_t)task->method;
+    stack->corcon = CORCON;
+    stack->psvpag = PSVPAG;
 
-    // Add W1-W14, RCOUNT and TBLPAG
-    for (i = 0; i < 16; i++)
-    {
-        *TOS = 0; TOS++;
-    }
+    task->stackPosition = (UI08_t*)(stack+1);
 
-    // Add CORCON and PSVPAG
-    *TOS = CORCON; TOS++;                        // CORCON - why save this?
-    *TOS = PSVPAG; TOS++;                        // PSVPAG
-    *TOS = 0; TOS++;                             // Nesting depth
-
-    task->stackPosition = (UI08_t*)TOS;
 }
 
 void RtosKernelPortTimerStart()

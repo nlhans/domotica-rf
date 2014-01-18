@@ -7,7 +7,6 @@ typedef  void (*ExtIntHandler_t) (UI08_t ind);
 
 typedef struct ExtIntInstance_s
 {
-    UI08_t ind;
     ExtIntHandler_t callback;
 } ExtIntInstance_t;
 

@@ -25,7 +25,7 @@ typedef struct TimerCfg_s
             TimerHandler_t callback;
         } ISR;
 
-        UI08_t data[8];
+        UI08_t data[6];
     };
 } TimerCfg_t;
 
