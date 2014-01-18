@@ -1,6 +1,6 @@
 #ifndef TASK_H
 #define TASK_H
-#define RTOS_DEBUG
+//#define RTOS_DEBUG
 #define RTOS_EVENTS
 
 #include "stddefs.h"

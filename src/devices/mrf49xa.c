@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "devices/mrf49xa.h"
+#include "rtos/task.h"
 
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop
@@ -102,14 +103,12 @@ void MRF49XA_Reset_Radio()
 
 void MRF49XA_Init()
 {
-    UI08_t i, j;
-    
     // Reset the chip
     RF_RES = 0;
     Nop();
     RF_RES = 1;
 
-    Mrf49XaDelay(2);
+    RtosTaskDelay(25); // TODO: Determine good timestamp.
     
     SPI_Command(FIFORSTREG);
     SPI_Command(FIFORSTREG | 0x0002);
@@ -123,7 +122,7 @@ void MRF49XA_Init()
     SPI_Command(BBFCREG);
     SPI_Command(PMCREG | 0x0020);		// turn on tx
 
-    Mrf49XaDelay(2);
+    RtosTaskDelay(25); // TODO: Determine good timestamp.
     
     SPI_Command(PMCREG | 0x0080);		// turn off Tx, turn on receiver
     SPI_Command(GENCREG | 0x0040);		// enable the FIFO

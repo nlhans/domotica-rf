@@ -16,6 +16,8 @@
 #include "bsp/interrupt.h"
 #include "bsp/timer.h"
 
+#include "ipstack/ethdefs.h"
+
 #include "ipstack/arp.h"
 #include "ipstack/ipv4.h"
 #include "ipstack/udp.h"
@@ -29,10 +31,10 @@
 #include "rtos/task.h"
 
 UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
-UI08_t myIp[4]            = {192, 168, 1, 123};
-UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-UI08_t myGateway[4]       = {192, 168, 1, 1};
-UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
+const UI08_t myIp[4]            = {192, 168, 1, 123};
+const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
+const UI08_t myGateway[4]       = {192, 168, 1, 1};
+const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
 
 // PC's in network
 UI08_t pc[4]            = {192, 168, 1, 147};
