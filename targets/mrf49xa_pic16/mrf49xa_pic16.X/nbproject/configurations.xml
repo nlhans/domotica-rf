@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>../../../inc/bspPIC16.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -20,6 +21,8 @@
         <itemPath>../../../src/devices/mcp9800.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
+      </logicalFolder>
       <itemPath>../../../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -30,6 +33,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../../src</Elem>
+    <Elem>../../../inc</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -157,12 +161,7 @@
         <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
-        <property key="advanced-elf" value="true"/>
         <property key="output-file-format" value="-mcof,+elf"/>
-        <property key="stack-size-high" value="auto"/>
-        <property key="stack-size-low" value="auto"/>
-        <property key="stack-size-main" value="auto"/>
-        <property key="stack-type" value="compiled"/>
       </XC8-config-global>
     </conf>
   </confs>

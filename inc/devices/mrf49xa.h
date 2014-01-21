@@ -3,12 +3,15 @@
 
 #include "stddefs.h"
 
-#define MRF49XA_WaitOnTx() do { while (!SPI_SDI); } while (0);
+#define RF_NETWORKID1 0x2D
+#define RF_NETWORKID2 0xD4
+
+#define MRF49XA_WaitOnTx() do { while (!RF_SPI_SDI); } while (0);
 
 #define PACKET_SIZE_MAX         20              // 8x2 bytes + 4 bytes header/footer
 
 #define GENCREG 		0x8000 | XTAL_LD_CAP_125 | FREQ_BAND_868		// Cload=12.5pF TX registers & FIFO are disabled
-#define PMCREG 			0x8200		// Everything off, uC clk enabled
+#define PMCREG 			0x8201		// Everything off, uC clk enabled
 #define	RXCREG                 (0x9460 | LNA_GAIN_0_DB | RSSI_THRESHOLD_103)
 #define TXBREG 			0xB800
 #define FIFORSTREG              0xCA81		// clear the sync latch enabled, limit=8bits, disable sensitive reset
@@ -77,14 +80,34 @@ typedef struct
 #define RSSI_THRESHOLD_79               0x0004
 #define RSSI_THRESHOLD_73               0x0005
 
-UI08_t SPI_Read(void);
-void SPI_Write(UI08_t spidata);
-void SPI_Write16(UI16_t spicmd);
-void SPI_Command(UI16_t spicmd);
+//#ifdef PIC16
+    UI08_t SPI_Read(void);
+    void SPI_Write(UI08_t data);
+//#else
+#ifdef JHAHAHA
+    #include "bsp/spi.h"
+    
 
-void MRF49XA_Init();
-void MRF49XA_Reset_Radio(void);
+    // On PIC24 we use SPI HAL in combination with ENC28J60
+    #define MRF49XA_PORT 1
+
+    #define SPI_Read() spiRxByte(MRF49XA_PORT)
+    #define SPI_Write(a) spiTxByte(MRF49XA_PORT, a);
+#endif
+
+void MRF49XAInit();
+void MRF49XAReset(void);
+void MRF49XACommand(UI16_t spicmd);
+UI16_t MRF49XAReadStatus();
+
+
+void RfTrcvPut(UI08_t byte);
+UI08_t RfTrcvGet(void);
+UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data);
+void RfTrcvRearm(void);
+
+/*
 void MRF49XA_TxPacket(UI08_t *data, UI08_t size);
 UI08_t MRF49XA_RxPacket(UI08_t *data);
-
+*/
 #endif

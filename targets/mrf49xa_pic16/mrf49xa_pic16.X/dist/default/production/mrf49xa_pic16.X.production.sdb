@@ -3,14 +3,14 @@
 [d edition pro ]
 [d chip 16F1508 ]
 "36 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
-[e E4204 Pic16PortDefs_e `uc
+[e E4203 Pic16PortDefs_e `uc
 PA 0
 PB 1
 PC 2
 PINT 3
 ]
 "71
-[e E4210 AdcChannels_e `uc
+[e E4209 AdcChannels_e `uc
 ADC_AN0 0
 ADC_AN1 1
 ADC_AN2 2
@@ -28,7 +28,7 @@ ADC_DAC 30
 ADC_FVR 31
 ]
 "5 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
-[e E4233 Mcp9800Resolution_e `uc
+[e E4232 Mcp9800Resolution_e `uc
 Mcp9800_9bit 0
 Mcp9800_10bit 32
 Mcp9800_11bit 64
@@ -68,131 +68,133 @@ Mcp9800_12bit 96
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 "20
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
-"6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"12 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
-"36
+"42
 [v _SPI_Write SPI_Write `(v  1 e 0 0 ]
-"75
+"80
 [v _SPI_Command SPI_Command `(v  1 e 0 0 ]
-"85
+"90
 [v _SPI_Write16 SPI_Write16 `(v  1 e 0 0 ]
-"91
+"96
 [v _MRF49XA_Reset_Radio MRF49XA_Reset_Radio `(v  1 e 0 0 ]
-"101
+"106
 [v _MRF49XA_Init MRF49XA_Init `(v  1 e 0 0 ]
-"134
+"148
 [v _MRF49XA_TxPacket MRF49XA_TxPacket `(v  1 e 0 0 ]
-"172
+"187
 [v _MRF49XA_RxPacket MRF49XA_RxPacket `(uc  1 e 1 0 ]
-"55 C:\Projects\Firmware\domoticarf/src/main.c
-[v _initRFPorts initRFPorts `(v  1 e 0 0 ]
-"183
+"60 C:\Projects\Firmware\domoticarf/src/main.c
+[v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
+"241
 [v _main main `(i  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\abdiv.c
 [v ___abdiv __abdiv `(c  1 e 1 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\abmod.c
 [v ___abmod __abmod `(c  1 e 1 0 ]
-"34 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\abtoft.c
+"34 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\abtoft.c
 [v ___abtoft __abtoft `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\aldiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\aldiv.c
 [v ___aldiv __aldiv `(l  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\almod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\almod.c
 [v ___almod __almod `(l  1 e 4 0 ]
-"43 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\altoft.c
+"43 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\altoft.c
 [v ___altoft __altoft `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\atdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\atdiv.c
 [v ___atdiv __atdiv `(m  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\atmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\atmod.c
 [v ___atmod __atmod `(m  1 e 3 0 ]
-"38 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\attoft.c
+"38 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\attoft.c
 [v ___attoft __attoft `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
-"33 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\awtoft.c
+"33 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\awtoft.c
 [v ___awtoft __awtoft `(f  1 e 3 0 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\bmul.c
+"3 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\bmul.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
-"63 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\float.c
+"63 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
-"87 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftadd.c
+"87 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
-"50 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftdiv.c
+"50 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftdiv.c
 [v ___ftdiv __ftdiv `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftge.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftge.c
 [v ___ftge __ftge `(b  1 e 0 0 ]
-"52 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftmul.c
+"52 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftmul.c
 [v ___ftmul __ftmul `(f  1 e 3 0 ]
-"16 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftneg.c
+"16 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftneg.c
 [v ___ftneg __ftneg `(f  1 e 3 0 ]
-"17 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ftsub.c
+"17 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ftsub.c
 [v ___ftsub __ftsub `(f  1 e 3 0 ]
-"45 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\fttol.c
+"45 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\fttol.c
 [v ___fttol __fttol `(l  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lbdiv.c
 [v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lbmod.c
 [v ___lbmod __lbmod `(uc  1 e 1 0 ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lbtoft.c
+"28 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lbtoft.c
 [v ___lbtoft __lbtoft `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lldiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\llmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
-"36 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lltoft.c
+"36 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lltoft.c
 [v ___lltoft __lltoft `(f  1 e 3 0 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lmul.c
+"3 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lmul.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ltdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ltdiv.c
 [v ___ltdiv __ltdiv `(um  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\ltmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\ltmod.c
 [v ___ltmod __ltmod `(um  1 e 3 0 ]
-"31 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lttoft.c
+"31 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lttoft.c
 [v ___lttoft __lttoft `(f  1 e 3 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwdiv.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwmod.c
+"5 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
-"29 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\lwtoft.c
+"29 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\tmul.c
+"3 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\tmul.c
 [v ___tmul __tmul `(um  1 e 3 0 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.21\sources\pic\wmul.c
+"3 C:\Program Files (x86)\Microchip\xc8\v1.20\sources\pic\wmul.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
+"239 C:\Projects\Firmware\domoticarf/src/main.c
+[v _bf bf `[8]uc  1 s 8 bf ]
 [s S19 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 LATB4 1 0 :1:4 
 `uc 1 LATB5 1 0 :1:5 
 `uc 1 LATB6 1 0 :1:6 
 `uc 1 LATB7 1 0 :1:7 
 ]
-"472 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic16f1508.h
+"472 C:\Program Files (x86)\Microchip\xc8\v1.20\include\pic16f1508.h
 [u S25 . 1 `S19 1 . 1 0 ]
 [v _PORTBbits PORTBbits `VES25  1 e 1 @13 ]
-[s S233 . 1 `uc 1 TRISC0 1 0 :1:0 
-`uc 1 TRISC1 1 0 :1:1 
-`uc 1 TRISC2 1 0 :1:2 
-`uc 1 TRISC3 1 0 :1:3 
-`uc 1 TRISC4 1 0 :1:4 
-`uc 1 TRISC5 1 0 :1:5 
-`uc 1 TRISC6 1 0 :1:6 
-`uc 1 TRISC7 1 0 :1:7 
+[s S183 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
 ]
 "513
-[u S242 . 1 `S233 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES242  1 e 1 @14 ]
+[u S192 . 1 `S183 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES192  1 e 1 @14 ]
 "1006
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
-[s S49 . 1 `uc 1 TRISA0 1 0 :1:0 
-`uc 1 TRISA1 1 0 :1:1 
-`uc 1 TRISA2 1 0 :1:2 
-`uc 1 TRISA3 1 0 :1:3 
-`uc 1 TRISA4 1 0 :1:4 
-`uc 1 TRISA5 1 0 :1:5 
+[s S225 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
 ]
 "1021
-[u S56 . 1 `S49 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES56  1 e 1 @140 ]
+[u S232 . 1 `S225 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES232  1 e 1 @140 ]
 "1055
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
 "1069
@@ -200,7 +202,7 @@ Mcp9800_12bit 96
 "1093
 [v _TRISC TRISC `VEuc  1 e 1 @142 ]
 "1110
-[v _TRISCbits TRISCbits `VES242  1 e 1 @142 ]
+[v _TRISCbits TRISCbits `VES192  1 e 1 @142 ]
 "1488
 [v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
 "1604
@@ -214,11 +216,11 @@ Mcp9800_12bit 96
 "1767
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
 "1829
-[v _LATAbits LATAbits `VES56  1 e 1 @268 ]
+[v _LATAbits LATAbits `VES232  1 e 1 @268 ]
 "1872
 [v _LATBbits LATBbits `VES25  1 e 1 @269 ]
 "1913
-[v _LATCbits LATCbits `VES242  1 e 1 @270 ]
+[v _LATCbits LATCbits `VES192  1 e 1 @270 ]
 "2268
 [v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
 "2480
@@ -227,69 +229,72 @@ Mcp9800_12bit 96
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
 "2561
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S66 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 WPUB4 1 0 :1:4 
-`uc 1 WPUB5 1 0 :1:5 
-`uc 1 WPUB6 1 0 :1:6 
-`uc 1 WPUB7 1 0 :1:7 
-]
-"3137
-[s S72 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 WPUB 1 0 :4:4 
-]
-[u S75 . 1 `S66 1 . 1 0 `S72 1 . 1 0 ]
-[v _WPUBbits WPUBbits `VES75  1 e 1 @525 ]
-"183 C:\Projects\Firmware\domoticarf/src/main.c
+"241 C:\Projects\Firmware\domoticarf/src/main.c
 [v _main main `(i  1 e 2 0 ]
 {
-"259
-[v main@bf bf `[8]uc  1 a 8 4 ]
-"275
+"305
+[v main@j_376 j `uc  1 a 1 6 ]
+[v main@i_375 i `uc  1 a 1 5 ]
+"304
+[v main@k k `uc  1 a 1 4 ]
+"299
+[v main@j_373 j `uc  1 a 1 3 ]
+"298
+[v main@j j `uc  1 a 1 1 ]
+"299
+[v main@i_372 i `uc  1 a 1 2 ]
+"298
+[v main@i i `uc  1 a 1 0 ]
+"312
 } 0
-"36 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"60
+[v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
+{
+"71
+} 0
+"148 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+[v _MRF49XA_TxPacket MRF49XA_TxPacket `(v  1 e 0 0 ]
+{
+[v MRF49XA_TxPacket@data data `*.4uc  1 a 1 7 ]
+"149
+[v MRF49XA_TxPacket@i i `uc  1 a 1 8 ]
+[v MRF49XA_TxPacket@crc crc `uc  1 a 1 6 ]
+"148
+[v MRF49XA_TxPacket@data data `*.4uc  1 a 1 7 ]
+[v MRF49XA_TxPacket@size size `uc  1 p 1 4 ]
+"184
+} 0
+"106
+[v _MRF49XA_Init MRF49XA_Init `(v  1 e 0 0 ]
+{
+"108
+[v MRF49XA_Init@j j `uc  1 a 1 5 ]
+[v MRF49XA_Init@i i `uc  1 a 1 4 ]
+"145
+} 0
+"96
+[v _MRF49XA_Reset_Radio MRF49XA_Reset_Radio `(v  1 e 0 0 ]
+{
+"103
+} 0
+"80
+[v _SPI_Command SPI_Command `(v  1 e 0 0 ]
+{
+[v SPI_Command@cmd cmd `ui  1 p 2 2 ]
+"87
+} 0
+"42
 [v _SPI_Write SPI_Write `(v  1 e 0 0 ]
 {
 [v SPI_Write@data data `uc  1 a 1 0 ]
+"60
+[v SPI_Write@i i `uc  1 a 1 1 ]
+"42
 [v SPI_Write@data data `uc  1 a 1 0 ]
-"72
-} 0
-"55 C:\Projects\Firmware\domoticarf/src/main.c
-[v _initRFPorts initRFPorts `(v  1 e 0 0 ]
-{
-"76
+"77
 } 0
 "4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
 [v _AdcInit AdcInit `(v  1 e 0 0 ]
 {
 "16
-} 0
-"4 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
-[v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
-{
-"29
-} 0
-"76
-[v _SoftI2cStop SoftI2cStop `(v  1 e 0 0 ]
-{
-"92
-} 0
-"95
-[v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
-{
-[v SoftI2cTxByte@data data `uc  1 a 1 2 ]
-"96
-[v SoftI2cTxByte@i i `uc  1 a 1 3 ]
-"95
-[v SoftI2cTxByte@data data `uc  1 a 1 2 ]
-"138
-} 0
-"41
-[v _SoftI2cStart SoftI2cStart `(v  1 e 0 0 ]
-{
-"52
-} 0
-"32
-[v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
-{
-"38
 } 0

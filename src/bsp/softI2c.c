@@ -1,5 +1,5 @@
 #include "bsp/softI2c.h"
-
+#define I2C_MIRROR()
 void SoftI2cInit(void)
 {
     // Write '0' (=HIGH)

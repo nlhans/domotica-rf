@@ -14,11 +14,11 @@
 
 #define FLASH_CMD_READ_ID_BYTES 2
 
-#define FLASH_CS2_SELECT        PORTAbits.RA7 = 0;
-#define FLASH_CS2_DESELECT      PORTAbits.RA7 = 1;
+#define FLASH_CS2_SELECT        FLASH_CS2 = 0;
+#define FLASH_CS2_DESELECT      FLASH_CS2 = 1;
 
-#define FLASH_CS1_SELECT        PORTAbits.RA0 = 0;
-#define FLASH_CS1_DESELECT      PORTAbits.RA0 = 1;
+#define FLASH_CS1_SELECT        FLASH_CS1 = 0;
+#define FLASH_CS1_DESELECT      FLASH_CS1 = 1;
 
 #define FLASH_CS(i, s) do { \
 if (i == 1) {if (s) FLASH_CS1_SELECT else FLASH_CS1_DESELECT } \

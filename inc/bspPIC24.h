@@ -38,42 +38,10 @@
 #ifdef PIC24GA
     #define F_OSC_DIV_2 ((UI32_t)16000000)
 #endif
+#ifdef PIC24GB
+    #define F_OSC_DIV_2 ((UI32_t)8000000)
+#endif
 #include <pps.h>
-
-    // I2C
-//#define I2C_PK2_DEBUG
-//#define I2C_PK2_MIRROR
-
-#ifdef I2C_PK2_MIRROR
-#define I2C_MIRROR() do { I2C_MIRROR_SCL = (I2C_SCL != 0)?1:0; \
-I2C_MIRROR_SDA = (I2C_SDA_READ != 0)?1:0; } while(0);
-
-#define I2C_MIRROR_SCL LATBbits.LATB1
-#define I2C_MIRROR_SDA LATBbits.LATB0
-
-#define TRIS_I2C_MIRROR_SCL TRISBbits.TRISB1           // RA1 = SCL
-#define TRIS_I2C_MIRROR_SDA TRISBbits.TRISB0           // RA0 = SDA
-#else
-#define I2C_MIRROR() // Nothing
-
-#endif
-
-#ifdef I2C_PK2_DEBUG
-#define TRIS_I2C_SCL TRISAbits.TRISB2           // RA1 = SCL
-#define TRIS_I2C_SDA TRISAbits.TRISB3           // RA0 = SDA
-
-#define I2C_SCL LATBbits.LATB2
-#define I2C_SDA LATBbits.LATB3
-#define I2C_SDA_READ PORTBbits.RB3
-
-#else
-#define TRIS_I2C_SCL TRISBbits.TRISB2
-#define TRIS_I2C_SDA TRISBbits.TRISB3
-
-#define I2C_SCL LATBbits.LATB2
-#define I2C_SDA LATBbits.LATB3
-#define I2C_SDA_READ PORTBbits.RB3
-#endif
 
 // ADC
 typedef enum Pic16PortDefs_e
@@ -106,8 +74,6 @@ typedef enum AdcChannels_e
 #define BSP_TIMER_COUNT 5
 #define BSP_EXT_INT_COUNT 3 // This PIC has 3 ext interrupt lines
 
-#define BSP_HUMIDITY_ANALOG_PIN PA, 1
-#define BSP_HUMIDITY_CHANNEL    ADC_AN1
 
 #define TRUE 1
 #define FALSE 0
@@ -123,31 +89,93 @@ typedef long I32_t;
 #define __delay_ms(x)
 #define __delay_us(x) do { for(i = 0; i < x; i++) asm volatile("nop"); } while(0);
 
-// PIC24FJ64GB004 / dsPIC33FJ128GP804 main controller
+#define GPIO_OUTPUT 0
+#define GPIO_INPUT  1
 
-#define SPI_SDO                 LATBbits.LATB8		// PIN_F3  SDO
-#define SPI_SDI                 PORTCbits.RC4		// PIN_F2  SDI
-#define SPI_SCK                 LATBbits.LATB7		// PIN_E8  SPI clock
-#define SPI_CS                  LATBbits.LATB5		// PIN_E2  chip select
-#define RF_IRQ                  PORTBbits.RB9		// PIN_E3  MRF49XA interrupt
-#define RF_FSEL                 LATCbits.LATC5		// PIN_E5  fifo select, active low output
-#define RF_DIO                  PORTAbits.RA9		// PIN_E0
-#define RF_RES                  LATCbits.LATC6		// PIN_B4  MRF49XA reset
-#define RF_FINT                 PORTCbits.RC3
-#define RF_POWER                LATAbits.LATA10
-#define SENSOR_PWR              LATAbits.LATA8
+// BSP I/O mapping for 44QFP PIC24/dsPIC33/PIC32
+/*************** PORTA *************/
+#define FLASH_CS2               LATAbits.LATA0          // out
+#define BSP_HUMIDITY_ANALOG_PIN PA, 1                   // A/D
+#define BSP_HUMIDITY_CHANNEL    ADC_AN1                 // A/D
+#define RF_INT1                 PORTAbits.RA2           // in
+#define SYS_DBG_LED             LATAbits.LATA3          // out
+                                         // A4 = secondary osc
+#define FLASH_CS1               LATAbits.LATA7          // out
+#define SENSOR_PWR              LATAbits.LATA8          // out
+#define RF_INT2                 PORTAbits.RA9           // in
+#define RF_POWER                LATAbits.LATA10         // out
 
-#define TRIS_SPI_SDO		TRISBbits.TRISB8	// PIN_F2  SDO (Out to SPI)
-#define TRIS_SPI_SDI		TRISCbits.TRISC4	// PIN_F3  SDI (IN from SPI)
-#define TRIS_SPI_SCK		TRISBbits.TRISB7	// PIN_E8  SPI clock
-#define TRIS_SPI_CS		TRISBbits.TRISB5	// PIN_E2  chip select
-#define TRIS_RF_IRQ		TRISBbits.TRISB9	// PIN_D0  MRF49XA interrupt
-#define TRIS_RF_FSEL		TRISCbits.TRISC5	// PIN_E5  fifo select, active low output
-#define TRIS_RF_DIO		TRISAbits.TRISA9	// PIN_E0
-#define TRIS_RF_RES		TRISCbits.TRISC6	// PIN_B4  MRF49XA reset
-#define TRIS_RF_FINT		TRISCbits.TRISC3
-#define TRIS_RF_POWER           TRISAbits.TRISA10
-#define TRIS_SENSOR_PWR         TRISAbits.TRISA8
+#define SYS_GPIO_INIT_PORTA() do { \
+TRISAbits.TRISA0 = GPIO_OUTPUT; \
+TRISAbits.TRISA3 = GPIO_OUTPUT; \
+TRISAbits.TRISA7 = GPIO_OUTPUT; \
+TRISAbits.TRISA8 = GPIO_OUTPUT; \
+TRISAbits.TRISA10 = GPIO_OUTPUT; \
+TRISAbits.TRISA1 = GPIO_INPUT; \
+TRISAbits.TRISA2 = GPIO_INPUT; \
+TRISAbits.TRISA9 = GPIO_INPUT; \
+} while(0);
+
+/*************** PORTB *************/
+                                         // B0 = PGD / UART (TX)
+                                         // B1 = PGC / UART (RX)
+#define I2C_SCL                 LATBbits.LATB2          // out
+#define I2C_SDA                 LATBbits.LATB3          // tri/out
+#define I2C_SDA_READ            PORTBbits.RB3           // tri/in
+                                         // B4 = secondary osc
+#define RF_SPI_CS               LATBbits.LATB5		// out
+                                         // B6 = non existing
+#define RF_SPI_SCK              LATBbits.LATB7		// out
+#define RF_SPI_SDO              LATBbits.LATB8		// out
+#define RF_IRQ                  PORTBbits.RB9		// in
+                                         // B10 = USB D+
+                                         // B11 = USB D-
+                                         // B12 = non existing
+#define FLASH_SIO3              LATBbits.LATB13          // out
+#define FLASH_SCK               LATBbits.LATB14          // out
+#define ETH_INT                 PORTBbits.RB15           // in
+
+#define TRIS_I2C_SCL            TRISBbits.TRISB2
+#define TRIS_I2C_SDA            TRISBbits.TRISB3
+
+#define SYS_GPIO_INIT_PORTB() do { \
+TRISBbits.TRISB0 = GPIO_OUTPUT; \
+TRISBbits.TRISB5 = GPIO_OUTPUT; \
+TRISBbits.TRISB7 = GPIO_OUTPUT; \
+TRISBbits.TRISB8 = GPIO_OUTPUT; \
+TRISBbits.TRISB13 = GPIO_OUTPUT; \
+TRISBbits.TRISB14 = GPIO_OUTPUT; \
+TRISBbits.TRISB1 = GPIO_INPUT; \
+TRISBbits.TRISB9 = GPIO_INPUT; \
+TRISBbits.TRISB15 = GPIO_INPUT; \
+} while(0);
+
+
+/*************** PORTC *************/
+#define FLASH_SIO0                                      // out
+#define FLASH_SIO2              LATCbits.LATC1          // out
+#define FLASH_SIO1                                      // in
+#define RF_FINT                 PORTCbits.RC3           // in?
+#define RF_SPI_SDI              PORTCbits.RC4		// in
+#define RF_FSEL                 LATCbits.LATC5		// out / fifo select
+#define RF_RES                  LATCbits.LATC6		// out
+#define ETH_RES                 LATCbits.LATC7          // out
+#define ETH_CS                  LATCbits.LATC8          // out
+#define ETH_WOL                 PORTCbits.RC9           // in
+
+#define SYS_GPIO_INIT_PORTC() do { \
+TRISCbits.TRISC0 = GPIO_OUTPUT; \
+TRISCbits.TRISC1 = GPIO_OUTPUT; \
+TRISCbits.TRISC5 = GPIO_OUTPUT; \
+TRISCbits.TRISC6 = GPIO_OUTPUT; \
+TRISCbits.TRISC7 = GPIO_OUTPUT; \
+TRISCbits.TRISC8 = GPIO_OUTPUT; \
+TRISCbits.TRISC2 = GPIO_INPUT; \
+TRISCbits.TRISC3 = GPIO_INPUT; \
+TRISCbits.TRISC4 = GPIO_INPUT; \
+TRISCbits.TRISC9 = GPIO_INPUT; \
+} while(0);
+
 
 #define PIC24_HW
 

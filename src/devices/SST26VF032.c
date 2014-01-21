@@ -2,8 +2,12 @@
 
 void FlashInit(void)
 {
-    spiInit(FLASH_SPI_PORT);
+    FLASH_SIO2 = 1;
+    FLASH_SIO3 = 1;
+    
     FLASH_CS(1, FALSE);
+    FLASH_CS(2, FALSE);
+    spiInit(FLASH_SPI_PORT);
 }
 
 void FlashCsSet(UI32_t addr, bool_t state)

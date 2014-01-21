@@ -35,48 +35,6 @@ typedef enum AdcChannels_e {
 // Compile the BSP c files
 #define ADC16_C
 
-// I2C
-
-//#define I2C_PK2_DEBUG
-#define I2C_PK2_MIRROR
-
-#ifdef I2C_PK2_MIRROR
-#define I2C_MIRROR() do { I2C_MIRROR_SCL = (I2C_SCL != 0)?1:0; \
-I2C_MIRROR_SDA = (I2C_SDA_READ != 0)?1:0; } while(0);
-
-#define I2C_MIRROR_SCL LATAbits.LATA0
-#define I2C_MIRROR_SDA LATAbits.LATA1
-
-#define TRIS_I2C_MIRROR_SCL TRISAbits.TRISA1           // RA1 = SCL
-#define TRIS_I2C_MIRROR_SDA TRISAbits.TRISA0           // RA0 = SDA
-#else
-#define I2C_MIRROR() // Nothing
-
-#endif
-
-#ifdef I2C_PK2_DEBUG
-#define TRIS_I2C_SCL TRISAbits.TRISA1           // RA1 = SCL
-#define TRIS_I2C_SDA TRISAbits.TRISA0           // RA0 = SDA
-
-#define I2C_SCL LATAbits.LATA1
-#define I2C_SDA LATAbits.LATA0
-#define I2C_SDA_READ PORTAbits.RA0
-
-#define WP_I2C_SCL  WPUAbits.WPUA1
-#define WP_I2C_SDA  WPUAbits.WPUA0
-
-#else
-#define TRIS_I2C_SCL TRISBbits.TRISB6
-#define TRIS_I2C_SDA TRISBbits.TRISB4
-
-#define I2C_SCL LATBbits.LATB6
-#define I2C_SDA LATBbits.LATB4
-#define I2C_SDA_READ PORTBbits.RB4
-
-#define WP_I2C_SCL  WPUBbits.WPUB6
-#define WP_I2C_SDA  WPUBbits.WPUB4
-#endif
-
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000
 #ifdef MAIN_C
@@ -93,10 +51,65 @@ typedef char I08_t;
 typedef int I16_t;
 typedef long I32_t;
 
-// Pinout
-#define BSP_HUMIDITY_ANALOG_PIN      PC, 0       // PORT C.0 / AN 4
-#define BSP_HUMIDITY_CHANNEL         ADC_AN4     // PORT C.0 / AN 4
+#define GPIO_OUTPUT 0
+#define GPIO_INPUT  1
 
+// BSP I/O mapping for 20SSOP PIC16F150(8/9)
+/*************** PORTA *************/
+#define RF_IRQ                  PORTAbits.RA2		// in
+#define RF_RES                  LATAbits.LATA4		// out
+#define RF_INT                  PORTAbits.RA5		// in
+
+#define SYS_GPIO_INIT_PORTA() do { \
+TRISAbits.TRISA4 = GPIO_OUTPUT; \
+TRISAbits.TRISA2 = GPIO_INPUT; \
+TRISAbits.TRISA5 = GPIO_INPUT; \
+} while(0);
+
+/*************** PORTB *************/
+#define I2C_SCL                 LATBbits.LATB4          // out
+#define I2C_SDA                 LATBbits.LATB6          // tri/out
+#define I2C_SDA_READ            PORTBbits.RB6        // tri/in
+
+#define UART_RX                 PORTBbits.RB5        // in
+
+#define RF_SPI_SDO              LATBbits.LATB7          // out
+
+#define TRIS_I2C_SCL            TRISBbits.TRISB4
+#define TRIS_I2C_SDA            TRISBbits.TRISB6
+
+#define SYS_GPIO_INIT_PORTB() do { \
+TRISBbits.TRISB4 = GPIO_OUTPUT; \
+TRISBbits.TRISB6 = GPIO_OUTPUT; \
+TRISBbits.TRISB7 = GPIO_OUTPUT; \
+TRISBbits.TRISB5 = GPIO_INPUT; \
+} while(0);
+
+
+/*************** PORTC *************/
+#define BSP_HUMIDITY_ANALOG_PIN      PC, 0              // A/D
+#define BSP_HUMIDITY_CHANNEL         ADC_AN4            // A/D
+
+#define RF_POWER                LATCbits.LATC1          // out
+#define SENSOR_PWR              LATCbits.LATC2          // out
+#define RF_FINT                 PORTCbits.RC3           // in
+#define RF_FSEL                 LATCbits.LATC4          // out
+#define RF_SPI_SDI              PORTCbits.RC5           // in
+#define RF_SPI_CS               LATCbits.LATC6          // out
+#define RF_SPI_SCK              LATCbits.LATC7          // out
+
+#define SYS_GPIO_INIT_PORTC() do { \
+TRISCbits.TRISC1 = GPIO_OUTPUT; \
+TRISCbits.TRISC2 = GPIO_OUTPUT; \
+TRISCbits.TRISC4 = GPIO_OUTPUT; \
+TRISCbits.TRISC6 = GPIO_OUTPUT; \
+TRISCbits.TRISC7 = GPIO_OUTPUT; \
+TRISCbits.TRISC0 = GPIO_INPUT; \
+TRISCbits.TRISC3 = GPIO_INPUT; \
+TRISCbits.TRISC5 = GPIO_INPUT; \
+} while(0);
+
+/*
 #define SENSOR_PWR      LATCbits.LATC2
 #define SPI_SDO		LATBbits.LATB7		// PIN_F3  SDO
 #define SPI_SDI		PORTCbits.RC5		// PIN_F2  SDI
@@ -119,7 +132,7 @@ typedef long I32_t;
 #define TRIS_RF_DIO		TRISAbits.TRISA5		// PIN_E0
 #define TRIS_RF_RES		TRISAbits.TRISA4		// PIN_B4  MRF49XA reset
 #define TRIS_RF_FINT		TRISCbits.TRISC3
-#define TRIS_RF_POWER           TRISCbits.TRISC1
+#define TRIS_RF_POWER           TRISCbits.TRISC1*/
 
 #define Nop() asm("nop");
 

@@ -278,6 +278,9 @@ void web404(TcpConnection_t * connection)
 
 void webServeFlash(TcpConnection_t* connection, UI16_t location)
 {
+    tcpCloseObj(connection);
+    return;
+    
     TcpFlags_t fl;
 
     UI16_t bfSize = sizeof(ethFrameBuffer) - sizeof(TcpPacket_t);
