@@ -18,70 +18,45 @@ void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge)
 {
     intHandlers[ind].callback = ((callback == NULL) ? ExtIntDummy : callback);
 
-    if (fallingEdge)
-    {
-        INTCON2 |= (1<<ind);
-    }
-    else
-    {
-        INTCON2 &= ~(1<<ind);
-    }
     switch(ind)
     {
         case 0:
-            IFS0 &= ~(1<<0);
-            if (callback == NULL)
-            {
-                IEC0 &= ~(1<<0);
-            }
-            else
-            {
-                IEC0 |= 1<<0;
-            }
+            INTCON2bits.INT0EP = (fallingEdge != 0) ? 1 : 0;
+            IFS0bits.INT0IF = 0;
+            IEC0bits.INT0IE = (callback == NULL) ? 0 : 1;
             break;
         case 1:
-            IFS1 &= ~(1<<4);
-            if (callback == NULL)
-            {
-                IEC1 &= ~(1<<4);
-            }
-            else
-            {
-                IEC1 |= 1<<4;
-            }
+            INTCON2bits.INT1EP = (fallingEdge != 0) ? 1 : 0;
+            IFS1bits.INT1IF = 0;
+            IEC1bits.INT1IE = (callback == NULL) ? 0 : 1;
+            printf(":D");
             break;
         case 2:
-            IFS1 &= ~(1<<13);
-            if (callback == NULL)
-            {
-                IEC1 &= ~(1<<13);
-            }
-            else
-            {
-                IEC1 |= 1<<13;
-            }
+            INTCON2bits.INT2EP = (fallingEdge != 0) ? 1 : 0;
+            IFS1bits.INT2IF = 0;
+            IEC1bits.INT2IE = (callback == NULL) ? 0 : 1;
             break;
     }
 }
 
 void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void)
 {
-    IFS0 &= ~(1<<0);
     if (intHandlers[0].callback != NULL)
-    intHandlers[0].callback(0);
+        intHandlers[0].callback(0);
 
+    IFS0bits.INT0IF = 0;
 }
 void __attribute__((__interrupt__,no_auto_psv)) _INT1Interrupt(void)
 {
-    IFS1 &= ~(1<<4);
     if (intHandlers[1].callback != NULL)
         intHandlers[1].callback(1);
 
+    IFS1bits.INT1IF = 0;
 }
 void __attribute__((__interrupt__,no_auto_psv)) _INT2Interrupt(void)
 {
-    IFS1 &= ~(1<<13);
     if (intHandlers[2].callback != NULL)
         intHandlers[2].callback(2);
 
+    IFS1bits.INT2IF = 0;
 }

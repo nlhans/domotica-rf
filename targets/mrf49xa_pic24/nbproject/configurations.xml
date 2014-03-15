@@ -69,10 +69,10 @@
         <targetDevice>PIC24FJ64GB004</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit2PlatformTool</platformTool>
+        <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.21</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -103,7 +103,27 @@
         <C30Global>
         </C30Global>
       </item>
+      <item path="../../src/ipstack/tcp.c" ex="true" overriding="false">
+        <C30>
+        </C30>
+        <C30-AS>
+        </C30-AS>
+        <C30-LD>
+        </C30-LD>
+        <C30Global>
+        </C30Global>
+      </item>
       <item path="../../src/rfstack/packets.c" ex="true" overriding="false">
+        <C30>
+        </C30>
+        <C30-AS>
+        </C30-AS>
+        <C30-LD>
+        </C30-LD>
+        <C30Global>
+        </C30Global>
+      </item>
+      <item path="../../src/webserver/router.c" ex="true" overriding="false">
         <C30>
         </C30>
         <C30-AS>
@@ -128,7 +148,7 @@
         <property key="enable-symbols" value="false"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="C:\Projects\Firmware\domoticarf\inc"/>
+                  value="/home/hans/Projects/Firmware/domoticaRf/inc;/opt/microchip/xc16/v1.21/support/peripheral_24F"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
@@ -145,7 +165,7 @@
         <property key="oXC16gcc-sfr-warn" value="false"/>
         <property key="oXC16gcc-smar-io-lvl" value="2"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
-        <property key="optimization-level" value="s"/>
+        <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
@@ -184,11 +204,19 @@
         <property key="enable-handles" value="true"/>
         <property key="enable-pack-data" value="true"/>
         <property key="extra-lib-directories" value=""/>
+        <property key="fill-flash-options-addr" value=""/>
+        <property key="fill-flash-options-const" value=""/>
+        <property key="fill-flash-options-how" value="0"/>
+        <property key="fill-flash-options-inc-const" value="1"/>
+        <property key="fill-flash-options-increment" value=""/>
+        <property key="fill-flash-options-seq" value=""/>
+        <property key="fill-flash-options-what" value="0"/>
         <property key="general-code-protect" value="no_code_protect"/>
         <property key="general-write-protect" value="no_write_protect"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="heap-size" value=""/>
         <property key="input-libraries" value=""/>
+        <property key="linker-stack" value="true"/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
         <property key="oXC16ld-extra-opts" value=""/>
@@ -215,15 +243,68 @@
         <property key="legacy-libc" value="false"/>
         <property key="oXC16glb-macros" value=""/>
         <property key="output-file-format" value="elf"/>
-        <property key="save-temps" value="true"/>
+        <property key="relaxed-math" value="false"/>
+        <property key="save-temps" value="false"/>
       </C30Global>
-      <PICkit2PlatformTool>
-        <property key="pk2settings.3state" value="false"/>
-        <property key="pk2settings.preserveee" value="false"/>
-        <property key="pk2settings.setvddvoltage" value=""/>
-        <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
-      </PICkit2PlatformTool>
+      <PICkit3PlatformTool>
+        <property key="ADC 1" value="true"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="COMPARATOR" value="true"/>
+        <property key="CRC" value="true"/>
+        <property key="CTMU" value="true"/>
+        <property key="Freeze All Other Peripherals" value="true"/>
+        <property key="I2C1" value="true"/>
+        <property key="I2C2" value="true"/>
+        <property key="INPUT CAPTURE 1" value="true"/>
+        <property key="INPUT CAPTURE 2" value="true"/>
+        <property key="INPUT CAPTURE 3" value="true"/>
+        <property key="INPUT CAPTURE 4" value="true"/>
+        <property key="INPUT CAPTURE 5" value="true"/>
+        <property key="OUTPUT COMPARE 1" value="true"/>
+        <property key="OUTPUT COMPARE 2" value="true"/>
+        <property key="OUTPUT COMPARE 3" value="true"/>
+        <property key="OUTPUT COMPARE 4" value="true"/>
+        <property key="OUTPUT COMPARE 5" value="true"/>
+        <property key="PARALLEL MASTER/SLAVE PORT" value="true"/>
+        <property key="REFERENCE CLOCK" value="true"/>
+        <property key="SPI 1" value="true"/>
+        <property key="SPI 2" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="TIMER1" value="true"/>
+        <property key="TIMER2" value="true"/>
+        <property key="TIMER3" value="true"/>
+        <property key="TIMER4" value="true"/>
+        <property key="TIMER5" value="true"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="UART 1" value="true"/>
+        <property key="UART 2" value="true"/>
+        <property key="USB" value="true"/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.end" value="0xabf7"/>
+        <property key="memories.programmemory.start" value="0x0"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmertogo.imagename" value=""/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.pgmspeed" value="2"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange.end" value="0xabf7"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="3.25"/>
+      </PICkit3PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>

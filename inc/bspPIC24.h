@@ -41,7 +41,7 @@
 #ifdef PIC24GB
     #define F_OSC_DIV_2 ((UI32_t)8000000)
 #endif
-#include <pps.h>
+#include <PPS.h>
 
 // ADC
 typedef enum Pic16PortDefs_e

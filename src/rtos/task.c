@@ -30,9 +30,9 @@ const char* const RtosStateText[5] = {
 RtosTask_t RtosTaskIdleObj;
 
 
-static UI08_t RtosTaskIdleStk[80];
+volatile static UI08_t RtosTaskIdleStk[256];
 
-static RtosTask_t* RtosActiveTask;
+volatile static RtosTask_t* RtosActiveTask;
 volatile UI08_t* RtosKernelStackPos;
 volatile UI16_t RtosCriticalNesting;
 
@@ -42,7 +42,7 @@ void RtosTaskIdleFnc()
 {
     while(1)
     {
-        asm volatile("PWRSAV #1");
+        //asm volatile("PWRSAV #1");
     }
 }
 
@@ -50,6 +50,7 @@ void RtosTaskIdleFnc()
 void RtosTaskInit()
 {
     RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
+    RtosActiveTask = &RtosTaskIdleObj;
 }
 
 /* Initialize task object. */

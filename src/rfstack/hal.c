@@ -11,7 +11,7 @@ void RfHalInit(void)
     rfStatus.byteCounter = 0;
     rfStatus.intermediateCrc = 0;
     rfStatus.packet = &(rfPackets[0]);
-    rfStatus.state = RX_RECV_HEADER;
+    rfStatus.state = RX_RECV_SYNC;
 }
 
 void RfHalStatemachine(RfStatus_t status)
@@ -71,6 +71,12 @@ void RfHalStatemachine(RfStatus_t status)
                 break;
 
             // Receiver states
+            case RX_RECV_SYNC:
+                if (RfTrcvGet() == 0x6B)
+                {
+                    rfStatus.state = RX_RECV_HEADER;
+                }
+                break;
             case RX_RECV_HEADER:
                 // This is the hardware header, consisting of 1 byte.
                 rfStatus.packet->size = RfTrcvGet();
@@ -79,6 +85,10 @@ void RfHalStatemachine(RfStatus_t status)
                     rfStatus.intermediateCrc = 0;
                     rfStatus.byteCounter = 0;
                     rfStatus.state = RX_RECV_DATA;
+                }
+                else
+                {
+                    rfStatus.state = RX_RECV_SYNC;
                 }
                 break;
             case RX_RECV_DATA:
@@ -104,8 +114,9 @@ void RfHalStatemachine(RfStatus_t status)
                     printf("New packet of %d bytes.\r\n", rfStatus.packet->size);
                     RfTrcvRearm();
                 }
-                rfStatus.state = RX_RECV_HEADER;
+                rfStatus.state = RX_RECV_SYNC;
                 break;
         }
     }
+    //printf(",%d", rfStatus.state);
 }

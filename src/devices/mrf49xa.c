@@ -13,11 +13,19 @@ void RfTrcvPut(UI08_t byte)
 }
 UI08_t RfTrcvGet(void)
 {
-    RF_FSEL = 0;
+    /*RF_FSEL = 0;
     RF_SPI_CS = 0;
     UI08_t b = SPI_Read();
     RF_SPI_CS = 1;
+    RF_FSEL = 1;*/
+
     RF_FSEL = 1;
+
+    RF_SPI_CS = 0;
+    SPI_Write(0xB0);
+    UI08_t b = SPI_Read();
+    RF_SPI_CS = 1;
+    
     return b;
 }
 UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
@@ -70,16 +78,17 @@ void MRF49XAInit()
 
     RF_FSEL = 1; // Read from SPI registers.
 
-#ifdef SERVER
-
-    CNEN2bits.CN21IE = 1;
-    CNEN2bits.CN30IE = 1;
 
     CNPU2bits.CN21PUE = 1;
     CNPU2bits.CN30PUE = 1;
+#ifndef SERVER
 
-    IEC1bits.CNIE = 1;
+    CNEN2bits.CN21IE = 1; // IRO
+    CNEN2bits.CN30IE = 1; // INT
+
     IFS1bits.CNIF = 0;
+    IEC1bits.CNIE = 1;
+//sts433B
 
 #endif
 }
@@ -117,15 +126,16 @@ UI16_t MRF49XAReadStatus()
 
 }
 
+
 void __attribute__((interrupt,no_auto_psv)) _CNInterrupt(void)
 {
-    if (RF_IRQ == 0)
+    if (RF_IRQ == 0 && 0)
     {
         UI16_t mrf49State = MRF49XAReadStatus();
         RfStatus_t mrf49Status;
         mrf49Status.dataTransferred = 1; // (mrf49State & (1<<15))?1:0;
-
         RfHalStatemachine(mrf49Status);
+        printf(".");
     }
     IFS1bits.CNIF = 0;
 }
@@ -133,7 +143,7 @@ void __attribute__((interrupt,no_auto_psv)) _CNInterrupt(void)
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop
 // -> ~460kHz SPI clockc without loop
-//#define SPI_UNROLL_LOOP
+#define SPI_UNROLL_LOOP
 
 UI08_t SPI_Read(void)
 {
@@ -201,114 +211,4 @@ void SPI_Write(UI08_t data)
         RF_SPI_SCK = 0;
     }
 #endif
-}
-//#endif
-
-/*
-void MRF49XA_TxPacket(UI08_t *data, UI08_t size)
-{
-    UI08_t i, crc = 0;
-
-    MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
-    MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
-    MRF49XACommand(PMCREG |0x0020);                        // turn on tx
-
-    RF_SPI_CS = 0;                                         // chip select low
-
-    //MRF49XA_WaitOnTx();     SPI_Write16(TXBREG | 0xAA);	// preamble
-    MRF49XA_WaitOnTx();     SPI_Write(TXBREG >> 8); SPI_Write(0xAA);	// preamble
-    MRF49XA_WaitOnTx();     SPI_Write(0xAA);            // preamble
-    MRF49XA_WaitOnTx();     SPI_Write(0x2D);            // sync byte 1
-    MRF49XA_WaitOnTx();     SPI_Write(0xD4);            // sync byte 2
-    MRF49XA_WaitOnTx();     SPI_Write(size + 1); // Data length
-    
-    for (i = 0; i < size; i++)
-    {
-        MRF49XA_WaitOnTx();
-        SPI_Write(data[i]);                   // write payload data
-        crc = crc ^ data[i];
-    }
-
-    MRF49XA_WaitOnTx();     SPI_Write(crc);	// checksum
-    MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
-    MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
-    MRF49XA_WaitOnTx();     SPI_Write(0x00);            // write a dummy byte
-    MRF49XA_WaitOnTx();
-
-    RF_SPI_CS = 1;						// end
-
-    MRF49XACommand(FIFORSTREG);                            // FIFO Reset
-    MRF49XACommand(PMCREG | 0x0080);                       // turn on receiver
-    MRF49XACommand(GENCREG | 0x0040);                      // enable the FIFO
-    MRF49XACommand(FIFORSTREG | 0x0002);                   // FIFO syncron latch re-enable
-
-}
- */
-
-UI08_t MRF49XA_RxPacket(UI08_t *data)
-{
-    static UI08_t inPacket = 0;
-    static UI08_t length = 0;
-    static UI08_t index = 0;
-    static UI08_t crc = 0;
-    
-    RF_SPI_SDO = 0;
-    RF_SPI_CS  = 0;
-    Nop();
-    return 0;
-    if(RF_SPI_SDI)
-    {
-        RF_SPI_CS  = 1;
-        RF_FSEL    = 0;
-
-        if (inPacket == 0)
-        {
-            length = SPI_Read();
-
-            RF_FSEL = 1;
-            
-            if (length > PACKET_SIZE_MAX)
-            {
-                MRF49XAReset();
-            }
-            else
-            {
-                inPacket = 1;
-                index = 0;
-                crc = 0;
-            }
-            
-            return 0;
-        }
-        else
-        {
-            data[index] = SPI_Read();
-            crc = crc ^ data[index];
-            index++;
-            
-            RF_FSEL = 1;
-
-            if (index >= length)
-            {
-                inPacket = 0;
-
-                if (length == 0)
-                    return 0;
-                
-                if(crc != data[index])
-                    return length | 0x80;
-                else
-                    return length;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-    }
-    else
-    {
-        RF_SPI_CS = 1;
-        return 0;
-    }
 }

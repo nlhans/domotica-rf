@@ -35,6 +35,7 @@ typedef enum RfTransceiverState_e
     TX_NULL3,
 
     // Receiver states
+    RX_RECV_SYNC,
     RX_RECV_HEADER,
     RX_RECV_DATA,
     RX_RECV_CRC,

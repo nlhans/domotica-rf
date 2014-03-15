@@ -1,10 +1,11 @@
 #define MAIN_C
 
-#define COMPILE_ETHERNET
+//#define COMPILE_ETHERNET
 
 #include "stddefs.h"
 
 #include "devices/mrf49xa.h"
+#include "rfstack/hal.h"
 #include "devices/mcp9800.h"
 
 #include "bsp/adc.h"
@@ -121,8 +122,6 @@ bool_t httpCloseConnection(void* con)
     return TRUE;
 }
 
-bool_t rfIsr=0;
-
 RtosTask_t ethTask;
 UI08_t ethTaskStk[768];
 
@@ -131,6 +130,8 @@ UI08_t ethTaskStk[768];
 #define ETH_ENC_ERR 0x04
 
 #endif
+
+bool_t rfIsr=0;
 
 RtosTask_t ledTask;
 RtosTask_t rfTask;
@@ -150,6 +151,7 @@ UI08_t doneRx = 0;
 {
     if (RF_IRQ == 0)
     {
+        printf(",");
         stat = MRF49XAReadStatus();
         if(stat&0x8000)
         {
@@ -183,48 +185,56 @@ UI08_t doneRx = 0;
 
 void mrf49xaIsr(UI08_t foo)
 {
+    UI16_t mrf49State;
+
+        printf(",");
+    do
+    {
+         mrf49State = MRF49XAReadStatus();
+
+        if ((mrf49State & 0x8000) != 0)
+        {
+            RfStatus_t mrf49Status;
+            mrf49Status.dataTransferred = 1; // (mrf49State & (1<<15))?1:0;
+            RfHalStatemachine(mrf49Status);
+        }
+        
+    } while ((mrf49State & 0xC000) != 0);
+    
+    //printf("|st%X|", mrf49State);
     rfIsr = 1;
 }
 
 void RfTask()
 {
-    /*CNEN2bits.CN21IE = 1;
-    CNEN2bits.CN30IE = 1;
-
-    CNPU2bits.CN30PUE = 1;
-    CNPU2bits.CN21PUE = 1;
-
-    IEC1bits.CNIE = 1;
-    IFS1bits.CNIF = 0;
-*/
     // Connect up MRF49XA ISR
     PPSUnLock;
 
-    iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP9);
+    iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
     ExtIntInit();
-    ExtIntSetup(1, mrf49xaIsr, TRUE);
+    ExtIntSetup(2, mrf49xaIsr, TRUE);
 
     PPSLock;
 
+    RF_RES = 1;
+    RF_POWER = 0;
+    RtosTaskDelay(100);
+    RF_POWER = 1;
+
     printf("1");
     RfHalInit();
+    printf("2");
     MRF49XAInit();
     printf("3");
     MRF49XAReset();
     printf("4");
-    
-    UI08_t bf2[32];
-    UI08_t l;
-    
+
     while(1)
     {
-        l = MRF49XA_RxPacket(bf2);
-        if (l != 0)
+        if (rfIsr==1)
         {
-            printf("Packet! %d ", isrs);
-            printf(" %X %X %X %X %X %X %X %X", bf2[0], bf2[1], bf2[2], bf2[3], bf2[4], bf2[5], bf2[6], bf2[7]);
-            printf("\r\n");
-            isrs = 0;
+            rfIsr=0;
+            printf("i");
         }
     }
     //
@@ -356,6 +366,11 @@ int main(void)
             #warning "Building for dsPIC33FJ128GP804"
             #endif
         #endif
+    ETH_CS = 1;
+    RF_SPI_CS = 1;
+    FLASH_CS1 = 1;
+    FLASH_CS2 = 1;
+    
     #else
     UI08_t i, j, k;
         #warning "Building for PIC16F1508"
@@ -366,11 +381,6 @@ int main(void)
 
     RF_POWER = 1;
     SENSOR_PWR = 1;
-    ETH_CS = 1;
-    RF_SPI_CS = 1;
-    FLASH_CS1 = 1;
-    FLASH_CS2 = 1;
-    
 #define dl() for (i = 0; i < 250; i++) \
             for(j = 0; j < 250; j++) \
                 asm("nop"); \
@@ -381,12 +391,17 @@ int main(void)
     printf("Hello world!\r\n");
 
     RtosTaskInit();
-    RtosTaskCreate(&rfTask,  "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
+    
 #ifdef COMPILE_ETHERNET
-    //RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
+    RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
 #endif
-    //RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
+
+    RtosTaskCreate(&rfTask,  "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
+    RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
     RtosTaskRun();
+
+
+
 #else
     // i = 0, j = 0, k = 0;
     MRF49XA_Init();
