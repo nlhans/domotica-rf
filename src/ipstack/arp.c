@@ -36,12 +36,12 @@ void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
     memcpy(arp->frame.srcMac, myMac, 6);
     arp->frame.type = htons(ProtocolARP);
 
-    macTxFrame(arp, sizeof(ArpPacket_t));
+    macTxFrame((EthernetFrame_t*) arp, sizeof(ArpPacket_t));
 }
 
 void arpAnnounce()
 {
-    arpBuildPacket((UI08_t*)zerosMac, myGateway, FALSE);
+    arpBuildPacket((UI08_t*)zerosMac, (UI08_t*)myGateway, FALSE);
 
     INSIGHT(ARP_ANNOUNCE, myIp[0], myIp[1], myIp[2], myIp[3]);
 }

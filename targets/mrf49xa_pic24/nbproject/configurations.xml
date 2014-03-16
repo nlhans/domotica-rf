@@ -42,9 +42,14 @@
       <logicalFolder name="f7" displayName="RFStack" projectFiles="true">
         <itemPath>../../src/rfstack/packets.c</itemPath>
         <itemPath>../../src/rfstack/hal.c</itemPath>
+        <itemPath>../../src/rfstack/rf_task.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f6" displayName="RTOS" projectFiles="true">
         <itemPath>../../src/rtos/task.c</itemPath>
+        <itemPath>../../src/timer.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f8" displayName="Utilities" projectFiles="true">
+        <itemPath>../../src/utilities/ccbuf.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Webserver" projectFiles="true">
         <itemPath>../../src/webserver/router.c</itemPath>
@@ -281,6 +286,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="USB" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

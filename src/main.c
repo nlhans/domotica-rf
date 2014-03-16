@@ -4,12 +4,7 @@
 
 #include "stddefs.h"
 
-#include "devices/mrf49xa.h"
-#include "rfstack/hal.h"
-#include "devices/mcp9800.h"
-
-#include "bsp/adc.h"
-#include "bsp/softI2c.h"
+#include "rfstack/rf_task.h"
 
 #ifdef SERVER
 #include "devices/enc28j60.h"
@@ -131,123 +126,8 @@ UI08_t ethTaskStk[768];
 
 #endif
 
-bool_t rfIsr=0;
-
 RtosTask_t ledTask;
-RtosTask_t rfTask;
 UI08_t ledTaskStk[128];
-UI08_t rfTaskStk[512];
-
-#define RF_RX_PACKET 0x01
-
-UI16_t stat = 0;
-UI08_t isrs = 0;
-UI08_t rxInProgress=0;
-UI08_t rxByte = 0;
-UI08_t rxSize=0;
-UI08_t doneRx = 0;
-
-/*void __attribute__((interrupt,no_auto_psv)) _CNInterrupt(void)
-{
-    if (RF_IRQ == 0)
-    {
-        printf(",");
-        stat = MRF49XAReadStatus();
-        if(stat&0x8000)
-        {
-            rfIsr=1;
-            stat = RfTrcvGet();
-
-            if(rxInProgress == 0)
-            {
-                rxByte = 0;
-                rxSize=stat;
-                rxInProgress = 1;
-            }
-            else
-            {
-                rxByte++;
-
-                if (rxByte == rxSize)
-                {
-                    MRF49XAReset();
-                    rxInProgress = 0;
-                }
-                else
-                {
-                }
-            }
-
-        }
-    }
-    IFS1bits.CNIF = 0;
-}*/
-
-void mrf49xaIsr(UI08_t foo)
-{
-    UI16_t mrf49State;
-
-        printf(",");
-    do
-    {
-         mrf49State = MRF49XAReadStatus();
-
-        if ((mrf49State & 0x8000) != 0)
-        {
-            RfStatus_t mrf49Status;
-            mrf49Status.dataTransferred = 1; // (mrf49State & (1<<15))?1:0;
-            RfHalStatemachine(mrf49Status);
-        }
-        
-    } while ((mrf49State & 0xC000) != 0);
-    
-    //printf("|st%X|", mrf49State);
-    rfIsr = 1;
-}
-
-void RfTask()
-{
-    // Connect up MRF49XA ISR
-    PPSUnLock;
-
-    iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntInit();
-    ExtIntSetup(2, mrf49xaIsr, TRUE);
-
-    PPSLock;
-
-    RF_RES = 1;
-    RF_POWER = 0;
-    RtosTaskDelay(100);
-    RF_POWER = 1;
-
-    printf("1");
-    RfHalInit();
-    printf("2");
-    MRF49XAInit();
-    printf("3");
-    MRF49XAReset();
-    printf("4");
-
-    while(1)
-    {
-        if (rfIsr==1)
-        {
-            rfIsr=0;
-            printf("i");
-        }
-    }
-    //
-    while(1)
-    {
-        UI16_t evt = RtosTaskWaitForEvent(RF_RX_PACKET);
-
-        if (evt & RF_RX_PACKET)
-        {
-            //
-        }
-    }
-}
 
 void LedTask()
 {
@@ -350,7 +230,6 @@ void __attribute__((interrupt,no_auto_psv)) _MathError(void)
 }
 #endif
 
-static UI08_t bf[8] = { 0x12, 0x34, 0x56, 0x78, 0x12, 0x34, 0x56, 0x78 };
 int main(void)
 {
     #ifdef PIC24_HW
@@ -366,10 +245,11 @@ int main(void)
             #warning "Building for dsPIC33FJ128GP804"
             #endif
         #endif
-    ETH_CS = 1;
-    RF_SPI_CS = 1;
-    FLASH_CS1 = 1;
-    FLASH_CS2 = 1;
+
+        ETH_CS = 1;
+        RF_SPI_CS = 1;
+        FLASH_CS1 = 1;
+        FLASH_CS2 = 1;
     
     #else
     UI08_t i, j, k;
@@ -379,11 +259,8 @@ int main(void)
     #endif
     SysInitGpio();
 
-    RF_POWER = 1;
-    SENSOR_PWR = 1;
-#define dl() for (i = 0; i < 250; i++) \
-            for(j = 0; j < 250; j++) \
-                asm("nop"); \
+    RF_POWER = 0;
+    SENSOR_PWR = 0;
 
 #ifdef SERVER
 
@@ -395,14 +272,17 @@ int main(void)
 #ifdef COMPILE_ETHERNET
     RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
 #endif
+    RfInit();
 
-    RtosTaskCreate(&rfTask,  "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
     RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
     RtosTaskRun();
 
 
 
 #else
+#define dl() for (i = 0; i < 250; i++) \
+            for(j = 0; j < 250; j++) \
+                asm("nop"); \
     // i = 0, j = 0, k = 0;
     MRF49XA_Init();
     dl();

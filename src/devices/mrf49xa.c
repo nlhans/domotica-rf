@@ -78,9 +78,10 @@ void MRF49XAInit()
 
     RF_FSEL = 1; // Read from SPI registers.
 
-
+    // Pull-up IRQ/INT signals
     CNPU2bits.CN21PUE = 1;
     CNPU2bits.CN30PUE = 1;
+
 #ifndef SERVER
 
     CNEN2bits.CN21IE = 1; // IRO
@@ -126,19 +127,6 @@ UI16_t MRF49XAReadStatus()
 
 }
 
-
-void __attribute__((interrupt,no_auto_psv)) _CNInterrupt(void)
-{
-    if (RF_IRQ == 0 && 0)
-    {
-        UI16_t mrf49State = MRF49XAReadStatus();
-        RfStatus_t mrf49Status;
-        mrf49Status.dataTransferred = 1; // (mrf49State & (1<<15))?1:0;
-        RfHalStatemachine(mrf49Status);
-        printf(".");
-    }
-    IFS1bits.CNIF = 0;
-}
 //#ifdef PIC16
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop

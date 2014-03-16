@@ -1,5 +1,6 @@
 #include "stddefs.h"
 #include "rtos/task.h"
+#include "rtos/timer.h"
 
 // TODO: Create interrupt handlers
 // All interrupts are currently pushed on the application's task stack. 
@@ -32,7 +33,7 @@ RtosTask_t RtosTaskIdleObj;
 
 volatile static UI08_t RtosTaskIdleStk[256];
 
-volatile static RtosTask_t* RtosActiveTask;
+static RtosTask_t* RtosActiveTask;
 volatile UI08_t* RtosKernelStackPos;
 volatile UI16_t RtosCriticalNesting;
 
@@ -42,6 +43,7 @@ void RtosTaskIdleFnc()
 {
     while(1)
     {
+        RtosTimerTick();
         //asm volatile("PWRSAV #1");
     }
 }
@@ -49,7 +51,7 @@ void RtosTaskIdleFnc()
 /* Initialize task kernel */
 void RtosTaskInit()
 {
-    RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
+    RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, (UI08_t*)RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
     RtosActiveTask = &RtosTaskIdleObj;
 }
 
@@ -188,13 +190,18 @@ UI16_t RtosTaskWaitForEvent(UI16_t mask)
 {
     // Suspend the current task untill the event is fired.
     RtosActiveTask->eventMask = mask;
+
+    if ((RtosActiveTask->eventStore & mask) == 0)
+    {
+        RtosActiveTask->state = TASK_STATE_EVENT;
+
+        RtosKernelContextSuspend();
+    }
+    
+    UI16_t t = RtosActiveTask->eventStore;
     RtosActiveTask->eventStore &= ~mask;
 
-    RtosActiveTask->state = TASK_STATE_EVENT;
-
-    RtosKernelContextSuspend();
-
-    return RtosActiveTask->eventStore;
+    return t;
 }
 
 void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event)

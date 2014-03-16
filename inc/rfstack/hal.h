@@ -27,6 +27,7 @@ typedef enum RfTransceiverState_e
     TX_PREAMBLE2,
     TX_SCL1,
     TX_SCL2,
+    TX_SCL3,
     TX_SIZE,
     TX_DATA,
     TX_CRC,
@@ -35,10 +36,7 @@ typedef enum RfTransceiverState_e
     TX_NULL3,
 
     // Receiver states
-    RX_RECV_SYNC,
-    RX_RECV_HEADER,
-    RX_RECV_DATA,
-    RX_RECV_CRC,
+    RX_RECV,
 } RfTransceiverState_t;
 
 // 24 bytes mean we can send 16-bytes payload FLASH data (bootloader)
@@ -58,15 +56,26 @@ typedef struct RfTransceiverPacket_s
 
 typedef struct RfTransceiverStatus_s
 {
-    RfTransceiverState_t state;
-    UI08_t byteCounter;
-    UI08_t intermediateCrc;
-    RfTransceiverPacket_t* packet;
+    struct
+    {
+        UI08_t queued:1;
+    } rx;
+    struct
+    {
+        UI08_t byteCounter;
+        RfTransceiverPacket_t* txPacket;
+        RfTransceiverState_t state;
+    }isr;
 } RfTransceiverStatus_t;
 
 
 
 void RfHalInit(void);
-void RfHalStatemachine(RfStatus_t status);
+void RfHalStatemachine();
+
+void RfHalTick(void);
+
+void RfHalTxEnable(RfTransceiverPacket_t* packet);
+void RfHalTxDisable(void);
 
 #endif

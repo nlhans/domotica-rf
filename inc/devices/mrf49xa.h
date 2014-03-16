@@ -5,6 +5,7 @@
 
 #define RF_NETWORKID1 0x2D
 #define RF_NETWORKID2 0xD4
+#define RF_NETWORKID3 0x6B
 
 #define MRF49XA_WaitOnTx() do { while (!RF_SPI_SDI); } while (0);
 

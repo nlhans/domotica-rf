@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/softI2c.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/context.s ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/SST26VF032.c ../../src/ipstack/arp.c ../../src/ipstack/icmp.c ../../src/ipstack/ipv4.c ../../src/ipstack/udp.c ../../src/profiling/executiontime.c ../../src/rfstack/hal.c ../../src/rtos/task.c ../../src/main.c
+SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/softI2c.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/context.s ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/SST26VF032.c ../../src/ipstack/arp.c ../../src/ipstack/icmp.c ../../src/ipstack/ipv4.c ../../src/ipstack/udp.c ../../src/profiling/executiontime.c ../../src/rfstack/hal.c ../../src/rtos/task.c ../../src/utilities/ccbuf.c ../../src/main.c ../../src/rfstack/rf_task.c ../../src/timer.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/312626442/arp.o ${OBJECTDIR}/_ext/312626442/icmp.o ${OBJECTDIR}/_ext/312626442/ipv4.o ${OBJECTDIR}/_ext/312626442/udp.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/main.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1161282060/softI2c.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/767653358/enc28j60.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/312626442/arp.o.d ${OBJECTDIR}/_ext/312626442/icmp.o.d ${OBJECTDIR}/_ext/312626442/ipv4.o.d ${OBJECTDIR}/_ext/312626442/udp.o.d ${OBJECTDIR}/_ext/11123685/executiontime.o.d ${OBJECTDIR}/_ext/1201319415/hal.o.d ${OBJECTDIR}/_ext/1639527791/task.o.d ${OBJECTDIR}/_ext/1445274692/main.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/312626442/arp.o ${OBJECTDIR}/_ext/312626442/icmp.o ${OBJECTDIR}/_ext/312626442/ipv4.o ${OBJECTDIR}/_ext/312626442/udp.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1445274692/timer.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1161282060/softI2c.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/767653358/enc28j60.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/312626442/arp.o.d ${OBJECTDIR}/_ext/312626442/icmp.o.d ${OBJECTDIR}/_ext/312626442/ipv4.o.d ${OBJECTDIR}/_ext/312626442/udp.o.d ${OBJECTDIR}/_ext/11123685/executiontime.o.d ${OBJECTDIR}/_ext/1201319415/hal.o.d ${OBJECTDIR}/_ext/1639527791/task.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/1445274692/main.o.d ${OBJECTDIR}/_ext/1201319415/rf_task.o.d ${OBJECTDIR}/_ext/1445274692/timer.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/312626442/arp.o ${OBJECTDIR}/_ext/312626442/icmp.o ${OBJECTDIR}/_ext/312626442/ipv4.o ${OBJECTDIR}/_ext/312626442/udp.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/main.o
+OBJECTFILES=${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/312626442/arp.o ${OBJECTDIR}/_ext/312626442/icmp.o ${OBJECTDIR}/_ext/312626442/ipv4.o ${OBJECTDIR}/_ext/312626442/udp.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1445274692/timer.o
 
 # Source Files
-SOURCEFILES=../../src/bsp/softI2c.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/context.s ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/SST26VF032.c ../../src/ipstack/arp.c ../../src/ipstack/icmp.c ../../src/ipstack/ipv4.c ../../src/ipstack/udp.c ../../src/profiling/executiontime.c ../../src/rfstack/hal.c ../../src/rtos/task.c ../../src/main.c
+SOURCEFILES=../../src/bsp/softI2c.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/context.s ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/SST26VF032.c ../../src/ipstack/arp.c ../../src/ipstack/icmp.c ../../src/ipstack/ipv4.c ../../src/ipstack/udp.c ../../src/profiling/executiontime.c ../../src/rfstack/hal.c ../../src/rtos/task.c ../../src/utilities/ccbuf.c ../../src/main.c ../../src/rfstack/rf_task.c ../../src/timer.c
 
 
 CFLAGS=
@@ -191,12 +191,33 @@ ${OBJECTDIR}/_ext/1639527791/task.o: ../../src/rtos/task.c  nbproject/Makefile-$
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1639527791/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/2125849857/ccbuf.o: ../../src/utilities/ccbuf.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/2125849857 
+	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d 
+	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/_ext/1445274692/main.o: ../../src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1201319415/rf_task.o: ../../src/rfstack/rf_task.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/rf_task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445274692/timer.o: ../../src/timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
+	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/_ext/1161282060/softI2c.o: ../../src/bsp/softI2c.c  nbproject/Makefile-${CND_CONF}.mk
@@ -311,12 +332,33 @@ ${OBJECTDIR}/_ext/1639527791/task.o: ../../src/rtos/task.c  nbproject/Makefile-$
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"        -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1639527791/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/2125849857/ccbuf.o: ../../src/utilities/ccbuf.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/2125849857 
+	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d 
+	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"        -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/_ext/1445274692/main.o: ../../src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"        -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1201319415/rf_task.o: ../../src/rfstack/rf_task.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"        -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/rf_task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1445274692/timer.o: ../../src/timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
+	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"        -omf=elf -msmall-data -mconst-in-code -O1 -I"/home/hans/Projects/Firmware/domoticaRf/inc" -I"/opt/microchip/xc16/v1.21/support/peripheral_24F" -msmart-io=2 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
