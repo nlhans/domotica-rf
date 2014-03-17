@@ -1,4 +1,9 @@
+#include "rfstack/hal.h"
 #include "rfstack/packets.h"
+#include "rfstack/rfdefs.h"
+
+PT_THREAD(RfHalTickPkTh);
+struct pt halPkTh;
 
 typedef enum EepromMemoryMap_e
 {
@@ -6,23 +11,87 @@ typedef enum EepromMemoryMap_e
 } EepromMemoryMap_t;
 #define eepromRead(a) 0 // TODO: Implement EEPROM.
 
-typedef struct RfNodeInfo_s
-{
-    union {
-        UI08_t ee;
-        struct
-        {
-            UI08_t id:6;
-            UI08_t type:2;
-        };
-    } node;
-    UI08_t sensors;
-} RfNodeInfo_t;
-
 RfNodeInfo_t rfNode;
+RfNodeInfo_t nodes[RF_NR_OF_NODES];
 
+void RfPacketReply(RfTransceiverPacket_t* packet, RfMsg_t msg, UI08_t* data, UI08_t length, UI08_t opt)
+{
+    UI08_t i;
+    
+    // Swap src&dst
+    UI08_t nodeTmp = packet->frame.src;
+    packet->frame.src = packet->frame.dst;
+    packet->frame.dst = nodeTmp;
 
-void RfStackPacketsInit()
+    packet->frame.id = msg;
+    packet->frame.opt = opt;
+    memcpy(packet->data+4, data, length);
+
+    packet->size = length + 4;
+
+    printf("[RF] TX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
+    for (i = 0; i < packet->size - 4; i++)
+        printf("%02X ", packet->data[4+i]);
+
+    printf("\n");
+    RfHalTxPut(packet);
+
+}
+PT_THREAD(RfPacketsTickTh)
+{
+    UI08_t i;
+    static RfTransceiverPacket_t* packet;
+    PT_BEGIN(pt);
+
+    UI08_t scratchpad[32];
+
+    while(1)
+    {
+        // Grab the packet
+        PT_WAIT_UNTIL(pt, (packet = RfHalRxGet()) != FALSE);
+
+        // Print crc check
+        if (packet->crcRx != packet->crcTx)
+        {
+            printf("[RF] CRC error | RX %02X | CALC %02X\n", packet->crcRx, packet->crcTx);
+        }
+
+        // Print packet
+        printf("[RF] RX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
+
+        for (i = 0; i < packet->size - 4; i++)
+            printf("%02X ", packet->data[4+i]);
+
+        printf("\n");
+
+        // Handle frame
+        switch(packet->frame.id)
+        {
+            case RF_POR:
+                printf("[RF] Power-on-Reset message from node %d\n[RF]Adding node to table\n", packet->frame.src);
+                scratchpad[0] = 0x55;
+                scratchpad[1] = 0xAA;
+                RfPacketReply(packet, RF_ACK, scratchpad, 2, 0);
+                break;
+
+            case RF_SHDN:
+                printf("[RF] RF nod %d is going down\n", packet->frame.src);
+                break;
+
+            case RF_ACK:
+                printf("[RF] Got ACK from node %d\n", packet->frame.src);
+                break;
+
+            default:
+                RfPacketReply(packet, RF_ACK, scratchpad, 2, 0);
+                break;
+        }
+    }
+
+    PT_END(pt);
+}
+
+void RfPacketsInit()
 {
     //
     rfNode.node.ee = eepromRead(EE_NODE_ID);

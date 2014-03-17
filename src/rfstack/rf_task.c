@@ -5,6 +5,7 @@
 
 #include "rfstack/rf_task.h"
 #include "rfstack/hal.h"
+#include "rfstack/packets.h"
 
 #include "bsp/interrupt.h"
 
@@ -82,6 +83,7 @@ void mrf49xaIsr(UI08_t foo)
 
 void RfTask()
 {
+    UI08_t xc = 0;
     UI08_t rfInitialized = 0;
 
     printf("[RF] reset\n");
@@ -112,14 +114,15 @@ void RfTask()
 
         if (evt & RF_RX_PACKET)
         {
-            //
-            printf("[RF] Rx\n");
+            // Tick RX packet process thread
+            RfPacketsTickTh(&halPkTh);
         }
 
         if (evt & RF_TX_PACKET)
         {
             //
-            printf("[RF] Tx\n");
+            //printf("[RF] Tx\n");
+            RfHalTxDone();
         }
 
         if (evt & RF_TICK && rfInitialized == 1)
@@ -128,7 +131,26 @@ void RfTask()
             {
                 mrf49xaIsr(3);
             }
-            RfHalTick();
+
+            if (mrfIsr > 0 && 0)
+            {
+                printf("isr%d/%d\n", mrfIsr,mrfDat);
+                mrfIsr = 0;
+                mrfDat = 0;
+            }
+
+            // Tick RX procces thread
+            RfHalTickRxTh(&halRxBfTh);
+            
+            // Tick TX procces thread
+            RfHalTickTxTh(&halTxBfTh);
+
+            xc++;
+            if(xc>50 && 0)
+            {
+                xc=0;
+                printf("sts:%04X / %d / %d of %d\n", MRF49XAReadStatus(), rfStatus.isr.state, rfStatus.isr.byteCounter, rfStatus.isr.txPacket->size);
+            }
         }
     }
 }

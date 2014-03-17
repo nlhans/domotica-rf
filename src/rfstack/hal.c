@@ -4,14 +4,16 @@
 #include "rfstack/rf_task.h"
 
 #include "utilities/ccbuf.h"
-#include "utilities/pt.h"
 
 #define RF_SYNC_BYTE_3
 
-PT_THREAD(RfHalTickBfTh);
-PT_THREAD(RfHalTickPkTh);
+PT_THREAD(RfHalTickRxTh);
+PT_THREAD(RfHalTickTxTh);
 
-bool_t RfHalRxStore(RfTransceiverPacket_t* rfPacket);
+struct pt halRxBfTh;
+struct pt halTxBfTh;
+
+bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
 
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
@@ -20,9 +22,6 @@ UI08_t rfRxBf[256]; // 128 bytes of Rx buffer
 UI08_t rfRxBf2[32];
 CircBufDef_t rfRxCC;
 UI08_t rfTrcvRxEn; // is in RX mode
-
-struct pt halRxBfTh;
-struct pt halPkTh;
 
 void RfHalInit(void)
 {
@@ -37,34 +36,70 @@ void RfHalInit(void)
 
     PT_INIT(&halRxBfTh);
     PT_INIT(&halPkTh);
+
+    RfTrcvMode(0);
 }
 
-void RfHalTick(void)
+void RfTrcvMode(UI08_t tx)
 {
-    // Tick RX buffer procces thread
-    RfHalTickBfTh(&halRxBfTh);
+    if (tx == 0)
+    {
+        MRF49XAReset();
+    }
+    else
+    {
+        MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
+        MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
+        MRF49XACommand(PMCREG |0x0020);                        // turn on tx
 
-    // Tick RX packet process thread
-    RfHalTickPkTh(&halPkTh);
+        // Start TX
+        RfTrcvPut(0xAA);
+        rfStatus.isr.state = TX_PREAMBLE1;
+    }
 }
 
-
-PT_THREAD(RfHalTickPkTh)
+volatile UI08_t txDone = 0;
+void RfHalTxDone()
 {
-    return;
+    txDone = 1;
+}
+
+PT_THREAD(RfHalTickTxTh)
+{
+    static RfTransceiverPacket_t* txPacket;
+    
     PT_BEGIN(pt);
 
-    while(1)
+    // Any packets for TX?
+    // Do CSMA test
+    PT_WAIT_UNTIL(pt, rfStatus.txInQueue > 0);
+
+    printf("[RF] Setting up TX\n");
+    txPacket = RfHalTxGet();
+
+    if (txPacket == NULL)
     {
-        PT_WAIT_UNTIL(pt, rfStatus.rx.queued == 1);
-        //
-        PT_YIELD(pt);
+        printf("[RF] Dropping TX packet - returned NULL\n");
+        PT_RESTART(pt);
     }
+
+    do
+    {
+        PT_WAIT_UNTIL(pt, RfTrcvCarrierPresent() == 0);
+    } while (rfStatus.isr.state != RX_RECV);
+
+    // We're ready for TX
+    RfTrcvMode(1);
+    printf("[RF] Air seems carry free - proceeding to TX\n");
+
+    txDone = 0;
+
+    PT_WAIT_UNTIL(pt, rfStatus.isr.state == RX_RECV);
 
     PT_END(pt);
 }
 
-PT_THREAD(RfHalTickBfTh)
+PT_THREAD(RfHalTickRxTh)
 {
     static UI08_t pktRxByteIndex;
     static RfTransceiverPacket_t rxPacket;
@@ -81,25 +116,36 @@ PT_THREAD(RfHalTickBfTh)
             
             pktLength = CCBufPeekByte(&rfRxCC);
             
-            if(pktLength > 0 && pktLength < PACKET_SIZE_MAX)
+            if(pktLength > 0 && pktLength <= PACKET_SIZE_MAX + 1)
             {
-                rxPacket.size = CCBufRdByte(&rfRxCC);
-                
+                // Store Size
+                rxPacket.size = CCBufRdByte(&rfRxCC) - 1;
+                rxPacket.crcTx = 0;
+
+                // Store Data
                 for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
                 {
                     PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
                     rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
-                    rxPacket.crc = RfTrcvCrcTick(rxPacket.crc, rxPacket.data[pktRxByteIndex]);
-                    printf("%02X ", rxPacket.data[pktRxByteIndex]);
+                    rxPacket.crcTx = RfTrcvCrcTick(rxPacket.crcTx, rxPacket.data[pktRxByteIndex]);
                 }
 
-                // Wait until there is storage space.
-                //PT_WAIT_UNTIL(pt, RfHalRxStore(&rxPacket));
-                
-                rfStatus.rx.queued = 1;
+                // Store CRC
+                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+                rxPacket.crcRx = CCBufRdByte(&rfRxCC);
 
-                //
-                printf("packet %d!\n\n", rxPacket.size);
+                // Store timestamp
+#ifdef PIC24_HW
+                rxPacket.timestamp = RtosTimestamp;
+#endif
+
+                // Store packet
+                PT_WAIT_UNTIL(pt, RfHalRxPut(&rxPacket));
+
+                // Signal OS
+#ifdef PIC24_HW
+                RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
+#endif
             }
             else
             {
@@ -113,15 +159,17 @@ PT_THREAD(RfHalTickBfTh)
         
 }
 
-bool_t RfHalRxStore(RfTransceiverPacket_t* rfPacket)
+bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket)
 {
     UI08_t i = 0;
 
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
     {
-        if (rfPackets[i].size == 0)
+        if (rfPackets[i].proc == 0 && rfPackets[i].tx == 0)
         {
             memcpy(&(rfPackets[i]), rfPacket, sizeof(RfTransceiverPacket_t));
+            rfPackets[i].proc = 1;
+            rfStatus.rxInQueue++;
             return TRUE;
         }
     }
@@ -129,26 +177,73 @@ bool_t RfHalRxStore(RfTransceiverPacket_t* rfPacket)
     return FALSE;
 }
 
-void RfHalTxDisable(void)
+
+RfTransceiverPacket_t* RfHalRxGet()
 {
-    
-}
-void RfHalTxEnable(RfTransceiverPacket_t* packet)
-{
-    // TODO: Setup state machine etc.
+    UI08_t i = 0;
+    if (rfStatus.rxInQueue == 0)
+        return FALSE;
+
+    for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
+    {
+        if (rfPackets[i].proc != 0 && rfPackets[i].tx == 0)
+        {
+            rfPackets[i].proc = 0;
+            rfStatus.rxInQueue--;
+            
+            return &(rfPackets[i]);
+        }
+    }
+
+    rfStatus.rxInQueue = 0;
+    return FALSE;
 }
 
-bool_t RfHalTxQueue(RfTransceiverPacket_t* packet)
+RfTransceiverPacket_t* RfHalTxGet()
+{
+    UI08_t i = 0;
+    if (rfStatus.txInQueue == 0)
+        return FALSE;
+
+    for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
+    {
+        if (rfPackets[i].proc == 1 && rfPackets[i].tx == 1)
+        {
+            rfPackets[i].proc = 0;
+            rfStatus.txInQueue--;
+            
+            return &(rfPackets[i]);
+        }
+    }
+
+    rfStatus.txInQueue = 0;
+    return FALSE;
+}
+
+bool_t RfHalTxPut(RfTransceiverPacket_t* packet)
 {
     UI08_t i;
-
-    packet->crc = 0;
-
+    
     // Calculate CRC
-    for (i = 0; i < packet->size; i++)
-        packet->crc = RfTrcvCrcTick(packet->crc, packet->data[i]);
+    packet->crcTx = 0;
 
-    // TODO: Set as TX packet
+    for (i = 0; i < packet->size; i++)
+        packet->crcTx = RfTrcvCrcTick(packet->crcTx, packet->data[i]);
+
+    // Store in packet storage
+    for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
+    {
+        if (rfPackets[i].proc == 0)
+        {
+            memcpy(&(rfPackets[i]), packet, sizeof(RfTransceiverPacket_t));
+            rfPackets[i].proc = 1;
+            rfPackets[i].tx = 1;
+            
+            rfStatus.txInQueue++;
+
+            return TRUE;
+        }
+    }
 
     // No slot found.
     return FALSE;
@@ -162,7 +257,6 @@ void RfHalStatemachine()
         case RX_RECV:
             CCBufWrByte(&rfRxCC, RfTrcvGet());
             break;
-
 
         // Transmit states
         case TX_PREAMBLE1:
@@ -192,11 +286,11 @@ void RfHalStatemachine()
         case TX_DATA:
             RfTrcvPut(rfStatus.isr.txPacket->data[rfStatus.isr.byteCounter]);
             rfStatus.isr.byteCounter++;
-            if(rfStatus.isr.byteCounter == rfStatus.isr.txPacket->size)
+            if(rfStatus.isr.byteCounter >= rfStatus.isr.txPacket->size)
                 rfStatus.isr.state = TX_CRC;
             break;
         case TX_CRC:
-            RfTrcvPut(rfStatus.isr.txPacket->crc);
+            RfTrcvPut(rfStatus.isr.txPacket->crcTx);
             rfStatus.isr.state = TX_NULL1;
             break;
         case TX_NULL1:
@@ -209,14 +303,10 @@ void RfHalStatemachine()
             break;
         case TX_NULL3:
             RfTrcvPut(0);
-            rfStatus.isr.state = TX_WAITING;
+            rfStatus.isr.state = RX_RECV;
 
             RtosTaskSignalEvent(&rfTask, RF_TX_PACKET);
-            break;
-
-        case TX_WAITING:
-            // TX done; waiting for more TX or return to RX
-
+            RfTrcvMode(0);
             break;
 
     }

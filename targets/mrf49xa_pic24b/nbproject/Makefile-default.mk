@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../mrf49xa_pic24/context.s ../../src/main.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/interrupt.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/devices/SST26VF032.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/rfstack/hal.c ../../src/rfstack/rf_task.c ../../src/rtos/task.c ../../src/timer.c ../../src/utilities/ccbuf.c ../../src/bsp/softI2c.c ../../src/profiling/executiontime.c
+SOURCEFILES_QUOTED_IF_SPACED=../mrf49xa_pic24/context.s ../../src/main.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/interrupt.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/devices/SST26VF032.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/rfstack/hal.c ../../src/rfstack/rf_task.c ../../src/rtos/task.c ../../src/timer.c ../../src/utilities/ccbuf.c ../../src/bsp/softI2c.c ../../src/profiling/executiontime.c ../../src/rfstack/packets.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/2059971085/context.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/timer.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/11123685/executiontime.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/2059971085/context.o.d ${OBJECTDIR}/_ext/1445274692/main.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/1201319415/hal.o.d ${OBJECTDIR}/_ext/1201319415/rf_task.o.d ${OBJECTDIR}/_ext/1639527791/task.o.d ${OBJECTDIR}/_ext/1445274692/timer.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/1161282060/softI2c.o.d ${OBJECTDIR}/_ext/11123685/executiontime.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/2059971085/context.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/timer.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/packets.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/2059971085/context.o.d ${OBJECTDIR}/_ext/1445274692/main.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/1201319415/hal.o.d ${OBJECTDIR}/_ext/1201319415/rf_task.o.d ${OBJECTDIR}/_ext/1639527791/task.o.d ${OBJECTDIR}/_ext/1445274692/timer.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/1161282060/softI2c.o.d ${OBJECTDIR}/_ext/11123685/executiontime.o.d ${OBJECTDIR}/_ext/1201319415/packets.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/2059971085/context.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/timer.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/11123685/executiontime.o
+OBJECTFILES=${OBJECTDIR}/_ext/2059971085/context.o ${OBJECTDIR}/_ext/1445274692/main.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/1201319415/hal.o ${OBJECTDIR}/_ext/1201319415/rf_task.o ${OBJECTDIR}/_ext/1639527791/task.o ${OBJECTDIR}/_ext/1445274692/timer.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1161282060/softI2c.o ${OBJECTDIR}/_ext/11123685/executiontime.o ${OBJECTDIR}/_ext/1201319415/packets.o
 
 # Source Files
-SOURCEFILES=../mrf49xa_pic24/context.s ../../src/main.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/interrupt.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/devices/SST26VF032.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/rfstack/hal.c ../../src/rfstack/rf_task.c ../../src/rtos/task.c ../../src/timer.c ../../src/utilities/ccbuf.c ../../src/bsp/softI2c.c ../../src/profiling/executiontime.c
+SOURCEFILES=../mrf49xa_pic24/context.s ../../src/main.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/interrupt.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/devices/SST26VF032.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/rfstack/hal.c ../../src/rfstack/rf_task.c ../../src/rtos/task.c ../../src/timer.c ../../src/utilities/ccbuf.c ../../src/bsp/softI2c.c ../../src/profiling/executiontime.c ../../src/rfstack/packets.c
 
 
 CFLAGS=
@@ -83,268 +83,282 @@ ${OBJECTDIR}/_ext/1445274692/main.o: ../../src/main.c  nbproject/Makefile-${CND_
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/i2c.o: ../../src/bsp/pic24/i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/i2c.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/i2c.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/i2c.c  -o ${OBJECTDIR}/_ext/585513329/i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/i2c.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/i2c.c  -o ${OBJECTDIR}/_ext/585513329/i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/i2c.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/i2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/adc.o: ../../src/bsp/pic24/adc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/adc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/adc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/adc.c  -o ${OBJECTDIR}/_ext/585513329/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/adc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/adc.c  -o ${OBJECTDIR}/_ext/585513329/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/adc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/adc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/interrupt.o: ../../src/bsp/pic24/interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/interrupt.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/interrupt.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/interrupt.c  -o ${OBJECTDIR}/_ext/585513329/interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/interrupt.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/interrupt.c  -o ${OBJECTDIR}/_ext/585513329/interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/interrupt.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/interrupt.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mcp9800.o: ../../src/devices/mcp9800.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mcp9800.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mcp9800.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mcp9800.c  -o ${OBJECTDIR}/_ext/767653358/mcp9800.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mcp9800.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mcp9800.c  -o ${OBJECTDIR}/_ext/767653358/mcp9800.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mcp9800.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mcp9800.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mrf49xa.o: ../../src/devices/mrf49xa.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/rtc.o: ../../src/bsp/pic24/rtc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtc.c  -o ${OBJECTDIR}/_ext/585513329/rtc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtc.c  -o ${OBJECTDIR}/_ext/585513329/rtc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/rtc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/rtos.o: ../../src/bsp/pic24/rtos.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtos.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtos.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtos.c  -o ${OBJECTDIR}/_ext/585513329/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtos.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtos.c  -o ${OBJECTDIR}/_ext/585513329/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtos.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/rtos.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/spi.o: ../../src/bsp/pic24/spi.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/spi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/spi.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/spi.c  -o ${OBJECTDIR}/_ext/585513329/spi.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/spi.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/spi.c  -o ${OBJECTDIR}/_ext/585513329/spi.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/spi.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/spi.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/SST26VF032.o: ../../src/devices/SST26VF032.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/SST26VF032.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/SST26VF032.c  -o ${OBJECTDIR}/_ext/767653358/SST26VF032.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/SST26VF032.c  -o ${OBJECTDIR}/_ext/767653358/SST26VF032.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/timer.o: ../../src/bsp/pic24/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/timer.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/timer.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/timer.c  -o ${OBJECTDIR}/_ext/585513329/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/timer.c  -o ${OBJECTDIR}/_ext/585513329/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/uart.o: ../../src/bsp/pic24/uart.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/uart.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/uart.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/uart.c  -o ${OBJECTDIR}/_ext/585513329/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/uart.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/uart.c  -o ${OBJECTDIR}/_ext/585513329/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/uart.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1201319415/hal.o: ../../src/rfstack/hal.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/hal.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/hal.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/hal.c  -o ${OBJECTDIR}/_ext/1201319415/hal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/hal.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/hal.c  -o ${OBJECTDIR}/_ext/1201319415/hal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/hal.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/hal.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1201319415/rf_task.o: ../../src/rfstack/rf_task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/rf_task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1639527791/task.o: ../../src/rtos/task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1639527791 
 	@${RM} ${OBJECTDIR}/_ext/1639527791/task.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1639527791/task.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1639527791/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1445274692/timer.o: ../../src/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/2125849857/ccbuf.o: ../../src/utilities/ccbuf.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/2125849857 
 	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1161282060/softI2c.o: ../../src/bsp/softI2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1161282060 
 	@${RM} ${OBJECTDIR}/_ext/1161282060/softI2c.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1161282060/softI2c.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/softI2c.c  -o ${OBJECTDIR}/_ext/1161282060/softI2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161282060/softI2c.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/softI2c.c  -o ${OBJECTDIR}/_ext/1161282060/softI2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161282060/softI2c.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1161282060/softI2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/11123685/executiontime.o: ../../src/profiling/executiontime.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/11123685 
 	@${RM} ${OBJECTDIR}/_ext/11123685/executiontime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/11123685/executiontime.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/profiling/executiontime.c  -o ${OBJECTDIR}/_ext/11123685/executiontime.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/11123685/executiontime.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/profiling/executiontime.c  -o ${OBJECTDIR}/_ext/11123685/executiontime.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/11123685/executiontime.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/11123685/executiontime.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1201319415/packets.o: ../../src/rfstack/packets.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/packets.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/packets.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/packets.c  -o ${OBJECTDIR}/_ext/1201319415/packets.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/packets.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/packets.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/_ext/1445274692/main.o: ../../src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/main.c  -o ${OBJECTDIR}/_ext/1445274692/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/main.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/i2c.o: ../../src/bsp/pic24/i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/i2c.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/i2c.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/i2c.c  -o ${OBJECTDIR}/_ext/585513329/i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/i2c.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/i2c.c  -o ${OBJECTDIR}/_ext/585513329/i2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/i2c.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/i2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/adc.o: ../../src/bsp/pic24/adc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/adc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/adc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/adc.c  -o ${OBJECTDIR}/_ext/585513329/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/adc.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/adc.c  -o ${OBJECTDIR}/_ext/585513329/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/adc.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/adc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/interrupt.o: ../../src/bsp/pic24/interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/interrupt.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/interrupt.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/interrupt.c  -o ${OBJECTDIR}/_ext/585513329/interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/interrupt.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/interrupt.c  -o ${OBJECTDIR}/_ext/585513329/interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/interrupt.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/interrupt.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mcp9800.o: ../../src/devices/mcp9800.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mcp9800.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mcp9800.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mcp9800.c  -o ${OBJECTDIR}/_ext/767653358/mcp9800.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mcp9800.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mcp9800.c  -o ${OBJECTDIR}/_ext/767653358/mcp9800.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mcp9800.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mcp9800.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mrf49xa.o: ../../src/devices/mrf49xa.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/rtc.o: ../../src/bsp/pic24/rtc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtc.c  -o ${OBJECTDIR}/_ext/585513329/rtc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtc.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtc.c  -o ${OBJECTDIR}/_ext/585513329/rtc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtc.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/rtc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/rtos.o: ../../src/bsp/pic24/rtos.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtos.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/rtos.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtos.c  -o ${OBJECTDIR}/_ext/585513329/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtos.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/rtos.c  -o ${OBJECTDIR}/_ext/585513329/rtos.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/rtos.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/rtos.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/spi.o: ../../src/bsp/pic24/spi.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/spi.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/spi.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/spi.c  -o ${OBJECTDIR}/_ext/585513329/spi.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/spi.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/spi.c  -o ${OBJECTDIR}/_ext/585513329/spi.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/spi.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/spi.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/SST26VF032.o: ../../src/devices/SST26VF032.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
 	@${RM} ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d 
 	@${RM} ${OBJECTDIR}/_ext/767653358/SST26VF032.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/SST26VF032.c  -o ${OBJECTDIR}/_ext/767653358/SST26VF032.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/SST26VF032.c  -o ${OBJECTDIR}/_ext/767653358/SST26VF032.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/SST26VF032.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/timer.o: ../../src/bsp/pic24/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/timer.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/timer.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/timer.c  -o ${OBJECTDIR}/_ext/585513329/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/timer.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/timer.c  -o ${OBJECTDIR}/_ext/585513329/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/timer.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/585513329/uart.o: ../../src/bsp/pic24/uart.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
 	@${RM} ${OBJECTDIR}/_ext/585513329/uart.o.d 
 	@${RM} ${OBJECTDIR}/_ext/585513329/uart.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/uart.c  -o ${OBJECTDIR}/_ext/585513329/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/uart.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/pic24/uart.c  -o ${OBJECTDIR}/_ext/585513329/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/585513329/uart.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/585513329/uart.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1201319415/hal.o: ../../src/rfstack/hal.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/hal.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/hal.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/hal.c  -o ${OBJECTDIR}/_ext/1201319415/hal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/hal.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/hal.c  -o ${OBJECTDIR}/_ext/1201319415/hal.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/hal.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/hal.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1201319415/rf_task.o: ../../src/rfstack/rf_task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/rf_task.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/rf_task.c  -o ${OBJECTDIR}/_ext/1201319415/rf_task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/rf_task.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/rf_task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1639527791/task.o: ../../src/rtos/task.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1639527791 
 	@${RM} ${OBJECTDIR}/_ext/1639527791/task.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1639527791/task.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rtos/task.c  -o ${OBJECTDIR}/_ext/1639527791/task.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1639527791/task.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1639527791/task.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1445274692/timer.o: ../../src/timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1445274692 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1445274692/timer.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/timer.c  -o ${OBJECTDIR}/_ext/1445274692/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1445274692/timer.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1445274692/timer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/2125849857/ccbuf.o: ../../src/utilities/ccbuf.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/2125849857 
 	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d 
 	@${RM} ${OBJECTDIR}/_ext/2125849857/ccbuf.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/utilities/ccbuf.c  -o ${OBJECTDIR}/_ext/2125849857/ccbuf.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/2125849857/ccbuf.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1161282060/softI2c.o: ../../src/bsp/softI2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1161282060 
 	@${RM} ${OBJECTDIR}/_ext/1161282060/softI2c.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1161282060/softI2c.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/softI2c.c  -o ${OBJECTDIR}/_ext/1161282060/softI2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161282060/softI2c.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/bsp/softI2c.c  -o ${OBJECTDIR}/_ext/1161282060/softI2c.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161282060/softI2c.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1161282060/softI2c.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/11123685/executiontime.o: ../../src/profiling/executiontime.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/11123685 
 	@${RM} ${OBJECTDIR}/_ext/11123685/executiontime.o.d 
 	@${RM} ${OBJECTDIR}/_ext/11123685/executiontime.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/profiling/executiontime.c  -o ${OBJECTDIR}/_ext/11123685/executiontime.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/11123685/executiontime.o.d"        -g -omf=elf -O0 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/profiling/executiontime.c  -o ${OBJECTDIR}/_ext/11123685/executiontime.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/11123685/executiontime.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/11123685/executiontime.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1201319415/packets.o: ../../src/rfstack/packets.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/packets.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1201319415/packets.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/rfstack/packets.c  -o ${OBJECTDIR}/_ext/1201319415/packets.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1201319415/packets.o.d"        -g -omf=elf -O1 -I"../../inc" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1201319415/packets.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

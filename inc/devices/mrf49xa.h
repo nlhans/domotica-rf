@@ -13,7 +13,7 @@
 
 #define GENCREG 		0x8000 | XTAL_LD_CAP_125 | FREQ_BAND_868		// Cload=12.5pF TX registers & FIFO are disabled
 #define PMCREG 			0x8200		// Everything off, uC clk enabled
-#define	RXCREG                 (0x9460 | LNA_GAIN_0_DB | RSSI_THRESHOLD_103)
+#define	RXCREG                 (0x9460 | LNA_GAIN_0_DB | RSSI_THRESHOLD_85)
 #define TXBREG 			0xB800
 #define FIFORSTREG              0xCA81		// clear the sync latch enabled, limit=8bits, disable sensitive reset
 #define BBFCREG 		0xC2AC		// Digital LPF (default), Automatic Recovery Clock
@@ -101,6 +101,8 @@ void MRF49XAReset(void);
 void MRF49XACommand(UI16_t spicmd);
 UI16_t MRF49XAReadStatus();
 
+
+bool_t RfTrcvCarrierPresent();
 
 void RfTrcvPut(UI08_t byte);
 UI08_t RfTrcvGet(void);

@@ -37,6 +37,16 @@ void RfTrcvRearm(void)
     MRF49XAReset();
 }
 
+bool_t RfTrcvCarrierPresent()
+{
+    UI16_t sts = MRF49XAReadStatus();
+
+    if ((sts & (1<<8)) != 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 void MRF49XAInit()
 {
 #ifndef SERVER

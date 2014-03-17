@@ -4,4 +4,8 @@ build/default/production/_ext/767653358/mrf49xa.o:  \
 ../../inc/bspPIC24.h  \
  ../../inc/devices/mrf49xa.h  \
 ../../inc/rtos/task.h  \
- ../../inc/rfstack/hal.h 
+ ../../inc/rfstack/hal.h  \
+../../inc/rfstack/rfdefs.h  \
+ ../../inc/utilities/pt.h  \
+../../inc/utilities/lc.h  \
+ ../../inc/utilities/lc-switch.h 

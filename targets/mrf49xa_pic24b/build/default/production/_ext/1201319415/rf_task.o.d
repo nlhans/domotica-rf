@@ -6,5 +6,10 @@ build/default/production/_ext/1201319415/rf_task.o:  \
 ../../inc/rtos/timer.h  \
 ../../inc/rfstack/rf_task.h  \
  ../../inc/rfstack/hal.h  \
-../../inc/devices/mrf49xa.h  \
- ../../inc/bsp/interrupt.h 
+../../inc/rfstack/rfdefs.h  \
+ ../../inc/devices/mrf49xa.h  \
+../../inc/utilities/pt.h  \
+ ../../inc/utilities/lc.h  \
+../../inc/utilities/lc-switch.h  \
+ ../../inc/rfstack/packets.h  \
+../../inc/bsp/interrupt.h 
