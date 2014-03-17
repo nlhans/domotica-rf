@@ -39,13 +39,13 @@ void RfTrcvMode(UI08_t tx)
     if (tx == 0)
     {
         mrfInRx = 1;
-        printf("[RF] Configuring as RX\n");
+        //printf("[RF] Configuring as RX\n");
         MRF49XAReset();
     }
     else
     {
         mrfInRx = 0;
-        printf("[RF] Configuring as TX\n");
+        //printf("[RF] Configuring as TX\n");
         MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
         MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
         MRF49XACommand(PMCREG |0x0020);                        // turn on tx
@@ -68,7 +68,7 @@ PT_THREAD(RfHalTickTxTh)
         // Do CSMA test
         PT_WAIT_UNTIL(pt, rfStatus.txInQueue > 0);
 
-        printf("[RF] Setting up TX\n");
+        //printf("[RF] Setting up TX\n");
         txPacket = RfHalTxGet();
 
         if (txPacket == NULL)
@@ -84,11 +84,11 @@ PT_THREAD(RfHalTickTxTh)
 
         // We're ready for TX
         RfTrcvMode(1);
-        printf("[RF] Air seems carry free - proceeding to TX\n");
+        //printf("[RF] Air seems carry free - proceeding to TX\n");
 
         PT_WAIT_UNTIL(pt, rfStatus.isr.state == RX_RECV);
 
-        printf("[RF] TX done\n");
+        //printf("[RF] TX done\n");
     }
     
     PT_END(pt);

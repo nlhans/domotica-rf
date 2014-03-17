@@ -81,7 +81,7 @@ Archive member included because of file (symbol)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo) (__iob)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_cdnopuxX.XXeo)
-                              build/default/production/_ext/1201319415/rf_task.o (__printf_cdnopuxX)
+                              build/default/production/_ext/1201319415/packets.o (__printf_cdnopuxX)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_s.XXeo)
                               build/default/production/_ext/585513329/interrupt.o (__printf_0)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
@@ -107,15 +107,15 @@ Program Memory  [Origin = 0x200, Length = 0xa9f6]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x9dc           0xeca  (3786)
-.const                       0xbdc               0x2b4           0x40e  (1038)
-.text                        0xe90              0x1772          0x232b  (9003)
-.dinit                      0x2602               0x106           0x189  (393)
-.text                       0x2708               0x1a8           0x27c  (636)
-../mrf49xa_pic24/context.s.scn1    0x28b0                0x4c            0x72  (114)
-../mrf49xa_pic24/context.s.scn2    0x28fc                0x22            0x33  (51)
-.text                       0x291e                 0xc            0x12  (18)
+.const                       0xbdc               0x1d6           0x2c1  (705)
+.text                        0xdb2              0x1652          0x217b  (8571)
+.dinit                      0x2404               0x106           0x189  (393)
+.text                       0x250a               0x1a8           0x27c  (636)
+../mrf49xa_pic24/context.s.scn1    0x26b2                0x4c            0x72  (114)
+../mrf49xa_pic24/context.s.scn2    0x26fe                0x22            0x33  (51)
+.text                       0x2720                 0xc            0x12  (18)
 
-                     Total program memory used (bytes):         0x3abf  (15039) 23%
+                     Total program memory used (bytes):         0x37c2  (14274) 21%
 
 
 Data Memory  [Origin = 0x800, Length = 0x2000]
@@ -243,192 +243,192 @@ External Symbols in Program Memory (by address):
                   0x0006d4                  __vfprintf_cdnopuxX
                   0x0006d4                  __vfprintf_cdnopsuxX
                   0x0006d4                  __vfprintf_0
-                  0x000e04                  _RtosStateText
-                  0x000e7c                  _divis
-                  0x000e90                  _RfHalInit
-                  0x000ec2                  _RfTrcvMode
-                  0x000efe                  _RfHalTickTxTh
-                  0x000fa0                  _RfHalTickRxTh
-                  0x0010fa                  _RfHalRxPut
-                  0x001174                  _RfHalRxGet
-                  0x0011f4                  _RfHalTxGet
-                  0x001274                  _RfHalTxPut
-                  0x001312                  _RfHalStatemachine
-                  0x0013f0                  _RfPacketSimpleReply
-                  0x001474                  _RfPacketTransmit
-                  0x001502                  _RfPacketReply
-                  0x0015aa                  _RfPacketsTickTh
-                  0x001728                  _RfPacketsInit
-                  0x001734                  _CCBufInit
-                  0x001752                  _CCBufReset
-                  0x001780                  _CCBufGetFaultStatus
-                  0x00178e                  _CCBufCalcPt
-                  0x0017ee                  _CCBufCanWr
-                  0x001842                  _CCBufCanRd
-                  0x00188e                  _CCBufRdByte
-                  0x0018da                  _CCBufPeekByte
-                  0x001914                  _CCBufRd
-                  0x001950                  _CCBufWrByte
-                  0x0019a2                  _CCBufWr
-                  0x0019e2                  _CCBufGetRdCount
-                  0x001a0a                  _timerSetup
-                  0x001a94                  _Timer16InitPeriod
-                  0x001ae0                  _Timer32Init
-                  0x001b12                  _TimerInitPeriodic16Isr
-                  0x001c2a                  __T1Interrupt
-                  0x001c68                  _RtosTaskIdleFnc
-                  0x001c6e                  _RtosTaskInit
-                  0x001c86                  _RtosTaskCreate
-                  0x001d06                  _RtosTaskRun
-                  0x001d22                  _RtosTaskDelay
-                  0x001d42                  _RtosTaskWake
-                  0x001d52                  _RtosTaskChange
-                  0x001dc4                  _RtosKernelRestoreTask
-                  0x001ddc                  _RtosKernelStoreTask
-                  0x001e36                  _RtosTaskWaitForEvent
-                  0x001e70                  _RtosTaskSignalEvent
-                  0x001e9e                  _RfTrcvPut
-                  0x001eb4                  _RfTrcvGet
-                  0x001ece                  _RfTrcvCrcTick
-                  0x001ede                  _RfTrcvRearm
-                  0x001ee6                  _RfTrcvCarrierPresent
-                  0x001f02                  _MRF49XAInit
-                  0x001f5c                  _MRF49XAReset
-                  0x001f7a                  _MRF49XACommand
-                  0x001f98                  _MRF49XAReadStatus
-                  0x001fbc                  _SPI_Read
-                  0x002000                  _SPI_Write
-                  0x0020ac                  _ExtIntDummy
-                  0x0020b4                  _ExtIntInit
-                  0x0020d4                  _ExtIntSetup
-                  0x0021ba                  __INT0Interrupt
-                  0x0021e2                  __INT1Interrupt
-                  0x00220a                  __INT2Interrupt
-                  0x002232                  _RfInit
-                  0x00228a                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
-                  0x00229c                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
-                  0x0022e2                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
-                  0x0023b4                  _SoftI2cInit
-                  0x0023ca                  _SoftI2cNop
-                  0x0023e6                  _SoftI2cStart
-                  0x0023fa                  _SoftI2cRepeatedStart
-                  0x002416                  _SoftI2cStop
-                  0x002436                  _SoftI2cTxByte
-                  0x00248e                  _SoftI2cRxByte
-                  0x0024f8                  _SysInitGpio
-                  0x002534                  _UartTxStr
-                  0x00255a                  _UartInit
-                  0x0025a8                  _LedTask
-                  0x0025bc                  __AddressError
-                  0x0025c8                  __StackError
-                  0x0025ca                  __MathError
-                  0x0025cc                  _main
-                  0x002708                  _RtosTimerCreate
-                  0x00274e                  _RtosTimerRearm
-                  0x00277a                  _RtosTimerTick
-                  0x0027c6                  _RtosKernelPortInitStack
-                  0x0027fc                  _RtosKernelPortTimerStart
-                  0x00281e                  _RtosKernelPortTimerClear
-                  0x002826                  __T5Interrupt
-                  0x002848                  _RtosKernelContextStart
-                  0x002852                  _RtosKernelContextSuspend
-                  0x00285c                  _Mcp9800Start
-                  0x002884                  _Mcp9800Read
-                  0x0028b0                  _RtosKernelContext
-                  0x0028fc                  _RtosKernelStart
-                  0x00291e                  _execTimeReset
-                  0x002924                  _execTimePrint
+                  0x000cfa                  _RtosStateText
+                  0x000d9e                  _divis
+                  0x000db2                  _RfHalInit
+                  0x000de4                  _RfTrcvMode
+                  0x000e18                  _RfHalTickTxTh
+                  0x000eae                  _RfHalTickRxTh
+                  0x001008                  _RfHalRxPut
+                  0x001082                  _RfHalRxGet
+                  0x001102                  _RfHalTxGet
+                  0x001182                  _RfHalTxPut
+                  0x001220                  _RfHalStatemachine
+                  0x0012fe                  _CCBufInit
+                  0x00131c                  _CCBufReset
+                  0x00134a                  _CCBufGetFaultStatus
+                  0x001358                  _CCBufCalcPt
+                  0x0013b8                  _CCBufCanWr
+                  0x00140c                  _CCBufCanRd
+                  0x001458                  _CCBufRdByte
+                  0x0014a4                  _CCBufPeekByte
+                  0x0014de                  _CCBufRd
+                  0x00151a                  _CCBufWrByte
+                  0x00156c                  _CCBufWr
+                  0x0015ac                  _CCBufGetRdCount
+                  0x0015d4                  _RfPacketSimpleReply
+                  0x0015fc                  _RfPacketTransmit
+                  0x00168a                  _RfPacketReply
+                  0x001732                  _RfPacketsTickTh
+                  0x001846                  _RfPacketsInit
+                  0x001852                  _timerSetup
+                  0x0018dc                  _Timer16InitPeriod
+                  0x001928                  _Timer32Init
+                  0x00195a                  _TimerInitPeriodic16Isr
+                  0x001a72                  __T1Interrupt
+                  0x001ab0                  _RtosTaskIdleFnc
+                  0x001ab6                  _RtosTaskInit
+                  0x001ace                  _RtosTaskCreate
+                  0x001b4e                  _RtosTaskRun
+                  0x001b6a                  _RtosTaskDelay
+                  0x001b8a                  _RtosTaskWake
+                  0x001b9a                  _RtosTaskChange
+                  0x001c0c                  _RtosKernelRestoreTask
+                  0x001c24                  _RtosKernelStoreTask
+                  0x001c7e                  _RtosTaskWaitForEvent
+                  0x001cb8                  _RtosTaskSignalEvent
+                  0x001ce6                  _RfTrcvPut
+                  0x001cfc                  _RfTrcvGet
+                  0x001d16                  _RfTrcvCrcTick
+                  0x001d26                  _RfTrcvRearm
+                  0x001d2e                  _RfTrcvCarrierPresent
+                  0x001d4a                  _MRF49XAInit
+                  0x001da4                  _MRF49XAReset
+                  0x001dc2                  _MRF49XACommand
+                  0x001de0                  _MRF49XAReadStatus
+                  0x001e04                  _SPI_Read
+                  0x001e48                  _SPI_Write
+                  0x001ef4                  _ExtIntDummy
+                  0x001efc                  _ExtIntInit
+                  0x001f1c                  _ExtIntSetup
+                  0x002002                  __INT0Interrupt
+                  0x00202a                  __INT1Interrupt
+                  0x002052                  __INT2Interrupt
+                  0x00207a                  _SoftI2cInit
+                  0x002090                  _SoftI2cNop
+                  0x0020ac                  _SoftI2cStart
+                  0x0020c0                  _SoftI2cRepeatedStart
+                  0x0020dc                  _SoftI2cStop
+                  0x0020fc                  _SoftI2cTxByte
+                  0x002154                  _SoftI2cRxByte
+                  0x0021be                  _RfInit
+                  0x002216                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
+                  0x002228                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
+                  0x00226e                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
+                  0x0022fa                  _SysInitGpio
+                  0x002336                  _UartTxStr
+                  0x00235c                  _UartInit
+                  0x0023aa                  _LedTask
+                  0x0023be                  __AddressError
+                  0x0023ca                  __StackError
+                  0x0023cc                  __MathError
+                  0x0023ce                  _main
+                  0x00250a                  _RtosTimerCreate
+                  0x002550                  _RtosTimerRearm
+                  0x00257c                  _RtosTimerTick
+                  0x0025c8                  _RtosKernelPortInitStack
+                  0x0025fe                  _RtosKernelPortTimerStart
+                  0x002620                  _RtosKernelPortTimerClear
+                  0x002628                  __T5Interrupt
+                  0x00264a                  _RtosKernelContextStart
+                  0x002654                  _RtosKernelContextSuspend
+                  0x00265e                  _Mcp9800Start
+                  0x002686                  _Mcp9800Read
+                  0x0026b2                  _RtosKernelContext
+                  0x0026fe                  _RtosKernelStart
+                  0x002720                  _execTimeReset
+                  0x002726                  _execTimePrint
 
 External Symbols in Program Memory (by name):
 
-                  0x00178e                  _CCBufCalcPt
-                  0x001842                  _CCBufCanRd
-                  0x0017ee                  _CCBufCanWr
-                  0x001780                  _CCBufGetFaultStatus
-                  0x0019e2                  _CCBufGetRdCount
-                  0x001734                  _CCBufInit
-                  0x0018da                  _CCBufPeekByte
-                  0x001914                  _CCBufRd
-                  0x00188e                  _CCBufRdByte
-                  0x001752                  _CCBufReset
-                  0x0019a2                  _CCBufWr
-                  0x001950                  _CCBufWrByte
-                  0x0020ac                  _ExtIntDummy
-                  0x0020b4                  _ExtIntInit
-                  0x0020d4                  _ExtIntSetup
-                  0x0025a8                  _LedTask
-                  0x001f7a                  _MRF49XACommand
-                  0x001f02                  _MRF49XAInit
-                  0x001f98                  _MRF49XAReadStatus
-                  0x001f5c                  _MRF49XAReset
-                  0x002884                  _Mcp9800Read
-                  0x00285c                  _Mcp9800Start
-                  0x000e90                  _RfHalInit
-                  0x001174                  _RfHalRxGet
-                  0x0010fa                  _RfHalRxPut
-                  0x001312                  _RfHalStatemachine
-                  0x000fa0                  _RfHalTickRxTh
-                  0x000efe                  _RfHalTickTxTh
-                  0x0011f4                  _RfHalTxGet
-                  0x001274                  _RfHalTxPut
-                  0x002232                  _RfInit
-                  0x001502                  _RfPacketReply
-                  0x0013f0                  _RfPacketSimpleReply
-                  0x001474                  _RfPacketTransmit
-                  0x001728                  _RfPacketsInit
-                  0x0015aa                  _RfPacketsTickTh
-                  0x001ee6                  _RfTrcvCarrierPresent
-                  0x001ece                  _RfTrcvCrcTick
-                  0x001eb4                  _RfTrcvGet
-                  0x000ec2                  _RfTrcvMode
-                  0x001e9e                  _RfTrcvPut
-                  0x001ede                  _RfTrcvRearm
-                  0x0028b0                  _RtosKernelContext
-                  0x002848                  _RtosKernelContextStart
-                  0x002852                  _RtosKernelContextSuspend
-                  0x0027c6                  _RtosKernelPortInitStack
-                  0x00281e                  _RtosKernelPortTimerClear
-                  0x0027fc                  _RtosKernelPortTimerStart
-                  0x001dc4                  _RtosKernelRestoreTask
-                  0x0028fc                  _RtosKernelStart
-                  0x001ddc                  _RtosKernelStoreTask
-                  0x000e04                  _RtosStateText
-                  0x001d52                  _RtosTaskChange
-                  0x001c86                  _RtosTaskCreate
-                  0x001d22                  _RtosTaskDelay
-                  0x001c68                  _RtosTaskIdleFnc
-                  0x001c6e                  _RtosTaskInit
-                  0x001d06                  _RtosTaskRun
-                  0x001e70                  _RtosTaskSignalEvent
-                  0x001e36                  _RtosTaskWaitForEvent
-                  0x001d42                  _RtosTaskWake
-                  0x002708                  _RtosTimerCreate
-                  0x00274e                  _RtosTimerRearm
-                  0x00277a                  _RtosTimerTick
-                  0x001fbc                  _SPI_Read
-                  0x002000                  _SPI_Write
-                  0x0023b4                  _SoftI2cInit
-                  0x0023ca                  _SoftI2cNop
-                  0x0023fa                  _SoftI2cRepeatedStart
-                  0x00248e                  _SoftI2cRxByte
-                  0x0023e6                  _SoftI2cStart
-                  0x002416                  _SoftI2cStop
-                  0x002436                  _SoftI2cTxByte
-                  0x0024f8                  _SysInitGpio
-                  0x001a94                  _Timer16InitPeriod
-                  0x001ae0                  _Timer32Init
-                  0x001b12                  _TimerInitPeriodic16Isr
-                  0x00255a                  _UartInit
-                  0x002534                  _UartTxStr
-                  0x0025bc                  __AddressError
+                  0x001358                  _CCBufCalcPt
+                  0x00140c                  _CCBufCanRd
+                  0x0013b8                  _CCBufCanWr
+                  0x00134a                  _CCBufGetFaultStatus
+                  0x0015ac                  _CCBufGetRdCount
+                  0x0012fe                  _CCBufInit
+                  0x0014a4                  _CCBufPeekByte
+                  0x0014de                  _CCBufRd
+                  0x001458                  _CCBufRdByte
+                  0x00131c                  _CCBufReset
+                  0x00156c                  _CCBufWr
+                  0x00151a                  _CCBufWrByte
+                  0x001ef4                  _ExtIntDummy
+                  0x001efc                  _ExtIntInit
+                  0x001f1c                  _ExtIntSetup
+                  0x0023aa                  _LedTask
+                  0x001dc2                  _MRF49XACommand
+                  0x001d4a                  _MRF49XAInit
+                  0x001de0                  _MRF49XAReadStatus
+                  0x001da4                  _MRF49XAReset
+                  0x002686                  _Mcp9800Read
+                  0x00265e                  _Mcp9800Start
+                  0x000db2                  _RfHalInit
+                  0x001082                  _RfHalRxGet
+                  0x001008                  _RfHalRxPut
+                  0x001220                  _RfHalStatemachine
+                  0x000eae                  _RfHalTickRxTh
+                  0x000e18                  _RfHalTickTxTh
+                  0x001102                  _RfHalTxGet
+                  0x001182                  _RfHalTxPut
+                  0x0021be                  _RfInit
+                  0x00168a                  _RfPacketReply
+                  0x0015d4                  _RfPacketSimpleReply
+                  0x0015fc                  _RfPacketTransmit
+                  0x001846                  _RfPacketsInit
+                  0x001732                  _RfPacketsTickTh
+                  0x001d2e                  _RfTrcvCarrierPresent
+                  0x001d16                  _RfTrcvCrcTick
+                  0x001cfc                  _RfTrcvGet
+                  0x000de4                  _RfTrcvMode
+                  0x001ce6                  _RfTrcvPut
+                  0x001d26                  _RfTrcvRearm
+                  0x0026b2                  _RtosKernelContext
+                  0x00264a                  _RtosKernelContextStart
+                  0x002654                  _RtosKernelContextSuspend
+                  0x0025c8                  _RtosKernelPortInitStack
+                  0x002620                  _RtosKernelPortTimerClear
+                  0x0025fe                  _RtosKernelPortTimerStart
+                  0x001c0c                  _RtosKernelRestoreTask
+                  0x0026fe                  _RtosKernelStart
+                  0x001c24                  _RtosKernelStoreTask
+                  0x000cfa                  _RtosStateText
+                  0x001b9a                  _RtosTaskChange
+                  0x001ace                  _RtosTaskCreate
+                  0x001b6a                  _RtosTaskDelay
+                  0x001ab0                  _RtosTaskIdleFnc
+                  0x001ab6                  _RtosTaskInit
+                  0x001b4e                  _RtosTaskRun
+                  0x001cb8                  _RtosTaskSignalEvent
+                  0x001c7e                  _RtosTaskWaitForEvent
+                  0x001b8a                  _RtosTaskWake
+                  0x00250a                  _RtosTimerCreate
+                  0x002550                  _RtosTimerRearm
+                  0x00257c                  _RtosTimerTick
+                  0x001e04                  _SPI_Read
+                  0x001e48                  _SPI_Write
+                  0x00207a                  _SoftI2cInit
+                  0x002090                  _SoftI2cNop
+                  0x0020c0                  _SoftI2cRepeatedStart
+                  0x002154                  _SoftI2cRxByte
+                  0x0020ac                  _SoftI2cStart
+                  0x0020dc                  _SoftI2cStop
+                  0x0020fc                  _SoftI2cTxByte
+                  0x0022fa                  _SysInitGpio
+                  0x0018dc                  _Timer16InitPeriod
+                  0x001928                  _Timer32Init
+                  0x00195a                  _TimerInitPeriodic16Isr
+                  0x00235c                  _UartInit
+                  0x002336                  _UartTxStr
+                  0x0023be                  __AddressError
                   0x0002ac                  __DefaultInterrupt
-                  0x0021ba                  __INT0Interrupt
-                  0x0021e2                  __INT1Interrupt
-                  0x00220a                  __INT2Interrupt
-                  0x0025ca                  __MathError
-                  0x0025c8                  __StackError
-                  0x001c2a                  __T1Interrupt
-                  0x002826                  __T5Interrupt
+                  0x002002                  __INT0Interrupt
+                  0x00202a                  __INT1Interrupt
+                  0x002052                  __INT2Interrupt
+                  0x0023cc                  __MathError
+                  0x0023ca                  __StackError
+                  0x001a72                  __T1Interrupt
+                  0x002628                  __T5Interrupt
                   0x000618                  ___divdi3
                   0x000678                  ___moddi3
                   0x000602                  ___udivdi3
@@ -446,19 +446,19 @@ External Symbols in Program Memory (by name):
                   0x0006d4                  __vfprintf_cdnopsuxX
                   0x0006d4                  __vfprintf_cdnopuxX
                   0x0006d4                  __vfprintf_s
-                  0x000e7c                  _divis
-                  0x002924                  _execTimePrint
-                  0x00291e                  _execTimeReset
+                  0x000d9e                  _divis
+                  0x002726                  _execTimePrint
+                  0x002720                  _execTimeReset
                   0x0002ec                  _fputs
-                  0x0025cc                  _main
+                  0x0023ce                  _main
                   0x0002d0                  _memcpy
                   0x0002de                  _memset
                   0x00031c                  _putchar
                   0x000308                  _puts
-                  0x001a0a                  _timerSetup
-                  0x0022e2                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
-                  0x00228a                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
-                  0x00229c                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
+                  0x001852                  _timerSetup
+                  0x00226e                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
+                  0x002216                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
+                  0x002228                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
 
 Memory Configuration
 
@@ -616,7 +616,7 @@ __CONFIG1         0x00abfe          0x2
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x6e24
+.debug_info       0x000000       0x6e1e
  *(.debug_info)
  .debug_info      0x000000         0x9f build/default/production/_ext/2059971085/context.o
  .debug_info      0x00009f       0x1019 build/default/production/_ext/1445274692/main.o
@@ -632,10 +632,10 @@ __CONFIG1         0x00abfe          0x2
  .debug_info      0x0058b5        0x59f build/default/production/_ext/2125849857/ccbuf.o
  .debug_info      0x005e54        0x6df build/default/production/_ext/1161282060/softI2c.o
  .debug_info      0x006533        0x1a5 build/default/production/_ext/11123685/executiontime.o
- .debug_info      0x0066d8        0x74c build/default/production/_ext/1201319415/packets.o
+ .debug_info      0x0066d8        0x746 build/default/production/_ext/1201319415/packets.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x11d6
+.debug_abbrev     0x000000       0x11e3
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0x10 build/default/production/_ext/2059971085/context.o
  .debug_abbrev    0x000010        0x1d8 build/default/production/_ext/1445274692/main.o
@@ -655,9 +655,9 @@ __CONFIG1         0x00abfe          0x2
  .debug_abbrev    0x000e84         0xd0 build/default/production/_ext/2125849857/ccbuf.o
  .debug_abbrev    0x000f54         0xd8 build/default/production/_ext/1161282060/softI2c.o
  .debug_abbrev    0x00102c         0x34 build/default/production/_ext/11123685/executiontime.o
- .debug_abbrev    0x001060        0x176 build/default/production/_ext/1201319415/packets.o
+ .debug_abbrev    0x001060        0x183 build/default/production/_ext/1201319415/packets.o
 
-.debug_line       0x000000       0x2b53
+.debug_line       0x000000       0x2aa5
  *(.debug_line)
  .debug_line      0x000000         0x88 build/default/production/_ext/2059971085/context.o
  .debug_line      0x000088        0x2a7 build/default/production/_ext/1445274692/main.o
@@ -670,16 +670,16 @@ __CONFIG1         0x00abfe          0x2
  .debug_line      0x000b46        0x1ef build/default/production/_ext/585513329/rtos.o
  .debug_line      0x000d35        0x38d build/default/production/_ext/585513329/timer.o
  .debug_line      0x0010c2         0x24 build/default/production/_ext/585513329/uart.o
- .debug_line      0x0010e6        0x649 build/default/production/_ext/1201319415/hal.o
- .debug_line      0x00172f        0x36a build/default/production/_ext/1201319415/rf_task.o
- .debug_line      0x001a99        0x3b5 build/default/production/_ext/1639527791/task.o
- .debug_line      0x001e4e        0x16d build/default/production/_ext/1445274692/timer.o
- .debug_line      0x001fbb        0x3a4 build/default/production/_ext/2125849857/ccbuf.o
- .debug_line      0x00235f        0x42a build/default/production/_ext/1161282060/softI2c.o
- .debug_line      0x002789         0x7f build/default/production/_ext/11123685/executiontime.o
- .debug_line      0x002808        0x34b build/default/production/_ext/1201319415/packets.o
+ .debug_line      0x0010e6        0x623 build/default/production/_ext/1201319415/hal.o
+ .debug_line      0x001709        0x33a build/default/production/_ext/1201319415/rf_task.o
+ .debug_line      0x001a43        0x3b5 build/default/production/_ext/1639527791/task.o
+ .debug_line      0x001df8        0x16d build/default/production/_ext/1445274692/timer.o
+ .debug_line      0x001f65        0x3a4 build/default/production/_ext/2125849857/ccbuf.o
+ .debug_line      0x002309        0x42a build/default/production/_ext/1161282060/softI2c.o
+ .debug_line      0x002733         0x7f build/default/production/_ext/11123685/executiontime.o
+ .debug_line      0x0027b2        0x2f3 build/default/production/_ext/1201319415/packets.o
 
-.debug_frame      0x000000        0x944
+.debug_frame      0x000000        0x848
  *(.debug_frame)
  .debug_frame     0x000000         0x94 build/default/production/_ext/1445274692/main.o
  .debug_frame     0x000094         0x8c build/default/production/_ext/585513329/interrupt.o
@@ -688,13 +688,13 @@ __CONFIG1         0x00abfe          0x2
  .debug_frame     0x000218         0x74 build/default/production/_ext/585513329/rtos.o
  .debug_frame     0x00028c         0x64 build/default/production/_ext/585513329/timer.o
  .debug_frame     0x0002f0         0xa4 build/default/production/_ext/1201319415/hal.o
- .debug_frame     0x000394         0xd4 build/default/production/_ext/1201319415/rf_task.o
- .debug_frame     0x000468         0xc4 build/default/production/_ext/1639527791/task.o
- .debug_frame     0x00052c         0x44 build/default/production/_ext/1445274692/timer.o
- .debug_frame     0x000570         0xd4 build/default/production/_ext/2125849857/ccbuf.o
- .debug_frame     0x000644         0x84 build/default/production/_ext/1161282060/softI2c.o
- .debug_frame     0x0006c8         0x34 build/default/production/_ext/11123685/executiontime.o
- .debug_frame     0x0006fc        0x248 build/default/production/_ext/1201319415/packets.o
+ .debug_frame     0x000394         0x94 build/default/production/_ext/1201319415/rf_task.o
+ .debug_frame     0x000428         0xc4 build/default/production/_ext/1639527791/task.o
+ .debug_frame     0x0004ec         0x44 build/default/production/_ext/1445274692/timer.o
+ .debug_frame     0x000530         0xd4 build/default/production/_ext/2125849857/ccbuf.o
+ .debug_frame     0x000604         0x84 build/default/production/_ext/1161282060/softI2c.o
+ .debug_frame     0x000688         0x34 build/default/production/_ext/11123685/executiontime.o
+ .debug_frame     0x0006bc        0x18c build/default/production/_ext/1201319415/packets.o
 
 .debug_str        0x000000        0x270
  *(.debug_str)
@@ -788,16 +788,16 @@ __CONFIG1         0x00abfe          0x2
 .ivt              0x000004         0xfc
                   0x000004          0x4 LONG 0x2ac DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
                   0x000006          0x4 LONG 0x2ac DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x25bc DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x25c8 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x25ca DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x23be DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x23ca DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x23cc DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00000e          0x4 LONG 0x2ac DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000010          0x4 LONG 0x2ac DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x2ac DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x21ba DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x2002 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2ac DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2ac DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x1c2a DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x1a72 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2ac DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2ac DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2ac DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -814,7 +814,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000036          0x4 LONG 0x2ac DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000038          0x4 LONG 0x2ac DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003a          0x4 LONG 0x2ac DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003c          0x4 LONG 0x21e2 DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003c          0x4 LONG 0x202a DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003e          0x4 LONG 0x2ac DEFINED (__Interrupt21)?ABSOLUTE (__Interrupt21):ABSOLUTE (__DefaultInterrupt)
                   0x000040          0x4 LONG 0x2ac DEFINED (__Interrupt22)?ABSOLUTE (__Interrupt22):ABSOLUTE (__DefaultInterrupt)
                   0x000042          0x4 LONG 0x2ac DEFINED (__Interrupt23)?ABSOLUTE (__Interrupt23):ABSOLUTE (__DefaultInterrupt)
@@ -822,8 +822,8 @@ __CONFIG1         0x00abfe          0x2
                   0x000046          0x4 LONG 0x2ac DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000048          0x4 LONG 0x2ac DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00004a          0x4 LONG 0x2ac DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004c          0x4 LONG 0x2826 DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004e          0x4 LONG 0x220a DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004c          0x4 LONG 0x2628 DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004e          0x4 LONG 0x2052 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000050          0x4 LONG 0x2ac DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000052          0x4 LONG 0x2ac DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000054          0x4 LONG 0x2ac DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -916,16 +916,16 @@ __CONFIG1         0x00abfe          0x2
 .aivt             0x000104         0xfc
                   0x000104          0x4 LONG 0x2ac DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
                   0x000106          0x4 LONG 0x2ac DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000108          0x4 LONG 0x25bc DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00010a          0x4 LONG 0x25c8 DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00010c          0x4 LONG 0x25ca DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000108          0x4 LONG 0x23be DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00010a          0x4 LONG 0x23ca DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00010c          0x4 LONG 0x23cc DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00010e          0x4 LONG 0x2ac DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000110          0x4 LONG 0x2ac DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000112          0x4 LONG 0x2ac DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000114          0x4 LONG 0x21ba DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000114          0x4 LONG 0x2002 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x2ac DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x2ac DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x1c2a DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x1a72 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x2ac DEFINED (__AltInterrupt4)?ABSOLUTE (__AltInterrupt4):DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x2ac DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x2ac DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -942,7 +942,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000136          0x4 LONG 0x2ac DEFINED (__AltMI2C1Interrupt)?ABSOLUTE (__AltMI2C1Interrupt):DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000138          0x4 LONG 0x2ac DEFINED (__AltCompInterrupt)?ABSOLUTE (__AltCompInterrupt):DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00013a          0x4 LONG 0x2ac DEFINED (__AltCNInterrupt)?ABSOLUTE (__AltCNInterrupt):DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00013c          0x4 LONG 0x21e2 DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00013c          0x4 LONG 0x202a DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00013e          0x4 LONG 0x2ac DEFINED (__AltInterrupt21)?ABSOLUTE (__AltInterrupt21):DEFINED (__Interrupt21)?ABSOLUTE (__Interrupt21):ABSOLUTE (__DefaultInterrupt)
                   0x000140          0x4 LONG 0x2ac DEFINED (__AltInterrupt22)?ABSOLUTE (__AltInterrupt22):DEFINED (__Interrupt22)?ABSOLUTE (__Interrupt22):ABSOLUTE (__DefaultInterrupt)
                   0x000142          0x4 LONG 0x2ac DEFINED (__AltInterrupt23)?ABSOLUTE (__AltInterrupt23):DEFINED (__Interrupt23)?ABSOLUTE (__Interrupt23):ABSOLUTE (__DefaultInterrupt)
@@ -950,8 +950,8 @@ __CONFIG1         0x00abfe          0x2
                   0x000146          0x4 LONG 0x2ac DEFINED (__AltOC3Interrupt)?ABSOLUTE (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?ABSOLUTE (__OC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000148          0x4 LONG 0x2ac DEFINED (__AltOC4Interrupt)?ABSOLUTE (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00014a          0x4 LONG 0x2ac DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00014c          0x4 LONG 0x2826 DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00014e          0x4 LONG 0x220a DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00014c          0x4 LONG 0x2628 DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00014e          0x4 LONG 0x2052 DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000150          0x4 LONG 0x2ac DEFINED (__AltU2RXInterrupt)?ABSOLUTE (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000152          0x4 LONG 0x2ac DEFINED (__AltU2TXInterrupt)?ABSOLUTE (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000154          0x4 LONG 0x2ac DEFINED (__AltSPI2ErrInterrupt)?ABSOLUTE (__AltSPI2ErrInterrupt):DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -2066,140 +2066,140 @@ __c30_signature
                     0x1316          0x2 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
                     0x1316                  ___C30_UART
 
-.const              0x8bdc        0x2b4 load address 0x000bdc  
- .const             0x8bdc        0x126 build/default/production/_ext/1201319415/packets.o
- .const             0x8d02         0xc2 build/default/production/_ext/1201319415/hal.o
- .const             0x8dc4         0x50 build/default/production/_ext/1639527791/task.o
-                    0x8e04                  _RtosStateText
- .const             0x8e14         0x42 build/default/production/_ext/1201319415/rf_task.o
- .const             0x8e56         0x14 build/default/production/_ext/2125849857/ccbuf.o
- .const             0x8e6a         0x12 build/default/production/_ext/1445274692/main.o
- .const             0x8e7c         0x10 build/default/production/_ext/585513329/timer.o
-                    0x8e7c                  _divis
- .const             0x8e8c          0x4 build/default/production/_ext/585513329/interrupt.o
+.const              0x8bdc        0x1d6 load address 0x000bdc  
+ .const             0x8bdc         0xde build/default/production/_ext/1201319415/packets.o
+ .const             0x8cba         0x50 build/default/production/_ext/1639527791/task.o
+                    0x8cfa                  _RtosStateText
+ .const             0x8d0a         0x46 build/default/production/_ext/1201319415/hal.o
+ .const             0x8d50         0x28 build/default/production/_ext/1201319415/rf_task.o
+ .const             0x8d78         0x14 build/default/production/_ext/2125849857/ccbuf.o
+ .const             0x8d8c         0x12 build/default/production/_ext/1445274692/main.o
+ .const             0x8d9e         0x10 build/default/production/_ext/585513329/timer.o
+                    0x8d9e                  _divis
+ .const             0x8dae          0x4 build/default/production/_ext/585513329/interrupt.o
 
-.text             0x000e90       0x1772
- .text            0x000e90        0x560 build/default/production/_ext/1201319415/hal.o
-                  0x000e90                  _RfHalInit
-                  0x000ec2                  _RfTrcvMode
-                  0x000efe                  _RfHalTickTxTh
-                  0x000fa0                  _RfHalTickRxTh
-                  0x0010fa                  _RfHalRxPut
-                  0x001174                  _RfHalRxGet
-                  0x0011f4                  _RfHalTxGet
-                  0x001274                  _RfHalTxPut
-                  0x001312                  _RfHalStatemachine
- .text            0x0013f0        0x344 build/default/production/_ext/1201319415/packets.o
-                  0x0013f0                  _RfPacketSimpleReply
-                  0x001474                  _RfPacketTransmit
-                  0x001502                  _RfPacketReply
-                  0x0015aa                  _RfPacketsTickTh
-                  0x001728                  _RfPacketsInit
- .text            0x001734        0x2d6 build/default/production/_ext/2125849857/ccbuf.o
-                  0x001734                  _CCBufInit
-                  0x001752                  _CCBufReset
-                  0x001780                  _CCBufGetFaultStatus
-                  0x00178e                  _CCBufCalcPt
-                  0x0017ee                  _CCBufCanWr
-                  0x001842                  _CCBufCanRd
-                  0x00188e                  _CCBufRdByte
-                  0x0018da                  _CCBufPeekByte
-                  0x001914                  _CCBufRd
-                  0x001950                  _CCBufWrByte
-                  0x0019a2                  _CCBufWr
-                  0x0019e2                  _CCBufGetRdCount
- .text            0x001a0a        0x25e build/default/production/_ext/585513329/timer.o
-                  0x001a0a                  _timerSetup
-                  0x001a94                  _Timer16InitPeriod
-                  0x001ae0                  _Timer32Init
-                  0x001b12                  _TimerInitPeriodic16Isr
-                  0x001c2a                  __T1Interrupt
- .text            0x001c68        0x236 build/default/production/_ext/1639527791/task.o
-                  0x001c68                  _RtosTaskIdleFnc
-                  0x001c6e                  _RtosTaskInit
-                  0x001c86                  _RtosTaskCreate
-                  0x001d06                  _RtosTaskRun
-                  0x001d22                  _RtosTaskDelay
-                  0x001d42                  _RtosTaskWake
-                  0x001d52                  _RtosTaskChange
-                  0x001dc4                  _RtosKernelRestoreTask
-                  0x001ddc                  _RtosKernelStoreTask
-                  0x001e36                  _RtosTaskWaitForEvent
-                  0x001e70                  _RtosTaskSignalEvent
- .text            0x001e9e        0x20e build/default/production/_ext/767653358/mrf49xa.o
-                  0x001e9e                  _RfTrcvPut
-                  0x001eb4                  _RfTrcvGet
-                  0x001ece                  _RfTrcvCrcTick
-                  0x001ede                  _RfTrcvRearm
-                  0x001ee6                  _RfTrcvCarrierPresent
-                  0x001f02                  _MRF49XAInit
-                  0x001f5c                  _MRF49XAReset
-                  0x001f7a                  _MRF49XACommand
-                  0x001f98                  _MRF49XAReadStatus
-                  0x001fbc                  _SPI_Read
-                  0x002000                  _SPI_Write
- .text            0x0020ac        0x186 build/default/production/_ext/585513329/interrupt.o
-                  0x0020ac                  _ExtIntDummy
-                  0x0020b4                  _ExtIntInit
-                  0x0020d4                  _ExtIntSetup
-                  0x0021ba                  __INT0Interrupt
-                  0x0021e2                  __INT1Interrupt
-                  0x00220a                  __INT2Interrupt
- .text            0x002232        0x182 build/default/production/_ext/1201319415/rf_task.o
-                  0x002232                  _RfInit
-                  0x00228a                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
-                  0x00229c                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
-                  0x0022e2                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
- .text            0x0023b4        0x144 build/default/production/_ext/1161282060/softI2c.o
-                  0x0023b4                  _SoftI2cInit
-                  0x0023ca                  _SoftI2cNop
-                  0x0023e6                  _SoftI2cStart
-                  0x0023fa                  _SoftI2cRepeatedStart
-                  0x002416                  _SoftI2cStop
-                  0x002436                  _SoftI2cTxByte
-                  0x00248e                  _SoftI2cRxByte
- .text            0x0024f8        0x10a build/default/production/_ext/1445274692/main.o
-                  0x0024f8                  _SysInitGpio
-                  0x002534                  _UartTxStr
-                  0x00255a                  _UartInit
-                  0x0025a8                  _LedTask
-                  0x0025bc                  __AddressError
-                  0x0025c8                  __StackError
-                  0x0025ca                  __MathError
-                  0x0025cc                  _main
+.text             0x000db2       0x1652
+ .text            0x000db2        0x54c build/default/production/_ext/1201319415/hal.o
+                  0x000db2                  _RfHalInit
+                  0x000de4                  _RfTrcvMode
+                  0x000e18                  _RfHalTickTxTh
+                  0x000eae                  _RfHalTickRxTh
+                  0x001008                  _RfHalRxPut
+                  0x001082                  _RfHalRxGet
+                  0x001102                  _RfHalTxGet
+                  0x001182                  _RfHalTxPut
+                  0x001220                  _RfHalStatemachine
+ .text            0x0012fe        0x2d6 build/default/production/_ext/2125849857/ccbuf.o
+                  0x0012fe                  _CCBufInit
+                  0x00131c                  _CCBufReset
+                  0x00134a                  _CCBufGetFaultStatus
+                  0x001358                  _CCBufCalcPt
+                  0x0013b8                  _CCBufCanWr
+                  0x00140c                  _CCBufCanRd
+                  0x001458                  _CCBufRdByte
+                  0x0014a4                  _CCBufPeekByte
+                  0x0014de                  _CCBufRd
+                  0x00151a                  _CCBufWrByte
+                  0x00156c                  _CCBufWr
+                  0x0015ac                  _CCBufGetRdCount
+ .text            0x0015d4        0x27e build/default/production/_ext/1201319415/packets.o
+                  0x0015d4                  _RfPacketSimpleReply
+                  0x0015fc                  _RfPacketTransmit
+                  0x00168a                  _RfPacketReply
+                  0x001732                  _RfPacketsTickTh
+                  0x001846                  _RfPacketsInit
+ .text            0x001852        0x25e build/default/production/_ext/585513329/timer.o
+                  0x001852                  _timerSetup
+                  0x0018dc                  _Timer16InitPeriod
+                  0x001928                  _Timer32Init
+                  0x00195a                  _TimerInitPeriodic16Isr
+                  0x001a72                  __T1Interrupt
+ .text            0x001ab0        0x236 build/default/production/_ext/1639527791/task.o
+                  0x001ab0                  _RtosTaskIdleFnc
+                  0x001ab6                  _RtosTaskInit
+                  0x001ace                  _RtosTaskCreate
+                  0x001b4e                  _RtosTaskRun
+                  0x001b6a                  _RtosTaskDelay
+                  0x001b8a                  _RtosTaskWake
+                  0x001b9a                  _RtosTaskChange
+                  0x001c0c                  _RtosKernelRestoreTask
+                  0x001c24                  _RtosKernelStoreTask
+                  0x001c7e                  _RtosTaskWaitForEvent
+                  0x001cb8                  _RtosTaskSignalEvent
+ .text            0x001ce6        0x20e build/default/production/_ext/767653358/mrf49xa.o
+                  0x001ce6                  _RfTrcvPut
+                  0x001cfc                  _RfTrcvGet
+                  0x001d16                  _RfTrcvCrcTick
+                  0x001d26                  _RfTrcvRearm
+                  0x001d2e                  _RfTrcvCarrierPresent
+                  0x001d4a                  _MRF49XAInit
+                  0x001da4                  _MRF49XAReset
+                  0x001dc2                  _MRF49XACommand
+                  0x001de0                  _MRF49XAReadStatus
+                  0x001e04                  _SPI_Read
+                  0x001e48                  _SPI_Write
+ .text            0x001ef4        0x186 build/default/production/_ext/585513329/interrupt.o
+                  0x001ef4                  _ExtIntDummy
+                  0x001efc                  _ExtIntInit
+                  0x001f1c                  _ExtIntSetup
+                  0x002002                  __INT0Interrupt
+                  0x00202a                  __INT1Interrupt
+                  0x002052                  __INT2Interrupt
+ .text            0x00207a        0x144 build/default/production/_ext/1161282060/softI2c.o
+                  0x00207a                  _SoftI2cInit
+                  0x002090                  _SoftI2cNop
+                  0x0020ac                  _SoftI2cStart
+                  0x0020c0                  _SoftI2cRepeatedStart
+                  0x0020dc                  _SoftI2cStop
+                  0x0020fc                  _SoftI2cTxByte
+                  0x002154                  _SoftI2cRxByte
+ .text            0x0021be        0x13c build/default/production/_ext/1201319415/rf_task.o
+                  0x0021be                  _RfInit
+                  0x002216                  build/default/production/_ext/1201319415/rf_task.o:_RfTick
+                  0x002228                  build/default/production/_ext/1201319415/rf_task.o:_mrf49xaIsr
+                  0x00226e                  build/default/production/_ext/1201319415/rf_task.o:_RfTask
+ .text            0x0022fa        0x10a build/default/production/_ext/1445274692/main.o
+                  0x0022fa                  _SysInitGpio
+                  0x002336                  _UartTxStr
+                  0x00235c                  _UartInit
+                  0x0023aa                  _LedTask
+                  0x0023be                  __AddressError
+                  0x0023ca                  __StackError
+                  0x0023cc                  __MathError
+                  0x0023ce                  _main
 
-.dinit            0x002602        0x106
- .dinit           0x002602        0x106 data_init
+.dinit            0x002404        0x106
+ .dinit           0x002404        0x106 data_init
 
-.text             0x002708        0x1a8
- .text            0x002708         0xbe build/default/production/_ext/1445274692/timer.o
-                  0x002708                  _RtosTimerCreate
-                  0x00274e                  _RtosTimerRearm
-                  0x00277a                  _RtosTimerTick
- .text            0x0027c6         0x96 build/default/production/_ext/585513329/rtos.o
-                  0x0027c6                  _RtosKernelPortInitStack
-                  0x0027fc                  _RtosKernelPortTimerStart
-                  0x00281e                  _RtosKernelPortTimerClear
-                  0x002826                  __T5Interrupt
-                  0x002848                  _RtosKernelContextStart
-                  0x002852                  _RtosKernelContextSuspend
- .text            0x00285c         0x54 build/default/production/_ext/767653358/mcp9800.o
-                  0x00285c                  _Mcp9800Start
-                  0x002884                  _Mcp9800Read
+.text             0x00250a        0x1a8
+ .text            0x00250a         0xbe build/default/production/_ext/1445274692/timer.o
+                  0x00250a                  _RtosTimerCreate
+                  0x002550                  _RtosTimerRearm
+                  0x00257c                  _RtosTimerTick
+ .text            0x0025c8         0x96 build/default/production/_ext/585513329/rtos.o
+                  0x0025c8                  _RtosKernelPortInitStack
+                  0x0025fe                  _RtosKernelPortTimerStart
+                  0x002620                  _RtosKernelPortTimerClear
+                  0x002628                  __T5Interrupt
+                  0x00264a                  _RtosKernelContextStart
+                  0x002654                  _RtosKernelContextSuspend
+ .text            0x00265e         0x54 build/default/production/_ext/767653358/mcp9800.o
+                  0x00265e                  _Mcp9800Start
+                  0x002686                  _Mcp9800Read
 
 ../mrf49xa_pic24/context.s.scn1
-                  0x0028b0         0x4c
+                  0x0026b2         0x4c
  ../mrf49xa_pic24/context.s.scn1
-                  0x0028b0         0x4c build/default/production/_ext/2059971085/context.o
-                  0x0028b0                  _RtosKernelContext
+                  0x0026b2         0x4c build/default/production/_ext/2059971085/context.o
+                  0x0026b2                  _RtosKernelContext
 
 ../mrf49xa_pic24/context.s.scn2
-                  0x0028fc         0x22
+                  0x0026fe         0x22
  ../mrf49xa_pic24/context.s.scn2
-                  0x0028fc         0x22 build/default/production/_ext/2059971085/context.o
-                  0x0028fc                  _RtosKernelStart
+                  0x0026fe         0x22 build/default/production/_ext/2059971085/context.o
+                  0x0026fe                  _RtosKernelStart
 
-.text             0x00291e          0xc
- .text            0x00291e          0xc build/default/production/_ext/11123685/executiontime.o
-                  0x00291e                  _execTimeReset
-                  0x002924                  _execTimePrint
+.text             0x002720          0xc
+ .text            0x002720          0xc build/default/production/_ext/11123685/executiontime.o
+                  0x002720                  _execTimeReset
+                  0x002726                  _execTimePrint

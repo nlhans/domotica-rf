@@ -42,7 +42,7 @@ void RfTick(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_TICK);
 
-    RtosTimerRearm(&rfTimer, 10);
+    RtosTimerRearm(&rfTimer, 1);
 }
 
 UI16_t mrfIsr;
@@ -151,7 +151,7 @@ void RfTask()
             RfHalTickTxTh(&halTxBfTh);
 
             xc++;
-            if(xc>50)
+            if(xc>50 && 0)
             {
                 xc=0;
                 printf("sts:%04X / %d / %d of %d\n", MRF49XAReadStatus(), rfStatus.isr.state, rfStatus.isr.byteCounter, rfStatus.isr.txPacket->size);
@@ -168,7 +168,7 @@ void RfTask()
             }
 #endif
 
-            while(mrfDat > 0)
+            while(mrfDat > 0 && 0)
             {
                 mrfDat--;
                 printf(".");

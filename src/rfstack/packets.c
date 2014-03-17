@@ -25,11 +25,11 @@ void RfPacketSimpleReply(RfTransceiverPacket_t* packet, RfMsg_t msg)
 
     packet->frame.id = msg;
     
-    printf("[RF] TX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
+    /*printf("[RF] TX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
     for (i = 0; i < packet->size - 4; i++)
         printf("%02X ", packet->data[4+i]);
 
-    printf("\n");
+    printf("\n");*/
     RfHalTxPut(packet);
 }
 
@@ -99,12 +99,12 @@ PT_THREAD(RfPacketsTickTh)
         }
 
         // Print packet
-        printf("[RF] RX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
+        /*printf("[RF] RX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
 
         for (i = 0; i < packet->size - 4; i++)
             printf("%02X ", packet->data[4+i]);
 
-        printf("\n");
+        printf("\n");*/
 
         // Handle frame
         switch(packet->frame.id)
@@ -125,8 +125,8 @@ PT_THREAD(RfPacketsTickTh)
                 break;
 
             case RF_PING:
-                printf("[RF] Ping from %d\n", packet->frame.src);
-
+                //printf("[RF] Ping from %d\n", packet->frame.src);
+                
                 packet->data[4] = 2;
                 RfPacketSimpleReply(packet, RF_PING);
                 break;
