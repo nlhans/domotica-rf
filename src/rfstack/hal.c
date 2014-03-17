@@ -5,23 +5,17 @@
 
 #include "utilities/ccbuf.h"
 
-#define RF_SYNC_BYTE_3
-
 PT_THREAD(RfHalTickRxTh);
 PT_THREAD(RfHalTickTxTh);
 
 struct pt halRxBfTh;
 struct pt halTxBfTh;
 
-bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
-
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
 UI08_t rfRxBf[256]; // 128 bytes of Rx buffer
-UI08_t rfRxBf2[32];
 CircBufDef_t rfRxCC;
-UI08_t rfTrcvRxEn; // is in RX mode
 
 void RfHalInit(void)
 {
@@ -44,24 +38,22 @@ void RfTrcvMode(UI08_t tx)
 {
     if (tx == 0)
     {
+        mrfInRx = 1;
+        printf("[RF] Configuring as RX\n");
         MRF49XAReset();
     }
     else
     {
+        mrfInRx = 0;
+        printf("[RF] Configuring as TX\n");
         MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
         MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
         MRF49XACommand(PMCREG |0x0020);                        // turn on tx
 
         // Start TX
-        RfTrcvPut(0xAA);
         rfStatus.isr.state = TX_PREAMBLE1;
+        rfStatus.isr.byteCounter = 0;
     }
-}
-
-volatile UI08_t txDone = 0;
-void RfHalTxDone()
-{
-    txDone = 1;
 }
 
 PT_THREAD(RfHalTickTxTh)
@@ -70,32 +62,35 @@ PT_THREAD(RfHalTickTxTh)
     
     PT_BEGIN(pt);
 
-    // Any packets for TX?
-    // Do CSMA test
-    PT_WAIT_UNTIL(pt, rfStatus.txInQueue > 0);
-
-    printf("[RF] Setting up TX\n");
-    txPacket = RfHalTxGet();
-
-    if (txPacket == NULL)
+    while(1)
     {
-        printf("[RF] Dropping TX packet - returned NULL\n");
-        PT_RESTART(pt);
+        // Any packets for TX?
+        // Do CSMA test
+        PT_WAIT_UNTIL(pt, rfStatus.txInQueue > 0);
+
+        printf("[RF] Setting up TX\n");
+        txPacket = RfHalTxGet();
+
+        if (txPacket == NULL)
+        {
+            printf("[RF] Dropping TX packet - returned NULL\n");
+            PT_RESTART(pt);
+        }
+
+        do
+        {
+            PT_WAIT_UNTIL(pt, RfTrcvCarrierPresent() == 0);
+        } while (rfStatus.isr.state != RX_RECV);
+
+        // We're ready for TX
+        RfTrcvMode(1);
+        printf("[RF] Air seems carry free - proceeding to TX\n");
+
+        PT_WAIT_UNTIL(pt, rfStatus.isr.state == RX_RECV);
+
+        printf("[RF] TX done\n");
     }
-
-    do
-    {
-        PT_WAIT_UNTIL(pt, RfTrcvCarrierPresent() == 0);
-    } while (rfStatus.isr.state != RX_RECV);
-
-    // We're ready for TX
-    RfTrcvMode(1);
-    printf("[RF] Air seems carry free - proceeding to TX\n");
-
-    txDone = 0;
-
-    PT_WAIT_UNTIL(pt, rfStatus.isr.state == RX_RECV);
-
+    
     PT_END(pt);
 }
 
@@ -107,8 +102,11 @@ PT_THREAD(RfHalTickRxTh)
     
     PT_BEGIN(pt);
 
-    while (CCBufCanRd(&rfRxCC))
+    while (1)
     {
+        // Wait until we can read a byte.
+        PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+        
         // Search for start byte
         if (CCBufRdByte(&rfRxCC) == RF_NETWORKID3)
         {

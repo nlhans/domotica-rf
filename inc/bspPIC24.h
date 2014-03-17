@@ -26,22 +26,27 @@
     _FBS(BWRP_WRPROTECT_OFF & BSS_NO_FLASH & RBS_NO_RAM)
     _FSS(SWRP_WRPROTECT_OFF & SSS_NO_FLASH & RSS_NO_RAM)
     _FGS(GWRP_OFF & GCP_OFF)
-    _FOSCSEL(FNOSC_FRCPLL & IESO_OFF)
+    _FOSCSEL(FNOSC_FRC & IESO_OFF)
     _FOSC(POSCMD_NONE & OSCIOFNC_ON & IOL1WAY_OFF & FCKSM_CSECME)
     _FWDT(WDTPOST_PS128 & WDTPRE_PR128 & WINDIS_OFF & FWDTEN_OFF)
     _FPOR(FPWRT_PWR1 & ALTI2C_OFF)
-    _FICD(ICS_PGD2 & JTAGEN_OFF)
+    _FICD(ICS_PGD1 & JTAGEN_OFF)
 
     #endif
 #endif
 
 #ifdef PIC24GA
     #define F_OSC_DIV_2 ((UI32_t)16000000)
+#include <PPS.h>
 #endif
 #ifdef PIC24GB
     #define F_OSC_DIV_2 ((UI32_t)8000000)
-#endif
 #include <PPS.h>
+#endif
+#ifdef dsPIC33
+    #define F_OSC_DIV_2 ((UI32_t)7370000/2)
+#include <pps.h>
+#endif
 
 // ADC
 typedef enum Pic16PortDefs_e

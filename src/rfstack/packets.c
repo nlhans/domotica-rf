@@ -14,6 +14,48 @@ typedef enum EepromMemoryMap_e
 RfNodeInfo_t rfNode;
 RfNodeInfo_t nodes[RF_NR_OF_NODES];
 
+void RfPacketSimpleReply(RfTransceiverPacket_t* packet, RfMsg_t msg)
+{
+    UI08_t i;
+    
+    // Swap src&dst
+    UI08_t nodeTmp = packet->frame.src;
+    packet->frame.src = packet->frame.dst;
+    packet->frame.dst = nodeTmp;
+
+    packet->frame.id = msg;
+    
+    printf("[RF] TX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet->frame.src, packet->frame.dst, packet->frame.id, packet->frame.opt);
+    for (i = 0; i < packet->size - 4; i++)
+        printf("%02X ", packet->data[4+i]);
+
+    printf("\n");
+    RfHalTxPut(packet);
+}
+
+void RfPacketTransmit(UI08_t dst, RfMsg_t msg, UI08_t* data, UI08_t length, UI08_t opt)
+{
+    UI08_t i;
+    
+    RfTransceiverPacket_t packet;
+
+    memcpy(&(packet.data[4]), data, length);
+
+    packet.frame.dst = dst;
+    packet.frame.src = 0x5A;
+    packet.frame.id = msg;
+    packet.frame.opt = opt;
+
+    packet.size = length+4;
+
+    printf("[RF] TX Node %d -> %d | Msg ID %02X Opt %02X | Data:", packet.frame.src, packet.frame.dst, packet.frame.id, packet.frame.opt);
+    for (i = 0; i < packet.size - 4; i++)
+        printf("%02X ", packet.data[4+i]);
+
+    printf("\n");
+
+    RfHalTxPut(&packet);
+}
 void RfPacketReply(RfTransceiverPacket_t* packet, RfMsg_t msg, UI08_t* data, UI08_t length, UI08_t opt)
 {
     UI08_t i;
@@ -75,11 +117,18 @@ PT_THREAD(RfPacketsTickTh)
                 break;
 
             case RF_SHDN:
-                printf("[RF] RF nod %d is going down\n", packet->frame.src);
+                printf("[RF] RF node %d is going down\n", packet->frame.src);
                 break;
 
             case RF_ACK:
                 printf("[RF] Got ACK from node %d\n", packet->frame.src);
+                break;
+
+            case RF_PING:
+                printf("[RF] Ping from %d\n", packet->frame.src);
+
+                packet->data[4] = 2;
+                RfPacketSimpleReply(packet, RF_PING);
                 break;
 
             default:

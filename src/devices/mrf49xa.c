@@ -6,6 +6,7 @@
 
 void RfTrcvPut(UI08_t byte)
 {
+    RF_FSEL = 1;
     RF_SPI_CS = 0;
     SPI_Write(TXBREG >> 8);
     SPI_Write(byte);

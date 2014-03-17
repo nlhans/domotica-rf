@@ -48,6 +48,7 @@ void RfTick(void)
 UI16_t mrfIsr;
 UI16_t mrfDat;
 UI16_t mrfStat;
+UI08_t mrfInRx;
 
 void mrf49xaIsr(UI08_t foo)
 {
@@ -58,27 +59,32 @@ void mrf49xaIsr(UI08_t foo)
         mrfStat = mrf49State;
         mrf49State = MRF49XAReadStatus();
 
-        if ((mrf49State & (1<<13)) != 0)
+        /*if ((mrf49State & (1<<13)) != 0)
         {
             // Overflow FIFO
             MRF49XAReset();
             mrfStat = mrf49State;
+            printf("err\n");
             break;
-        }
+        }*/
 
-        if ((mrf49State & (1<<15)) != 0 && (mrf49State & (1<<7)) != 0)
+        if ((mrf49State & (1<<15)) != 0)
         {
-            mrfDat++;
-            RfHalStatemachine();
+            if (mrfInRx==1 && (mrf49State & (1<<7)) == 0) {} else
+            {
+                mrfDat++;
+                RfHalStatemachine();
+            }
         }
         else if((mrf49State & (1<<14)) != 0)
         {
             MRF49XAReset();
+            printf("por\n");
         }
 
         mrfIsr++;
 
-    } while ((mrf49State & 0xC000) != 0);
+    } while ((mrf49State & 0xC000) != 0 && 0);
 }
 
 void RfTask()
@@ -122,10 +128,9 @@ void RfTask()
         {
             //
             //printf("[RF] Tx\n");
-            RfHalTxDone();
         }
 
-        if (evt & RF_TICK && rfInitialized == 1)
+        if (evt & RF_TICK)
         {
             if (RF_IRQ == 0)
             {
@@ -146,10 +151,27 @@ void RfTask()
             RfHalTickTxTh(&halTxBfTh);
 
             xc++;
-            if(xc>50 && 0)
+            if(xc>50)
             {
                 xc=0;
                 printf("sts:%04X / %d / %d of %d\n", MRF49XAReadStatus(), rfStatus.isr.state, rfStatus.isr.byteCounter, rfStatus.isr.txPacket->size);
+            }
+#ifdef dsPIC33
+            if(xc>250)
+            {
+                xc = 0;
+                UI08_t dummy[20];
+                UI08_t k;
+                for (k = 0; k < 16; k++) dummy[k] = 0x55 + k;
+                
+                RfPacketTransmit(1, RF_PING, dummy, 16, 0);
+            }
+#endif
+
+            while(mrfDat > 0)
+            {
+                mrfDat--;
+                printf(".");
             }
         }
     }

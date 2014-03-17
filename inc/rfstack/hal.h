@@ -86,17 +86,17 @@ extern struct pt halTxBfTh;
 
 extern RfTransceiverStatus_t rfStatus;
 
-// Maintaing
+// Maintenance
 void RfHalInit(void);
 void RfHalStatemachine();
 PT_THREAD(RfHalTickRxTh);
 PT_THREAD(RfHalTickTxTh);
 
-// Transmit packets
+// Raw API for transmit packets
 bool_t RfHalTxPut(RfTransceiverPacket_t* packet);
 RfTransceiverPacket_t* RfHalTxGet();
 
-// Receive packets
+// Raw API for receive packets
 bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
 RfTransceiverPacket_t* RfHalRxGet();
 

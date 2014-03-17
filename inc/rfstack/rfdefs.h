@@ -59,9 +59,12 @@ typedef struct RfNodeInfo_s
 
 typedef enum
 {
-    RF_POR  = 0x5A,
-    RF_SHDN = 0xA6,
-    RF_ACK  = 0xA5
+    RF_PING = 0xA0,
+    RF_ACK  = 0xA1,
+
+    RF_POR  = 0xB0,
+    RF_SHDN = 0xB1,
+
 } RfMsg_t;
 
 #endif

@@ -217,8 +217,8 @@ void EthernetTask()
 #endif
 
 #define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
-WORD StkAddrLo;  // order matters
-WORD StkAddrHi;
+int StkAddrLo;  // order matters
+int StkAddrHi;
 char TrapMsgBuf[24];
 
 void TRAP_ISR _AddressError(void)

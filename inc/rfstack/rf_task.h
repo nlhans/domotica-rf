@@ -4,6 +4,7 @@
 #include "rtos/task.h"
 
 extern RtosTask_t rfTask;
+extern UI08_t mrfInRx;
 
 #define RF_RX_PACKET   0x01
 #define RF_TX_PACKET   0x02
