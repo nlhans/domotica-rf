@@ -57,6 +57,14 @@ void mrf49xaIsr(UI08_t foo)
         mrfStat = mrf49State;
         mrf49State = MRF49XAReadStatus();
 
+        if ((mrf49State & (1<<13)) != 0)
+        {
+            // Overflow FIFO
+            MRF49XAReset();
+            mrfStat = mrf49State;
+            break;
+        }
+
         if ((mrf49State & (1<<15)) != 0 && (mrf49State & (1<<7)) != 0)
         {
             mrfDat++;

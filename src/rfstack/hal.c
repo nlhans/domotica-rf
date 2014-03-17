@@ -85,11 +85,12 @@ PT_THREAD(RfHalTickBfTh)
             {
                 rxPacket.size = CCBufRdByte(&rfRxCC);
                 
-                for (pktRxByteIndex = 0; pktRxByteIndex < pktLength; pktRxByteIndex++)
+                for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
                 {
                     PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
                     rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
                     rxPacket.crc = RfTrcvCrcTick(rxPacket.crc, rxPacket.data[pktRxByteIndex]);
+                    printf("%02X ", rxPacket.data[pktRxByteIndex]);
                 }
 
                 // Wait until there is storage space.
@@ -157,6 +158,12 @@ void RfHalStatemachine()
 {
     switch (rfStatus.isr.state)
     {
+        // Receive bytes to RX queue
+        case RX_RECV:
+            CCBufWrByte(&rfRxCC, RfTrcvGet());
+            break;
+
+
         // Transmit states
         case TX_PREAMBLE1:
             RfTrcvPut(0xAA);
@@ -210,11 +217,6 @@ void RfHalStatemachine()
         case TX_WAITING:
             // TX done; waiting for more TX or return to RX
 
-            break;
-
-        // Receive bytes to RX queue
-        case RX_RECV:
-            CCBufWrByte(&rfRxCC, RfTrcvGet());
             break;
 
     }

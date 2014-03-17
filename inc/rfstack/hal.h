@@ -21,6 +21,9 @@ typedef struct RfStatus_s
 
 typedef enum RfTransceiverState_e
 {
+    // Receiver states
+    RX_RECV,
+
     // Transmit states
     TX_WAITING,
     TX_PREAMBLE1,
@@ -34,9 +37,6 @@ typedef enum RfTransceiverState_e
     TX_NULL1,
     TX_NULL2,
     TX_NULL3,
-
-    // Receiver states
-    RX_RECV,
 } RfTransceiverState_t;
 
 // 24 bytes mean we can send 16-bytes payload FLASH data (bootloader)
