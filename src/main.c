@@ -216,15 +216,22 @@ void EthernetTask()
 
 #endif
 
-void __attribute__((interrupt,no_auto_psv)) _AddressError(void)
+#define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
+WORD StkAddrLo;  // order matters
+WORD StkAddrHi;
+char TrapMsgBuf[24];
+
+void TRAP_ISR _AddressError(void)
+{
+    asm("mov #_StkAddrHi,w1\n\tpop [w1--]\n\tpop [w1++]\n\tpush [w1--]\n\tpush [w1++]");
+    // TODO: Write StkAddrLo & Hi to EEPROM
+    while(1);
+}
+void TRAP_ISR _StackError(void)
 {
     while(1);
 }
-void __attribute__((interrupt,no_auto_psv)) _StackError(void)
-{
-    while(1);
-}
-void __attribute__((interrupt,no_auto_psv)) _MathError(void)
+void TRAP_ISR _MathError(void)
 {
     while(1);
 }

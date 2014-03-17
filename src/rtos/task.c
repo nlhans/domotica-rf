@@ -31,7 +31,7 @@ const char* const RtosStateText[5] = {
 RtosTask_t RtosTaskIdleObj;
 
 
-volatile static UI08_t RtosTaskIdleStk[256];
+static UI08_t RtosTaskIdleStk[256];
 
 static RtosTask_t* RtosActiveTask;
 volatile UI08_t* RtosKernelStackPos;
@@ -206,11 +206,7 @@ UI16_t RtosTaskWaitForEvent(UI16_t mask)
 
 void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event)
 {
-    if (task == NULL)
-    {
-        //error
-    }
-    else
+    if (task != NULL)
     {
         task->eventStore |= event;
 

@@ -1,0 +1,5100 @@
+Disassembly Listing for mrf49xa_pic24b
+Generated From:
+/home/hans/Projects/Firmware/domoticaRf/targets/mrf49xa_pic24b/dist/default/production/mrf49xa_pic24b.production.elf
+Mar 17, 2014 12:33:52 PM
+
+---  /home/hans/Projects/Firmware/domoticaRf/targets/mrf49xa_pic24/context.s  ---------------------------
+                                                  1:     .section *,code
+                                                  2:     .global _RtosKernelContext
+                                                  3:     _RtosKernelContext:
+00242C  F80042     PUSH SR                        4:                     PUSH        SR                                                /* Save the SR used by the task.... */
+00242E  781F80     MOV W0, [W15++]                5:                     PUSH        W0                                                /* ....then disable interrupts. */
+002430  200200     MOV #0x20, W0                  6:                     MOV         #32, W0
+002432  880210     MOV W0, SR                     7:                     MOV         W0, SR
+002434  781F81     MOV W1, [W15++]                8:                     PUSH        W1                                                /* Save registers to the stack. */
+002436  BE9F82     MOV.D W2, [W15++]              9:                     PUSH.D      W2
+002438  BE9F84     MOV.D W4, [W15++]              10:                    PUSH.D      W4
+00243A  BE9F86     MOV.D W6, [W15++]              11:                    PUSH.D      W6
+00243C  BE9F88     MOV.D W8, [W15++]              12:                    PUSH.D      W8
+00243E  BE9F8A     MOV.D W10, [W15++]             13:                    PUSH.D      W10
+002440  BE9F8C     MOV.D W12, [W15++]             14:                    PUSH.D      W12
+002442  781F8E     MOV W14, [W15++]               15:                    PUSH        W14
+002444  F80036     PUSH RCOUNT                    16:                    PUSH        RCOUNT
+002446  F80032     PUSH TBLPAG                    17:                    PUSH        TBLPAG
+002448  F80044     PUSH CORCON                    18:                    PUSH        CORCON
+00244A  F80034     PUSH PSVPAG                    19:                    PUSH        PSVPAG
+                                                  20:    
+00244C  8073C0     MOV 0xE78, W0                  21:                    MOV         _RtosCriticalNesting, W0                /* Save the critical nesting counter for the task. */
+00244E  781F80     MOV W0, [W15++]                22:                    PUSH        W0
+002450  8873BF     MOV W15, 0xE76                 23:                    MOV         W15, _RtosKernelStackPos                /* Save the new top of stack into the TCB. */
+                                                  24:    
+002452  02187C     CALL 0x187C                    25:                    call         _RtosTaskChange
+                                                  26:    
+002456  8073BF     MOV 0xE76, W15                 27:                    MOV         _RtosKernelStackPos, W15                        /* Restore the stack pointer for the task. */
+002458  78004F     MOV [--W15], W0                28:                    POP          W0                                                        /* Restore the critical nesting counter for the task. */
+00245A  8873C0     MOV W0, 0xE78                  29:                    MOV          W0, _RtosCriticalNesting
+                                                  30:    
+00245C  F90034     POP PSVPAG                     31:                    POP          PSVPAG
+00245E  F90044     POP CORCON                     32:                    POP          CORCON
+002460  F90032     POP TBLPAG                     33:                    POP          TBLPAG
+002462  F90036     POP RCOUNT                     34:                    POP          RCOUNT                                                /* Restore the registers from the stack. */
+002464  78074F     MOV [--W15], W14               35:                    POP          W14
+002466  BE064F     MOV.D [--W15], W12             36:                    POP.D        W12
+002468  BE054F     MOV.D [--W15], W10             37:                    POP.D        W10
+00246A  BE044F     MOV.D [--W15], W8              38:                    POP.D        W8
+00246C  BE034F     MOV.D [--W15], W6              39:                    POP.D        W6
+00246E  BE024F     MOV.D [--W15], W4              40:                    POP.D        W4
+002470  BE014F     MOV.D [--W15], W2              41:                    POP.D        W2
+002472  BE004F     MOV.D [--W15], W0              42:                    POP.D        W0
+002474  F90042     POP SR                         43:                    POP          SR
+                                                  44:    
+002476  060000     RETURN                         45:                    return
+                                                  46:    
+                                                  47:    .section *,code
+                                                  48:    .global _RtosKernelStart
+                                                  49:    _RtosKernelStart:
+                                                  50:    
+002478  8073BF     MOV 0xE76, W15                 51:                    MOV                _RtosKernelStackPos, W15
+00247A  78004F     MOV [--W15], W0                52:                    POP                W0
+00247C  8873C0     MOV W0, 0xE78                  53:                    MOV                W0, _RtosCriticalNesting
+                                                  54:    
+00247E  F90034     POP PSVPAG                     55:                    POP                PSVPAG
+002480  F90044     POP CORCON                     56:                    POP                CORCON
+002482  F90032     POP TBLPAG                     57:                    POP                TBLPAG
+002484  F90036     POP RCOUNT                     58:                    POP                RCOUNT
+002486  78074F     MOV [--W15], W14               59:                    POP                W14
+002488  BE064F     MOV.D [--W15], W12             60:                    POP.D              W12
+00248A  BE054F     MOV.D [--W15], W10             61:                    POP.D              W10
+00248C  BE044F     MOV.D [--W15], W8              62:                    POP.D              W8
+00248E  BE034F     MOV.D [--W15], W6              63:                    POP.D              W6
+002490  BE024F     MOV.D [--W15], W4              64:                    POP.D              W4
+002492  BE014F     MOV.D [--W15], W2              65:                    POP.D              W2
+002494  BE004F     MOV.D [--W15], W0              66:                    POP.D              W0
+002496  F90042     POP SR                         67:                    POP                SR
+                                                  68:    
+002498  060000     RETURN                         69:                    return
+                                                  70:    
+                                                  71:            .end
+                                                  72:    
+---  /home/hans/Projects/Firmware/domoticaRf/src/utilities/ccbuf.c  -------------------------------------
+1:                 #include "utilities/ccbuf.h"
+2:                 
+3:                 
+4:                 void CCBufInit(CircBufDef_t* CCDef, UI08_t* bf, UI16_t size, UI08_t options)
+5:                 {
+000FA4  FA0008     LNK #0x8
+000FA6  780F00     MOV W0, [W14]
+000FA8  980711     MOV W1, [W14+2]
+000FAA  980722     MOV W2, [W14+4]
+000FAC  984763     MOV.B W3, [W14+6]
+6:                     CCDef->size = size;
+000FAE  78021E     MOV [W14], W4
+000FB0  9002AE     MOV [W14+4], W5
+000FB2  980215     MOV W5, [W4+2]
+7:                     CCDef->bf = bf;
+000FB4  78021E     MOV [W14], W4
+000FB6  90029E     MOV [W14+2], W5
+000FB8  780A05     MOV W5, [W4]
+8:                     CCBufReset(CCDef);
+000FBA  78001E     MOV [W14], W0
+000FBC  070002     RCALL CCBufReset
+9:                 }
+000FBE  FA8000     ULNK
+000FC0  060000     RETURN
+10:                
+11:                void CCBufReset(CircBufDef_t* CCDef)
+12:                {
+000FC2  FA0002     LNK #0x2
+000FC4  780F00     MOV W0, [W14]
+13:                    memset(CCDef->bf, 0, CCDef->size);
+000FC6  78021E     MOV [W14], W4
+000FC8  900294     MOV [W4+2], W5
+000FCA  78021E     MOV [W14], W4
+000FCC  780214     MOV [W4], W4
+000FCE  780105     MOV W5, W2
+000FD0  EB0080     CLR W1
+000FD2  780004     MOV W4, W0
+000FD4  07F984     RCALL _memset
+14:                
+15:                    CCDef->rdPt = CCDef->size - 1;
+000FD6  78021E     MOV [W14], W4
+000FD8  900214     MOV [W4+2], W4
+000FDA  E90284     DEC W4, W5
+000FDC  78021E     MOV [W14], W4
+000FDE  980235     MOV W5, [W4+6]
+16:                    CCDef->wrPt = 0;
+000FE0  78021E     MOV [W14], W4
+000FE2  EB0280     CLR W5
+000FE4  980225     MOV W5, [W4+4]
+17:                
+18:                    CCDef->faults = 0;
+000FE6  78029E     MOV [W14], W5
+000FE8  EB4200     CLR.B W4
+000FEA  984A94     MOV.B W4, [W5+9]
+19:                }
+000FEC  FA8000     ULNK
+000FEE  060000     RETURN
+20:                
+21:                UI08_t CCBufGetFaultStatus(CircBufDef_t* CCDef)
+22:                {
+000FF0  FA0002     LNK #0x2
+000FF2  780F00     MOV W0, [W14]
+23:                    return CCDef->faults;
+000FF4  78021E     MOV [W14], W4
+000FF6  904A14     MOV.B [W4+9], W4
+24:                }
+000FF8  784004     MOV.B W4, W0
+000FFA  FA8000     ULNK
+000FFC  060000     RETURN
+25:                
+26:                UI16_t CCBufCalcPt(CircBufDef_t* CCDef, UI16_t entry, I16_t move)
+27:                {
+000FFE  FA000A     LNK #0xA
+001000  980720     MOV W0, [W14+4]
+001002  980731     MOV W1, [W14+6]
+001004  980742     MOV W2, [W14+8]
+28:                    I32_t result = (I32_t)entry + (I32_t)move;
+001006  90023E     MOV [W14+6], W4
+001008  B82361     MUL.UU W4, #1, W6
+00100A  90024E     MOV [W14+8], W4
+00100C  DEA2CF     ASR W4, #15, W5
+00100E  431F04     ADD W6, W4, [W14++]
+001010  4B9705     ADDC W7, W5, [W14--]
+29:                
+30:                    if (result < 0) result += CCDef->size;
+001012  BE021E     MOV.D [W14], W4
+001014  520FE0     SUB W4, #0x0, [W15]
+001016  5A8FE0     SUBB W5, #0x0, [W15]
+001018  3D0005     BRA GE, 0x1024
+00101A  90022E     MOV [W14+4], W4
+00101C  900214     MOV [W4+2], W4
+00101E  200005     MOV #0x0, W5
+001020  420F1E     ADD W4, [W14], [W14]
+001022  4A975E     ADDC W5, [++W14], [W14--]
+31:                    if (result < 0) return CCBUF_CALC_ERROR_UNDER;
+001024  BE021E     MOV.D [W14], W4
+001026  520FE0     SUB W4, #0x0, [W15]
+001028  5A8FE0     SUBB W5, #0x0, [W15]
+00102A  3D0002     BRA GE, 0x1030
+00102C  25B004     MOV #0x5B00, W4
+00102E  370014     BRA 0x1058
+32:                
+33:                    if (result >= CCDef->size) result -= CCDef->size;
+001030  90022E     MOV [W14+4], W4
+001032  900214     MOV [W4+2], W4
+001034  200005     MOV #0x0, W5
+001036  520FBE     SUB W4, [W14++], [W15]
+001038  5A8FAE     SUBB W5, [W14--], [W15]
+00103A  3C0005     BRA GT, 0x1046
+00103C  90022E     MOV [W14+4], W4
+00103E  900214     MOV [W4+2], W4
+001040  200005     MOV #0x0, W5
+001042  121F1E     SUBR W4, [W14], [W14++]
+001044  1A971E     SUBBR W5, [W14], [W14--]
+34:                    if (result >= CCDef->size) return CCBUF_CALC_ERROR_OVER;
+001046  90022E     MOV [W14+4], W4
+001048  900214     MOV [W4+2], W4
+00104A  200005     MOV #0x0, W5
+00104C  520FBE     SUB W4, [W14++], [W15]
+00104E  5A8FAE     SUBB W5, [W14--], [W15]
+001050  3C0002     BRA GT, 0x1056
+001052  25C004     MOV #0x5C00, W4
+001054  370001     BRA 0x1058
+35:                
+36:                    return (UI16_t) result;
+001056  78021E     MOV [W14], W4
+37:                }
+001058  780004     MOV W4, W0
+00105A  FA8000     ULNK
+00105C  060000     RETURN
+38:                
+39:                bool_t CCBufCanWr(CircBufDef_t* CCDef)
+40:                {
+00105E  FA0002     LNK #0x2
+001060  780F00     MOV W0, [W14]
+41:                    if ((CCDef->faults & CCBUF_FLT_OVERFLOW) != 0) return FALSE;
+001062  78021E     MOV [W14], W4
+001064  904A14     MOV.B [W4+9], W4
+001066  FB8204     ZE W4, W4
+001068  620261     AND W4, #0x1, W4
+00106A  784204     MOV.B W4, W4
+00106C  524FE0     SUB.B W4, #0x0, [W15]
+00106E  320002     BRA Z, 0x1074
+001070  EB4200     CLR.B W4
+001072  37001C     BRA 0x10AC
+42:                    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return FALSE;
+001074  78021E     MOV [W14], W4
+001076  904A14     MOV.B [W4+9], W4
+001078  FB8204     ZE W4, W4
+00107A  620262     AND W4, #0x2, W4
+00107C  520FE0     SUB W4, #0x0, [W15]
+00107E  320002     BRA Z, 0x1084
+001080  EB4200     CLR.B W4
+001082  370014     BRA 0x10AC
+43:                    if (CCDef->wrPt > CCDef->size)
+001084  78021E     MOV [W14], W4
+001086  9002A4     MOV [W4+4], W5
+001088  78021E     MOV [W14], W4
+00108A  900214     MOV [W4+2], W4
+00108C  528F84     SUB W5, W4, [W15]
+00108E  360005     BRA LEU, 0x109A
+44:                    {
+45:                        CCDef->faults |= CCBUF_FLT_BF_ERR;
+001090  78021E     MOV [W14], W4
+001092  904A14     MOV.B [W4+9], W4
+001094  A01404     BSET.B W4, #1
+001096  78029E     MOV [W14], W5
+001098  984A94     MOV.B W4, [W5+9]
+46:                    }
+47:                
+48:                    if (CCDef->wrPt == CCDef->rdPt) return FALSE;
+00109A  78021E     MOV [W14], W4
+00109C  9002A4     MOV [W4+4], W5
+00109E  78021E     MOV [W14], W4
+0010A0  900234     MOV [W4+6], W4
+0010A2  528F84     SUB W5, W4, [W15]
+0010A4  3A0002     BRA NZ, 0x10AA
+0010A6  EB4200     CLR.B W4
+0010A8  370001     BRA 0x10AC
+49:                    else return TRUE;
+0010AA  B3C014     MOV #0x1, W4
+50:                }
+0010AC  784004     MOV.B W4, W0
+0010AE  FA8000     ULNK
+0010B0  060000     RETURN
+51:                
+52:                bool_t CCBufCanRd(CircBufDef_t* CCDef)
+53:                {
+0010B2  FA0002     LNK #0x2
+0010B4  780F00     MOV W0, [W14]
+54:                    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return FALSE;
+0010B6  78021E     MOV [W14], W4
+0010B8  904A14     MOV.B [W4+9], W4
+0010BA  FB8204     ZE W4, W4
+0010BC  620262     AND W4, #0x2, W4
+0010BE  520FE0     SUB W4, #0x0, [W15]
+0010C0  320002     BRA Z, 0x10C6
+0010C2  EB4200     CLR.B W4
+0010C4  370019     BRA 0x10F8
+55:                    if (CCDef->rdPt > CCDef->size)
+0010C6  78021E     MOV [W14], W4
+0010C8  9002B4     MOV [W4+6], W5
+0010CA  78021E     MOV [W14], W4
+0010CC  900214     MOV [W4+2], W4
+0010CE  528F84     SUB W5, W4, [W15]
+0010D0  360005     BRA LEU, 0x10DC
+56:                    {
+57:                        CCDef->faults |= CCBUF_FLT_BF_ERR;
+0010D2  78021E     MOV [W14], W4
+0010D4  904A14     MOV.B [W4+9], W4
+0010D6  A01404     BSET.B W4, #1
+0010D8  78029E     MOV [W14], W5
+0010DA  984A94     MOV.B W4, [W5+9]
+58:                    }
+59:                
+60:                    // If RD pt is done +1, is it at WR pt?
+61:                    // If that is the case, then the buffer is empty.
+62:                    if (CCBufCalcPt(CCDef, CCDef->rdPt, 1) == CCDef->wrPt) return FALSE;
+0010DC  78021E     MOV [W14], W4
+0010DE  900234     MOV [W4+6], W4
+0010E0  200012     MOV #0x1, W2
+0010E2  780084     MOV W4, W1
+0010E4  78001E     MOV [W14], W0
+0010E6  07FF8B     RCALL CCBufCalcPt
+0010E8  780200     MOV W0, W4
+0010EA  78029E     MOV [W14], W5
+0010EC  9002A5     MOV [W5+4], W5
+0010EE  520F85     SUB W4, W5, [W15]
+0010F0  3A0002     BRA NZ, 0x10F6
+0010F2  EB4200     CLR.B W4
+0010F4  370001     BRA 0x10F8
+63:                    else return TRUE;
+0010F6  B3C014     MOV #0x1, W4
+64:                }
+0010F8  784004     MOV.B W4, W0
+0010FA  FA8000     ULNK
+0010FC  060000     RETURN
+65:                
+66:                UI16_t CCBufRdByte(CircBufDef_t* CCDef)
+67:                {
+0010FE  FA0004     LNK #0x4
+001100  980710     MOV W0, [W14+2]
+68:                    if (CCBufCanRd(CCDef))
+001102  90001E     MOV [W14+2], W0
+001104  07FFD6     RCALL CCBufCanRd
+001106  784200     MOV.B W0, W4
+001108  524FE0     SUB.B W4, #0x0, [W15]
+00110A  320019     BRA Z, 0x113E
+69:                    {
+70:                        CCDef->rdPt = CCBufCalcPt(CCDef, CCDef->rdPt, 1);
+00110C  90021E     MOV [W14+2], W4
+00110E  900234     MOV [W4+6], W4
+001110  200012     MOV #0x1, W2
+001112  780084     MOV W4, W1
+001114  90001E     MOV [W14+2], W0
+001116  07FF73     RCALL CCBufCalcPt
+001118  780200     MOV W0, W4
+00111A  90029E     MOV [W14+2], W5
+00111C  9802B4     MOV W4, [W5+6]
+71:                        UI08_t res = CCDef->bf[CCDef->rdPt];
+00111E  90021E     MOV [W14+2], W4
+001120  780294     MOV [W4], W5
+001122  90021E     MOV [W14+2], W4
+001124  900234     MOV [W4+6], W4
+001126  428204     ADD W5, W4, W4
+001128  784F14     MOV.B [W4], [W14]
+72:                        CCDef->bf[CCDef->rdPt] = 0;
+00112A  90021E     MOV [W14+2], W4
+00112C  780294     MOV [W4], W5
+00112E  90021E     MOV [W14+2], W4
+001130  900234     MOV [W4+6], W4
+001132  428284     ADD W5, W4, W5
+001134  EB4200     CLR.B W4
+001136  784A84     MOV.B W4, [W5]
+73:                        return res;
+001138  78429E     MOV.B [W14], W5
+00113A  FB8205     ZE W5, W4
+00113C  370003     BRA 0x1144
+74:                    }
+75:                    else
+76:                    {
+77:                        printf("[CCBuf] Read error\r\n");
+00113E  28C920     MOV #0x8C92, W0
+001140  07F8E3     RCALL _puts
+78:                        return CCBUF_READ_ERROR;
+001142  25A004     MOV #0x5A00, W4
+79:                    }
+80:                }
+001144  780004     MOV W4, W0
+001146  FA8000     ULNK
+001148  060000     RETURN
+81:                
+82:                UI16_t CCBufPeekByte(CircBufDef_t* CCDef)
+83:                {
+00114A  FA0004     LNK #0x4
+00114C  781F88     MOV W8, [W15++]
+00114E  980710     MOV W0, [W14+2]
+84:                    if (CCBufCanRd(CCDef))
+001150  90001E     MOV [W14+2], W0
+001152  07FFAF     RCALL CCBufCanRd
+001154  784200     MOV.B W0, W4
+001156  524FE0     SUB.B W4, #0x0, [W15]
+001158  32000E     BRA Z, 0x1176
+85:                    {
+86:                        UI08_t res = CCDef->bf[CCBufCalcPt(CCDef, CCDef->rdPt, 1)];
+00115A  90021E     MOV [W14+2], W4
+00115C  780414     MOV [W4], W8
+00115E  90021E     MOV [W14+2], W4
+001160  900234     MOV [W4+6], W4
+001162  200012     MOV #0x1, W2
+001164  780084     MOV W4, W1
+001166  90001E     MOV [W14+2], W0
+001168  07FF4A     RCALL CCBufCalcPt
+00116A  780200     MOV W0, W4
+00116C  440204     ADD W8, W4, W4
+00116E  784F14     MOV.B [W4], [W14]
+87:                        return res;
+001170  78429E     MOV.B [W14], W5
+001172  FB8205     ZE W5, W4
+001174  370003     BRA 0x117C
+88:                    }
+89:                    else
+90:                    {
+91:                        printf("[CCBuf] Read error\r\n");
+001176  28C920     MOV #0x8C92, W0
+001178  07F8C7     RCALL _puts
+92:                        return CCBUF_READ_ERROR;
+00117A  25A004     MOV #0x5A00, W4
+93:                    }
+94:                }
+00117C  780004     MOV W4, W0
+00117E  78044F     MOV [--W15], W8
+001180  FA8000     ULNK
+001182  060000     RETURN
+95:                
+96:                UI16_t CCBufRd(CircBufDef_t* CCDef, UI08_t* bf, UI16_t max)
+97:                {
+001184  FA0008     LNK #0x8
+001186  781F88     MOV W8, [W15++]
+001188  980710     MOV W0, [W14+2]
+00118A  980721     MOV W1, [W14+4]
+00118C  980732     MOV W2, [W14+6]
+98:                    UI16_t read = 0;
+00118E  EB0200     CLR W4
+001190  780F04     MOV W4, [W14]
+99:                
+100:                   while (CCBufCanRd(CCDef) && read < max)
+001192  370008     BRA 0x11A4
+0011A4  90001E     MOV [W14+2], W0
+0011A6  07FF85     RCALL CCBufCanRd
+0011A8  784200     MOV.B W0, W4
+0011AA  524FE0     SUB.B W4, #0x0, [W15]
+0011AC  320004     BRA Z, 0x11B6
+0011AE  90023E     MOV [W14+6], W4
+0011B0  78029E     MOV [W14], W5
+0011B2  528F84     SUB W5, W4, [W15]
+0011B4  39FFEF     BRA NC, 0x1194
+101:                   {
+102:                       bf[read] = (UI08_t) CCBufRdByte(CCDef);
+001194  90022E     MOV [W14+4], W4
+001196  42041E     ADD W4, [W14], W8
+001198  90001E     MOV [W14+2], W0
+00119A  07FFB1     RCALL CCBufRdByte
+00119C  780200     MOV W0, W4
+00119E  784204     MOV.B W4, W4
+0011A0  784C04     MOV.B W4, [W8]
+103:                       read++;
+0011A2  E80F1E     INC [W14], [W14]
+104:                   }
+105:               
+106:                   return read;
+0011B6  78021E     MOV [W14], W4
+107:               }
+0011B8  780004     MOV W4, W0
+0011BA  78044F     MOV [--W15], W8
+0011BC  FA8000     ULNK
+0011BE  060000     RETURN
+108:               
+109:               bool_t CCBufWrByte(CircBufDef_t* CCDef, UI08_t data)
+110:               {
+0011C0  FA0004     LNK #0x4
+0011C2  780F00     MOV W0, [W14]
+0011C4  984721     MOV.B W1, [W14+2]
+111:                   if (CCBufCanWr(CCDef))
+0011C6  78001E     MOV [W14], W0
+0011C8  07FF4A     RCALL CCBufCanWr
+0011CA  784200     MOV.B W0, W4
+0011CC  524FE0     SUB.B W4, #0x0, [W15]
+0011CE  320012     BRA Z, 0x11F4
+112:                   {
+113:                       CCDef->bf[CCDef->wrPt] = data;
+0011D0  78021E     MOV [W14], W4
+0011D2  780294     MOV [W4], W5
+0011D4  78021E     MOV [W14], W4
+0011D6  900224     MOV [W4+4], W4
+0011D8  428204     ADD W5, W4, W4
+0011DA  9042AE     MOV.B [W14+2], W5
+0011DC  784A05     MOV.B W5, [W4]
+114:                       CCDef->wrPt = CCBufCalcPt(CCDef, CCDef->wrPt, 1);
+0011DE  78021E     MOV [W14], W4
+0011E0  900224     MOV [W4+4], W4
+0011E2  200012     MOV #0x1, W2
+0011E4  780084     MOV W4, W1
+0011E6  78001E     MOV [W14], W0
+0011E8  07FF0A     RCALL CCBufCalcPt
+0011EA  780200     MOV W0, W4
+0011EC  78029E     MOV [W14], W5
+0011EE  9802A4     MOV W4, [W5+4]
+115:               
+116:                       return TRUE;
+0011F0  B3C014     MOV #0x1, W4
+0011F2  37000C     BRA 0x120C
+117:                   }
+118:                   else if ((CCDef->options & CCDEF_OPT_ALLOW_OVERFLOW) == 0)
+0011F4  78021E     MOV [W14], W4
+0011F6  904A04     MOV.B [W4+8], W4
+0011F8  FB8204     ZE W4, W4
+0011FA  620261     AND W4, #0x1, W4
+0011FC  520FE0     SUB W4, #0x0, [W15]
+0011FE  3A0005     BRA NZ, 0x120A
+119:                   {
+120:                       CCDef->faults |= CCBUF_FLT_OVERFLOW;
+001200  78021E     MOV [W14], W4
+001202  904A14     MOV.B [W4+9], W4
+001204  A00404     BSET.B W4, #0
+001206  78029E     MOV [W14], W5
+001208  984A94     MOV.B W4, [W5+9]
+121:                   }
+122:                   return FALSE;
+00120A  EB4200     CLR.B W4
+123:               
+124:               }
+00120C  784004     MOV.B W4, W0
+00120E  FA8000     ULNK
+001210  060000     RETURN
+125:               
+126:               bool_t CCBufWr(CircBufDef_t* CCDef, UI08_t* bf, UI16_t count)
+127:               {
+001212  FA000A     LNK #0xA
+001214  980720     MOV W0, [W14+4]
+001216  980731     MOV W1, [W14+6]
+001218  980742     MOV W2, [W14+8]
+128:                   bool_t result = TRUE;
+00121A  B3C014     MOV #0x1, W4
+00121C  784F04     MOV.B W4, [W14]
+129:                   UI16_t index = 0;
+00121E  EB0200     CLR W4
+001220  980714     MOV W4, [W14+2]
+130:               
+131:                   while (result && index < count)
+001222  37000C     BRA 0x123C
+00123C  78421E     MOV.B [W14], W4
+00123E  524FE0     SUB.B W4, #0x0, [W15]
+001240  320004     BRA Z, 0x124A
+001242  90029E     MOV [W14+2], W5
+001244  90024E     MOV [W14+8], W4
+001246  528F84     SUB W5, W4, [W15]
+001248  39FFED     BRA NC, 0x1224
+132:                   {
+133:                       result &= CCBufWrByte(CCDef, bf[index]);
+001224  9002BE     MOV [W14+6], W5
+001226  90021E     MOV [W14+2], W4
+001228  428204     ADD W5, W4, W4
+00122A  784214     MOV.B [W4], W4
+00122C  784084     MOV.B W4, W1
+00122E  90002E     MOV [W14+4], W0
+001230  07FFC7     RCALL CCBufWrByte
+001232  784200     MOV.B W0, W4
+001234  624F1E     AND.B W4, [W14], [W14]
+134:                       index++;
+001236  90021E     MOV [W14+2], W4
+001238  E80204     INC W4, W4
+00123A  980714     MOV W4, [W14+2]
+135:                   }
+136:               
+137:                   return result;
+00124A  78421E     MOV.B [W14], W4
+138:               }
+00124C  784004     MOV.B W4, W0
+00124E  FA8000     ULNK
+001250  060000     RETURN
+139:               
+140:               UI16_t CCBufGetRdCount(CircBufDef_t* CCDef)
+141:               {
+001252  FA0004     LNK #0x4
+001254  980710     MOV W0, [W14+2]
+142:                   UI16_t distance = CCDef->wrPt - CCDef->rdPt;
+001256  90021E     MOV [W14+2], W4
+001258  9002A4     MOV [W4+4], W5
+00125A  90021E     MOV [W14+2], W4
+00125C  900234     MOV [W4+6], W4
+00125E  528F04     SUB W5, W4, [W14]
+143:                   if (CCDef->rdPt > CCDef->wrPt)
+001260  90021E     MOV [W14+2], W4
+001262  9002B4     MOV [W4+6], W5
+001264  90021E     MOV [W14+2], W4
+001266  900224     MOV [W4+4], W4
+001268  528F84     SUB W5, W4, [W15]
+00126A  360003     BRA LEU, 0x1272
+144:                   {
+145:                       distance += CCDef->size;
+00126C  90021E     MOV [W14+2], W4
+00126E  900214     MOV [W4+2], W4
+001270  420F1E     ADD W4, [W14], [W14]
+146:                   }
+147:               
+148:                   return distance;
+001272  78021E     MOV [W14], W4
+149:               }
+001274  780004     MOV W4, W0
+001276  FA8000     ULNK
+001278  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/timer.c  -----------------------------------------------
+1:                 #include "rtos/timer.h"
+2:                 #include "rtos/task.h"
+3:                 
+4:                 UI08_t rtosTimerChainStarted = 0;
+5:                 RtosTimer_t* rtosTimerChain;
+6:                 
+7:                 void RtosTimerCreate(RtosTimer_t* tObj, UI16_t inTime, TimerHandler_t handler)
+8:                 {
+0021D0  FA0008     LNK #0x8
+0021D2  980710     MOV W0, [W14+2]
+0021D4  980721     MOV W1, [W14+4]
+0021D6  980732     MOV W2, [W14+6]
+9:                     if (rtosTimerChainStarted == 0)
+0021D8  20F6C4     MOV #0xF6C, W4
+0021DA  784214     MOV.B [W4], W4
+0021DC  524FE0     SUB.B W4, #0x0, [W15]
+0021DE  3A0006     BRA NZ, 0x21EC
+10:                    {
+11:                        rtosTimerChain = tObj;
+0021E0  90001E     MOV [W14+2], W0
+0021E2  887B70     MOV W0, rtosTimerChain
+12:                        rtosTimerChainStarted = 1;
+0021E4  B3C014     MOV #0x1, W4
+0021E6  784004     MOV.B W4, W0
+0021E8  B7EF6C     MOV.B WREG, rtosTimerChainStarted
+0021EA  37000D     BRA 0x2206
+13:                    }
+14:                    else
+15:                    {
+16:                        RtosTimer_t* t;
+17:                        for(t = rtosTimerChain; t->p != NULL; t = t->p);
+0021EC  807B74     MOV rtosTimerChain, W4
+0021EE  780F04     MOV W4, [W14]
+0021F0  370003     BRA 0x21F8
+0021F2  78021E     MOV [W14], W4
+0021F4  9002F4     MOV [W4+14], W5
+0021F6  780F05     MOV W5, [W14]
+0021F8  78021E     MOV [W14], W4
+0021FA  900274     MOV [W4+14], W4
+0021FC  520FE0     SUB W4, #0x0, [W15]
+0021FE  3AFFF9     BRA NZ, 0x21F2
+18:                        t->p = tObj;
+002200  78021E     MOV [W14], W4
+002202  90001E     MOV [W14+2], W0
+002204  980270     MOV W0, [W4+14]
+19:                
+20:                    }
+21:                
+22:                    tObj->handler = handler;
+002206  90021E     MOV [W14+2], W4
+002208  9002BE     MOV [W14+6], W5
+00220A  780A05     MOV W5, [W4]
+23:                    RtosTimerRearm(tObj, inTime);
+00220C  9000AE     MOV [W14+4], W1
+00220E  90001E     MOV [W14+2], W0
+002210  070002     RCALL RtosTimerRearm
+24:                }
+002212  FA8000     ULNK
+002214  060000     RETURN
+25:                
+26:                void RtosTimerRearm(RtosTimer_t* tObj, UI16_t inTime)
+27:                {
+002216  FA0004     LNK #0x4
+002218  780F00     MOV W0, [W14]
+00221A  980711     MOV W1, [W14+2]
+28:                    tObj->lastRun = RtosTimestamp;
+00221C  807B44     MOV RtosTimestamp, W4
+00221E  807B55     MOV 0xF6A, W5
+002220  78031E     MOV [W14], W6
+002222  980314     MOV W4, [W6+2]
+002224  980325     MOV W5, [W6+4]
+29:                    tObj->nextRun = RtosTimestamp + inTime;
+002226  90021E     MOV [W14+2], W4
+002228  B82361     MUL.UU W4, #1, W6
+00222A  807B44     MOV RtosTimestamp, W4
+00222C  807B55     MOV 0xF6A, W5
+00222E  420206     ADD W4, W6, W4
+002230  4A8287     ADDC W5, W7, W5
+002232  78031E     MOV [W14], W6
+002234  980334     MOV W4, [W6+6]
+002236  980345     MOV W5, [W6+8]
+30:                    tObj->needsRunning = 1;
+002238  78029E     MOV [W14], W5
+00223A  B3C014     MOV #0x1, W4
+00223C  984AC4     MOV.B W4, [W5+12]
+31:                }
+00223E  FA8000     ULNK
+002240  060000     RETURN
+32:                
+33:                void RtosTimerTick(void)
+34:                {
+002242  FA0002     LNK #0x2
+35:                    RtosTimer_t* t;
+36:                    if (rtosTimerChainStarted == 0) return;
+002244  20F6C4     MOV #0xF6C, W4
+002246  784214     MOV.B [W4], W4
+002248  524FE0     SUB.B W4, #0x0, [W15]
+00224A  32001C     BRA Z, 0x2284
+002284  000000     NOP
+002286  370001     BRA 0x228A
+37:                    for(t = rtosTimerChain; ; t = t->p)
+00224C  807B74     MOV rtosTimerChain, W4
+00224E  780F04     MOV W4, [W14]
+00227C  78021E     MOV [W14], W4
+00227E  9002F4     MOV [W4+14], W5
+002280  780F05     MOV W5, [W14]
+38:                    {
+39:                        if (t->needsRunning == 1 && RtosTimestamp >= t->nextRun)
+002250  78021E     MOV [W14], W4
+002252  904A44     MOV.B [W4+12], W4
+002254  524FE1     SUB.B W4, #0x1, [W15]
+002256  3A000E     BRA NZ, 0x2274
+002258  78021E     MOV [W14], W4
+00225A  900334     MOV [W4+6], W6
+00225C  9003C4     MOV [W4+8], W7
+00225E  807B44     MOV RtosTimestamp, W4
+002260  807B55     MOV 0xF6A, W5
+002262  530F84     SUB W6, W4, [W15]
+002264  5B8F85     SUBB W7, W5, [W15]
+002266  3E0006     BRA GTU, 0x2274
+40:                        {
+41:                            t->needsRunning = 0;
+002268  78029E     MOV [W14], W5
+00226A  EB4200     CLR.B W4
+00226C  984AC4     MOV.B W4, [W5+12]
+42:                            t->handler();
+00226E  78021E     MOV [W14], W4
+002270  780214     MOV [W4], W4
+002272  010004     CALL W4
+43:                        }
+44:                        if (t->p == NULL) break;
+002274  78021E     MOV [W14], W4
+002276  900274     MOV [W4+14], W4
+002278  520FE0     SUB W4, #0x0, [W15]
+00227A  320006     BRA Z, 0x2288
+002288  000000     NOP
+45:                    }
+002282  37FFE6     BRA 0x2250
+46:                }
+00228A  FA8000     ULNK
+00228C  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/rtos/task.c  -------------------------------------------
+1:                 #include "stddefs.h"
+2:                 #include "rtos/task.h"
+3:                 #include "rtos/timer.h"
+4:                 
+5:                 // TODO: Create interrupt handlers
+6:                 // All interrupts are currently pushed on the application's task stack. 
+7:                 // This means that if any interrupt is received, even the idle stack must
+8:                 // be capable of supporting the required stack depth. Switching back to the OS
+9:                 // stack (main()) would be best, but will require the interrupt handlers to run
+10:                // via the operating system.
+11:                
+12:                // TODO: Create mailboxes/IPC in addition to events.
+13:                // Tasks should be able to create a small mailbox (e.g. 64 bytes of RAM) and
+14:                // wait for messages, before contiuning their work. This would not only be
+15:                // possible via own IPC implenentation and (abuse of) event handlers
+16:                
+17:                RtosTime_t RtosTimestamp = 0;
+18:                
+19:                void RtosKernelRestoreTask(RtosTask_t* task);
+20:                void RtosKernelStoreTask(RtosTask_t* task);
+21:                #ifdef RTOS_DEBUG
+22:                const char* const RtosStateText[5] = {
+23:                    "SUSPENDED",
+24:                    "RUNNING",
+25:                    "WAIT FOR TIME (%lu/%lu)",
+26:                    "WAIT FOR SIGNAL",
+27:                    "READY"
+28:                };
+29:                #endif
+30:                
+31:                RtosTask_t RtosTaskIdleObj;
+32:                
+33:                
+34:                static UI08_t RtosTaskIdleStk[256];
+35:                
+36:                static RtosTask_t* RtosActiveTask;
+37:                volatile UI08_t* RtosKernelStackPos;
+38:                volatile UI16_t RtosCriticalNesting;
+39:                
+40:                
+41:                /* Idle task */
+42:                void RtosTaskIdleFnc()
+43:                {
+001792  FA0000     LNK #0x0
+44:                    while(1)
+45:                    {
+46:                        RtosTimerTick();
+001794  070556     RCALL RtosTimerTick
+47:                        //asm volatile("PWRSAV #1");
+48:                    }
+001796  37FFFE     BRA 0x1794
+49:                }
+50:                
+51:                /* Initialize task kernel */
+52:                void RtosTaskInit()
+53:                {
+001798  FA0000     LNK #0x0
+54:                    RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, (UI08_t*)RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
+00179A  201005     MOV #0x100, W5
+00179C  20D744     MOV #0xD74, W4
+00179E  EB4180     CLR.B W3
+0017A0  217922     MOV #0x1792, W2
+0017A2  28C261     MOV #0x8C26, W1
+0017A4  20D500     MOV #0xD50, W0
+0017A6  070004     RCALL RtosTaskCreate
+55:                    RtosActiveTask = &RtosTaskIdleObj;
+0017A8  20D504     MOV #0xD50, W4
+0017AA  8873A4     MOV W4, RtosActiveTask
+56:                }
+0017AC  FA8000     ULNK
+0017AE  060000     RETURN
+57:                
+58:                /* Initialize task object. */
+59:                void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priority, UI08_t* stack, UI16_t stackSize)
+60:                {
+0017B0  FA000C     LNK #0xC
+0017B2  780F00     MOV W0, [W14]
+0017B4  980711     MOV W1, [W14+2]
+0017B6  980722     MOV W2, [W14+4]
+0017B8  984763     MOV.B W3, [W14+6]
+0017BA  980744     MOV W4, [W14+8]
+0017BC  980755     MOV W5, [W14+10]
+61:                    if (task == &RtosTaskIdleObj)
+0017BE  20D504     MOV #0xD50, W4
+0017C0  78029E     MOV [W14], W5
+0017C2  528F84     SUB W5, W4, [W15]
+0017C4  3A0004     BRA NZ, 0x17CE
+62:                    {
+63:                        // Initialize linked-list for first element.
+64:                        task->list = NULL;
+0017C6  78021E     MOV [W14], W4
+0017C8  EB0280     CLR W5
+0017CA  780A05     MOV W5, [W4]
+0017CC  370005     BRA 0x17D8
+65:                    }
+66:                    else
+67:                    {
+68:                        // Initialize linked-list for next element
+69:                        task->list = RtosTaskIdleObj.list;
+0017CE  806A85     MOV RtosTaskIdleObj, W5
+0017D0  78021E     MOV [W14], W4
+0017D2  780A05     MOV W5, [W4]
+70:                        RtosTaskIdleObj.list = (struct RtosTask_t*) task;
+0017D4  78021E     MOV [W14], W4
+0017D6  886A84     MOV W4, RtosTaskIdleObj
+71:                    }
+72:                
+73:                #ifdef RTOS_DEBUG
+74:                    task->name = name;
+0017D8  78021E     MOV [W14], W4
+0017DA  90029E     MOV [W14+2], W5
+0017DC  981215     MOV W5, [W4+34]
+75:                    task->stackMaxUsage = 0;
+0017DE  78021E     MOV [W14], W4
+0017E0  EB0280     CLR W5
+0017E2  981205     MOV W5, [W4+32]
+76:                    task->stackUsage = 0;
+0017E4  78021E     MOV [W14], W4
+0017E6  EB0280     CLR W5
+0017E8  980A75     MOV W5, [W4+30]
+77:                    task->timeRan = 0;
+0017EA  78031E     MOV [W14], W6
+0017EC  B82260     MUL.UU W4, #0, W4
+0017EE  980B44     MOV W4, [W6+24]
+0017F0  980B55     MOV W5, [W6+26]
+78:                    task->lastRun = 0;
+0017F2  78031E     MOV [W14], W6
+0017F4  B82260     MUL.UU W4, #0, W4
+0017F6  980B24     MOV W4, [W6+20]
+0017F8  980B35     MOV W5, [W6+22]
+79:                    task->stackSize = stackSize;
+0017FA  78021E     MOV [W14], W4
+0017FC  9002DE     MOV [W14+10], W5
+0017FE  980A65     MOV W5, [W4+28]
+80:                
+81:                    // Fill stack with test pattern so we chan stack-growth
+82:                    memset(stack, 0x55, stackSize);
+001800  90015E     MOV [W14+10], W2
+001802  200551     MOV #0x55, W1
+001804  90004E     MOV [W14+8], W0
+001806  07F56B     RCALL _memset
+83:                #endif
+84:                    task->method = function;
+001808  78021E     MOV [W14], W4
+00180A  9002AE     MOV [W14+4], W5
+00180C  980215     MOV W5, [W4+2]
+85:                    task->nextRun = 0;
+00180E  78031E     MOV [W14], W6
+001810  B82260     MUL.UU W4, #0, W4
+001812  980364     MOV W4, [W6+12]
+001814  980375     MOV W5, [W6+14]
+86:                    task->priority = priority;
+001816  78021E     MOV [W14], W4
+001818  9042EE     MOV.B [W14+6], W5
+00181A  984A05     MOV.B W5, [W4+8]
+87:                    task->stack = stack;
+00181C  78021E     MOV [W14], W4
+00181E  9002CE     MOV [W14+8], W5
+001820  980225     MOV W5, [W4+4]
+88:                    task->state = TASK_STATE_READY;
+001822  78021E     MOV [W14], W4
+001824  200045     MOV #0x4, W5
+001826  980255     MOV W5, [W4+10]
+89:                
+90:                    RtosKernelPortInitStack(task);
+001828  78001E     MOV [W14], W0
+00182A  07058B     RCALL RtosKernelPortInitStack
+91:                
+92:                }
+00182C  FA8000     ULNK
+00182E  060000     RETURN
+93:                
+94:                /* Start task kernel */
+95:                void RtosTaskRun()
+96:                {
+001830  FA0000     LNK #0x0
+97:                    if (RtosTaskIdleObj.list == NULL)
+001832  806A84     MOV RtosTaskIdleObj, W4
+001834  520FE0     SUB W4, #0x0, [W15]
+001836  3A0003     BRA NZ, 0x183E
+98:                        RtosKernelRestoreTask(&RtosTaskIdleObj);
+001838  20D500     MOV #0xD50, W0
+00183A  070059     RCALL RtosKernelRestoreTask
+00183C  370003     BRA 0x1844
+99:                    else
+100:                       RtosKernelRestoreTask((RtosTask_t*)RtosTaskIdleObj.list);
+00183E  806A84     MOV RtosTaskIdleObj, W4
+001840  780004     MOV W4, W0
+001842  070055     RCALL RtosKernelRestoreTask
+101:                   
+102:                   RtosKernelPortTimerStart();
+001844  070599     RCALL RtosKernelPortTimerStart
+103:                   RtosKernelContextStart();
+001846  0705BE     RCALL RtosKernelContextStart
+104:               }
+001848  FA8000     ULNK
+00184A  060000     RETURN
+105:               
+106:               /* Insert a delay inside a testk. Enforces context switch, too. */
+107:               void RtosTaskDelay(RtosTime_t time)
+108:               {
+00184C  FA0004     LNK #0x4
+00184E  BE8F00     MOV.D W0, [W14]
+109:                   RtosActiveTask->nextRun = RtosTimestamp + time;
+001850  8073A6     MOV RtosActiveTask, W6
+001852  807B44     MOV RtosTimestamp, W4
+001854  807B55     MOV 0xF6A, W5
+001856  42013E     ADD W4, [W14++], W2
+001858  4A81AE     ADDC W5, [W14--], W3
+00185A  BE0202     MOV.D W2, W4
+00185C  980364     MOV W4, [W6+12]
+00185E  980375     MOV W5, [W6+14]
+110:                   RtosActiveTask->state = TASK_STATE_DELAY;
+001860  8073A4     MOV RtosActiveTask, W4
+001862  200025     MOV #0x2, W5
+001864  980255     MOV W5, [W4+10]
+111:                   
+112:                   RtosKernelContextSuspend();
+001866  0705B3     RCALL RtosKernelContextSuspend
+113:               }
+001868  FA8000     ULNK
+00186A  060000     RETURN
+114:               
+115:               /* Enforces a task to be run ASAP. Only works when it's set for time delay. */
+116:               void RtosTaskWake(RtosTask_t* task)
+117:               {
+00186C  FA0002     LNK #0x2
+00186E  780F00     MOV W0, [W14]
+118:                   RtosActiveTask->nextRun = 0;
+001870  8073A6     MOV RtosActiveTask, W6
+001872  B82260     MUL.UU W4, #0, W4
+001874  980364     MOV W4, [W6+12]
+001876  980375     MOV W5, [W6+14]
+119:               }
+001878  FA8000     ULNK
+00187A  060000     RETURN
+120:               
+121:               /* Change context. */
+122:               void RtosTaskChange()
+123:               {
+00187C  FA0004     LNK #0x4
+124:                   RtosKernelStoreTask(RtosActiveTask);
+00187E  8073A4     MOV RtosActiveTask, W4
+001880  780004     MOV W4, W0
+001882  070041     RCALL RtosKernelStoreTask
+125:               
+126:                   RtosTimestamp ++;
+001884  807B44     MOV RtosTimestamp, W4
+001886  807B55     MOV 0xF6A, W5
+001888  420261     ADD W4, #0x1, W4
+00188A  4A82E0     ADDC W5, #0x0, W5
+00188C  887B44     MOV W4, RtosTimestamp
+00188E  887B55     MOV W5, 0xF6A
+127:               
+128:                   RtosTask_t* next = &RtosTaskIdleObj;
+001890  20D504     MOV #0xD50, W4
+001892  780F04     MOV W4, [W14]
+129:                   RtosTask_t* t = &RtosTaskIdleObj;
+001894  20D504     MOV #0xD50, W4
+001896  980714     MOV W4, [W14+2]
+130:                   while (t != NULL)
+001898  370023     BRA 0x18E0
+0018E0  90021E     MOV [W14+2], W4
+0018E2  520FE0     SUB W4, #0x0, [W15]
+0018E4  3AFFDA     BRA NZ, 0x189A
+131:                   {
+132:                       switch(t->state)
+00189A  90021E     MOV [W14+2], W4
+00189C  900254     MOV [W4+10], W4
+00189E  520FE3     SUB W4, #0x3, [W15]
+0018A0  320015     BRA Z, 0x18CC
+0018A2  520FE4     SUB W4, #0x4, [W15]
+0018A4  32000A     BRA Z, 0x18BA
+0018A6  520FE2     SUB W4, #0x2, [W15]
+0018A8  3A0013     BRA NZ, 0x18D0
+133:                       {
+134:                           case TASK_STATE_DELAY:
+135:                               if (t->nextRun > RtosTimestamp)
+0018AA  90021E     MOV [W14+2], W4
+0018AC  900364     MOV [W4+12], W6
+0018AE  9003F4     MOV [W4+14], W7
+0018B0  807B44     MOV RtosTimestamp, W4
+0018B2  807B55     MOV 0xF6A, W5
+0018B4  530F84     SUB W6, W4, [W15]
+0018B6  5B8F85     SUBB W7, W5, [W15]
+0018B8  3E000D     BRA GTU, 0x18D4
+136:                               {
+137:                                   break;
+0018D4  000000     NOP
+0018D6  370001     BRA 0x18DA
+138:                               }
+139:                           case TASK_STATE_READY:
+140:                               if (t->priority >= next->priority)
+0018BA  90021E     MOV [W14+2], W4
+0018BC  904A84     MOV.B [W4+8], W5
+0018BE  78021E     MOV [W14], W4
+0018C0  904A04     MOV.B [W4+8], W4
+0018C2  52CF84     SUB.B W5, W4, [W15]
+0018C4  390009     BRA NC, 0x18D8
+141:                                   next = t;
+0018C6  90021E     MOV [W14+2], W4
+0018C8  780F04     MOV W4, [W14]
+142:                               break;
+0018CA  370007     BRA 0x18DA
+0018D8  000000     NOP
+143:               
+144:               #ifdef RTOS_EVENTS
+145:                           case TASK_STATE_EVENT:
+146:                               // It's waiting forever.
+147:                               // TODO: Add timeouts.
+148:                               break;
+0018CC  000000     NOP
+0018CE  370005     BRA 0x18DA
+149:               #endif
+150:                           default:
+151:                               //t->state = TASK_STATE_SUSPENDED;
+152:                               break;
+0018D0  000000     NOP
+0018D2  370003     BRA 0x18DA
+153:                       }
+154:                       t = (RtosTask_t*)t->list;
+0018DA  90021E     MOV [W14+2], W4
+0018DC  780214     MOV [W4], W4
+0018DE  980714     MOV W4, [W14+2]
+155:                   }
+156:               
+157:                   RtosKernelRestoreTask(next);
+0018E6  78001E     MOV [W14], W0
+0018E8  070002     RCALL RtosKernelRestoreTask
+158:               }
+0018EA  FA8000     ULNK
+0018EC  060000     RETURN
+159:               
+160:               /* Restore task context. */
+161:               void RtosKernelRestoreTask(RtosTask_t* task)
+162:               {
+0018EE  FA0002     LNK #0x2
+0018F0  780F00     MOV W0, [W14]
+163:                   RtosActiveTask = task;
+0018F2  78021E     MOV [W14], W4
+0018F4  8873A4     MOV W4, RtosActiveTask
+164:                   RtosKernelStackPos = task->stackPosition;
+0018F6  78021E     MOV [W14], W4
+0018F8  900234     MOV [W4+6], W4
+0018FA  8873B4     MOV W4, RtosKernelStackPos
+165:                   //SPLIM = (UI16_t) (task->stack + task->stackSize) - 1;
+166:                   task->state = TASK_STATE_RUNNING;
+0018FC  78021E     MOV [W14], W4
+0018FE  200015     MOV #0x1, W5
+001900  980255     MOV W5, [W4+10]
+167:               }
+001902  FA8000     ULNK
+001904  060000     RETURN
+168:               
+169:               /* Store task context. */
+170:               void RtosKernelStoreTask(RtosTask_t* task)
+171:               {
+001906  FA0002     LNK #0x2
+001908  780F00     MOV W0, [W14]
+172:                   task->stackPosition = (UI08_t*) RtosKernelStackPos;
+00190A  8073B5     MOV RtosKernelStackPos, W5
+00190C  78021E     MOV [W14], W4
+00190E  980235     MOV W5, [W4+6]
+173:                   if (task->state == TASK_STATE_RUNNING)
+001910  78021E     MOV [W14], W4
+001912  900254     MOV [W4+10], W4
+001914  520FE1     SUB W4, #0x1, [W15]
+001916  3A0003     BRA NZ, 0x191E
+174:                   {
+175:                       task->state = TASK_STATE_READY;
+001918  78021E     MOV [W14], W4
+00191A  200045     MOV #0x4, W5
+00191C  980255     MOV W5, [W4+10]
+176:                   }
+177:               #ifdef RTOS_DEBUG
+178:                   task->lastRun = RtosTimestamp;
+00191E  807B44     MOV RtosTimestamp, W4
+001920  807B55     MOV 0xF6A, W5
+001922  78031E     MOV [W14], W6
+001924  980B24     MOV W4, [W6+20]
+001926  980B35     MOV W5, [W6+22]
+179:                   task->timeRan++;
+001928  78021E     MOV [W14], W4
+00192A  900AD4     MOV [W4+26], W5
+00192C  900A44     MOV [W4+24], W4
+00192E  420261     ADD W4, #0x1, W4
+001930  4A82E0     ADDC W5, #0x0, W5
+001932  78031E     MOV [W14], W6
+001934  980B44     MOV W4, [W6+24]
+001936  980B55     MOV W5, [W6+26]
+180:                   //TODO: Analayze stack
+181:                   task->stackUsage = ((UI16_t)task->stackPosition - (UI16_t)task->stack);
+001938  78021E     MOV [W14], W4
+00193A  900234     MOV [W4+6], W4
+00193C  780284     MOV W4, W5
+00193E  78021E     MOV [W14], W4
+001940  900224     MOV [W4+4], W4
+001942  528284     SUB W5, W4, W5
+001944  78021E     MOV [W14], W4
+001946  980A75     MOV W5, [W4+30]
+182:                   if (task->stackUsage > task->stackMaxUsage)
+001948  78021E     MOV [W14], W4
+00194A  900AF4     MOV [W4+30], W5
+00194C  78021E     MOV [W14], W4
+00194E  901204     MOV [W4+32], W4
+001950  528F84     SUB W5, W4, [W15]
+001952  360004     BRA LEU, 0x195C
+183:                       task->stackMaxUsage = task->stackUsage;
+001954  78021E     MOV [W14], W4
+001956  900AF4     MOV [W4+30], W5
+001958  78021E     MOV [W14], W4
+00195A  981205     MOV W5, [W4+32]
+184:               #endif
+185:               }
+00195C  FA8000     ULNK
+00195E  060000     RETURN
+186:               
+187:               
+188:               #ifdef RTOS_EVENTS
+189:               UI16_t RtosTaskWaitForEvent(UI16_t mask)
+190:               {
+001960  FA0004     LNK #0x4
+001962  980710     MOV W0, [W14+2]
+191:                   // Suspend the current task untill the event is fired.
+192:                   RtosActiveTask->eventMask = mask;
+001964  8073A4     MOV RtosActiveTask, W4
+001966  90029E     MOV [W14+2], W5
+001968  980A05     MOV W5, [W4+16]
+193:               
+194:                   if ((RtosActiveTask->eventStore & mask) == 0)
+00196A  8073A4     MOV RtosActiveTask, W4
+00196C  900A94     MOV [W4+18], W5
+00196E  90021E     MOV [W14+2], W4
+001970  628204     AND W5, W4, W4
+001972  520FE0     SUB W4, #0x0, [W15]
+001974  3A0004     BRA NZ, 0x197E
+195:                   {
+196:                       RtosActiveTask->state = TASK_STATE_EVENT;
+001976  8073A4     MOV RtosActiveTask, W4
+001978  200035     MOV #0x3, W5
+00197A  980255     MOV W5, [W4+10]
+197:               
+198:                       RtosKernelContextSuspend();
+00197C  070528     RCALL RtosKernelContextSuspend
+199:                   }
+200:                   
+201:                   UI16_t t = RtosActiveTask->eventStore;
+00197E  8073A4     MOV RtosActiveTask, W4
+001980  900A94     MOV [W4+18], W5
+001982  780F05     MOV W5, [W14]
+202:                   RtosActiveTask->eventStore &= ~mask;
+001984  8073A4     MOV RtosActiveTask, W4
+001986  8073A5     MOV RtosActiveTask, W5
+001988  900B15     MOV [W5+18], W6
+00198A  90029E     MOV [W14+2], W5
+00198C  EA8285     COM W5, W5
+00198E  630285     AND W6, W5, W5
+001990  980A15     MOV W5, [W4+18]
+203:               
+204:                   return t;
+001992  78021E     MOV [W14], W4
+205:               }
+001994  780004     MOV W4, W0
+001996  FA8000     ULNK
+001998  060000     RETURN
+206:               
+207:               void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event)
+208:               {
+00199A  FA0004     LNK #0x4
+00199C  780F00     MOV W0, [W14]
+00199E  980711     MOV W1, [W14+2]
+209:                   if (task != NULL)
+0019A0  78021E     MOV [W14], W4
+0019A2  520FE0     SUB W4, #0x0, [W15]
+0019A4  32000F     BRA Z, 0x19C4
+210:                   {
+211:                       task->eventStore |= event;
+0019A6  78021E     MOV [W14], W4
+0019A8  900A94     MOV [W4+18], W5
+0019AA  90021E     MOV [W14+2], W4
+0019AC  728284     IOR W5, W4, W5
+0019AE  78021E     MOV [W14], W4
+0019B0  980A15     MOV W5, [W4+18]
+212:               
+213:                       if ((event & task->eventMask) != 0)
+0019B2  78021E     MOV [W14], W4
+0019B4  900A84     MOV [W4+16], W5
+0019B6  90021E     MOV [W14+2], W4
+0019B8  628204     AND W5, W4, W4
+0019BA  520FE0     SUB W4, #0x0, [W15]
+0019BC  320003     BRA Z, 0x19C4
+214:                       {
+215:                           task->state = TASK_STATE_READY;
+0019BE  78021E     MOV [W14], W4
+0019C0  200045     MOV #0x4, W5
+0019C2  980255     MOV W5, [W4+10]
+216:                       }
+217:                   }
+218:                   // Don't enforce a context switch. This is control of application.
+219:                   // Moreover, enforcing context switches would make this method not safe
+220:                   // for use in interrupts.
+221:               }
+0019C4  FA8000     ULNK
+0019C6  060000     RETURN
+222:               #endif
+---  /home/hans/Projects/Firmware/domoticaRf/src/rfstack/rf_task.c  -------------------------------------
+1:                 #include "stddefs.h"
+2:                 
+3:                 #include "rtos/task.h"
+4:                 #include "rtos/timer.h"
+5:                 
+6:                 #include "rfstack/rf_task.h"
+7:                 #include "rfstack/hal.h"
+8:                 
+9:                 #include "bsp/interrupt.h"
+10:                
+11:                RtosTimer_t rfTimer;
+12:                
+13:                RtosTask_t rfTask;
+14:                UI08_t rfTaskStk[512];
+15:                
+16:                static void RfTick();
+17:                static void RfTask();
+18:                
+19:                static void mrf49xaIsr(UI08_t foo);
+20:                
+21:                void RfInit(void)
+22:                {
+001D3E  FA0000     LNK #0x0
+23:                    RF_RES = 1;
+001D40  A8C2D4     BSET LATC, #6
+24:                    RF_POWER = 0;
+001D42  A942C5     BCLR 0x2C5, #2
+25:                
+26:                    // Connect up MRF49XA ISR
+27:                    PPSUnLock;
+001D44  803A15     MOV OSCCON, W5
+001D46  200BF4     MOV #0xBF, W4
+001D48  628304     AND W5, W4, W6
+001D4A  200464     MOV #0x46, W4
+001D4C  200575     MOV #0x57, W5
+001D4E  207427     MOV #0x742, W7
+001D50  784B84     MOV.B W4, [W7]
+001D52  784B85     MOV.B W5, [W7]
+001D54  784B86     MOV.B W6, [W7]
+28:                
+29:                    iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
+001D56  803415     MOV RPINR1, W5
+001D58  2FFE04     MOV #0xFFE0, W4
+001D5A  628204     AND W5, W4, W4
+001D5C  B30094     IOR #0x9, W4
+001D5E  883414     MOV W4, RPINR1
+30:                    ExtIntInit();
+001D60  07FF2F     RCALL ExtIntInit
+31:                    ExtIntSetup(2, mrf49xaIsr, TRUE);
+001D62  B3C012     MOV #0x1, W2
+001D64  21DA81     MOV #0x1DA8, W1
+001D66  B3C020     MOV #0x2, W0
+001D68  07FF3B     RCALL ExtIntSetup
+32:                
+33:                    PPSLock;
+001D6A  803A15     MOV OSCCON, W5
+001D6C  200404     MOV #0x40, W4
+001D6E  728304     IOR W5, W4, W6
+001D70  200464     MOV #0x46, W4
+001D72  200575     MOV #0x57, W5
+001D74  207427     MOV #0x742, W7
+001D76  784B84     MOV.B W4, [W7]
+001D78  784B85     MOV.B W5, [W7]
+001D7A  784B86     MOV.B W6, [W7]
+34:                    
+35:                    RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
+001D7C  202005     MOV #0x200, W5
+001D7E  20B4A4     MOV #0xB4A, W4
+001D80  B3C283     MOV #0x28, W3
+001D82  21DFA2     MOV #0x1DFA, W2
+001D84  28C2C1     MOV #0x8C2C, W1
+001D86  20B260     MOV #0xB26, W0
+001D88  07FD13     RCALL RtosTaskCreate
+36:                    RtosTimerCreate(&rfTimer, 10, RfTick);
+001D8A  21D962     MOV #0x1D96, W2
+001D8C  2000A1     MOV #0xA, W1
+001D8E  20B160     MOV #0xB16, W0
+001D90  07021F     RCALL RtosTimerCreate
+37:                
+38:                }
+001D92  FA8000     ULNK
+001D94  060000     RETURN
+39:                
+40:                void RfTick(void)
+41:                {
+001D96  FA0000     LNK #0x0
+42:                    RtosTaskSignalEvent(&rfTask, RF_TICK);
+001D98  200801     MOV #0x80, W1
+001D9A  20B260     MOV #0xB26, W0
+001D9C  07FDFE     RCALL RtosTaskSignalEvent
+43:                
+44:                    RtosTimerRearm(&rfTimer, 10);
+001D9E  2000A1     MOV #0xA, W1
+001DA0  20B160     MOV #0xB16, W0
+001DA2  070239     RCALL RtosTimerRearm
+45:                }
+001DA4  FA8000     ULNK
+001DA6  060000     RETURN
+46:                
+47:                UI16_t mrfIsr;
+48:                UI16_t mrfDat;
+49:                UI16_t mrfStat;
+50:                
+51:                void mrf49xaIsr(UI08_t foo)
+52:                {
+001DA8  FA0004     LNK #0x4
+001DAA  984720     MOV.B W0, [W14+2]
+53:                    UI16_t mrf49State;
+54:                
+55:                    do
+56:                    {
+57:                        mrfStat = mrf49State;
+001DAC  78021E     MOV [W14], W4
+001DAE  886A74     MOV W4, mrfStat
+58:                        mrf49State = MRF49XAReadStatus();
+001DB0  07FE79     RCALL MRF49XAReadStatus
+001DB2  780200     MOV W0, W4
+001DB4  780F04     MOV W4, [W14]
+59:                
+60:                        if ((mrf49State & (1<<13)) != 0)
+001DB6  220004     MOV #0x2000, W4
+001DB8  62021E     AND W4, [W14], W4
+001DBA  520FE0     SUB W4, #0x0, [W15]
+001DBC  320004     BRA Z, 0x1DC6
+61:                        {
+62:                            // Overflow FIFO
+63:                            MRF49XAReset();
+001DBE  07FE54     RCALL MRF49XAReset
+64:                            mrfStat = mrf49State;
+001DC0  78021E     MOV [W14], W4
+001DC2  886A74     MOV W4, mrfStat
+65:                            break;
+001DC4  370018     BRA 0x1DF6
+66:                        }
+67:                
+68:                        if ((mrf49State & (1<<15)) != 0 && (mrf49State & (1<<7)) != 0)
+001DC6  78021E     MOV [W14], W4
+001DC8  520FE0     SUB W4, #0x0, [W15]
+001DCA  3D0009     BRA GE, 0x1DDE
+001DCC  200804     MOV #0x80, W4
+001DCE  62021E     AND W4, [W14], W4
+001DD0  520FE0     SUB W4, #0x0, [W15]
+001DD2  320005     BRA Z, 0x1DDE
+69:                        {
+70:                            mrfDat++;
+001DD4  806A64     MOV mrfDat, W4
+001DD6  E80204     INC W4, W4
+001DD8  886A64     MOV W4, mrfDat
+71:                            RfHalStatemachine();
+001DDA  07F874     RCALL RfHalStatemachine
+001DDC  370005     BRA 0x1DE8
+72:                        }
+73:                        else if((mrf49State & (1<<14)) != 0)
+001DDE  240004     MOV #0x4000, W4
+001DE0  62021E     AND W4, [W14], W4
+001DE2  520FE0     SUB W4, #0x0, [W15]
+001DE4  320001     BRA Z, 0x1DE8
+74:                        {
+75:                            MRF49XAReset();
+001DE6  07FE40     RCALL MRF49XAReset
+76:                        }
+77:                
+78:                        mrfIsr++;
+001DE8  806A54     MOV mrfIsr, W4
+001DEA  E80204     INC W4, W4
+001DEC  886A54     MOV W4, mrfIsr
+79:                
+80:                    } while ((mrf49State & 0xC000) != 0);
+001DEE  2C0004     MOV #0xC000, W4
+001DF0  62021E     AND W4, [W14], W4
+001DF2  520FE0     SUB W4, #0x0, [W15]
+001DF4  3AFFDB     BRA NZ, 0x1DAC
+81:                }
+001DF6  FA8000     ULNK
+001DF8  060000     RETURN
+82:                
+83:                void RfTask()
+84:                {
+001DFA  FA0004     LNK #0x4
+85:                    UI08_t rfInitialized = 0;
+001DFC  EB4200     CLR.B W4
+001DFE  784F04     MOV.B W4, [W14]
+86:                
+87:                    printf("[RF] reset\n");
+001E00  28C2F0     MOV #0x8C2F, W0
+001E02  07F282     RCALL _puts
+88:                    RtosTaskDelay(100);
+001E04  200640     MOV #0x64, W0
+001E06  200001     MOV #0x0, W1
+001E08  07FD21     RCALL RtosTaskDelay
+89:                    RF_POWER = 1;
+001E0A  A842C5     BSET 0x2C5, #2
+90:                    RF_RES = 1;
+001E0C  A8C2D4     BSET LATC, #6
+91:                
+92:                    RtosTaskDelay(100);
+001E0E  200640     MOV #0x64, W0
+001E10  200001     MOV #0x0, W1
+001E12  07FD1C     RCALL RtosTaskDelay
+93:                
+94:                    printf("[RF] Bootcycle\n");
+001E14  28C3A0     MOV #0x8C3A, W0
+001E16  07F278     RCALL _puts
+95:                    printf("1");
+001E18  200310     MOV #0x31, W0
+001E1A  07F280     RCALL _putchar
+96:                    RfHalInit();
+001E1C  07F757     RCALL RfHalInit
+97:                    printf("2");
+001E1E  200320     MOV #0x32, W0
+001E20  07F27D     RCALL _putchar
+98:                    MRF49XAInit();
+001E22  07FDF5     RCALL MRF49XAInit
+99:                    printf("3");
+001E24  200330     MOV #0x33, W0
+001E26  07F27A     RCALL _putchar
+100:                   MRF49XAReset();
+001E28  07FE1F     RCALL MRF49XAReset
+101:                   printf("4");
+001E2A  200340     MOV #0x34, W0
+001E2C  07F277     RCALL _putchar
+102:                   printf(" done\n");
+001E2E  28C490     MOV #0x8C49, W0
+001E30  07F26B     RCALL _puts
+103:               
+104:                   rfInitialized = 1;
+001E32  B3C014     MOV #0x1, W4
+001E34  784F04     MOV.B W4, [W14]
+001E36  370003     BRA 0x1E3E
+105:               
+106:                   while(1)
+107:                   {
+108:                       UI16_t evt = RtosTaskWaitForEvent(
+001E3E  200830     MOV #0x83, W0
+001E40  07FD8F     RCALL RtosTaskWaitForEvent
+001E42  780200     MOV W0, W4
+001E44  980714     MOV W4, [W14+2]
+109:                                           RF_RX_PACKET |
+110:                                           RF_TX_PACKET |
+111:                                           RF_TICK);
+112:               
+113:                       if (evt & RF_RX_PACKET)
+001E46  90021E     MOV [W14+2], W4
+001E48  620261     AND W4, #0x1, W4
+001E4A  784204     MOV.B W4, W4
+001E4C  524FE0     SUB.B W4, #0x0, [W15]
+001E4E  320002     BRA Z, 0x1E54
+114:                       {
+115:                           //
+116:                           printf("[RF] Rx\n");
+001E50  28C4F0     MOV #0x8C4F, W0
+001E52  07F25A     RCALL _puts
+117:                       }
+118:               
+119:                       if (evt & RF_TX_PACKET)
+001E54  90021E     MOV [W14+2], W4
+001E56  620262     AND W4, #0x2, W4
+001E58  520FE0     SUB W4, #0x0, [W15]
+001E5A  320002     BRA Z, 0x1E60
+120:                       {
+121:                           //
+122:                           printf("[RF] Tx\n");
+001E5C  28C570     MOV #0x8C57, W0
+001E5E  07F254     RCALL _puts
+123:                       }
+124:               
+125:                       if (evt & RF_TICK && rfInitialized == 1)
+001E60  90029E     MOV [W14+2], W5
+001E62  200804     MOV #0x80, W4
+001E64  628204     AND W5, W4, W4
+001E66  520FE0     SUB W4, #0x0, [W15]
+001E68  32FFE7     BRA Z, 0x1E38
+001E6A  78421E     MOV.B [W14], W4
+001E6C  524FE1     SUB.B W4, #0x1, [W15]
+001E6E  3AFFE6     BRA NZ, 0x1E3C
+126:                       {
+127:                           if (RF_IRQ == 0)
+001E70  801655     MOV PORTB, W5
+001E72  202004     MOV #0x200, W4
+001E74  628204     AND W5, W4, W4
+001E76  520FE0     SUB W4, #0x0, [W15]
+001E78  3A0002     BRA NZ, 0x1E7E
+128:                           {
+129:                               mrf49xaIsr(3);
+001E7A  B3C030     MOV #0x3, W0
+001E7C  07FF95     RCALL _mrf49xaIsr
+130:                           }
+131:                           RfHalTick();
+001E7E  07F73D     RCALL RfHalTick
+132:                       }
+133:                   }
+001E38  000000     NOP
+001E3A  370001     BRA 0x1E3E
+001E3C  000000     NOP
+001E80  37FFDE     BRA 0x1E3E
+134:               }
+---  /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c  -----------------------------------------
+1:                 #include "stddefs.h"
+2:                 #include "rfstack/hal.h"
+3:                 #include "rfstack/packets.h"
+4:                 #include "rfstack/rf_task.h"
+5:                 
+6:                 #include "utilities/ccbuf.h"
+7:                 #include "utilities/pt.h"
+8:                 
+9:                 #define RF_SYNC_BYTE_3
+10:                
+11:                PT_THREAD(RfHalTickBfTh);
+12:                PT_THREAD(RfHalTickPkTh);
+13:                
+14:                bool_t RfHalRxStore(RfTransceiverPacket_t* rfPacket);
+15:                
+16:                RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
+17:                RfTransceiverStatus_t rfStatus;
+18:                
+19:                UI08_t rfRxBf[256]; // 128 bytes of Rx buffer
+20:                UI08_t rfRxBf2[32];
+21:                CircBufDef_t rfRxCC;
+22:                UI08_t rfTrcvRxEn; // is in RX mode
+23:                
+24:                struct pt halRxBfTh;
+25:                struct pt halPkTh;
+26:                
+27:                void RfHalInit(void)
+28:                {
+000CCC  FA0000     LNK #0x0
+29:                    //
+30:                    rfStatus.isr.byteCounter = 0;
+000CCE  EB4200     CLR.B W4
+000CD0  784004     MOV.B W4, W0
+000CD2  B7E9C2     MOV.B WREG, 0x9C2
+31:                    rfStatus.isr.txPacket = &(rfPackets[0]);
+000CD4  208004     MOV #0x800, W4
+000CD6  884E24     MOV W4, 0x9C4
+32:                    rfStatus.isr.state = RX_RECV;
+000CD8  EB0200     CLR W4
+000CDA  884E34     MOV W4, 0x9C6
+33:                
+34:                    memset(rfPackets, 0, RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t));
+000CDC  201C02     MOV #0x1C0, W2
+000CDE  EB0080     CLR W1
+000CE0  208000     MOV #0x800, W0
+000CE2  07FAFD     RCALL _memset
+35:                
+36:                    CCBufInit(&rfRxCC, rfRxBf, sizeof(rfRxBf), 0);
+000CE4  EB4180     CLR.B W3
+000CE6  201002     MOV #0x100, W2
+000CE8  209C81     MOV #0x9C8, W1
+000CEA  20AE80     MOV #0xAE8, W0
+000CEC  07015B     RCALL CCBufInit
+37:                
+38:                    PT_INIT(&halRxBfTh);
+000CEE  EB0200     CLR W4
+000CF0  8857A4     MOV W4, halRxBfTh
+39:                    PT_INIT(&halPkTh);
+000CF2  EB0200     CLR W4
+000CF4  8857B4     MOV W4, halPkTh
+40:                }
+000CF6  FA8000     ULNK
+000CF8  060000     RETURN
+41:                
+42:                void RfHalTick(void)
+43:                {
+000CFA  FA0000     LNK #0x0
+44:                    // Tick RX buffer procces thread
+45:                    RfHalTickBfTh(&halRxBfTh);
+000CFC  20AF44     MOV #0xAF4, W4
+000CFE  781F84     MOV W4, [W15++]
+000D00  07000B     RCALL RfHalTickBfTh
+000D02  E9878F     DEC2 W15, W15
+46:                
+47:                    // Tick RX packet process thread
+48:                    RfHalTickPkTh(&halPkTh);
+000D04  20AF64     MOV #0xAF6, W4
+000D06  781F84     MOV W4, [W15++]
+000D08  070003     RCALL RfHalTickPkTh
+000D0A  E9878F     DEC2 W15, W15
+49:                }
+000D0C  FA8000     ULNK
+000D0E  060000     RETURN
+50:                
+51:                
+52:                PT_THREAD(RfHalTickPkTh)
+53:                {
+000D10  FA0000     LNK #0x0
+54:                    return;
+55:                    PT_BEGIN(pt);
+56:                
+57:                    while(1)
+58:                    {
+59:                        PT_WAIT_UNTIL(pt, rfStatus.rx.queued == 1);
+60:                        //
+61:                        PT_YIELD(pt);
+62:                    }
+63:                
+64:                    PT_END(pt);
+65:                }
+000D12  784004     MOV.B W4, W0
+000D14  FA8000     ULNK
+000D16  060000     RETURN
+66:                
+67:                PT_THREAD(RfHalTickBfTh)
+68:                {
+000D18  FA0004     LNK #0x4
+000D1A  781F88     MOV W8, [W15++]
+69:                    static UI08_t pktRxByteIndex;
+70:                    static RfTransceiverPacket_t rxPacket;
+71:                    UI16_t pktLength = 0;
+000D1C  EB0200     CLR W4
+000D1E  780F04     MOV W4, [W14]
+72:                    
+73:                    PT_BEGIN(pt);
+000D20  B3C014     MOV #0x1, W4
+000D22  984724     MOV.B W4, [W14+2]
+000D24  97BA4E     MOV [W14-8], W4
+000D26  780214     MOV [W4], W4
+000D28  200505     MOV #0x50, W5
+000D2A  520F85     SUB W4, W5, [W15]
+000D2C  32000F     BRA Z, 0xD4C
+000D2E  2005A5     MOV #0x5A, W5
+000D30  520F85     SUB W4, W5, [W15]
+000D32  32002A     BRA Z, 0xD88
+000D34  520FE0     SUB W4, #0x0, [W15]
+000D36  32006D     BRA Z, 0xE12
+000D38  370072     BRA 0xE1E
+74:                
+75:                    while (CCBufCanRd(&rfRxCC))
+000E12  000000     NOP
+000E14  20AE80     MOV #0xAE8, W0
+000E16  07014D     RCALL CCBufCanRd
+000E18  784200     MOV.B W0, W4
+000E1A  524FE0     SUB.B W4, #0x0, [W15]
+000E1C  3AFF8E     BRA NZ, 0xD3A
+76:                    {
+77:                        // Search for start byte
+78:                        if (CCBufRdByte(&rfRxCC) == RF_NETWORKID3)
+000D3A  20AE80     MOV #0xAE8, W0
+000D3C  0701E0     RCALL CCBufRdByte
+000D3E  780200     MOV W0, W4
+000D40  2006B5     MOV #0x6B, W5
+000D42  520F85     SUB W4, W5, [W15]
+000D44  3A0067     BRA NZ, 0xE14
+79:                        {
+80:                            PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+000D46  97BA4E     MOV [W14-8], W4
+000D48  200505     MOV #0x50, W5
+000D4A  780A05     MOV W5, [W4]
+000D4C  20AE80     MOV #0xAE8, W0
+000D4E  0701B1     RCALL CCBufCanRd
+000D50  784200     MOV.B W0, W4
+000D52  524FE0     SUB.B W4, #0x0, [W15]
+000D54  3A0002     BRA NZ, 0xD5A
+000D56  EB4200     CLR.B W4
+000D58  370068     BRA 0xE2A
+81:                            
+82:                            pktLength = CCBufPeekByte(&rfRxCC);
+000D5A  20AE80     MOV #0xAE8, W0
+000D5C  0701F6     RCALL CCBufPeekByte
+000D5E  780200     MOV W0, W4
+000D60  780F04     MOV W4, [W14]
+83:                            
+84:                            if(pktLength > 0 && pktLength < PACKET_SIZE_MAX)
+000D62  78021E     MOV [W14], W4
+000D64  520FE0     SUB W4, #0x0, [W15]
+000D66  320052     BRA Z, 0xE0C
+000D68  78021E     MOV [W14], W4
+000D6A  520FF3     SUB W4, #0x13, [W15]
+000D6C  3E004F     BRA GTU, 0xE0C
+85:                            {
+86:                                rxPacket.size = CCBufRdByte(&rfRxCC);
+000D6E  20AE80     MOV #0xAE8, W0
+000D70  0701C6     RCALL CCBufRdByte
+000D72  780200     MOV W0, W4
+000D74  784204     MOV.B W4, W4
+000D76  784004     MOV.B W4, W0
+000D78  B7EAF8     MOV.B WREG, rxPacket
+87:                                
+88:                                for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
+000D7A  EB4200     CLR.B W4
+000D7C  784004     MOV.B W4, W0
+000D7E  B7EB14     MOV.B WREG, pktRxByteIndex
+000D80  370035     BRA 0xDEC
+000DE2  20B144     MOV #0xB14, W4
+000DE4  784214     MOV.B [W4], W4
+000DE6  E84204     INC.B W4, W4
+000DE8  784004     MOV.B W4, W0
+000DEA  B7EB14     MOV.B WREG, pktRxByteIndex
+000DEC  20AF85     MOV #0xAF8, W5
+000DEE  784295     MOV.B [W5], W5
+000DF0  20B144     MOV #0xB14, W4
+000DF2  784214     MOV.B [W4], W4
+000DF4  52CF84     SUB.B W5, W4, [W15]
+000DF6  3EFFC5     BRA GTU, 0xD82
+89:                                {
+90:                                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+000D82  97BA4E     MOV [W14-8], W4
+000D84  2005A5     MOV #0x5A, W5
+000D86  780A05     MOV W5, [W4]
+000D88  20AE80     MOV #0xAE8, W0
+000D8A  070193     RCALL CCBufCanRd
+000D8C  784200     MOV.B W0, W4
+000D8E  524FE0     SUB.B W4, #0x0, [W15]
+000D90  3A0002     BRA NZ, 0xD96
+000D92  EB4200     CLR.B W4
+000D94  37004A     BRA 0xE2A
+91:                                    rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
+000D96  20B144     MOV #0xB14, W4
+000D98  784214     MOV.B [W4], W4
+000D9A  FB8404     ZE W4, W8
+000D9C  20AE80     MOV #0xAE8, W0
+000D9E  0701AF     RCALL CCBufRdByte
+000DA0  780200     MOV W0, W4
+000DA2  784204     MOV.B W4, W4
+000DA4  20AFC5     MOV #0xAFC, W5
+000DA6  440285     ADD W8, W5, W5
+000DA8  784A84     MOV.B W4, [W5]
+92:                                    rxPacket.crc = RfTrcvCrcTick(rxPacket.crc, rxPacket.data[pktRxByteIndex]);
+000DAA  20B144     MOV #0xB14, W4
+000DAC  784214     MOV.B [W4], W4
+000DAE  FB8204     ZE W4, W4
+000DB0  4202E4     ADD W4, #0x4, W5
+000DB2  20AF84     MOV #0xAF8, W4
+000DB4  428204     ADD W5, W4, W4
+000DB6  784294     MOV.B [W4], W5
+000DB8  20AFB4     MOV #0xAFB, W4
+000DBA  784214     MOV.B [W4], W4
+000DBC  784085     MOV.B W5, W1
+000DBE  784004     MOV.B W4, W0
+000DC0  07061A     RCALL RfTrcvCrcTick
+000DC2  784200     MOV.B W0, W4
+000DC4  784004     MOV.B W4, W0
+000DC6  B7EAFB     MOV.B WREG, 0xAFB
+93:                                    printf("%02X ", rxPacket.data[pktRxByteIndex]);
+000DC8  20B144     MOV #0xB14, W4
+000DCA  784214     MOV.B [W4], W4
+000DCC  FB8204     ZE W4, W4
+000DCE  4202E4     ADD W4, #0x4, W5
+000DD0  20AF84     MOV #0xAF8, W4
+000DD2  428204     ADD W5, W4, W4
+000DD4  784214     MOV.B [W4], W4
+000DD6  FB8204     ZE W4, W4
+000DD8  781F84     MOV W4, [W15++]
+000DDA  28C604     MOV #0x8C60, W4
+000DDC  781F84     MOV W4, [W15++]
+000DDE  07FAA0     RCALL __printf_cdnopuxX
+000DE0  5787E4     SUB W15, #0x4, W15
+94:                                }
+95:                
+96:                                // Wait until there is storage space.
+97:                                //PT_WAIT_UNTIL(pt, RfHalRxStore(&rxPacket));
+98:                                
+99:                                rfStatus.rx.queued = 1;
+000DF8  A809C0     BSET rfStatus, #0
+100:               
+101:                               //
+102:                               printf("packet %d!\n\n", rxPacket.size);
+000DFA  20AF84     MOV #0xAF8, W4
+000DFC  784214     MOV.B [W4], W4
+000DFE  FB8204     ZE W4, W4
+000E00  781F84     MOV W4, [W15++]
+000E02  28C664     MOV #0x8C66, W4
+000E04  781F84     MOV W4, [W15++]
+000E06  07FA8C     RCALL __printf_cdnopuxX
+000E08  5787E4     SUB W15, #0x4, W15
+000E0A  370004     BRA 0xE14
+103:                           }
+104:                           else
+105:                           {
+106:                               printf("[MRF49] Packet header dropped\n");
+000E0C  28C730     MOV #0x8C73, W0
+000E0E  07FA7C     RCALL _puts
+000E10  370001     BRA 0xE14
+107:                           }
+108:                       }
+109:               
+110:                   }
+111:                   
+112:                   PT_END(pt);
+000E1E  EB4200     CLR.B W4
+000E20  984724     MOV.B W4, [W14+2]
+000E22  97BA4E     MOV [W14-8], W4
+000E24  EB0280     CLR W5
+000E26  780A05     MOV W5, [W4]
+000E28  B3C034     MOV #0x3, W4
+113:                       
+114:               }
+000E2A  784004     MOV.B W4, W0
+000E2C  78044F     MOV [--W15], W8
+000E2E  FA8000     ULNK
+000E30  060000     RETURN
+115:               
+116:               bool_t RfHalRxStore(RfTransceiverPacket_t* rfPacket)
+117:               {
+000E32  FA0004     LNK #0x4
+000E34  980710     MOV W0, [W14+2]
+118:                   UI08_t i = 0;
+000E36  EB4200     CLR.B W4
+000E38  784F04     MOV.B W4, [W14]
+119:               
+120:                   for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
+000E3A  EB4200     CLR.B W4
+000E3C  784F04     MOV.B W4, [W14]
+000E3E  370016     BRA 0xE6C
+000E6A  E84F1E     INC.B [W14], [W14]
+000E6C  78421E     MOV.B [W14], W4
+000E6E  524FEF     SUB.B W4, #0xF, [W15]
+000E70  36FFE7     BRA LEU, 0xE40
+121:                   {
+122:                       if (rfPackets[i].size == 0)
+000E40  78429E     MOV.B [W14], W5
+000E42  FB8205     ZE W5, W4
+000E44  B9227C     MUL.SU W4, #28, W4
+000E46  780284     MOV W4, W5
+000E48  208004     MOV #0x800, W4
+000E4A  428204     ADD W5, W4, W4
+000E4C  784214     MOV.B [W4], W4
+000E4E  524FE0     SUB.B W4, #0x0, [W15]
+000E50  3A000C     BRA NZ, 0xE6A
+123:                       {
+124:                           memcpy(&(rfPackets[i]), rfPacket, sizeof(RfTransceiverPacket_t));
+000E52  78429E     MOV.B [W14], W5
+000E54  FB8205     ZE W5, W4
+000E56  B9227C     MUL.SU W4, #28, W4
+000E58  780284     MOV W4, W5
+000E5A  208004     MOV #0x800, W4
+000E5C  428204     ADD W5, W4, W4
+000E5E  2001C2     MOV #0x1C, W2
+000E60  90009E     MOV [W14+2], W1
+000E62  780004     MOV W4, W0
+000E64  07FA35     RCALL _memcpy
+125:                           return TRUE;
+000E66  B3C014     MOV #0x1, W4
+000E68  370005     BRA 0xE74
+126:                       }
+127:                   }
+128:               
+129:                   return FALSE;
+000E72  EB4200     CLR.B W4
+130:               }
+000E74  784004     MOV.B W4, W0
+000E76  FA8000     ULNK
+000E78  060000     RETURN
+131:               
+132:               void RfHalTxDisable(void)
+133:               {
+000E7A  FA0000     LNK #0x0
+134:                   
+135:               }
+000E7C  FA8000     ULNK
+000E7E  060000     RETURN
+136:               void RfHalTxEnable(RfTransceiverPacket_t* packet)
+137:               {
+000E80  FA0002     LNK #0x2
+000E82  780F00     MOV W0, [W14]
+138:                   // TODO: Setup state machine etc.
+139:               }
+000E84  FA8000     ULNK
+000E86  060000     RETURN
+140:               
+141:               bool_t RfHalTxQueue(RfTransceiverPacket_t* packet)
+142:               {
+000E88  FA0004     LNK #0x4
+000E8A  980710     MOV W0, [W14+2]
+143:                   UI08_t i;
+144:               
+145:                   packet->crc = 0;
+000E8C  90029E     MOV [W14+2], W5
+000E8E  EB4200     CLR.B W4
+000E90  9842B4     MOV.B W4, [W5+3]
+146:               
+147:                   // Calculate CRC
+148:                   for (i = 0; i < packet->size; i++)
+000E92  EB4200     CLR.B W4
+000E94  784F04     MOV.B W4, [W14]
+000E96  37000E     BRA 0xEB4
+000EB2  E84F1E     INC.B [W14], [W14]
+000EB4  90021E     MOV [W14+2], W4
+000EB6  784214     MOV.B [W4], W4
+000EB8  524F9E     SUB.B W4, [W14], [W15]
+000EBA  3EFFEE     BRA GTU, 0xE98
+149:                       packet->crc = RfTrcvCrcTick(packet->crc, packet->data[i]);
+000E98  78429E     MOV.B [W14], W5
+000E9A  FB8205     ZE W5, W4
+000E9C  90029E     MOV [W14+2], W5
+000E9E  420264     ADD W4, #0x4, W4
+000EA0  7A42E5     MOV.B [W5+W4], W5
+000EA2  90021E     MOV [W14+2], W4
+000EA4  904234     MOV.B [W4+3], W4
+000EA6  784085     MOV.B W5, W1
+000EA8  784004     MOV.B W4, W0
+000EAA  0705A5     RCALL RfTrcvCrcTick
+000EAC  784200     MOV.B W0, W4
+000EAE  90029E     MOV [W14+2], W5
+000EB0  9842B4     MOV.B W4, [W5+3]
+150:               
+151:                   // TODO: Set as TX packet
+152:               
+153:                   // No slot found.
+154:                   return FALSE;
+000EBC  EB4200     CLR.B W4
+155:               }
+000EBE  784004     MOV.B W4, W0
+000EC0  FA8000     ULNK
+000EC2  060000     RETURN
+156:               
+157:               void RfHalStatemachine()
+158:               {
+000EC4  FA0000     LNK #0x0
+159:                   switch (rfStatus.isr.state)
+000EC6  804E34     MOV 0x9C6, W4
+000EC8  200005     MOV #0x0, W5
+000ECA  2000C6     MOV #0xC, W6
+000ECC  200007     MOV #0x0, W7
+000ECE  520F86     SUB W4, W6, [W15]
+000ED0  5A8F87     SUBB W5, W7, [W15]
+000ED2  3E0066     BRA GTU, 0xFA0
+000ED4  016004     BRA W4
+000ED6  37000C     BRA 0xEF0
+000ED8  370060     BRA 0xF9A
+000EDA  370010     BRA 0xEFC
+000EDC  370014     BRA 0xF06
+000EDE  370018     BRA 0xF10
+000EE0  37001C     BRA 0xF1A
+000EE2  370020     BRA 0xF24
+000EE4  370024     BRA 0xF2E
+000EE6  37002A     BRA 0xF3C
+000EE8  37003F     BRA 0xF68
+000EEA  370045     BRA 0xF76
+000EEC  370049     BRA 0xF80
+000EEE  37004D     BRA 0xF8A
+160:                   {
+161:                       // Receive bytes to RX queue
+162:                       case RX_RECV:
+163:                           CCBufWrByte(&rfRxCC, RfTrcvGet());
+000EF0  070575     RCALL RfTrcvGet
+000EF2  784200     MOV.B W0, W4
+000EF4  784084     MOV.B W4, W1
+000EF6  20AE80     MOV #0xAE8, W0
+000EF8  070163     RCALL CCBufWrByte
+164:                           break;
+000EFA  370052     BRA 0xFA0
+165:               
+166:               
+167:                       // Transmit states
+168:                       case TX_PREAMBLE1:
+169:                           RfTrcvPut(0xAA);
+000EFC  B3CAA0     MOV #0xAA, W0
+000EFE  070564     RCALL RfTrcvPut
+170:                           rfStatus.isr.state = TX_PREAMBLE2;
+000F00  200034     MOV #0x3, W4
+000F02  884E34     MOV W4, 0x9C6
+171:                           break;
+000F04  37004D     BRA 0xFA0
+172:                       case TX_PREAMBLE2:
+173:                           RfTrcvPut(0xAA);
+000F06  B3CAA0     MOV #0xAA, W0
+000F08  07055F     RCALL RfTrcvPut
+174:                           rfStatus.isr.state = TX_SCL1;
+000F0A  200044     MOV #0x4, W4
+000F0C  884E34     MOV W4, 0x9C6
+175:                           break;
+000F0E  370048     BRA 0xFA0
+176:                       case TX_SCL1:
+177:                           RfTrcvPut(RF_NETWORKID1);
+000F10  B3C2D0     MOV #0x2D, W0
+000F12  07055A     RCALL RfTrcvPut
+178:                           rfStatus.isr.state = TX_SCL2;
+000F14  200054     MOV #0x5, W4
+000F16  884E34     MOV W4, 0x9C6
+179:                           break;
+000F18  370043     BRA 0xFA0
+180:                       case TX_SCL2:
+181:                           RfTrcvPut(RF_NETWORKID2);
+000F1A  B3CD40     MOV #0xD4, W0
+000F1C  070555     RCALL RfTrcvPut
+182:                           rfStatus.isr.state = TX_SCL3;
+000F1E  200064     MOV #0x6, W4
+000F20  884E34     MOV W4, 0x9C6
+183:                           break;
+000F22  37003E     BRA 0xFA0
+184:                       case TX_SCL3:
+185:                           RfTrcvPut(RF_NETWORKID3);
+000F24  B3C6B0     MOV #0x6B, W0
+000F26  070550     RCALL RfTrcvPut
+186:                           rfStatus.isr.state = TX_SIZE;
+000F28  200074     MOV #0x7, W4
+000F2A  884E34     MOV W4, 0x9C6
+187:                           break;
+000F2C  370039     BRA 0xFA0
+188:                       case TX_SIZE:
+189:                           RfTrcvPut(rfStatus.isr.txPacket->size);
+000F2E  804E24     MOV 0x9C4, W4
+000F30  784214     MOV.B [W4], W4
+000F32  784004     MOV.B W4, W0
+000F34  070549     RCALL RfTrcvPut
+190:                           rfStatus.isr.state = TX_DATA;
+000F36  200084     MOV #0x8, W4
+000F38  884E34     MOV W4, 0x9C6
+191:                           break;
+000F3A  370032     BRA 0xFA0
+192:                       case TX_DATA:
+193:                           RfTrcvPut(rfStatus.isr.txPacket->data[rfStatus.isr.byteCounter]);
+000F3C  804E25     MOV 0x9C4, W5
+000F3E  209C24     MOV #0x9C2, W4
+000F40  784214     MOV.B [W4], W4
+000F42  FB8204     ZE W4, W4
+000F44  420264     ADD W4, #0x4, W4
+000F46  7A4265     MOV.B [W5+W4], W4
+000F48  784004     MOV.B W4, W0
+000F4A  07053E     RCALL RfTrcvPut
+194:                           rfStatus.isr.byteCounter++;
+000F4C  209C24     MOV #0x9C2, W4
+000F4E  784214     MOV.B [W4], W4
+000F50  E84204     INC.B W4, W4
+000F52  784004     MOV.B W4, W0
+000F54  B7E9C2     MOV.B WREG, 0x9C2
+195:                           if(rfStatus.isr.byteCounter == rfStatus.isr.txPacket->size)
+000F56  209C25     MOV #0x9C2, W5
+000F58  784295     MOV.B [W5], W5
+000F5A  804E24     MOV 0x9C4, W4
+000F5C  784214     MOV.B [W4], W4
+000F5E  52CF84     SUB.B W5, W4, [W15]
+000F60  3A001E     BRA NZ, 0xF9E
+196:                               rfStatus.isr.state = TX_CRC;
+000F62  200094     MOV #0x9, W4
+000F64  884E34     MOV W4, 0x9C6
+197:                           break;
+000F66  37001C     BRA 0xFA0
+000F9E  000000     NOP
+198:                       case TX_CRC:
+199:                           RfTrcvPut(rfStatus.isr.txPacket->crc);
+000F68  804E24     MOV 0x9C4, W4
+000F6A  904234     MOV.B [W4+3], W4
+000F6C  784004     MOV.B W4, W0
+000F6E  07052C     RCALL RfTrcvPut
+200:                           rfStatus.isr.state = TX_NULL1;
+000F70  2000A4     MOV #0xA, W4
+000F72  884E34     MOV W4, 0x9C6
+201:                           break;
+000F74  370015     BRA 0xFA0
+202:                       case TX_NULL1:
+203:                           RfTrcvPut(0);
+000F76  EB4000     CLR.B W0
+000F78  070527     RCALL RfTrcvPut
+204:                           rfStatus.isr.state = TX_NULL2;
+000F7A  2000B4     MOV #0xB, W4
+000F7C  884E34     MOV W4, 0x9C6
+205:                           break;
+000F7E  370010     BRA 0xFA0
+206:                       case TX_NULL2:
+207:                           RfTrcvPut(0);
+000F80  EB4000     CLR.B W0
+000F82  070522     RCALL RfTrcvPut
+208:                           rfStatus.isr.state = TX_NULL3;
+000F84  2000C4     MOV #0xC, W4
+000F86  884E34     MOV W4, 0x9C6
+209:                           break;
+000F88  37000B     BRA 0xFA0
+210:                       case TX_NULL3:
+211:                           RfTrcvPut(0);
+000F8A  EB4000     CLR.B W0
+000F8C  07051D     RCALL RfTrcvPut
+212:                           rfStatus.isr.state = TX_WAITING;
+000F8E  200014     MOV #0x1, W4
+000F90  884E34     MOV W4, 0x9C6
+213:               
+214:                           RtosTaskSignalEvent(&rfTask, RF_TX_PACKET);
+000F92  200021     MOV #0x2, W1
+000F94  20B260     MOV #0xB26, W0
+000F96  070501     RCALL RtosTaskSignalEvent
+215:                           break;
+000F98  370003     BRA 0xFA0
+216:               
+217:                       case TX_WAITING:
+218:                           // TX done; waiting for more TX or return to RX
+219:               
+220:                           break;
+000F9A  000000     NOP
+000F9C  370001     BRA 0xFA0
+221:               
+222:                   }
+223:                   
+224:               }
+000FA0  FA8000     ULNK
+000FA2  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/profiling/executiontime.c  -----------------------------
+1:                 #include "profiling/executiontime.h"
+2:                 
+3:                 typedef struct executionTimePoint_s
+4:                 {
+5:                     const char * datapoint;
+6:                     UI32_t timestamp;
+7:                     bool_t called;
+8:                 } executionTimePoint_t;
+9:                 #ifdef EXEC_COMPILE
+10:                executionTimePoint_t points[NUM_OF_EXECUTION_POINTS] = {
+11:                    executionTimeTable(execPointsTable)
+12:                };
+13:                executionTimePoint_t* sortlist[NUM_OF_EXECUTION_POINTS];
+14:                
+15:                void execTimeReset(void)
+16:                {
+17:                    UI08_t i = 0;
+18:                    //
+19:                    for (i = 0; i < NUM_OF_EXECUTION_POINTS; i++)
+20:                    {
+21:                        points[i].timestamp = 0;
+22:                        points[i].called = FALSE;
+23:                    }
+24:                    execResetTimestamp();
+25:                }
+26:                
+27:                void execTimeWatch(ExecutionTimePoints_t datapoint)
+28:                {
+29:                    UI08_t ind = (UI08_t) datapoint;
+30:                    //
+31:                    points[ind].called = TRUE;
+32:                    points[ind].timestamp = execGetTimestamp();
+33:                }
+34:                
+35:                void execTimeSort(void)
+36:                {
+37:                    executionTimePoint_t* swapper = NULL;
+38:                    UI08_t i = 0;
+39:                    UI08_t c = 0;
+40:                
+41:                    // Sort the list
+42:                    for (i = 0; i < NUM_OF_EXECUTION_POINTS; i++)
+43:                    {
+44:                        sortlist[i] = points + i;
+45:                    }
+46:                
+47:                    //
+48:                    do
+49:                    {
+50:                        c = 0;
+51:                        i = 0;
+52:                        while(i < NUM_OF_EXECUTION_POINTS - 1)
+53:                        {
+54:                            if(sortlist[i]->timestamp > sortlist[i+1]->timestamp)
+55:                            {
+56:                                c = 1;
+57:                                
+58:                                swapper = sortlist[i+1];
+59:                
+60:                                sortlist[i+1] = sortlist[i];
+61:                                sortlist[i] = swapper;
+62:                            }
+63:                            i++;
+64:                        }
+65:                    } while(c != 0);
+66:                }
+67:                
+68:                void execTimePrint(void)
+69:                {
+70:                    UI08_t i = 0;
+71:                    UI32_t diff = 0;
+72:                    
+73:                    execTimeSort();
+74:                
+75:                    printf("-----------\n");
+76:                    for (i = 0; i < NUM_OF_EXECUTION_POINTS; i++)
+77:                    {
+78:                        if(sortlist[i]->called == FALSE) continue;
+79:                        
+80:                        diff = sortlist[i]->timestamp - diff;
+81:                
+82:                        printf("%04lu | +%04lu | %s\n",
+83:                                sortlist[i]->timestamp,
+84:                                diff,
+85:                                sortlist[i]->datapoint);
+86:                        
+87:                        diff = sortlist[i]->timestamp;
+88:                
+89:                    }
+90:                    printf("-----------\n\n");
+91:                
+92:                }
+93:                #else
+94:                
+95:                void execTimeReset(void) {}
+00249A  FA0000     LNK #0x0
+00249C  FA8000     ULNK
+00249E  060000     RETURN
+96:                void execTimePrint(void) {}
+0024A0  FA0000     LNK #0x0
+0024A2  FA8000     ULNK
+0024A4  060000     RETURN
+97:                
+98:                #endif
+---  /home/hans/Projects/Firmware/domoticaRf/src/main.c  ------------------------------------------------
+1:                 #define MAIN_C
+2:                 
+3:                 //#define COMPILE_ETHERNET
+4:                 
+5:                 #include "stddefs.h"
+6:                 
+7:                 #include "rfstack/rf_task.h"
+8:                 
+9:                 #ifdef SERVER
+10:                #include "devices/enc28j60.h"
+11:                #include "devices/SST26VF032.h"
+12:                
+13:                #include "bsp/spi.h"
+14:                #include "bsp/interrupt.h"
+15:                #include "bsp/timer.h"
+16:                
+17:                #include "profiling/executiontime.h"
+18:                #include "rtos/task.h"
+19:                
+20:                
+21:                #ifdef COMPILE_ETHERNET
+22:                #include "ipstack/ethdefs.h"
+23:                
+24:                #include "ipstack/arp.h"
+25:                #include "ipstack/ipv4.h"
+26:                #include "ipstack/udp.h"
+27:                #include "ipstack/tcp.h"
+28:                #include "ipstack/ntp.h"
+29:                #include "ipstack/icpm.h"
+30:                
+31:                #include "webserver/router.h"
+32:                
+33:                
+34:                UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
+35:                const UI08_t myIp[4]            = {192, 168, 1, 123};
+36:                const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
+37:                const UI08_t myGateway[4]       = {192, 168, 1, 122};
+38:                //const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
+39:                const UI08_t myGatewayMac[6] = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
+40:                // PC's in network
+41:                UI08_t pc[4]            = {192, 168, 1, 147};
+42:                UI08_t ntpServer[4]     = {194, 171, 167, 130};
+43:                
+44:                //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
+45:                
+46:                void macRxFrame()
+47:                {
+48:                    enc28j60RxFrame();
+49:                }
+50:                void macTxFrame(EthernetFrame_t* packet, UI16_t length)
+51:                {
+52:                    enc28j60TxFrame(packet, length);
+53:                }
+54:                void macTxReplyFrame(EthernetFrame_t* packet, UI16_t length)
+55:                {
+56:                    enc28j60TxReplyFrame(packet, length);
+57:                }
+58:                
+59:                #endif
+60:                
+61:                #endif
+62:                
+63:                void SysInitGpio(void)
+64:                {
+001FC6  FA0000     LNK #0x0
+65:                    SYS_GPIO_INIT_PORTA();
+001FC8  A902C0     BCLR TRISA, #0
+001FCA  A962C0     BCLR TRISA, #3
+001FCC  A9E2C0     BCLR TRISA, #7
+001FCE  A902C1     BCLR 0x2C1, #0
+001FD0  A942C1     BCLR 0x2C1, #2
+001FD2  A822C0     BSET TRISA, #1
+001FD4  A842C0     BSET TRISA, #2
+001FD6  A822C1     BSET 0x2C1, #1
+66:                    SYS_GPIO_INIT_PORTB();
+001FD8  A902C8     BCLR TRISB, #0
+001FDA  A9A2C8     BCLR TRISB, #5
+001FDC  A9E2C8     BCLR TRISB, #7
+001FDE  A902C9     BCLR 0x2C9, #0
+001FE0  A9A2C9     BCLR 0x2C9, #5
+001FE2  A9C2C9     BCLR 0x2C9, #6
+001FE4  A822C8     BSET TRISB, #1
+001FE6  A822C9     BSET 0x2C9, #1
+001FE8  A8E2C9     BSET 0x2C9, #7
+67:                    SYS_GPIO_INIT_PORTC();
+001FEA  A902D0     BCLR TRISC, #0
+001FEC  A922D0     BCLR TRISC, #1
+001FEE  A9A2D0     BCLR TRISC, #5
+001FF0  A9C2D0     BCLR TRISC, #6
+001FF2  A9E2D0     BCLR TRISC, #7
+001FF4  A902D1     BCLR 0x2D1, #0
+001FF6  A842D0     BSET TRISC, #2
+001FF8  A862D0     BSET TRISC, #3
+001FFA  A882D0     BSET TRISC, #4
+001FFC  A822D1     BSET 0x2D1, #1
+68:                    
+69:                    // Enable humidity analog function
+70:                    //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
+71:                
+72:                #ifdef SERVER
+73:                    // Pins only dedicated on server, for like FLASH and Ethernet
+74:                #endif
+75:                }
+001FFE  FA8000     ULNK
+002000  060000     RETURN
+76:                
+77:                #ifdef SERVER
+78:                void UartTxStr(char * str)
+79:                {
+002002  FA0002     LNK #0x2
+002004  780F00     MOV W0, [W14]
+80:                    while(*str != '\0')
+002006  37000A     BRA 0x201C
+00201C  78021E     MOV [W14], W4
+00201E  784214     MOV.B [W4], W4
+002020  524FE0     SUB.B W4, #0x0, [W15]
+002022  3AFFF2     BRA NZ, 0x2008
+81:                    {
+82:                        U1TXREG = *str;
+002008  78021E     MOV [W14], W4
+00200A  784214     MOV.B [W4], W4
+00200C  FB0204     SE W4, W4
+00200E  881124     MOV W4, U1TXREG
+83:                        while ((U1STA & (1<<9)) != 0);
+002010  000000     NOP
+002012  801115     MOV U1STA, W5
+002014  202004     MOV #0x200, W4
+002016  628204     AND W5, W4, W4
+002018  520FE0     SUB W4, #0x0, [W15]
+00201A  3AFFFB     BRA NZ, 0x2012
+84:                    }
+85:                }
+002024  FA8000     ULNK
+002026  060000     RETURN
+86:                
+87:                void UartInit()
+88:                {
+002028  FA0000     LNK #0x0
+89:                #ifdef PIC24_HW
+90:                    U1MODE = 0;
+00202A  EB0200     CLR W4
+00202C  881104     MOV W4, U1MODE
+91:                    
+92:                    PPSUnLock;
+00202E  803A15     MOV OSCCON, W5
+002030  200BF4     MOV #0xBF, W4
+002032  628304     AND W5, W4, W6
+002034  200464     MOV #0x46, W4
+002036  200575     MOV #0x57, W5
+002038  207427     MOV #0x742, W7
+00203A  784B84     MOV.B W4, [W7]
+00203C  784B85     MOV.B W5, [W7]
+00203E  784B86     MOV.B W6, [W7]
+93:                    iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
+002040  803605     MOV RPOR0, W5
+002042  2FFE04     MOV #0xFFE0, W4
+002044  628204     AND W5, W4, W4
+002046  B30034     IOR #0x3, W4
+002048  883604     MOV W4, RPOR0
+94:                    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
+00204A  803525     MOV RPINR18, W5
+00204C  2FFE04     MOV #0xFFE0, W4
+00204E  628204     AND W5, W4, W4
+002050  A00004     BSET W4, #0
+002052  883524     MOV W4, RPINR18
+95:                    PPSLock;
+002054  803A15     MOV OSCCON, W5
+002056  200404     MOV #0x40, W4
+002058  728304     IOR W5, W4, W6
+00205A  200464     MOV #0x46, W4
+00205C  200575     MOV #0x57, W5
+00205E  207427     MOV #0x742, W7
+002060  784B84     MOV.B W4, [W7]
+002062  784B85     MOV.B W5, [W7]
+002064  784B86     MOV.B W6, [W7]
+96:                
+97:                    U1STA  = (1 << 10);
+002066  204004     MOV #0x400, W4
+002068  881114     MOV W4, U1STA
+98:                    U1BRG  = F_OSC_DIV_2/16/38400 - 1; //103; // 115k2 @ FRCPLL stock
+00206A  2000C4     MOV #0xC, W4
+00206C  881144     MOV W4, U1BRG
+99:                    U1MODE = (1 << 15);
+00206E  280004     MOV #0x8000, W4
+002070  881104     MOV W4, U1MODE
+100:               #endif
+101:               }
+002072  FA8000     ULNK
+002074  060000     RETURN
+102:               
+103:               #ifdef COMPILE_ETHERNET
+104:               bool_t httpHandleConnection(void* con)
+105:               {
+106:                   TcpConnection_t* connection = (TcpConnection_t*) con;
+107:                   connection->rxData = (TcpRxDataHandler_t) WebserverHandle;
+108:               
+109:                   return TRUE;
+110:               }
+111:               
+112:               bool_t httpCloseConnection(void* con)
+113:               {
+114:                   TcpConnection_t* connection = (TcpConnection_t*) con;
+115:                   connection->rxData = NULL;
+116:               
+117:                   return TRUE;
+118:               }
+119:               
+120:               RtosTask_t ethTask;
+121:               UI08_t ethTaskStk[768];
+122:               
+123:               #define ETH_TCP_TICK 0x01
+124:               #define ETH_ENC_ISR 0x02
+125:               #define ETH_ENC_ERR 0x04
+126:               
+127:               #endif
+128:               
+129:               RtosTask_t ledTask;
+130:               UI08_t ledTaskStk[128];
+131:               
+132:               void LedTask()
+133:               {
+002076  FA0000     LNK #0x0
+134:                   while(1)
+135:                   {
+136:                       //
+137:                       SYS_DBG_LED = 1;
+002078  A862C4     BSET LATA, #3
+138:                       RtosTaskDelay(250);
+00207A  200FA0     MOV #0xFA, W0
+00207C  200001     MOV #0x0, W1
+00207E  07FBE6     RCALL RtosTaskDelay
+139:               
+140:                       SYS_DBG_LED = 0;
+002080  A962C4     BCLR LATA, #3
+141:                       RtosTaskDelay(250);
+002082  200FA0     MOV #0xFA, W0
+002084  200001     MOV #0x0, W1
+002086  07FBE2     RCALL RtosTaskDelay
+142:               
+143:               #ifdef COMPILE_ETHERNET
+144:                       RtosTaskSignalEvent(&ethTask, ETH_TCP_TICK);
+145:               #endif
+146:                   }
+002088  37FFF7     BRA 0x2078
+147:               }
+148:               
+149:               #ifdef COMPILE_ETHERNET
+150:               
+151:               void enc28j60Int(UI08_t foo)
+152:               {
+153:                   if (enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
+154:                   {
+155:                       RtosTaskSignalEvent(&ethTask, ETH_ENC_ERR);
+156:                       printf("Overflow occurered\r\n");
+157:                   }
+158:                   else
+159:                   {
+160:                       RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
+161:                   }
+162:               }
+163:               
+164:               void EthernetTaskInit()
+165:               {
+166:                   // Connect up ENC28j60 ISR
+167:                   PPSUnLock;
+168:               
+169:                   // Hook up external interrupt to enc28j60 driver
+170:                   iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
+171:                   ExtIntInit();
+172:                   ExtIntSetup(1, enc28j60Int, TRUE);
+173:               
+174:                   PPSLock;
+175:               
+176:                   // Boot the complete ethernet stack.
+177:                   spiInit(1);
+178:                   enc28j60Initialize(ethFrameBuffer, sizeof(ethFrameBuffer));
+179:                   arpInit();
+180:                   arpAnnounce();
+181:                   tcpInit();
+182:                   tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
+183:                   
+184:               }
+185:               
+186:               void EthernetTask()
+187:               {
+188:                   EthernetTaskInit();
+189:                   FlashInit();
+190:                   while(1)
+191:                   {
+192:                       UI16_t evt = RtosTaskWaitForEvent(
+193:                               ETH_TCP_TICK |
+194:                               ETH_ENC_ERR |
+195:                               ETH_ENC_ISR);
+196:               
+197:                       if ((evt & ETH_ENC_ERR) != 0)
+198:                       {
+199:                           enc28j60ResetRxBuffer();
+200:                       }
+201:               
+202:                       if ((evt & ETH_ENC_ISR) != 0)
+203:                       {
+204:                           while (enc28j60PacketPending())
+205:                           {
+206:                               macRxFrame();
+207:                           }
+208:                       }
+209:               
+210:                       if ((evt & ETH_TCP_TICK) != 0)
+211:                       {
+212:                           tcpTick();
+213:                       }
+214:                   }
+215:               }
+216:               
+217:               #endif
+218:               
+219:               #define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
+220:               WORD StkAddrLo;  // order matters
+221:               WORD StkAddrHi;
+222:               char TrapMsgBuf[24];
+223:               
+224:               void TRAP_ISR _AddressError(void)
+225:               {
+226:                   asm("mov #_StkAddrHi,w1\n\tpop [w1--]\n\tpop [w1++]\n\tpush [w1--]\n\tpush [w1++]");
+00208A  20F201     MOV #0xF20, W1
+00208C  7810CF     MOV [--W15], [W1--]
+00208E  7818CF     MOV [--W15], [W1++]
+002090  781FA1     MOV [W1--], [W15++]
+002092  781FB1     MOV [W1++], [W15++]
+227:                   // TODO: Write StkAddrLo & Hi to EEPROM
+228:                   while(1);
+002094  37FFFF     BRA 0x2094
+229:               }
+230:               void TRAP_ISR _StackError(void)
+231:               {
+232:                   while(1);
+002096  37FFFF     BRA _StackError
+233:               }
+234:               void TRAP_ISR _MathError(void)
+235:               {
+236:                   while(1);
+002098  37FFFF     BRA _MathError
+237:               }
+238:               #endif
+239:               
+240:               int main(void)
+241:               {
+00209A  FA0000     LNK #0x0
+242:                   #ifdef PIC24_HW
+243:                       #if defined(__PIC24FJ64GB004__)
+244:                       AD1PCFG = 0xFFFF;
+00209C  EB8200     SETM W4
+00209E  881964     MOV W4, AD1PCFG
+245:                       #warning "Building for PIC24FJ64GB004"
+246:                       #else
+247:                           #if defined (__PIC24FJ64GA004__)
+248:                           AD1PCFG = 0xFFFF;
+249:                           #warning "Building for PIC24FJ64GA004"
+250:                           #else
+251:                           ADPCFG = 0xFFFF; // Ports as digital, not analog
+252:                           #warning "Building for dsPIC33FJ128GP804"
+253:                           #endif
+254:                       #endif
+255:               
+256:                       ETH_CS = 1;
+0020A0  A802D5     BSET 0x2D5, #0
+257:                       RF_SPI_CS = 1;
+0020A2  A8A2CC     BSET LATB, #5
+258:                       FLASH_CS1 = 1;
+0020A4  A8E2C4     BSET LATA, #7
+259:                       FLASH_CS2 = 1;
+0020A6  A802C4     BSET LATA, #0
+260:                   
+261:                   #else
+262:                   UI08_t i, j, k;
+263:                       #warning "Building for PIC16F1508"
+264:                       OSCCON = 0b01111000; // 16MHz
+265:                       AdcInit();
+266:                   #endif
+267:                   SysInitGpio();
+0020A8  07FF8E     RCALL SysInitGpio
+268:               
+269:                   RF_POWER = 0;
+0020AA  A942C5     BCLR 0x2C5, #2
+270:                   SENSOR_PWR = 0;
+0020AC  A902C5     BCLR 0x2C5, #0
+271:               
+272:               #ifdef SERVER
+273:               
+274:                   UartInit();
+0020AE  07FFBC     RCALL UartInit
+275:                   printf("Hello world!\r\n");
+0020B0  28CA60     MOV #0x8CA6, W0
+0020B2  07F12A     RCALL _puts
+276:               
+277:                   RtosTaskInit();
+0020B4  07FB71     RCALL RtosTaskInit
+278:                   
+279:               #ifdef COMPILE_ETHERNET
+280:                   RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
+281:               #endif
+282:                   RfInit();
+0020B6  07FE43     RCALL RfInit
+283:               
+284:                   RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
+0020B8  200805     MOV #0x80, W5
+0020BA  20E9E4     MOV #0xE9E, W4
+0020BC  B3C013     MOV #0x1, W3
+0020BE  220762     MOV #0x2076, W2
+0020C0  28CB41     MOV #0x8CB4, W1
+0020C2  20E7A0     MOV #0xE7A, W0
+0020C4  07FB75     RCALL RtosTaskCreate
+285:                   RtosTaskRun();
+0020C6  07FBB4     RCALL RtosTaskRun
+286:               
+287:               
+288:               
+289:               #else
+290:               #define dl() for (i = 0; i < 250; i++) \
+291:                           for(j = 0; j < 250; j++) \
+292:                               asm("nop"); \
+293:                   // i = 0, j = 0, k = 0;
+294:                   MRF49XA_Init();
+295:                   dl();
+296:                   dl();
+297:                   MRF49XA_Reset_Radio();
+298:                   while (1)
+299:                   {
+300:                       MRF49XA_TxPacket(bf, sizeof(bf));
+301:                       for (k = 0; k < 5; k++)
+302:                           dl();
+303:               
+304:                   }
+305:               #endif
+306:               
+307:                   //while(1);
+308:                   return 0;
+0020C8  EB0200     CLR W4
+309:               }
+0020CA  780004     MOV W4, W0
+0020CC  FA8000     ULNK
+0020CE  060000     RETURN
+310:               
+---  /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c  -------------------------------------
+1:                 #include "stddefs.h"
+2:                 #include <xc.h>
+3:                 #include "devices/mrf49xa.h"
+4:                 #include "rtos/task.h"
+5:                 #include "rfstack/hal.h"
+6:                 
+7:                 void RfTrcvPut(UI08_t byte)
+8:                 {
+0019C8  FA0002     LNK #0x2
+0019CA  784F00     MOV.B W0, [W14]
+9:                     RF_SPI_CS = 0;
+0019CC  A9A2CC     BCLR LATB, #5
+10:                    SPI_Write(TXBREG >> 8);
+0019CE  B3CB80     MOV #0xB8, W0
+0019D0  07009D     RCALL SPI_Write
+11:                    SPI_Write(byte);
+0019D2  78401E     MOV.B [W14], W0
+0019D4  07009B     RCALL SPI_Write
+12:                    RF_SPI_CS = 1;
+0019D6  A8A2CC     BSET LATB, #5
+13:                }
+0019D8  FA8000     ULNK
+0019DA  060000     RETURN
+14:                UI08_t RfTrcvGet(void)
+15:                {
+0019DC  FA0002     LNK #0x2
+16:                    /*RF_FSEL = 0;
+17:                    RF_SPI_CS = 0;
+18:                    UI08_t b = SPI_Read();
+19:                    RF_SPI_CS = 1;
+20:                    RF_FSEL = 1;*/
+21:                
+22:                    RF_FSEL = 1;
+0019DE  A8A2D4     BSET LATC, #5
+23:                
+24:                    RF_SPI_CS = 0;
+0019E0  A9A2CC     BCLR LATB, #5
+25:                    SPI_Write(0xB0);
+0019E2  B3CB00     MOV #0xB0, W0
+0019E4  070093     RCALL SPI_Write
+26:                    UI08_t b = SPI_Read();
+0019E6  070070     RCALL SPI_Read
+0019E8  784200     MOV.B W0, W4
+0019EA  784F04     MOV.B W4, [W14]
+27:                    RF_SPI_CS = 1;
+0019EC  A8A2CC     BSET LATB, #5
+28:                    
+29:                    return b;
+0019EE  78421E     MOV.B [W14], W4
+30:                }
+0019F0  784004     MOV.B W4, W0
+0019F2  FA8000     ULNK
+0019F4  060000     RETURN
+31:                UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
+32:                {
+0019F6  FA0002     LNK #0x2
+0019F8  784F00     MOV.B W0, [W14]
+0019FA  984711     MOV.B W1, [W14+1]
+33:                    return (initial ^ data);
+0019FC  90421E     MOV.B [W14+1], W4
+0019FE  6A421E     XOR.B W4, [W14], W4
+34:                }
+001A00  784004     MOV.B W4, W0
+001A02  FA8000     ULNK
+001A04  060000     RETURN
+35:                void RfTrcvRearm(void)
+36:                {
+001A06  FA0000     LNK #0x0
+37:                    MRF49XAReset();
+001A08  07002F     RCALL MRF49XAReset
+38:                }
+001A0A  FA8000     ULNK
+001A0C  060000     RETURN
+39:                
+40:                void MRF49XAInit()
+41:                {
+001A0E  FA0000     LNK #0x0
+42:                #ifndef SERVER
+43:                    UI08_t i, j;
+44:                #endif
+45:                    // Reset the chip
+46:                    RF_RES = 0;
+001A10  A9C2D4     BCLR LATC, #6
+47:                    Nop();
+001A12  000000     NOP
+48:                    RF_RES = 1;
+001A14  A8C2D4     BSET LATC, #6
+49:                
+50:                #ifdef SERVER
+51:                    RtosTaskDelay(250); // TODO: Determine good timestamp.
+001A16  200FA0     MOV #0xFA, W0
+001A18  200001     MOV #0x0, W1
+001A1A  07FF18     RCALL RtosTaskDelay
+52:                #else
+53:                    for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
+54:                #endif
+55:                
+56:                    MRF49XACommand(FIFORSTREG);
+001A1C  2CA810     MOV #0xCA81, W0
+001A1E  070033     RCALL MRF49XACommand
+57:                    MRF49XACommand(FIFORSTREG | 0x0002);
+001A20  2CA830     MOV #0xCA83, W0
+001A22  070031     RCALL MRF49XACommand
+58:                    MRF49XACommand(GENCREG);
+001A24  280280     MOV #0x8028, W0
+001A26  07002F     RCALL MRF49XACommand
+59:                    MRF49XACommand(AFCCREG);
+001A28  2C4D70     MOV #0xC4D7, W0
+001A2A  07002D     RCALL MRF49XACommand
+60:                    MRF49XACommand(CFSREG);
+001A2C  2A8600     MOV #0xA860, W0
+001A2E  07002B     RCALL MRF49XACommand
+61:                    MRF49XACommand(DRSREG);
+001A30  2C6110     MOV #0xC611, W0
+001A32  070029     RCALL MRF49XACommand
+62:                    MRF49XACommand(PMCREG);
+001A34  282000     MOV #0x8200, W0
+001A36  070027     RCALL MRF49XACommand
+63:                    MRF49XACommand(RXCREG);
+001A38  294600     MOV #0x9460, W0
+001A3A  070025     RCALL MRF49XACommand
+64:                    MRF49XACommand(TXCREG);
+001A3C  298900     MOV #0x9890, W0
+001A3E  070023     RCALL MRF49XACommand
+65:                    MRF49XACommand(BBFCREG);
+001A40  2C2AC0     MOV #0xC2AC, W0
+001A42  070021     RCALL MRF49XACommand
+66:                    MRF49XACommand(PMCREG | 0x0020);		// turn on tx
+001A44  282200     MOV #0x8220, W0
+001A46  07001F     RCALL MRF49XACommand
+67:                
+68:                #ifdef SERVER
+69:                    RtosTaskDelay(250); // TODO: Determine good timestamp.
+001A48  200FA0     MOV #0xFA, W0
+001A4A  200001     MOV #0x0, W1
+001A4C  07FEFF     RCALL RtosTaskDelay
+70:                #else
+71:                    for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
+72:                #endif
+73:                
+74:                    MRF49XACommand(PMCREG | 0x0080);		// turn off Tx, turn on receiver
+001A4E  282800     MOV #0x8280, W0
+001A50  07001A     RCALL MRF49XACommand
+75:                    MRF49XACommand(GENCREG | 0x0040);		// enable the FIFO
+001A52  280680     MOV #0x8068, W0
+001A54  070018     RCALL MRF49XACommand
+76:                    MRF49XACommand(FIFORSTREG);
+001A56  2CA810     MOV #0xCA81, W0
+001A58  070016     RCALL MRF49XACommand
+77:                    MRF49XACommand(FIFORSTREG | 0x0002);	// enable syncron latch
+001A5A  2CA830     MOV #0xCA83, W0
+001A5C  070014     RCALL MRF49XACommand
+78:                
+79:                    RF_FSEL = 1; // Read from SPI registers.
+001A5E  A8A2D4     BSET LATC, #5
+80:                
+81:                    // Pull-up IRQ/INT signals
+82:                    CNPU2bits.CN21PUE = 1;
+001A60  A8A06A     BSET CNPU2, #5
+83:                    CNPU2bits.CN30PUE = 1;
+001A62  A8C06B     BSET 0x6B, #6
+84:                
+85:                #ifndef SERVER
+86:                
+87:                    CNEN2bits.CN21IE = 1; // IRO
+88:                    CNEN2bits.CN30IE = 1; // INT
+89:                
+90:                    IFS1bits.CNIF = 0;
+91:                    IEC1bits.CNIE = 1;
+92:                //sts433B
+93:                
+94:                #endif
+95:                }
+001A64  FA8000     ULNK
+001A66  060000     RETURN
+96:                
+97:                void MRF49XAReset()
+98:                {
+001A68  FA0000     LNK #0x0
+99:                    MRF49XACommand(PMCREG);		// turn off tx and rx
+001A6A  282000     MOV #0x8200, W0
+001A6C  07000C     RCALL MRF49XACommand
+100:                   MRF49XACommand(FIFORSTREG);		// reset FIFO
+001A6E  2CA810     MOV #0xCA81, W0
+001A70  07000A     RCALL MRF49XACommand
+101:                   MRF49XACommand(GENCREG);		// disable FIFO , Tx_latch
+001A72  280280     MOV #0x8028, W0
+001A74  070008     RCALL MRF49XACommand
+102:                   MRF49XACommand(PMCREG | 0x0080);	// turn on receiver
+001A76  282800     MOV #0x8280, W0
+001A78  070006     RCALL MRF49XACommand
+103:                   MRF49XACommand(GENCREG | 0x0040);	// enable the FIFO
+001A7A  280680     MOV #0x8068, W0
+001A7C  070004     RCALL MRF49XACommand
+104:                   MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
+001A7E  2CA830     MOV #0xCA83, W0
+001A80  070002     RCALL MRF49XACommand
+105:               }
+001A82  FA8000     ULNK
+001A84  060000     RETURN
+106:               
+107:               void MRF49XACommand(UI16_t cmd)
+108:               {
+001A86  FA0002     LNK #0x2
+001A88  780F00     MOV W0, [W14]
+109:                   RF_SPI_CS = 0;
+001A8A  A9A2CC     BCLR LATB, #5
+110:               
+111:                   SPI_Write((cmd & 0xFF00) >> 8);
+001A8C  78021E     MOV [W14], W4
+001A8E  DE2248     LSR W4, #8, W4
+001A90  784204     MOV.B W4, W4
+001A92  784004     MOV.B W4, W0
+001A94  07003B     RCALL SPI_Write
+112:                   SPI_Write((cmd & 0x00FF));
+001A96  78021E     MOV [W14], W4
+001A98  784204     MOV.B W4, W4
+001A9A  784004     MOV.B W4, W0
+001A9C  070037     RCALL SPI_Write
+113:               
+114:                   RF_SPI_CS = 1;
+001A9E  A8A2CC     BSET LATB, #5
+115:               }
+001AA0  FA8000     ULNK
+001AA2  060000     RETURN
+116:               
+117:               UI16_t MRF49XAReadStatus()
+118:               {
+001AA4  FA0002     LNK #0x2
+119:                   UI16_t w = 0;
+001AA6  EB0200     CLR W4
+001AA8  780F04     MOV W4, [W14]
+120:               
+121:                   RF_SPI_CS = 0;
+001AAA  A9A2CC     BCLR LATB, #5
+122:                   w = SPI_Read() << 8;
+001AAC  07000D     RCALL SPI_Read
+001AAE  784200     MOV.B W0, W4
+001AB0  FB8204     ZE W4, W4
+001AB2  DD2248     SL W4, #8, W4
+001AB4  780F04     MOV W4, [W14]
+123:                   w |= SPI_Read();
+001AB6  070008     RCALL SPI_Read
+001AB8  784200     MOV.B W0, W4
+001ABA  FB8204     ZE W4, W4
+001ABC  720F1E     IOR W4, [W14], [W14]
+124:                   RF_SPI_CS = 1;
+001ABE  A8A2CC     BSET LATB, #5
+125:               
+126:                   return w;
+001AC0  78021E     MOV [W14], W4
+127:               
+128:               }
+001AC2  780004     MOV W4, W0
+001AC4  FA8000     ULNK
+001AC6  060000     RETURN
+129:               
+130:               //#ifdef PIC16
+131:               // 16MHz PIC16
+132:               // -> 267kHz SPI clock with loop
+133:               // -> ~460kHz SPI clockc without loop
+134:               #define SPI_UNROLL_LOOP
+135:               
+136:               UI08_t SPI_Read(void)
+137:               {
+001AC8  FA0002     LNK #0x2
+138:                   UI08_t i;
+139:                   UI08_t data = 0;
+001ACA  EB4200     CLR.B W4
+001ACC  984714     MOV.B W4, [W14+1]
+140:               
+141:                   RF_SPI_SDO = 0;
+001ACE  A902CD     BCLR 0x2CD, #0
+142:                   RF_SPI_SCK = 0;
+001AD0  A9E2CC     BCLR LATB, #7
+143:                   
+144:                   for (i = 0; i < 8; i++)
+001AD2  EB4200     CLR.B W4
+001AD4  784F04     MOV.B W4, [W14]
+001AD6  370013     BRA 0x1AFE
+001AFC  E84F1E     INC.B [W14], [W14]
+001AFE  78421E     MOV.B [W14], W4
+001B00  524FE7     SUB.B W4, #0x7, [W15]
+001B02  36FFEA     BRA LEU, 0x1AD8
+145:                   {
+146:                       data = data << 1;
+001AD8  90421E     MOV.B [W14+1], W4
+001ADA  424204     ADD.B W4, W4, W4
+001ADC  984714     MOV.B W4, [W14+1]
+147:               
+148:                       if (RF_SPI_SDI)
+001ADE  801694     MOV PORTC, W4
+001AE0  620270     AND W4, #0x10, W4
+001AE2  520FE0     SUB W4, #0x0, [W15]
+001AE4  320004     BRA Z, 0x1AEE
+149:                       {
+150:                           data |= 0x01;
+001AE6  90421E     MOV.B [W14+1], W4
+001AE8  A00404     BSET.B W4, #0
+001AEA  984714     MOV.B W4, [W14+1]
+001AEC  370004     BRA 0x1AF6
+151:                       }
+152:                       else
+153:                       {
+154:                           data &= 0xFE;
+001AEE  90429E     MOV.B [W14+1], W5
+001AF0  B3CFE4     MOV #0xFE, W4
+001AF2  62C204     AND.B W5, W4, W4
+001AF4  984714     MOV.B W4, [W14+1]
+155:                       }
+156:               
+157:                       RF_SPI_SCK = 1;
+001AF6  A8E2CC     BSET LATB, #7
+158:               
+159:                       Nop();
+001AF8  000000     NOP
+160:                       
+161:                       RF_SPI_SCK = 0;
+001AFA  A9E2CC     BCLR LATB, #7
+162:                   }
+163:                   return data;
+001B04  90421E     MOV.B [W14+1], W4
+164:               }
+001B06  784004     MOV.B W4, W0
+001B08  FA8000     ULNK
+001B0A  060000     RETURN
+165:               
+166:               void SPI_Write(UI08_t data)
+167:               {
+001B0C  FA0002     LNK #0x2
+001B0E  784F00     MOV.B W0, [W14]
+168:               
+169:                   RF_SPI_SCK = 0;
+001B10  A9E2CC     BCLR LATB, #7
+170:               
+171:               #ifdef SPI_UNROLL_LOOP
+172:                   #define SPI_TICK(a) do { if ((data & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
+173:                   RF_SPI_SCK = 1; \
+174:                   RF_SPI_SCK = 0; } while (0);
+175:                   
+176:                   SPI_TICK(7);
+001B12  78421E     MOV.B [W14], W4
+001B14  524FE0     SUB.B W4, #0x0, [W15]
+001B16  3D0002     BRA GE, 0x1B1C
+001B18  A802CD     BSET 0x2CD, #0
+001B1A  370001     BRA 0x1B1E
+001B1C  A902CD     BCLR 0x2CD, #0
+001B1E  A8E2CC     BSET LATB, #7
+001B20  A9E2CC     BCLR LATB, #7
+177:                   SPI_TICK(6);
+001B22  78421E     MOV.B [W14], W4
+001B24  FB8284     ZE W4, W5
+001B26  200404     MOV #0x40, W4
+001B28  628204     AND W5, W4, W4
+001B2A  520FE0     SUB W4, #0x0, [W15]
+001B2C  320002     BRA Z, 0x1B32
+001B2E  A802CD     BSET 0x2CD, #0
+001B30  370001     BRA 0x1B34
+001B32  A902CD     BCLR 0x2CD, #0
+001B34  A8E2CC     BSET LATB, #7
+001B36  A9E2CC     BCLR LATB, #7
+178:                   SPI_TICK(5);
+001B38  78421E     MOV.B [W14], W4
+001B3A  FB8284     ZE W4, W5
+001B3C  200204     MOV #0x20, W4
+001B3E  628204     AND W5, W4, W4
+001B40  520FE0     SUB W4, #0x0, [W15]
+001B42  320002     BRA Z, 0x1B48
+001B44  A802CD     BSET 0x2CD, #0
+001B46  370001     BRA 0x1B4A
+001B48  A902CD     BCLR 0x2CD, #0
+001B4A  A8E2CC     BSET LATB, #7
+001B4C  A9E2CC     BCLR LATB, #7
+179:                   SPI_TICK(4);
+001B4E  78429E     MOV.B [W14], W5
+001B50  FB8205     ZE W5, W4
+001B52  620270     AND W4, #0x10, W4
+001B54  520FE0     SUB W4, #0x0, [W15]
+001B56  320002     BRA Z, 0x1B5C
+001B58  A802CD     BSET 0x2CD, #0
+001B5A  370001     BRA 0x1B5E
+001B5C  A902CD     BCLR 0x2CD, #0
+001B5E  A8E2CC     BSET LATB, #7
+001B60  A9E2CC     BCLR LATB, #7
+180:                   SPI_TICK(3);
+001B62  78429E     MOV.B [W14], W5
+001B64  FB8205     ZE W5, W4
+001B66  620268     AND W4, #0x8, W4
+001B68  520FE0     SUB W4, #0x0, [W15]
+001B6A  320002     BRA Z, 0x1B70
+001B6C  A802CD     BSET 0x2CD, #0
+001B6E  370001     BRA 0x1B72
+001B70  A902CD     BCLR 0x2CD, #0
+001B72  A8E2CC     BSET LATB, #7
+001B74  A9E2CC     BCLR LATB, #7
+181:                   SPI_TICK(2);
+001B76  78429E     MOV.B [W14], W5
+001B78  FB8205     ZE W5, W4
+001B7A  620264     AND W4, #0x4, W4
+001B7C  520FE0     SUB W4, #0x0, [W15]
+001B7E  320002     BRA Z, 0x1B84
+001B80  A802CD     BSET 0x2CD, #0
+001B82  370001     BRA 0x1B86
+001B84  A902CD     BCLR 0x2CD, #0
+001B86  A8E2CC     BSET LATB, #7
+001B88  A9E2CC     BCLR LATB, #7
+182:                   SPI_TICK(1);
+001B8A  78429E     MOV.B [W14], W5
+001B8C  FB8205     ZE W5, W4
+001B8E  620262     AND W4, #0x2, W4
+001B90  520FE0     SUB W4, #0x0, [W15]
+001B92  320002     BRA Z, 0x1B98
+001B94  A802CD     BSET 0x2CD, #0
+001B96  370001     BRA 0x1B9A
+001B98  A902CD     BCLR 0x2CD, #0
+001B9A  A8E2CC     BSET LATB, #7
+001B9C  A9E2CC     BCLR LATB, #7
+183:                   SPI_TICK(0);
+001B9E  78429E     MOV.B [W14], W5
+001BA0  FB8205     ZE W5, W4
+001BA2  620261     AND W4, #0x1, W4
+001BA4  784204     MOV.B W4, W4
+001BA6  524FE0     SUB.B W4, #0x0, [W15]
+001BA8  320002     BRA Z, 0x1BAE
+001BAA  A802CD     BSET 0x2CD, #0
+001BAC  370001     BRA 0x1BB0
+001BAE  A902CD     BCLR 0x2CD, #0
+001BB0  A8E2CC     BSET LATB, #7
+001BB2  A9E2CC     BCLR LATB, #7
+184:               #else
+185:                   UI08_t i;
+186:                   for (i = 0; i < 8; i++)
+187:                   {
+188:                       if (data & 0x80)
+189:                       {
+190:                           RF_SPI_SDO = 1;
+191:                       }
+192:                       else
+193:                       {
+194:                           RF_SPI_SDO = 0;
+195:                       }
+196:               
+197:                       RF_SPI_SCK = 1;
+198:                       data = data << 1;
+199:                       RF_SPI_SCK = 0;
+200:                   }
+201:               #endif
+202:               }
+001BB4  FA8000     ULNK
+001BB6  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c  -------------------------------------
+1:                 #include "devices/mcp9800.h"
+2:                 #include "bsp/softI2c.h"
+3:                 
+4:                 void Mcp9800Start(Mcp9800Resolution_t resolution)
+5:                 {
+0023D8  FA0002     LNK #0x2
+0023DA  780F00     MOV W0, [W14]
+6:                     SoftI2cStart();
+0023DC  07FD6B     RCALL SoftI2cStart
+7:                     SoftI2cTxByte(0b10010000);
+0023DE  B3C900     MOV #0x90, W0
+0023E0  07FD91     RCALL SoftI2cTxByte
+8:                     SoftI2cTxByte(0x01);
+0023E2  B3C010     MOV #0x1, W0
+0023E4  07FD8F     RCALL SoftI2cTxByte
+9:                     SoftI2cTxByte(resolution);  // one shot + resolution
+0023E6  78021E     MOV [W14], W4
+0023E8  784204     MOV.B W4, W4
+0023EA  784004     MOV.B W4, W0
+0023EC  07FD8B     RCALL SoftI2cTxByte
+10:                    SoftI2cStop();
+0023EE  07FD7A     RCALL SoftI2cStop
+11:                
+12:                    SoftI2cStart();
+0023F0  07FD61     RCALL SoftI2cStart
+13:                    SoftI2cTxByte(0b10010000);
+0023F2  B3C900     MOV #0x90, W0
+0023F4  07FD87     RCALL SoftI2cTxByte
+14:                    SoftI2cTxByte(0x00);
+0023F6  EB4000     CLR.B W0
+0023F8  07FD85     RCALL SoftI2cTxByte
+15:                    SoftI2cStop();
+0023FA  07FD74     RCALL SoftI2cStop
+16:                
+17:                }
+0023FC  FA8000     ULNK
+0023FE  060000     RETURN
+18:                
+19:                UI16_t Mcp9800Read(void)
+20:                {
+002400  FA0002     LNK #0x2
+21:                    SoftI2cStart();
+002402  07FD58     RCALL SoftI2cStart
+22:                    //SoftI2cTxByte(0b10010000);
+23:                    //SoftI2cTxByte(0x00);
+24:                    //SoftI2cRepeatedStart();
+25:                    SoftI2cTxByte(0b10010001);
+002404  B3C910     MOV #0x91, W0
+002406  07FD7E     RCALL SoftI2cTxByte
+26:                    UI08_t tempH = SoftI2cRxByte(1);
+002408  B3C010     MOV #0x1, W0
+00240A  07FDA8     RCALL SoftI2cRxByte
+00240C  784200     MOV.B W0, W4
+00240E  784F04     MOV.B W4, [W14]
+27:                    UI08_t tempL = SoftI2cRxByte(0);
+002410  EB4000     CLR.B W0
+002412  07FDA4     RCALL SoftI2cRxByte
+002414  784200     MOV.B W0, W4
+002416  984714     MOV.B W4, [W14+1]
+28:                    SoftI2cStop();
+002418  07FD65     RCALL SoftI2cStop
+29:                
+30:                    return (tempH << 8) | tempL;
+00241A  78429E     MOV.B [W14], W5
+00241C  FB8205     ZE W5, W4
+00241E  DD22C8     SL W4, #8, W5
+002420  90421E     MOV.B [W14+1], W4
+002422  FB8204     ZE W4, W4
+002424  728204     IOR W5, W4, W4
+31:                }
+002426  780004     MOV W4, W0
+002428  FA8000     ULNK
+00242A  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/devices/SST26VF032.c  ----------------------------------
+1:                 #include "devices/SST26VF032.h"
+2:                 
+3:                 void FlashInit(void)
+4:                 {
+00228E  FA0000     LNK #0x0
+5:                     FLASH_SIO2 = 1;
+002290  A822D4     BSET LATC, #1
+6:                     FLASH_SIO3 = 1;
+002292  A8A2CD     BSET 0x2CD, #5
+7:                     
+8:                     FLASH_CS(1, FALSE);
+002294  A8E2C4     BSET LATA, #7
+9:                     FLASH_CS(2, FALSE);
+002296  A802C4     BSET LATA, #0
+10:                    spiInit(FLASH_SPI_PORT);
+002298  B3C020     MOV #0x2, W0
+00229A  07F7EF     RCALL spiInit
+11:                }
+00229C  FA8000     ULNK
+00229E  060000     RETURN
+12:                
+13:                void FlashCsSet(UI32_t addr, bool_t state)
+14:                {
+0022A0  FA0006     LNK #0x6
+0022A2  BE8F00     MOV.D W0, [W14]
+0022A4  984742     MOV.B W2, [W14+4]
+15:                    if (addr <= 524288)
+0022A6  200004     MOV #0x0, W4
+0022A8  200085     MOV #0x8, W5
+0022AA  BE031E     MOV.D [W14], W6
+0022AC  530F84     SUB W6, W4, [W15]
+0022AE  5B8F85     SUBB W7, W5, [W15]
+0022B0  3E0007     BRA GTU, 0x22C0
+16:                    {
+17:                        FLASH_CS(1, state);
+0022B2  90424E     MOV.B [W14+4], W4
+0022B4  524FE0     SUB.B W4, #0x0, [W15]
+0022B6  320002     BRA Z, 0x22BC
+0022B8  A9E2C4     BCLR LATA, #7
+0022BA  370008     BRA 0x22CC
+0022BC  A8E2C4     BSET LATA, #7
+0022BE  370006     BRA 0x22CC
+18:                    }
+19:                    else
+20:                    {
+21:                        FLASH_CS(2, state);
+0022C0  90424E     MOV.B [W14+4], W4
+0022C2  524FE0     SUB.B W4, #0x0, [W15]
+0022C4  320002     BRA Z, 0x22CA
+0022C6  A902C4     BCLR LATA, #0
+0022C8  370001     BRA 0x22CC
+0022CA  A802C4     BSET LATA, #0
+22:                    }
+23:                }
+0022CC  FA8000     ULNK
+0022CE  060000     RETURN
+24:                
+25:                UI16_t FlashReadId(void)
+26:                {
+0022D0  FA0002     LNK #0x2
+27:                    UI16_t id = 0;
+0022D2  EB0200     CLR W4
+0022D4  780F04     MOV W4, [W14]
+28:                
+29:                    FLASH_CS(1, TRUE);
+0022D6  A9E2C4     BCLR LATA, #7
+30:                
+31:                    spiTxByte(FLASH_SPI_PORT, FLASH_CMD_READ_ID);
+0022D8  B3C1D0     MOV #0x1D, W0
+0022DA  07F890     RCALL spiTx2
+32:                
+33:                #if FLASH_CMD_READ_ID_BYTES == 4
+34:                    id |= spiRxByte(FLASH_SPI_PORT) << 16;
+35:                #endif
+36:                #if FLASH_CMD_READ_ID_BYTES >= 3
+37:                    id |= spiRxByte(FLASH_SPI_PORT) << 16;
+38:                #endif
+39:                #if FLASH_CMD_READ_ID_BYTES >= 2
+40:                    id |= spiRxByte(FLASH_SPI_PORT) << 8;
+0022DC  07F8AC     RCALL spiRx2
+0022DE  784200     MOV.B W0, W4
+0022E0  FB8204     ZE W4, W4
+0022E2  DD2248     SL W4, #8, W4
+0022E4  720F1E     IOR W4, [W14], [W14]
+41:                #endif
+42:                #if FLASH_CMD_READ_ID_BYTES >= 1
+43:                    id |= spiRxByte(FLASH_SPI_PORT);
+0022E6  07F8A7     RCALL spiRx2
+0022E8  784200     MOV.B W0, W4
+0022EA  FB8204     ZE W4, W4
+0022EC  720F1E     IOR W4, [W14], [W14]
+44:                #endif
+45:                
+46:                    FLASH_CS(1, FALSE);
+0022EE  A8E2C4     BSET LATA, #7
+47:                
+48:                    return id;
+0022F0  78021E     MOV [W14], W4
+49:                }
+0022F2  780004     MOV W4, W0
+0022F4  FA8000     ULNK
+0022F6  060000     RETURN
+50:                
+51:                void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
+52:                {
+0022F8  FA0008     LNK #0x8
+0022FA  BE8F00     MOV.D W0, [W14]
+0022FC  980722     MOV W2, [W14+4]
+0022FE  980733     MOV W3, [W14+6]
+53:                    FlashCsSet(addr, TRUE);
+002300  B3C012     MOV #0x1, W2
+002302  BE001E     MOV.D [W14], W0
+002304  07FFCD     RCALL FlashCsSet
+54:                
+55:                    spiTxByte(FLASH_SPI_PORT, FLASH_CMD_RX_DATA);
+002306  B3C030     MOV #0x3, W0
+002308  07F879     RCALL spiTx2
+56:                
+57:                    spiTxByte(FLASH_SPI_PORT, (addr >> 16));
+00230A  BE021E     MOV.D [W14], W4
+00230C  DE2A40     LSR W5, #0, W4
+00230E  200005     MOV #0x0, W5
+002310  784204     MOV.B W4, W4
+002312  784004     MOV.B W4, W0
+002314  07F873     RCALL spiTx2
+58:                    spiTxByte(FLASH_SPI_PORT, (addr >> 8));
+002316  BE021E     MOV.D [W14], W4
+002318  DD2B48     SL W5, #8, W6
+00231A  DE2248     LSR W4, #8, W4
+00231C  730204     IOR W6, W4, W4
+00231E  DE2AC8     LSR W5, #8, W5
+002320  784204     MOV.B W4, W4
+002322  784004     MOV.B W4, W0
+002324  07F86B     RCALL spiTx2
+59:                    spiTxByte(FLASH_SPI_PORT,  addr);
+002326  78021E     MOV [W14], W4
+002328  784204     MOV.B W4, W4
+00232A  784004     MOV.B W4, W0
+00232C  07F867     RCALL spiTx2
+60:                
+61:                    spiTxRxBytes(FLASH_SPI_PORT, NULL, bf, size);
+00232E  9001BE     MOV [W14+6], W3
+002330  90012E     MOV [W14+4], W2
+002332  EB0080     CLR W1
+002334  B3C020     MOV #0x2, W0
+002336  07F8AA     RCALL spiTxRxBytes
+62:                
+63:                    FlashCsSet(addr, FALSE);
+002338  EB4100     CLR.B W2
+00233A  BE001E     MOV.D [W14], W0
+00233C  07FFB1     RCALL FlashCsSet
+64:                }
+00233E  FA8000     ULNK
+002340  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c  -----------------------------------------
+1:                 #include "bsp/softI2c.h"
+2:                 #define I2C_MIRROR()
+3:                 void SoftI2cInit(void)
+4:                 {
+001E82  FA0000     LNK #0x0
+5:                     // Write '0' (=HIGH)
+6:                     I2C_SCL = I2C_HIGH;
+001E84  A842CC     BSET LATB, #2
+7:                     I2C_SDA = I2C_HIGH;
+001E86  A862CC     BSET LATB, #3
+8:                     
+9:                     // Configure as inputs
+10:                    TRIS_I2C_SCL = OUTPUT_PIN;
+001E88  A942C8     BCLR TRISB, #2
+11:                    TRIS_I2C_SDA = OUTPUT_PIN;
+001E8A  A962C8     BCLR TRISB, #3
+12:                
+13:                #ifdef I2C_PK2_MIRROR
+14:                    TRIS_I2C_MIRROR_SCL = OUTPUT_PIN;
+15:                    TRIS_I2C_MIRROR_SDA = OUTPUT_PIN;
+16:                #endif
+17:                
+18:                    // Enable weak pullups
+19:                    // Should be disabled during sleep
+20:                #ifdef WP_I2C_SDA
+21:                    WP_I2C_SDA = 0; // SDA
+22:                    WP_I2C_SCL = 0; // SCL
+23:                #endif
+24:                    
+25:                    SoftI2cStart();
+001E8C  070013     RCALL SoftI2cStart
+26:                    SoftI2cTxByte(0x00);
+001E8E  EB4000     CLR.B W0
+001E90  070039     RCALL SoftI2cTxByte
+27:                    SoftI2cStop();
+001E92  070028     RCALL SoftI2cStop
+28:                    
+29:                }
+001E94  FA8000     ULNK
+001E96  060000     RETURN
+30:                
+31:                void SoftI2cNop(void)
+32:                {
+001E98  FA0002     LNK #0x2
+33:                    UI16_t i =0;
+001E9A  EB0200     CLR W4
+001E9C  780F04     MOV W4, [W14]
+34:                    I2C_MIRROR();
+35:                    __delay_us(50);
+001E9E  EB0200     CLR W4
+001EA0  780F04     MOV W4, [W14]
+001EA2  370002     BRA 0x1EA8
+001EA4  000000     NOP
+001EA6  E80F1E     INC [W14], [W14]
+001EA8  200314     MOV #0x31, W4
+001EAA  78029E     MOV [W14], W5
+001EAC  528F84     SUB W5, W4, [W15]
+001EAE  36FFFA     BRA LEU, 0x1EA4
+36:                    //for (i = 0; i < 1000; i++) asm volatile("nop");
+37:                    I2C_MIRROR();
+38:                }
+001EB0  FA8000     ULNK
+001EB2  060000     RETURN
+39:                
+40:                void SoftI2cStart(void)
+41:                {
+001EB4  FA0000     LNK #0x0
+42:                    TRIS_I2C_SDA = OUTPUT_PIN;
+001EB6  A962C8     BCLR TRISB, #3
+43:                
+44:                    I2C_SCL = I2C_HIGH;
+001EB8  A842CC     BSET LATB, #2
+45:                    SoftI2cNop();
+001EBA  07FFEE     RCALL SoftI2cNop
+46:                
+47:                    I2C_SDA = I2C_LOW;
+001EBC  A962CC     BCLR LATB, #3
+48:                    SoftI2cNop();
+001EBE  07FFEC     RCALL SoftI2cNop
+49:                    I2C_SCL = I2C_LOW;
+001EC0  A942CC     BCLR LATB, #2
+50:                    SoftI2cNop();
+001EC2  07FFEA     RCALL SoftI2cNop
+51:                
+52:                }
+001EC4  FA8000     ULNK
+001EC6  060000     RETURN
+53:                
+54:                void SoftI2cRepeatedStart(void)
+55:                {
+001EC8  FA0000     LNK #0x0
+56:                    TRIS_I2C_SDA = OUTPUT_PIN;
+001ECA  A962C8     BCLR TRISB, #3
+57:                
+58:                    I2C_SCL = I2C_LOW;
+001ECC  A942CC     BCLR LATB, #2
+59:                    SoftI2cNop();
+001ECE  07FFE4     RCALL SoftI2cNop
+60:                    
+61:                    I2C_SDA = I2C_HIGH;
+001ED0  A862CC     BSET LATB, #3
+62:                    SoftI2cNop();
+001ED2  07FFE2     RCALL SoftI2cNop
+63:                    
+64:                    I2C_SCL = I2C_HIGH;
+001ED4  A842CC     BSET LATB, #2
+65:                    SoftI2cNop();
+001ED6  07FFE0     RCALL SoftI2cNop
+66:                
+67:                    I2C_SDA = I2C_LOW;
+001ED8  A962CC     BCLR LATB, #3
+68:                    SoftI2cNop();
+001EDA  07FFDE     RCALL SoftI2cNop
+69:                    
+70:                    I2C_SCL = I2C_LOW;
+001EDC  A942CC     BCLR LATB, #2
+71:                    SoftI2cNop();
+001EDE  07FFDC     RCALL SoftI2cNop
+72:                
+73:                }
+001EE0  FA8000     ULNK
+001EE2  060000     RETURN
+74:                
+75:                void SoftI2cStop(void)
+76:                {
+001EE4  FA0000     LNK #0x0
+77:                    TRIS_I2C_SDA = OUTPUT_PIN;
+001EE6  A962C8     BCLR TRISB, #3
+78:                    
+79:                    I2C_SDA = I2C_LOW;
+001EE8  A962CC     BCLR LATB, #3
+80:                    SoftI2cNop();
+001EEA  07FFD6     RCALL SoftI2cNop
+81:                    
+82:                    I2C_SCL = I2C_HIGH;
+001EEC  A842CC     BSET LATB, #2
+83:                    SoftI2cNop();
+001EEE  07FFD4     RCALL SoftI2cNop
+84:                    I2C_SDA = I2C_HIGH;
+001EF0  A862CC     BSET LATB, #3
+85:                    SoftI2cNop();
+001EF2  07FFD2     RCALL SoftI2cNop
+86:                    SoftI2cNop();
+001EF4  07FFD1     RCALL SoftI2cNop
+87:                    SoftI2cNop();
+001EF6  07FFD0     RCALL SoftI2cNop
+88:                    SoftI2cNop();
+001EF8  07FFCF     RCALL SoftI2cNop
+89:                    SoftI2cNop();
+001EFA  07FFCE     RCALL SoftI2cNop
+90:                    SoftI2cNop();
+001EFC  07FFCD     RCALL SoftI2cNop
+91:                    SoftI2cNop();
+001EFE  07FFCC     RCALL SoftI2cNop
+92:                }
+001F00  FA8000     ULNK
+001F02  060000     RETURN
+93:                
+94:                UI08_t SoftI2cTxByte(UI08_t data)
+95:                {
+001F04  FA0004     LNK #0x4
+001F06  984720     MOV.B W0, [W14+2]
+96:                    UI08_t i;
+97:                
+98:                    for(i = 0; i < 8; i++)
+001F08  EB4200     CLR.B W4
+001F0A  784F04     MOV.B W4, [W14]
+001F0C  370010     BRA 0x1F2E
+001F2C  E84F1E     INC.B [W14], [W14]
+001F2E  78421E     MOV.B [W14], W4
+001F30  524FE7     SUB.B W4, #0x7, [W15]
+001F32  36FFED     BRA LEU, 0x1F0E
+99:                    {
+100:                       I2C_SCL = I2C_LOW;
+001F0E  A942CC     BCLR LATB, #2
+101:                       SoftI2cNop();
+001F10  07FFC3     RCALL SoftI2cNop
+102:               
+103:                       if(data & 0x80)
+001F12  90422E     MOV.B [W14+2], W4
+001F14  524FE0     SUB.B W4, #0x0, [W15]
+001F16  3D0002     BRA GE, 0x1F1C
+104:                           I2C_SDA = I2C_HIGH;
+001F18  A862CC     BSET LATB, #3
+001F1A  370001     BRA 0x1F1E
+105:                       else
+106:                           I2C_SDA = I2C_LOW;
+001F1C  A962CC     BCLR LATB, #3
+107:                       TRIS_I2C_SDA = OUTPUT_PIN;
+001F1E  A962C8     BCLR TRISB, #3
+108:               
+109:                       SoftI2cNop();
+001F20  07FFBB     RCALL SoftI2cNop
+110:               
+111:                       I2C_SCL = I2C_HIGH;
+001F22  A842CC     BSET LATB, #2
+112:                       SoftI2cNop();
+001F24  07FFB9     RCALL SoftI2cNop
+113:               
+114:                       //while((SCLPIN & (1<<SCL))==0);
+115:               
+116:                       data = data << 1;
+001F26  90422E     MOV.B [W14+2], W4
+001F28  424204     ADD.B W4, W4, W4
+001F2A  984724     MOV.B W4, [W14+2]
+117:                   }
+118:               
+119:                   //The 9th clock (ACK Phase)
+120:                   I2C_SCL = I2C_LOW;
+001F34  A942CC     BCLR LATB, #2
+121:                   SoftI2cNop();
+001F36  07FFB0     RCALL SoftI2cNop
+122:               
+123:                   //I2C_SDA = I2C_HIGH;
+124:                   TRIS_I2C_SDA = INPUT_PIN;
+001F38  A862C8     BSET TRISB, #3
+125:                   
+126:                   I2C_SCL = I2C_HIGH;
+001F3A  A842CC     BSET LATB, #2
+127:                   SoftI2cNop();
+001F3C  07FFAD     RCALL SoftI2cNop
+128:               
+129:                   UI08_t ack= !I2C_SDA_READ;
+001F3E  801654     MOV PORTB, W4
+001F40  620268     AND W4, #0x8, W4
+001F42  A7F004     BTSC W4, #15
+001F44  EA0204     NEG W4, W4
+001F46  E90204     DEC W4, W4
+001F48  DE224F     LSR W4, #15, W4
+001F4A  984714     MOV.B W4, [W14+1]
+130:               
+131:                   I2C_SCL = I2C_LOW;
+001F4C  A942CC     BCLR LATB, #2
+132:                   SoftI2cNop();
+001F4E  07FFA4     RCALL SoftI2cNop
+133:                   SoftI2cNop();
+001F50  07FFA3     RCALL SoftI2cNop
+134:                   SoftI2cNop();
+001F52  07FFA2     RCALL SoftI2cNop
+135:               
+136:                   return ack;
+001F54  90421E     MOV.B [W14+1], W4
+137:               
+138:               }
+001F56  784004     MOV.B W4, W0
+001F58  FA8000     ULNK
+001F5A  060000     RETURN
+139:               
+140:               
+141:               UI08_t SoftI2cRxByte(UI08_t ack)
+142:               {
+001F5C  FA0004     LNK #0x4
+001F5E  984720     MOV.B W0, [W14+2]
+143:                   UI08_t data=0x00;
+001F60  EB4200     CLR.B W4
+001F62  784F04     MOV.B W4, [W14]
+144:                   UI08_t i;
+145:               
+146:                   I2C_SCL = I2C_LOW;
+001F64  A942CC     BCLR LATB, #2
+147:                   SoftI2cNop();
+001F66  07FF98     RCALL SoftI2cNop
+148:                   TRIS_I2C_SDA = INPUT_PIN;
+001F68  A862C8     BSET TRISB, #3
+149:                   I2C_SDA = I2C_HIGH;
+001F6A  A862CC     BSET LATB, #3
+150:                   
+151:                   for(i = 0; i < 8; i++)
+001F6C  EB4200     CLR.B W4
+001F6E  984714     MOV.B W4, [W14+1]
+001F70  370013     BRA 0x1F98
+001F92  90421E     MOV.B [W14+1], W4
+001F94  E84204     INC.B W4, W4
+001F96  984714     MOV.B W4, [W14+1]
+001F98  90421E     MOV.B [W14+1], W4
+001F9A  524FE7     SUB.B W4, #0x7, [W15]
+001F9C  36FFEA     BRA LEU, 0x1F72
+152:                   {
+153:                       I2C_SCL = I2C_LOW;
+001F72  A942CC     BCLR LATB, #2
+154:                       SoftI2cNop();
+001F74  07FF91     RCALL SoftI2cNop
+155:                       I2C_SCL = I2C_HIGH;
+001F76  A842CC     BSET LATB, #2
+156:                       SoftI2cNop();
+001F78  07FF8F     RCALL SoftI2cNop
+157:               
+158:                       //while((SCLPIN & (1<<SCL))==0);
+159:               
+160:                       if(I2C_SDA_READ != 0)
+001F7A  801654     MOV PORTB, W4
+001F7C  620268     AND W4, #0x8, W4
+001F7E  520FE0     SUB W4, #0x0, [W15]
+001F80  320008     BRA Z, 0x1F92
+161:                           data |= (0x80 >> i);
+001F82  90421E     MOV.B [W14+1], W4
+001F84  FB8204     ZE W4, W4
+001F86  200805     MOV #0x80, W5
+001F88  DEAA04     ASR W5, W4, W4
+001F8A  784284     MOV.B W4, W5
+001F8C  78421E     MOV.B [W14], W4
+001F8E  72C204     IOR.B W5, W4, W4
+001F90  784F04     MOV.B W4, [W14]
+162:               
+163:                   }
+164:               
+165:                   
+166:                   I2C_SCL = I2C_LOW;
+001F9E  A942CC     BCLR LATB, #2
+167:                   SoftI2cNop();
+001FA0  07FF7B     RCALL SoftI2cNop
+168:               
+169:                   TRIS_I2C_SDA = OUTPUT_PIN;
+001FA2  A962C8     BCLR TRISB, #3
+170:                   if(ack)
+001FA4  90422E     MOV.B [W14+2], W4
+001FA6  524FE0     SUB.B W4, #0x0, [W15]
+001FA8  320002     BRA Z, 0x1FAE
+171:                   {
+172:                       I2C_SDA = I2C_LOW;
+001FAA  A962CC     BCLR LATB, #3
+001FAC  370001     BRA 0x1FB0
+173:                   }
+174:                   else
+175:                   {
+176:                       I2C_SDA = I2C_HIGH;
+001FAE  A862CC     BSET LATB, #3
+177:                   }
+178:                   SoftI2cNop();
+001FB0  07FF73     RCALL SoftI2cNop
+179:               
+180:                   I2C_SCL = I2C_HIGH;
+001FB2  A842CC     BSET LATB, #2
+181:                   SoftI2cNop();
+001FB4  07FF71     RCALL SoftI2cNop
+182:               
+183:                   I2C_SCL = I2C_LOW;
+001FB6  A942CC     BCLR LATB, #2
+184:                   SoftI2cNop();
+001FB8  07FF6F     RCALL SoftI2cNop
+185:                   SoftI2cNop();
+001FBA  07FF6E     RCALL SoftI2cNop
+186:                   SoftI2cNop();
+001FBC  07FF6D     RCALL SoftI2cNop
+187:               
+188:                   return data;
+001FBE  78421E     MOV.B [W14], W4
+189:               
+190:               }
+001FC0  784004     MOV.B W4, W0
+001FC2  FA8000     ULNK
+001FC4  060000     RETURN
+191:               
+192:               
+193:               
+194:               
+---  /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic24/timer.c  -------------------------------------
+1:                 #include "bsp/timer.h"
+2:                 
+3:                 TimerCfg_t hwTimers[BSP_TIMER_COUNT];
+4:                 
+5:                 const UI32_t const divis[4] = {
+6:                     F_OSC_DIV_2/1,
+7:                     F_OSC_DIV_2/8, 
+8:                     F_OSC_DIV_2/64,
+9:                     F_OSC_DIV_2/256
+10:                };
+11:                
+12:                void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
+13:                {
+001534  FA0006     LNK #0x6
+001536  784F00     MOV.B W0, [W14]
+001538  980711     MOV W1, [W14+2]
+00153A  980722     MOV W2, [W14+4]
+14:                    switch(index)
+00153C  78429E     MOV.B [W14], W5
+00153E  FB8205     ZE W5, W4
+001540  B92361     MUL.SU W4, #1, W6
+001542  EB8200     SETM W4
+001544  EB8280     SETM W5
+001546  420206     ADD W4, W6, W4
+001548  4A8287     ADDC W5, W7, W5
+00154A  200046     MOV #0x4, W6
+00154C  200007     MOV #0x0, W7
+00154E  520F86     SUB W4, W6, [W15]
+001550  5A8F87     SUBB W5, W7, [W15]
+001552  3E0033     BRA GTU, 0x15BA
+001554  016004     BRA W4
+001556  370004     BRA 0x1560
+001558  37000C     BRA 0x1572
+00155A  370014     BRA 0x1584
+00155C  37001C     BRA 0x1596
+00155E  370024     BRA 0x15A8
+15:                    {
+16:                        case 1:
+17:                            T1CON = 0;
+001560  EB0200     CLR W4
+001562  880824     MOV W4, T1CON
+18:                            PR1 = periodReg;
+001564  90022E     MOV [W14+4], W4
+001566  880814     MOV W4, PR1
+19:                            TMR1 = 0;
+001568  EB0200     CLR W4
+00156A  880804     MOV W4, TMR1
+20:                            T1CON = ctrlReg;
+00156C  90029E     MOV [W14+2], W5
+00156E  880825     MOV W5, T1CON
+21:                            break;
+001570  370024     BRA 0x15BA
+22:                        case 2:
+23:                            T2CON = 0;
+001572  EB0200     CLR W4
+001574  880884     MOV W4, T2CON
+24:                            PR2 = periodReg;
+001576  90022E     MOV [W14+4], W4
+001578  880864     MOV W4, PR2
+25:                            TMR2 = 0;
+00157A  EB0200     CLR W4
+00157C  880834     MOV W4, TMR2
+26:                            T2CON = ctrlReg;
+00157E  90029E     MOV [W14+2], W5
+001580  880885     MOV W5, T2CON
+27:                            break;
+001582  37001B     BRA 0x15BA
+28:                        case 3:
+29:                            T3CON = 0;
+001584  EB0200     CLR W4
+001586  880894     MOV W4, T3CON
+30:                            PR3 = periodReg;
+001588  90022E     MOV [W14+4], W4
+00158A  880874     MOV W4, PR3
+31:                            TMR3 = 0;
+00158C  EB0200     CLR W4
+00158E  880854     MOV W4, TMR3
+32:                            T3CON = ctrlReg;
+001590  90029E     MOV [W14+2], W5
+001592  880895     MOV W5, T3CON
+33:                            break;
+001594  370012     BRA 0x15BA
+34:                        case 4:
+35:                            T4CON = 0;
+001596  EB0200     CLR W4
+001598  8808F4     MOV W4, T4CON
+36:                            PR4 = periodReg;
+00159A  90022E     MOV [W14+4], W4
+00159C  8808D4     MOV W4, PR4
+37:                            TMR4 = 0;
+00159E  EB0200     CLR W4
+0015A0  8808A4     MOV W4, TMR4
+38:                            T4CON = ctrlReg;
+0015A2  90029E     MOV [W14+2], W5
+0015A4  8808F5     MOV W5, T4CON
+39:                            break;
+0015A6  370009     BRA 0x15BA
+40:                        case 5:
+41:                            T5CON = 0;
+0015A8  EB0200     CLR W4
+0015AA  880904     MOV W4, T5CON
+42:                            PR5 = periodReg;
+0015AC  90022E     MOV [W14+4], W4
+0015AE  8808E4     MOV W4, PR5
+43:                            TMR5 = 0;
+0015B0  EB0200     CLR W4
+0015B2  8808C4     MOV W4, TMR5
+44:                            T5CON = ctrlReg;
+0015B4  90029E     MOV [W14+2], W5
+0015B6  880905     MOV W5, T5CON
+45:                            break;
+0015B8  000000     NOP
+46:                
+47:                    }
+48:                }
+0015BA  FA8000     ULNK
+0015BC  060000     RETURN
+49:                
+50:                void Timer16InitPeriod(UI08_t index, UI32_t period)
+51:                {
+0015BE  FA000C     LNK #0xC
+0015C0  984760     MOV.B W0, [W14+6]
+0015C2  980742     MOV W2, [W14+8]
+0015C4  980753     MOV W3, [W14+10]
+52:                    UI08_t i, tmrDivider = 0;
+0015C6  EB4200     CLR.B W4
+0015C8  984744     MOV.B W4, [W14+4]
+53:                    UI32_t tmrPeriod = 0;
+0015CA  B82260     MUL.UU W4, #0, W4
+0015CC  BE8F04     MOV.D W4, [W14]
+54:                
+55:                    // Calculate maximum period for each division setting
+56:                    for (i = 0; i < 4; i++)
+0015CE  EB4200     CLR.B W4
+0015D0  984754     MOV.B W4, [W14+5]
+0015D2  90425E     MOV.B [W14+5], W4
+0015D4  524FE3     SUB.B W4, #0x3, [W15]
+0015D6  3E000D     BRA GTU, 0x15F2
+57:                    {
+58:                        tmrPeriod = divis[i] / period;
+0015D8  90425E     MOV.B [W14+5], W4
+0015DA  FB8204     ZE W4, W4
+0015DC  DD22C2     SL W4, #2, W5
+0015DE  28CB84     MOV #0x8CB8, W4
+0015E0  428204     ADD W5, W4, W4
+0015E2  BE0214     MOV.D [W4], W4
+0015E4  90014E     MOV [W14+8], W2
+0015E6  9001DE     MOV [W14+10], W3
+0015E8  BE0004     MOV.D W4, W0
+0015EA  07F662     RCALL ___udivsi3
+0015EC  BE0200     MOV.D W0, W4
+0015EE  BE8F04     MOV.D W4, [W14]
+59:                        if (i < 0xFFFF)
+60:                            break;
+0015F0  000000     NOP
+61:                    }
+62:                
+63:                    timerSetup(index, (1<<15) | (tmrDivider << 4), tmrPeriod);
+0015F2  78029E     MOV [W14], W5
+0015F4  90424E     MOV.B [W14+4], W4
+0015F6  FB8204     ZE W4, W4
+0015F8  DD2344     SL W4, #4, W6
+0015FA  280004     MOV #0x8000, W4
+0015FC  730204     IOR W6, W4, W4
+0015FE  780105     MOV W5, W2
+001600  780084     MOV W4, W1
+001602  90406E     MOV.B [W14+6], W0
+001604  07FF97     RCALL timerSetup
+64:                }
+001606  FA8000     ULNK
+001608  060000     RETURN
+65:                
+66:                void Timer32Init(UI08_t index, UI08_t tmrDivider)
+67:                {
+00160A  FA0002     LNK #0x2
+00160C  784F00     MOV.B W0, [W14]
+00160E  984711     MOV.B W1, [W14+1]
+68:                    timerSetup(index, (1<<15) | (1<<3) | (tmrDivider << 4), 0xFFFF);
+001610  90421E     MOV.B [W14+1], W4
+001612  FB8204     ZE W4, W4
+001614  DD22C4     SL W4, #4, W5
+001616  280084     MOV #0x8008, W4
+001618  728204     IOR W5, W4, W4
+00161A  EB8100     SETM W2
+00161C  780084     MOV W4, W1
+00161E  78401E     MOV.B [W14], W0
+001620  07FF89     RCALL timerSetup
+69:                    timerSetup(index+1, (1<<15) | (tmrDivider << 4), 0xFFFF);
+001622  90421E     MOV.B [W14+1], W4
+001624  FB8204     ZE W4, W4
+001626  DD22C4     SL W4, #4, W5
+001628  280004     MOV #0x8000, W4
+00162A  728204     IOR W5, W4, W4
+00162C  780284     MOV W4, W5
+00162E  E8421E     INC.B [W14], W4
+001630  EB8100     SETM W2
+001632  780085     MOV W5, W1
+001634  784004     MOV.B W4, W0
+001636  07FF7E     RCALL timerSetup
+70:                }
+001638  FA8000     ULNK
+00163A  060000     RETURN
+71:                
+72:                void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback)
+73:                {
+00163C  FA0008     LNK #0x8
+00163E  784F00     MOV.B W0, [W14]
+001640  980712     MOV W2, [W14+2]
+001642  980723     MOV W3, [W14+4]
+001644  980731     MOV W1, [W14+6]
+74:                    if (hwTimers[index-1].used == TRUE || index >= BSP_TIMER_COUNT)
+75:                    {
+76:                        // TODO: Error?
+77:                    }
+78:                    
+79:                    hwTimers[index-1].used = TRUE;
+001646  78429E     MOV.B [W14], W5
+001648  FB8205     ZE W5, W4
+00164A  E90204     DEC W4, W4
+00164C  DD22C3     SL W4, #3, W5
+00164E  20F3A4     MOV #0xF3A, W4
+001650  428284     ADD W5, W4, W5
+001652  780215     MOV [W5], W4
+001654  A00004     BSET W4, #0
+001656  780A84     MOV W4, [W5]
+80:                    hwTimers[index-1].type = Periodic16Isr;
+001658  78429E     MOV.B [W14], W5
+00165A  FB8205     ZE W5, W4
+00165C  E90204     DEC W4, W4
+00165E  DD22C3     SL W4, #3, W5
+001660  20F3A4     MOV #0xF3A, W4
+001662  428204     ADD W5, W4, W4
+001664  780314     MOV [W4], W6
+001666  2FF015     MOV #0xFF01, W5
+001668  630285     AND W6, W5, W5
+00166A  780A05     MOV W5, [W4]
+81:                    hwTimers[index-1].ISR.callback = callback;
+00166C  78429E     MOV.B [W14], W5
+00166E  FB8205     ZE W5, W4
+001670  E90204     DEC W4, W4
+001672  DD22C3     SL W4, #3, W5
+001674  20F404     MOV #0xF40, W4
+001676  428204     ADD W5, W4, W4
+001678  9002BE     MOV [W14+6], W5
+00167A  780A05     MOV W5, [W4]
+82:                    
+83:                    Timer16InitPeriod(index, period);
+00167C  90011E     MOV [W14+2], W2
+00167E  9001AE     MOV [W14+4], W3
+001680  78401E     MOV.B [W14], W0
+001682  07FF9D     RCALL Timer16InitPeriod
+84:                
+85:                    switch(index)
+001684  78429E     MOV.B [W14], W5
+001686  FB8205     ZE W5, W4
+001688  B92361     MUL.SU W4, #1, W6
+00168A  EB8200     SETM W4
+00168C  EB8280     SETM W5
+00168E  420206     ADD W4, W6, W4
+001690  4A8287     ADDC W5, W7, W5
+001692  200046     MOV #0x4, W6
+001694  200007     MOV #0x0, W7
+001696  520F86     SUB W4, W6, [W15]
+001698  5A8F87     SUBB W5, W7, [W15]
+00169A  3E005A     BRA GTU, 0x1750
+00169C  016004     BRA W4
+00169E  370004     BRA 0x16A8
+0016A0  370013     BRA 0x16C8
+0016A2  370023     BRA 0x16EA
+0016A4  370033     BRA 0x170C
+0016A6  370043     BRA 0x172E
+86:                    {
+87:                        case 1:
+88:                            IFS0 &= ~(1<<3);
+0016A8  800425     MOV IFS0, W5
+0016AA  2FFF74     MOV #0xFFF7, W4
+0016AC  628204     AND W5, W4, W4
+0016AE  880424     MOV W4, IFS0
+89:                            if (callback == NULL)
+0016B0  90023E     MOV [W14+6], W4
+0016B2  520FE0     SUB W4, #0x0, [W15]
+0016B4  3A0005     BRA NZ, 0x16C0
+90:                            {
+91:                                IEC0 &= ~(1<<3);
+0016B6  8004A5     MOV IEC0, W5
+0016B8  2FFF74     MOV #0xFFF7, W4
+0016BA  628204     AND W5, W4, W4
+0016BC  8804A4     MOV W4, IEC0
+92:                            }
+93:                            else
+94:                            {
+95:                                IEC0 |= 1<<3;
+0016C0  8004A4     MOV IEC0, W4
+0016C2  A03004     BSET W4, #3
+0016C4  8804A4     MOV W4, IEC0
+96:                            }
+97:                            break;
+0016BE  370048     BRA 0x1750
+0016C6  370044     BRA 0x1750
+98:                        case 2:
+99:                            IFS0 &= ~(1<<7);
+0016C8  800425     MOV IFS0, W5
+0016CA  2FF7F4     MOV #0xFF7F, W4
+0016CC  628204     AND W5, W4, W4
+0016CE  880424     MOV W4, IFS0
+100:                           if (callback == NULL)
+0016D0  90023E     MOV [W14+6], W4
+0016D2  520FE0     SUB W4, #0x0, [W15]
+0016D4  3A0005     BRA NZ, 0x16E0
+101:                           {
+102:                               IEC0 &= ~(1<<7);
+0016D6  8004A5     MOV IEC0, W5
+0016D8  2FF7F4     MOV #0xFF7F, W4
+0016DA  628204     AND W5, W4, W4
+0016DC  8804A4     MOV W4, IEC0
+103:                           }
+104:                           else
+105:                           {
+106:                               IEC0 |= 1<<7;
+0016E0  8004A5     MOV IEC0, W5
+0016E2  200804     MOV #0x80, W4
+0016E4  728204     IOR W5, W4, W4
+0016E6  8804A4     MOV W4, IEC0
+107:                           }
+108:                           break;
+0016DE  370038     BRA 0x1750
+0016E8  370033     BRA 0x1750
+109:                       case 3:
+110:                           IFS0 &= ~(1<<8);
+0016EA  800425     MOV IFS0, W5
+0016EC  2FEFF4     MOV #0xFEFF, W4
+0016EE  628204     AND W5, W4, W4
+0016F0  880424     MOV W4, IFS0
+111:                           if (callback == NULL)
+0016F2  90023E     MOV [W14+6], W4
+0016F4  520FE0     SUB W4, #0x0, [W15]
+0016F6  3A0005     BRA NZ, 0x1702
+112:                           {
+113:                               IEC0 &= ~(1<<8);
+0016F8  8004A5     MOV IEC0, W5
+0016FA  2FEFF4     MOV #0xFEFF, W4
+0016FC  628204     AND W5, W4, W4
+0016FE  8804A4     MOV W4, IEC0
+114:                           }
+115:                           else
+116:                           {
+117:                               IEC0 |= 1<<8;
+001702  8004A5     MOV IEC0, W5
+001704  201004     MOV #0x100, W4
+001706  728204     IOR W5, W4, W4
+001708  8804A4     MOV W4, IEC0
+118:                           }
+119:                           break;
+001700  370027     BRA 0x1750
+00170A  370022     BRA 0x1750
+120:                       case 4:
+121:                           IFS1 &= ~(1<<11);
+00170C  800435     MOV IFS1, W5
+00170E  2F7FF4     MOV #0xF7FF, W4
+001710  628204     AND W5, W4, W4
+001712  880434     MOV W4, IFS1
+122:                           if (callback == NULL)
+001714  90023E     MOV [W14+6], W4
+001716  520FE0     SUB W4, #0x0, [W15]
+001718  3A0005     BRA NZ, 0x1724
+123:                           {
+124:                               IEC1 &= ~(1<<11);
+00171A  8004B5     MOV IEC1, W5
+00171C  2F7FF4     MOV #0xF7FF, W4
+00171E  628204     AND W5, W4, W4
+001720  8804B4     MOV W4, IEC1
+125:                           }
+126:                           else
+127:                           {
+128:                               IEC1 |= 1<<11;
+001724  8004B5     MOV IEC1, W5
+001726  208004     MOV #0x800, W4
+001728  728204     IOR W5, W4, W4
+00172A  8804B4     MOV W4, IEC1
+129:                           }
+130:                           break;
+001722  370016     BRA 0x1750
+00172C  370011     BRA 0x1750
+131:                       case 5:
+132:                           IFS1 &= ~(1<<12);
+00172E  800435     MOV IFS1, W5
+001730  2EFFF4     MOV #0xEFFF, W4
+001732  628204     AND W5, W4, W4
+001734  880434     MOV W4, IFS1
+133:                           if (callback == NULL)
+001736  90023E     MOV [W14+6], W4
+001738  520FE0     SUB W4, #0x0, [W15]
+00173A  3A0005     BRA NZ, 0x1746
+134:                           {
+135:                               IEC1 &= ~(1<<12);
+00173C  8004B5     MOV IEC1, W5
+00173E  2EFFF4     MOV #0xEFFF, W4
+001740  628204     AND W5, W4, W4
+001742  8804B4     MOV W4, IEC1
+136:                           }
+137:                           else
+138:                           {
+139:                               IEC1 |= 1<<12;
+001746  8004B5     MOV IEC1, W5
+001748  210004     MOV #0x1000, W4
+00174A  728204     IOR W5, W4, W4
+00174C  8804B4     MOV W4, IEC1
+140:                           }
+141:                           break;
+001744  370005     BRA 0x1750
+00174E  000000     NOP
+142:                   }
+143:               }
+001750  FA8000     ULNK
+001752  060000     RETURN
+144:               
+145:               void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
+146:               {
+001754  F80036     PUSH RCOUNT
+001756  BE9F80     MOV.D W0, [W15++]
+001758  BE9F82     MOV.D W2, [W15++]
+00175A  BE9F84     MOV.D W4, [W15++]
+00175C  BE9F86     MOV.D W6, [W15++]
+00175E  FA0000     LNK #0x0
+147:                   IFS0 &= ~(1<<3);
+001760  800425     MOV IFS0, W5
+001762  2FFF74     MOV #0xFFF7, W4
+001764  628204     AND W5, W4, W4
+001766  880424     MOV W4, IFS0
+148:                   if (hwTimers[0].ISR.callback(0, hwTimers[0].ISR.count))
+001768  807A05     MOV 0xF40, W5
+00176A  8079F4     MOV 0xF3E, W4
+00176C  780084     MOV W4, W1
+00176E  EB4000     CLR.B W0
+001770  010005     CALL W5
+001772  784200     MOV.B W0, W4
+001774  524FE0     SUB.B W4, #0x0, [W15]
+001776  320003     BRA Z, 0x177E
+149:                       hwTimers[0].ISR.count = 0;
+001778  EB0200     CLR W4
+00177A  8879F4     MOV W4, 0xF3E
+00177C  370003     BRA 0x1784
+150:                   else
+151:                       hwTimers[0].ISR.count++;
+00177E  8079F4     MOV 0xF3E, W4
+001780  E80204     INC W4, W4
+001782  8879F4     MOV W4, 0xF3E
+152:               }
+001784  FA8000     ULNK
+001786  BE034F     MOV.D [--W15], W6
+001788  BE024F     MOV.D [--W15], W4
+00178A  BE014F     MOV.D [--W15], W2
+00178C  BE004F     MOV.D [--W15], W0
+00178E  F90036     POP RCOUNT
+001790  064000     RETFIE
+---  /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic24/spi.c  ---------------------------------------
+1:                 #include "bsp/spi.h"
+2:                 
+3:                 void spiInit(UI08_t port)
+4:                 {
+00127A  FA0002     LNK #0x2
+00127C  784F00     MOV.B W0, [W14]
+5:                     switch(port)
+00127E  78429E     MOV.B [W14], W5
+001280  FB8205     ZE W5, W4
+001282  520FE1     SUB W4, #0x1, [W15]
+001284  320003     BRA Z, 0x128C
+001286  520FE2     SUB W4, #0x2, [W15]
+001288  32002C     BRA Z, 0x12E2
+00128A  370055     BRA 0x1336
+6:                     {
+7:                         case 1:
+8:                             PPSUnLock;
+00128C  803A15     MOV OSCCON, W5
+00128E  200BF4     MOV #0xBF, W4
+001290  628304     AND W5, W4, W6
+001292  200464     MOV #0x46, W4
+001294  200575     MOV #0x57, W5
+001296  207427     MOV #0x742, W7
+001298  784B84     MOV.B W4, [W7]
+00129A  784B85     MOV.B W5, [W7]
+00129C  784B86     MOV.B W6, [W7]
+9:                             iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK1OUT);
+00129E  803635     MOV RPOR3, W5
+0012A0  2E0FF4     MOV #0xE0FF, W4
+0012A2  628284     AND W5, W4, W5
+0012A4  208004     MOV #0x800, W4
+0012A6  728204     IOR W5, W4, W4
+0012A8  883634     MOV W4, RPOR3
+10:                            iPPSOutput(OUT_PIN_PPS_RP8, OUT_FN_PPS_SDO1);
+0012AA  803645     MOV RPOR4, W5
+0012AC  2FFE04     MOV #0xFFE0, W4
+0012AE  628204     AND W5, W4, W4
+0012B0  B30074     IOR #0x7, W4
+0012B2  883644     MOV W4, RPOR4
+11:                            iPPSInput(IN_FN_PPS_SDI1, IN_PIN_PPS_RP20);
+0012B4  803545     MOV RPINR20, W5
+0012B6  2FFE04     MOV #0xFFE0, W4
+0012B8  628204     AND W5, W4, W4
+0012BA  B30144     IOR #0x14, W4
+0012BC  883544     MOV W4, RPINR20
+12:                            PPSLock;
+0012BE  803A15     MOV OSCCON, W5
+0012C0  200404     MOV #0x40, W4
+0012C2  728304     IOR W5, W4, W6
+0012C4  200464     MOV #0x46, W4
+0012C6  200575     MOV #0x57, W5
+0012C8  207427     MOV #0x742, W7
+0012CA  784B84     MOV.B W4, [W7]
+0012CC  784B85     MOV.B W5, [W7]
+0012CE  784B86     MOV.B W6, [W7]
+13:                
+14:                            IFS0bits.SPI1IF = 0;
+0012D0  A94085     BCLR 0x85, #2
+15:                            IEC0bits.SPI1IE = 0;
+0012D2  A94095     BCLR 0x95, #2
+16:                
+17:                            SPI1CON1 = 0b0000000100111011;
+0012D4  2013B4     MOV #0x13B, W4
+0012D6  881214     MOV W4, SPI1CON1
+18:                            //SPI1CON2 = 0b0;
+19:                            SPI1STAT |= 0x1 << 15;
+0012D8  801205     MOV SPI1STAT, W5
+0012DA  280004     MOV #0x8000, W4
+0012DC  728204     IOR W5, W4, W4
+0012DE  881204     MOV W4, SPI1STAT
+20:                            break;
+0012E0  37002A     BRA 0x1336
+21:                        case 2:
+22:                            PPSUnLock;
+0012E2  803A15     MOV OSCCON, W5
+0012E4  200BF4     MOV #0xBF, W4
+0012E6  628304     AND W5, W4, W6
+0012E8  200464     MOV #0x46, W4
+0012EA  200575     MOV #0x57, W5
+0012EC  207427     MOV #0x742, W7
+0012EE  784B84     MOV.B W4, [W7]
+0012F0  784B85     MOV.B W5, [W7]
+0012F2  784B86     MOV.B W6, [W7]
+23:                            iPPSOutput(OUT_PIN_PPS_RP14, OUT_FN_PPS_SCK2OUT);   // OUT_FN_PPS_NULL
+0012F4  803675     MOV RPOR7, W5
+0012F6  2FFE04     MOV #0xFFE0, W4
+0012F8  628204     AND W5, W4, W4
+0012FA  B300B4     IOR #0xB, W4
+0012FC  883674     MOV W4, RPOR7
+24:                            iPPSOutput(OUT_PIN_PPS_RP16, OUT_FN_PPS_SDO2);
+0012FE  803685     MOV RPOR8, W5
+001300  2FFE04     MOV #0xFFE0, W4
+001302  628204     AND W5, W4, W4
+001304  B300A4     IOR #0xA, W4
+001306  883684     MOV W4, RPOR8
+25:                            iPPSInput(IN_FN_PPS_SDI2, IN_PIN_PPS_RP18);
+001308  803565     MOV RPINR22, W5
+00130A  2FFE04     MOV #0xFFE0, W4
+00130C  628204     AND W5, W4, W4
+00130E  B30124     IOR #0x12, W4
+001310  883564     MOV W4, RPINR22
+26:                            PPSLock;
+001312  803A15     MOV OSCCON, W5
+001314  200404     MOV #0x40, W4
+001316  728304     IOR W5, W4, W6
+001318  200464     MOV #0x46, W4
+00131A  200575     MOV #0x57, W5
+00131C  207427     MOV #0x742, W7
+00131E  784B84     MOV.B W4, [W7]
+001320  784B85     MOV.B W5, [W7]
+001322  784B86     MOV.B W6, [W7]
+27:                
+28:                            IFS2bits.SPI2IF = 0;
+001324  A92088     BCLR IFS2, #1
+29:                            IEC2bits.SPI2IE = 0;
+001326  A92098     BCLR IEC2, #1
+30:                
+31:                            SPI2CON1 = 0b0000000100111011;
+001328  2013B4     MOV #0x13B, W4
+00132A  881314     MOV W4, SPI2CON1
+32:                            //SPI2CON2 = 0b0;
+33:                            SPI2STAT |= 0x1 << 15;
+00132C  801305     MOV SPI2STAT, W5
+00132E  280004     MOV #0x8000, W4
+001330  728204     IOR W5, W4, W4
+001332  881304     MOV W4, SPI2STAT
+34:                            break;
+001334  000000     NOP
+35:                    }
+36:                }
+001336  FA8000     ULNK
+001338  060000     RETURN
+37:                
+38:                void spiDeinit(UI08_t port)
+39:                {
+00133A  FA0002     LNK #0x2
+00133C  784F00     MOV.B W0, [W14]
+40:                    switch(port)
+00133E  78429E     MOV.B [W14], W5
+001340  FB8205     ZE W5, W4
+001342  520FE1     SUB W4, #0x1, [W15]
+001344  320003     BRA Z, 0x134C
+001346  520FE2     SUB W4, #0x2, [W15]
+001348  320024     BRA Z, 0x1392
+00134A  370046     BRA 0x13D8
+41:                    {
+42:                        case 1:
+43:                            PPSUnLock;
+00134C  803A15     MOV OSCCON, W5
+00134E  200BF4     MOV #0xBF, W4
+001350  628304     AND W5, W4, W6
+001352  200464     MOV #0x46, W4
+001354  200575     MOV #0x57, W5
+001356  207427     MOV #0x742, W7
+001358  784B84     MOV.B W4, [W7]
+00135A  784B85     MOV.B W5, [W7]
+00135C  784B86     MOV.B W6, [W7]
+44:                            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_NULL);
+00135E  803635     MOV RPOR3, W5
+001360  2E0FF4     MOV #0xE0FF, W4
+001362  628204     AND W5, W4, W4
+001364  883634     MOV W4, RPOR3
+45:                            iPPSOutput(OUT_PIN_PPS_RP8, OUT_FN_PPS_NULL);
+001366  803645     MOV RPOR4, W5
+001368  2FFE04     MOV #0xFFE0, W4
+00136A  628204     AND W5, W4, W4
+00136C  883644     MOV W4, RPOR4
+46:                            iPPSInput(IN_FN_PPS_SDI1, IN_PIN_PPS_RP0);
+00136E  803545     MOV RPINR20, W5
+001370  2FFE04     MOV #0xFFE0, W4
+001372  628204     AND W5, W4, W4
+001374  883544     MOV W4, RPINR20
+47:                            PPSLock;
+001376  803A15     MOV OSCCON, W5
+001378  200404     MOV #0x40, W4
+00137A  728304     IOR W5, W4, W6
+00137C  200464     MOV #0x46, W4
+00137E  200575     MOV #0x57, W5
+001380  207427     MOV #0x742, W7
+001382  784B84     MOV.B W4, [W7]
+001384  784B85     MOV.B W5, [W7]
+001386  784B86     MOV.B W6, [W7]
+48:                
+49:                            IFS0bits.SPI1IF = 0;
+001388  A94085     BCLR 0x85, #2
+50:                            IEC0bits.SPI1IE = 0;
+00138A  A94095     BCLR 0x95, #2
+51:                
+52:                            SPI1STAT = 0;
+00138C  EB0200     CLR W4
+00138E  881204     MOV W4, SPI1STAT
+53:                            break;
+001390  370023     BRA 0x13D8
+54:                        case 2:
+55:                            PPSUnLock;
+001392  803A15     MOV OSCCON, W5
+001394  200BF4     MOV #0xBF, W4
+001396  628304     AND W5, W4, W6
+001398  200464     MOV #0x46, W4
+00139A  200575     MOV #0x57, W5
+00139C  207427     MOV #0x742, W7
+00139E  784B84     MOV.B W4, [W7]
+0013A0  784B85     MOV.B W5, [W7]
+0013A2  784B86     MOV.B W6, [W7]
+56:                            iPPSOutput(OUT_PIN_PPS_RP14, OUT_FN_PPS_NULL);   //
+0013A4  803675     MOV RPOR7, W5
+0013A6  2FFE04     MOV #0xFFE0, W4
+0013A8  628204     AND W5, W4, W4
+0013AA  883674     MOV W4, RPOR7
+57:                            iPPSOutput(OUT_PIN_PPS_RP16, OUT_FN_PPS_NULL);
+0013AC  803685     MOV RPOR8, W5
+0013AE  2FFE04     MOV #0xFFE0, W4
+0013B0  628204     AND W5, W4, W4
+0013B2  883684     MOV W4, RPOR8
+58:                            iPPSInput(IN_FN_PPS_SDI2, IN_PIN_PPS_RP0);
+0013B4  803565     MOV RPINR22, W5
+0013B6  2FFE04     MOV #0xFFE0, W4
+0013B8  628204     AND W5, W4, W4
+0013BA  883564     MOV W4, RPINR22
+59:                            PPSLock;
+0013BC  803A15     MOV OSCCON, W5
+0013BE  200404     MOV #0x40, W4
+0013C0  728304     IOR W5, W4, W6
+0013C2  200464     MOV #0x46, W4
+0013C4  200575     MOV #0x57, W5
+0013C6  207427     MOV #0x742, W7
+0013C8  784B84     MOV.B W4, [W7]
+0013CA  784B85     MOV.B W5, [W7]
+0013CC  784B86     MOV.B W6, [W7]
+60:                
+61:                            IFS2bits.SPI2IF = 0;
+0013CE  A92088     BCLR IFS2, #1
+62:                            IEC2bits.SPI2IE = 0;
+0013D0  A92098     BCLR IEC2, #1
+63:                
+64:                            SPI2STAT = 0;
+0013D2  EB0200     CLR W4
+0013D4  881304     MOV W4, SPI2STAT
+65:                            break;
+0013D6  000000     NOP
+66:                    }
+67:                }
+0013D8  FA8000     ULNK
+0013DA  060000     RETURN
+68:                
+69:                void spiTx1(UI08_t byte)
+70:                {
+0013DC  FA0004     LNK #0x4
+0013DE  984720     MOV.B W0, [W14+2]
+71:                    UI16_t aha = 0;
+0013E0  EB0200     CLR W4
+0013E2  780F04     MOV W4, [W14]
+72:                    SPI1BUF = byte;
+0013E4  90422E     MOV.B [W14+2], W4
+0013E6  FB8204     ZE W4, W4
+0013E8  881244     MOV W4, SPI1BUF
+73:                    while(SPI1STATbits.SPIRBF == 0);
+0013EA  000000     NOP
+0013EC  801204     MOV SPI1STAT, W4
+0013EE  620261     AND W4, #0x1, W4
+0013F0  520FE0     SUB W4, #0x0, [W15]
+0013F2  32FFFC     BRA Z, 0x13EC
+74:                    aha = SPI1BUF;
+0013F4  801244     MOV SPI1BUF, W4
+0013F6  780F04     MOV W4, [W14]
+75:                }
+0013F8  FA8000     ULNK
+0013FA  060000     RETURN
+76:                void spiTx2(UI08_t byte)
+77:                {
+0013FC  FA0004     LNK #0x4
+0013FE  984720     MOV.B W0, [W14+2]
+78:                    UI16_t aha = 0;
+001400  EB0200     CLR W4
+001402  780F04     MOV W4, [W14]
+79:                    SPI2BUF = byte;
+001404  90422E     MOV.B [W14+2], W4
+001406  FB8204     ZE W4, W4
+001408  881344     MOV W4, SPI2BUF
+80:                    while(SPI2STATbits.SPIRBF == 0);
+00140A  000000     NOP
+00140C  801304     MOV SPI2STAT, W4
+00140E  620261     AND W4, #0x1, W4
+001410  520FE0     SUB W4, #0x0, [W15]
+001412  32FFFC     BRA Z, 0x140C
+81:                    aha = SPI2BUF;
+001414  801344     MOV SPI2BUF, W4
+001416  780F04     MOV W4, [W14]
+82:                }
+001418  FA8000     ULNK
+00141A  060000     RETURN
+83:                
+84:                UI08_t spiRx1()
+85:                {
+00141C  FA0000     LNK #0x0
+86:                    SPI1BUF = 0;
+00141E  EB0200     CLR W4
+001420  881244     MOV W4, SPI1BUF
+87:                    while(SPI1STATbits.SPIRBF == 0);
+001422  000000     NOP
+001424  801204     MOV SPI1STAT, W4
+001426  620261     AND W4, #0x1, W4
+001428  520FE0     SUB W4, #0x0, [W15]
+00142A  32FFFC     BRA Z, 0x1424
+88:                    return SPI1BUF;
+00142C  801244     MOV SPI1BUF, W4
+00142E  784204     MOV.B W4, W4
+89:                }
+001430  784004     MOV.B W4, W0
+001432  FA8000     ULNK
+001434  060000     RETURN
+90:                UI08_t spiRx2()
+91:                {
+001436  FA0000     LNK #0x0
+92:                    SPI2BUF = 0;
+001438  EB0200     CLR W4
+00143A  881344     MOV W4, SPI2BUF
+93:                    while(SPI2STATbits.SPIRBF == 0);
+00143C  000000     NOP
+00143E  801304     MOV SPI2STAT, W4
+001440  620261     AND W4, #0x1, W4
+001442  520FE0     SUB W4, #0x0, [W15]
+001444  32FFFC     BRA Z, 0x143E
+94:                    return SPI2BUF;
+001446  801344     MOV SPI2BUF, W4
+001448  784204     MOV.B W4, W4
+95:                }
+00144A  784004     MOV.B W4, W0
+00144C  FA8000     ULNK
+00144E  060000     RETURN
+96:                
+97:                UI08_t spiTxRx1(UI08_t byte)
+98:                {
+001450  FA0002     LNK #0x2
+001452  784F00     MOV.B W0, [W14]
+99:                    SPI1BUF = byte;
+001454  78429E     MOV.B [W14], W5
+001456  FB8205     ZE W5, W4
+001458  881244     MOV W4, SPI1BUF
+100:                   while(SPI1STATbits.SPIRBF == 0);
+00145A  000000     NOP
+00145C  801204     MOV SPI1STAT, W4
+00145E  620261     AND W4, #0x1, W4
+001460  520FE0     SUB W4, #0x0, [W15]
+001462  32FFFC     BRA Z, 0x145C
+101:                   return SPI1BUF;
+001464  801244     MOV SPI1BUF, W4
+001466  784204     MOV.B W4, W4
+102:               }
+001468  784004     MOV.B W4, W0
+00146A  FA8000     ULNK
+00146C  060000     RETURN
+103:               UI08_t spiTxRx2(UI08_t byte)
+104:               {
+00146E  FA0002     LNK #0x2
+001470  784F00     MOV.B W0, [W14]
+105:                   SPI2BUF = byte;
+001472  78429E     MOV.B [W14], W5
+001474  FB8205     ZE W5, W4
+001476  881344     MOV W4, SPI2BUF
+106:                   while(SPI2STATbits.SPIRBF == 0);
+001478  000000     NOP
+00147A  801304     MOV SPI2STAT, W4
+00147C  620261     AND W4, #0x1, W4
+00147E  520FE0     SUB W4, #0x0, [W15]
+001480  32FFFC     BRA Z, 0x147A
+107:                   return SPI2BUF;
+001482  801344     MOV SPI2BUF, W4
+001484  784204     MOV.B W4, W4
+108:               }
+001486  784004     MOV.B W4, W0
+001488  FA8000     ULNK
+00148A  060000     RETURN
+109:               
+110:               #ifndef spiTxByte
+111:               void spiTxByte(UI08_t port, UI08_t byte)
+112:               {
+113:                   switch(port)
+114:                   {
+115:                       case 1:
+116:                           spiTx1(byte);
+117:                           break;
+118:                       case 2:
+119:                           spiTx2(byte);
+120:                           break;
+121:                   }
+122:               }
+123:               #endif
+124:               
+125:               #ifndef spiRxByte
+126:               UI08_t spiRxByte(UI08_t port)
+127:               {
+128:                   switch(port)
+129:                   {
+130:                       case 1:
+131:                           spiRx1();
+132:                           break;
+133:                       case 2:
+134:                           spiRx2();
+135:                       default:
+136:                           return 0x5A;
+137:                   }
+138:               }
+139:               #endif
+140:               
+141:               #ifndef spiTxRxByte
+142:               UI08_t spiTxRxByte(UI08_t port, UI08_t byte)
+143:               {
+144:                   switch(port)
+145:                   {
+146:                       case 1:
+147:                           return spiTxRx1(byte);
+148:                       case 2:
+149:                           return spiTxRx2(byte);
+150:               
+151:                       default:
+152:                           return 0;
+153:                   }
+154:               }
+155:               #endif
+156:               void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size)
+157:               {
+00148C  FA000A     LNK #0xA
+00148E  781F88     MOV W8, [W15++]
+001490  984720     MOV.B W0, [W14+2]
+001492  980721     MOV W1, [W14+4]
+001494  980732     MOV W2, [W14+6]
+001496  980743     MOV W3, [W14+8]
+158:                   UI16_t i = 0;
+001498  EB0200     CLR W4
+00149A  780F04     MOV W4, [W14]
+159:                   if (dataRx == NULL)
+00149C  90023E     MOV [W14+6], W4
+00149E  520FE0     SUB W4, #0x0, [W15]
+0014A0  3A0017     BRA NZ, 0x14D0
+160:                   {
+161:                       while (size > 0)
+0014A2  370012     BRA 0x14C8
+0014C8  90024E     MOV [W14+8], W4
+0014CA  520FE0     SUB W4, #0x0, [W15]
+0014CC  3AFFEB     BRA NZ, 0x14A4
+0014CE  37002F     BRA 0x152E
+162:                       {
+163:                           spiTxByte(port, *dataTx);
+0014A4  90422E     MOV.B [W14+2], W4
+0014A6  524FE1     SUB.B W4, #0x1, [W15]
+0014A8  3A0005     BRA NZ, 0x14B4
+0014AA  90022E     MOV [W14+4], W4
+0014AC  784214     MOV.B [W4], W4
+0014AE  784004     MOV.B W4, W0
+0014B0  07FF95     RCALL spiTx1
+0014B2  370004     BRA 0x14BC
+0014B4  90022E     MOV [W14+4], W4
+0014B6  784214     MOV.B [W4], W4
+0014B8  784004     MOV.B W4, W0
+0014BA  07FFA0     RCALL spiTx2
+164:                           dataTx++;
+0014BC  90022E     MOV [W14+4], W4
+0014BE  E80204     INC W4, W4
+0014C0  980724     MOV W4, [W14+4]
+165:                           size--;
+0014C2  90024E     MOV [W14+8], W4
+0014C4  E90204     DEC W4, W4
+0014C6  980744     MOV W4, [W14+8]
+166:                       }
+167:                   }
+168:                   else if (dataTx == NULL)
+0014D0  90022E     MOV [W14+4], W4
+0014D2  520FE0     SUB W4, #0x0, [W15]
+0014D4  3A0029     BRA NZ, 0x1528
+169:                   {
+170:                       while (size > 0)
+0014D6  370010     BRA 0x14F8
+0014F8  90024E     MOV [W14+8], W4
+0014FA  520FE0     SUB W4, #0x0, [W15]
+0014FC  3AFFED     BRA NZ, 0x14D8
+0014FE  370017     BRA 0x152E
+171:                       {
+172:                           *dataRx = spiRxByte(port);
+0014D8  90422E     MOV.B [W14+2], W4
+0014DA  524FE1     SUB.B W4, #0x1, [W15]
+0014DC  3A0003     BRA NZ, 0x14E4
+0014DE  07FF9E     RCALL spiRx1
+0014E0  784200     MOV.B W0, W4
+0014E2  370002     BRA 0x14E8
+0014E4  07FFA8     RCALL spiRx2
+0014E6  784200     MOV.B W0, W4
+0014E8  9002BE     MOV [W14+6], W5
+0014EA  784A84     MOV.B W4, [W5]
+173:                           dataRx++;
+0014EC  90023E     MOV [W14+6], W4
+0014EE  E80204     INC W4, W4
+0014F0  980734     MOV W4, [W14+6]
+174:                           size--;
+0014F2  90024E     MOV [W14+8], W4
+0014F4  E90204     DEC W4, W4
+0014F6  980744     MOV W4, [W14+8]
+175:                       }
+176:                   }
+177:                   else
+178:                   {
+179:                       while(size> i)
+001528  90024E     MOV [W14+8], W4
+00152A  520F9E     SUB W4, [W14], [W15]
+00152C  3EFFE9     BRA GTU, 0x1500
+180:                       {
+181:                           dataRx[i] = spiTxRxByte(port, dataTx[i]);
+001500  90023E     MOV [W14+6], W4
+001502  42041E     ADD W4, [W14], W8
+001504  90422E     MOV.B [W14+2], W4
+001506  524FE1     SUB.B W4, #0x1, [W15]
+001508  3A0007     BRA NZ, 0x1518
+00150A  90022E     MOV [W14+4], W4
+00150C  42021E     ADD W4, [W14], W4
+00150E  784214     MOV.B [W4], W4
+001510  784004     MOV.B W4, W0
+001512  07FF9E     RCALL spiTxRx1
+001514  784200     MOV.B W0, W4
+001516  370006     BRA 0x1524
+001518  90022E     MOV [W14+4], W4
+00151A  42021E     ADD W4, [W14], W4
+00151C  784214     MOV.B [W4], W4
+00151E  784004     MOV.B W4, W0
+001520  07FFA6     RCALL spiTxRx2
+001522  784200     MOV.B W0, W4
+001524  784C04     MOV.B W4, [W8]
+182:                           i++;
+001526  E80F1E     INC [W14], [W14]
+183:                       }
+184:                   }
+185:                   //
+186:               }
+00152E  78044F     MOV [--W15], W8
+001530  FA8000     ULNK
+001532  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic24/rtos.c  --------------------------------------
+1:                 #include "stddefs.h"
+2:                 #include "rtos/task.h"
+3:                 
+4:                 typedef struct RtosPic24Stack_s
+5:                 {
+6:                     UI16_t lowPc;
+7:                     UI16_t highPc;
+8:                     UI16_t sr;
+9:                     UI16_t w[15];
+10:                    UI16_t rcount;
+11:                    UI16_t tblpag;
+12:                    UI16_t corcon;
+13:                    UI16_t psvpag;
+14:                    UI16_t nest;
+15:                } RtosPic24Stack_t;
+16:                
+17:                void RtosKernelPortInitStack(RtosTask_t* task)
+18:                {
+002342  FA0004     LNK #0x4
+002344  980710     MOV W0, [W14+2]
+19:                    RtosPic24Stack_t *stack = (RtosPic24Stack_t*) task->stack;
+002346  90021E     MOV [W14+2], W4
+002348  900224     MOV [W4+4], W4
+00234A  780F04     MOV W4, [W14]
+20:                
+21:                    memset(stack, 0, sizeof(RtosPic24Stack_t));
+00234C  2002E2     MOV #0x2E, W2
+00234E  EB0080     CLR W1
+002350  78001E     MOV [W14], W0
+002352  07EFC5     RCALL _memset
+22:                    stack->lowPc = (UI16_t)task->method;
+002354  90021E     MOV [W14+2], W4
+002356  900214     MOV [W4+2], W4
+002358  780284     MOV W4, W5
+00235A  78021E     MOV [W14], W4
+00235C  780A05     MOV W5, [W4]
+23:                    stack->corcon = CORCON;
+00235E  800225     MOV CORCON, W5
+002360  78021E     MOV [W14], W4
+002362  981245     MOV W5, [W4+40]
+24:                    stack->psvpag = PSVPAG;
+002364  8001A5     MOV PSVPAG, W5
+002366  78021E     MOV [W14], W4
+002368  981255     MOV W5, [W4+42]
+25:                
+26:                    task->stackPosition = (UI08_t*)(stack+1);
+00236A  78021E     MOV [W14], W4
+00236C  2002E5     MOV #0x2E, W5
+00236E  428284     ADD W5, W4, W5
+002370  90021E     MOV [W14+2], W4
+002372  980235     MOV W5, [W4+6]
+27:                
+28:                }
+002374  FA8000     ULNK
+002376  060000     RETURN
+29:                
+30:                void RtosKernelPortTimerStart()
+31:                {
+002378  FA0000     LNK #0x0
+32:                    T5CON = 0;
+00237A  EB0200     CLR W4
+00237C  880904     MOV W4, T5CON
+33:                    TMR5 = 0;
+00237E  EB0200     CLR W4
+002380  8808C4     MOV W4, TMR5
+34:                
+35:                    PR5 = F_OSC_DIV_2/1000; // 1kHz
+002382  21F404     MOV #0x1F40, W4
+002384  8808E4     MOV W4, PR5
+36:                
+37:                    RtosKernelPortTimerClear();
+002386  070009     RCALL RtosKernelPortTimerClear
+38:                    IPC7bits.T5IP = 0x01; // Priority level
+002388  800594     MOV IPC7, W4
+00238A  A00004     BSET W4, #0
+00238C  A11004     BCLR W4, #1
+00238E  A12004     BCLR W4, #2
+002390  880594     MOV W4, IPC7
+39:                    IEC1bits.T5IE = 1; // Enable Timer 5 interrupts
+002392  A88097     BSET 0x97, #4
+40:                
+41:                    T5CONbits.TON = 1;
+002394  A8E121     BSET 0x121, #7
+42:                }
+002396  FA8000     ULNK
+002398  060000     RETURN
+43:                
+44:                void RtosKernelPortTimerClear()
+45:                {
+00239A  FA0000     LNK #0x0
+46:                    IFS1bits.T5IF = 0;
+00239C  A98087     BCLR 0x87, #4
+47:                }
+00239E  FA8000     ULNK
+0023A0  060000     RETURN
+48:                
+49:                void __attribute__((__interrupt__, __shadow__, auto_psv)) _T5Interrupt(void)
+50:                {
+0023A2  FEA000     PUSH.S
+0023A4  F80036     PUSH RCOUNT
+0023A6  BE9F84     MOV.D W4, [W15++]
+0023A8  BE9F86     MOV.D W6, [W15++]
+0023AA  F80034     PUSH PSVPAG
+0023AC  200004     MOV #0x0, W4
+0023AE  8801A4     MOV W4, PSVPAG
+0023B0  FA0000     LNK #0x0
+51:                    RtosKernelPortTimerClear();
+0023B2  07FFF3     RCALL RtosKernelPortTimerClear
+52:                    RtosKernelContextSuspend();
+0023B4  07000C     RCALL RtosKernelContextSuspend
+53:                }
+0023B6  FA8000     ULNK
+0023B8  F90034     POP PSVPAG
+0023BA  BE034F     MOV.D [--W15], W6
+0023BC  BE024F     MOV.D [--W15], W4
+0023BE  F90036     POP RCOUNT
+0023C0  FE8000     POP.S
+0023C2  064000     RETFIE
+54:                
+55:                inline void RtosKernelContextStart()
+56:                {
+0023C4  FA0000     LNK #0x0
+57:                    asm volatile("CALL _RtosKernelStart");
+0023C6  022478     CALL _RtosKernelStart
+0023C8  000000     NOP
+58:                }
+0023CA  FA8000     ULNK
+0023CC  060000     RETURN
+59:                
+60:                inline void RtosKernelContextSuspend()
+61:                {
+0023CE  FA0000     LNK #0x0
+62:                    asm volatile("CALL _RtosKernelContext");
+0023D0  02242C     CALL _RtosKernelContext
+0023D2  000000     NOP
+63:                }
+0023D4  FA8000     ULNK
+0023D6  060000     RETURN
+---  /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic24/interrupt.c  ---------------------------------
+1:                 #include "bsp/interrupt.h"
+2:                 #include "stddefs.h"
+3:                 
+4:                 static ExtIntInstance_t intHandlers[BSP_EXT_INT_COUNT];
+5:                 
+6:                 void ExtIntDummy(UI08_t ind) { }
+001BB8  FA0002     LNK #0x2
+001BBA  784F00     MOV.B W0, [W14]
+001BBC  FA8000     ULNK
+001BBE  060000     RETURN
+7:                 
+8:                 void ExtIntInit(void)
+9:                 {
+001BC0  FA0002     LNK #0x2
+10:                    UI08_t i = 0;
+001BC2  EB4200     CLR.B W4
+001BC4  784F04     MOV.B W4, [W14]
+11:                    for (i = 0; i < BSP_EXT_INT_COUNT; i++)
+001BC6  EB4200     CLR.B W4
+001BC8  784F04     MOV.B W4, [W14]
+001BCA  370005     BRA 0x1BD6
+001BD4  E84F1E     INC.B [W14], [W14]
+001BD6  78421E     MOV.B [W14], W4
+001BD8  524FE2     SUB.B W4, #0x2, [W15]
+001BDA  36FFF8     BRA LEU, 0x1BCC
+12:                    {
+13:                        ExtIntSetup(i, NULL, 0);
+001BCC  EB4100     CLR.B W2
+001BCE  EB0080     CLR W1
+001BD0  78401E     MOV.B [W14], W0
+001BD2  070006     RCALL ExtIntSetup
+14:                    }
+15:                }
+001BDC  FA8000     ULNK
+001BDE  060000     RETURN
+16:                
+17:                void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge)
+18:                {
+001BE0  FA0006     LNK #0x6
+001BE2  784F00     MOV.B W0, [W14]
+001BE4  980711     MOV W1, [W14+2]
+001BE6  984742     MOV.B W2, [W14+4]
+19:                    intHandlers[ind].callback = ((callback == NULL) ? ExtIntDummy : callback);
+001BE8  78421E     MOV.B [W14], W4
+001BEA  FB8284     ZE W4, W5
+001BEC  90021E     MOV [W14+2], W4
+001BEE  520FE0     SUB W4, #0x0, [W15]
+001BF0  320002     BRA Z, 0x1BF6
+001BF2  90021E     MOV [W14+2], W4
+001BF4  370001     BRA 0x1BF8
+001BF6  21BB84     MOV #0x1BB8, W4
+001BF8  428305     ADD W5, W5, W6
+001BFA  20F625     MOV #0xF62, W5
+001BFC  430285     ADD W6, W5, W5
+001BFE  780A84     MOV W4, [W5]
+20:                
+21:                    switch(ind)
+001C00  78429E     MOV.B [W14], W5
+001C02  FB8205     ZE W5, W4
+001C04  520FE1     SUB W4, #0x1, [W15]
+001C06  32001F     BRA Z, 0x1C46
+001C08  520FE2     SUB W4, #0x2, [W15]
+001C0A  32003E     BRA Z, 0x1C88
+001C0C  520FE0     SUB W4, #0x0, [W15]
+001C0E  3A0059     BRA NZ, 0x1CC2
+22:                    {
+23:                        case 0:
+24:                            INTCON2bits.INT0EP = (fallingEdge != 0) ? 1 : 0;
+001C10  90424E     MOV.B [W14+4], W4
+001C12  FB8204     ZE W4, W4
+001C14  EA0204     NEG W4, W4
+001C16  DE224F     LSR W4, #15, W4
+001C18  784204     MOV.B W4, W4
+001C1A  FB8204     ZE W4, W4
+001C1C  620261     AND W4, #0x1, W4
+001C1E  800416     MOV INTCON2, W6
+001C20  2FFFE5     MOV #0xFFFE, W5
+001C22  630285     AND W6, W5, W5
+001C24  728204     IOR W5, W4, W4
+001C26  880414     MOV W4, INTCON2
+25:                            IFS0bits.INT0IF = 0;
+001C28  A90084     BCLR IFS0, #0
+26:                            IEC0bits.INT0IE = (callback == NULL) ? 0 : 1;
+001C2A  90021E     MOV [W14+2], W4
+001C2C  A7F004     BTSC W4, #15
+001C2E  EA0204     NEG W4, W4
+001C30  EA0204     NEG W4, W4
+001C32  DE224F     LSR W4, #15, W4
+001C34  784204     MOV.B W4, W4
+001C36  FB8204     ZE W4, W4
+001C38  620261     AND W4, #0x1, W4
+001C3A  8004A6     MOV IEC0, W6
+001C3C  2FFFE5     MOV #0xFFFE, W5
+001C3E  630285     AND W6, W5, W5
+001C40  728204     IOR W5, W4, W4
+001C42  8804A4     MOV W4, IEC0
+27:                            break;
+001C44  37003E     BRA 0x1CC2
+28:                        case 1:
+29:                            INTCON2bits.INT1EP = (fallingEdge != 0) ? 1 : 0;
+001C46  90424E     MOV.B [W14+4], W4
+001C48  FB8204     ZE W4, W4
+001C4A  EA0204     NEG W4, W4
+001C4C  DE224F     LSR W4, #15, W4
+001C4E  784204     MOV.B W4, W4
+001C50  FB8204     ZE W4, W4
+001C52  620261     AND W4, #0x1, W4
+001C54  420204     ADD W4, W4, W4
+001C56  800416     MOV INTCON2, W6
+001C58  2FFFD5     MOV #0xFFFD, W5
+001C5A  630285     AND W6, W5, W5
+001C5C  728204     IOR W5, W4, W4
+001C5E  880414     MOV W4, INTCON2
+30:                            IFS1bits.INT1IF = 0;
+001C60  A98086     BCLR IFS1, #4
+31:                            IEC1bits.INT1IE = (callback == NULL) ? 0 : 1;
+001C62  90021E     MOV [W14+2], W4
+001C64  A7F004     BTSC W4, #15
+001C66  EA0204     NEG W4, W4
+001C68  EA0204     NEG W4, W4
+001C6A  DE224F     LSR W4, #15, W4
+001C6C  784204     MOV.B W4, W4
+001C6E  FB8204     ZE W4, W4
+001C70  620261     AND W4, #0x1, W4
+001C72  DD2244     SL W4, #4, W4
+001C74  8004B6     MOV IEC1, W6
+001C76  2FFEF5     MOV #0xFFEF, W5
+001C78  630285     AND W6, W5, W5
+001C7A  728204     IOR W5, W4, W4
+001C7C  8804B4     MOV W4, IEC1
+32:                            printf(":D");
+001C7E  28CC84     MOV #0x8CC8, W4
+001C80  781F84     MOV W4, [W15++]
+001C82  07F355     RCALL __printf_0
+001C84  E9878F     DEC2 W15, W15
+33:                            break;
+001C86  37001D     BRA 0x1CC2
+34:                        case 2:
+35:                            INTCON2bits.INT2EP = (fallingEdge != 0) ? 1 : 0;
+001C88  90424E     MOV.B [W14+4], W4
+001C8A  FB8204     ZE W4, W4
+001C8C  EA0204     NEG W4, W4
+001C8E  DE224F     LSR W4, #15, W4
+001C90  784204     MOV.B W4, W4
+001C92  FB8204     ZE W4, W4
+001C94  620261     AND W4, #0x1, W4
+001C96  DD2242     SL W4, #2, W4
+001C98  800416     MOV INTCON2, W6
+001C9A  2FFFB5     MOV #0xFFFB, W5
+001C9C  630285     AND W6, W5, W5
+001C9E  728204     IOR W5, W4, W4
+001CA0  880414     MOV W4, INTCON2
+36:                            IFS1bits.INT2IF = 0;
+001CA2  A9A087     BCLR 0x87, #5
+37:                            IEC1bits.INT2IE = (callback == NULL) ? 0 : 1;
+001CA4  90021E     MOV [W14+2], W4
+001CA6  A7F004     BTSC W4, #15
+001CA8  EA0204     NEG W4, W4
+001CAA  EA0204     NEG W4, W4
+001CAC  DE224F     LSR W4, #15, W4
+001CAE  784204     MOV.B W4, W4
+001CB0  FB8204     ZE W4, W4
+001CB2  620261     AND W4, #0x1, W4
+001CB4  DD224D     SL W4, #13, W4
+001CB6  8004B6     MOV IEC1, W6
+001CB8  2DFFF5     MOV #0xDFFF, W5
+001CBA  630285     AND W6, W5, W5
+001CBC  728204     IOR W5, W4, W4
+001CBE  8804B4     MOV W4, IEC1
+38:                            break;
+001CC0  000000     NOP
+39:                    }
+40:                }
+001CC2  FA8000     ULNK
+001CC4  060000     RETURN
+41:                
+42:                void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void)
+43:                {
+001CC6  F80036     PUSH RCOUNT
+001CC8  BE9F80     MOV.D W0, [W15++]
+001CCA  BE9F82     MOV.D W2, [W15++]
+001CCC  BE9F84     MOV.D W4, [W15++]
+001CCE  BE9F86     MOV.D W6, [W15++]
+001CD0  FA0000     LNK #0x0
+44:                    if (intHandlers[0].callback != NULL)
+001CD2  807B14     MOV intHandlers, W4
+001CD4  520FE0     SUB W4, #0x0, [W15]
+001CD6  320003     BRA Z, 0x1CDE
+45:                        intHandlers[0].callback(0);
+001CD8  807B14     MOV intHandlers, W4
+001CDA  EB4000     CLR.B W0
+001CDC  010004     CALL W4
+46:                
+47:                    IFS0bits.INT0IF = 0;
+001CDE  A90084     BCLR IFS0, #0
+48:                }
+001CE0  FA8000     ULNK
+001CE2  BE034F     MOV.D [--W15], W6
+001CE4  BE024F     MOV.D [--W15], W4
+001CE6  BE014F     MOV.D [--W15], W2
+001CE8  BE004F     MOV.D [--W15], W0
+001CEA  F90036     POP RCOUNT
+001CEC  064000     RETFIE
+49:                void __attribute__((__interrupt__,no_auto_psv)) _INT1Interrupt(void)
+50:                {
+001CEE  F80036     PUSH RCOUNT
+001CF0  BE9F80     MOV.D W0, [W15++]
+001CF2  BE9F82     MOV.D W2, [W15++]
+001CF4  BE9F84     MOV.D W4, [W15++]
+001CF6  BE9F86     MOV.D W6, [W15++]
+001CF8  FA0000     LNK #0x0
+51:                    if (intHandlers[1].callback != NULL)
+001CFA  807B24     MOV 0xF64, W4
+001CFC  520FE0     SUB W4, #0x0, [W15]
+001CFE  320003     BRA Z, 0x1D06
+52:                        intHandlers[1].callback(1);
+001D00  807B24     MOV 0xF64, W4
+001D02  B3C010     MOV #0x1, W0
+001D04  010004     CALL W4
+53:                
+54:                    IFS1bits.INT1IF = 0;
+001D06  A98086     BCLR IFS1, #4
+55:                }
+001D08  FA8000     ULNK
+001D0A  BE034F     MOV.D [--W15], W6
+001D0C  BE024F     MOV.D [--W15], W4
+001D0E  BE014F     MOV.D [--W15], W2
+001D10  BE004F     MOV.D [--W15], W0
+001D12  F90036     POP RCOUNT
+001D14  064000     RETFIE
+56:                void __attribute__((__interrupt__,no_auto_psv)) _INT2Interrupt(void)
+57:                {
+001D16  F80036     PUSH RCOUNT
+001D18  BE9F80     MOV.D W0, [W15++]
+001D1A  BE9F82     MOV.D W2, [W15++]
+001D1C  BE9F84     MOV.D W4, [W15++]
+001D1E  BE9F86     MOV.D W6, [W15++]
+001D20  FA0000     LNK #0x0
+58:                    if (intHandlers[2].callback != NULL)
+001D22  807B34     MOV 0xF66, W4
+001D24  520FE0     SUB W4, #0x0, [W15]
+001D26  320003     BRA Z, 0x1D2E
+59:                        intHandlers[2].callback(2);
+001D28  807B34     MOV 0xF66, W4
+001D2A  B3C020     MOV #0x2, W0
+001D2C  010004     CALL W4
+60:                
+61:                    IFS1bits.INT2IF = 0;
+001D2E  A9A087     BCLR 0x87, #5
+62:                }
+001D30  FA8000     ULNK
+001D32  BE034F     MOV.D [--W15], W6
+001D34  BE024F     MOV.D [--W15], W4
+001D36  BE014F     MOV.D [--W15], W2
+001D38  BE004F     MOV.D [--W15], W0
+001D3A  F90036     POP RCOUNT
+001D3C  064000     RETFIE

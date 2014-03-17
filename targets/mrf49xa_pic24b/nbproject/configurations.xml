@@ -4,8 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>../../inc/bspPIC24.h</itemPath>
-      <itemPath>../../inc/ipstack/ethdefs.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -14,47 +12,26 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f3" displayName="BSP" projectFiles="true">
-        <itemPath>../../src/bsp/softI2c.c</itemPath>
-        <itemPath>../../src/bsp/pic24/spi.c</itemPath>
-        <itemPath>../../src/bsp/pic24/interrupt.c</itemPath>
-        <itemPath>../../src/bsp/pic24/timer.c</itemPath>
-        <itemPath>../../src/bsp/pic24/rtos.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f1" displayName="Devices" projectFiles="true">
-        <itemPath>../../src/devices/enc28j60.c</itemPath>
-        <itemPath>../../src/devices/mcp9800.c</itemPath>
-        <itemPath>../../src/devices/mrf49xa.c</itemPath>
-        <itemPath>../../src/devices/SST26VF032.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="IPStack" projectFiles="true">
-        <itemPath>../../src/ipstack/arp.c</itemPath>
-        <itemPath>../../src/ipstack/icmp.c</itemPath>
-        <itemPath>../../src/ipstack/ipv4.c</itemPath>
-        <itemPath>../../src/ipstack/ntp.c</itemPath>
-        <itemPath>../../src/ipstack/tcp.c</itemPath>
-        <itemPath>../../src/ipstack/udp.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f5" displayName="Profiling" projectFiles="true">
-        <itemPath>../../src/profiling/executiontime.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f7" displayName="RFStack" projectFiles="true">
-        <itemPath>../../src/rfstack/packets.c</itemPath>
-        <itemPath>../../src/rfstack/hal.c</itemPath>
-        <itemPath>../../src/rfstack/rf_task.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f6" displayName="RTOS" projectFiles="true">
-        <itemPath>../../src/rtos/task.c</itemPath>
-        <itemPath>../../src/timer.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f8" displayName="Utilities" projectFiles="true">
-        <itemPath>../../src/utilities/ccbuf.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f4" displayName="Webserver" projectFiles="true">
-        <itemPath>../../src/webserver/router.c</itemPath>
-      </logicalFolder>
+      <itemPath>../mrf49xa_pic24/context.s</itemPath>
       <itemPath>../../src/main.c</itemPath>
-      <itemPath>context.s</itemPath>
+      <itemPath>../../src/bsp/pic24/i2c.c</itemPath>
+      <itemPath>../../src/bsp/pic24/adc.c</itemPath>
+      <itemPath>../../src/bsp/pic24/interrupt.c</itemPath>
+      <itemPath>../../src/devices/mcp9800.c</itemPath>
+      <itemPath>../../src/devices/mrf49xa.c</itemPath>
+      <itemPath>../../src/bsp/pic24/rtc.c</itemPath>
+      <itemPath>../../src/bsp/pic24/rtos.c</itemPath>
+      <itemPath>../../src/bsp/pic24/spi.c</itemPath>
+      <itemPath>../../src/devices/SST26VF032.c</itemPath>
+      <itemPath>../../src/bsp/pic24/timer.c</itemPath>
+      <itemPath>../../src/bsp/pic24/uart.c</itemPath>
+      <itemPath>../../src/rfstack/hal.c</itemPath>
+      <itemPath>../../src/rfstack/rf_task.c</itemPath>
+      <itemPath>../../src/rtos/task.c</itemPath>
+      <itemPath>../../src/timer.c</itemPath>
+      <itemPath>../../src/utilities/ccbuf.c</itemPath>
+      <itemPath>../../src/bsp/softI2c.c</itemPath>
+      <itemPath>../../src/profiling/executiontime.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -63,8 +40,8 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
+    <Elem>../mrf49xa_pic24</Elem>
     <Elem>../../src</Elem>
-    <Elem>../../inc</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -98,46 +75,6 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../src/ipstack/ntp.c" ex="true" overriding="false">
-        <C30>
-        </C30>
-        <C30-AS>
-        </C30-AS>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../src/ipstack/tcp.c" ex="true" overriding="false">
-        <C30>
-        </C30>
-        <C30-AS>
-        </C30-AS>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../src/rfstack/packets.c" ex="true" overriding="false">
-        <C30>
-        </C30>
-        <C30-AS>
-        </C30-AS>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
-      <item path="../../src/webserver/router.c" ex="true" overriding="false">
-        <C30>
-        </C30>
-        <C30-AS>
-        </C30-AS>
-        <C30-LD>
-        </C30-LD>
-        <C30Global>
-        </C30Global>
-      </item>
       <C30>
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
@@ -152,8 +89,7 @@
         <property key="enable-short-double" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
-        <property key="extra-include-directories"
-                  value="/home/hans/Projects/Firmware/domoticaRf/inc;/opt/microchip/xc16/v1.21/support/peripheral_24F"/>
+        <property key="extra-include-directories" value="../../inc"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
@@ -168,7 +104,7 @@
         <property key="oXC16gcc-near-chars" value="false"/>
         <property key="oXC16gcc-no-isr-warn" value="false"/>
         <property key="oXC16gcc-sfr-warn" value="false"/>
-        <property key="oXC16gcc-smar-io-lvl" value="2"/>
+        <property key="oXC16gcc-smar-io-lvl" value="1"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
         <property key="optimization-level" value="0"/>
         <property key="post-instruction-scheduling" value="default"/>
@@ -231,14 +167,14 @@
         <property key="oXC16ld-nostdlib" value="false"/>
         <property key="oXC16ld-stackguard" value="16"/>
         <property key="preprocessor-macros" value=""/>
-        <property key="remove-unused-sections" value="true"/>
+        <property key="remove-unused-sections" value="false"/>
         <property key="report-memory-usage" value="true"/>
         <property key="secure-eeprom" value="no_eeprom"/>
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
         <property key="stack-size" value="16"/>
-        <property key="symbol-stripping" value="s"/>
+        <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
       </C30-LD>
@@ -286,7 +222,6 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="USB" value="true"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
