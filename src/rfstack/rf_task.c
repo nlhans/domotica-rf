@@ -34,7 +34,7 @@ void RfInit(void)
     PPSLock;
     
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
-    RtosTimerCreate(&rfTimer, 10, RfTick);
+    RtosTimerCreate(&rfTimer, 5, RfTick);
 
 }
 
@@ -42,7 +42,7 @@ void RfTick(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_TICK);
 
-    RtosTimerRearm(&rfTimer, 1);
+    RtosTimerRearm(&rfTimer, 5);
 }
 
 UI16_t mrfIsr;

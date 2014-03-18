@@ -11,4 +11,14 @@ build/default/production/_ext/1445274692/main.o:  \
 ../../inc/bsp/interrupt.h  \
  ../../inc/bsp/timer.h  \
 ../../inc/profiling/executiontime.h  \
- ../../inc/profiling/executiontime_project.h 
+ ../../inc/profiling/executiontime_project.h  \
+../../inc/ipstack/arp.h  \
+ ../../inc/ipstack/ethdefs.h  \
+../../inc/ipstack/ipv4.h  \
+ ../../inc/ipstack/udp.h  \
+../../inc/ipstack/ipv4.h  \
+../../inc/ipstack/tcp.h  \
+ ../../inc/ipstack/ntp.h  \
+../../inc/ipstack/udp.h  \
+../../inc/ipstack/icpm.h  \
+ ../../inc/webserver/router.h 

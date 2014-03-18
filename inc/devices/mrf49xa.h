@@ -20,7 +20,7 @@
 #define AFCCREG			0xC4D7		// Auto AFC (default) , +15/-16 Fres, Output enable
 #define CFSREG 			0xA860		// Fo=915.000MHz (default)
 #define TXCREG			0x9890		// df=150kHz, Pmax, normal modulation polarity
-#define DRSREG 			0xC611		// 9579Baud (default)
+#define DRSREG 			0xC606		// 9579Baud (default)
 #define	SYNBREG			0xCED4		// Syncronization Pattern (default 0xCED4)
 
 typedef enum Mrf49XARxState_e

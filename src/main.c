@@ -1,6 +1,6 @@
 #define MAIN_C
 
-//#define COMPILE_ETHERNET
+#define COMPILE_ETHERNET
 
 #include "stddefs.h"
 

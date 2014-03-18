@@ -33,6 +33,14 @@
       <itemPath>../../src/bsp/softI2c.c</itemPath>
       <itemPath>../../src/profiling/executiontime.c</itemPath>
       <itemPath>../../src/rfstack/packets.c</itemPath>
+      <itemPath>../../src/devices/enc28j60.c</itemPath>
+      <itemPath>../../src/ipstack/tcp.c</itemPath>
+      <itemPath>../../src/ipstack/arp.c</itemPath>
+      <itemPath>../../src/ipstack/icmp.c</itemPath>
+      <itemPath>../../src/ipstack/ipv4.c</itemPath>
+      <itemPath>../../src/ipstack/ntp.c</itemPath>
+      <itemPath>../../src/ipstack/udp.c</itemPath>
+      <itemPath>../../src/webserver/router.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -76,7 +84,7 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../src/bsp/pic24/spi.c" ex="true" overriding="false">
+      <item path="../../src/bsp/pic24/spi.c" ex="false" overriding="false">
         <C30>
         </C30>
         <C30-AS>
@@ -86,7 +94,7 @@
         <C30Global>
         </C30Global>
       </item>
-      <item path="../../src/devices/SST26VF032.c" ex="true" overriding="false">
+      <item path="../../src/devices/SST26VF032.c" ex="false" overriding="false">
         <C30>
           <property key="code-model" value="default"/>
           <property key="const-model" value="default"/>
@@ -330,6 +338,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="USB" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
