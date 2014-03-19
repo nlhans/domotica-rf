@@ -32,13 +32,13 @@
 
 
 UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
-const UI08_t myIp[4]            = {192, 168, 1, 123};
+const UI08_t myIp[4]            = {192, 168, 2, 123};
 const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-const UI08_t myGateway[4]       = {192, 168, 1, 122};
+const UI08_t myGateway[4]       = {192, 168, 2, 100};
 //const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
 const UI08_t myGatewayMac[6] = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
 // PC's in network
-UI08_t pc[4]            = {192, 168, 1, 147};
+UI08_t pc[4]            = {192, 168, 2, 122};
 UI08_t ntpServer[4]     = {194, 171, 167, 130};
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
@@ -168,13 +168,11 @@ void EthernetTaskInit()
 
     // Hook up external interrupt to enc28j60 driver
     iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    ExtIntInit();
-    ExtIntSetup(1, enc28j60Int, TRUE);
+    ExtIntSetup(1, enc28j60Int, TRUE, 5);
 
     PPSLock;
 
     // Boot the complete ethernet stack.
-    spiInit(1);
     enc28j60Initialize(ethFrameBuffer, sizeof(ethFrameBuffer));
     arpInit();
     arpAnnounce();
@@ -205,11 +203,13 @@ void EthernetTask()
             {
                 macRxFrame();
             }
+            printf("[Eth] RX\n");
         }
 
         if ((evt & ETH_TCP_TICK) != 0)
         {
             tcpTick();
+            printf("[Eth] Tick\n");
         }
     }
 }
@@ -271,6 +271,8 @@ int main(void)
 
 #ifdef SERVER
 
+    ExtIntInit();
+    spiInit(1);
     UartInit();
     printf("Hello world!\r\n");
 
