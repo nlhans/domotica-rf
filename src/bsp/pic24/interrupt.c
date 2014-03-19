@@ -10,11 +10,11 @@ void ExtIntInit(void)
     UI08_t i = 0;
     for (i = 0; i < BSP_EXT_INT_COUNT; i++)
     {
-        ExtIntSetup(i, NULL, 0);
+        ExtIntSetup(i, NULL, 0, 0);
     }
 }
 
-void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge)
+void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio)
 {
     intHandlers[ind].callback = ((callback == NULL) ? ExtIntDummy : callback);
 
@@ -24,17 +24,19 @@ void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge)
             INTCON2bits.INT0EP = (fallingEdge != 0) ? 1 : 0;
             IFS0bits.INT0IF = 0;
             IEC0bits.INT0IE = (callback == NULL) ? 0 : 1;
+            IPC0bits.INT0IP = prio;
             break;
         case 1:
             INTCON2bits.INT1EP = (fallingEdge != 0) ? 1 : 0;
             IFS1bits.INT1IF = 0;
             IEC1bits.INT1IE = (callback == NULL) ? 0 : 1;
-            printf(":D");
+            IPC5bits.INT1IP = prio;
             break;
         case 2:
             INTCON2bits.INT2EP = (fallingEdge != 0) ? 1 : 0;
             IFS1bits.INT2IF = 0;
             IEC1bits.INT2IE = (callback == NULL) ? 0 : 1;
+            IPC7bits.INT2IP = prio;
             break;
     }
 }
