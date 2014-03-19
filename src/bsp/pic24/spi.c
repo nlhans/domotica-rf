@@ -14,7 +14,7 @@ void spiInit(UI08_t port)
             IFS0bits.SPI1IF = 0;
             IEC0bits.SPI1IE = 0;
 
-            SPI1CON1 = 0b0000000100111011;
+            SPI1CON1 = 0b0000000100111010;
             //SPI1CON2 = 0b0;
             SPI1STAT |= 0x1 << 15;
             break;
@@ -66,19 +66,23 @@ void spiDeinit(UI08_t port)
     }
 }
 
+bool_t spiBusy1()
+{
+    return (SPI1STATbits.SPIRBF == 0);
+}
+volatile UI16_t spiDummy;
+
 void spiTx1(UI08_t byte)
 {
-    UI16_t aha = 0;
     SPI1BUF = byte;
     while(SPI1STATbits.SPIRBF == 0);
-    aha = SPI1BUF;
+    spiDummy = SPI1BUF;
 }
 void spiTx2(UI08_t byte)
 {
-    UI16_t aha = 0;
     SPI2BUF = byte;
     while(SPI2STATbits.SPIRBF == 0);
-    aha = SPI2BUF;
+    spiDummy = SPI2BUF;
 }
 
 UI08_t spiRx1()
