@@ -8,7 +8,7 @@ UI08_t ethFault = 0;
 void spiArbEthAbort(void)
 {
     //if (spiBusy1())
-    //   while(spiBusy1());
+    while(spiBusy1());
     spiArbStat.ethBusy = 0;
     spiArbStat.ethAbort = 1;
 
@@ -24,7 +24,19 @@ UI16_t spiArbEthWasAborted(void)
         return 0;
 }
 
-UI16_t spiArbEthAcquire(void)
+static UI08_t spiArbIsrOff = 0;
+void spiArbEthDisableIsr(void)
+{
+    spiArbIsrOff = 1;
+    __builtin_disi(0x3FFF);
+}
+void spiArbEthEnableIsr(void)
+{
+    spiArbIsrOff = 0;
+    __builtin_disi(0);
+}
+
+UI16_t spiArbEthAcquire()
 {
     if (spiArbStat.rfBusy == 1)
     {
@@ -43,9 +55,8 @@ UI16_t spiArbEthAcquire(void)
 UI16_t spiArbEthComplete(void)
 {
     spiArbStat.ethBusy = 0;
-
     ENC28J60_CS_HIGH;
-    
+
     return 1;
 }
 

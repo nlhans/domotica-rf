@@ -96,11 +96,15 @@ PT_THREAD(RfHalTickTxTh)
 
 PT_THREAD(RfHalTickRxTh)
 {
+    static UI08_t rxByteTimeout;
     static UI08_t pktRxByteIndex;
     static RfTransceiverPacket_t rxPacket;
     UI16_t pktLength = 0;
-    
+
+    rxByteTimeout++;
+
     PT_BEGIN(pt);
+
 
     while (1)
     {
@@ -110,7 +114,13 @@ PT_THREAD(RfHalTickRxTh)
         // Search for start byte
         if (CCBufRdByte(&rfRxCC) == RF_NETWORKID3)
         {
-            PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+            rxByteTimeout = 0;
+            PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
+            if (rxByteTimeout > 5)
+            {
+                // Overrun error
+                PT_RESTART(pt);
+            }
             
             pktLength = CCBufPeekByte(&rfRxCC);
             
@@ -120,30 +130,50 @@ PT_THREAD(RfHalTickRxTh)
                 rxPacket.size = CCBufRdByte(&rfRxCC) - 1;
                 rxPacket.crcTx = 0;
 
+                rxByteTimeout = 0;
+
                 // Store Data
                 for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
                 {
-                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
+                    if(rxByteTimeout > 5) break; // abort, CRC read falls through instantly, and packet check will be done
+                    rxByteTimeout = 0;
                     rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
                     rxPacket.crcTx = RfTrcvCrcTick(rxPacket.crcTx, rxPacket.data[pktRxByteIndex]);
                 }
 
                 // Store CRC
-                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
                 rxPacket.crcRx = CCBufRdByte(&rfRxCC);
 
+                // CRC error?
+                if(rxByteTimeout > 5)
+                {
+                    // Buffer error.
+                    // Reverse buffer , it may very well be an underrun
+                    printf("[RF] Timeout\n");
+                    CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
+                }
+                else if (rxPacket.crcRx != rxPacket.crcTx)
+                {
+                    printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
+                    CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
+                }
+                else
+                {
                 // Store timestamp
 #ifdef PIC24_HW
-                rxPacket.timestamp = RtosTimestamp;
+                    rxPacket.timestamp = RtosTimestamp;
 #endif
 
-                // Store packet
-                PT_WAIT_UNTIL(pt, RfHalRxPut(&rxPacket));
+                    // Store packet
+                    PT_WAIT_UNTIL(pt, RfHalRxPut(&rxPacket));
 
                 // Signal OS
 #ifdef PIC24_HW
-                RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
+                    RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
 #endif
+                }
             }
             else
             {

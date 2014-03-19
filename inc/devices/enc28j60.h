@@ -223,8 +223,8 @@ UI08_t enc28j60ReadRegisterUint8(UI08_t address);
 UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address);
 
 void enc28j60RxFrame(void);
-void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length);
-void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length);
+bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length);
+bool_t enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length);
 
 bool_t enc28j60RegisterTxHandler(EthernetPacketHandler_t handler);
 void enc28j60UnregisterTxHandler(EthernetPacketHandler_t handler);

@@ -33,7 +33,7 @@ void RfInit(void)
     PPSLock;
     
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
-    RtosTimerCreate(&rfTimer, 5, RfTick);
+    RtosTimerCreate(&rfTimer, 3, RfTick);
 
 }
 
@@ -41,7 +41,7 @@ void RfTick(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_TICK);
 
-    RtosTimerRearm(&rfTimer, 5);
+    RtosTimerRearm(&rfTimer, 3);
 }
 
 UI16_t mrfIsr;
@@ -137,13 +137,6 @@ void RfTask()
                 mrf49xaIsr(3);
             }
 
-            if (mrfIsr > 0 && 0)
-            {
-                printf("isr%d/%d\n", mrfIsr,mrfDat);
-                mrfIsr = 0;
-                mrfDat = 0;
-            }
-
             // Tick RX procces thread
             RfHalTickRxTh(&halRxBfTh);
             
@@ -151,10 +144,16 @@ void RfTask()
             RfHalTickTxTh(&halTxBfTh);
 
             xc++;
-            if(xc>50 && 0)
+            if(xc>200 && 0)
             {
                 xc=0;
-                printf("sts:%04X / %d / %d of %d\n", MRF49XAReadStatus(), rfStatus.isr.state, rfStatus.isr.byteCounter, rfStatus.isr.txPacket->size);
+                printf("[RF] sts: %04X / %d / %d of %d\n", MRF49XAReadStatus(), rfStatus.isr.state, rfStatus.isr.byteCounter, rfStatus.isr.txPacket->size);
+            }
+
+            while (mrfDat > 0 && 0)
+            {
+                mrfDat--;
+                printf(".");
             }
 #ifdef dsPIC33
             if(xc>250)

@@ -22,4 +22,7 @@ UI16_t spiArbEthComplete(void);
 void spiArbRfAcquire(void);
 void spiArbRfComplete(void);
 
+void spiArbEthDisableIsr(void);
+void spiArbEthEnableIsr(void);
+
 #endif

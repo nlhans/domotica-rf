@@ -49,6 +49,11 @@ bool_t CCBufCanWr(CircBufDef_t* CCDef)
     else return TRUE;
 }
 
+void CCBufRdReverse(CircBufDef_t* CCDef, UI16_t qty)
+{
+    CCDef->rdPt = CCBufCalcPt(CCDef, CCDef->rdPt, 0-qty);
+}
+
 bool_t CCBufCanRd(CircBufDef_t* CCDef)
 {
     if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return FALSE;

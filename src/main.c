@@ -203,13 +203,13 @@ void EthernetTask()
             {
                 macRxFrame();
             }
-            printf("[Eth] RX\n");
+            //printf("[Eth] RX\n");
         }
 
         if ((evt & ETH_TCP_TICK) != 0)
         {
             tcpTick();
-            printf("[Eth] Tick\n");
+            //printf("[Eth] Tick\n");
         }
     }
 }

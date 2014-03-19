@@ -31,6 +31,7 @@ bool_t CCBufCanWr(CircBufDef_t* CCDef);
 bool_t CCBufCanRd(CircBufDef_t* CCDef);
 UI16_t CCBufRdByte(CircBufDef_t* CCDef);
 UI16_t CCBufPeekByte(CircBufDef_t* CCDef);
+void CCBufRdReverse(CircBufDef_t* CCDef, UI16_t qty);
 
 UI16_t CCBufRd(CircBufDef_t* CCDef, UI08_t* bf, UI16_t max);
 bool_t CCBufWrByte(CircBufDef_t* CCDef, UI08_t data);

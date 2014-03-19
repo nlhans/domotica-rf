@@ -320,6 +320,8 @@ void enc28j60Initialize()
 {
     ENC28J60_CS_HIGH; // deselect chip
 
+    spiArbEthDisableIsr();
+    
     // reset
     enc28j60Reset();
     
@@ -386,21 +388,24 @@ void enc28j60Initialize()
     enc28j60WritePhyRegisterUint16(PHCON2, 0b000000100000000); // hdldis
     enc28j60BitSetRegisterUint8(ECON1, 0b00000100); // rxen
     
+    spiArbEthEnableIsr();
+
     // set phy LED status settings:
     //enc28j60WritePhyRegisterUint16(PHLCON, 0b0000010010100000); // B: blink fast, A: link status, no stretching
 }
 
-void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
+bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
 {
     execProfile(ENC_TX_FRAME);
     static UI08_t controlByte = 0x00;
+    UI32_t timeout = 0xFFFFF;
 
     // clear status/error flags
     // Errata B7.10
     while ((enc28j60ReadRegisterUint8(ECON1) & 0x8) != 0) // TXRTS
     {
         enc28j60BitSetRegisterUint8(ECON1, 0x08);
-        enc28j60BitClrRegisterUint8(ECON1, 0x08);
+        enc28j60BitClrRegisterUint8 (ECON1, 0x08);
     }
 
     // Set buffer write pointer to start of TXBUFFER
@@ -417,9 +422,12 @@ void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     execProfile(ENC_TX_SEND);
     // Todo: ext interrupts
     enc28j60BitClrRegisterUint8(EIR,    0b00001010); // TX complete, TX error
+    
+    spiArbEthDisableIsr();
     enc28j60BitSetRegisterUint8(ECON1, 0b00001000); // TXRTS
+    spiArbEthEnableIsr();
 
-    while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0);
+    while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0 && (timeout--) > 0);
 
     execProfile(ENC_TX_DONE);
     
@@ -427,10 +435,10 @@ void enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     // Todo: report status
     INSIGHT(ENC28J60_TX, length, packet->dstMac[0], packet->dstMac[1], packet->dstMac[2], packet->dstMac[3], packet->dstMac[4], packet->dstMac[5]);
     
-    return;
+    return (timeout < 2) ? FALSE : TRUE;
 }
 
-void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
+bool_t enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
 {
     execProfile(ENC_TX_REPLY_FRAME);
     UI08_t tmpMac[6];
@@ -441,7 +449,7 @@ void enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
     memcpy(frame->srcMac,   tmpMac          , 6);
 
     // TX frame, MAC & protocol are already done.
-    enc28j60TxFrame(frame, sizeof(EthernetFrame_t) + length);
+    return enc28j60TxFrame(frame, sizeof(EthernetFrame_t) + length);
 }
 
 void enc28j60RxFrame(void)
@@ -520,7 +528,11 @@ void enc28j60RxFrame(void)
         {
             enc28j60WriteRegisterUint16(ERXRDPTL, dataPtr-1);
         }
+
+        spiArbEthDisableIsr();
         enc28j60BitSetRegisterUint8(ECON2, 0b01000000); // decrease packet counter
+        spiArbEthEnableIsr();
+
 
         packetCount = enc28j60GetPacketCount();
 
