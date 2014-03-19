@@ -4,36 +4,55 @@
 #include "rtos/task.h"
 #include "rfstack/hal.h"
 
+#include "bsp/spi.h"
+
+// Write TX byte
 void RfTrcvPut(UI08_t byte)
 {
-    RF_FSEL = 1;
-    RF_SPI_CS = 0;
-    SPI_Write(TXBREG >> 8);
-    SPI_Write(byte);
-    RF_SPI_CS = 1;
+    MRF49XACommand(TXBREG | byte);
 }
+
+// Read RX byte
 UI08_t RfTrcvGet(void)
 {
-    /*RF_FSEL = 0;
-    RF_SPI_CS = 0;
-    UI08_t b = SPI_Read();
-    RF_SPI_CS = 1;
-    RF_FSEL = 1;*/
-
-    RF_FSEL = 1;
-
-    RF_SPI_CS = 0;
+    spiArbRfAcquire();
     SPI_Write(0xB0);
     UI08_t b = SPI_Read();
-    RF_SPI_CS = 1;
+    spiArbRfComplete();
     
     return b;
 }
-UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
+
+// Write word
+void MRF49XACommand(UI16_t cmd)
+{
+    spiArbRfAcquire();
+
+    SPI_Write((cmd & 0xFF00) >> 8);
+    SPI_Write((cmd & 0x00FF));
+
+    spiArbRfComplete();
+}
+
+// Read word
+UI16_t MRF49XAReadStatus()
+{
+    UI16_t w = 0;
+
+    spiArbRfAcquire();
+    w = SPI_Read() << 8;
+    w |= SPI_Read();
+    spiArbRfComplete();
+
+    return w;
+
+}
+
+inline UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
 {
     return (initial ^ data);
 }
-void RfTrcvRearm(void)
+inline void RfTrcvRearm(void)
 {
     MRF49XAReset();
 }
@@ -115,29 +134,6 @@ void MRF49XAReset()
     MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
 }
 
-void MRF49XACommand(UI16_t cmd)
-{
-    RF_SPI_CS = 0;
-
-    SPI_Write((cmd & 0xFF00) >> 8);
-    SPI_Write((cmd & 0x00FF));
-
-    RF_SPI_CS = 1;
-}
-
-UI16_t MRF49XAReadStatus()
-{
-    UI16_t w = 0;
-
-    RF_SPI_CS = 0;
-    w = SPI_Read() << 8;
-    w |= SPI_Read();
-    RF_SPI_CS = 1;
-
-    return w;
-
-}
-
 //#ifdef PIC16
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop
@@ -146,6 +142,7 @@ UI16_t MRF49XAReadStatus()
 
 UI08_t SPI_Read(void)
 {
+    return spiRx1();
     UI08_t i;
     UI08_t data = 0;
 
@@ -176,6 +173,7 @@ UI08_t SPI_Read(void)
 
 void SPI_Write(UI08_t data)
 {
+    return spiTx1(data);
 
     RF_SPI_SCK = 0;
 

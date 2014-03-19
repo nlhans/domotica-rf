@@ -31,38 +31,50 @@ static UI08_t currentBank = 0;
 /******************************************************************************/
 void enc28j60WriteUint8(UI08_t reg, UI08_t value)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(WCR | (reg & 0x1F));
-    enc28j60_spi_write(value);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(WCR | (reg & 0x1F));
+        enc28j60_spi_write(value);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
     
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
 void enc28j60BitSetUint8(UI08_t reg, UI08_t value)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(BFS | (reg & 0x1F));
-    enc28j60_spi_write(value);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(BFS | (reg & 0x1F));
+        enc28j60_spi_write(value);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     INSIGHT(ENC28J60_BITSET_REG, reg, value);
 }
 void enc28j60BitClrUint8(UI08_t reg, UI08_t value)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(BFC | (reg & 0x1F));
-    enc28j60_spi_write(value);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(BFC | (reg & 0x1F));
+        enc28j60_spi_write(value);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     INSIGHT(ENC28J60_BITCLR_REG, reg, value);
 }
 void enc28j60WriteUint16(UI08_t reg, UI16_t value)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(WCR | (reg & 0x1F));
-    enc28j60_spi_write(value & 0x00FF);
-    enc28j60_spi_write((value & 0xFF00) >> 8);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(WCR | (reg & 0x1F));
+        enc28j60_spi_write(value & 0x00FF);
+        enc28j60_spi_write((value & 0xFF00) >> 8);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
@@ -70,10 +82,13 @@ void enc28j60WriteUint16(UI08_t reg, UI16_t value)
 UI08_t enc28j60ReadUint8(UI08_t reg)
 {
     UI08_t d;
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(RCR | (reg & 0x1F));
-    d = enc28j60_spi_read();
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(RCR | (reg & 0x1F));
+        d = enc28j60_spi_read();
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     return d;
 }
@@ -81,11 +96,14 @@ UI08_t enc28j60ReadUint8(UI08_t reg)
 UI08_t enc28j60ReadMacUint8(UI08_t reg)
 {
     UI08_t d;
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(RCR | (reg & 0x1F));
-    enc28j60_spi_write(0x00); // dummy
-    d = enc28j60_spi_read();
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(RCR | (reg & 0x1F));
+        enc28j60_spi_write(0x00); // dummy
+        d = enc28j60_spi_read();
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     INSIGHT(ENC28J60_READ_REG, reg, d);
 
@@ -105,39 +123,51 @@ void enc28j60SetBank(enc28j60Register_t reg)
 {
     if (currentBank > 0)
     {
-        ENC28J60_CS_LOW;
-        enc28j60_spi_write(BFC | (ECON1 & 0x1F));
-        enc28j60_spi_write(0b00000011);
-        ENC28J60_CS_HIGH;
+        do
+        {
+            while (!spiArbEthAcquire());
+            enc28j60_spi_write(BFC | (ECON1 & 0x1F));
+            enc28j60_spi_write(0b00000011);
+            spiArbEthComplete();
+        } while(spiArbEthWasAborted());
     }
     
     currentBank = reg.registerObj.bank & 0x3;
 
     if (currentBank > 0)
     {
-        ENC28J60_CS_LOW;
-        enc28j60_spi_write(BFS | (ECON1 & 0x1F));
-        enc28j60_spi_write(currentBank);
-        ENC28J60_CS_HIGH;
+        do
+        {
+            while (!spiArbEthAcquire());
+            enc28j60_spi_write(BFS | (ECON1 & 0x1F));
+            enc28j60_spi_write(currentBank);
+            spiArbEthComplete();
+        } while(spiArbEthWasAborted());
     }
 
 }
 
 void enc28j60WriteData(UI08_t* bf, UI16_t size)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(WBM | 0x1A);
-    enc28j60_spi_transferBytes(bf, NULL, size);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(WBM | 0x1A);
+        enc28j60_spi_transferBytes(bf, NULL, size);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
 }
 
 void enc28j60ReadData(UI08_t* bf, UI16_t size)
 {
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(RBM | 0x1A);
-    enc28j60_spi_transferBytes(NULL, bf, size);
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        enc28j60_spi_write(RBM | 0x1A);
+        enc28j60_spi_transferBytes(NULL, bf, size);
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 }
 
 
@@ -244,20 +274,29 @@ UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
     while(enc28j60ReadMacUint8(MISTAT) & 0x1); // is busy?
     enc28j60BitClrRegisterUint8(MICMD, 0x01); // MIRD
 
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(RCR | (MIRDL & 0x1F));
-    enc28j60_spi_write(0);
-    temp = enc28j60_spi_read();
-    
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+        
+        enc28j60_spi_write(RCR | (MIRDL & 0x1F));
+        enc28j60_spi_write(0);
+        temp = enc28j60_spi_read();
+
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
 
     ENC28J60_DelayShort();
 
-    ENC28J60_CS_LOW;
-    enc28j60_spi_write(RCR | ((MIRDL+1) & 0x1F));
-    enc28j60_spi_write(0);
-    temp |= enc28j60_spi_read() << 8;
-    ENC28J60_CS_HIGH;
+    do
+    {
+        while (!spiArbEthAcquire());
+
+        enc28j60_spi_write(RCR | ((MIRDL+1) & 0x1F));
+        enc28j60_spi_write(0);
+        temp |= enc28j60_spi_read() << 8;
+
+        spiArbEthComplete();
+    } while(spiArbEthWasAborted());
     // write MIWR
     return temp;
 }
@@ -284,8 +323,8 @@ void enc28j60Initialize()
     
     ENC28J60_DelayShort();
 
-    enc28j60ReadPhyRegisterUint16(PHID1);
-    enc28j60ReadPhyRegisterUint16(PHID2);
+    //enc28j60ReadPhyRegisterUint16(PHID1);
+    //enc28j60ReadPhyRegisterUint16(PHID2);
     enc28j60ReadRegisterUint8(EREVID);
     
     enc28j60BitSetRegisterUint8(ECON2, 0b1000000);

@@ -28,8 +28,7 @@ void RfInit(void)
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntInit();
-    ExtIntSetup(2, mrf49xaIsr, TRUE);
+    ExtIntSetup(2, mrf49xaIsr, TRUE, 6);
 
     PPSLock;
     
@@ -92,6 +91,7 @@ void RfTask()
     UI08_t xc = 0;
     UI08_t rfInitialized = 0;
 
+    RtosTaskDelay(1000);
     printf("[RF] reset\n");
     RtosTaskDelay(100);
     RF_POWER = 1;
@@ -168,10 +168,10 @@ void RfTask()
             }
 #endif
 
-            while(mrfDat > 0 && 0)
+            while(ethFault > 0)
             {
-                mrfDat--;
-                printf(".");
+                ethFault--;
+                printf("!");
             }
         }
     }
