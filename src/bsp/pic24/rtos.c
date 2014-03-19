@@ -37,7 +37,7 @@ void RtosKernelPortTimerStart()
     RtosKernelPortTimerClear();
     IPC7bits.T5IP = 0x01; // Priority level
     IEC1bits.T5IE = 1; // Enable Timer 5 interrupts
-
+    IPC7bits.T5IP = 1; // priority 1
     T5CONbits.TON = 1;
 }
 
