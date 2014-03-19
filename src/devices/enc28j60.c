@@ -400,6 +400,10 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     static UI08_t controlByte = 0x00;
     UI32_t timeout = 0xFFFFF;
 
+    UI16_t bufferPos = 0;
+    UI08_t writeSize = 16;
+    UI08_t* packetBf = (UI08_t*)packet;
+
     // clear status/error flags
     // Errata B7.10
     while ((enc28j60ReadRegisterUint8(ECON1) & 0x8) != 0) // TXRTS
@@ -407,17 +411,32 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
         enc28j60BitSetRegisterUint8(ECON1, 0x08);
         enc28j60BitClrRegisterUint8 (ECON1, 0x08);
     }
-
-    // Set buffer write pointer to start of TXBUFFER
+    
+    // Set phy buffer write pointer to start of TXBUFFER
     enc28j60WriteRegisterUint16(EWRPTL, ENC28J60_TXBUF_START);
 
-    // Set tx pointer indicating the end
+    // Set phy tx pointer indicating the end
     enc28j60WriteRegisterUint16(ETXNDL, ENC28J60_TXBUF_START + length);
 
     // Control byte (0x00) + packet
     execProfile(ENC_TX_BUFFER);
     enc28j60WriteData(&controlByte, 1);
-    enc28j60WriteData((UI08_t*)packet, length);
+
+    // Split up the writing into segments of 16 bytes each
+    // This is because SPI1 peripheral is shared with RF, and cannot handle
+    // long bursts.
+    for (bufferPos = 0; bufferPos < length; bufferPos += 16)
+    {
+        // Set phy buffer write pointer to start of TXBUFFER
+        enc28j60WriteRegisterUint16(EWRPTL, ENC28J60_TXBUF_START + 1 + bufferPos);
+
+        if (length - bufferPos > 16)
+            writeSize = 16;
+        else
+            writeSize = length - bufferPos;
+        enc28j60WriteData((packetBf + bufferPos), writeSize);
+        
+    }
 
     execProfile(ENC_TX_SEND);
     // Todo: ext interrupts
@@ -464,6 +483,9 @@ void enc28j60RxFrame(void)
     EthernetFrame_t*    frame;
     UI08_t*             data;
 
+    UI16_t readPos;
+    UI08_t readSize = 16;
+
     while(packetCount > 0)
     {
         //memset(packet, 0, length); // 2 status bytes?
@@ -491,11 +513,19 @@ void enc28j60RxFrame(void)
                 packetSize = length-2;
             }
 
-            // Set read pointer to packet
-            enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4);
-
             // Read the data
-            enc28j60ReadData(packet, packetSize+2-4); // -4 for CRC, +2 for some status bytes or something?
+            for (readPos = 0; readPos < packetSize+2-4; readPos += 16)
+            {
+                // Set read pointer to packet
+                enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
+
+                if ((packetSize+2-4)-readPos > 16)
+                    readSize = 16;
+                else
+                    readSize = (packetSize+2-4) - readPos;
+
+                enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
+            }
 
             execProfile(ENC_RX_PACKET_DONE);
             
