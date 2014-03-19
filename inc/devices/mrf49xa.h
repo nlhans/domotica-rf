@@ -20,7 +20,7 @@
 #define AFCCREG			0xC4D7		// Auto AFC (default) , +15/-16 Fres, Output enable
 #define CFSREG 			0xA860		// Fo=915.000MHz (default)
 #define TXCREG			0x9890		// df=150kHz, Pmax, normal modulation polarity
-#define DRSREG 			0xC606		// 9579Baud (default)
+#define DRSREG 			0xC611		// 9579Baud (default)
 #define	SYNBREG			0xCED4		// Syncronization Pattern (default 0xCED4)
 
 typedef enum Mrf49XARxState_e
@@ -98,16 +98,19 @@ typedef struct
 
 void MRF49XAInit();
 void MRF49XAReset(void);
+
 void MRF49XACommand(UI16_t spicmd);
 UI16_t MRF49XAReadStatus();
+
+void RfTrcvPut(UI08_t byte);
+UI08_t RfTrcvGet(void);
+
 
 
 bool_t RfTrcvCarrierPresent();
 
-void RfTrcvPut(UI08_t byte);
-UI08_t RfTrcvGet(void);
-UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data);
-void RfTrcvRearm(void);
+inline UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data);
+inline void RfTrcvRearm(void);
 
 /*
 void MRF49XA_TxPacket(UI08_t *data, UI08_t size);
