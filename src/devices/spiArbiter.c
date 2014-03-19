@@ -8,7 +8,7 @@ UI08_t ethFault = 0;
 void spiArbEthAbort(void)
 {
     //if (spiBusy1())
-    while(spiBusy1());
+    //while(spiBusy1());
     spiArbStat.ethBusy = 0;
     spiArbStat.ethAbort = 1;
 
@@ -18,6 +18,7 @@ void spiArbEthAbort(void)
 }
 UI16_t spiArbEthWasAborted(void)
 {
+    return 0;
     if (spiArbStat.ethAbort)
         return 1;
     else
@@ -38,6 +39,10 @@ void spiArbEthEnableIsr(void)
 
 UI16_t spiArbEthAcquire()
 {
+    __builtin_disi(0x3FFF);
+    ENC28J60_CS_LOW;
+    return TRUE;
+    
     if (spiArbStat.rfBusy == 1)
     {
         return FALSE;
@@ -56,6 +61,7 @@ UI16_t spiArbEthComplete(void)
 {
     spiArbStat.ethBusy = 0;
     ENC28J60_CS_HIGH;
+    __builtin_disi(0);
 
     return 1;
 }

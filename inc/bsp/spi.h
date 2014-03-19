@@ -5,6 +5,7 @@
 
 void spiDeinit(UI08_t port);
 void spiInit(UI08_t port);
+void spiSpeed(UI08_t port, bool_t fast);
 
 void spiTx1(UI08_t b);
 void spiTx2(UI08_t b);

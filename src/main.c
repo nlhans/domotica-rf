@@ -95,8 +95,8 @@ void UartInit()
     PPSLock;
 
     U1STA  = (1 << 10);
-    U1BRG  = F_OSC_DIV_2/16/38400 - 1; //103; // 115k2 @ FRCPLL stock
-    U1MODE = (1 << 15);
+    U1BRG  = F_OSC_DIV_2/16/38400 - 1;
+    U1MODE = (1 << 15); // high baud
 #endif
 }
 
@@ -270,6 +270,14 @@ int main(void)
     SENSOR_PWR = 0;
 
 #ifdef SERVER
+
+    // Setup profiler timer
+        T2CON = (1<<3); // 32-bit timer
+        PR2 = 0xFFFF;
+        PR3 = 0xFFFF;
+        TMR2 = 0; // reset timebase
+        TMR3 = 0;
+        T2CON = (1<<3) | (1<<4) | (1<<15); // start timer
 
     ExtIntInit();
     spiInit(1);
