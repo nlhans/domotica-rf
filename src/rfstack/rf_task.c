@@ -53,6 +53,8 @@ void mrf49xaIsr(UI08_t foo)
 {
     UI16_t mrf49State;
 
+    spiSpeed(1, FALSE);
+
     do
     {
         mrfStat = mrf49State;
@@ -84,6 +86,8 @@ void mrf49xaIsr(UI08_t foo)
         mrfIsr++;
 
     } while ((mrf49State & 0xC000) != 0 && 0);
+
+    spiSpeed(1, TRUE);
 }
 
 void RfTask()

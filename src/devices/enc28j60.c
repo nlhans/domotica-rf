@@ -481,7 +481,6 @@ void enc28j60RxFrame(void)
     static UI16_t       dataPtr             = ENC28J60_RXBUF_START;
     UI08_t              packetHeader[6];
     EthernetFrame_t*    frame;
-    UI08_t*             data;
 
     UI16_t readPos;
     UI08_t readSize = 16;
@@ -513,37 +512,53 @@ void enc28j60RxFrame(void)
                 packetSize = length-2;
             }
 
-            // Read the data
-            for (readPos = 0; readPos < packetSize+2-4; readPos += 16)
-            {
-                // Set read pointer to packet
-                enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
+            // Critically; read the very first header piece.
+            // As this contains the frame type
+            enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4);
+            enc28j60ReadData(packet, sizeof(EthernetFrame_t)+2); // -4 for CRC, +2 for some status bytes or something?
 
-                if ((packetSize+2-4)-readPos > 16)
-                    readSize = 16;
-                else
-                    readSize = (packetSize+2-4) - readPos;
-
-                enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
-            }
-
-            execProfile(ENC_RX_PACKET_DONE);
-            
+            // Cast packet to frame
             frame       = (EthernetFrame_t*) (packet+2);
             frame->type = htons(frame->type); // reverse byte order
-            data        = (UI08_t*) (packet + 2+sizeof(EthernetFrame_t));
+
+            // Only process relevant stuff (IPv4 & ARP)
+            if ((frame->type == 0x0800) || (frame->type == 0x0806))
+            {
+
+                // Read the data
+                for (readPos = 0; readPos < packetSize+2-4; readPos += 16)
+                {
+                    // Set read pointer to packet
+                    enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
+
+                    if ((packetSize+2-4)-readPos > 16)
+                        readSize = 16;
+                    else
+                        readSize = (packetSize+2-4) - readPos;
+
+                    enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
+                }
+
+                execProfile(ENC_RX_PACKET_DONE);
+                
+                frame->type = htons(frame->type); // reverse byte order
+
+                if (frame->type == 0x0800)
+                {
+                    ipv4HandlePacket(frame);
+                }
+                else if (frame->type == 0x0806)
+                {
+                    arpProcessPacket(frame);
+                }
+            }
+            else
+            {
+                execProfile(ENC_RX_SKIPPED);
+            }
 
             INSIGHT(ENC28J60_RX, packetSize+2-4, frame->srcMac[0], frame->srcMac[1], frame->srcMac[2], frame->srcMac[3], frame->srcMac[4], frame->srcMac[5]);
 
-            if (frame->type == 0x0800)
-            {
-                ipv4HandlePacket(frame);
-            }
-            else if (frame->type == 0x0806)
-            {
-                arpProcessPacket(frame);
-            }
-            //enc28j60FireTxHandlers(frame);
 
         }
         
