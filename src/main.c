@@ -150,7 +150,7 @@ void LedTask()
 
 void enc28j60Int(UI08_t foo)
 {
-    if (enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
+    if (0) //enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
     {
         RtosTaskSignalEvent(&ethTask, ETH_ENC_ERR);
         printf("Overflow occurered\r\n");
@@ -275,6 +275,9 @@ int main(void)
     spiInit(1);
     UartInit();
     printf("Hello world!\r\n");
+
+    // Interrupts..
+    INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
     

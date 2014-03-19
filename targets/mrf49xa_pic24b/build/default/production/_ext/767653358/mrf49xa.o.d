@@ -8,4 +8,6 @@ build/default/production/_ext/767653358/mrf49xa.o:  \
 ../../inc/rfstack/rfdefs.h  \
  ../../inc/utilities/pt.h  \
 ../../inc/utilities/lc.h  \
- ../../inc/utilities/lc-switch.h 
+ ../../inc/utilities/lc-switch.h  \
+../../inc/bsp/spi.h  \
+ ../../inc/devices/spiArbiter.h 

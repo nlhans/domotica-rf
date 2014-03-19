@@ -6,6 +6,8 @@
 #include "ipstack/arp.h"
 #include "insight.h"
 
+#include "devices/spiArbiter.h"
+
 #include "profiling/executiontime.h"
 
 const UI08_t* ethPacketBuffer = ethFrameBuffer;

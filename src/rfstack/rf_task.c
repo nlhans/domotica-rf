@@ -167,12 +167,6 @@ void RfTask()
                 RfPacketTransmit(1, RF_PING, dummy, 16, 0);
             }
 #endif
-
-            while(ethFault > 0)
-            {
-                ethFault--;
-                printf("!");
-            }
         }
     }
 }

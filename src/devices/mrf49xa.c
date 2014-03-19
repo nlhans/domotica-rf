@@ -6,6 +6,8 @@
 
 #include "bsp/spi.h"
 
+#include "devices/spiArbiter.h"
+
 // Write TX byte
 void RfTrcvPut(UI08_t byte)
 {

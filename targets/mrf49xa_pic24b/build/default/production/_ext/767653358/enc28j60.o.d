@@ -12,5 +12,6 @@ build/default/production/_ext/767653358/enc28j60.o:  \
  ../../inc/ipstack/arp.h  \
 ../../inc/insight.h  \
 ../../inc/stddefs.h  \
- ../../inc/profiling/executiontime.h  \
+ ../../inc/devices/spiArbiter.h  \
+../../inc/profiling/executiontime.h  \
  ../../inc/profiling/executiontime_project.h 
