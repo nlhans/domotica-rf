@@ -44,21 +44,18 @@ void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_
 void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void)
 {
     if (intHandlers[0].callback != NULL)
-        intHandlers[0].callback(0);
-
-    IFS0bits.INT0IF = 0;
+        if (intHandlers[0].callback(0))
+            IFS0bits.INT0IF = 0;
 }
 void __attribute__((__interrupt__,no_auto_psv)) _INT1Interrupt(void)
 {
     if (intHandlers[1].callback != NULL)
-        intHandlers[1].callback(1);
-
-    IFS1bits.INT1IF = 0;
+        if (intHandlers[1].callback(1))
+            IFS1bits.INT1IF = 0;
 }
 void __attribute__((__interrupt__,no_auto_psv)) _INT2Interrupt(void)
 {
     if (intHandlers[2].callback != NULL)
-        intHandlers[2].callback(2);
-
-    IFS1bits.INT2IF = 0;
+        if (intHandlers[2].callback(2))
+            IFS1bits.INT2IF = 0;
 }

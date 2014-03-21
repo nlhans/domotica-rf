@@ -7,7 +7,7 @@
 #define execGetTimestamp() ((UI32_t)(TMR2 | (TMR3 << 16)) / (F_OSC_DIV_2/1000000) )
 #define execResetTimestamp() do { TMR2 = 0; TMR3 = 0;} while(0);
 
-#define EXEC_ENABLE 1
+//#define EXEC_ENABLE 1
 
 #define executionTimeTable(point) \
     point(ENC_START_PACKET, "[ENC] Start RX packet") \

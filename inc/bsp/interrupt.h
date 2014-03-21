@@ -3,7 +3,7 @@
 
 #include "stddefs.h"
 
-typedef  void (*ExtIntHandler_t) (UI08_t ind);
+typedef bool_t (*ExtIntHandler_t) (UI08_t ind);
 
 typedef struct ExtIntInstance_s
 {

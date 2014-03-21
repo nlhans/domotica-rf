@@ -29,24 +29,28 @@ void RtosKernelPortInitStack(RtosTask_t* task)
 
 void RtosKernelPortTimerStart()
 {
-    T5CON = 0;
-    TMR5 = 0;
+    T1CON = 0;
+    TMR1 = 0;
 
-    PR5 = F_OSC_DIV_2/1000; // 1kHz
+    PR1 = F_OSC_DIV_2/1000; // 1kHz
 
     RtosKernelPortTimerClear();
+    IPC0bits.T1IP = 0x01;
+    IEC0bits.T1IE = 1;
+
+    T1CONbits.TON = 1;
+/*
     IPC7bits.T5IP = 0x01; // Priority level
     IEC1bits.T5IE = 1; // Enable Timer 5 interrupts
-    IPC7bits.T5IP = 1; // priority 1
-    T5CONbits.TON = 1;
+    T5CONbits.TON = 1;*/
 }
 
 void RtosKernelPortTimerClear()
 {
-    IFS1bits.T5IF = 0;
+    IFS0bits.T1IF = 0;
 }
 
-void __attribute__((__interrupt__, __shadow__, auto_psv)) _T5Interrupt(void)
+void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
 {
     RtosKernelPortTimerClear();
     RtosKernelContextSuspend();

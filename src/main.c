@@ -84,6 +84,12 @@ void UartTxStr(char * str)
     }
 }
 
+void UartTxByte(char c)
+{
+    while(U1STAbits.UTXBF == 1);
+    U1TXREG = c;
+}
+
 void UartInit()
 {
 #ifdef PIC24_HW
@@ -148,7 +154,7 @@ void LedTask()
 
 #ifdef COMPILE_ETHERNET
 
-void enc28j60Int(UI08_t foo)
+bool_t enc28j60Int(UI08_t foo)
 {
     if (0) //enc28j60GetOverflowStatus() && 0) // TODO: Fix overflow situations.
     {
@@ -159,6 +165,8 @@ void enc28j60Int(UI08_t foo)
     {
         RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
     }
+
+    return TRUE;
 }
 
 void EthernetTaskInit()
@@ -277,7 +285,7 @@ int main(void)
         PR3 = 0xFFFF;
         TMR2 = 0; // reset timebase
         TMR3 = 0;
-        T2CON = (1<<3) | (1<<4) | (1<<15); // start timer
+        T2CON = (1<<3) | (1<<15); // start timer
 
     ExtIntInit();
     spiInit(1);

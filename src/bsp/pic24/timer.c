@@ -11,6 +11,7 @@ const UI32_t const divis[4] = {
 
 void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
 {
+    printf("[Timer] Initializing timer %d\n", index);
     switch(index)
     {
         case 1:
@@ -142,11 +143,11 @@ void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback
     }
 }
 
-void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
+/*void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
 {
     IFS0 &= ~(1<<3);
     if (hwTimers[0].ISR.callback(0, hwTimers[0].ISR.count))
         hwTimers[0].ISR.count = 0;
     else
         hwTimers[0].ISR.count++;
-}
+}*/

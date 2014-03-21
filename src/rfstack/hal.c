@@ -16,6 +16,17 @@ RfTransceiverStatus_t rfStatus;
 
 UI08_t rfRxBf[256]; // 128 bytes of Rx buffer
 CircBufDef_t rfRxCC;
+bool_t RfHalInRxMode(void)
+{
+    if (rfStatus.isr.state == RX_RECV)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
 
 void RfHalInit(void)
 {
@@ -110,9 +121,11 @@ PT_THREAD(RfHalTickRxTh)
     {
         // Wait until we can read a byte.
         PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
-        
+
+        UI08_t b = CCBufRdByte(&rfRxCC);
+
         // Search for start byte
-        if (CCBufRdByte(&rfRxCC) == RF_NETWORKID3)
+        if (b == RF_NETWORKID3)
         {
             rxByteTimeout = 0;
             PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
@@ -151,12 +164,12 @@ PT_THREAD(RfHalTickRxTh)
                 {
                     // Buffer error.
                     // Reverse buffer , it may very well be an underrun
-                    printf("[RF] Timeout\n");
+                    //printf("[RF] Timeout\n");
                     CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
                 }
                 else if (rxPacket.crcRx != rxPacket.crcTx)
                 {
-                    printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
+                    //printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
                     CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
                 }
                 else
@@ -177,8 +190,12 @@ PT_THREAD(RfHalTickRxTh)
             }
             else
             {
-                printf("[MRF49] Packet header dropped\n");
+                //printf("[MRF49] Packet header dropped\n");
             }
+        }
+        else
+        {
+            //printf("!%02X", b);
         }
 
     }

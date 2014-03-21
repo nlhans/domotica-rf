@@ -197,6 +197,9 @@ UI16_t RtosTaskWaitForEvent(UI16_t mask)
 
         RtosKernelContextSuspend();
     }
+
+    // Reset mask
+    RtosActiveTask->eventMask = 0;
     
     UI16_t t = RtosActiveTask->eventStore;
     RtosActiveTask->eventStore &= ~mask;

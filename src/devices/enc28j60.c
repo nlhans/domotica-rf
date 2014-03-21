@@ -10,6 +10,8 @@
 
 #include "profiling/executiontime.h"
 
+#define BLOCK_TFR_SIZE 8
+
 const UI08_t* ethPacketBuffer = ethFrameBuffer;
 
 void enc28j60SetBank(enc28j60Register_t bank);
@@ -33,50 +35,46 @@ static UI08_t currentBank = 0;
 /******************************************************************************/
 void enc28j60WriteUint8(UI08_t reg, UI08_t value)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(WCR | (reg & 0x1F));
-        enc28j60_spi_write(value);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+    
+    enc28j60_spi_write(WCR | (reg & 0x1F));
+    enc28j60_spi_write(value);
+
+    spiArbEthComplete();
     
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
 void enc28j60BitSetUint8(UI08_t reg, UI08_t value)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(BFS | (reg & 0x1F));
-        enc28j60_spi_write(value);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+
+    enc28j60_spi_write(BFS | (reg & 0x1F));
+    enc28j60_spi_write(value);
+    
+    spiArbEthComplete();
 
     INSIGHT(ENC28J60_BITSET_REG, reg, value);
 }
 void enc28j60BitClrUint8(UI08_t reg, UI08_t value)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(BFC | (reg & 0x1F));
-        enc28j60_spi_write(value);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+
+    enc28j60_spi_write(BFC | (reg & 0x1F));
+    enc28j60_spi_write(value);
+
+    spiArbEthComplete();
 
     INSIGHT(ENC28J60_BITCLR_REG, reg, value);
 }
 void enc28j60WriteUint16(UI08_t reg, UI16_t value)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(WCR | (reg & 0x1F));
-        enc28j60_spi_write(value & 0x00FF);
-        enc28j60_spi_write((value & 0xFF00) >> 8);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+    
+    enc28j60_spi_write(WCR | (reg & 0x1F));
+    enc28j60_spi_write(value & 0x00FF);
+    enc28j60_spi_write((value & 0xFF00) >> 8);
+
+    spiArbEthComplete();
 
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
@@ -84,13 +82,13 @@ void enc28j60WriteUint16(UI08_t reg, UI16_t value)
 UI08_t enc28j60ReadUint8(UI08_t reg)
 {
     UI08_t d;
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(RCR | (reg & 0x1F));
-        d = enc28j60_spi_read();
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+
+    spiArbEthAcquire();
+
+    enc28j60_spi_write(RCR | (reg & 0x1F));
+    d = enc28j60_spi_read();
+
+    spiArbEthComplete();
 
     return d;
 }
@@ -98,14 +96,15 @@ UI08_t enc28j60ReadUint8(UI08_t reg)
 UI08_t enc28j60ReadMacUint8(UI08_t reg)
 {
     UI08_t d;
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(RCR | (reg & 0x1F));
-        enc28j60_spi_write(0x00); // dummy
-        d = enc28j60_spi_read();
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+
+    spiArbEthAcquire();
+
+    enc28j60_spi_write(RCR | (reg & 0x1F));
+    enc28j60_spi_write(0x00); // dummy
+
+    d = enc28j60_spi_read();
+    
+    spiArbEthComplete();
 
     INSIGHT(ENC28J60_READ_REG, reg, d);
 
@@ -125,51 +124,39 @@ void enc28j60SetBank(enc28j60Register_t reg)
 {
     if (currentBank > 0)
     {
-        do
-        {
-            while (!spiArbEthAcquire());
-            enc28j60_spi_write(BFC | (ECON1 & 0x1F));
-            enc28j60_spi_write(0b00000011);
-            spiArbEthComplete();
-        } while(spiArbEthWasAborted());
+        spiArbEthAcquire();
+        enc28j60_spi_write(BFC | (ECON1 & 0x1F));
+        enc28j60_spi_write(0b00000011);
+        spiArbEthComplete();
     }
     
     currentBank = reg.registerObj.bank & 0x3;
 
     if (currentBank > 0)
     {
-        do
-        {
-            while (!spiArbEthAcquire());
-            enc28j60_spi_write(BFS | (ECON1 & 0x1F));
-            enc28j60_spi_write(currentBank);
-            spiArbEthComplete();
-        } while(spiArbEthWasAborted());
+        spiArbEthAcquire();
+        enc28j60_spi_write(BFS | (ECON1 & 0x1F));
+        enc28j60_spi_write(currentBank);
+        spiArbEthComplete();
     }
 
 }
 
 void enc28j60WriteData(UI08_t* bf, UI16_t size)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(WBM | 0x1A);
-        enc28j60_spi_transferBytes(bf, NULL, size);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+    enc28j60_spi_write(WBM | 0x1A);
+    enc28j60_spi_transferBytes(bf, NULL, size);
+    spiArbEthComplete();
 
 }
 
 void enc28j60ReadData(UI08_t* bf, UI16_t size)
 {
-    do
-    {
-        while (!spiArbEthAcquire());
-        enc28j60_spi_write(RBM | 0x1A);
-        enc28j60_spi_transferBytes(NULL, bf, size);
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthAcquire();
+    enc28j60_spi_write(RBM | 0x1A);
+    enc28j60_spi_transferBytes(NULL, bf, size);
+    spiArbEthComplete();
 }
 
 
@@ -276,29 +263,21 @@ UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
     while(enc28j60ReadMacUint8(MISTAT) & 0x1); // is busy?
     enc28j60BitClrRegisterUint8(MICMD, 0x01); // MIRD
 
-    do
-    {
-        while (!spiArbEthAcquire());
-        
-        enc28j60_spi_write(RCR | (MIRDL & 0x1F));
-        enc28j60_spi_write(0);
-        temp = enc28j60_spi_read();
+    spiArbEthAcquire();
+    
+    enc28j60_spi_write(RCR | (MIRDL & 0x1F));
+    enc28j60_spi_write(0);
+    temp = enc28j60_spi_read();
 
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthComplete();
 
-    ENC28J60_DelayShort();
+    spiArbEthAcquire();
 
-    do
-    {
-        while (!spiArbEthAcquire());
+    enc28j60_spi_write(RCR | ((MIRDL+1) & 0x1F));
+    enc28j60_spi_write(0);
+    temp |= enc28j60_spi_read() << 8;
 
-        enc28j60_spi_write(RCR | ((MIRDL+1) & 0x1F));
-        enc28j60_spi_write(0);
-        temp |= enc28j60_spi_read() << 8;
-
-        spiArbEthComplete();
-    } while(spiArbEthWasAborted());
+    spiArbEthComplete();
     // write MIWR
     return temp;
 }
@@ -401,7 +380,7 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     UI32_t timeout = 0xFFFFF;
 
     UI16_t bufferPos = 0;
-    UI08_t writeSize = 16;
+    UI08_t writeSize = BLOCK_TFR_SIZE;
     UI08_t* packetBf = (UI08_t*)packet;
 
     // clear status/error flags
@@ -409,7 +388,7 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     while ((enc28j60ReadRegisterUint8(ECON1) & 0x8) != 0) // TXRTS
     {
         enc28j60BitSetRegisterUint8(ECON1, 0x08);
-        enc28j60BitClrRegisterUint8 (ECON1, 0x08);
+        enc28j60BitClrRegisterUint8(ECON1, 0x08);
     }
     
     // Set phy buffer write pointer to start of TXBUFFER
@@ -425,13 +404,13 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     // Split up the writing into segments of 16 bytes each
     // This is because SPI1 peripheral is shared with RF, and cannot handle
     // long bursts.
-    for (bufferPos = 0; bufferPos < length; bufferPos += 16)
+    for (bufferPos = 0; bufferPos < length; bufferPos += BLOCK_TFR_SIZE)
     {
         // Set phy buffer write pointer to start of TXBUFFER
         enc28j60WriteRegisterUint16(EWRPTL, ENC28J60_TXBUF_START + 1 + bufferPos);
 
-        if (length - bufferPos > 16)
-            writeSize = 16;
+        if (length - bufferPos > BLOCK_TFR_SIZE)
+            writeSize = BLOCK_TFR_SIZE;
         else
             writeSize = length - bufferPos;
         enc28j60WriteData((packetBf + bufferPos), writeSize);
@@ -439,7 +418,7 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     }
 
     execProfile(ENC_TX_SEND);
-    // Todo: ext interrupts
+    
     enc28j60BitClrRegisterUint8(EIR,    0b00001010); // TX complete, TX error
     
     spiArbEthDisableIsr();
@@ -482,8 +461,9 @@ void enc28j60RxFrame(void)
     UI08_t              packetHeader[6];
     EthernetFrame_t*    frame;
 
+    UI08_t i = 0;
     UI16_t readPos;
-    UI08_t readSize = 16;
+    UI08_t readSize = BLOCK_TFR_SIZE;
 
     while(packetCount > 0)
     {
@@ -494,9 +474,9 @@ void enc28j60RxFrame(void)
         
         // Move data ptr to start of packet
         enc28j60WriteRegisterUint16(ERDPTL, dataPtr);
-        
+
         // Read the ENC header.
-        enc28j60ReadData(packetHeader, 6);
+        enc28j60ReadData(packetHeader+i, 6);
 
         UI16_t  nextPacketOffset    = packetHeader[0] | (packetHeader[1] << 8);
         UI16_t  packetSize          = packetHeader[2] | (packetHeader[3] << 8);
@@ -512,45 +492,34 @@ void enc28j60RxFrame(void)
                 packetSize = length-2;
             }
 
-            // Critically; read the very first header piece.
-            // As this contains the frame type
-            enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4);
-            enc28j60ReadData(packet, sizeof(EthernetFrame_t)+2); // -4 for CRC, +2 for some status bytes or something?
+            // Read the data
+            for (readPos = 0; readPos < packetSize+2-4; readPos += BLOCK_TFR_SIZE)
+            {
+                // Set read pointer to packet
+                enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
+
+                if ((packetSize+2-4)-readPos > BLOCK_TFR_SIZE)
+                    readSize = BLOCK_TFR_SIZE;
+                else
+                    readSize = (packetSize+2-4) - readPos;
+
+                enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
+            }
+
+            execProfile(ENC_RX_PACKET_DONE);
 
             // Cast packet to frame
             frame       = (EthernetFrame_t*) (packet+2);
             frame->type = htons(frame->type); // reverse byte order
 
             // Only process relevant stuff (IPv4 & ARP)
-            if ((frame->type == 0x0800) || (frame->type == 0x0806))
+            if (frame->type == 0x0800)
             {
-
-                // Read the data
-                for (readPos = 0; readPos < packetSize+2-4; readPos += 16)
-                {
-                    // Set read pointer to packet
-                    enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
-
-                    if ((packetSize+2-4)-readPos > 16)
-                        readSize = 16;
-                    else
-                        readSize = (packetSize+2-4) - readPos;
-
-                    enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
-                }
-
-                execProfile(ENC_RX_PACKET_DONE);
-                
-                frame->type = htons(frame->type); // reverse byte order
-
-                if (frame->type == 0x0800)
-                {
-                    ipv4HandlePacket(frame);
-                }
-                else if (frame->type == 0x0806)
-                {
-                    arpProcessPacket(frame);
-                }
+                ipv4HandlePacket(frame);
+            }
+            else if (frame->type == 0x0806)
+            {
+                arpProcessPacket(frame);
             }
             else
             {

@@ -102,4 +102,5 @@ RfTransceiverPacket_t* RfHalRxGet();
 
 // TODO: MOVE
 void RfTrcvMode(UI08_t tx);
+bool_t RfHalInRxMode(void);
 #endif
