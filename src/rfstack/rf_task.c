@@ -37,7 +37,7 @@ void RfInit(void)
     T4CON = (1<<15) | (1<<1);
 
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
-    RtosTimerCreate(&rfTimer, 3, RfTick);
+    RtosTimerCreate(&rfTimer, 25, RfTick);
 
 }
 
@@ -45,7 +45,7 @@ void RfTick(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_TICK);
 
-    RtosTimerRearm(&rfTimer, 3);
+    RtosTimerRearm(&rfTimer, 2);
 }
 
 UI08_t swtick = 0;
@@ -58,15 +58,20 @@ UI16_t mrfOf;
 UI16_t mrfUf;
 UI08_t mrfBadData;
 
+UI16_t mrf49State;
+
 bool_t mrf49xaIsr(UI08_t foo)
 {
-    UI16_t mrf49State;
 
+    // Check conflict with ethernet
     if (PORTCbits.RC8 == 0)
     {
-        printf("Conflict with ethernet found.");
+        printf("SPI CS conflict\n");
     }
 
+    // Foo==5 means it was called from the main thread.
+    // Foo==2 when in ISR
+    // We don't want to count ticks from main thread
     if (foo != 5)
     {
         swtick++;
@@ -77,23 +82,13 @@ bool_t mrf49xaIsr(UI08_t foo)
         mrfStat = mrf49State;
         mrf49State = MRF49XAReadStatus();
 
-        /*if ((mrf49State & (1<<13)) != 0)
-        {
-            if (RfHalInRxMode())
-                mrfOf++;
-            else
-                mrfUf++;
-        }*/
-
         if ((mrf49State & (1<<15)) != 0)
         {
             if (mrfInRx==1 && (mrf49State & (1<<7)) == 0)
             {
-                //mrfBadData++;
             }
             else
             {
-                mrfDat++;
                 RfHalStatemachine();
             }
         }
@@ -130,7 +125,15 @@ void RfTask()
     printf("3");
     MRF49XAReset();
     printf("4");
+    RtosTaskDelay(100);
     printf(" done\n");
+
+    UI16_t i, j;
+
+    if (RF_IRQ == 0)
+    {
+        while (!mrf49xaIsr(5));
+    }
 
     while(1)
     {
@@ -152,62 +155,24 @@ void RfTask()
 
         if (evt & RF_TICK)
         {
-            if (RF_IRQ == 0)
-            {
-                while (!mrf49xaIsr(5));
-            }
-            
             // Tick RX procces thread
             RfHalTickRxTh(&halRxBfTh);
 
             // Tick TX procces thread
             RfHalTickTxTh(&halTxBfTh);
 
-            UI16_t tick = TMR4;
-            UI16_t myck = swtick;
-            if (tick != myck)
+            if (mrfIsr > 0)
             {
-                I08_t d = (tick - myck);
-                if (d < 0)
-                {
-                    UartTxByte('-');
-                    d = 0 - d;
-                }
-                if (d < 10)
-                {
-                    char m = '0' + d;
-                    UartTxByte(m);
-                }
-                else
-                {
-                    printf("%d", d);
-                }
-                UartTxByte('\r');
-                UartTxByte('\n');
-            }
-            if (tick != 0)
-            {
+                UI16_t tick = TMR4;
+                UI16_t myck = swtick;
+                //printf("%04X | %04X | %04d | %04d | %02d\n", mrf49State, mrfStat, tick, myck, (tick-myck));
+                mrfIsr=0;
                 swtick=0; TMR4=0;
             }
-            
-            while (mrfOf > 0)
-            {
-                mrfOf--;
-                printf("@");
-            }
 
-            while (mrfUf > 0)
-            {
-                mrfUf--;
-                printf("#");
-            }
-
-
-            while (mrfBadData > 0)
-            {
-                mrfBadData--;
-                printf("^");
-            }
+            //for (i = 0; i < 100; i++)
+            //    for(j = 0; j < 100; j++)
+            //        asm volatile("nop");
 
         }
     }

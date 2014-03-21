@@ -14,7 +14,7 @@ struct pt halTxBfTh;
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
-UI08_t rfRxBf[256]; // 128 bytes of Rx buffer
+UI08_t rfRxBf[1024]; // 128 bytes of Rx buffer
 CircBufDef_t rfRxCC;
 bool_t RfHalInRxMode(void)
 {
@@ -148,15 +148,15 @@ PT_THREAD(RfHalTickRxTh)
                 // Store Data
                 for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
                 {
-                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
-                    if(rxByteTimeout > 5) break; // abort, CRC read falls through instantly, and packet check will be done
+                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
+                    if(rxByteTimeout > 25) break; // abort, CRC read falls through instantly, and packet check will be done
                     rxByteTimeout = 0;
                     rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
                     rxPacket.crcTx = RfTrcvCrcTick(rxPacket.crcTx, rxPacket.data[pktRxByteIndex]);
                 }
 
                 // Store CRC
-                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
+                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
                 rxPacket.crcRx = CCBufRdByte(&rfRxCC);
 
                 // CRC error?

@@ -122,6 +122,7 @@ bool_t CCBufWrByte(CircBufDef_t* CCDef, UI08_t data)
     }
     else if ((CCDef->options & CCDEF_OPT_ALLOW_OVERFLOW) == 0)
     {
+        printf("[CCBuf] Cannot write; overflow\n");
         CCDef->faults |= CCBUF_FLT_OVERFLOW;
     }
     return FALSE;
