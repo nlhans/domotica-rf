@@ -91,7 +91,9 @@ typedef enum TcpState_e
     NUM_OF_TCP_STATES
 } TcpState_t;
 
+#ifdef TCP_DEBUG
 extern const char * const TcpStateStrings[NUM_OF_TCP_STATES];
+#endif
 
 typedef bool_t (*TcpConnectedHandler_t) (void* connectionHandle);
 typedef void (*TcpRxDataHandler_t) (void* connectionHandle, bool_t push, UI08_t* data, UI16_t length);

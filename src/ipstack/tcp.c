@@ -6,6 +6,7 @@
 
 #include "profiling/executiontime.h"
 
+#ifdef TCP_DEBUG
 const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
     "CLOSED",
     "LISTEN",
@@ -19,6 +20,7 @@ const char* const TcpStateStrings[NUM_OF_TCP_STATES] = {
     "CLOSE WAIT",
     "LAST ACK"
 };
+#endif
 
 TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];

@@ -3,6 +3,8 @@
 
 #include "stddefs.h"
 
+//#define TCP_DEBUG
+
 #define ETHERNET_FRAME_SIZE 1100
 
 #define TCP_MAX_LISTEN_PORTS 2

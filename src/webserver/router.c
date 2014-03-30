@@ -16,11 +16,16 @@ const char* const http200 = "HTTP/1.1 200 OK\r\nContent-type: %s\r\n\r\n";
 const char* const http404 = "HTTP/1.1 404 Not Found\r\n\r\n<h1>404 Not Found</h1>The page you requested is not found, that means it doesn't exist. ";
 const char* const httpHelloWorld = "HTTP/1.1 200 OK\r\nContent-type: text/html\r\n\r\n<h1>Hello world</h1>This is a sample page to show this actually works.";
 
+#ifdef TCP_DEBUG
 const char* const httpConnectionTable = "<h1>Connection list</h1><table style=\"border: 1px;\"><tr><td>#</td><td>IP</td><td>Port</td><td>State</td></tr>";
+#endif
+#ifdef RTOS_DEBUG
 const char* const httpRtosTaskTable = "<h1>RTOS task table</h1><table style=\"border: 1px; \"><tr><td>#</td><td>Prio</td><td>Name</td><td>State</td><td>Stack</td><td>Time</td><td>Events</td><td>Load %</td></tr>";
+#endif
 
 void webIndex(TcpConnection_t* connection, char **params);
 void webTest(TcpConnection_t* connection, char **params);
+void web404(TcpConnection_t * connection);
 
 /**** SYSTEM DIAGNOSTICS ****/
 void webSysFlash(TcpConnection_t* connection, char **params);
@@ -119,16 +124,15 @@ void webSysFlash(TcpConnection_t* connection, char **params)
 
 void webSysRtos(TcpConnection_t* connection, char **params)
 {
-    TcpFlags_t fl;
 #ifdef RTOS_DEBUG
+    TcpFlags_t fl;
     UI08_t i = 0;
     UI08_t loadInt = 0;
     UI32_t runTimeRemaining;
     char state [32];
     char load[4];
     RtosTask_t* ptr = &RtosTaskIdleObj;
-#endif
-    
+
     // Tcp flags for HTTP header
     fl.data = 0;
     fl.bits.ack = 1;
@@ -141,8 +145,6 @@ void webSysRtos(TcpConnection_t* connection, char **params)
 
     webBfPos = sprintf(webBf, httpSysNavBar);
 
-#ifdef RTOS_DEBUG
-    
     webBfPos += sprintf(webBf+webBfPos, httpRtosTaskTable);
     while(ptr != NULL)
     {
@@ -186,14 +188,15 @@ void webSysRtos(TcpConnection_t* connection, char **params)
         ptr = (RtosTask_t*)ptr->list;
     }
     webBfPos += sprintf(webBf + webBfPos, "</table>Time: %lu", RtosTimestamp);
-#else
-    webBfPos += sprintf(webBf+webBfPos, "<h1>No RTOS debug available</h1>");
-#endif
     
     tcpTxPacket(webBfPos, fl, connection);
     tcpCloseObj(connection);
+#else
+    web404(connection);
+#endif
 }
 
+#ifdef TCP_DEBUG
 void webSysTcpip(TcpConnection_t* connection, char **params)
 {
     UI08_t i;
@@ -227,6 +230,14 @@ void webSysTcpip(TcpConnection_t* connection, char **params)
     
     tcpTxPacket(webBfPos, fl, connection);
 }
+#else
+
+void webSysTcpip(TcpConnection_t* connection, char **params)
+{
+    web404(connection);
+}
+
+#endif
 
 void webIndex(TcpConnection_t* connection, char **params)
 {
