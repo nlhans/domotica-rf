@@ -9,46 +9,9 @@
 #include "rtos/task.h"
 
 #include "bsp/interrupt.h"
-
-#include "devices/enc28j60.h"
-#include "devices/SST26VF032.h"
-
-#include "ipstack/ethdefs.h"
-
-#include "ipstack/arp.h"
-#include "ipstack/ipv4.h"
-#include "ipstack/udp.h"
-#include "ipstack/tcp.h"
-#include "ipstack/ntp.h"
-#include "ipstack/icpm.h"
-
-#include "webserver/router.h"
-
-
-UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
-const UI08_t myIp[4]            = {192, 168, 2, 123};
-const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-const UI08_t myGateway[4]       = {192, 168, 2, 100};
-//const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
-const UI08_t myGatewayMac[6] = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
-// PC's in network
-UI08_t pc[4]            = {192, 168, 2, 122};
-UI08_t ntpServer[4]     = {194, 171, 167, 130};
+#include "bsp/spi.h"
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
-
-void macRxFrame()
-{
-    enc28j60RxFrame();
-}
-void macTxFrame(EthernetFrame_t* packet, UI16_t length)
-{
-    enc28j60TxFrame(packet, length);
-}
-void macTxReplyFrame(EthernetFrame_t* packet, UI16_t length)
-{
-    enc28j60TxReplyFrame(packet, length);
-}
 
 void SysInitGpio(void)
 {
@@ -58,10 +21,6 @@ void SysInitGpio(void)
     
     // Enable humidity analog function
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
-
-#ifdef SERVER
-    // Pins only dedicated on server, for like FLASH and Ethernet
-#endif
 }
 
 #ifdef SERVER
@@ -95,112 +54,6 @@ void UartInit()
     U1MODE = (1 << 15); // high baud
 #endif
 }
-
-#ifdef COMPILE_ETHERNET
-bool_t httpHandleConnection(void* con)
-{
-    TcpConnection_t* connection = (TcpConnection_t*) con;
-    connection->rxData = (TcpRxDataHandler_t) WebserverHandle;
-
-    return TRUE;
-}
-
-bool_t httpCloseConnection(void* con)
-{
-    TcpConnection_t* connection = (TcpConnection_t*) con;
-    connection->rxData = NULL;
-
-    return TRUE;
-}
-
-RtosTask_t ethTask;
-UI08_t ethTaskStk[768];
-
-#define ETH_TCP_TICK 0x01
-#define ETH_ENC_ISR 0x02
-#define ETH_ENC_ERR 0x04
-
-#endif
-
-RtosTask_t ledTask;
-UI08_t ledTaskStk[128];
-
-void LedTask()
-{
-    while(1)
-    {
-        //
-        SYS_DBG_LED = 1;
-        RtosTaskDelay(250);
-
-        SYS_DBG_LED = 0;
-        RtosTaskDelay(250);
-
-#ifdef COMPILE_ETHERNET
-        RtosTaskSignalEvent(&ethTask, ETH_TCP_TICK);
-#endif
-    }
-}
-
-#ifdef COMPILE_ETHERNET
-
-bool_t enc28j60Int(UI08_t foo)
-{
-    RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
-    return TRUE;
-}
-
-void EthernetTaskInit()
-{
-    // Connect up ENC28j60 ISR
-    PPSUnLock;
-
-    // Hook up external interrupt to enc28j60 driver
-    iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    ExtIntSetup(1, enc28j60Int, TRUE, 5);
-
-    PPSLock;
-
-    // Boot the complete ethernet stack.
-    enc28j60Initialize(ethFrameBuffer, sizeof(ethFrameBuffer));
-    arpAnnounce();
-    tcpInit();
-    tcpListen(80, 32, httpHandleConnection, httpCloseConnection);
-    
-}
-
-void EthernetTask()
-{
-    EthernetTaskInit();
-    FlashInit();
-    while(1)
-    {
-        UI16_t evt = RtosTaskWaitForEvent(
-                ETH_TCP_TICK |
-                ETH_ENC_ERR |
-                ETH_ENC_ISR);
-
-        if ((evt & ETH_ENC_ERR) != 0)
-        {
-            enc28j60ResetRxBuffer();
-        }
-
-        if ((evt & ETH_ENC_ISR) != 0)
-        {
-            while (enc28j60PacketPending())
-            {
-                macRxFrame();
-            }
-        }
-
-        if ((evt & ETH_TCP_TICK) != 0)
-        {
-            tcpTick();
-        }
-    }
-}
-
-#endif
 
 #define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
 int StkAddrLo;  // order matters
@@ -254,8 +107,6 @@ int main(void)
     RF_POWER = 0;
     SENSOR_PWR = 0;
 
-#ifdef SERVER
-
     // Setup profiler timer
         T2CON = (1<<3); // 32-bit timer
         PR2 = 0xFFFF;
@@ -275,23 +126,11 @@ int main(void)
     RtosTaskInit();
     
 #ifdef COMPILE_ETHERNET
-    RtosTaskCreate(&ethTask, "Eth", EthernetTask, 20, ethTaskStk, sizeof(ethTaskStk));
+    EthInit();
 #endif
     RfInit();
-
-    RtosTaskCreate(&ledTask, "LED", LedTask, 1, ledTaskStk, sizeof(ledTaskStk));
-    RtosTaskRun();
-
-
-
-#else
     
-    while (1)
-    {
-       
-
-    }
-#endif
+    RtosTaskRun();
 
     //while(1);
     return 0;
