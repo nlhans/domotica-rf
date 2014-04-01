@@ -1,4 +1,5 @@
 #include "stddefs.h"
+#include "bsp/adc.h"
 #ifdef ADC16_C
 void AdcInit(void)
 {

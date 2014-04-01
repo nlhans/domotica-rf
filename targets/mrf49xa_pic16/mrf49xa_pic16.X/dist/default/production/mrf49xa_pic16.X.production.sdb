@@ -1,0 +1,339 @@
+[p LITE_MODE PRO_MODE AUTOSTATIC PIC14 PIC14E SPACEOPT ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1508 ]
+[d frameptr 6 ]
+"37 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
+[e E4207 Pic16PortDefs_e `uc
+PA 0
+PB 1
+PC 2
+PINT 3
+]
+"72
+[e E4213 AdcChannels_e `uc
+ADC_AN0 0
+ADC_AN1 1
+ADC_AN2 2
+ADC_AN3 3
+ADC_AN4 4
+ADC_AN5 5
+ADC_AN6 6
+ADC_AN7 7
+ADC_AN8 8
+ADC_AN9 9
+ADC_AN10 10
+ADC_AN11 11
+ADC_TEMP 29
+ADC_DAC 30
+ADC_FVR 31
+]
+"5 /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c
+[e E4237 Mcp9800Resolution_e `uc
+Mcp9800_9bit 0
+Mcp9800_10bit 32
+Mcp9800_11bit 64
+Mcp9800_12bit 96
+]
+"17 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c
+[e E4296 RfTransceiverState_e `uc
+RX_RECV 0
+TX_PREAMBLE1 1
+TX_PREAMBLE2 2
+TX_SCL1 3
+TX_SCL2 4
+TX_SCL3 5
+TX_SIZE 6
+TX_DATA 7
+TX_CRC 8
+TX_NULL1 9
+TX_NULL2 10
+TX_NULL3 11
+]
+"18 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
+[e E4254 . `uc
+RF_PING 160
+RF_ACK 161
+RF_POR 176
+RF_SHDN 177
+]
+"4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+"19
+[v _AdcGetResult AdcGetResult `T(ui  1 e 2 0 ]
+"24
+[v _AdcGo AdcGo `(v  1 e 0 0 ]
+"29
+[v _AdcIsBusy AdcIsBusy `(uc  1 e 1 0 ]
+"34
+[v _AdcPinEnable AdcPinEnable `(v  1 e 0 0 ]
+"54
+[v _AdcPinDisable AdcPinDisable `(v  1 e 0 0 ]
+"71
+[v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
+"76
+[v _AdcSample AdcSample `(ui  1 e 2 0 ]
+"3 /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c
+[v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
+"31
+[v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
+"40
+[v _SoftI2cStart SoftI2cStart `(v  1 e 0 0 ]
+"54
+[v _SoftI2cRepeatedStart SoftI2cRepeatedStart `(v  1 e 0 0 ]
+"75
+[v _SoftI2cStop SoftI2cStop `(v  1 e 0 0 ]
+"94
+[v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
+"141
+[v _SoftI2cRxByte SoftI2cRxByte `(uc  1 e 1 0 ]
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c
+[v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
+"19
+[v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
+"12 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+[v _RfTrcvPut RfTrcvPut `(v  1 e 0 0 ]
+"18
+[v _RfTrcvGet RfTrcvGet `(uc  1 e 1 0 ]
+"29
+[v _MRF49XACommand MRF49XACommand `(v  1 e 0 0 ]
+"40
+[v _MRF49XAReadStatus MRF49XAReadStatus `(ui  1 e 2 0 ]
+"53
+[v _RfTrcvCrcTick RfTrcvCrcTick `T(uc  1 e 1 0 ]
+"57
+[v _RfTrcvRearm RfTrcvRearm `T(v  1 e 0 0 ]
+"62
+[v _RfTrcvCarrierPresent RfTrcvCarrierPresent `(uc  1 e 1 0 ]
+"72
+[v _MRF49XAInit MRF49XAInit `(v  1 e 0 0 ]
+"121
+[v _MRF49XAReset MRF49XAReset `(v  1 e 0 0 ]
+"137
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+"170
+[v _SPI_Write SPI_Write `(v  1 e 0 0 ]
+"65 /home/hans/Projects/Firmware/domoticaRf/src/main.c
+[v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
+"238
+[v _main main `(i  1 e 2 0 ]
+"23 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c
+[v _RfHalInRxMode RfHalInRxMode `(uc  1 e 1 0 ]
+"35
+[v _RfHalInit RfHalInit `(v  1 e 0 0 ]
+"52
+[v _RfTrcvMode RfTrcvMode `(v  1 e 0 0 ]
+"74
+[v _RfHalTickTxTh RfHalTickTxTh `(uc  1 e 1 0 ]
+"112
+[v _RfHalTickRxTh RfHalTickRxTh `(uc  1 e 1 0 ]
+"211
+[v _RfHalRxPut RfHalRxPut `(uc  1 e 1 0 ]
+"46 /home/hans/Projects/Firmware/domoticaRf/inc/rfstack/hal.h
+"54 /home/hans/Projects/Firmware/domoticaRf/inc/utilities/pt.h
+[s S319 . 4 `uc 1 src 1 0 `uc 1 dst 1 1 `uc 1 id 1 2 `uc 1 opt 1 3 ]
+"230 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c
+[u S324 . 24 `[24]uc 1 data 24 0 `S319 1 frame 4 0 ]
+[s S327 RfTransceiverPacket_s 28 `S324 1 . 24 0 `uc 1 crcTx 1 24 `uc 1 crcRx 1 25 `uc 1 size 1 26 `uc 1 proc 1 27 :1:0 
+`uc 1 tx 1 27 :1:1 
+]
+[v _RfHalRxGet RfHalRxGet `(*.4S327  1 e 1 0 ]
+"46 /home/hans/Projects/Firmware/domoticaRf/inc/rfstack/hal.h
+"54 /home/hans/Projects/Firmware/domoticaRf/inc/utilities/pt.h
+[s S319 . 4 `uc 1 src 1 0 `uc 1 dst 1 1 `uc 1 id 1 2 `uc 1 opt 1 3 ]
+"251 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c
+[u S324 . 24 `[24]uc 1 data 24 0 `S319 1 frame 4 0 ]
+[s S327 RfTransceiverPacket_s 28 `S324 1 . 24 0 `uc 1 crcTx 1 24 `uc 1 crcRx 1 25 `uc 1 size 1 26 `uc 1 proc 1 27 :1:0 
+`uc 1 tx 1 27 :1:1 
+]
+[v _RfHalTxGet RfHalTxGet `(*.4S327  1 e 1 0 ]
+"272
+[v _RfHalTxPut RfHalTxPut `(uc  1 e 1 0 ]
+"301
+[v _RfHalStatemachine RfHalStatemachine `(v  1 e 0 0 ]
+"17 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
+[v _RfPacketSimpleReply RfPacketSimpleReply `(v  1 e 0 0 ]
+"34
+[v _RfPacketTransmit RfPacketTransmit `(v  1 e 0 0 ]
+"57
+[v _RfPacketReply RfPacketReply `(v  1 e 0 0 ]
+"80
+[v _RfPacketsTickTh RfPacketsTickTh `(uc  1 e 1 0 ]
+"140
+[v _RfPacketsInit RfPacketsInit `(v  1 e 0 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/abdiv.c
+[v ___abdiv __abdiv `(c  1 e 1 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/abmod.c
+[v ___abmod __abmod `(c  1 e 1 0 ]
+"33 /opt/microchip/xc8/v1.30/sources/common/abtoft.c
+[v ___abtoft __abtoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.30/sources/common/almod.c
+[v ___almod __almod `(l  1 e 4 0 ]
+"42 /opt/microchip/xc8/v1.30/sources/common/altoft.c
+[v ___altoft __altoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/atdiv.c
+[v ___atdiv __atdiv `(m  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/atmod.c
+[v ___atmod __atmod `(m  1 e 3 0 ]
+"37 /opt/microchip/xc8/v1.30/sources/common/attoft.c
+[v ___attoft __attoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"32 /opt/microchip/xc8/v1.30/sources/common/awtoft.c
+[v ___awtoft __awtoft `(f  1 e 3 0 ]
+"2 /opt/microchip/xc8/v1.30/sources/common/bmul.c
+[v ___bmul __bmul `(uc  1 e 1 0 ]
+"464 /opt/microchip/xc8/v1.30/sources/common/doprnt.c
+[v _printf printf `(i  1 e 2 0 ]
+"62 /opt/microchip/xc8/v1.30/sources/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 /opt/microchip/xc8/v1.30/sources/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"51 /opt/microchip/xc8/v1.30/sources/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"15 /opt/microchip/xc8/v1.30/sources/common/ftneg.c
+[v ___ftneg __ftneg `(f  1 e 3 0 ]
+"18 /opt/microchip/xc8/v1.30/sources/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"44 /opt/microchip/xc8/v1.30/sources/common/fttol.c
+[v ___fttol __fttol `(l  1 e 4 0 ]
+"8 /opt/microchip/xc8/v1.30/sources/common/isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/lbdiv.c
+[v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/lbmod.c
+[v ___lbmod __lbmod `(uc  1 e 1 0 ]
+"27 /opt/microchip/xc8/v1.30/sources/common/lbtoft.c
+[v ___lbtoft __lbtoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"35 /opt/microchip/xc8/v1.30/sources/common/lltoft.c
+[v ___lltoft __lltoft `(f  1 e 3 0 ]
+"2 /opt/microchip/xc8/v1.30/sources/common/lmul.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/ltdiv.c
+[v ___ltdiv __ltdiv `(um  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/ltmod.c
+[v ___ltmod __ltmod `(um  1 e 3 0 ]
+"30 /opt/microchip/xc8/v1.30/sources/common/lttoft.c
+[v ___lttoft __lttoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"6 /opt/microchip/xc8/v1.30/sources/common/lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"28 /opt/microchip/xc8/v1.30/sources/common/lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"11 /opt/microchip/xc8/v1.30/sources/common/memcpy.c
+[v _memcpy memcpy `(*.4v  1 e 1 0 ]
+"8 /opt/microchip/xc8/v1.30/sources/common/memset.c
+[v _memset memset `(*.4v  1 e 1 0 ]
+"7 /opt/microchip/xc8/v1.30/sources/common/putch.c
+[v _putch putch `(v  1 e 0 0 ]
+"2 /opt/microchip/xc8/v1.30/sources/common/tmul.c
+[v ___tmul __tmul `(um  1 e 3 0 ]
+"4 /opt/microchip/xc8/v1.30/sources/common/wmul.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"49 /opt/microchip/xc8/v1.30/sources/pic/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+[s S319 . 4 `uc 1 src 1 0 `uc 1 dst 1 1 `uc 1 id 1 2 `uc 1 opt 1 3 ]
+"16 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/hal.c
+[u S324 . 24 `[24]uc 1 data 24 0 `S319 1 frame 4 0 ]
+[s S327 RfTransceiverPacket_s 28 `S324 1 . 24 0 `uc 1 crcTx 1 24 `uc 1 crcRx 1 25 `uc 1 size 1 26 `uc 1 proc 1 27 :1:0 
+`uc 1 tx 1 27 :1:1 
+]
+[v _rfPackets rfPackets `[2]S327  1 e 56 0 ]
+"21
+[v _rfRxBf rfRxBf `[64]uc  1 e 64 0 ]
+[s S355 CircBufDef_s 10 `*.1uc 1 bf 2 0 `ui 1 size 2 2 `ui 1 wrPt 2 4 `ui 1 rdPt 2 6 `uc 1 options 1 8 `uc 1 faults 1 9 ]
+"22
+[v _rfRxCC rfRxCC `S355  1 e 10 0 ]
+[s S19 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"472 /opt/microchip/xc8/v1.30/include/pic16f1508.h
+[u S25 . 1 `S19 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES25  1 e 1 @13 ]
+[s S219 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"513
+[u S228 . 1 `S219 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES228  1 e 1 @14 ]
+"1006
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+[s S202 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+]
+"1021
+[u S209 . 1 `S202 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES209  1 e 1 @140 ]
+"1055
+[v _TRISB TRISB `VEuc  1 e 1 @141 ]
+"1069
+[v _TRISBbits TRISBbits `VES25  1 e 1 @141 ]
+"1093
+[v _TRISC TRISC `VEuc  1 e 1 @142 ]
+"1110
+[v _TRISCbits TRISCbits `VES228  1 e 1 @142 ]
+"1488
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1604
+[v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
+"1623
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1642
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"1721
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
+"1767
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
+"1829
+[v _LATAbits LATAbits `VES209  1 e 1 @268 ]
+"1872
+[v _LATBbits LATBbits `VES25  1 e 1 @269 ]
+"1913
+[v _LATCbits LATCbits `VES228  1 e 1 @270 ]
+"2268
+[v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
+"2480
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2526
+[v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"2561
+[v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
+"238 /home/hans/Projects/Firmware/domoticaRf/src/main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"310
+} 0
+"65
+[v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
+{
+"77
+} 0
+"4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+{
+"17
+} 0

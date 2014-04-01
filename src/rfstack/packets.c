@@ -16,8 +16,6 @@ RfNodeInfo_t nodes[RF_NR_OF_NODES];
 
 void RfPacketSimpleReply(RfTransceiverPacket_t* packet, RfMsg_t msg)
 {
-    UI08_t i;
-    
     // Swap src&dst
     UI08_t nodeTmp = packet->frame.src;
     packet->frame.src = packet->frame.dst;
@@ -81,7 +79,6 @@ void RfPacketReply(RfTransceiverPacket_t* packet, RfMsg_t msg, UI08_t* data, UI0
 }
 PT_THREAD(RfPacketsTickTh)
 {
-    UI08_t i;
     static RfTransceiverPacket_t* packet;
     PT_BEGIN(pt);
 

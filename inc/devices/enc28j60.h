@@ -30,12 +30,12 @@ typedef union enc28j60Register_u
 
 } enc28j60Register_t;
 
-#define regBank0 0x00
-#define regBank1 0x20
-#define regBank2 0x40
-#define regBank3 0x60
-#define regGlobal 0x80
-#define regDefine(addr, bank) (addr | regBank##bank)
+#define regBank0                0x00
+#define regBank1                0x20
+#define regBank2                0x40
+#define regBank3                0x60
+#define regGlobal               0x80
+#define regDefine(addr, bank)   (addr | regBank##bank)
 
 typedef enum enc28j60Addressing_e
 {
@@ -190,16 +190,11 @@ typedef enum enc28j60Registers_e
 // ESTAT mask definitions
 #define ESTAT_CLKRDY            0x01
 
-#define ENC28J60_CS_HIGH        asm volatile("bset PORTC, #8\n");
-#define ENC28J60_CS_LOW         asm volatile("bclr PORTC, #8\n");
+#define ENC28J60_CS_HIGH        PORTCbits.RC8 = 1;
+#define ENC28J60_CS_LOW         PORTCbits.RC8 = 0;
 
-//#define ENC28J60_CS_LOW         PORTC &= ~(1<<6)
-//#define ENC28J60_CS_HIGH        PORTC |= 1<<6
-
-#define ENC28J60_RST_LOW        PORTC &= ~(1<<7)
-#define ENC28J60_RST_HIGH       PORTC |= 1<<7
-
-#define ENC28J60_DelayShort()    do {} while(0);// do { volatile UI08_t i = 0; while (i++ < 25); } while(0);
+#define ENC28J60_RST_LOW        PORTCbits.RC7 = 0;
+#define ENC28J60_RST_HIGH       PORTCbits.RC7 = 1;
 
 #define ENC28J60_RXBUF_START    0
 #define ENC28J60_RXBUF_END      4095

@@ -1,0 +1,44 @@
+/* 
+ * File:   arp.h
+ * Author: Hans
+ *
+ * Created on March 10, 2013, 9:06 AM
+ */
+
+#ifndef ARP_H
+#define	ARP_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+#include "stddefs.h"
+#include "ethdefs.h"
+
+typedef struct ArpPacket_s
+{
+    EthernetFrame_t frame;
+    
+    UI16_t htype;
+    UI16_t ptype;
+    UI08_t hlen;
+    UI08_t plen;
+    UI16_t oper;
+    UI08_t sha[6]; // mac
+    UI08_t spa[4]; // ip
+    UI08_t tha[6]; // mac
+    UI08_t tpa[4]; // ip
+} ArpPacket_t;
+
+void arpAnnounce();
+void arpProcessPacket(EthernetFrame_t* frame);
+
+extern  UI08_t thisIp[4];
+extern  UI08_t thisMac[6];
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* ARP_H */
+

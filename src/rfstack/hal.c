@@ -1,7 +1,9 @@
 #include "stddefs.h"
 #include "rfstack/hal.h"
 #include "rfstack/packets.h"
-#include "rfstack/rf_task.h"
+#ifdef SERVER
+#include "tasks/rf_task.h"
+#endif
 
 #include "utilities/ccbuf.h"
 
@@ -14,7 +16,9 @@ struct pt halTxBfTh;
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
-UI08_t rfRxBf[1024]; // 128 bytes of Rx buffer
+UI08_t mrfInRx;
+
+UI08_t rfRxBf[64]; // 128 bytes of Rx buffer
 CircBufDef_t rfRxCC;
 bool_t RfHalInRxMode(void)
 {
@@ -349,8 +353,11 @@ void RfHalStatemachine()
         case TX_NULL3:
             RfTrcvPut(0);
             rfStatus.isr.state = RX_RECV;
-
+#ifdef SERVER
             RtosTaskSignalEvent(&rfTask, RF_TX_PACKET);
+#else
+      // TODO: wake CPU
+#endif
             RfTrcvMode(0);
             break;
 

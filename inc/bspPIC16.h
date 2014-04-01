@@ -42,7 +42,11 @@ __CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLK
 __CONFIG(WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_OFF);
 #endif
 
+#define TRUE 1
+#define FALSE 0
+
 // Standard types
+typedef unsigned char bool_t;
 typedef unsigned char UI08_t;
 typedef unsigned int UI16_t;
 typedef unsigned long UI32_t;

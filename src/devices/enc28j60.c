@@ -1,14 +1,15 @@
 
+#include "rtos/task.h"
+
 #include "bsp/spi.h"
 #include "bsp/uart.h"
 #include "devices/enc28j60.h"
 #include "ipstack/udp.h"
 #include "ipstack/arp.h"
-#include "insight.h"
 
-#include "devices/spiArbiter.h"
-
-#include "profiling/executiontime.h"
+#include "utilities/spiArbiter.h"
+#include "utilities/insight.h"
+#include "utilities/executiontime.h"
 
 #define BLOCK_TFR_SIZE 8
 
@@ -303,8 +304,8 @@ void enc28j60Initialize()
     
     // reset
     enc28j60Reset();
-    
-    ENC28J60_DelayShort();
+
+    RtosTaskDelay(250);
 
     //enc28j60ReadPhyRegisterUint16(PHID1);
     //enc28j60ReadPhyRegisterUint16(PHID2);
@@ -588,14 +589,11 @@ void enc28j60ResetRxBuffer()
 void enc28j60Reset(void)
 {
     ENC28J60_RST_HIGH;
-    ENC28J60_DelayShort();
+    Nop();
     ENC28J60_RST_LOW;
-    ENC28J60_DelayShort();
+    Nop();
     ENC28J60_RST_HIGH;
-    ENC28J60_DelayShort();
-
-    ENC28J60_DelayShort();
-
+    RtosTaskDelay(5);
     ENC28J60_CS_LOW;
     enc28j60_spi_write(SC);
     ENC28J60_CS_HIGH;

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="domoticaRf" />
+		<Option pch_mode="2" />
+		<Option compiler="armelfgcc" />
+		<Build>
+			<Target title="default">
+				<Option output="default/domoticaRf.elf" prefix_auto="0" extension_auto="0" />
+				<Option object_output="default" />
+				<Option type="1" />
+				<Option compiler="armelfgcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="xc16">
+				<Option output="domoticaRf" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-g" />
+			<Add option="-O2" />
+			<Add option="-fno-common" />
+			<Add option="-mcpu=arm7tdmi" />
+			<Add option="-DOLIMEX_LPC213X" />
+			<Add option="-D__NO_CTOR_DTOR_SUPPORT__" />
+			<Add option="-DUSE_IRQ" />
+			<Add directory="src" />
+			<Add directory="h" />
+		</Compiler>
+		<Linker>
+			<Add option="-s" />
+			<Add option="-Wl,-Map,map.txt" />
+			<Add option="-mcpu=arm7tdmi" />
+			<Add option="-T ld/target_2134.ld" />
+		</Linker>
+		<Unit filename="../../../src/bsp/pic16/adc16.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/adc.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/context.s">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/i2c.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/interrupt.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/rtc.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/rtos.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/spi.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/timer.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/pic24/uart.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/bsp/softI2c.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/devices/SST26VF032.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/devices/enc28j60.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/devices/mcp9800.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/devices/mrf49xa.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/devices/spiArbiter.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/arp.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/icmp.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/ipv4.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/ntp.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/tcp.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/ipstack/udp.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/main.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/profiling/executiontime.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/rfstack/hal.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/rfstack/packets.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/rfstack/rf_task.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/rtos/task.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/timer.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/utilities/ccbuf.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="../../../src/webserver/router.c">
+			<Option compilerVar="CC" />
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="h/lpc-p2138.h">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="h/lpc213x.h">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="ld/target_2132.ld">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="ld/target_2134.ld">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="ld/target_2136.ld">
+			<Option target="xc16" />
+		</Unit>
+		<Unit filename="ld/target_2138.ld">
+			<Option target="xc16" />
+		</Unit>
+		<Extensions>
+			<code_completion>
+				<search_path add="../../../inc" />
+			</code_completion>
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

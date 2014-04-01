@@ -3,11 +3,11 @@ build/default/production/_ext/767653358/mrf49xa.o:  \
 ../../inc/stddefs.h  \
 ../../inc/bspPIC24.h  \
  ../../inc/devices/mrf49xa.h  \
-../../inc/rtos/task.h  \
+../../inc/server/rtos/task.h  \
  ../../inc/rfstack/hal.h  \
 ../../inc/rfstack/rfdefs.h  \
- ../../inc/utilities/pt.h  \
-../../inc/utilities/lc.h  \
- ../../inc/utilities/lc-switch.h  \
+ ../../inc/server/utilities/pt.h  \
+../../inc/server/utilities/lc.h  \
+ ../../inc/server/utilities/lc-switch.h  \
 ../../inc/bsp/spi.h  \
- ../../inc/devices/spiArbiter.h 
+ ../../inc/server/utilities/spiArbiter.h 

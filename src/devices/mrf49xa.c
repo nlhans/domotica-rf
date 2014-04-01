@@ -6,7 +6,7 @@
 
 #include "bsp/spi.h"
 
-#include "devices/spiArbiter.h"
+#include "utilities/spiArbiter.h"
 
 // Write TX byte
 void RfTrcvPut(UI08_t byte)
@@ -80,7 +80,7 @@ void MRF49XAInit()
     RF_RES = 1;
 
 #ifdef SERVER
-    RtosTaskDelay(250); // TODO: Determine good timestamp.
+    RtosTaskDelay(25);
 #else
     for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
 #endif
@@ -98,7 +98,7 @@ void MRF49XAInit()
     MRF49XACommand(PMCREG | 0x0020);		// turn on tx
 
 #ifdef SERVER
-    RtosTaskDelay(250); // TODO: Determine good timestamp.
+    RtosTaskDelay(25);
 #else
     for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
 #endif
@@ -110,18 +110,10 @@ void MRF49XAInit()
 
     RF_FSEL = 1; // Read from SPI registers.
 
+#ifdef SERVER
     // Pull-up IRQ/INT signals
     CNPU2bits.CN21PUE = 1;
     CNPU2bits.CN30PUE = 1;
-
-#ifndef SERVER
-
-    CNEN2bits.CN21IE = 1; // IRO
-    CNEN2bits.CN30IE = 1; // INT
-
-    IFS1bits.CNIF = 0;
-    IEC1bits.CNIE = 1;
-//sts433B
 
 #endif
 }
@@ -144,7 +136,9 @@ void MRF49XAReset()
 
 UI08_t SPI_Read(void)
 {
+#ifdef SERVER
     return spiRx1();
+#endif
     UI08_t i;
     UI08_t data = 0;
 
@@ -175,8 +169,11 @@ UI08_t SPI_Read(void)
 
 void SPI_Write(UI08_t data)
 {
-    return spiTx1(data);
-
+#ifdef SERVER
+    spiTx1(data);
+    return;
+#endif
+    
     RF_SPI_SCK = 0;
 
 #ifdef SPI_UNROLL_LOOP

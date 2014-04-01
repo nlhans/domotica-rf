@@ -16,7 +16,7 @@ void ExtIntInit(void)
 
 void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio)
 {
-    intHandlers[ind].callback = ((callback == NULL) ? ExtIntDummy : callback);
+    intHandlers[ind].callback = (ExtIntHandler_t) ((callback == NULL) ? ExtIntDummy : callback);
 
     switch(ind)
     {

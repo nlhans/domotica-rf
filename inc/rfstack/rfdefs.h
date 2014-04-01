@@ -8,7 +8,7 @@
 #endif
 
 // Configuration
-#ifdef PIC16
+#ifndef PIC24_HW
 #define RF_PACKET_BUFFER_DEPTH 2
 #define RF_NR_OF_NODES 2
 #else
@@ -41,9 +41,10 @@ typedef struct RfNodeInfo_s
         UI08_t sensors;
         UI16_t battery;
         UI32_t firmwareVersion;
-
+#ifdef SERVER
         RtosTime_t lastWake;
         RtosTime_t nextWake;
+#endif
     }entity;
 #ifdef PIC24_HW
     struct

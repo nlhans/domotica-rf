@@ -22,6 +22,8 @@
         <itemPath>../../../src/devices/mrf49xa.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
+        <itemPath>../../../src/rfstack/hal.c</itemPath>
+        <itemPath>../../../src/rfstack/packets.c</itemPath>
       </logicalFolder>
       <itemPath>../../../src/main.c</itemPath>
     </logicalFolder>
@@ -46,7 +48,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.30</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -161,7 +163,12 @@
         <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
+        <property key="advanced-elf" value="true"/>
         <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="stack-size-high" value="auto"/>
+        <property key="stack-size-low" value="auto"/>
+        <property key="stack-size-main" value="auto"/>
+        <property key="stack-type" value="compiled"/>
       </XC8-config-global>
     </conf>
   </confs>
