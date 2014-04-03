@@ -78,42 +78,28 @@ void TRAP_ISR _MathError(void)
 
 int main(void)
 {
-    #ifdef PIC24_HW
-        #if defined(__PIC24FJ64GB004__)
-        AD1PCFG = 0xFFFF;
-        #warning "Building for PIC24FJ64GB004"
-        #else
-            #if defined (__PIC24FJ64GA004__)
-            AD1PCFG = 0xFFFF;
-            #warning "Building for PIC24FJ64GA004"
-            #else
-            ADPCFG = 0xFFFF; // Ports as digital, not analog
-            #warning "Building for dsPIC33FJ128GP804"
-            #endif
-        #endif
-
-        ETH_CS = 1;
-        RF_SPI_CS = 1;
-        FLASH_CS1 = 1;
-        FLASH_CS2 = 1;
-    
+    #if defined(__PIC24FJ64GB004__)
+    AD1PCFG = 0xFFFF;
+    #warning "Building for PIC24FJ64GB004"
     #else
-        #warning "Building for PIC16F1508"
-        OSCCON = 0b01111000; // 16MHz
-        AdcInit();
+        #if defined (__PIC24FJ64GA004__)
+        AD1PCFG = 0xFFFF;
+        #warning "Building for PIC24FJ64GA004(sim)"
+        #else
+        ADPCFG = 0xFFFF; // Ports as digital, not analog
+        #warning "Building for dsPIC33FJ128GP804"
+        #endif
     #endif
+
+    ETH_CS = 1;
+    RF_SPI_CS = 1;
+    FLASH_CS1 = 1;
+    FLASH_CS2 = 1;
+
     SysInitGpio();
 
     RF_POWER = 0;
     SENSOR_PWR = 0;
-
-    // Setup profiler timer
-        T2CON = (1<<3); // 32-bit timer
-        PR2 = 0xFFFF;
-        PR3 = 0xFFFF;
-        TMR2 = 0; // reset timebase
-        TMR3 = 0;
-        T2CON = (1<<3) | (1<<15); // start timer
 
     ExtIntInit();
     spiInit(1);

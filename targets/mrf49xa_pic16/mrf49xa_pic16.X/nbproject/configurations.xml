@@ -16,6 +16,7 @@
       <logicalFolder name="f1" displayName="BSP" projectFiles="true">
         <itemPath>../../../src/bsp/softI2c.c</itemPath>
         <itemPath>../../../src/bsp/pic16/adc16.c</itemPath>
+        <itemPath>../../../src/bsp/pic16/interrupt.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Devices" projectFiles="true">
         <itemPath>../../../src/devices/mcp9800.c</itemPath>
@@ -25,7 +26,10 @@
         <itemPath>../../../src/rfstack/hal.c</itemPath>
         <itemPath>../../../src/rfstack/packets.c</itemPath>
       </logicalFolder>
-      <itemPath>../../../src/main.c</itemPath>
+      <logicalFolder name="f4" displayName="Utilities" projectFiles="true">
+        <itemPath>../../../src/utilities/ccbuf.c</itemPath>
+      </logicalFolder>
+      <itemPath>../../../src/node/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -72,7 +76,7 @@
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
-        <property key="extra-include-directories" value="..\..\..\inc"/>
+        <property key="extra-include-directories" value="../../../inc"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="pro"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>

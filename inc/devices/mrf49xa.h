@@ -3,6 +3,22 @@
 
 #include "stddefs.h"
 
+#ifdef SERVER
+
+
+#include "utilities/spiArbiter.h"
+#include "spiArbiter.h"
+
+#define RF_CS_ACQ() spiArbRfAcquire();
+#define RF_CS_REL() spiArbRfComplete();
+
+#else
+
+#define RF_CS_ACQ() RF_SPI_CS = 0;
+#define RF_CS_REL() RF_SPI_CS = 1;
+
+#endif
+
 #define RF_NETWORKID1 0x2D
 #define RF_NETWORKID2 0xD4
 #define RF_NETWORKID3 0x6B

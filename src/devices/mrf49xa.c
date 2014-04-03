@@ -1,12 +1,9 @@
 #include "stddefs.h"
 #include <xc.h>
 #include "devices/mrf49xa.h"
-#include "rtos/task.h"
 #include "rfstack/hal.h"
 
 #include "bsp/spi.h"
-
-#include "utilities/spiArbiter.h"
 
 // Write TX byte
 void RfTrcvPut(UI08_t byte)
@@ -17,10 +14,10 @@ void RfTrcvPut(UI08_t byte)
 // Read RX byte
 UI08_t RfTrcvGet(void)
 {
-    spiArbRfAcquire();
+    RF_CS_ACQ();
     SPI_Write(0xB0);
     UI08_t b = SPI_Read();
-    spiArbRfComplete();
+    RF_CS_REL();
     
     return b;
 }
@@ -28,12 +25,12 @@ UI08_t RfTrcvGet(void)
 // Write word
 void MRF49XACommand(UI16_t cmd)
 {
-    spiArbRfAcquire();
+    RF_CS_ACQ();
 
     SPI_Write((cmd & 0xFF00) >> 8);
     SPI_Write((cmd & 0x00FF));
 
-    spiArbRfComplete();
+    RF_CS_REL();
 }
 
 // Read word
@@ -41,10 +38,10 @@ UI16_t MRF49XAReadStatus()
 {
     UI16_t w = 0;
 
-    spiArbRfAcquire();
+    RF_CS_ACQ();
     w = SPI_Read() << 8;
     w |= SPI_Read();
-    spiArbRfComplete();
+    RF_CS_REL();
 
     return w;
 
