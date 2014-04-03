@@ -49,8 +49,6 @@ void RfTick(void)
     RtosTimerRearm(&rfTimer, 2);
 }
 
-extern UI08_t mrfInRx;
-
 UI08_t swtick = 0;
 
 UI16_t mrfStat;
@@ -65,7 +63,7 @@ bool_t mrf49xaIsr(UI08_t foo)
 
         if ((mrf49State & (1<<15)) != 0)
         {
-            if (mrfInRx==1 && (mrf49State & (1<<7)) == 0)
+            if (rfStatus.inRx ==1 && (mrf49State & (1<<7)) == 0)
             {
             }
             else

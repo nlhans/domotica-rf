@@ -15,8 +15,10 @@ void RfTrcvPut(UI08_t byte)
 UI08_t RfTrcvGet(void)
 {
     RF_CS_ACQ();
+    
     SPI_Write(0xB0);
     UI08_t b = SPI_Read();
+
     RF_CS_REL();
     
     return b;
@@ -36,11 +38,11 @@ void MRF49XACommand(UI16_t cmd)
 // Read word
 UI16_t MRF49XAReadStatus()
 {
-    UI16_t w = 0;
-
     RF_CS_ACQ();
-    w = SPI_Read() << 8;
+    
+    UI16_t w = SPI_Read() << 8;
     w |= SPI_Read();
+
     RF_CS_REL();
 
     return w;
@@ -58,9 +60,8 @@ inline void RfTrcvRearm(void)
 
 bool_t RfTrcvCarrierPresent()
 {
-    UI16_t sts = MRF49XAReadStatus();
-
-    if ((sts & (1<<8)) != 0)
+    UI16_t stat = MRF49XAReadStatus();
+    if ((stat & (1<<8)) != 0)
         return TRUE;
     else
         return FALSE;
@@ -129,15 +130,31 @@ void MRF49XAReset()
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop
 // -> ~460kHz SPI clockc without loop
-#define SPI_UNROLL_LOOP
+//#define SPI_UNROLL_LOOP
 
 UI08_t SPI_Read(void)
 {
 #ifdef SERVER
     return spiRx1();
 #endif
-    UI08_t i;
     UI08_t data = 0;
+    RF_SPI_SCK = 0;
+    RF_SPI_SDO = 0;
+#ifdef SPI_UNROLL_LOOP
+    #define SPI_RX_TICK(a) do { if (RF_SPI_SDI) data |= (1<<a); \
+    RF_SPI_SCK = 1; \
+    RF_SPI_SCK = 0; } while (0);
+
+    SPI_RX_TICK(7);
+    SPI_RX_TICK(6);
+    SPI_RX_TICK(5);
+    SPI_RX_TICK(4);
+    SPI_RX_TICK(3);
+    SPI_RX_TICK(2);
+    SPI_RX_TICK(1);
+    SPI_RX_TICK(0);
+#else
+    UI08_t i;
 
     RF_SPI_SDO = 0;
     RF_SPI_SCK = 0;
@@ -161,6 +178,7 @@ UI08_t SPI_Read(void)
         
         RF_SPI_SCK = 0;
     }
+#endif
     return data;
 }
 
@@ -174,18 +192,18 @@ void SPI_Write(UI08_t data)
     RF_SPI_SCK = 0;
 
 #ifdef SPI_UNROLL_LOOP
-    #define SPI_TICK(a) do { if ((data & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
+    #define SPI_TX_TICK(a) do { if ((data & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
     RF_SPI_SCK = 1; \
     RF_SPI_SCK = 0; } while (0);
     
-    SPI_TICK(7);
-    SPI_TICK(6);
-    SPI_TICK(5);
-    SPI_TICK(4);
-    SPI_TICK(3);
-    SPI_TICK(2);
-    SPI_TICK(1);
-    SPI_TICK(0);
+    SPI_TX_TICK(7);
+    SPI_TX_TICK(6);
+    SPI_TX_TICK(5);
+    SPI_TX_TICK(4);
+    SPI_TX_TICK(3);
+    SPI_TX_TICK(2);
+    SPI_TX_TICK(1);
+    SPI_TX_TICK(0);
 #else
     UI08_t i;
     for (i = 0; i < 8; i++)

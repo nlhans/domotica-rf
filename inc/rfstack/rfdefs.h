@@ -36,16 +36,16 @@ typedef struct RfNodeInfo_s
         UI08_t isServer:1;
     } options;
 
+#ifdef SERVER
     struct
     {
         UI08_t sensors;
         UI16_t battery;
         UI32_t firmwareVersion;
-#ifdef SERVER
         RtosTime_t lastWake;
         RtosTime_t nextWake;
-#endif
     }entity;
+#endif
 #ifdef PIC24_HW
     struct
     {

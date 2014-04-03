@@ -76,6 +76,7 @@ typedef struct RfTransceiverStatus_s
         RfTransceiverState_t state;
     } isr;
 
+    UI08_t inRx;
     UI08_t txInQueue;
     UI08_t rxInQueue;
 } RfTransceiverStatus_t;

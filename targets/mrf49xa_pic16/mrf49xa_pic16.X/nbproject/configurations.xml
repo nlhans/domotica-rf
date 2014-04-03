@@ -27,7 +27,7 @@
         <itemPath>../../../src/rfstack/packets.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Utilities" projectFiles="true">
-        <itemPath>../../../src/utilities/ccbuf.c</itemPath>
+        <itemPath>../../../src/utilities/ccbuf_static.c</itemPath>
       </logicalFolder>
       <itemPath>../../../src/node/main.c</itemPath>
     </logicalFolder>
@@ -93,7 +93,7 @@
         <property key="use-iar" value="false"/>
         <property key="verbose" value="false"/>
         <property key="warning-level" value="0"/>
-        <property key="what-to-do" value="request"/>
+        <property key="what-to-do" value="require"/>
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
@@ -124,7 +124,7 @@
         <property key="fill-flash-options-increment" value=""/>
         <property key="fill-flash-options-seq" value=""/>
         <property key="fill-flash-options-what" value="0"/>
-        <property key="format-hex-file-for-download" value="false"/>
+        <property key="format-hex-file-for-download" value="true"/>
         <property key="initialize-data" value="true"/>
         <property key="keep-generated-startup.as" value="false"/>
         <property key="link-in-c-library" value="true"/>
@@ -168,7 +168,7 @@
       </PICkit3PlatformTool>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>
-        <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="output-file-format" value="+mcof,-elf"/>
         <property key="stack-size-high" value="auto"/>
         <property key="stack-size-low" value="auto"/>
         <property key="stack-size-main" value="auto"/>

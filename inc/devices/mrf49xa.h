@@ -7,7 +7,6 @@
 
 
 #include "utilities/spiArbiter.h"
-#include "spiArbiter.h"
 
 #define RF_CS_ACQ() spiArbRfAcquire();
 #define RF_CS_REL() spiArbRfComplete();

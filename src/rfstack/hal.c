@@ -5,7 +5,11 @@
 #include "tasks/rf_task.h"
 #endif
 
+#ifdef SERVER
 #include "utilities/ccbuf.h"
+#else
+#include "utilities/ccbuf_static.h"
+#endif
 
 PT_THREAD(RfHalTickRxTh);
 PT_THREAD(RfHalTickTxTh);
@@ -16,21 +20,15 @@ struct pt halTxBfTh;
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
-UI08_t mrfInRx;
+UI08_t rfRxBf[32]; // Rx buffer
 
-UI08_t rfRxBf[64]; // 128 bytes of Rx buffer
-CircBufDef_t rfRxCC;
-bool_t RfHalInRxMode(void)
-{
-    if (rfStatus.isr.state == RX_RECV)
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
-}
+CircBufDef_t rfRxCC = { 
+    rfRxBf, sizeof(rfRxBf)
+};
+
+#ifndef SERVER
+CircBufDef_t* const CCDef = &rfRxCC;
+#endif
 
 void RfHalInit(void)
 {
@@ -39,7 +37,10 @@ void RfHalInit(void)
     rfStatus.isr.txPacket = &(rfPackets[0]);
     rfStatus.isr.state = RX_RECV;
 
-    memset(rfPackets, 0, RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t));
+    UI08_t i = 0;
+    for (i = 0; i < RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t); i++)
+        ((UI08_t*) rfPackets)[i] = 0;
+    //memset(rfPackets, 0, RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t));
 
     CCBufInit(&rfRxCC, rfRxBf, sizeof(rfRxBf), 0);
 
@@ -53,13 +54,13 @@ void RfTrcvMode(UI08_t tx)
 {
     if (tx == 0)
     {
-        mrfInRx = 1;
+        rfStatus.inRx = 1;
         //printf("[RF] Configuring as RX\n");
         MRF49XAReset();
     }
     else
     {
-        mrfInRx = 0;
+        rfStatus.inRx = 0;
         //printf("[RF] Configuring as TX\n");
         MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
         MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
@@ -88,7 +89,9 @@ PT_THREAD(RfHalTickTxTh)
 
         if (txPacket == NULL)
         {
+#ifdef PIC24_HW
             printf("[RF] Dropping TX packet - returned NULL\n");
+#endif
             PT_RESTART(pt);
         }
 
@@ -114,7 +117,7 @@ PT_THREAD(RfHalTickRxTh)
     static UI08_t rxByteTimeout;
     static UI08_t pktRxByteIndex;
     static RfTransceiverPacket_t rxPacket;
-    UI16_t pktLength = 0;
+    UI08_t pktLength;
 
     rxByteTimeout++;
 
@@ -309,13 +312,11 @@ void RfHalStatemachine()
 
         // Transmit states
         case TX_PREAMBLE1:
-            RfTrcvPut(0xAA);
-            rfStatus.isr.state = TX_PREAMBLE2;
-            break;
         case TX_PREAMBLE2:
             RfTrcvPut(0xAA);
-            rfStatus.isr.state = TX_SCL1;
+            rfStatus.isr.state++;
             break;
+            
         case TX_SCL1:
             RfTrcvPut(RF_NETWORKID1);
             rfStatus.isr.state = TX_SCL2;
@@ -342,13 +343,11 @@ void RfHalStatemachine()
             RfTrcvPut(rfStatus.isr.txPacket->crcTx);
             rfStatus.isr.state = TX_NULL1;
             break;
+            
         case TX_NULL1:
-            RfTrcvPut(0);
-            rfStatus.isr.state = TX_NULL2;
-            break;
         case TX_NULL2:
             RfTrcvPut(0);
-            rfStatus.isr.state = TX_NULL3;
+            rfStatus.isr.state++;
             break;
         case TX_NULL3:
             RfTrcvPut(0);

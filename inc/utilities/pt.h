@@ -97,7 +97,7 @@ struct pt {
  *
  * \hideinitializer
  */
-#define PT_THREAD(name_args) char name_args(struct pt *pt)
+#define PT_THREAD(name_args) char name_args(struct pt* pt)
 
 /**
  * Declare the start of a protothread inside the C function

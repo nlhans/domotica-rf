@@ -6,9 +6,10 @@ build/default/production/_ext/1201319415/hal.o:  \
  ../../inc/rfstack/rfdefs.h  \
 ../../inc/server/rtos/task.h  \
  ../../inc/devices/mrf49xa.h  \
-../../inc/server/utilities/pt.h  \
- ../../inc/server/utilities/lc.h  \
-../../inc/server/utilities/lc-switch.h  \
- ../../inc/rfstack/packets.h  \
-../../inc/server/tasks/rf_task.h  \
- ../../inc/server/utilities/ccbuf.h 
+../../inc/server/utilities/spiArbiter.h  \
+ ../../inc/utilities/pt.h  \
+../../inc/utilities/lc.h  \
+ ../../inc/utilities/lc-switch.h  \
+../../inc/rfstack/packets.h  \
+ ../../inc/server/tasks/rf_task.h  \
+../../inc/utilities/ccbuf.h 
