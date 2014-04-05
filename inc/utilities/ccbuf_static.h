@@ -26,19 +26,19 @@ typedef struct CircBufDef_s
 #define CCBufWr(def, bf, c) _CCBufWr(bf, c)
 #define CCBufGetRdCount(def) _CCBufGetRdCount()
 
-void _CCBufInit(void);
-void _CCBufReset(void);
+inline void _CCBufInit(void);
+inline void _CCBufReset(void);
 
 UI08_t _CCBufCalcPt(UI08_t entry, I08_t move);
-bool_t _CCBufCanWr(void);
-bool_t _CCBufCanRd(void);
+inline bool_t _CCBufCanWr(void);
+inline bool_t _CCBufCanRd(void);
 UI08_t _CCBufPeekByte(void);
-void _CCBufRdReverse(UI08_t qty);
+inline void _CCBufRdReverse(UI08_t qty);
 
 UI08_t _CCBufRdByte(void);
 UI08_t _CCBufRd(UI08_t* bf, UI08_t max);
-bool_t _CCBufWrByte(UI08_t data);
-bool_t _CCBufWr(UI08_t* bf, UI08_t count);
+void _CCBufWrByte(UI08_t data);
+void _CCBufWr(UI08_t* bf, UI08_t count);
 
 UI08_t _CCBufGetRdCount(void);
 // TODO: _CCBufGetWrCount

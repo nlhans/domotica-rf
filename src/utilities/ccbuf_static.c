@@ -2,15 +2,21 @@
 
 extern CircBufDef_t* const CCDef;
 
-void _CCBufInit(void)
+inline void _CCBufInit(void)
 {
     _CCBufReset();
 }
 
-void _CCBufReset(void)
+inline void _CCBufReset(void)
 {
-    memset(CCDef->bf, 0, CCDef->size);
-
+    // Reset buffer
+    UI08_t i = CCDef->size;
+    while (i > 0)
+    {
+        i--;
+        CCDef->bf[i] = 0;
+    }
+    
     CCDef->rdPt = CCDef->size - 1;
     CCDef->wrPt = 0;
 }
@@ -25,18 +31,19 @@ UI08_t _CCBufCalcPt(UI08_t entry, I08_t move)
     return (UI08_t) result;
 }
 
-bool_t _CCBufCanWr(void)
+inline bool_t _CCBufCanWr(void)
 {
     if (CCDef->wrPt == CCDef->rdPt) return FALSE;
     else return TRUE;
 }
 
-void _CCBufRdReverse(UI08_t qty)
+
+inline void _CCBufRdReverse(UI08_t qty)
 {
     CCDef->rdPt = _CCBufCalcPt(CCDef->rdPt, 0-qty);
 }
 
-bool_t _CCBufCanRd(void)
+inline bool_t _CCBufCanRd(void)
 {
     // If RD pt is done +1, is it at WR pt?
     // If that is the case, then the buffer is empty.
@@ -46,11 +53,11 @@ bool_t _CCBufCanRd(void)
 
 UI08_t _CCBufRdByte(void)
 {
-    if (_CCBufCanRd() != 0)
+    if (_CCBufCanRd())
     {
         CCDef->rdPt = _CCBufCalcPt(CCDef->rdPt, 1);
         UI08_t res = CCDef->bf[CCDef->rdPt];
-        CCDef->bf[CCDef->rdPt] = 0;
+        //CCDef->bf[CCDef->rdPt] = 0;
         return res;
     }
     return 0;
@@ -79,31 +86,23 @@ UI08_t _CCBufRd(UI08_t* bf, UI08_t max)
     return read;
 }
 
-bool_t _CCBufWrByte(UI08_t data)
+void _CCBufWrByte(UI08_t data)
 {
     if (_CCBufCanWr())
     {
         CCDef->bf[CCDef->wrPt] = data;
         CCDef->wrPt = _CCBufCalcPt(CCDef->wrPt, 1);
-
-        return TRUE;
     }
-    return FALSE;
-
 }
 
-bool_t _CCBufWr(UI08_t* bf, UI08_t count)
+void _CCBufWr(UI08_t* bf, UI08_t count)
 {
-    bool_t result = TRUE;
-    UI08_t index = 0;
-
-    while (result && index < count)
+    while (count > 0)
     {
-        result &= _CCBufWrByte(bf[index]);
-        index++;
+        _CCBufWrByte(*bf);
+        bf++;
+        count--;
     }
-
-    return result;
 }
 
 UI08_t _CCBufGetRdCount(void)

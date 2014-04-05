@@ -23,7 +23,6 @@ typedef enum RfTransceiverState_e
     TX_PREAMBLE2,           //2
     TX_SCL1,                //3
     TX_SCL2,                //4
-    TX_SCL3,                //5
     TX_SIZE,                //6
     TX_DATA,                //7
     TX_CRC,
@@ -45,6 +44,17 @@ typedef struct RfStatus_s
 
 typedef struct RfTransceiverPacket_s
 {
+    // flags
+    struct
+    {
+        UI08_t resends:2;
+        UI08_t wait_for_ack:1;
+        UI08_t acq:1;
+        UI08_t tx:1;
+        UI08_t proc:1;
+    } flags;
+
+    
     union
     {
         UI08_t data[24];
@@ -55,6 +65,7 @@ typedef struct RfTransceiverPacket_s
             UI08_t dst;
             UI08_t id;
             UI08_t opt;
+            UI08_t* data;
         } frame;
     };
 #ifdef PIC24_HW
@@ -63,8 +74,7 @@ typedef struct RfTransceiverPacket_s
     UI08_t crcTx;
     UI08_t crcRx;
     UI08_t size;
-    UI08_t proc:1;
-    UI08_t tx:1;
+
 } RfTransceiverPacket_t;
 
 typedef struct RfTransceiverStatus_s
@@ -77,9 +87,13 @@ typedef struct RfTransceiverStatus_s
     } isr;
 
     UI08_t inRx;
-    UI08_t txInQueue;
-    UI08_t rxInQueue;
 } RfTransceiverStatus_t;
+
+typedef enum
+{
+    PCKT_NO_PROC = 0,
+    PCKT_NEED_PROC = 1
+};
 
 // Status carriers
 extern struct pt halRxBfTh;
@@ -94,12 +108,16 @@ PT_THREAD(RfHalTickRxTh);
 PT_THREAD(RfHalTickTxTh);
 
 // Raw API for transmit packets
-bool_t RfHalTxPut(RfTransceiverPacket_t* packet);
-RfTransceiverPacket_t* RfHalTxGet();
+bool_t RfHalTxPut(RfTransceiverPacket_t* packet, UI08_t needAck);
+void RfHalTxPutAgain(void);
 
 // Raw API for receive packets
-bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
 RfTransceiverPacket_t* RfHalRxGet();
+
+// API for allocating clean packet
+RfTransceiverPacket_t* RfHalGetFree(void);
+// Reset allocated packet
+void RfHalGetReturn(RfTransceiverPacket_t* packet);
 
 // TODO: MOVE
 void RfTrcvMode(UI08_t tx);

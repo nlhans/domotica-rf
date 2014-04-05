@@ -5,6 +5,8 @@
 
 #include "bsp/spi.h"
 
+mrf49xaStatus_t rfTrcvStatus;
+
 // Write TX byte
 void RfTrcvPut(UI08_t byte)
 {
@@ -36,35 +38,46 @@ void MRF49XACommand(UI16_t cmd)
 }
 
 // Read word
-UI16_t MRF49XAReadStatus()
+void RfTrcvStatus()
 {
     RF_CS_ACQ();
-    
-    UI16_t w = SPI_Read() << 8;
-    w |= SPI_Read();
+
+    rfTrcvStatus.byte[0] = SPI_Read();
+    rfTrcvStatus.byte[1] = SPI_Read();
 
     RF_CS_REL();
+}
 
-    return w;
-
+bool_t RfTrcvCarrierPresent()
+{
+    RfTrcvStatus();
+    return rfTrcvStatus.flags.msb.signalPresent;
 }
 
 inline UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
 {
     return (initial ^ data);
 }
-inline void RfTrcvRearm(void)
+void RfTrcvSetup(UI08_t tx)
 {
-    MRF49XAReset();
-}
+    if (tx)
+    {
+        MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
+        MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
+        MRF49XACommand(PMCREG |0x0020);                        // turn on tx
 
-bool_t RfTrcvCarrierPresent()
-{
-    UI16_t stat = MRF49XAReadStatus();
-    if ((stat & (1<<8)) != 0)
-        return TRUE;
+        // put 1 byte into TX to trigger ISR
+        RfTrcvPut(0x55);
+    }
     else
-        return FALSE;
+    {
+        MRF49XACommand(PMCREG);		// turn off tx and rx
+        MRF49XACommand(FIFORSTREG);		// reset FIFO
+        MRF49XACommand(GENCREG);		// disable FIFO , Tx_latch
+        MRF49XACommand(PMCREG | 0x0080);	// turn on receiver
+        MRF49XACommand(GENCREG | 0x0040);	// enable the FIFO
+        MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
+    }
 }
 
 void MRF49XAInit()
@@ -73,9 +86,14 @@ void MRF49XAInit()
     UI08_t i, j;
 #endif
     // Reset the chip
+    RF_POWER = 1;
     RF_RES = 0;
+    RF_INT = 0;
     Nop();
     RF_RES = 1;
+    RF_INT = 1;
+
+    RF_FSEL = 1; // Read from SPI registers.
 
 #ifdef SERVER
     RtosTaskDelay(25);
@@ -106,31 +124,23 @@ void MRF49XAInit()
     MRF49XACommand(FIFORSTREG);
     MRF49XACommand(FIFORSTREG | 0x0002);	// enable syncron latch
 
-    RF_FSEL = 1; // Read from SPI registers.
+    RfTrcvSetup(0);
 
 #ifdef SERVER
     // Pull-up IRQ/INT signals
     CNPU2bits.CN21PUE = 1;
     CNPU2bits.CN30PUE = 1;
 
+#else
+    WPUAbits.WPUA2 = 1;
 #endif
-}
-
-void MRF49XAReset()
-{
-    MRF49XACommand(PMCREG);		// turn off tx and rx
-    MRF49XACommand(FIFORSTREG);		// reset FIFO
-    MRF49XACommand(GENCREG);		// disable FIFO , Tx_latch
-    MRF49XACommand(PMCREG | 0x0080);	// turn on receiver
-    MRF49XACommand(GENCREG | 0x0040);	// enable the FIFO
-    MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
 }
 
 //#ifdef PIC16
 // 16MHz PIC16
 // -> 267kHz SPI clock with loop
 // -> ~460kHz SPI clockc without loop
-//#define SPI_UNROLL_LOOP
+#define SPI_UNROLL_LOOP
 
 UI08_t SPI_Read(void)
 {
@@ -163,13 +173,9 @@ UI08_t SPI_Read(void)
     {
         data = data << 1;
 
-        if (RF_SPI_SDI)
+        if (RF_SPI_SDI != 0)
         {
             data |= 0x01;
-        }
-        else
-        {
-            data &= 0xFE;
         }
 
         RF_SPI_SCK = 1;

@@ -1,3 +1,6 @@
+
+#define _XTAL_FREQ 4000000
+
 #include "stddefs.h"
 
 #include "bsp/adc.h"
@@ -5,6 +8,9 @@
 
 #include "rfstack/hal.h"
 #include "rfstack/packets.h"
+
+UI16_t delay = 1000;
+volatile UI08_t isr = 0;
 
 void SysInitGpio(void)
 {
@@ -19,39 +25,38 @@ void SysInitGpio(void)
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
 
-UI16_t mrfStat;
-UI16_t mrf49State;
-
 bool_t mrf49XaIsr()
 {
     do
     {
-        mrfStat = mrf49State;
-        mrf49State = MRF49XAReadStatus();
+        RfTrcvStatus();
+        isr++;
 
-        if ((mrf49State & (1<<15)) != 0)
+        if (rfTrcvStatus.flags.msb.fifoTxRx)
         {
-            if (rfStatus.inRx ==1 && (mrf49State & (1<<7)) == 0)
+            if (rfStatus.inRx ==1 && rfTrcvStatus.flags.lsb.dataQualityOK == 0)
             {
+                // Skip RX + bad data
             }
             else
             {
                 RfHalStatemachine();
             }
         }
-        else if((mrf49State & (1<<14)) != 0)
+        if (rfTrcvStatus.flags.msb.por)
         {
-            MRF49XAReset();
+            RfTrcvSetup(0);
         }
 
-    } while ((mrf49State & 0xC000) != 0);
+    } while (rfTrcvStatus.flags.msb.por || rfTrcvStatus.flags.msb.fifoTxRx);
 
-    return (RF_IRQ == 1)?1:0;
+    return (RF_IRQ == 1) ? 1 : 0;
 }
 bool_t mrf49XaIsr2(UI08_t foo)
 {
     return TRUE;
 }
+
 void main(void)
 {
     #warning "Building for PIC16F1508"
@@ -61,14 +66,25 @@ void main(void)
     AdcInit();
     
     ExtIntInit();
+
+    MRF49XAInit();
     RfHalInit();
 
     while(1)
     {
+        if (RF_IRQ == 0) mrf49XaIsr();
+        
         RfHalTickRxTh(&halRxBfTh);
-        RfHalTickTxTh(&halTxBfTh);
 
         RfPacketsTickTh(&halPkTh);
+
+        RfHalTickTxTh(&halTxBfTh);
+        
+        RfTrcvStatus();
+
+        delay=1000;
+        isr = 0;
+        while(delay-- > 0 && isr == 0) Nop();
     }
 
 }

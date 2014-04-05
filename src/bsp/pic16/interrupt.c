@@ -32,8 +32,8 @@ void interrupt extInt()
 {
     if (INTCONbits.INTF != 0)
     {
-        mrf49XaIsr();
+        if (mrf49XaIsr())
+            INTCONbits.INTF = 0;
         //cb(0);
-        INTCONbits.INTF = 0;
     }
 }

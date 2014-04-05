@@ -17,6 +17,9 @@ PT_THREAD(RfHalTickTxTh);
 struct pt halRxBfTh;
 struct pt halTxBfTh;
 
+bool_t RfHalTxGet();
+bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
+
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
@@ -34,13 +37,12 @@ void RfHalInit(void)
 {
     //
     rfStatus.isr.byteCounter = 0;
-    rfStatus.isr.txPacket = &(rfPackets[0]);
+    rfStatus.isr.txPacket = rfPackets;
     rfStatus.isr.state = RX_RECV;
 
     UI08_t i = 0;
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t); i++)
         ((UI08_t*) rfPackets)[i] = 0;
-    //memset(rfPackets, 0, RF_PACKET_BUFFER_DEPTH * sizeof(RfTransceiverPacket_t));
 
     CCBufInit(&rfRxCC, rfRxBf, sizeof(rfRxBf), 0);
 
@@ -52,21 +54,11 @@ void RfHalInit(void)
 
 void RfTrcvMode(UI08_t tx)
 {
-    if (tx == 0)
-    {
-        rfStatus.inRx = 1;
-        //printf("[RF] Configuring as RX\n");
-        MRF49XAReset();
-    }
-    else
-    {
-        rfStatus.inRx = 0;
-        //printf("[RF] Configuring as TX\n");
-        MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
-        MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
-        MRF49XACommand(PMCREG |0x0020);                        // turn on tx
+    rfStatus.inRx = 1 - tx;
+    RfTrcvSetup(tx);
 
-        // Start TX
+    if (tx == 1)
+    {
         rfStatus.isr.state = TX_PREAMBLE1;
         rfStatus.isr.byteCounter = 0;
     }
@@ -74,26 +66,13 @@ void RfTrcvMode(UI08_t tx)
 
 PT_THREAD(RfHalTickTxTh)
 {
-    static RfTransceiverPacket_t* txPacket;
-    
     PT_BEGIN(pt);
 
     while(1)
     {
         // Any packets for TX?
         // Do CSMA test
-        PT_WAIT_UNTIL(pt, rfStatus.txInQueue > 0);
-
-        //printf("[RF] Setting up TX\n");
-        txPacket = RfHalTxGet();
-
-        if (txPacket == NULL)
-        {
-#ifdef PIC24_HW
-            printf("[RF] Dropping TX packet - returned NULL\n");
-#endif
-            PT_RESTART(pt);
-        }
+        PT_WAIT_UNTIL(pt, RfHalTxGet() == TRUE);
 
         do
         {
@@ -106,6 +85,7 @@ PT_THREAD(RfHalTickTxTh)
 
         PT_WAIT_UNTIL(pt, rfStatus.isr.state == RX_RECV);
 
+        RfHalGetReturn(rfStatus.isr.txPacket);
         //printf("[RF] TX done\n");
     }
     
@@ -116,93 +96,85 @@ PT_THREAD(RfHalTickRxTh)
 {
     static UI08_t rxByteTimeout;
     static UI08_t pktRxByteIndex;
-    static RfTransceiverPacket_t rxPacket;
-    UI08_t pktLength;
+    static RfTransceiverPacket_t* packet;
 
     rxByteTimeout++;
 
     PT_BEGIN(pt);
 
-
     while (1)
     {
         // Wait until we can read a byte.
         PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
+            
+        UI08_t pktLength = CCBufPeekByte(&rfRxCC);
 
-        UI08_t b = CCBufRdByte(&rfRxCC);
-
-        // Search for start byte
-        if (b == RF_NETWORKID3)
+        if (pktLength > 5 && pktLength <= sizeof(packet->data) + 1)
         {
-            rxByteTimeout = 0;
-            PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 5);
-            if (rxByteTimeout > 5)
+            do
             {
-                // Overrun error
-                PT_RESTART(pt);
+                packet = RfHalGetFree();
+                PT_WAIT_UNTIL(pt, packet != NULL);
             }
+            while (packet == NULL);
             
-            pktLength = CCBufPeekByte(&rfRxCC);
-            
-            if(pktLength > 0 && pktLength <= PACKET_SIZE_MAX + 1)
+            // Store Size
+            packet->size = CCBufRdByte(&rfRxCC) - 1;
+            packet->crcTx = 0;
+            rxByteTimeout = 0;
+
+            // Store Data
+            for (pktRxByteIndex = 0; pktRxByteIndex < packet->size; pktRxByteIndex++)
             {
-                // Store Size
-                rxPacket.size = CCBufRdByte(&rfRxCC) - 1;
-                rxPacket.crcTx = 0;
-
+                PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
+                if(rxByteTimeout > 25) break; // abort, CRC read falls through instantly, and packet check will be done
                 rxByteTimeout = 0;
+                packet->data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
+                packet->crcTx = RfTrcvCrcTick(packet->crcTx, packet->data[pktRxByteIndex]);
+            }
 
-                // Store Data
-                for (pktRxByteIndex = 0; pktRxByteIndex < rxPacket.size; pktRxByteIndex++)
-                {
-                    PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
-                    if(rxByteTimeout > 25) break; // abort, CRC read falls through instantly, and packet check will be done
-                    rxByteTimeout = 0;
-                    rxPacket.data[pktRxByteIndex] = CCBufRdByte(&rfRxCC);
-                    rxPacket.crcTx = RfTrcvCrcTick(rxPacket.crcTx, rxPacket.data[pktRxByteIndex]);
-                }
-
+            if (pktRxByteIndex == packet->size)
+            {
                 // Store CRC
                 PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
-                rxPacket.crcRx = CCBufRdByte(&rfRxCC);
-
-                // CRC error?
-                if(rxByteTimeout > 5)
-                {
-                    // Buffer error.
-                    // Reverse buffer , it may very well be an underrun
-                    //printf("[RF] Timeout\n");
-                    CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
-                }
-                else if (rxPacket.crcRx != rxPacket.crcTx)
-                {
-                    //printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
-                    CCBufRdReverse(&rfRxCC, pktRxByteIndex+1);
-                }
-                else
-                {
-                // Store timestamp
-#ifdef PIC24_HW
-                    rxPacket.timestamp = RtosTimestamp;
-#endif
-
-                    // Store packet
-                    PT_WAIT_UNTIL(pt, RfHalRxPut(&rxPacket));
-
-                // Signal OS
-#ifdef PIC24_HW
-                    RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
-#endif
-                }
+                packet->crcRx = CCBufRdByte(&rfRxCC);
+            }
+            
+            // CRC error?
+            if(rxByteTimeout > 25)
+            {
+                // Buffer error.
+                // Reverse buffer , it may very well be an underrun
+                //printf("[RF] Timeout\n");
+                CCBufRdReverse(&rfRxCC, pktRxByteIndex);
+                RfHalGetReturn(packet);
+            }
+            else if (0 && packet->crcRx != packet->crcTx)
+            {
+                //printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
+                CCBufRdReverse(&rfRxCC, pktRxByteIndex);
+                RfHalGetReturn(packet);
             }
             else
             {
-                //printf("[MRF49] Packet header dropped\n");
+            // Store timestamp
+#ifdef PIC24_HW
+                packet->timestamp = RtosTimestamp;
+#endif
+
+                // Store packet
+                PT_WAIT_UNTIL(pt, RfHalRxPut(packet));
+
+            // Signal OS
+#ifdef PIC24_HW
+                RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
+#endif
             }
         }
         else
         {
-            //printf("!%02X", b);
+            CCBufRdByte(&rfRxCC);
+            //printf("[MRF49] Packet header dropped\n");
         }
 
     }
@@ -211,94 +183,175 @@ PT_THREAD(RfHalTickRxTh)
         
 }
 
-bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket)
+void RfHalGetReturn(RfTransceiverPacket_t* packet)
 {
+    packet->flags.acq = 0;
+    packet->flags.tx = 0;
+    packet->flags.proc = PCKT_NO_PROC;
+}
+
+RfTransceiverPacket_t* RfHalGetFree(void)
+{
+#ifdef PIC24_HW
     UI08_t i = 0;
 
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
     {
-        if (rfPackets[i].proc == 0 && rfPackets[i].tx == 0)
+        if (rfPackets[i].flags.proc == PCKT_NO_PROC && rfPackets[i].flags.acq == 0)
         {
-            memcpy(&(rfPackets[i]), rfPacket, sizeof(RfTransceiverPacket_t));
-            rfPackets[i].proc = 1;
-            rfStatus.rxInQueue++;
+            rfPackets[i].flags.acq = 1;
+            return &(rfPackets[i]);
+        }
+    }
+    return NULL;
+#else
+    if (rfPackets[0].flags.proc == PCKT_NO_PROC && rfPackets[0].flags.acq == 0)
+    {
+        rfPackets[0].flags.acq = 1;
+        return &(rfPackets[0]);
+    }
+    if (rfPackets[1].flags.proc == PCKT_NO_PROC && rfPackets[0].flags.acq == 0)
+    {
+        rfPackets[0].flags.acq = 1;
+        return &(rfPackets[1]);
+    }
+    return FALSE;
+#endif
+}
+
+bool_t RfHalRxPut(RfTransceiverPacket_t* packet)
+{
+#ifdef PIC24_HW
+    UI08_t i = 0;
+
+    for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
+    {
+        if (rfPackets[i].flags.proc == PCKT_NO_PROC && rfPackets[i].flags.tx == 0)
+        {
+            memcpy(&(rfPackets[i]), packet, sizeof(RfTransceiverPacket_t));
+            rfPackets[i].flags.proc = PCKT_NEED_PROC;
+            rfPackets[i].flags.acq = 0;
+            rfPackets[i].flags.tx = 0;
             return TRUE;
         }
     }
 
     return FALSE;
+#else
+    packet->flags.proc = PCKT_NEED_PROC;
+    packet->flags.acq = 0;
+    packet->flags.tx = 0;
+    return TRUE;
+#endif
 }
-
 
 RfTransceiverPacket_t* RfHalRxGet()
 {
+#ifdef PIC24_HW
     UI08_t i = 0;
-    if (rfStatus.rxInQueue == 0)
-        return FALSE;
 
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
     {
-        if (rfPackets[i].proc != 0 && rfPackets[i].tx == 0)
+        if (rfPackets[i].flags.proc == PCKT_NEED_PROC && rfPackets[i].flags.tx == 0)
         {
-            rfPackets[i].proc = 0;
-            rfStatus.rxInQueue--;
-            
+            rfPackets[i].flags.proc = PCKT_NO_PROC;
             return &(rfPackets[i]);
         }
     }
 
-    rfStatus.rxInQueue = 0;
     return FALSE;
+#else
+    if (rfPackets[0].flags.proc == PCKT_NEED_PROC && rfPackets[0].flags.tx == 0)
+    {
+        rfPackets[0].flags.proc = PCKT_NO_PROC;
+        return &(rfPackets[0]);
+    }
+    if (rfPackets[1].flags.proc == PCKT_NEED_PROC && rfPackets[1].flags.tx == 0)
+    {
+        rfPackets[1].flags.proc = PCKT_NO_PROC;
+        return &(rfPackets[1]);
+    }
+    return FALSE;
+#endif
 }
 
-RfTransceiverPacket_t* RfHalTxGet()
+bool_t RfHalTxGet()
 {
+#ifndef PIC24_HW
     UI08_t i = 0;
-    if (rfStatus.txInQueue == 0)
-        return FALSE;
-
+    
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
     {
-        if (rfPackets[i].proc == 1 && rfPackets[i].tx == 1)
+        if (rfPackets[i].flags.proc == PCKT_NEED_PROC && rfPackets[i].flags.tx == 1)
         {
-            rfPackets[i].proc = 0;
-            rfStatus.txInQueue--;
-            
-            return &(rfPackets[i]);
+            if (rfPackets[i].flags.wait_for_ack == 0)
+                rfPackets[i].flags.proc = PCKT_NO_PROC;
+            rfPackets[i].flags.acq = 1;
+            rfStatus.isr.txPacket = &(rfPackets[i]);
+            return TRUE;
         }
     }
 
-    rfStatus.txInQueue = 0;
     return FALSE;
+#else
+    if (rfPackets[0].flags.proc == PCKT_NEED_PROC && rfPackets[0].flags.tx == 1)
+    {
+        if (rfPackets[0].flags.wait_for_ack == 0)
+            rfPackets[0].flags.proc = PCKT_NO_PROC;
+        rfPackets[0].flags.acq = 1;
+        rfStatus.isr.txPacket = &(rfPackets[0]);
+        return TRUE;
+    }
+    if (rfPackets[1].flags.proc == PCKT_NEED_PROC && rfPackets[1].flags.tx == 1)
+    {
+        if (rfPackets[1].flags.wait_for_ack == 0)
+            rfPackets[1].flags.proc = PCKT_NO_PROC;
+        rfPackets[1].flags.acq = 1;
+        rfStatus.isr.txPacket = &(rfPackets[1]);
+        return TRUE;
+    }
+    return FALSE;
+#endif
 }
 
-bool_t RfHalTxPut(RfTransceiverPacket_t* packet)
+bool_t RfHalTxPut(RfTransceiverPacket_t* packet, UI08_t needAck)
 {
+#ifdef PIC24_HW
     UI08_t i;
     
-    // Calculate CRC
-    packet->crcTx = 0;
-
-    for (i = 0; i < packet->size; i++)
-        packet->crcTx = RfTrcvCrcTick(packet->crcTx, packet->data[i]);
-
     // Store in packet storage
     for (i = 0; i < RF_PACKET_BUFFER_DEPTH; i++)
     {
-        if (rfPackets[i].proc == 0)
+        if (rfPackets[i].flags.proc == PCKT_NO_PROC)
         {
             memcpy(&(rfPackets[i]), packet, sizeof(RfTransceiverPacket_t));
-            rfPackets[i].proc = 1;
-            rfPackets[i].tx = 1;
-            
-            rfStatus.txInQueue++;
-
+            rfPackets[i].flags.proc = PCKT_NEED_PROC;
+            rfPackets[i].flags.tx = 1;
+            rfPackets[i].flags.acq = 0;
+            rfPackets[i].flags.resends = 0 ;
+            rfPackets[i].flags.wait_for_ack = (needAck != 0 ? 1 : 0);
             return TRUE;
         }
     }
 
     // No slot found.
     return FALSE;
+#else
+    packet->flags.acq = 0;
+    packet->flags.proc = PCKT_NEED_PROC;
+    packet->flags.tx = 1;
+    packet->flags.resends = 0;
+    packet->flags.wait_for_ack = (needAck != 0 ? 1 : 0);
+    return TRUE;
+#endif
+}
+
+void RfHalTxPutAgain(void)
+{
+    rfStatus.isr.txPacket->flags.resends++;
+    rfStatus.isr.txPacket->flags.tx = 1; // mark as TX again
+    rfStatus.isr.txPacket->flags.acq = 1;
+    
 }
 
 void RfHalStatemachine()
@@ -319,29 +372,26 @@ void RfHalStatemachine()
             
         case TX_SCL1:
             RfTrcvPut(RF_NETWORKID1);
-            rfStatus.isr.state = TX_SCL2;
+            rfStatus.isr.state++;
             break;
         case TX_SCL2:
             RfTrcvPut(RF_NETWORKID2);
-            rfStatus.isr.state = TX_SCL3;
-            break;
-        case TX_SCL3:
-            RfTrcvPut(RF_NETWORKID3);
-            rfStatus.isr.state = TX_SIZE;
+            rfStatus.isr.state++;
             break;
         case TX_SIZE:
             RfTrcvPut(rfStatus.isr.txPacket->size);
-            rfStatus.isr.state = TX_DATA;
+            rfStatus.isr.state++;
             break;
         case TX_DATA:
             RfTrcvPut(rfStatus.isr.txPacket->data[rfStatus.isr.byteCounter]);
+            rfStatus.isr.txPacket->crcTx = RfTrcvCrcTick(rfStatus.isr.txPacket->crcTx, rfStatus.isr.txPacket->data[rfStatus.isr.byteCounter]);
             rfStatus.isr.byteCounter++;
             if(rfStatus.isr.byteCounter >= rfStatus.isr.txPacket->size)
                 rfStatus.isr.state = TX_CRC;
             break;
         case TX_CRC:
             RfTrcvPut(rfStatus.isr.txPacket->crcTx);
-            rfStatus.isr.state = TX_NULL1;
+            rfStatus.isr.state++;
             break;
             
         case TX_NULL1:

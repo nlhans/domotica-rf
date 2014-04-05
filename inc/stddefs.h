@@ -27,6 +27,10 @@
     #include "bspPIC16.h"
 #endif
 
+#ifdef _16LF1508
+    #include "bspPIC16.h"
+#endif
+
 #ifdef _16F1509
     #include "bspPIC16.h"
 #endif

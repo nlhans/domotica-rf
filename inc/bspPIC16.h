@@ -62,12 +62,14 @@ typedef long I32_t;
 /*************** PORTA *************/
 #define RF_IRQ                  PORTAbits.RA2		// in
 #define RF_RES                  LATAbits.LATA4		// out
-#define RF_INT                  PORTAbits.RA5		// in
+#define RF_INT                  LATAbits.LATA5		// out
 
 #define SYS_GPIO_INIT_PORTA() do { \
-TRISAbits.TRISA4 = GPIO_OUTPUT; \
 TRISAbits.TRISA2 = GPIO_INPUT; \
-TRISAbits.TRISA5 = GPIO_INPUT; \
+TRISAbits.TRISA4 = GPIO_OUTPUT; \
+TRISAbits.TRISA5 = GPIO_OUTPUT; \
+RF_RES = 0; \
+RF_INT = 0; \
 } while(0);
 
 /*************** PORTB *************/
@@ -111,6 +113,11 @@ TRISCbits.TRISC7 = GPIO_OUTPUT; \
 TRISCbits.TRISC0 = GPIO_INPUT; \
 TRISCbits.TRISC3 = GPIO_INPUT; \
 TRISCbits.TRISC5 = GPIO_INPUT; \
+RF_POWER = 0; \
+SENSOR_PWR = 0; \
+RF_FSEL = 0; \
+RF_SPI_CS = 1; \
+RF_SPI_SCK = 0; \
 } while(0);
 
 /*

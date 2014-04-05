@@ -5,24 +5,49 @@
 
 #ifdef SERVER
 
+    #include "utilities/spiArbiter.h"
 
-#include "utilities/spiArbiter.h"
-
-#define RF_CS_ACQ() spiArbRfAcquire();
-#define RF_CS_REL() spiArbRfComplete();
+    #define RF_CS_ACQ() spiArbRfAcquire();
+    #define RF_CS_REL() spiArbRfComplete();
 
 #else
 
-#define RF_CS_ACQ() RF_SPI_CS = 0;
-#define RF_CS_REL() RF_SPI_CS = 1;
+    #define RF_CS_ACQ() RF_SPI_CS = 0;
+    #define RF_CS_REL() RF_SPI_CS = 1;
 
 #endif
 
+typedef union mrf49xaStatus_u
+{
+    UI08_t byte[2];
+    struct
+    {
+        struct
+        {
+            UI08_t signalPresent:1;
+            UI08_t fifoEmpty:1;
+            UI08_t lowBat:1;
+            UI08_t extIntPin:1;
+            UI08_t wakeup:1;
+            UI08_t overflow:1;
+            UI08_t por:1;
+            UI08_t fifoTxRx:1;
+        } msb;
+        struct
+        {
+            UI08_t offset:4;
+            UI08_t offsetSign:1;
+            UI08_t afc:1;
+            UI08_t clockLock:1;
+            UI08_t dataQualityOK:1;
+        } lsb;
+    } flags;
+}mrf49xaStatus_t;
+extern mrf49xaStatus_t rfTrcvStatus;
+
+// *Unique* Network ID's
 #define RF_NETWORKID1 0x2D
 #define RF_NETWORKID2 0xD4
-#define RF_NETWORKID3 0x6B
-
-#define MRF49XA_WaitOnTx() do { while (!RF_SPI_SDI); } while (0);
 
 #define PACKET_SIZE_MAX         20              // 8x2 bytes + 4 bytes header/footer
 
@@ -38,20 +63,6 @@
 #define DRSREG 			0xC611		// 9579Baud (default)
 #define	SYNBREG			0xCED4		// Syncronization Pattern (default 0xCED4)
 
-typedef enum Mrf49XARxState_e
-{
-    RX_STATE_NONE,
-    RX_STATE_DATA,
-    RX_STATE_PACKET
-} Mrf49XARxState_t;
-
-typedef struct
-{
-    UI08_t buffer[PACKET_SIZE_MAX];
-    UI08_t index;               // Contains the array index
-    UI08_t len;                 // Real array length
-    UI08_t ChkSum;                // For storing 14, 28 and 128 bit speeds
-} TRFData;
 
 #define	FREQ_BAND_433			0x0010       //    433 MHz
 #define FREQ_BAND_868			0x0020       //    868 MHz
@@ -112,23 +123,14 @@ typedef struct
 #endif
 
 void MRF49XAInit();
-void MRF49XAReset(void);
-
 void MRF49XACommand(UI16_t spicmd);
-UI16_t MRF49XAReadStatus();
+void RfTrcvSetup(UI08_t tx);
 
-void RfTrcvPut(UI08_t byte);
-UI08_t RfTrcvGet(void);
-
-
-
-bool_t RfTrcvCarrierPresent();
+void RfTrcvStatus(void); // update status
+bool_t RfTrcvCarrierPresent(); // CSMA
+void RfTrcvPut(UI08_t byte); // tx byte
+UI08_t RfTrcvGet(void); // rx byte
 
 inline UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data);
-inline void RfTrcvRearm(void);
 
-/*
-void MRF49XA_TxPacket(UI08_t *data, UI08_t size);
-UI08_t MRF49XA_RxPacket(UI08_t *data);
-*/
 #endif
