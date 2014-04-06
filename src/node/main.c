@@ -9,7 +9,7 @@
 #include "rfstack/hal.h"
 #include "rfstack/packets.h"
 
-UI16_t delay = 1000;
+UI08_t dl1, dl2;
 volatile UI08_t isr = 0;
 
 void SysInitGpio(void)
@@ -82,9 +82,14 @@ void main(void)
         
         RfTrcvStatus();
 
-        delay=1000;
+        dl1 = 100;
         isr = 0;
-        while(delay-- > 0 && isr == 0) Nop();
+        while (dl1 > 0 && isr == 0)
+        {
+            dl2 = 0xFF;
+            while (dl2 != 1 && isr == 0) dl2--;
+            dl1--;
+        }
     }
 
 }

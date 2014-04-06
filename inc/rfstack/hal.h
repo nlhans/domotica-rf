@@ -116,6 +116,10 @@ RfTransceiverPacket_t* RfHalRxGet();
 
 // API for allocating clean packet
 RfTransceiverPacket_t* RfHalGetFree(void);
+
+// Returns true if any packet free in buffer
+bool_t RfHalAnyFree(void);
+
 // Reset allocated packet
 void RfHalGetReturn(RfTransceiverPacket_t* packet);
 

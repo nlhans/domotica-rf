@@ -23,11 +23,15 @@ bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
-UI08_t rfRxBf[32]; // Rx buffer
+UI08_t rfRxBf[48]; // Rx buffer
 
 CircBufDef_t rfRxCC = { 
     rfRxBf, sizeof(rfRxBf)
 };
+
+volatile UI08_t rfPkCrc=0;
+volatile UI08_t rfPkTime=0;
+volatile UI08_t rfPk=0;
 
 #ifndef SERVER
 CircBufDef_t* const CCDef = &rfRxCC;
@@ -111,12 +115,8 @@ PT_THREAD(RfHalTickRxTh)
 
         if (pktLength > 5 && pktLength <= sizeof(packet->data) + 1)
         {
-            do
-            {
-                packet = RfHalGetFree();
-                PT_WAIT_UNTIL(pt, packet != NULL);
-            }
-            while (packet == NULL);
+            PT_WAIT_UNTIL(pt, RfHalAnyFree());
+            packet = RfHalGetFree();
             
             // Store Size
             packet->size = CCBufRdByte(&rfRxCC) - 1;
@@ -139,6 +139,8 @@ PT_THREAD(RfHalTickRxTh)
                 PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
                 packet->crcRx = CCBufRdByte(&rfRxCC);
             }
+
+            rfPk++;
             
             // CRC error?
             if(rxByteTimeout > 25)
@@ -148,12 +150,14 @@ PT_THREAD(RfHalTickRxTh)
                 //printf("[RF] Timeout\n");
                 CCBufRdReverse(&rfRxCC, pktRxByteIndex);
                 RfHalGetReturn(packet);
+                rfPkTime++;
             }
             else if (0 && packet->crcRx != packet->crcTx)
             {
                 //printf("[RF] CRC error %02X/%02X\n", rxPacket.crcRx, rxPacket.crcTx);
                 CCBufRdReverse(&rfRxCC, pktRxByteIndex);
                 RfHalGetReturn(packet);
+                rfPkCrc++;
             }
             else
             {
@@ -188,6 +192,19 @@ void RfHalGetReturn(RfTransceiverPacket_t* packet)
     packet->flags.acq = 0;
     packet->flags.tx = 0;
     packet->flags.proc = PCKT_NO_PROC;
+}
+
+bool_t RfHalAnyFree(void)
+{
+#ifdef PIC24_HW
+#error "Need to implement"
+#else
+    if ((rfPackets[0].flags.proc == PCKT_NO_PROC && rfPackets[0].flags.acq == 0)
+     || (rfPackets[1].flags.proc == PCKT_NO_PROC && rfPackets[0].flags.acq == 0))
+        return TRUE;
+    else
+        return FALSE;
+#endif
 }
 
 RfTransceiverPacket_t* RfHalGetFree(void)

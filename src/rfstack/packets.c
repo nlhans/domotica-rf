@@ -135,7 +135,7 @@ void RfPacketsHandleClient(RfTransceiverPacket_t* packet)
     switch(packet->frame.id)
     {
         case RF_PING:
-            packet->frame.data[0] = RF_PING_RESPONSE;
+            packet->data[4] = RF_PING_RESPONSE;
             RfPacketSimpleReply(packet, RF_PING, FALSE);
             break;
 
