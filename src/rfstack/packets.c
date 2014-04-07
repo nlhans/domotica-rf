@@ -188,10 +188,10 @@ PT_THREAD(RfPacketsTickTh)
         if (timeout > 25)
         {
             // Timeout on RX packet.
-            if (packet->flags.proc == PCKT_NEED_PROC)
+            /*if (packet->flags.proc == PCKT_NEED_PROC)
             {
                 RfHalTxPutAgain();
-            }
+            }*/
         }
 
         timeout = 0;

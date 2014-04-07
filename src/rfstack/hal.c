@@ -100,7 +100,7 @@ PT_THREAD(RfHalTickRxTh)
 {
     static UI08_t rxByteTimeout;
     static UI08_t pktRxByteIndex;
-    static RfTransceiverPacket_t* packet;
+    static RfTransceiverPacket_t* packet = NULL;
 
     rxByteTimeout++;
 
@@ -108,18 +108,23 @@ PT_THREAD(RfHalTickRxTh)
 
     while (1)
     {
+        if (packet == NULL)
+        {
+            PT_WAIT_UNTIL(pt, RfHalAnyFree() == TRUE);
+            packet = RfHalGetFree();
+        }
+        
         // Wait until we can read a byte.
         PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC));
             
-        UI08_t pktLength = CCBufPeekByte(&rfRxCC);
+        UI08_t pktLength = CCBufRdByte(&rfRxCC);
 
         if (pktLength > 5 && pktLength <= sizeof(packet->data) + 1)
         {
-            PT_WAIT_UNTIL(pt, RfHalAnyFree());
-            packet = RfHalGetFree();
+            rfPk++;
             
             // Store Size
-            packet->size = CCBufRdByte(&rfRxCC) - 1;
+            packet->size = pktLength - 1;
             packet->crcTx = 0;
             rxByteTimeout = 0;
 
@@ -139,8 +144,6 @@ PT_THREAD(RfHalTickRxTh)
                 PT_WAIT_UNTIL(pt, CCBufCanRd(&rfRxCC) || rxByteTimeout > 25);
                 packet->crcRx = CCBufRdByte(&rfRxCC);
             }
-
-            rfPk++;
             
             // CRC error?
             if(rxByteTimeout > 25)
@@ -169,6 +172,8 @@ PT_THREAD(RfHalTickRxTh)
                 // Store packet
                 PT_WAIT_UNTIL(pt, RfHalRxPut(packet));
 
+                packet = NULL;
+                
             // Signal OS
 #ifdef PIC24_HW
                 RtosTaskSignalEvent(&rfTask, RF_RX_PACKET);
@@ -382,6 +387,9 @@ void RfHalStatemachine()
 
         // Transmit states
         case TX_PREAMBLE1:
+            rfStatus.isr.state++;
+            break;
+            
         case TX_PREAMBLE2:
             RfTrcvPut(0xAA);
             rfStatus.isr.state++;

@@ -1,6 +1,4 @@
 
-#define _XTAL_FREQ 4000000
-
 #include "stddefs.h"
 
 #include "bsp/adc.h"
@@ -11,6 +9,7 @@
 
 UI08_t dl1, dl2;
 volatile UI08_t isr = 0;
+UI08_t worried = 0;
 
 void SysInitGpio(void)
 {
@@ -24,6 +23,7 @@ void SysInitGpio(void)
     // Enable humidity analog function
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
+volatile UI08_t rfPkResets = 0;
 
 bool_t mrf49XaIsr()
 {
@@ -43,18 +43,17 @@ bool_t mrf49XaIsr()
                 RfHalStatemachine();
             }
         }
-        if (rfTrcvStatus.flags.msb.por)
+        
+        // Abort & reset
+        if (rfTrcvStatus.flags.msb.por || (rfTrcvStatus.flags.msb.signalPresent && rfTrcvStatus.flags.msb.overflow))
         {
             RfTrcvSetup(0);
+            rfPkResets++;
         }
-
+        
     } while (rfTrcvStatus.flags.msb.por || rfTrcvStatus.flags.msb.fifoTxRx);
 
     return (RF_IRQ == 1) ? 1 : 0;
-}
-bool_t mrf49XaIsr2(UI08_t foo)
-{
-    return TRUE;
 }
 
 void main(void)
@@ -81,14 +80,40 @@ void main(void)
         RfHalTickTxTh(&halTxBfTh);
         
         RfTrcvStatus();
+        if (rfTrcvStatus.flags.lsb.clockLock == 0 && rfStatus.inRx == 1)
+            worried++;
 
-        dl1 = 100;
+        dl1 = 33;
         isr = 0;
         while (dl1 > 0 && isr == 0)
         {
             dl2 = 0xFF;
             while (dl2 != 1 && isr == 0) dl2--;
             dl1--;
+        }
+
+        if (isr == 0)
+        {
+            RfTrcvStatus();
+            if (worried ==  1 && rfTrcvStatus.flags.lsb.clockLock == 0 && rfStatus.inRx == 1)
+            {
+                RfTrcvSetup(0);
+            }
+            else if (worried == 5)
+            {
+                if (rfTrcvStatus.byte[0] == 0 || rfTrcvStatus.byte[0] == 0x02)
+                {
+                    // Re-boot chip
+                    RF_RES = 0;
+                    Nop();
+
+                    MRF49XAInit();
+                }
+            }
+        }
+        else
+        {
+            worried = 0;
         }
     }
 
