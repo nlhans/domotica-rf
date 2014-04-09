@@ -41,6 +41,11 @@ inline bool_t _CCBufCanWr(void)
 inline void _CCBufRdReverse(UI08_t qty)
 {
     CCDef->rdPt = _CCBufCalcPt(CCDef->rdPt, 0-qty);
+    if (CCDef->rdPt == CCDef->wrPt)
+    {
+        // We've moved it back to far
+        CCDef->rdPt++;
+    }
 }
 
 inline bool_t _CCBufCanRd(void)

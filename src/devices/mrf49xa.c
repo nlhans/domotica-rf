@@ -68,6 +68,7 @@ void RfTrcvSetup(UI08_t tx)
 
         // put 1 byte into TX to trigger ISR
         RfTrcvPut(0x55);
+        rfStatus.inRx = 0;
     }
     else
     {
@@ -77,6 +78,7 @@ void RfTrcvSetup(UI08_t tx)
         MRF49XACommand(PMCREG | 0x0080);	// turn on receiver
         MRF49XACommand(GENCREG | 0x0040);	// enable the FIFO
         MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
+        rfStatus.inRx = 1;
     }
 }
 

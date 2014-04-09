@@ -27,12 +27,15 @@ volatile UI08_t rfPkResets = 0;
 
 bool_t mrf49XaIsr()
 {
+    UI08_t retry;
+    
     do
     {
+        retry = 0;
         RfTrcvStatus();
-        isr++;
 
-        if (rfTrcvStatus.flags.msb.fifoTxRx)
+        // Actually in TX overflow is 'underflow'.
+        if (rfTrcvStatus.flags.msb.fifoTxRx || (!rfStatus.inRx && rfTrcvStatus.flags.msb.overflow))
         {
             if (rfStatus.inRx ==1 && rfTrcvStatus.flags.lsb.dataQualityOK == 0)
             {
@@ -41,17 +44,20 @@ bool_t mrf49XaIsr()
             else
             {
                 RfHalStatemachine();
+                isr++;
             }
+            retry++;
         }
         
         // Abort & reset
-        if (rfTrcvStatus.flags.msb.por || (rfTrcvStatus.flags.msb.signalPresent && rfTrcvStatus.flags.msb.overflow))
+        if (rfTrcvStatus.flags.msb.por || (rfStatus.inRx && rfTrcvStatus.flags.msb.overflow))
         {
             RfTrcvSetup(0);
             rfPkResets++;
+            retry++;
         }
-        
-    } while (rfTrcvStatus.flags.msb.por || rfTrcvStatus.flags.msb.fifoTxRx);
+
+    } while (retry);
 
     return (RF_IRQ == 1) ? 1 : 0;
 }
@@ -95,20 +101,20 @@ void main(void)
         if (isr == 0)
         {
             RfTrcvStatus();
-            if (worried ==  1 && rfTrcvStatus.flags.lsb.clockLock == 0 && rfStatus.inRx == 1)
+            if (worried == 75)
+            {
+                // Re-boot chip
+                RF_RES = 0;
+                Nop();
+
+                MRF49XAInit();
+
+                worried = 0;
+            }
+            else 
+            if (worried % 15 == 0 && rfTrcvStatus.flags.lsb.clockLock == 0 && rfStatus.inRx == 1)
             {
                 RfTrcvSetup(0);
-            }
-            else if (worried == 5)
-            {
-                if (rfTrcvStatus.byte[0] == 0 || rfTrcvStatus.byte[0] == 0x02)
-                {
-                    // Re-boot chip
-                    RF_RES = 0;
-                    Nop();
-
-                    MRF49XAInit();
-                }
             }
         }
         else

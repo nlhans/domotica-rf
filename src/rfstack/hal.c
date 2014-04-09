@@ -23,7 +23,7 @@ bool_t RfHalRxPut(RfTransceiverPacket_t* rfPacket);
 RfTransceiverPacket_t rfPackets[RF_PACKET_BUFFER_DEPTH];
 RfTransceiverStatus_t rfStatus;
 
-UI08_t rfRxBf[48]; // Rx buffer
+UI08_t rfRxBf[64]; // Rx buffer
 
 CircBufDef_t rfRxCC = { 
     rfRxBf, sizeof(rfRxBf)
