@@ -21,6 +21,9 @@
       <logicalFolder name="f2" displayName="Devices" projectFiles="true">
         <itemPath>../../../src/devices/mcp9800.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_spi_pic16.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_cmd.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_packet.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
         <itemPath>../../../src/rfstack/hal.c</itemPath>
@@ -73,6 +76,14 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../../src/utilities/ccbuf_static.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
@@ -90,7 +101,7 @@
         <property key="preprocess-assembler" value="true"/>
         <property key="undefine-macros" value=""/>
         <property key="use-cci" value="false"/>
-        <property key="use-iar" value="false"/>
+        <property key="use-iar" value="true"/>
         <property key="verbose" value="false"/>
         <property key="warning-level" value="0"/>
         <property key="what-to-do" value="require"/>

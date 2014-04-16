@@ -29,6 +29,7 @@
 
 #ifdef _16LF1508
     #include "bspPIC16.h"
+#define PIC16_HW
 #endif
 
 #ifdef _16F1509

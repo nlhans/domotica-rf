@@ -3,11 +3,9 @@ build/default/production/_ext/1201319415/packets.o:  \
 ../../inc/rfstack/hal.h  \
 ../../inc/stddefs.h  \
  ../../inc/bspPIC24.h  \
-../../inc/rfstack/rfdefs.h  \
- ../../inc/server/rtos/task.h  \
 ../../inc/devices/mrf49xa.h  \
- ../../inc/server/utilities/spiArbiter.h  \
-../../inc/utilities/pt.h  \
- ../../inc/utilities/lc.h  \
-../../inc/utilities/lc-switch.h  \
+ ../../inc/rfstack/rf_defs.h  \
+../../inc/server/rtos/task.h  \
+ ../../inc/devices/mrf49xa_defs.h  \
+../../inc/server/utilities/spiArbiter.h  \
  ../../inc/rfstack/packets.h 

@@ -38,7 +38,7 @@ typedef enum AdcChannels_e {
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000
 #ifdef MAIN_C
-__CONFIG(FOSC_INTOSC & WDTE_ON & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF);
+__CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF);
 __CONFIG(WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_ON);
 #endif
 
@@ -54,6 +54,14 @@ typedef unsigned long UI32_t;
 typedef char I08_t;
 typedef int I16_t;
 typedef long I32_t;
+
+typedef unsigned char uint8_t;
+typedef unsigned int uint16_t;
+typedef unsigned long uint32_t;
+
+typedef char int8_t;
+typedef int int16_t;
+typedef long int32_t;
 
 #define GPIO_OUTPUT 0
 #define GPIO_INPUT  1

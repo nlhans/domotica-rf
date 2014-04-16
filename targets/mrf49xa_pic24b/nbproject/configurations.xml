@@ -52,7 +52,7 @@
       <logicalFolder name="f4" displayName="Utilities" projectFiles="true">
         <itemPath>../../src/server/utilities/executiontime.c</itemPath>
         <itemPath>../../src/server/utilities/spiArbiter.c</itemPath>
-        <itemPath>../../src/utilities/ccbuf.c</itemPath>
+        <itemPath>../../src/server/utilities/ccbuf.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f8" displayName="Web" projectFiles="true">
         <itemPath>../../src/server/webserver/router.c</itemPath>

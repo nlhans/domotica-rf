@@ -3,7 +3,7 @@
 
 extern bool_t mrf49XaIsr();
 
-ExtIntHandler_t cb = mrf49XaIsr;
+ExtIntHandler_t cb;
 
 void ExtIntInit(void)
 {

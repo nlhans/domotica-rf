@@ -1,233 +1,255 @@
-#include "stddefs.h"
-#include <xc.h>
 #include "devices/mrf49xa.h"
-#include "rfstack/hal.h"
 
-#include "bsp/spi.h"
+#define uint8_t unsigned char 
 
-mrf49xaStatus_t rfTrcvStatus;
+#define packetHwRx rfTrcvStatus.hwRx
+#define packetSwRx rfTrcvStatus.swRx
+#define packetTx rfTrcvStatus.txPacket
 
-// Write TX byte
-void RfTrcvPut(UI08_t byte)
+// Hardware chip status
+mrf49xaStatus_t mrf49Status;
+
+// Software driver status
+rfTrcvStatus_t rfTrcvStatus;
+// TODO: make object
+
+typedef struct Mrf49InitReg_s
 {
-    MRF49XACommand(TXBREG | byte);
-}
+    uint8_t reg;
+    uint8_t val;
+}Mrf49InitReg_t;
+#define REG(a, b) { a, b}
 
-// Read RX byte
-UI08_t RfTrcvGet(void)
-{
-    RF_CS_ACQ();
+volatile const Mrf49InitReg_t const mrfRegset_Init[] = {
+    REG(REG_FIFORSTREG,   FIFORST_RESET),
+    REG(REG_FIFORSTREG,   FIFORST_MODE_RX),
+
+    REG(REG_GENCREG,      GENCREG_RESET),
+    REG(REG_AFCREG,       AFC_EN | AFC_OFFSET_EN | AFC_HAM | AFC_RANGE_P15_M16 | AFC_MODE_INDEPENDANT ),      // AFC ON
+    REG(REG_CFSREG |      RF_FREQ_MSB, RF_FREQ_LSB ),
+    REG(REG_DRSREG,       DRS_DATARATE ),
+    REG(REG_PMCREG,       PMCREG_RESET),
+    REG(REG_RXCREG,       RXC_RXBW_270K | RXC_LNA_0DB | RXC_RSSI_M_91DB),
+    REG(REG_TXCREG,       TXC_MODBW_150K | TXC_TXPWR_0_DB),                // 60kHz tx BW
+    REG(REG_BBFCREG,      BBFC_WRITE | BBFC_AUTO_CLK | BBFC_FILTER_DIGITAL | BBFC_DQTI(4) ),
+
+    REG(REG_PMCREG,       PMCREG_MODE_TX),
+    REG(REG_DELAY,        0x00), // tune in antenna
+
+    REG(REG_PMCREG,       PMCREG_MODE_RX),
+    REG(REG_GENCREG,      GENCREG_MODE_RX),
+    REG(REG_FIFORSTREG,   FIFORST_RESET),
+    REG(REG_FIFORSTREG,   FIFORST_MODE_RX),
     
-    SPI_Write(0xB0);
-    UI08_t b = SPI_Read();
+};
+volatile const uint8_t mrfRegset_InitCnt = sizeof(mrfRegset_Init)/sizeof(Mrf49InitReg_t);
 
-    RF_CS_REL();
-    
-    return b;
-}
+volatile const Mrf49InitReg_t const mrfRegset_Rx[] = {
+    REG(REG_PMCREG,         PMCREG_RESET),
+    REG(REG_FIFORSTREG,     FIFORST_RESET),
+    REG(REG_GENCREG,        GENCREG_RESET),
+    REG(REG_PMCREG,         PMCREG_MODE_RX),
+    REG(REG_GENCREG,        GENCREG_MODE_RX),
+    REG(REG_FIFORSTREG,     FIFORST_MODE_RX)
+};
+volatile const uint8_t mrfRegset_RxCnt = sizeof(mrfRegset_Rx)/sizeof(Mrf49InitReg_t);
 
-// Write word
-void MRF49XACommand(UI16_t cmd)
+volatile const Mrf49InitReg_t const mrfRegset_Tx[] = {
+    REG(REG_PMCREG,         PMCREG_RESET),
+    REG(REG_GENCREG,        GENCREG_RESET),
+    REG(REG_PMCREG,         PMCREG_MODE_TX),
+    REG(REG_GENCREG,        GENCREG_MODE_TX),
+};
+volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitReg_t);
+
+// TODO: Calibrate delay to 5ms on PIC16 @ 16MHz.
+// 250 = ~109ms
+// 5ms -> 12
+#define SetupRegisterDelay() for (i = 0; i < 12; i++) { for (j = 0; j < 250; j++) { asm ("nop"); } }
+
+#define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
+#define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
+
+#define SetupRegistersLoopWithoutDelay(array, count) for (k = 0; k < count; k++) { \
+        if (array[k].reg != REG_DELAY) \
+        Mrf49TxCmd(array[k].reg, array[k].val); }
+
+#define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
+    if (array[k].reg == REG_DELAY) { SetupRegisterDelay(); } else { \
+    Mrf49TxCmd(array[k].reg, array[k].val); } }
+
+// Do tick or ISR
+void Mrf49xaTick(void)
 {
-    RF_CS_ACQ();
-
-    SPI_Write((cmd & 0xFF00) >> 8);
-    SPI_Write((cmd & 0x00FF));
-
-    RF_CS_REL();
-}
-
-// Read word
-void RfTrcvStatus()
-{
-    RF_CS_ACQ();
-
-    rfTrcvStatus.byte[0] = SPI_Read();
-    rfTrcvStatus.byte[1] = SPI_Read();
-
-    RF_CS_REL();
-}
-
-bool_t RfTrcvCarrierPresent()
-{
-    RfTrcvStatus();
-    return rfTrcvStatus.flags.msb.signalPresent;
-}
-
-inline UI08_t RfTrcvCrcTick(UI08_t initial, UI08_t data)
-{
-    return (initial ^ data);
-}
-void RfTrcvSetup(UI08_t tx)
-{
-    if (tx)
-    {
-        MRF49XACommand(PMCREG);                                // turn off the transmitter and receiver
-        MRF49XACommand(GENCREG | 0x0080);                      // Enable the Tx register
-        MRF49XACommand(PMCREG |0x0020);                        // turn on tx
-
-        // put 1 byte into TX to trigger ISR
-        RfTrcvPut(0x55);
-        rfStatus.inRx = 0;
-    }
-    else
-    {
-        MRF49XACommand(PMCREG);		// turn off tx and rx
-        MRF49XACommand(FIFORSTREG);		// reset FIFO
-        MRF49XACommand(GENCREG);		// disable FIFO , Tx_latch
-        MRF49XACommand(PMCREG | 0x0080);	// turn on receiver
-        MRF49XACommand(GENCREG | 0x0040);	// enable the FIFO
-        MRF49XACommand(FIFORSTREG | 0x0002);   // FIFO syncron latch re-enable
-        rfStatus.inRx = 1;
-    }
-}
-
-void MRF49XAInit()
-{
-#ifndef SERVER
-    UI08_t i, j;
+    uint8_t data;
+#ifdef MRF49XA_POWER_SWITCH
+    if (rfTrcvStatus.state == POWERED_OFF)
+        return;
 #endif
-    // Reset the chip
+
+    if (PORTAbits.RA2 == 0)
+        Mrf49RxSts();
+    
+    // Power-on-Reset
+    if (mrf49Status.flags.msb.por == 1)
+    {
+        // TODO: Software reset?
+    }
+
+    // TXOWRXOF (RX overrun / TX underrun)
+    if (mrf49Status.flags.msb.overflow == 1)
+    {
+        switch(rfTrcvStatus.state)
+        {
+            case RECV_IDLE:
+            case RECV_DATA:
+            case RECV_TIMEOUT:
+
+                // Clear fifo data
+                data = Mrf49RxByte();
+                data = Mrf49RxByte();
+
+                // Reset HW & SW rx
+                Mrf49xaModeRx();
+
+                // TODO: Wait until end of this packet burst is done.
+                
+                break;
+
+            case TX_PACKET:
+                // According to the datasheet, fifoTxRx is also always set.
+                // So we don't have to do anything, as after this the
+                // data-statemachine will run.
+                break;
+        }
+    }
+
+    // TODO: Wake-up timer
+    // Use the wake-up timer to signal packet timeouts.
+    // For example, we could transmit only 1 packet every 15ms - 20ms.
+    // If a packet isn't completely received within that period, the WUT flag
+    // occurs & signals the RX statemachine to abort.
+    
+    // TODO: Logic external interrupt
+    // This is probably never going to be used.
+
+    // TODO: Low battery threshold detect
+    // The system has it's own battery monitor.
+
+    // TXRXFIFO flag raised
+    if (mrf49Status.flags.msb.fifoTxRx == 1)
+    {
+        // Depending on the driver status.
+        switch (rfTrcvStatus.state)
+        {
+            case RECV_IDLE:
+                data = Mrf49RxByte();
+                
+                //Truncate data is quality is bad
+                if (mrf49Status.flags.lsb.dataQualityOK == 0)
+                    break;
+
+                if (rfTrcvStatus.rxPacket[0].state == PKT_FREE) rfTrcvStatus.hwRx = &(rfTrcvStatus.rxPacket[0]);
+                else if (rfTrcvStatus.rxPacket[1].state == PKT_FREE) rfTrcvStatus.hwRx = &(rfTrcvStatus.rxPacket[1]);
+                else
+                {
+                    // Error!
+                    break;
+                }
+                packetHwRx->packet.size = data;
+                packetHwRx->crc = 0;
+                packetHwRx->state = PKT_HW_BUSY_RX;
+                
+                rfTrcvStatus.state = RECV_DATA;
+                rfTrcvStatus.hwRxByte = 1;
+
+                break;
+
+            case RECV_DATA:
+
+                data = Mrf49RxByte();
+
+                //Truncate data is quality is bad
+                if (mrf49Status.flags.lsb.dataQualityOK == 0)
+                    break;
+                
+                packetHwRx->raw[rfTrcvStatus.hwRxByte++] = data;
+
+                if (rfTrcvStatus.hwRxByte == packetHwRx->packet.size ||
+                        rfTrcvStatus.hwRxByte == 16)
+                {
+                    rfTrcvStatus.state = RECV_IDLE;
+                    packetHwRx->state = PKT_FREE;
+
+                    // flag scope
+                    SENSOR_PWR = 1;
+                    SENSOR_PWR = 0;
+
+                    // Reset modem
+                    Mrf49xaModeRx();
+
+                }
+
+                break;
+        }
+    }
+    
+}
+
+void Mrf49xaModeRx(void)
+{
+    UI08_t k;
+    SetupRegistersWithoutDelay(Rx);
+
+    rfTrcvStatus.state = RECV_IDLE;
+}
+
+void Mrf49xaModeTx(void)
+{
+    UI08_t k;
+    SetupRegistersWithoutDelay(Tx);
+
+    rfTrcvStatus.state = TX_PACKET;
+}
+
+#ifdef MRF49XA_POWER_SWITCH
+void Mrf49xaBootup(void)
+{
+    UI08_t i, j, k;
+    
     RF_POWER = 1;
     RF_RES = 0;
-    RF_INT = 0;
-    Nop();
+    for (i = 0; i < 250; i++)
+    {
+        if (i == 125)
+            RF_RES = 1;
+        for (j = 0; j < 250; j++) asm ("nop");
+    }
     RF_RES = 1;
-    RF_INT = 1;
 
-    RF_FSEL = 1; // Read from SPI registers.
+    SetupRegisters(Init);
 
-#ifdef SERVER
-    RtosTaskDelay(25);
-#else
-    for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
-#endif
-
-    MRF49XACommand(FIFORSTREG);
-    MRF49XACommand(FIFORSTREG | 0x0002);
-    MRF49XACommand(GENCREG);
-    MRF49XACommand(AFCCREG);
-    MRF49XACommand(CFSREG);
-    MRF49XACommand(DRSREG);
-    MRF49XACommand(PMCREG);
-    MRF49XACommand(RXCREG);
-    MRF49XACommand(TXCREG);
-    MRF49XACommand(BBFCREG);
-    MRF49XACommand(PMCREG | 0x0020);		// turn on tx
-
-#ifdef SERVER
-    RtosTaskDelay(25);
-#else
-    for (i = 0; i < 250; i++) for (j = 0; j < 250; j++) asm ("nop");
-#endif
-
-    MRF49XACommand(PMCREG | 0x0080);		// turn off Tx, turn on receiver
-    MRF49XACommand(GENCREG | 0x0040);		// enable the FIFO
-    MRF49XACommand(FIFORSTREG);
-    MRF49XACommand(FIFORSTREG | 0x0002);	// enable syncron latch
-
-    RfTrcvSetup(0);
-
-#ifdef SERVER
-    // Pull-up IRQ/INT signals
-    CNPU2bits.CN21PUE = 1;
-    CNPU2bits.CN30PUE = 1;
-
-#else
-    WPUAbits.WPUA2 = 1;
-#endif
+    Mrf49xaModeRx();
 }
 
-//#ifdef PIC16
-// 16MHz PIC16
-// -> 267kHz SPI clock with loop
-// -> ~460kHz SPI clockc without loop
-#define SPI_UNROLL_LOOP
-
-UI08_t SPI_Read(void)
+void Mrf49xaShutdown(void)
 {
-#ifdef SERVER
-    return spiRx1();
-#endif
-    UI08_t data = 0;
-    RF_SPI_SCK = 0;
-    RF_SPI_SDO = 0;
-#ifdef SPI_UNROLL_LOOP
-    #define SPI_RX_TICK(a) do { if (RF_SPI_SDI) data |= (1<<a); \
-    RF_SPI_SCK = 1; \
-    RF_SPI_SCK = 0; } while (0);
+    RF_POWER = 0;
 
-    SPI_RX_TICK(7);
-    SPI_RX_TICK(6);
-    SPI_RX_TICK(5);
-    SPI_RX_TICK(4);
-    SPI_RX_TICK(3);
-    SPI_RX_TICK(2);
-    SPI_RX_TICK(1);
-    SPI_RX_TICK(0);
-#else
-    UI08_t i;
-
-    RF_SPI_SDO = 0;
-    RF_SPI_SCK = 0;
-    
-    for (i = 0; i < 8; i++)
-    {
-        data = data << 1;
-
-        if (RF_SPI_SDI != 0)
-        {
-            data |= 0x01;
-        }
-
-        RF_SPI_SCK = 1;
-
-        Nop();
-        
-        RF_SPI_SCK = 0;
-    }
-#endif
-    return data;
+    rfTrcvStatus.state = POWERED_OFF;
 }
 
-void SPI_Write(UI08_t data)
+#else
+
+void Mrf49xaInit(void)
 {
-#ifdef SERVER
-    spiTx1(data);
-    return;
-#endif
-    
-    RF_SPI_SCK = 0;
+    UI08_t i, j, k;
+    SetupRegisters(Init);
 
-#ifdef SPI_UNROLL_LOOP
-    #define SPI_TX_TICK(a) do { if ((data & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
-    RF_SPI_SCK = 1; \
-    RF_SPI_SCK = 0; } while (0);
-    
-    SPI_TX_TICK(7);
-    SPI_TX_TICK(6);
-    SPI_TX_TICK(5);
-    SPI_TX_TICK(4);
-    SPI_TX_TICK(3);
-    SPI_TX_TICK(2);
-    SPI_TX_TICK(1);
-    SPI_TX_TICK(0);
-#else
-    UI08_t i;
-    for (i = 0; i < 8; i++)
-    {
-        if (data & 0x80)
-        {
-            RF_SPI_SDO = 1;
-        }
-        else
-        {
-            RF_SPI_SDO = 0;
-        }
+    Mrf49xaModeRx();
 
-        RF_SPI_SCK = 1;
-        data = data << 1;
-        RF_SPI_SCK = 0;
-    }
-#endif
+    while(RF_IRQ == 0)
+        Mrf49xaTick();
 }
+
+#endif
