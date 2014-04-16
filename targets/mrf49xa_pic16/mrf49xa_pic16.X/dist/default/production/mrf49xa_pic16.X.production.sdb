@@ -1,4 +1,4 @@
-[p PRO_MODE GLOBOPT AUTOSTATIC PIC14 PIC14E SPACEOPT ]
+[p PRO_MODE GLOBOPT AUTOSTATIC PIC14 PIC14E SPEEDOPT ]
 [d version 1.1 ]
 [d edition pro ]
 [d chip 16LF1508 ]
@@ -90,14 +90,16 @@ PKT_SW_BUSY 4
 "19
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
 "82 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
-[v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
-"190
+[v _Mrf49xaTick Mrf49xaTick `(uc  1 e 1 0 ]
+[v i1_Mrf49xaTick Mrf49xaTick `(uc  1 e 1 0 ]
+[v i1_Mrf49xaTick Mrf49xaTick `(uc  1 e 1 0 ]
+"200
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-"198
+"208
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
-"235
+"245
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 "6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
@@ -105,10 +107,16 @@ PKT_SW_BUSY 4
 [v i1_Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
 "16
 [v _Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
+[v i1_Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
+[v i1_Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
 "29
 [v _Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
+[v i1_Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
+[v i1_Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
 "39
 [v _Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
+[v i1_Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
+[v i1_Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
 "44
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 "3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_packet.c
@@ -119,13 +127,13 @@ PKT_SW_BUSY 4
 [v _Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 [v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 [v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
-"21
+"20
 [v _Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
+[v i1_Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
+[v i1_Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
 "10 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
 "23
-[v _mrf49XaIsr mrf49XaIsr `(uc  1 e 1 0 ]
-"30
 [v _main main `(v  1 e 0 0 ]
 "4 /opt/microchip/xc8/v1.30/sources/common/abdiv.c
 [v ___abdiv __abdiv `(c  1 e 1 0 ]
@@ -340,7 +348,7 @@ PKT_SW_BUSY 4
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
 "2553
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S684 . 1 `uc 1 WPUA0 1 0 :1:0 
+[s S673 . 1 `uc 1 WPUA0 1 0 :1:0 
 `uc 1 WPUA1 1 0 :1:1 
 `uc 1 WPUA2 1 0 :1:2 
 `uc 1 WPUA3 1 0 :1:3 
@@ -348,91 +356,54 @@ PKT_SW_BUSY 4
 `uc 1 WPUA5 1 0 :1:5 
 ]
 "3052
-[s S691 . 1 `uc 1 WPUA 1 0 :6:0 
+[s S680 . 1 `uc 1 WPUA 1 0 :6:0 
 ]
-[u S693 . 1 `S684 1 . 1 0 `S691 1 . 1 0 ]
-[v _WPUAbits WPUAbits `VES693  1 e 1 @524 ]
-"30 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
+[u S682 . 1 `S673 1 . 1 0 `S680 1 . 1 0 ]
+[v _WPUAbits WPUAbits `VES682  1 e 1 @524 ]
+"23 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"39
-[v main@i i `uc  1 a 1 6 ]
-[v main@j j `uc  1 a 1 5 ]
-"60
+"32
+[v main@i i `uc  1 a 1 10 ]
+[v main@j j `uc  1 a 1 9 ]
+"52
 } 0
 "10
 [v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
 {
 "21
 } 0
-"235 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"245 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 {
-"237
-[v Mrf49xaInit@k k `uc  1 a 1 4 ]
-[v Mrf49xaInit@j j `uc  1 a 1 3 ]
-[v Mrf49xaInit@i i `uc  1 a 1 2 ]
-"241
+"247
+[v Mrf49xaInit@k k `uc  1 a 1 8 ]
+[v Mrf49xaInit@j j `uc  1 a 1 7 ]
+[v Mrf49xaInit@i i `uc  1 a 1 6 ]
+"254
 } 0
-"190
+"82
+[v _Mrf49xaTick Mrf49xaTick `(uc  1 e 1 0 ]
+{
+"84
+[v Mrf49xaTick@data data `uc  1 a 1 5 ]
+"198
+} 0
+"200
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
-"192
-[v Mrf49xaModeRx@k k `uc  1 a 1 1 ]
-"196
+"202
+[v Mrf49xaModeRx@k k `uc  1 a 1 3 ]
+"206
 } 0
 "6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
 {
 [v Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
 [v Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
-[v Mrf49TxCmd@val val `uc  1 p 1 7 ]
+[v Mrf49TxCmd@val val `uc  1 p 1 1 ]
 "8
-[v Mrf49TxCmd@cmd cmd `uc  1 a 1 0 ]
-"14
-} 0
-"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
-[v _Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
-{
-[v Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
-[v Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
-[v Mrf49SpiTx@byte byte `uc  1 a 1 6 ]
-"19
-} 0
-"8 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
-[v _ExtIntInit ExtIntInit `(v  1 e 0 0 ]
-{
-"15
-} 0
-"31
-[v _extInt extInt `II(v  1 e 0 0 ]
-{
-"39
-} 0
-"23 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
-[v _mrf49XaIsr mrf49XaIsr `(uc  1 e 1 0 ]
-{
-"28
-} 0
-"82 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
-[v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
-{
-"188
-} 0
-"190
-[v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-{
-[v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
-"196
-} 0
-"6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
-[v i1_Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
-{
-[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
-[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
-[v i1Mrf49TxCmd@val val `uc  1 p 1 1 ]
-"8
-[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 2 ]
+[v Mrf49TxCmd@cmd cmd `uc  1 a 1 2 ]
 "14
 } 0
 "29
@@ -458,17 +429,88 @@ PKT_SW_BUSY 4
 "27
 } 0
 "3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
+[v _Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
+{
+[v Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
+[v Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
+[v Mrf49SpiTx@byte byte `uc  1 a 1 0 ]
+"18
+} 0
+"20
+[v _Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
+{
+"22
+[v Mrf49SpiRx@data data `uc  1 a 1 0 ]
+"39
+} 0
+"8 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
+[v _ExtIntInit ExtIntInit `(v  1 e 0 0 ]
+{
+"15
+} 0
+"4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+{
+"17
+} 0
+"31 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
+[v _extInt extInt `II(v  1 e 0 0 ]
+{
+"39
+} 0
+"82 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+[v i1_Mrf49xaTick Mrf49xaTick `(uc  1 e 1 0 ]
+{
+[v i1Mrf49xaTick@data Mrf49xaTick `uc  1 a 1 5 ]
+"198
+} 0
+"200
+[v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
+{
+[v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
+"206
+} 0
+"6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
+[v i1_Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
+{
+[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
+[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 wreg ]
+[v i1Mrf49TxCmd@val val `uc  1 p 1 1 ]
+"8
+[v i1Mrf49TxCmd@cmd cmd `uc  1 a 1 2 ]
+"14
+} 0
+"29
+[v i1_Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
+{
+"37
+} 0
+"39
+[v i1_Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
+{
+"42
+} 0
+"16
+[v i1_Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
+{
+[v i1Mrf49RxCmd@cmd cmd `uc  1 a 1 wreg ]
+[v i1Mrf49RxCmd@val Mrf49RxCmd `uc  1 a 1 2 ]
+[v i1Mrf49RxCmd@cmd cmd `uc  1 a 1 wreg ]
+"18
+[v i1Mrf49RxCmd@cmd cmd `uc  1 a 1 1 ]
+"27
+} 0
+"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
 [v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 {
 [v i1Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
 [v i1Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
 [v i1Mrf49SpiTx@byte byte `uc  1 a 1 0 ]
-"19
+"18
 } 0
-"21
-[v _Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
+"20
+[v i1_Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
 {
-"23
-[v Mrf49SpiRx@data data `uc  1 a 1 0 ]
-"41
+[v i1Mrf49SpiRx@data Mrf49SpiRx `uc  1 a 1 0 ]
+"39
 } 0

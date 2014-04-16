@@ -11,7 +11,7 @@
 // -------
 // mrf49xa.c
 void Mrf49xaInit(void);
-void Mrf49xaTick(void);
+bool_t Mrf49xaTick(void);
 
 
 void Mrf49xaModeRx(void);

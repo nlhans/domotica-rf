@@ -20,13 +20,6 @@ void SysInitGpio(void)
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
 
-bool_t mrf49XaIsr()
-{
-    Mrf49xaTick();
-
-    return RF_IRQ == 1 ? TRUE : FALSE;
-}
-
 void main(void)
 {
     #warning "Building for PIC16F1508"

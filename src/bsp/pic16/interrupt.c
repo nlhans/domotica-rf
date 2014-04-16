@@ -1,7 +1,7 @@
 #include "bsp/interrupt.h"
 #include "stddefs.h"
 
-extern bool_t mrf49XaIsr();
+extern bool_t Mrf49xaTick(void);
 
 ExtIntHandler_t cb;
 
@@ -32,7 +32,7 @@ void interrupt extInt()
 {
     if (INTCONbits.INTF != 0)
     {
-        if (mrf49XaIsr())
+        if (Mrf49xaTick())
             INTCONbits.INTF = 0;
         //cb(0);
     }

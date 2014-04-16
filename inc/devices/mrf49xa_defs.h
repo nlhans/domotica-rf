@@ -184,7 +184,7 @@
 // ***** Data Rate Value Set Register ******//
 //#define DRS_SLOW(x)             (0x7F & (10000000/(uint32_t)(29 * 8 * x) - 1))
 //#define DRS_FAST(x)             (0x7F & (10000000/(uint32_t)(29     * x) - 1))
-#define DRS_SLOW(x) 0x11 // TODO: Fix this formula, this is 2400bps
+#define DRS_SLOW(x) 0x05 // TODO: Fix this formula, 0x11 is 2400bps
 #ifdef RF_DATARATE_SLOW
 #define DRS_DATARATE DRS_SLOW(RF_DATARATE)
 #else

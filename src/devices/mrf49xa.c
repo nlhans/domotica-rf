@@ -79,7 +79,7 @@ volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitRe
     Mrf49TxCmd(array[k].reg, array[k].val); } }
 
 // Do tick or ISR
-void Mrf49xaTick(void)
+bool_t Mrf49xaTick(void)
 {
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH
@@ -193,7 +193,8 @@ void Mrf49xaTick(void)
                 break;
         }
     }
-    
+
+    return RF_IRQ == 1 ? TRUE : FALSE;
 }
 
 void Mrf49xaModeRx(void)
