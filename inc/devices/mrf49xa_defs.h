@@ -24,6 +24,7 @@
 #define REG_FIFORSTREG  0xCA
 #define REG_SYNBREG     0xCE
 #define REG_DRSREG      0xC6
+#define REG_WTSREG      0xE0
 
 // Tx buffer
 #define REG_TXBREG      0xB8
@@ -201,9 +202,13 @@
 #define PMCREG_BBC              0x40
 #define PMCREG_RXC              0x80
 
-#define PMCREG_MODE_RX          PMCREG_OSC | PMCREG_SYN | PMCREG_BBC | PMCREG_RXC
-#define PMCREG_MODE_TX          PMCREG_OSC | PMCREG_SYN | PMCREG_BBC | PMCREG_TXC
+#define PMCREG_MODE_RX          PMCREG_RXC
+#define PMCREG_MODE_TX          PMCREG_TXC
 #define PMCREG_RESET            0
+
+// ***** Wake-up timer register ******//
+#define WTS_EVERY_9MS_MSB       0x03
+#define WTS_EVERY_9MS_LSB       0x01
 
 // ***** Status Register ******//
 // (obtained by 2 reads)
@@ -234,8 +239,6 @@ typedef union mrf49xaStatus_u
     } flags;
 }mrf49xaStatus_t;
 extern mrf49xaStatus_t mrf49Status;
-
-
 
 // Software status for receiving & transmitting packets
 typedef enum rfTrcvState_e
@@ -278,6 +281,7 @@ typedef struct rfTrcvPacket_s
         uint8_t raw[20];
     };
     uint8_t crc;
+    uint8_t retry;
 } rfTrcvPacket_t;
 
 typedef struct rfTrcvStatus_s
@@ -288,8 +292,14 @@ typedef struct rfTrcvStatus_s
     rfTrcvPacket_t rxPacket[2];
 
     rfTrcvPacket_t* hwRx;
-    uint8_t hwRxByte;
+    uint8_t hwByte;
+
+    uint8_t src; // my node ID
 
 } rfTrcvStatus_t;
+extern rfTrcvStatus_t rfTrcvStatus;
+
+#define packetRx rfTrcvStatus.hwRx
+#define packetTx rfTrcvStatus.txPacket
 
 #endif

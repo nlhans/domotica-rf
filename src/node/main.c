@@ -29,7 +29,9 @@ void main(void)
     SysInitGpio();
     AdcInit();
     ExtIntInit();
+
     uint8_t i, j;
+
     RF_RES = 0;
     RF_POWER = 1;
     for (i = 0; i < 250; i++)
@@ -46,7 +48,7 @@ void main(void)
 
     while(1)
     {
-        
+        Mrf49xaTick();
     }
 
 }

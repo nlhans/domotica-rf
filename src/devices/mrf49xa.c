@@ -2,10 +2,6 @@
 
 #define uint8_t unsigned char 
 
-#define packetHwRx rfTrcvStatus.hwRx
-#define packetSwRx rfTrcvStatus.swRx
-#define packetTx rfTrcvStatus.txPacket
-
 // Hardware chip status
 mrf49xaStatus_t mrf49Status;
 
@@ -55,17 +51,12 @@ volatile const Mrf49InitReg_t const mrfRegset_Rx[] = {
 volatile const uint8_t mrfRegset_RxCnt = sizeof(mrfRegset_Rx)/sizeof(Mrf49InitReg_t);
 
 volatile const Mrf49InitReg_t const mrfRegset_Tx[] = {
+    REG(REG_FIFORSTREG,     FIFORST_RESET),
     REG(REG_PMCREG,         PMCREG_RESET),
-    REG(REG_GENCREG,        GENCREG_RESET),
-    REG(REG_PMCREG,         PMCREG_MODE_TX),
     REG(REG_GENCREG,        GENCREG_MODE_TX),
+    REG(REG_PMCREG,         PMCREG_MODE_TX),
 };
 volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitReg_t);
-
-// TODO: Calibrate delay to 5ms on PIC16 @ 16MHz.
-// 250 = ~109ms
-// 5ms -> 12
-#define SetupRegisterDelay() for (i = 0; i < 12; i++) { for (j = 0; j < 250; j++) { asm ("nop"); } }
 
 #define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
 #define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
@@ -75,11 +66,11 @@ volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitRe
         Mrf49TxCmd(array[k].reg, array[k].val); }
 
 #define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
-    if (array[k].reg == REG_DELAY) { SetupRegisterDelay(); } else { \
+    if (array[k].reg == REG_DELAY) { Delay5Ms(); } else { \
     Mrf49TxCmd(array[k].reg, array[k].val); } }
 
-// Do tick or ISR
-bool_t Mrf49xaTick(void)
+// Serve MRf49XA chipset when requires attention.
+bool_t Mrf49xaServe(void)
 {
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH
@@ -87,9 +78,7 @@ bool_t Mrf49xaTick(void)
         return;
 #endif
 
-    if (PORTAbits.RA2 == 0)
-        Mrf49RxSts();
-    
+    Mrf49RxSts();
     // Power-on-Reset
     if (mrf49Status.flags.msb.por == 1)
     {
@@ -124,18 +113,12 @@ bool_t Mrf49xaTick(void)
         }
     }
 
-    // TODO: Wake-up timer
-    // Use the wake-up timer to signal packet timeouts.
-    // For example, we could transmit only 1 packet every 15ms - 20ms.
-    // If a packet isn't completely received within that period, the WUT flag
-    // occurs & signals the RX statemachine to abort.
-    
     // TODO: Logic external interrupt
     // This is probably never going to be used.
 
     // TODO: Low battery threshold detect
     // The system has it's own battery monitor.
-
+    
     // TXRXFIFO flag raised
     if (mrf49Status.flags.msb.fifoTxRx == 1)
     {
@@ -145,23 +128,29 @@ bool_t Mrf49xaTick(void)
             case RECV_IDLE:
                 data = Mrf49RxByte();
                 
-                //Truncate data is quality is bad
+                // Truncate data if quality is bad
+                // Reset radio & wait for sync byte. Current pattern is rubbish data.
                 if (mrf49Status.flags.lsb.dataQualityOK == 0)
+                {
+                    Mrf49xaModeRx();
                     break;
+                }
 
                 if (rfTrcvStatus.rxPacket[0].state == PKT_FREE) rfTrcvStatus.hwRx = &(rfTrcvStatus.rxPacket[0]);
                 else if (rfTrcvStatus.rxPacket[1].state == PKT_FREE) rfTrcvStatus.hwRx = &(rfTrcvStatus.rxPacket[1]);
                 else
                 {
-                    // Error!
+                    // Error, no space in RX buffers.
+                    // Reset radio. Drop this packet.
+                    Mrf49xaModeRx();
                     break;
                 }
-                packetHwRx->packet.size = data;
-                packetHwRx->crc = 0;
-                packetHwRx->state = PKT_HW_BUSY_RX;
+                packetRx->packet.size = data;
+                packetRx->crc = 0;
+                packetRx->state = PKT_HW_BUSY_RX;
                 
                 rfTrcvStatus.state = RECV_DATA;
-                rfTrcvStatus.hwRxByte = 1;
+                rfTrcvStatus.hwByte = 1;
 
                 break;
 
@@ -169,30 +158,95 @@ bool_t Mrf49xaTick(void)
 
                 data = Mrf49RxByte();
 
-                //Truncate data is quality is bad
+                // Truncate data if quality is bad
+                // Reset radio & wait for sync byte. Current pattern is rubbish data.
                 if (mrf49Status.flags.lsb.dataQualityOK == 0)
-                    break;
-                
-                packetHwRx->raw[rfTrcvStatus.hwRxByte++] = data;
-
-                if (rfTrcvStatus.hwRxByte == packetHwRx->packet.size ||
-                        rfTrcvStatus.hwRxByte == 16)
                 {
-                    rfTrcvStatus.state = RECV_IDLE;
-                    packetHwRx->state = PKT_FREE;
+                    Mrf49xaModeRx();
+                    break;
+                }
+
+                if (rfTrcvStatus.hwByte == packetRx->packet.size)
+                {
+                    packetRx->crc = data;
+                    
+                    // TODO: Check CRC
+                    // TODO: Check node ID (broadcast/myself)
+                    packetRx->state = PKT_HW_READY_RX;
+
+                    // Reset modem
+                    Mrf49xaModeRx();
 
                     // flag scope
                     SENSOR_PWR = 1;
                     SENSOR_PWR = 0;
 
-                    // Reset modem
-                    Mrf49xaModeRx();
-
                 }
+                else
+                {
+                    packetRx->raw[rfTrcvStatus.hwByte++] = data;
+                }
+                
+                break;
+
+            case TX_PACKET:
+                switch (rfTrcvStatus.hwByte)
+                {
+                    case 0:
+                    case 1:
+                        Mrf49TxByte(0xAA);
+                        break;
+
+                    case 2:
+                        Mrf49TxByte(RF_NETWORKID1);
+                        break;
+
+                    case 3:
+                        Mrf49TxByte(RF_NETWORKID2);
+                        break;
+                        
+                        // 4..packet size
+                    default:
+                        Mrf49TxByte(packetTx.raw[rfTrcvStatus.hwByte-4]);
+                        packetTx.crc = packetTx.crc ^ packetTx.raw[rfTrcvStatus.hwByte-4];
+                        if (rfTrcvStatus.hwByte-4 == packetTx.packet.size)
+                        {
+                            rfTrcvStatus.hwByte = 48;
+                        }
+                        break;
+
+                    case 49: // crc
+                        Mrf49TxByte(packetTx.crc);
+                        break;
+
+                    case 50:
+                        Mrf49TxByte(0x00);
+                        break;
+
+                    case 51:
+                        Mrf49TxByte(0x00);
+                        Mrf49xaModeRx();
+                        packetTx.state = PKT_FREE;
+                        break;
+                }
+
+                rfTrcvStatus.hwByte++;
 
                 break;
         }
     }
+
+    // TODO: Wake-up timer
+    // On second thought, the underneath is not very attractive.
+    // The wake-up needs shadow PMC register as the bit needs to be set
+    // to 0 and back to 1 for it to retrigger.
+    // An internal timer is more economic, as this bit reset/set costs
+    // ~120us on PIC16.
+
+    // Use the wake-up timer to signal packet timeouts & base tick
+    // For example, we could transmit only 1 packet every 15ms - 20ms.
+    // If a packet isn't completely received within that period, the WUT flag
+    // occurs & signals the RX statemachine to abort.
 
     return RF_IRQ == 1 ? TRUE : FALSE;
 }
@@ -203,6 +257,7 @@ void Mrf49xaModeRx(void)
     SetupRegistersWithoutDelay(Rx);
 
     rfTrcvStatus.state = RECV_IDLE;
+    rfTrcvStatus.hwByte = 0;
 }
 
 void Mrf49xaModeTx(void)
@@ -211,6 +266,7 @@ void Mrf49xaModeTx(void)
     SetupRegistersWithoutDelay(Tx);
 
     rfTrcvStatus.state = TX_PACKET;
+    rfTrcvStatus.hwByte = 0;
 }
 
 #ifdef MRF49XA_POWER_SWITCH
@@ -250,7 +306,7 @@ void Mrf49xaInit(void)
     Mrf49xaModeRx();
 
     while(RF_IRQ == 0)
-        Mrf49xaTick();
+        Mrf49xaServe();
 }
 
 #endif

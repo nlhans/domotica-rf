@@ -28,12 +28,14 @@ uint8_t Mrf49RxCmd(uint8_t cmd)
 
 void Mrf49RxSts(void)
 {
+    MRF_DISABLE_INT;
     RF_CS_ACQ();
 
     mrf49Status.byte[0] = Mrf49SpiRx();
     mrf49Status.byte[1] = Mrf49SpiRx();
 
     RF_CS_REL();
+    MRF_ENABLE_INT;
 }
 
 uint8_t Mrf49RxByte(void)

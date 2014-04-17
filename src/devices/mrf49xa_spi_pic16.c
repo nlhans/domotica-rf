@@ -4,6 +4,7 @@ void Mrf49SpiTx(uint8_t byte)
 {
     #define SPI_TX_TICK(a) do { if ((byte & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
     RF_SPI_SCK = 1; \
+    Nop(); \
     RF_SPI_SCK = 0; } while (0);
 
     SPI_TX_TICK(7);
@@ -24,6 +25,7 @@ uint8_t Mrf49SpiRx(void)
 
     #define SPI_RX_TICK(a) do { if (RF_SPI_SDI) data |= (1<<a); \
     RF_SPI_SCK = 1; \
+    Nop(); \
     RF_SPI_SCK = 0; } while (0);
 
     SPI_RX_TICK(7);

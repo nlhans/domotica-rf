@@ -8,11 +8,18 @@
 
 #ifdef PIC16_HW
 
+#define MRF_DISABLE_INT     INTCONbits.INTE = 0;
+#define MRF_ENABLE_INT      INTCONbits.INTE = 1;
+
+// "Calibrated" delay to 5ms on PIC16 @ 16MHz.
+// 250 = ~109ms
+// 5ms -> 12
+#define Delay5Ms() for (i = 0; i < 12; i++) { for (j = 0; j < 250; j++) { asm ("nop"); } }
+
 // -------
 // mrf49xa.c
 void Mrf49xaInit(void);
-bool_t Mrf49xaTick(void);
-
+bool_t Mrf49xaServe(void);
 
 void Mrf49xaModeRx(void);
 void Mrf49xaModeTx(void);
@@ -38,6 +45,17 @@ void Mrf49TxByte(uint8_t byte);
 
 #define RF_CS_ACQ() RF_SPI_CS = 0;
 #define RF_CS_REL() RF_SPI_CS = 1;
+
+// -------
+// mrf49xa_packet.c
+void Mrf49xaTick();
+
+bool_t Mrf49xaPacketPending(void);
+
+rfTrcvPacket_t* Mrf49xaRxPacket(void);
+void Mrf49xaFreePacket(rfTrcvPacket_t* packet);
+
+bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t swapSrcDst);
 
 #else
 // -------
