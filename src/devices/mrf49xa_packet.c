@@ -34,7 +34,7 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t swapSrcDst)
         packet->state = PKT_FREE;
 
         // Copy complete packet.
-        for (i = 0; i < packet->packet.size+1; i++)
+        for (i = 0; i <= packet->packet.size; i++)
              packetTx.raw[i] = packet->raw[i];
 
         return TRUE;
@@ -112,11 +112,8 @@ void Mrf49xaTick(void)
         while (1);
 
         // We've obtained air mission control.
-        //rfTrcvStatus.state = TX_PACKET;
         MRF_DISABLE_INT;
         Mrf49xaModeTx();
-        Mrf49TxByte(0xAA);
-        Mrf49TxByte(0xAA);
         MRF_ENABLE_INT;
     }
 }

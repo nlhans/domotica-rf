@@ -24,6 +24,7 @@
         <itemPath>../../../src/devices/mrf49xa_spi_pic16.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_cmd.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_packet.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_data.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
         <itemPath>../../../src/rfstack/hal.c</itemPath>
@@ -153,6 +154,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

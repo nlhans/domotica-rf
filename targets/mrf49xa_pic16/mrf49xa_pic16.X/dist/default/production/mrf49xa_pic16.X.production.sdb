@@ -63,6 +63,20 @@ PKT_HW_BUSY_RX 2
 PKT_HW_READY_RX 3
 PKT_SW_BUSY 4
 ]
+"22 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_data.c
+[e E4292 rfTrcvState_e `uc
+RECV_IDLE 0
+RECV_DATA 1
+RECV_TIMEOUT 2
+TX_PACKET 3
+]
+[e E4298 rfTrcvPacketState_e `uc
+PKT_FREE 0
+PKT_READY_FOR_TX 1
+PKT_HW_BUSY_RX 2
+PKT_HW_READY_RX 3
+PKT_SW_BUSY 4
+]
 "4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
 [v _AdcInit AdcInit `(v  1 e 0 0 ]
 "19
@@ -103,17 +117,13 @@ PKT_SW_BUSY 4
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 "19
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
-"74 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
-[v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
-[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
-[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
-"255
+"73 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-"264
+"82
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
-"302
+"116
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 "6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
@@ -135,6 +145,10 @@ PKT_SW_BUSY 4
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_data.c
+[v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
+[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
+[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
 "3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_packet.c
 [v _Mrf49xaPacketPending Mrf49xaPacketPending `(uc  1 e 1 0 ]
 "12
@@ -289,16 +303,16 @@ PKT_SW_BUSY 4
 ]
 [u S209 . 1 `S195 1 . 1 0 `S204 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES209  1 e 1 @11 ]
-[s S371 . 1 `uc 1 RA0 1 0 :1:0 
-`uc 1 RA1 1 0 :1:1 
-`uc 1 RA2 1 0 :1:2 
-`uc 1 RA3 1 0 :1:3 
-`uc 1 RA4 1 0 :1:4 
-`uc 1 RA5 1 0 :1:5 
+[s S339 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
 ]
 "424
-[u S378 . 1 `S371 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES378  1 e 1 @12 ]
+[u S346 . 1 `S339 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES346  1 e 1 @12 ]
 [s S19 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 LATB4 1 0 :1:4 
 `uc 1 LATB5 1 0 :1:5 
@@ -308,7 +322,7 @@ PKT_SW_BUSY 4
 "472
 [u S25 . 1 `S19 1 . 1 0 ]
 [v _PORTBbits PORTBbits `VES25  1 e 1 @13 ]
-[s S345 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S356 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -318,12 +332,12 @@ PKT_SW_BUSY 4
 `uc 1 LATC7 1 0 :1:7 
 ]
 "513
-[u S354 . 1 `S345 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES354  1 e 1 @14 ]
+[u S365 . 1 `S356 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES365  1 e 1 @14 ]
 "1006
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1021
-[v _TRISAbits TRISAbits `VES378  1 e 1 @140 ]
+[v _TRISAbits TRISAbits `VES346  1 e 1 @140 ]
 "1055
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
 "1069
@@ -331,7 +345,7 @@ PKT_SW_BUSY 4
 "1093
 [v _TRISC TRISC `VEuc  1 e 1 @142 ]
 "1110
-[v _TRISCbits TRISCbits `VES354  1 e 1 @142 ]
+[v _TRISCbits TRISCbits `VES365  1 e 1 @142 ]
 [s S163 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 TMR0SE 1 0 :1:4 
@@ -362,11 +376,11 @@ PKT_SW_BUSY 4
 "1767
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
 "1829
-[v _LATAbits LATAbits `VES378  1 e 1 @268 ]
+[v _LATAbits LATAbits `VES346  1 e 1 @268 ]
 "1872
 [v _LATBbits LATBbits `VES25  1 e 1 @269 ]
 "1913
-[v _LATCbits LATCbits `VES354  1 e 1 @270 ]
+[v _LATCbits LATCbits `VES365  1 e 1 @270 ]
 "2268
 [v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
 "2472
@@ -375,7 +389,7 @@ PKT_SW_BUSY 4
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
 "2553
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S853 . 1 `uc 1 WPUA0 1 0 :1:0 
+[s S830 . 1 `uc 1 WPUA0 1 0 :1:0 
 `uc 1 WPUA1 1 0 :1:1 
 `uc 1 WPUA2 1 0 :1:2 
 `uc 1 WPUA3 1 0 :1:3 
@@ -383,17 +397,14 @@ PKT_SW_BUSY 4
 `uc 1 WPUA5 1 0 :1:5 
 ]
 "3052
-[s S860 . 1 `uc 1 WPUA 1 0 :6:0 
+[s S837 . 1 `uc 1 WPUA 1 0 :6:0 
 ]
-[u S862 . 1 `S853 1 . 1 0 `S860 1 . 1 0 ]
-[v _WPUAbits WPUAbits `VES862  1 e 1 @524 ]
+[u S839 . 1 `S830 1 . 1 0 `S837 1 . 1 0 ]
+[v _WPUAbits WPUAbits `VES839  1 e 1 @524 ]
 "23 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"33
-[v main@i i `uc  1 a 1 11 ]
-[v main@j j `uc  1 a 1 10 ]
-"54
+"41
 } 0
 "10
 [v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
@@ -404,16 +415,13 @@ PKT_SW_BUSY 4
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
 {
 "87
-[v Mrf49xaTick@timeout timeout `uc  1 a 1 5 ]
+[v Mrf49xaTick@timeout timeout `uc  1 a 1 6 ]
 [s S308 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "71
 [u S315 . 21 `S308 1 packet 21 0 `[21]uc 1 raw 21 0 ]
 [s S318 rfTrcvPacket_s 24 `E4298 1 state 1 0 `S315 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 ]
-[v Mrf49xaTick@packet packet `*.4S318  1 a 1 8 ]
-"68
-[v Mrf49xaTick@j j `uc  1 a 1 7 ]
-[v Mrf49xaTick@i i `uc  1 a 1 6 ]
-"122
+[v Mrf49xaTick@packet packet `*.4S318  1 a 1 7 ]
+"119
 } 0
 "12
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
@@ -423,13 +431,13 @@ PKT_SW_BUSY 4
 [s S318 rfTrcvPacket_s 24 `E4298 1 state 1 0 `S315 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 ]
 [v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 wreg ]
 "14
-[v Mrf49xaTxPacket@i i `uc  1 a 1 3 ]
+[v Mrf49xaTxPacket@i i `uc  1 a 1 2 ]
 "12
 [v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 wreg ]
 [v Mrf49xaTxPacket@swapSrcDst swapSrcDst `uc  1 p 1 0 ]
 "17
 "12
-[v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 4 ]
+[v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 3 ]
 "42
 } 0
 "266 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
@@ -447,35 +455,33 @@ PKT_SW_BUSY 4
 {
 "10
 } 0
-"264 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"82 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
 {
-"266
+"84
 [v Mrf49xaModeTx@k k `uc  1 a 1 3 ]
-"271
+"89
 } 0
-"302
+"116
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 {
-"304
+"118
 [v Mrf49xaInit@k k `uc  1 a 1 9 ]
-[v Mrf49xaInit@j j `uc  1 a 1 8 ]
-[v Mrf49xaInit@i i `uc  1 a 1 7 ]
-"311
+"135
 } 0
-"74
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_data.c
 [v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
 {
-"76
-[v Mrf49xaServe@data data `uc  1 a 1 6 ]
-"253
+"6
+[v Mrf49xaServe@data data `uc  1 a 1 5 ]
+"181
 } 0
-"255
+"73 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
-"257
+"75
 [v Mrf49xaModeRx@k k `uc  1 a 1 3 ]
-"262
+"80
 } 0
 "46 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
@@ -548,17 +554,17 @@ PKT_SW_BUSY 4
 {
 "39
 } 0
-"74 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_data.c
 [v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
 {
-[v i1Mrf49xaServe@data Mrf49xaServe `uc  1 a 1 6 ]
-"253
+[v i1Mrf49xaServe@data Mrf49xaServe `uc  1 a 1 5 ]
+"181
 } 0
-"255
+"73 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
 [v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
-"262
+"80
 } 0
 "46 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]

@@ -29,20 +29,6 @@ void main(void)
     SysInitGpio();
     AdcInit();
     ExtIntInit();
-
-    uint8_t i, j;
-
-    RF_RES = 0;
-    RF_POWER = 1;
-    for (i = 0; i < 250; i++)
-    {
-        if (i == 125)
-            RF_RES = 1;
-        for (j = 0; j < 250; j++) asm ("nop");
-    }
-
-    RF_FSEL = 1; // Read from SPI registers.
-    RF_INT = 1;
     
     Mrf49xaInit();
 
@@ -50,5 +36,6 @@ void main(void)
     {
         Mrf49xaTick();
     }
+
 
 }
