@@ -6,4 +6,5 @@ build/default/production/_ext/767653358/mrf49xa.o:  \
 ../../inc/rfstack/rf_defs.h  \
  ../../inc/server/rtos/task.h  \
 ../../inc/devices/mrf49xa_defs.h  \
- ../../inc/server/utilities/spiArbiter.h 
+ ../../inc/server/utilities/spiArbiter.h  \
+../../inc/bsp/spi.h 

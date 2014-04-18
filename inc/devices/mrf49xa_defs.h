@@ -249,7 +249,6 @@ typedef enum rfTrcvState_e
             
     RECV_IDLE,
     RECV_DATA,
-    RECV_TIMEOUT,
 
     TX_PACKET
 } rfTrcvState_t;
@@ -258,10 +257,18 @@ typedef enum rfTrcvPacketState_e
 {
     PKT_FREE,               // Packet is unused
     PKT_READY_FOR_TX,       // Marked for transmit
+    PKT_WAITING_FOR_ACK,    // Packet was transmitted but is waiting for acknowledgement
     PKT_HW_BUSY_RX,         // Hardware is busy with receiving in this buffer
     PKT_HW_READY_RX,        // Hardware is done with receiving, software can pick it up
     PKT_SW_BUSY             // Software is still busy with processing. After this; returns to "FREE"
 }rfTrcvPacketState_t;
+
+typedef enum rfTrcvAckState_e
+{
+    NO_ACK,
+    NEED_ACK,
+    ACK_RECEIVED
+} rfTrcvAckState_t;
 
 typedef struct rfTrcvPacket_s
 {
@@ -282,7 +289,9 @@ typedef struct rfTrcvPacket_s
         uint8_t raw[21];
     };
     uint8_t crc;
-    uint8_t retry;
+    rfTrcvAckState_t needAck;
+    uint8_t retry:4;
+    uint8_t retransmit:2;
 } rfTrcvPacket_t;
 
 typedef struct rfTrcvStatus_s
@@ -302,5 +311,9 @@ extern rfTrcvStatus_t rfTrcvStatus;
 
 #define packetRx rfTrcvStatus.hwRx
 #define packetTx rfTrcvStatus.txPacket
+
+
+// Node ID for broadcasts
+#define RF_BROADCAST 0xFF
 
 #endif

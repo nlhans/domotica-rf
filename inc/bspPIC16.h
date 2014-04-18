@@ -37,10 +37,6 @@ typedef enum AdcChannels_e {
 
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000
-#ifdef MAIN_C
-__CONFIG(FOSC_INTOSC & WDTE_OFF & PWRTE_ON & MCLRE_ON & CP_OFF & BOREN_OFF & CLKOUTEN_OFF & IESO_OFF & FCMEN_OFF);
-__CONFIG(WRT_ALL & STVREN_ON & BORV_HI & LPBOR_OFF & LVP_ON);
-#endif
 
 #define TRUE 1
 #define FALSE 0

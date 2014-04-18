@@ -1,7 +1,5 @@
 #include "devices/mrf49xa.h"
 
-#define uint8_t unsigned char 
-
 // Hardware chip status
 mrf49xaStatus_t mrf49Status;
 
@@ -124,14 +122,23 @@ void Mrf49xaInit(void)
     RF_RES = 1;
     Delay50Ms();
     RF_FSEL = 1;
+#ifdef PIC16_HW
     RF_INT = 1;
+#endif
     
     SetupRegisters(Init);
 
     Mrf49xaModeRx();
 
+#ifdef PIC24_HW
+    while(RF_IRQ == 0)
+        Mrf49xaServe(0);
+#else
+   
     while(RF_IRQ == 0)
         Mrf49xaServe();
+#endif
+    
 }
 
 #endif

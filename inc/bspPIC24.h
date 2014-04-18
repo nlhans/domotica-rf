@@ -3,6 +3,8 @@
 #define INPUT_PIN           1
 #define OUTPUT_PIN          0
 
+#include <stdint.h>
+
 #ifdef MAIN_C
     #ifdef PIC24GB
 

@@ -29,7 +29,11 @@ void Mrf49TxByte(uint8_t byte);
 
 // -------
 // mrf49xa_data.c
+#ifdef PIC24_HW
+bool_t Mrf49xaServe(uint8_t foo);
+#else
 bool_t Mrf49xaServe(void);
+#endif
 
 // -------
 // mrf49xa_packet.c
@@ -40,8 +44,8 @@ bool_t Mrf49xaPacketPending(void);
 rfTrcvPacket_t* Mrf49xaRxPacket(void);
 void Mrf49xaFreePacket(rfTrcvPacket_t* packet);
 
-bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t swapSrcDst);
-
+bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck);
+void Mrf49xaTxAck(rfTrcvPacket_t* packet);
 
 
 // Platform dependant.
@@ -67,36 +71,22 @@ uint8_t Mrf49SpiRx(void);
 // bsp/spi.c
 
 #include "utilities/spiArbiter.h"
+#include "bsp/spi.h"
+
+#define MRF_DISABLE_INT     IEC1bits.INT2IE = 0;
+#define MRF_ENABLE_INT      IEC1bits.INT2IE = 1;
 
 #define RF_CS_ACQ() spiArbRfAcquire();
 #define RF_CS_REL() spiArbRfComplete();
 
+#define Mrf49SpiTx(x) spiTx1(x)
+#define Mrf49SpiRx() spiRx1()
+
+#define Delay5Ms() RtosTaskDelay(10)
+#define Delay50Ms() RtosTaskDelay(50)
+
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

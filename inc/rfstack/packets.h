@@ -4,4 +4,10 @@
 #include "stddefs.h"
 #include "rfstack/rf_defs.h"
 
+#include "devices/mrf49xa.h"
+
+void HandlePacket(rfTrcvPacket_t* packet);
+
+extern uint32_t syncedTime;
+
 #endif

@@ -1,7 +1,11 @@
 #include "devices/mrf49xa.h"
 
 // Serve MRf49XA chipset when requires attention.
+#ifdef PIC24_HW
+bool_t Mrf49xaServe(uint8_t foo)
+#else
 bool_t Mrf49xaServe(void)
+#endif
 {
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH
@@ -23,7 +27,6 @@ bool_t Mrf49xaServe(void)
         {
             case RECV_IDLE:
             case RECV_DATA:
-            case RECV_TIMEOUT:
 
                 // Clear fifo data
                 data = Mrf49RxByte();
@@ -156,7 +159,13 @@ bool_t Mrf49xaServe(void)
                     case 51:
                         Mrf49TxByte(0x00);
                         Mrf49xaModeRx();
-                        packetTx.state = PKT_FREE;
+
+                        packetTx.retry = 0;
+
+                        if (packetTx.needAck == NEED_ACK)
+                            packetTx.state = PKT_WAITING_FOR_ACK;
+                        else
+                            packetTx.state = PKT_FREE;
                         break;
                 }
 
@@ -166,11 +175,11 @@ bool_t Mrf49xaServe(void)
     }
 
     // TODO: Wake-up timer
-    // On second thought, the underneath is not very attractive.
-    // The wake-up needs shadow PMC register as the bit needs to be set
+    // On second thought, this is not very attractive.
+    // The wake-up needs a shadow PMC register as the bit needs to be set
     // to 0 and back to 1 for it to retrigger.
     // An internal timer is more economic, as this bit reset/set costs
-    // ~120us on PIC16.
+    // ~120us on PIC16 + extra RAM/Code.
 
     // Use the wake-up timer to signal packet timeouts & base tick
     // For example, we could transmit only 1 packet every 15ms - 20ms.

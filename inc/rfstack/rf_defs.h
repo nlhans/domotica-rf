@@ -19,9 +19,6 @@
 #define RF_NETWORKID1 0x2D
 #define RF_NETWORKID2 0xD4
 
-
-
-
 // Standard types
 
 typedef struct RfNodeInfo_s
@@ -65,6 +62,7 @@ typedef enum
 {
     RF_PING = 0xA0,
     RF_ACK  = 0xA1,
+    RF_TIMESYNC = 0xA2,
 
     RF_POR  = 0xB0,
     RF_SHDN = 0xB1,
