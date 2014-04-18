@@ -34,7 +34,7 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t swapSrcDst)
         packet->state = PKT_FREE;
 
         // Copy complete packet.
-        for (i = 0; i < packet->packet.size; i++)
+        for (i = 0; i < packet->packet.size+1; i++)
              packetTx.raw[i] = packet->raw[i];
 
         return TRUE;
@@ -69,6 +69,13 @@ void Mrf49xaTick(void)
     if (Mrf49xaPacketPending())
     {
         rfTrcvPacket_t* packet = Mrf49xaRxPacket();
+
+        // Ping-pong
+        if (packet->packet.id == 0xA0)
+        {
+            packet->packet.data[0] = 2;
+        }
+
 
         // TODO: RF data response statemachine
         Mrf49xaTxPacket(packet, TRUE);
@@ -108,8 +115,8 @@ void Mrf49xaTick(void)
         //rfTrcvStatus.state = TX_PACKET;
         MRF_DISABLE_INT;
         Mrf49xaModeTx();
-        //Mrf49TxByte(0xAA);
-        //Mrf49TxByte(0xAA);
+        Mrf49TxByte(0xAA);
+        Mrf49TxByte(0xAA);
         MRF_ENABLE_INT;
     }
 }

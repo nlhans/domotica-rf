@@ -275,10 +275,11 @@ typedef struct rfTrcvPacket_s
             uint8_t src;
             uint8_t dst;
             uint8_t id;
-
+            uint8_t opt;
+            
             uint8_t data[16];
         } packet;
-        uint8_t raw[20];
+        uint8_t raw[21];
     };
     uint8_t crc;
     uint8_t retry;

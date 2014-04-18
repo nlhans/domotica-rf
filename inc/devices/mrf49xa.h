@@ -14,7 +14,7 @@
 // "Calibrated" delay to 5ms on PIC16 @ 16MHz.
 // 250 = ~109ms
 // 5ms -> 12
-#define Delay5Ms() for (i = 0; i < 12; i++) { for (j = 0; j < 250; j++) { asm ("nop"); } }
+#define Delay5Ms() for (i = 0; i < 36; i++) { for (j = 0; j < 250; j++) { asm ("nop"); } }
 
 // -------
 // mrf49xa.c

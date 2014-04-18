@@ -21,15 +21,16 @@ volatile const Mrf49InitReg_t const mrfRegset_Init[] = {
     REG(REG_FIFORSTREG,   FIFORST_MODE_RX),
 
     REG(REG_GENCREG,      GENCREG_RESET),
-    REG(REG_AFCREG,       AFC_EN | AFC_OFFSET_EN | AFC_HAM | AFC_RANGE_P15_M16 | AFC_MODE_INDEPENDANT ),      // AFC ON
+    REG(REG_AFCREG,       AFC_EN | AFC_OFFSET_EN | AFC_HAM | AFC_RANGE_P7_M8 | AFC_MODE_INDEPENDANT ),      // AFC ON
     REG(REG_CFSREG |      RF_FREQ_MSB, RF_FREQ_LSB ),
     REG(REG_DRSREG,       DRS_DATARATE ),
     REG(REG_PMCREG,       PMCREG_RESET),
     REG(REG_RXCREG,       RXC_RXBW_270K | RXC_LNA_0DB | RXC_RSSI_M_91DB),
     REG(REG_TXCREG,       TXC_MODBW_150K | TXC_TXPWR_0_DB),                // 60kHz tx BW
-    REG(REG_BBFCREG,      BBFC_WRITE | BBFC_AUTO_CLK | BBFC_FILTER_DIGITAL | BBFC_DQTI(4) ),
-
+    REG(REG_BBFCREG,      0xAC), //BBFC_WRITE | BBFC_AUTO_CLK | BBFC_FILTER_DIGITAL | BBFC_DQTI(4) ),
     REG(REG_PMCREG,       PMCREG_MODE_TX),
+
+
     REG(REG_DELAY,        0x00), // tune in antenna
 
     REG(REG_PMCREG,       PMCREG_MODE_RX),
@@ -51,8 +52,8 @@ volatile const Mrf49InitReg_t const mrfRegset_Rx[] = {
 volatile const uint8_t mrfRegset_RxCnt = sizeof(mrfRegset_Rx)/sizeof(Mrf49InitReg_t);
 
 volatile const Mrf49InitReg_t const mrfRegset_Tx[] = {
-    REG(REG_FIFORSTREG,     FIFORST_RESET),
     REG(REG_PMCREG,         PMCREG_RESET),
+    REG(REG_FIFORSTREG,     FIFORST_RESET),
     REG(REG_GENCREG,        GENCREG_MODE_TX),
     REG(REG_PMCREG,         PMCREG_MODE_TX),
 };
