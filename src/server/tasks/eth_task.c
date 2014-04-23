@@ -36,15 +36,11 @@ UI08_t ethTaskStk[768];
 
 // IP stack constants
 UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
-const UI08_t myIp[4]            = {192, 168, 2, 123};
+const UI08_t myIp[4]            = {192, 168, 11, 123};
 const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x56};
-const UI08_t myGateway[4]       = {192, 168, 2, 100};
-//const UI08_t myGatewayMac[6]  = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
-const UI08_t myGatewayMac[6]    = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
-
-// PC's in network
-UI08_t pc[4]            = {192, 168, 2, 122};
-UI08_t ntpServer[4]     = {194, 171, 167, 130};
+const UI08_t myGateway[4]       = {192, 168, 11, 1};
+const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
+//const UI08_t myGatewayMac[6]    = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
 
 // Redirect to ENC28J60 device
 void macRxFrame()

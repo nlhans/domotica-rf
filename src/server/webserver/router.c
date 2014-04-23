@@ -4,13 +4,22 @@
 
 #include "webserver/router.h"
 #include "rtos/task.h"
+#include "tasks/rf_task.h"
 
+#include "devices/mrf49xa.h"
 #include "devices/SST26VF032.h"
 
 char * webBf;
 UI16_t webBfPos;
 
-const char* const httpSysNavBar = "<a href=\"/sys/tcpip\">Network Stack</a> | <a href=\"/sys/rtos\">RTOS Task List</a> | <a href=\"/sys/flash\">Flash</a><br />";
+
+
+const char* const httpRfTable = "<pre><table><tr><td>Direction</td><td>Src</td><td>Dst</td><td>Time</td><td>Length</td><td>Type</td><td>Payload</td><td>CRC</td><td>ACK</td></tr>";
+const char* const httpRfRow = "<tr><td>%s</td><td>%02X</td><td>%02X</td><td>%lu</td><td>%d</td><td>%02X</td><td>%s</td><td>%d/%d</td><td>%s</td></tr>";
+const char* const httpRfFooter = "</table></pre>";
+
+
+const char* const httpSysNavBar = "<a href=\"/sys/tcpip\">Network Stack</a> | <a href=\"/sys/rtos\">RTOS Task List</a> | <a href=\"/sys/flash\">Flash</a> | <a href=\"/sys/rf\">RF Stack</a><br />";
 
 const char* const http200 = "HTTP/1.1 200 OK\r\nContent-type: %s\r\n\r\n";
 const char* const http404 = "HTTP/1.1 404 Not Found\r\n\r\n<h1>404 Not Found</h1>The page you requested is not found, that means it doesn't exist. ";
@@ -31,6 +40,7 @@ void web404(TcpConnection_t * connection);
 void webSysFlash(TcpConnection_t* connection, char **params);
 void webSysTcpip(TcpConnection_t* connection, char **params);
 void webSysRtos(TcpConnection_t* connection, char **params);
+void webSysRf(TcpConnection_t* connection, char **params);
 
 void webServeFlash(TcpConnection_t* connection, UI16_t location);
 
@@ -68,6 +78,7 @@ typedef void (*RouterPageHandler_t) (TcpConnection_t* connection, char **params)
     on(5, "GET", "/",               ROUTE_IS_CONSTANT,      webIndex)    \
     on(6, "GET", "/sys/tcpip",      ROUTE_IS_CONSTANT,      webSysTcpip) \
     on(7, "GET", "/sys/rtos",       ROUTE_IS_CONSTANT,      webSysRtos)  \
+    on(8, "GET", "/sys/rf",         ROUTE_IS_CONSTANT,      webSysRf) \
 
 #define WEB_PAGE_404_FLASH 11
 
@@ -138,6 +149,89 @@ void webSysFlash(TcpConnection_t* connection, char **params)
      fileType,
      flashLocation);
 
+    tcpTxPacket(webBfPos, fl, connection);
+
+}
+void webSysRf(TcpConnection_t* connection, char **params)
+{
+    TcpFlags_t fl;
+    uint8_t i, j, pt;
+    char payload[64];
+    char ack[24];
+    char direction[3];
+
+    // Tcp flags for HTTP header
+    fl.data = 0;
+    fl.bits.ack = 1;
+    fl.bits.psh = 1;
+    fl.bits.fin = 0;
+
+    webBfPos = sprintf(webBf, http200, "text/html");
+
+    webBfPos += sprintf(webBf+webBfPos, httpSysNavBar);
+    webBfPos += sprintf(webBf+webBfPos, httpRfTable);
+
+    RfDiagnosticPacket_t* target;
+    for (i = 0; i < RF_HISTORY_DEPTH; i++)
+    {
+        if (webBfPos > 1000)
+        {
+            tcpTxPacket(webBfPos, fl, connection);
+            webBfPos = 0;
+        }
+
+        if (i >= rfHistoryHead) pt = rfHistoryHead + RF_HISTORY_DEPTH - i - 1;
+        else  pt = rfHistoryHead - i - 1;
+        target = &(rfHistoryPackets[pt]);
+        //if(target->needAck == 0xFF)
+        //    break;
+        
+        strcpy(payload, " ");
+
+        for (j = 0; j < target->packet.size - 5; j++)
+        {
+            sprintf(payload, "%s %02X", payload, target->packet.data[j]);
+        }
+
+        if(target->direction == 0)
+            strcpy(direction, "RX");
+        if(target->direction == 1)
+            strcpy(direction, "TX");
+
+        switch (target->needAck)
+        {
+            case NO_ACK:
+                strcpy(ack, "No ack");
+                break;
+
+            case NEED_ACK:
+                strcpy(ack, "Need ack");
+                break;
+
+            case ACK_RECEIVED:
+                sprintf(ack, "ACK: %lu", target->ackTime);
+                break;
+
+            default:
+                sprintf(ack, "ack %02X?", target->needAck);
+        }
+
+        webBfPos += sprintf(webBf+webBfPos, httpRfRow,
+            direction,
+            target->packet.src,
+            target->packet.dst,
+            target->rxTime,
+            target->packet.size,
+            target->packet.id,
+            payload,
+            target->crcHw, target->crcSw,
+            ack);
+
+    }
+    
+    webBfPos += sprintf(webBf+webBfPos, httpRfFooter);
+
+    fl.bits.fin = 1;
     tcpTxPacket(webBfPos, fl, connection);
 
 }

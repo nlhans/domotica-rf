@@ -5,20 +5,19 @@ void spiSpeed(UI08_t port, bool_t fast)
     switch(port)
     {
         case 1:
+            SPI1CON1 = 0;
+
             if(fast == TRUE)
-                    SPI1CON1 = 0b0000000100111011;
+                SPI1CON1 = 0b0000000100111011;
             else
                 SPI1CON1 = 0b0000000100111010;
             break;
         case 2:
+            SPI2CON1 = 0;
             if(fast == TRUE)
                 SPI2CON1 = 0b0000000100111011;
             else
                 SPI2CON1 = 0b0000000100111010;
-            break;
-
-        default:
-            printf("[SPI] Invalid speed port selected");
             break;
     }
 }

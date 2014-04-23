@@ -25,7 +25,7 @@ void ipv4HandlePacket(EthernetFrame_t* frame)
     switch (ipv4Header->header.protocol)
     {
         case Ipv4TCP:
-            //tcpHandlePacket(ipv4Header);
+            tcpHandlePacket(ipv4Header);
             break;
 
         case Ipv4ICMP:

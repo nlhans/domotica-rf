@@ -34,6 +34,9 @@ Command:
   build/default/production/_ext/767653358/enc28j60.o \
   build/default/production/_ext/767653358/mcp9800.o \
   build/default/production/_ext/767653358/mrf49xa.o \
+  build/default/production/_ext/767653358/mrf49xa_cmd.o \
+  build/default/production/_ext/767653358/mrf49xa_data.o \
+  build/default/production/_ext/767653358/mrf49xa_packet.o \
   build/default/production/_ext/2033261600/arp.o \
   build/default/production/_ext/2033261600/icmp.o \
   build/default/production/_ext/2033261600/ipv4.o \
@@ -41,19 +44,16 @@ Command:
   build/default/production/_ext/2033261600/tcp.o \
   build/default/production/_ext/2033261600/udp.o \
   build/default/production/_ext/1201319415/packets.o \
+  build/default/production/_ext/1201319415/server.o \
   build/default/production/_ext/1209926055/task.o \
   build/default/production/_ext/1209926055/timer.o \
   build/default/production/_ext/1145713235/rf_task.o \
   build/default/production/_ext/1145713235/eth_task.o \
   build/default/production/_ext/1709695401/executiontime.o \
   build/default/production/_ext/1709695401/spiArbiter.o \
+  build/default/production/_ext/2125849857/ccbuf.o \
   build/default/production/_ext/296506934/router.o \
   build/default/production/_ext/681662318/main.o \
-  build/default/production/_ext/767653358/mrf49xa_cmd.o \
-  build/default/production/_ext/767653358/mrf49xa_data.o \
-  build/default/production/_ext/767653358/mrf49xa_packet.o \
-  build/default/production/_ext/2125849857/ccbuf.o \
-  build/default/production/_ext/1201319415/server.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FJ64GB004.gld.00 \
   --heap=0 \
@@ -85,14 +85,20 @@ Archive member included because of file (symbol)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o) (__data_init_standard)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(udivsi3.eo)
                               build/default/production/_ext/585513329/timer.o (___udivsi3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(mulsi3.eo)
+                              build/default/production/_ext/296506934/router.o (___mulsi3)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memcmp.eo)
                               build/default/production/_ext/2033261600/arp.o (_memcmp)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memset.eo)
-                              build/default/production/_ext/2125849857/ccbuf.o (_memset)
+                              build/default/production/_ext/1209926055/task.o (_memset)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
-                              build/default/production/_ext/681662318/main.o (_puts)
+                              build/default/production/_ext/1201319415/server.o (_puts)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf.eo)
+                              build/default/production/_ext/296506934/router.o (_sprintf)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcmp.eo)
                               build/default/production/_ext/296506934/router.o (_strcmp)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcpy.eo)
+                              build/default/production/_ext/296506934/router.o (_strcpy)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo) (__iob)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_cdnopuxX.XXeo)
@@ -105,10 +111,12 @@ Archive member included because of file (symbol)
                               build/default/production/_ext/296506934/router.o (__sprintf_s)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_s.XXeo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf_s.XXeo) (__vfprintf_s)
-/opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_s.XXeo)
-                              build/default/production/_ext/585513329/spi.o (__printf_0)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf.eo) (_vfprintf)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo) (_fputc)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(powers.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (__powers_)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopuxX.XXeo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_cdnopuxX.XXeo) (__vfprintf_cdnopuxX)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(flsbuf.eo)
@@ -117,45 +125,92 @@ Archive member included because of file (symbol)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo) (_write)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo) (___C30_UART)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(adddf3.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___adddf3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(deqltle.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___ltdf2)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dgtge.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___gedf2)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divdf3.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___divdf3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dne.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___nedf2)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpack.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(adddf3.eo) (__dpack)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack2.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(adddf3.eo) (__dunpack2)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(extendsfdf.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___extendsfdf2)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfdi.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___fixunsdfdi)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfsi.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___fixunsdfsi)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatundidf.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___floatundidf)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatunsidf.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___floatunsidf)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(frexp.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (_frexp)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(funpack.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(extendsfdf.eo) (__funpack)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(muldf3.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___muldf3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(subdf3.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___subdf3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(truncdfsf.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo) (___truncdfsf2)
 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
                               /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo) (___udivdi3)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dcompare.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(deqltle.eo) (__dcompare)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpropagateNaN.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack2.eo) (__dPropagateNaN)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dtype.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dcompare.eo) (__dtype)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack2.eo) (__dunpack)
+/opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fpack.eo)
+                              /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(truncdfsf.eo) (__fpack)
 
 
 Program Memory  [Origin = 0x200, Length = 0xa9f6]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x970           0xe28  (3624)
-.const                       0xb70               0x330           0x4c8  (1224)
-.text                        0xea0              0x1488          0x1ecc  (7884)
-.dinit                      0x2328               0x13a           0x1d7  (471)
-.text                       0x2462               0x8fc           0xd7a  (3450)
-../../src/bsp/pic24/context.s.scn1    0x2d5e                0x4c            0x72  (114)
-.text                       0x2daa                0x8c            0xd2  (210)
-../../src/bsp/pic24/context.s.scn2    0x2e36                0x22            0x33  (51)
-.text                       0x2e58                0x26            0x39  (57)
+.text                        0x200              0x2064          0x3096  (12438)
+.const                      0x2264               0x62c           0x942  (2370)
+.text                       0x2890              0x1056          0x1881  (6273)
+.dinit                      0x38e6               0x2c8           0x42c  (1068)
+.text                       0x3bae               0xf44          0x16e6  (5862)
+../../src/bsp/pic24/context.s.scn1    0x4af2                0x4c            0x72  (114)
+.text                       0x4b3e                0xbc           0x11a  (282)
+../../src/bsp/pic24/context.s.scn2    0x4bfa                0x22            0x33  (51)
+.text                       0x4c1c                 0x4             0x6  (6)
 
-                     Total program memory used (bytes):         0x42bd  (17085) 26%
+                     Total program memory used (bytes):         0x6f30  (28464) 43%
 
 
 Data Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0           0xcaa  (3242)
-.ndata                      0x14aa                   0             0x4  (4)
-.nbss                       0x14ae                   0             0x4  (4)
-.ndata                      0x14b2                   0             0x4  (4)
-.nbss                       0x14b6                   0             0x6  (6)
-.ndata                      0x14bc                   0             0x2  (2)
-.nbss                       0x14be                   0             0x4  (4)
-.data.dpowers               0x14c2                   0            0xa0  (160)
-.data                       0x1562                   0            0x2a  (42)
-.data._iob                  0x158c                   0            0x26  (38)
-.bss                        0x15b2                   0             0x6  (6)
-.data.__C30_UART            0x15b8                   0             0x2  (2)
+.nbss                        0x800                   0          0x155a  (5466)
+.ndata                      0x1d5a                   0             0x4  (4)
+.nbss                       0x1d5e                   0             0x4  (4)
+.ndata                      0x1d62                   0             0x4  (4)
+.nbss                       0x1d66                   0             0x6  (6)
+.ndata                      0x1d6c                   0             0x2  (2)
+.nbss                       0x1d6e                   0             0x2  (2)
+.ndata                      0x1d70                   0             0x2  (2)
+.nbss                       0x1d72                   0             0x2  (2)
+.data._powers_              0x1d74                   0           0x160  (352)
+.data.dpowers               0x1ed4                   0           0x140  (320)
+.data                       0x2014                   0            0x54  (84)
+.data._iob                  0x2068                   0            0x26  (38)
+.bss                        0x208e                   0             0x6  (6)
+.data.__C30_UART            0x2094                   0             0x2  (2)
 
-                        Total data memory used (bytes):          0xdba  (3514) 42%
+                        Total data memory used (bytes):         0x1896  (6294) 76%
 
 
 Dynamic Memory Usage
@@ -163,86 +218,94 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x15ba                              0x1246  (4678)
+stack                       0x2096                               0x76a  (1898)
 
-                        Maximum dynamic memory (bytes):         0x1246  (4678)
+                        Maximum dynamic memory (bytes):          0x76a  (1898)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _ethFrameBuffer
-                    0x0c4c                  _ethTask
-                    0x0c60                  _tcpTicker
-                    0x0c70                  _ethTaskStk
-                    0x0f70                  _rfTask
-                    0x0f84                  _rfTimer
-                    0x0f94                  _rfPingTimer
-                    0x0fa4                  _rfTaskStk
-                    0x11a4                  _RtosTaskIdleObj
-                    0x11b8                  _RtosKernelStackPos
-                    0x11ba                  _RtosCriticalNesting
-                    0x12be                  _tcpConnections
-                    0x139e                  _tcpListeners
-                    0x13ae                  _mrf49Status
-                    0x13b0                  _rfTrcvStatus
-                    0x140a                  _ntpRequestPacket
-                    0x1464                  _handlers
-                    0x1484                  _StkAddrLo
-                    0x1486                  _StkAddrHi
-                    0x1488                  _TrapMsgBuf
-                    0x14aa                  _ntpTimestamp
-                    0x14ae                  _syncedTime
-                    0x14b2                  _RtosTimestamp
-                    0x14b6                  _webBf
-                    0x14b8                  _webBfPos
-                    0x14ba                  _spiDummy
-                    0x14bc                  _rtosTimerChainStarted
-                    0x14be                  _rtosTimerChain
-                    0x14c0                  _spiArbStat
-                    0x158c                  __iob
-                    0x15b0                  __Files
-                    0x15b2                  __outdone
-                    0x15b3                  __sibuf
-                    0x15b5                  __sobuf
-                    0x15b8                  ___C30_UART
+                    0x0800                  _rfTask
+                    0x0824                  _rfHistoryPackets
+                    0x10a4                  _rfTimer
+                    0x10b4                  _rfPingTimer
+                    0x10c4                  _rfTaskStk
+                    0x12c4                  _ethFrameBuffer
+                    0x1710                  _ethTask
+                    0x1734                  _tcpTicker
+                    0x1744                  _ethTaskStk
+                    0x1a44                  _RtosTaskIdleObj
+                    0x1a68                  _RtosKernelStackPos
+                    0x1a6a                  _RtosCriticalNesting
+                    0x1b6e                  _tcpConnections
+                    0x1c4e                  _tcpListeners
+                    0x1c5e                  _mrf49Status
+                    0x1c60                  _rfTrcvStatus
+                    0x1cba                  _ntpRequestPacket
+                    0x1d14                  _handlers
+                    0x1d34                  _StkAddrLo
+                    0x1d36                  _StkAddrHi
+                    0x1d38                  _TrapMsgBuf
+                    0x1d5a                  _ntpTimestamp
+                    0x1d5e                  _syncedTime
+                    0x1d62                  _RtosTimestamp
+                    0x1d66                  _webBf
+                    0x1d68                  _webBfPos
+                    0x1d6a                  _spiDummy
+                    0x1d6c                  _rtosTimerChainStarted
+                    0x1d6e                  _rtosTimerChain
+                    0x1d70                  _rfHistoryHead
+                    0x1d72                  _spiArbStat
+                    0x1d74                  __powers_
+                    0x1e24                  __npowers_
+                    0x2068                  __iob
+                    0x208c                  __Files
+                    0x208e                  __outdone
+                    0x208f                  __sibuf
+                    0x2091                  __sobuf
+                    0x2094                  ___C30_UART
 
 External Symbols in Data Memory (by name):
 
-                    0x11ba                  _RtosCriticalNesting
-                    0x11b8                  _RtosKernelStackPos
-                    0x11a4                  _RtosTaskIdleObj
-                    0x14b2                  _RtosTimestamp
-                    0x1486                  _StkAddrHi
-                    0x1484                  _StkAddrLo
-                    0x1488                  _TrapMsgBuf
-                    0x15b0                  __Files
-                    0x15b8                  ___C30_UART
-                    0x158c                  __iob
-                    0x15b2                  __outdone
-                    0x15b3                  __sibuf
-                    0x15b5                  __sobuf
-                    0x0800                  _ethFrameBuffer
-                    0x0c4c                  _ethTask
-                    0x0c70                  _ethTaskStk
-                    0x1464                  _handlers
-                    0x13ae                  _mrf49Status
-                    0x140a                  _ntpRequestPacket
-                    0x14aa                  _ntpTimestamp
-                    0x0f94                  _rfPingTimer
-                    0x0f70                  _rfTask
-                    0x0fa4                  _rfTaskStk
-                    0x0f84                  _rfTimer
-                    0x13b0                  _rfTrcvStatus
-                    0x14be                  _rtosTimerChain
-                    0x14bc                  _rtosTimerChainStarted
-                    0x14c0                  _spiArbStat
-                    0x14ba                  _spiDummy
-                    0x14ae                  _syncedTime
-                    0x12be                  _tcpConnections
-                    0x139e                  _tcpListeners
-                    0x0c60                  _tcpTicker
-                    0x14b6                  _webBf
-                    0x14b8                  _webBfPos
+                    0x1a6a                  _RtosCriticalNesting
+                    0x1a68                  _RtosKernelStackPos
+                    0x1a44                  _RtosTaskIdleObj
+                    0x1d62                  _RtosTimestamp
+                    0x1d36                  _StkAddrHi
+                    0x1d34                  _StkAddrLo
+                    0x1d38                  _TrapMsgBuf
+                    0x208c                  __Files
+                    0x2094                  ___C30_UART
+                    0x2068                  __iob
+                    0x1e24                  __npowers_
+                    0x208e                  __outdone
+                    0x1d74                  __powers_
+                    0x208f                  __sibuf
+                    0x2091                  __sobuf
+                    0x12c4                  _ethFrameBuffer
+                    0x1710                  _ethTask
+                    0x1744                  _ethTaskStk
+                    0x1d14                  _handlers
+                    0x1c5e                  _mrf49Status
+                    0x1cba                  _ntpRequestPacket
+                    0x1d5a                  _ntpTimestamp
+                    0x1d70                  _rfHistoryHead
+                    0x0824                  _rfHistoryPackets
+                    0x10b4                  _rfPingTimer
+                    0x0800                  _rfTask
+                    0x10c4                  _rfTaskStk
+                    0x10a4                  _rfTimer
+                    0x1c60                  _rfTrcvStatus
+                    0x1d6e                  _rtosTimerChain
+                    0x1d6c                  _rtosTimerChainStarted
+                    0x1d72                  _spiArbStat
+                    0x1d6a                  _spiDummy
+                    0x1d5e                  _syncedTime
+                    0x1b6e                  _tcpConnections
+                    0x1c4e                  _tcpListeners
+                    0x1734                  _tcpTicker
+                    0x1d66                  _webBf
+                    0x1d68                  _webBfPos
 
 External Symbols in Program Memory (by address):
 
@@ -251,384 +314,466 @@ External Symbols in Program Memory (by address):
                   0x000236                  __data_init
                   0x000236                  __data_init_standard
                   0x0002dc                  __DefaultInterrupt
-                  0x0002e0                  _memcmp
-                  0x000314                  _fputs
-                  0x000330                  _puts
-                  0x000344                  _strcmp
-                  0x000352                  __sprintf_cdnopsuxX
-                  0x000352                  __sprintf_0
-                  0x000352                  __sprintf_s
-                  0x00037e                  __vfprintf_s
-                  0x00037e                  __vfprintf_cdnopuxX
-                  0x00037e                  __vfprintf_cdnopsuxX
-                  0x00037e                  __vfprintf_0
-                  0x000886                  __printf_0
-                  0x000886                  __printf_s
-                  0x000a76                  ___udivmoddi3
-                  0x000b5a                  ___udivdi3
-                  0x000b68                  ___umoddi3
-                  0x000d0e                  _httpSysNavBar
-                  0x000d10                  _http200
-                  0x000d86                  _http404
-                  0x000d88                  _httpHelloWorld
-                  0x000dd4                  _webRoutes
-                  0x000e0c                  _mrfRegset_Init
-                  0x000e2c                  _mrfRegset_InitCnt
-                  0x000e2d                  _mrfRegset_Rx
-                  0x000e39                  _mrfRegset_RxCnt
-                  0x000e3a                  _mrfRegset_Tx
-                  0x000e42                  _mrfRegset_TxCnt
-                  0x000e6a                  _myIp
-                  0x000e6e                  _myMac
-                  0x000e74                  _myGateway
-                  0x000e78                  _myGatewayMac
-                  0x000ea0                  _tcpInit
-                  0x000eba                  _tcpPickFreeConnection
-                  0x000ee4                  _tcpMatchConnection
-                  0x000f34                  _tcpMatchPort
-                  0x000f5e                  _tcpListenMore
-                  0x000f92                  _tcpCrc
-                  0x001006                  _tcpTxReplyPacket
-                  0x0010ea                  _tcpGetDataPtr
-                  0x0010ee                  _tcpTxPacket
-                  0x0011e8                  _tcpCloseObj
-                  0x001206                  _tcpStatemachine
-                  0x00145e                  _tcpHandlePacket
-                  0x0014c0                  _tcpListen
-                  0x001536                  _tcpTick
-                  0x001568                  _enc28j60WriteUint8
-                  0x001580                  _enc28j60BitSetUint8
-                  0x001598                  _enc28j60BitClrUint8
-                  0x0015b2                  _enc28j60WriteUint16
-                  0x0015ce                  _enc28j60ReadUint8
-                  0x0015e4                  _enc28j60ReadMacUint8
-                  0x0015fe                  _enc28j60ReadUint16
-                  0x001614                  _enc28j60SetBank
-                  0x001648                  _enc28j60WriteData
-                  0x001664                  _enc28j60ReadData
-                  0x001680                  _enc28j60ReadRegisterUint8
-                  0x0016a2                  _enc28j60ReadRegisterUint16
-                  0x0016c4                  _enc28j60WriteRegisterUint8
-                  0x0016ea                  _enc28j60BitSetRegisterUint8
-                  0x001710                  _enc28j60BitClrRegisterUint8
-                  0x001736                  _enc28j60WriteRegisterUint16
-                  0x001762                  _enc28j60WritePhyRegisterUint16
-                  0x001776                  _enc28j60ReadPhyRegisterUint16
-                  0x0017bc                  _enc28j60GetOverflowStatus
-                  0x0017c0                  _enc28j60TxFrame
-                  0x00185e                  _enc28j60TxReplyFrame
-                  0x001888                  _enc28j60PacketPending
-                  0x00189a                  _enc28j60GetPacketCount
-                  0x0018a0                  _enc28j60RxFrame
-                  0x00197c                  _enc28j60ResetRxBuffer
-                  0x0019b8                  _enc28j60Reset
-                  0x0019d2                  _enc28j60Initialize
-                  0x001a8a                  _webTest
-                  0x001abe                  _webIndex
-                  0x001ae6                  _webSysFlash
-                  0x001b82                  _webServeFlash
-                  0x001b86                  _web404
-                  0x001b8c                  _webSysTcpip
-                  0x001b90                  _webSysRtos
-                  0x001b94                  _WebserverHandle
-                  0x001d36                  _spiSpeed
-                  0x001d6a                  _spiInit
-                  0x001e02                  _spiDeinit
-                  0x001e6a                  _spiBusy1
-                  0x001e72                  _spiTx1
-                  0x001e80                  _spiTx2
-                  0x001e8e                  _spiRx1
-                  0x001e98                  _spiRx2
-                  0x001ea2                  _spiTxRx1
-                  0x001eae                  _spiTxRx2
-                  0x001eba                  _spiTxRxBytes
-                  0x001f28                  _Mrf49xaPacketPending
-                  0x001f3e                  _Mrf49xaTxPacket
-                  0x001f8c                  _Mrf49xaTxAck
-                  0x001fa4                  _Mrf49xaFreePacket
-                  0x001fa8                  _Mrf49xaRxPacket
-                  0x001fc6                  _Mrf49xaTick
-                  0x00209c                  _ExtIntDummy
-                  0x00209e                  _ExtIntSetup
-                  0x002158                  _ExtIntInit
-                  0x002178                  __INT0Interrupt
-                  0x00219e                  __INT1Interrupt
-                  0x0021c4                  __INT2Interrupt
-                  0x0021ea                  _Mrf49xaServe
-                  0x002462                  _RtosTaskIdleFnc
-                  0x002466                  _RtosTaskCreate
-                  0x00248a                  _RtosTaskInit
-                  0x00249e                  _RtosTaskDelay
-                  0x0024b4                  _RtosTaskWake
-                  0x0024be                  _RtosKernelRestoreTask
-                  0x0024ca                  _RtosTaskRun
-                  0x0024de                  _RtosKernelStoreTask
-                  0x0024ee                  _RtosTaskChange
-                  0x00252c                  _RtosTaskWaitForEvent
-                  0x002552                  _RtosTaskSignalEvent
-                  0x002568                  _ipv4HandlePacket
-                  0x002586                  _ipv4Crc
-                  0x0025ae                  _ipv4TxReplyPacket
-                  0x0025f4                  _ipv4TxPacket
-                  0x002666                  _Mrf49xaModeRx
-                  0x0026a6                  _Mrf49xaModeTx
-                  0x0026e6                  _Mrf49xaInit
-                  0x002756                  _SysInitGpio
-                  0x00278e                  _UartTxStr
-                  0x0027a6                  _UartTxByte
-                  0x0027b6                  _UartInit
-                  0x0027f6                  __AddressError
-                  0x002802                  __StackError
-                  0x002804                  __MathError
-                  0x002806                  _main
-                  0x002830                  _RfPing
-                  0x00283e                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
-                  0x00284c                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
-                  0x00289e                  _RfInit
-                  0x002906                  _httpHandleConnection
-                  0x00290e                  _httpCloseConnection
-                  0x002916                  _enc28j60Int
-                  0x002920                  _ethTcpTick
-                  0x00292e                  _macRxFrame
-                  0x002932                  _macTxFrame
-                  0x002936                  _macTxReplyFrame
-                  0x00293a                  _EthInit
-                  0x002952                  _EthHwInit
-                  0x0029a0                  _EthTask
-                  0x0029ca                  _udpInit
-                  0x0029de                  _udpFirePacket
-                  0x002a10                  _udpRegisterHandler
-                  0x002a3c                  _udpHandlePacket
-                  0x002a5e                  _udpTxPacket
-                  0x002a82                  _arpBuildPacket
-                  0x002ade                  _arpAnnounce
-                  0x002af2                  _arpProcessPacket
-                  0x002b1c                  _FlashInit
-                  0x002b2a                  _FlashCsSet
-                  0x002b4c                  _FlashReadId
-                  0x002b66                  _FlashRxBytes
-                  0x002ba2                  _RtosTimerRearm
-                  0x002bbc                  _RtosTimerCreate
-                  0x002be4                  _RtosTimerTick
-                  0x002c16                  _ntpHandlePacket
-                  0x002c62                  _ntpInit
-                  0x002c6a                  _ntpRequest
-                  0x002c88                  _HandlePacket
-                  0x002cfa                  _RtosKernelPortInitStack
-                  0x002d14                  _RtosKernelPortTimerClear
-                  0x002d18                  _RtosKernelPortTimerStart
-                  0x002d34                  _RtosKernelContextStart
-                  0x002d3a                  _RtosKernelContextSuspend
-                  0x002d40                  __T1Interrupt
-                  0x002d5e                  _RtosKernelContext
-                  0x002daa                  _Mrf49TxCmd
-                  0x002dc0                  _Mrf49RxCmd
-                  0x002dd6                  _Mrf49RxSts
-                  0x002de8                  _Mrf49RxByte
-                  0x002dee                  _Mrf49TxByte
-                  0x002df6                  _icmpHandlePacket
-                  0x002e36                  _RtosKernelStart
-                  0x002e58                  _spiArbEthDisableIsr
-                  0x002e5c                  _spiArbEthEnableIsr
-                  0x002e60                  _spiArbEthAcquire
-                  0x002e68                  _spiArbEthComplete
-                  0x002e72                  _spiArbRfAcquire
-                  0x002e76                  _spiArbRfComplete
-                  0x002e7a                  _execTimeReset
-                  0x002e7c                  _execTimePrint
+                  0x0002e0                  ___udivsi3
+                  0x000300                  ___mulp32eds3
+                  0x000300                  ___mulp32peds3
+                  0x000300                  ___mulsi3
+                  0x00030c                  _memcmp
+                  0x000340                  _memset
+                  0x00034e                  _fputs
+                  0x00036a                  _puts
+                  0x00037e                  _sprintf
+                  0x0003aa                  _strcmp
+                  0x0003b8                  _strcpy
+                  0x0003c4                  __sprintf_cdnopsuxX
+                  0x0003c4                  __sprintf_0
+                  0x0003c4                  __sprintf_s
+                  0x0003f0                  __vfprintf_s
+                  0x0003f0                  __vfprintf_cdnopuxX
+                  0x0003f0                  __vfprintf_cdnopsuxX
+                  0x0003f0                  __vfprintf_0
+                  0x000a72                  _vfprintf
+                  0x001a88                  ___adddf3
+                  0x001b82                  ___ledf2
+                  0x001b82                  ___eqdf2
+                  0x001b82                  ___ltdf2
+                  0x001b8c                  ___gedf2
+                  0x001b8c                  ___gtdf2
+                  0x001b96                  ___divdf3
+                  0x001c4a                  ___nedf2
+                  0x001c54                  __dpack
+                  0x001cac                  __dunpack2
+                  0x001cce                  __dreturnNaN
+                  0x001cd4                  __dunpack2exit
+                  0x001cde                  ___extendsfdf2
+                  0x001d1c                  ___fixunsdfdi
+                  0x001d7e                  ___fixunsdfsi
+                  0x001dca                  ___floatundidf
+                  0x001e20                  ___floatunsidf
+                  0x001e24                  _frexpl
+                  0x001e24                  _frexp
+                  0x001e5e                  __funpack
+                  0x001e88                  ___muldf3
+                  0x001f72                  ___subdf3
+                  0x001f76                  ___truncdfsf2
+                  0x00203e                  ___udivmoddi3
+                  0x002122                  ___udivdi3
+                  0x002130                  ___umoddi3
+                  0x002138                  __dcompare
+                  0x00218a                  __dPropagateNaN
+                  0x0021a6                  __dtype
+                  0x0021ca                  __dunpack
+                  0x002218                  __fpack
+                  0x0026be                  _httpRfTable
+                  0x0026c0                  _httpRfRow
+                  0x0026c2                  _httpRfFooter
+                  0x0026c4                  _httpSysNavBar
+                  0x0026c6                  _http200
+                  0x00273c                  _http404
+                  0x00273e                  _httpHelloWorld
+                  0x002740                  _httpRtosTaskTable
+                  0x002794                  _webRoutes
+                  0x00281a                  _RtosStateText
+                  0x002824                  _mrfRegset_Init
+                  0x002844                  _mrfRegset_InitCnt
+                  0x002845                  _mrfRegset_Rx
+                  0x002851                  _mrfRegset_RxCnt
+                  0x002852                  _mrfRegset_Tx
+                  0x00285a                  _mrfRegset_TxCnt
+                  0x002860                  _myIp
+                  0x002864                  _myMac
+                  0x00286a                  _myGateway
+                  0x00286e                  _myGatewayMac
+                  0x002890                  _tcpInit
+                  0x0028aa                  _tcpPickFreeConnection
+                  0x0028c8                  _tcpMatchConnection
+                  0x002910                  _tcpMatchPort
+                  0x002938                  _tcpListenMore
+                  0x00296a                  _tcpCrc
+                  0x0029d8                  _tcpTxReplyPacket
+                  0x002ac6                  _tcpGetDataPtr
+                  0x002aca                  _tcpTxPacket
+                  0x002bc8                  _tcpCloseObj
+                  0x002be6                  _tcpStatemachine
+                  0x002df8                  _tcpHandlePacket
+                  0x002e5e                  _tcpListen
+                  0x002eca                  _tcpTick
+                  0x002ef4                  _webTest
+                  0x002f2e                  _webIndex
+                  0x002f52                  _webSysRtos
+                  0x00307c                  _webSysRf
+                  0x003202                  _webSysFlash
+                  0x00329e                  _webServeFlash
+                  0x0032a0                  _web404
+                  0x0032a4                  _webSysTcpip
+                  0x0032a6                  _WebserverHandle
+                  0x0033f2                  _enc28j60WriteUint8
+                  0x00340a                  _enc28j60BitSetUint8
+                  0x003422                  _enc28j60BitClrUint8
+                  0x00343c                  _enc28j60WriteUint16
+                  0x003458                  _enc28j60ReadUint8
+                  0x00346e                  _enc28j60ReadMacUint8
+                  0x003488                  _enc28j60ReadUint16
+                  0x00349e                  _enc28j60SetBank
+                  0x0034d2                  _enc28j60WriteData
+                  0x0034f4                  _enc28j60ReadData
+                  0x003516                  _enc28j60ReadRegisterUint8
+                  0x003538                  _enc28j60ReadRegisterUint16
+                  0x00355a                  _enc28j60WriteRegisterUint8
+                  0x003580                  _enc28j60BitSetRegisterUint8
+                  0x0035a6                  _enc28j60BitClrRegisterUint8
+                  0x0035cc                  _enc28j60WriteRegisterUint16
+                  0x0035f8                  _enc28j60WritePhyRegisterUint16
+                  0x00360c                  _enc28j60ReadPhyRegisterUint16
+                  0x003650                  _enc28j60GetOverflowStatus
+                  0x003654                  _enc28j60TxFrame
+                  0x0036e2                  _enc28j60TxReplyFrame
+                  0x00370c                  _enc28j60PacketPending
+                  0x00371e                  _enc28j60GetPacketCount
+                  0x003722                  _enc28j60RxFrame
+                  0x0037ea                  _enc28j60ResetRxBuffer
+                  0x00381c                  _enc28j60Reset
+                  0x003836                  _enc28j60Initialize
+                  0x003bae                  _spiSpeed
+                  0x003bd8                  _spiInit
+                  0x003c6c                  _spiDeinit
+                  0x003cd0                  _spiBusy1
+                  0x003cd8                  _spiTx1
+                  0x003ce6                  _spiTx2
+                  0x003cf4                  _spiRx1
+                  0x003cfe                  _spiRx2
+                  0x003d08                  _spiTxRx1
+                  0x003d14                  _spiTxRx2
+                  0x003d20                  _spiTxRxBytes
+                  0x003d84                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
+                  0x003da8                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
+                  0x003dfa                  _RfInit
+                  0x003e4c                  _RfPing
+                  0x003e58                  _rfHistoryPut
+                  0x003f1c                  _Mrf49xaPacketPending
+                  0x003f32                  _Mrf49xaTxPacket
+                  0x003f82                  _Mrf49xaTxAck
+                  0x003f98                  _Mrf49xaFreePacket
+                  0x003f9c                  _Mrf49xaRxPacket
+                  0x003fba                  _Mrf49xaTick
+                  0x004090                  _RtosTaskIdleFnc
+                  0x004094                  _RtosTaskCreate
+                  0x0040ee                  _RtosTaskInit
+                  0x004102                  _RtosTaskDelay
+                  0x004116                  _RtosTaskWake
+                  0x004120                  _RtosKernelRestoreTask
+                  0x00412c                  _RtosTaskRun
+                  0x00413a                  _RtosKernelStoreTask
+                  0x00416c                  _RtosTaskChange
+                  0x0041a8                  _RtosTaskWaitForEvent
+                  0x0041ce                  _RtosTaskSignalEvent
+                  0x0041e4                  _ExtIntDummy
+                  0x0041e6                  _ExtIntSetup
+                  0x004296                  _ExtIntInit
+                  0x0042ae                  __INT0Interrupt
+                  0x0042d4                  __INT1Interrupt
+                  0x0042fa                  __INT2Interrupt
+                  0x004320                  _Mrf49xaServe
+                  0x00443e                  _ipv4HandlePacket
+                  0x004460                  _ipv4Crc
+                  0x004486                  _ipv4TxReplyPacket
+                  0x0044cc                  _ipv4TxPacket
+                  0x00453e                  _SysInitGpio
+                  0x004576                  _UartTxStr
+                  0x004588                  _UartTxByte
+                  0x004592                  _UartInit
+                  0x0045d2                  __AddressError
+                  0x0045de                  __StackError
+                  0x0045e0                  __MathError
+                  0x0045e2                  _main
+                  0x00460a                  _Mrf49xaModeRx
+                  0x00463e                  _Mrf49xaModeTx
+                  0x004676                  _Mrf49xaInit
+                  0x0046ce                  _httpHandleConnection
+                  0x0046d6                  _httpCloseConnection
+                  0x0046de                  _enc28j60Int
+                  0x0046e8                  _ethTcpTick
+                  0x0046f4                  _macRxFrame
+                  0x0046f6                  _macTxFrame
+                  0x0046f8                  _macTxReplyFrame
+                  0x0046fa                  _EthInit
+                  0x004710                  _EthHwInit
+                  0x00475e                  _EthTask
+                  0x004786                  _udpInit
+                  0x00479a                  _udpFirePacket
+                  0x0047d2                  _udpRegisterHandler
+                  0x0047f2                  _udpHandlePacket
+                  0x004812                  _udpTxPacket
+                  0x004834                  _arpBuildPacket
+                  0x004886                  _arpAnnounce
+                  0x00489a                  _arpProcessPacket
+                  0x0048c4                  _FlashInit
+                  0x0048d0                  _FlashCsSet
+                  0x0048f2                  _FlashReadId
+                  0x00490c                  _FlashRxBytes
+                  0x00494c                  _RtosTimerRearm
+                  0x004966                  _RtosTimerCreate
+                  0x00498c                  _RtosTimerTick
+                  0x0049be                  _ntpHandlePacket
+                  0x004a0a                  _ntpInit
+                  0x004a10                  _ntpRequest
+                  0x004a2c                  _RtosKernelPortInitStack
+                  0x004a46                  _RtosKernelPortTimerClear
+                  0x004a4a                  _RtosKernelPortTimerStart
+                  0x004a66                  _RtosKernelContextStart
+                  0x004a6c                  _RtosKernelContextSuspend
+                  0x004a72                  __T1Interrupt
+                  0x004a90                  _HandlePacket
+                  0x004af2                  _RtosKernelContext
+                  0x004b3e                  _Mrf49TxCmd
+                  0x004b54                  _Mrf49RxCmd
+                  0x004b6a                  _Mrf49RxSts
+                  0x004b7c                  _Mrf49RxByte
+                  0x004b80                  _Mrf49TxByte
+                  0x004b86                  _icmpHandlePacket
+                  0x004bc6                  _spiArbEthDisableIsr
+                  0x004bca                  _spiArbEthEnableIsr
+                  0x004bce                  _spiArbEthAcquire
+                  0x004bda                  _spiArbEthComplete
+                  0x004be8                  _spiArbRfAcquire
+                  0x004bf2                  _spiArbRfComplete
+                  0x004bfa                  _RtosKernelStart
+                  0x004c1c                  _execTimeReset
+                  0x004c1e                  _execTimePrint
 
 External Symbols in Program Memory (by name):
 
-                  0x002952                  _EthHwInit
-                  0x00293a                  _EthInit
-                  0x0029a0                  _EthTask
-                  0x00209c                  _ExtIntDummy
-                  0x002158                  _ExtIntInit
-                  0x00209e                  _ExtIntSetup
-                  0x002b2a                  _FlashCsSet
-                  0x002b1c                  _FlashInit
-                  0x002b4c                  _FlashReadId
-                  0x002b66                  _FlashRxBytes
-                  0x002c88                  _HandlePacket
-                  0x002de8                  _Mrf49RxByte
-                  0x002dc0                  _Mrf49RxCmd
-                  0x002dd6                  _Mrf49RxSts
-                  0x002dee                  _Mrf49TxByte
-                  0x002daa                  _Mrf49TxCmd
-                  0x001fa4                  _Mrf49xaFreePacket
-                  0x0026e6                  _Mrf49xaInit
-                  0x002666                  _Mrf49xaModeRx
-                  0x0026a6                  _Mrf49xaModeTx
-                  0x001f28                  _Mrf49xaPacketPending
-                  0x001fa8                  _Mrf49xaRxPacket
-                  0x0021ea                  _Mrf49xaServe
-                  0x001fc6                  _Mrf49xaTick
-                  0x001f8c                  _Mrf49xaTxAck
-                  0x001f3e                  _Mrf49xaTxPacket
-                  0x00289e                  _RfInit
-                  0x002830                  _RfPing
-                  0x002d5e                  _RtosKernelContext
-                  0x002d34                  _RtosKernelContextStart
-                  0x002d3a                  _RtosKernelContextSuspend
-                  0x002cfa                  _RtosKernelPortInitStack
-                  0x002d14                  _RtosKernelPortTimerClear
-                  0x002d18                  _RtosKernelPortTimerStart
-                  0x0024be                  _RtosKernelRestoreTask
-                  0x002e36                  _RtosKernelStart
-                  0x0024de                  _RtosKernelStoreTask
-                  0x0024ee                  _RtosTaskChange
-                  0x002466                  _RtosTaskCreate
-                  0x00249e                  _RtosTaskDelay
-                  0x002462                  _RtosTaskIdleFnc
-                  0x00248a                  _RtosTaskInit
-                  0x0024ca                  _RtosTaskRun
-                  0x002552                  _RtosTaskSignalEvent
-                  0x00252c                  _RtosTaskWaitForEvent
-                  0x0024b4                  _RtosTaskWake
-                  0x002bbc                  _RtosTimerCreate
-                  0x002ba2                  _RtosTimerRearm
-                  0x002be4                  _RtosTimerTick
-                  0x002756                  _SysInitGpio
-                  0x0027b6                  _UartInit
-                  0x0027a6                  _UartTxByte
-                  0x00278e                  _UartTxStr
-                  0x001b94                  _WebserverHandle
-                  0x0027f6                  __AddressError
+                  0x004710                  _EthHwInit
+                  0x0046fa                  _EthInit
+                  0x00475e                  _EthTask
+                  0x0041e4                  _ExtIntDummy
+                  0x004296                  _ExtIntInit
+                  0x0041e6                  _ExtIntSetup
+                  0x0048d0                  _FlashCsSet
+                  0x0048c4                  _FlashInit
+                  0x0048f2                  _FlashReadId
+                  0x00490c                  _FlashRxBytes
+                  0x004a90                  _HandlePacket
+                  0x004b7c                  _Mrf49RxByte
+                  0x004b54                  _Mrf49RxCmd
+                  0x004b6a                  _Mrf49RxSts
+                  0x004b80                  _Mrf49TxByte
+                  0x004b3e                  _Mrf49TxCmd
+                  0x003f98                  _Mrf49xaFreePacket
+                  0x004676                  _Mrf49xaInit
+                  0x00460a                  _Mrf49xaModeRx
+                  0x00463e                  _Mrf49xaModeTx
+                  0x003f1c                  _Mrf49xaPacketPending
+                  0x003f9c                  _Mrf49xaRxPacket
+                  0x004320                  _Mrf49xaServe
+                  0x003fba                  _Mrf49xaTick
+                  0x003f82                  _Mrf49xaTxAck
+                  0x003f32                  _Mrf49xaTxPacket
+                  0x003dfa                  _RfInit
+                  0x003e4c                  _RfPing
+                  0x004af2                  _RtosKernelContext
+                  0x004a66                  _RtosKernelContextStart
+                  0x004a6c                  _RtosKernelContextSuspend
+                  0x004a2c                  _RtosKernelPortInitStack
+                  0x004a46                  _RtosKernelPortTimerClear
+                  0x004a4a                  _RtosKernelPortTimerStart
+                  0x004120                  _RtosKernelRestoreTask
+                  0x004bfa                  _RtosKernelStart
+                  0x00413a                  _RtosKernelStoreTask
+                  0x00281a                  _RtosStateText
+                  0x00416c                  _RtosTaskChange
+                  0x004094                  _RtosTaskCreate
+                  0x004102                  _RtosTaskDelay
+                  0x004090                  _RtosTaskIdleFnc
+                  0x0040ee                  _RtosTaskInit
+                  0x00412c                  _RtosTaskRun
+                  0x0041ce                  _RtosTaskSignalEvent
+                  0x0041a8                  _RtosTaskWaitForEvent
+                  0x004116                  _RtosTaskWake
+                  0x004966                  _RtosTimerCreate
+                  0x00494c                  _RtosTimerRearm
+                  0x00498c                  _RtosTimerTick
+                  0x00453e                  _SysInitGpio
+                  0x004592                  _UartInit
+                  0x004588                  _UartTxByte
+                  0x004576                  _UartTxStr
+                  0x0032a6                  _WebserverHandle
+                  0x0045d2                  __AddressError
                   0x0002dc                  __DefaultInterrupt
-                  0x002178                  __INT0Interrupt
-                  0x00219e                  __INT1Interrupt
-                  0x0021c4                  __INT2Interrupt
-                  0x002804                  __MathError
-                  0x002802                  __StackError
-                  0x002d40                  __T1Interrupt
-                  0x000b5a                  ___udivdi3
-                  0x000a76                  ___udivmoddi3
-                  0x000b68                  ___umoddi3
+                  0x0042ae                  __INT0Interrupt
+                  0x0042d4                  __INT1Interrupt
+                  0x0042fa                  __INT2Interrupt
+                  0x0045e0                  __MathError
+                  0x0045de                  __StackError
+                  0x004a72                  __T1Interrupt
+                  0x001a88                  ___adddf3
+                  0x001b96                  ___divdf3
+                  0x001b82                  ___eqdf2
+                  0x001cde                  ___extendsfdf2
+                  0x001d1c                  ___fixunsdfdi
+                  0x001d7e                  ___fixunsdfsi
+                  0x001dca                  ___floatundidf
+                  0x001e20                  ___floatunsidf
+                  0x001b8c                  ___gedf2
+                  0x001b8c                  ___gtdf2
+                  0x001b82                  ___ledf2
+                  0x001b82                  ___ltdf2
+                  0x001e88                  ___muldf3
+                  0x000300                  ___mulp32eds3
+                  0x000300                  ___mulp32peds3
+                  0x000300                  ___mulsi3
+                  0x001c4a                  ___nedf2
+                  0x001f72                  ___subdf3
+                  0x001f76                  ___truncdfsf2
+                  0x002122                  ___udivdi3
+                  0x00203e                  ___udivmoddi3
+                  0x0002e0                  ___udivsi3
+                  0x002130                  ___umoddi3
+                  0x00218a                  __dPropagateNaN
                   0x000236                  __data_init
                   0x000236                  __data_init_standard
-                  0x000886                  __printf_0
-                  0x000886                  __printf_s
+                  0x002138                  __dcompare
+                  0x001c54                  __dpack
+                  0x001cce                  __dreturnNaN
+                  0x0021a6                  __dtype
+                  0x0021ca                  __dunpack
+                  0x001cac                  __dunpack2
+                  0x001cd4                  __dunpack2exit
+                  0x002218                  __fpack
+                  0x001e5e                  __funpack
                   0x000226                  __psv_init
                   0x000200                  __resetPRI
-                  0x000352                  __sprintf_0
-                  0x000352                  __sprintf_cdnopsuxX
-                  0x000352                  __sprintf_s
-                  0x00037e                  __vfprintf_0
-                  0x00037e                  __vfprintf_cdnopsuxX
-                  0x00037e                  __vfprintf_cdnopuxX
-                  0x00037e                  __vfprintf_s
-                  0x002ade                  _arpAnnounce
-                  0x002a82                  _arpBuildPacket
-                  0x002af2                  _arpProcessPacket
-                  0x001710                  _enc28j60BitClrRegisterUint8
-                  0x001598                  _enc28j60BitClrUint8
-                  0x0016ea                  _enc28j60BitSetRegisterUint8
-                  0x001580                  _enc28j60BitSetUint8
-                  0x0017bc                  _enc28j60GetOverflowStatus
-                  0x00189a                  _enc28j60GetPacketCount
-                  0x0019d2                  _enc28j60Initialize
-                  0x002916                  _enc28j60Int
-                  0x001888                  _enc28j60PacketPending
-                  0x001664                  _enc28j60ReadData
-                  0x0015e4                  _enc28j60ReadMacUint8
-                  0x001776                  _enc28j60ReadPhyRegisterUint16
-                  0x0016a2                  _enc28j60ReadRegisterUint16
-                  0x001680                  _enc28j60ReadRegisterUint8
-                  0x0015fe                  _enc28j60ReadUint16
-                  0x0015ce                  _enc28j60ReadUint8
-                  0x0019b8                  _enc28j60Reset
-                  0x00197c                  _enc28j60ResetRxBuffer
-                  0x0018a0                  _enc28j60RxFrame
-                  0x001614                  _enc28j60SetBank
-                  0x0017c0                  _enc28j60TxFrame
-                  0x00185e                  _enc28j60TxReplyFrame
-                  0x001648                  _enc28j60WriteData
-                  0x001762                  _enc28j60WritePhyRegisterUint16
-                  0x001736                  _enc28j60WriteRegisterUint16
-                  0x0016c4                  _enc28j60WriteRegisterUint8
-                  0x0015b2                  _enc28j60WriteUint16
-                  0x001568                  _enc28j60WriteUint8
-                  0x002920                  _ethTcpTick
-                  0x002e7c                  _execTimePrint
-                  0x002e7a                  _execTimeReset
-                  0x000314                  _fputs
-                  0x000d10                  _http200
-                  0x000d86                  _http404
-                  0x00290e                  _httpCloseConnection
-                  0x002906                  _httpHandleConnection
-                  0x000d88                  _httpHelloWorld
-                  0x000d0e                  _httpSysNavBar
-                  0x002df6                  _icmpHandlePacket
-                  0x002586                  _ipv4Crc
-                  0x002568                  _ipv4HandlePacket
-                  0x0025f4                  _ipv4TxPacket
-                  0x0025ae                  _ipv4TxReplyPacket
-                  0x00292e                  _macRxFrame
-                  0x002932                  _macTxFrame
-                  0x002936                  _macTxReplyFrame
-                  0x002806                  _main
-                  0x0002e0                  _memcmp
-                  0x000e0c                  _mrfRegset_Init
-                  0x000e2c                  _mrfRegset_InitCnt
-                  0x000e2d                  _mrfRegset_Rx
-                  0x000e39                  _mrfRegset_RxCnt
-                  0x000e3a                  _mrfRegset_Tx
-                  0x000e42                  _mrfRegset_TxCnt
-                  0x000e74                  _myGateway
-                  0x000e78                  _myGatewayMac
-                  0x000e6a                  _myIp
-                  0x000e6e                  _myMac
-                  0x002c16                  _ntpHandlePacket
-                  0x002c62                  _ntpInit
-                  0x002c6a                  _ntpRequest
-                  0x000330                  _puts
-                  0x002e60                  _spiArbEthAcquire
-                  0x002e68                  _spiArbEthComplete
-                  0x002e58                  _spiArbEthDisableIsr
-                  0x002e5c                  _spiArbEthEnableIsr
-                  0x002e72                  _spiArbRfAcquire
-                  0x002e76                  _spiArbRfComplete
-                  0x001e6a                  _spiBusy1
-                  0x001e02                  _spiDeinit
-                  0x001d6a                  _spiInit
-                  0x001e8e                  _spiRx1
-                  0x001e98                  _spiRx2
-                  0x001d36                  _spiSpeed
-                  0x001e72                  _spiTx1
-                  0x001e80                  _spiTx2
-                  0x001ea2                  _spiTxRx1
-                  0x001eae                  _spiTxRx2
-                  0x001eba                  _spiTxRxBytes
-                  0x000344                  _strcmp
-                  0x0011e8                  _tcpCloseObj
-                  0x000f92                  _tcpCrc
-                  0x0010ea                  _tcpGetDataPtr
-                  0x00145e                  _tcpHandlePacket
-                  0x000ea0                  _tcpInit
-                  0x0014c0                  _tcpListen
-                  0x000f5e                  _tcpListenMore
-                  0x000ee4                  _tcpMatchConnection
-                  0x000f34                  _tcpMatchPort
-                  0x000eba                  _tcpPickFreeConnection
-                  0x001206                  _tcpStatemachine
-                  0x001536                  _tcpTick
-                  0x0010ee                  _tcpTxPacket
-                  0x001006                  _tcpTxReplyPacket
-                  0x0029de                  _udpFirePacket
-                  0x002a3c                  _udpHandlePacket
-                  0x0029ca                  _udpInit
-                  0x002a10                  _udpRegisterHandler
-                  0x002a5e                  _udpTxPacket
-                  0x001b86                  _web404
-                  0x001abe                  _webIndex
-                  0x000dd4                  _webRoutes
-                  0x001b82                  _webServeFlash
-                  0x001ae6                  _webSysFlash
-                  0x001b90                  _webSysRtos
-                  0x001b8c                  _webSysTcpip
-                  0x001a8a                  _webTest
-                  0x00284c                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
-                  0x00283e                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
+                  0x0003c4                  __sprintf_0
+                  0x0003c4                  __sprintf_cdnopsuxX
+                  0x0003c4                  __sprintf_s
+                  0x0003f0                  __vfprintf_0
+                  0x0003f0                  __vfprintf_cdnopsuxX
+                  0x0003f0                  __vfprintf_cdnopuxX
+                  0x0003f0                  __vfprintf_s
+                  0x004886                  _arpAnnounce
+                  0x004834                  _arpBuildPacket
+                  0x00489a                  _arpProcessPacket
+                  0x0035a6                  _enc28j60BitClrRegisterUint8
+                  0x003422                  _enc28j60BitClrUint8
+                  0x003580                  _enc28j60BitSetRegisterUint8
+                  0x00340a                  _enc28j60BitSetUint8
+                  0x003650                  _enc28j60GetOverflowStatus
+                  0x00371e                  _enc28j60GetPacketCount
+                  0x003836                  _enc28j60Initialize
+                  0x0046de                  _enc28j60Int
+                  0x00370c                  _enc28j60PacketPending
+                  0x0034f4                  _enc28j60ReadData
+                  0x00346e                  _enc28j60ReadMacUint8
+                  0x00360c                  _enc28j60ReadPhyRegisterUint16
+                  0x003538                  _enc28j60ReadRegisterUint16
+                  0x003516                  _enc28j60ReadRegisterUint8
+                  0x003488                  _enc28j60ReadUint16
+                  0x003458                  _enc28j60ReadUint8
+                  0x00381c                  _enc28j60Reset
+                  0x0037ea                  _enc28j60ResetRxBuffer
+                  0x003722                  _enc28j60RxFrame
+                  0x00349e                  _enc28j60SetBank
+                  0x003654                  _enc28j60TxFrame
+                  0x0036e2                  _enc28j60TxReplyFrame
+                  0x0034d2                  _enc28j60WriteData
+                  0x0035f8                  _enc28j60WritePhyRegisterUint16
+                  0x0035cc                  _enc28j60WriteRegisterUint16
+                  0x00355a                  _enc28j60WriteRegisterUint8
+                  0x00343c                  _enc28j60WriteUint16
+                  0x0033f2                  _enc28j60WriteUint8
+                  0x0046e8                  _ethTcpTick
+                  0x004c1e                  _execTimePrint
+                  0x004c1c                  _execTimeReset
+                  0x00034e                  _fputs
+                  0x001e24                  _frexp
+                  0x001e24                  _frexpl
+                  0x0026c6                  _http200
+                  0x00273c                  _http404
+                  0x0046d6                  _httpCloseConnection
+                  0x0046ce                  _httpHandleConnection
+                  0x00273e                  _httpHelloWorld
+                  0x0026c2                  _httpRfFooter
+                  0x0026c0                  _httpRfRow
+                  0x0026be                  _httpRfTable
+                  0x002740                  _httpRtosTaskTable
+                  0x0026c4                  _httpSysNavBar
+                  0x004b86                  _icmpHandlePacket
+                  0x004460                  _ipv4Crc
+                  0x00443e                  _ipv4HandlePacket
+                  0x0044cc                  _ipv4TxPacket
+                  0x004486                  _ipv4TxReplyPacket
+                  0x0046f4                  _macRxFrame
+                  0x0046f6                  _macTxFrame
+                  0x0046f8                  _macTxReplyFrame
+                  0x0045e2                  _main
+                  0x00030c                  _memcmp
+                  0x000340                  _memset
+                  0x002824                  _mrfRegset_Init
+                  0x002844                  _mrfRegset_InitCnt
+                  0x002845                  _mrfRegset_Rx
+                  0x002851                  _mrfRegset_RxCnt
+                  0x002852                  _mrfRegset_Tx
+                  0x00285a                  _mrfRegset_TxCnt
+                  0x00286a                  _myGateway
+                  0x00286e                  _myGatewayMac
+                  0x002860                  _myIp
+                  0x002864                  _myMac
+                  0x0049be                  _ntpHandlePacket
+                  0x004a0a                  _ntpInit
+                  0x004a10                  _ntpRequest
+                  0x00036a                  _puts
+                  0x003e58                  _rfHistoryPut
+                  0x004bce                  _spiArbEthAcquire
+                  0x004bda                  _spiArbEthComplete
+                  0x004bc6                  _spiArbEthDisableIsr
+                  0x004bca                  _spiArbEthEnableIsr
+                  0x004be8                  _spiArbRfAcquire
+                  0x004bf2                  _spiArbRfComplete
+                  0x003cd0                  _spiBusy1
+                  0x003c6c                  _spiDeinit
+                  0x003bd8                  _spiInit
+                  0x003cf4                  _spiRx1
+                  0x003cfe                  _spiRx2
+                  0x003bae                  _spiSpeed
+                  0x003cd8                  _spiTx1
+                  0x003ce6                  _spiTx2
+                  0x003d08                  _spiTxRx1
+                  0x003d14                  _spiTxRx2
+                  0x003d20                  _spiTxRxBytes
+                  0x00037e                  _sprintf
+                  0x0003aa                  _strcmp
+                  0x0003b8                  _strcpy
+                  0x002bc8                  _tcpCloseObj
+                  0x00296a                  _tcpCrc
+                  0x002ac6                  _tcpGetDataPtr
+                  0x002df8                  _tcpHandlePacket
+                  0x002890                  _tcpInit
+                  0x002e5e                  _tcpListen
+                  0x002938                  _tcpListenMore
+                  0x0028c8                  _tcpMatchConnection
+                  0x002910                  _tcpMatchPort
+                  0x0028aa                  _tcpPickFreeConnection
+                  0x002be6                  _tcpStatemachine
+                  0x002eca                  _tcpTick
+                  0x002aca                  _tcpTxPacket
+                  0x0029d8                  _tcpTxReplyPacket
+                  0x00479a                  _udpFirePacket
+                  0x0047f2                  _udpHandlePacket
+                  0x004786                  _udpInit
+                  0x0047d2                  _udpRegisterHandler
+                  0x004812                  _udpTxPacket
+                  0x000a72                  _vfprintf
+                  0x0032a0                  _web404
+                  0x002f2e                  _webIndex
+                  0x002794                  _webRoutes
+                  0x00329e                  _webServeFlash
+                  0x003202                  _webSysFlash
+                  0x00307c                  _webSysRf
+                  0x002f52                  _webSysRtos
+                  0x0032a4                  _webSysTcpip
+                  0x002ef4                  _webTest
+                  0x003da8                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
+                  0x003d84                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
 
 Memory Configuration
 
@@ -660,6 +805,9 @@ LOAD build/default/production/_ext/767653358/SST26VF032.o
 LOAD build/default/production/_ext/767653358/enc28j60.o
 LOAD build/default/production/_ext/767653358/mcp9800.o
 LOAD build/default/production/_ext/767653358/mrf49xa.o
+LOAD build/default/production/_ext/767653358/mrf49xa_cmd.o
+LOAD build/default/production/_ext/767653358/mrf49xa_data.o
+LOAD build/default/production/_ext/767653358/mrf49xa_packet.o
 LOAD build/default/production/_ext/2033261600/arp.o
 LOAD build/default/production/_ext/2033261600/icmp.o
 LOAD build/default/production/_ext/2033261600/ipv4.o
@@ -667,19 +815,16 @@ LOAD build/default/production/_ext/2033261600/ntp.o
 LOAD build/default/production/_ext/2033261600/tcp.o
 LOAD build/default/production/_ext/2033261600/udp.o
 LOAD build/default/production/_ext/1201319415/packets.o
+LOAD build/default/production/_ext/1201319415/server.o
 LOAD build/default/production/_ext/1209926055/task.o
 LOAD build/default/production/_ext/1209926055/timer.o
 LOAD build/default/production/_ext/1145713235/rf_task.o
 LOAD build/default/production/_ext/1145713235/eth_task.o
 LOAD build/default/production/_ext/1709695401/executiontime.o
 LOAD build/default/production/_ext/1709695401/spiArbiter.o
+LOAD build/default/production/_ext/2125849857/ccbuf.o
 LOAD build/default/production/_ext/296506934/router.o
 LOAD build/default/production/_ext/681662318/main.o
-LOAD build/default/production/_ext/767653358/mrf49xa_cmd.o
-LOAD build/default/production/_ext/767653358/mrf49xa_data.o
-LOAD build/default/production/_ext/767653358/mrf49xa_packet.o
-LOAD build/default/production/_ext/2125849857/ccbuf.o
-LOAD build/default/production/_ext/1201319415/server.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD /opt/microchip/xc16/v1.21/bin/bin/../../lib/PIC24F/libpPIC24Fxxx-elf.a
                     0xabf8                  __CONFIG4 = 0xabf8
@@ -700,7 +845,7 @@ LOAD /opt/microchip/xc16/v1.21/bin/bin/../../lib/PIC24F/libpPIC24Fxxx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x970
+.text             0x000200       0x2064
  *(.init)
  .init            0x000200         0x36 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
                   0x000200                  __reset
@@ -718,56 +863,133 @@ LOAD /opt/microchip/xc16/v1.21/bin/bin/../../lib/PIC24F/libpPIC24Fxxx-elf.a
  *(.libm)
  *(.libdsp)
  *(.lib*)
+ .libm.udivsi3    0x0002e0         0x20 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(udivsi3.eo)
+                  0x0002e0                  ___udivsi3
+ .libm.mulsi3     0x000300          0xc /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(mulsi3.eo)
+                  0x000300                  ___mulp32eds3
+                  0x000300                  ___mulp32peds3
+                  0x000300                  ___mulsi3
  .libc.memcmp.memcmp
-                  0x0002e0         0x34 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memcmp.eo)
-                  0x0002e0                  _memcmp
+                  0x00030c         0x34 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memcmp.eo)
+                  0x00030c                  _memcmp
+ .libc.memset.memset
+                  0x000340          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memset.eo)
+                  0x000340                  _memset
  .libc.fputs.fputs
-                  0x000314         0x1c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
-                  0x000314                  _fputs
+                  0x00034e         0x1c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
+                  0x00034e                  _fputs
  .libc.puts.puts
-                  0x000330         0x14 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
-                  0x000330                  _puts
+                  0x00036a         0x14 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
+                  0x00036a                  _puts
+ .libc.sprintf.sprintf
+                  0x00037e         0x2c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf.eo)
+                  0x00037e                  _sprintf
  .libc.strcmp.strcmp
-                  0x000344          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcmp.eo)
-                  0x000344                  _strcmp
+                  0x0003aa          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcmp.eo)
+                  0x0003aa                  _strcmp
+ .libc.strcpy.strcpy
+                  0x0003b8          0xc /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcpy.eo)
+                  0x0003b8                  _strcpy
  .libc._sprintf_cdnopsuxX._sprintf_cdnopsuxX
-                  0x000352         0x2c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf_cdnopsuxX.XXeo)
-                  0x000352                  __sprintf_cdnopsuxX
-                  0x000352                  __sprintf_0
-                  0x000352                  __sprintf_s
+                  0x0003c4         0x2c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf_cdnopsuxX.XXeo)
+                  0x0003c4                  __sprintf_cdnopsuxX
+                  0x0003c4                  __sprintf_0
+                  0x0003c4                  __sprintf_s
  .libc._vfprintf_cdnopsuxX._vfprintf_cdnopsuxX
-                  0x00037e        0x508 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
-                  0x00037e                  __vfprintf_s
-                  0x00037e                  __vfprintf_cdnopuxX
-                  0x00037e                  __vfprintf_cdnopsuxX
-                  0x00037e                  __vfprintf_0
- .libc._printf_s._printf_s
-                  0x000886          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_s.XXeo)
-                  0x000886                  __printf_0
-                  0x000886                  __printf_s
+                  0x0003f0        0x508 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+                  0x0003f0                  __vfprintf_s
+                  0x0003f0                  __vfprintf_cdnopuxX
+                  0x0003f0                  __vfprintf_cdnopsuxX
+                  0x0003f0                  __vfprintf_0
+ .libc.fround.fround
+                  0x0008f8         0xba /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+ .libc.scale.scale
+                  0x0009b2         0xc0 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+ .libc.vfprintf.vfprintf
+                  0x000a72        0xea6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+                  0x000a72                  _vfprintf
  .libc.fputc.fputc
-                  0x000894         0x88 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
-                  0x000894                  _fputc
+                  0x001918         0x88 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
+                  0x001918                  _fputc
  .libc._flsbuf._flsbuf
-                  0x00091c         0x84 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(flsbuf.eo)
-                  0x00091c                  __flsbuf
+                  0x0019a0         0x84 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(flsbuf.eo)
+                  0x0019a0                  __flsbuf
  .libc.dowrite.dowrite
-                  0x0009a0          0x4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
- .libc.write      0x0009a4         0x60 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
-                  0x0009a4                  _write
+                  0x001a24          0x4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
+ .libc.write      0x001a28         0x60 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
+                  0x001a28                  _write
+ .libm.adddf3     0x001a88         0xfa /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(adddf3.eo)
+                  0x001a88                  ___adddf3
+ .libm.eqdf2      0x001b82          0xa /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(deqltle.eo)
+                  0x001b82                  ___ledf2
+                  0x001b82                  ___eqdf2
+                  0x001b82                  ___ltdf2
+ .libm.gtdf2      0x001b8c          0xa /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dgtge.eo)
+                  0x001b8c                  ___gedf2
+                  0x001b8c                  ___gtdf2
+ .libm.divdf3     0x001b96         0xb4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divdf3.eo)
+                  0x001b96                  ___divdf3
+ .libm.nedf2      0x001c4a          0xa /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dne.eo)
+                  0x001c4a                  ___nedf2
+ .libm.dpack      0x001c54         0x58 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpack.eo)
+                  0x001c54                  __dpack
+ .libm.dunpack2
+                  0x001cac         0x32 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack2.eo)
+                  0x001cac                  __dunpack2
+                  0x001cce                  __dreturnNaN
+                  0x001cd4                  __dunpack2exit
+ .libm.extendsfdf2
+                  0x001cde         0x3e /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(extendsfdf.eo)
+                  0x001cde                  ___extendsfdf2
+ .libm.fixunsdfdi
+                  0x001d1c         0x62 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfdi.eo)
+                  0x001d1c                  ___fixunsdfdi
+ .libm.fixunsdfsi
+                  0x001d7e         0x4c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfsi.eo)
+                  0x001d7e                  ___fixunsdfsi
+ .libm.floatundidf
+                  0x001dca         0x56 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatundidf.eo)
+                  0x001dca                  ___floatundidf
+ .libm.floatunsidf
+                  0x001e20          0x4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatunsidf.eo)
+                  0x001e20                  ___floatunsidf
+ .libm.frexp      0x001e24         0x3a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(frexp.eo)
+                  0x001e24                  _frexpl
+                  0x001e24                  _frexp
+ .libm.funpack    0x001e5e         0x2a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(funpack.eo)
+                  0x001e5e                  __funpack
+ .libm.muldf3     0x001e88         0xea /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(muldf3.eo)
+                  0x001e88                  ___muldf3
+ .libm.subdf3     0x001f72          0x4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(subdf3.eo)
+                  0x001f72                  ___subdf3
+ .libm.truncdfsf2
+                  0x001f76         0x56 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(truncdfsf.eo)
+                  0x001f76                  ___truncdfsf2
  .libm.__PplusBdi.__PplusBdi
-                  0x000a04         0x28 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x001fcc         0x28 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
  .libm.__PminusBdi.__PminusBdi
-                  0x000a2c         0x4a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x001ff4         0x4a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
  .libm.__udivmoddi3.__udivmoddi3
-                  0x000a76         0xe4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
-                  0x000a76                  ___udivmoddi3
+                  0x00203e         0xe4 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x00203e                  ___udivmoddi3
  .libm.__udivdi3.__udivdi3
-                  0x000b5a          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
-                  0x000b5a                  ___udivdi3
+                  0x002122          0xe /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x002122                  ___udivdi3
  .libm.__umoddi3.__umoddi3
-                  0x000b68          0x8 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
-                  0x000b68                  ___umoddi3
+                  0x002130          0x8 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x002130                  ___umoddi3
+ .libm.dcompare
+                  0x002138         0x52 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dcompare.eo)
+                  0x002138                  __dcompare
+ .libm.dPropagateNaN
+                  0x00218a         0x1c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpropagateNaN.eo)
+                  0x00218a                  __dPropagateNaN
+ .libm.dtype      0x0021a6         0x24 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dtype.eo)
+                  0x0021a6                  __dtype
+ .libm.dunpack    0x0021ca         0x4e /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack.eo)
+                  0x0021ca                  __dunpack
+ .libm.fpack      0x002218         0x4c /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fpack.eo)
+                  0x002218                  __fpack
 
 usercode
  *(usercode)
@@ -791,40 +1013,40 @@ __CONFIG1         0x00abfe          0x2
 .comment
  *(.comment)
 
-.debug_info       0x000000       0xedf4
+.debug_info       0x000000       0xf632
  *(.debug_info)
  .debug_info      0x000000         0xa2 build/default/production/_ext/585513329/context.o
  .debug_info      0x0000a2        0xd25 build/default/production/_ext/585513329/interrupt.o
- .debug_info      0x000dc7        0xad8 build/default/production/_ext/585513329/rtos.o
- .debug_info      0x00189f       0x14d7 build/default/production/_ext/585513329/spi.o
- .debug_info      0x002d76        0x6c3 build/default/production/_ext/585513329/timer.o
- .debug_info      0x003439        0x5ec build/default/production/_ext/767653358/SST26VF032.o
- .debug_info      0x003a25       0x106c build/default/production/_ext/767653358/enc28j60.o
- .debug_info      0x004a91        0x26b build/default/production/_ext/767653358/mcp9800.o
- .debug_info      0x004cfc        0xc08 build/default/production/_ext/767653358/mrf49xa.o
- .debug_info      0x005904        0x48f build/default/production/_ext/2033261600/arp.o
- .debug_info      0x005d93        0x45e build/default/production/_ext/2033261600/icmp.o
- .debug_info      0x0061f1        0x5d4 build/default/production/_ext/2033261600/ipv4.o
- .debug_info      0x0067c5        0x670 build/default/production/_ext/2033261600/ntp.o
- .debug_info      0x006e35        0xe30 build/default/production/_ext/2033261600/tcp.o
- .debug_info      0x007c65        0x68c build/default/production/_ext/2033261600/udp.o
- .debug_info      0x0082f1        0x18c build/default/production/_ext/1201319415/packets.o
- .debug_info      0x00847d        0x646 build/default/production/_ext/1209926055/task.o
- .debug_info      0x008ac3        0x37e build/default/production/_ext/1209926055/timer.o
- .debug_info      0x008e41        0xd69 build/default/production/_ext/1145713235/rf_task.o
- .debug_info      0x009baa        0xb62 build/default/production/_ext/1145713235/eth_task.o
- .debug_info      0x00a70c        0x1ac build/default/production/_ext/1709695401/executiontime.o
- .debug_info      0x00a8b8        0x56d build/default/production/_ext/1709695401/spiArbiter.o
- .debug_info      0x00ae25        0xbf0 build/default/production/_ext/296506934/router.o
- .debug_info      0x00ba15       0x1056 build/default/production/_ext/681662318/main.o
- .debug_info      0x00ca6b        0x564 build/default/production/_ext/767653358/mrf49xa_cmd.o
- .debug_info      0x00cfcf        0x934 build/default/production/_ext/767653358/mrf49xa_data.o
- .debug_info      0x00d903        0x990 build/default/production/_ext/767653358/mrf49xa_packet.o
- .debug_info      0x00e293        0x5c2 build/default/production/_ext/2125849857/ccbuf.o
- .debug_info      0x00e855        0x59f build/default/production/_ext/1201319415/server.o
+ .debug_info      0x000dc7        0xb52 build/default/production/_ext/585513329/rtos.o
+ .debug_info      0x001919       0x14d7 build/default/production/_ext/585513329/spi.o
+ .debug_info      0x002df0        0x6c3 build/default/production/_ext/585513329/timer.o
+ .debug_info      0x0034b3        0x5ec build/default/production/_ext/767653358/SST26VF032.o
+ .debug_info      0x003a9f       0x1062 build/default/production/_ext/767653358/enc28j60.o
+ .debug_info      0x004b01        0x26b build/default/production/_ext/767653358/mcp9800.o
+ .debug_info      0x004d6c        0xc08 build/default/production/_ext/767653358/mrf49xa.o
+ .debug_info      0x005974        0x564 build/default/production/_ext/767653358/mrf49xa_cmd.o
+ .debug_info      0x005ed8        0x934 build/default/production/_ext/767653358/mrf49xa_data.o
+ .debug_info      0x00680c        0x9b2 build/default/production/_ext/767653358/mrf49xa_packet.o
+ .debug_info      0x0071be        0x48b build/default/production/_ext/2033261600/arp.o
+ .debug_info      0x007649        0x45c build/default/production/_ext/2033261600/icmp.o
+ .debug_info      0x007aa5        0x5d2 build/default/production/_ext/2033261600/ipv4.o
+ .debug_info      0x008077        0x670 build/default/production/_ext/2033261600/ntp.o
+ .debug_info      0x0086e7        0xe2c build/default/production/_ext/2033261600/tcp.o
+ .debug_info      0x009513        0x68c build/default/production/_ext/2033261600/udp.o
+ .debug_info      0x009b9f        0x18c build/default/production/_ext/1201319415/packets.o
+ .debug_info      0x009d2b        0x59d build/default/production/_ext/1201319415/server.o
+ .debug_info      0x00a2c8        0x6ea build/default/production/_ext/1209926055/task.o
+ .debug_info      0x00a9b2        0x37e build/default/production/_ext/1209926055/timer.o
+ .debug_info      0x00ad30        0xe43 build/default/production/_ext/1145713235/rf_task.o
+ .debug_info      0x00bb73        0xbb3 build/default/production/_ext/1145713235/eth_task.o
+ .debug_info      0x00c726        0x1ac build/default/production/_ext/1709695401/executiontime.o
+ .debug_info      0x00c8d2        0x56d build/default/production/_ext/1709695401/spiArbiter.o
+ .debug_info      0x00ce3f        0x5c2 build/default/production/_ext/2125849857/ccbuf.o
+ .debug_info      0x00d401       0x11db build/default/production/_ext/296506934/router.o
+ .debug_info      0x00e5dc       0x1056 build/default/production/_ext/681662318/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x25e3
+.debug_abbrev     0x000000       0x26de
  *(.debug_abbrev)
  .debug_abbrev    0x000000          0x1 build/default/production/_ext/585513329/adc.o
  .debug_abbrev    0x000001         0x10 build/default/production/_ext/585513329/context.o
@@ -839,94 +1061,94 @@ __CONFIG1         0x00abfe          0x2
  .debug_abbrev    0x000703        0x285 build/default/production/_ext/767653358/enc28j60.o
  .debug_abbrev    0x000988         0x90 build/default/production/_ext/767653358/mcp9800.o
  .debug_abbrev    0x000a18        0x1bf build/default/production/_ext/767653358/mrf49xa.o
- .debug_abbrev    0x000bd7         0xf9 build/default/production/_ext/2033261600/arp.o
- .debug_abbrev    0x000cd0         0xb6 build/default/production/_ext/2033261600/icmp.o
- .debug_abbrev    0x000d86        0x13b build/default/production/_ext/2033261600/ipv4.o
- .debug_abbrev    0x000ec1         0xdc build/default/production/_ext/2033261600/ntp.o
- .debug_abbrev    0x000f9d        0x27f build/default/production/_ext/2033261600/tcp.o
- .debug_abbrev    0x00121c        0x13e build/default/production/_ext/2033261600/udp.o
- .debug_abbrev    0x00135a         0x3d build/default/production/_ext/1201319415/packets.o
- .debug_abbrev    0x001397        0x168 build/default/production/_ext/1209926055/task.o
- .debug_abbrev    0x0014ff         0xcc build/default/production/_ext/1209926055/timer.o
- .debug_abbrev    0x0015cb        0x202 build/default/production/_ext/1145713235/rf_task.o
- .debug_abbrev    0x0017cd        0x225 build/default/production/_ext/1145713235/eth_task.o
- .debug_abbrev    0x0019f2         0x34 build/default/production/_ext/1709695401/executiontime.o
- .debug_abbrev    0x001a26         0xf8 build/default/production/_ext/1709695401/spiArbiter.o
- .debug_abbrev    0x001b1e        0x225 build/default/production/_ext/296506934/router.o
- .debug_abbrev    0x001d43        0x187 build/default/production/_ext/681662318/main.o
- .debug_abbrev    0x001eca        0x15f build/default/production/_ext/767653358/mrf49xa_cmd.o
- .debug_abbrev    0x002029        0x189 build/default/production/_ext/767653358/mrf49xa_data.o
- .debug_abbrev    0x0021b2        0x205 build/default/production/_ext/767653358/mrf49xa_packet.o
- .debug_abbrev    0x0023b7         0xdd build/default/production/_ext/2125849857/ccbuf.o
- .debug_abbrev    0x002494        0x14f build/default/production/_ext/1201319415/server.o
+ .debug_abbrev    0x000bd7        0x15f build/default/production/_ext/767653358/mrf49xa_cmd.o
+ .debug_abbrev    0x000d36        0x189 build/default/production/_ext/767653358/mrf49xa_data.o
+ .debug_abbrev    0x000ebf        0x22e build/default/production/_ext/767653358/mrf49xa_packet.o
+ .debug_abbrev    0x0010ed        0x106 build/default/production/_ext/2033261600/arp.o
+ .debug_abbrev    0x0011f3         0xb4 build/default/production/_ext/2033261600/icmp.o
+ .debug_abbrev    0x0012a7        0x12c build/default/production/_ext/2033261600/ipv4.o
+ .debug_abbrev    0x0013d3         0xdc build/default/production/_ext/2033261600/ntp.o
+ .debug_abbrev    0x0014af        0x28c build/default/production/_ext/2033261600/tcp.o
+ .debug_abbrev    0x00173b        0x13e build/default/production/_ext/2033261600/udp.o
+ .debug_abbrev    0x001879         0x3d build/default/production/_ext/1201319415/packets.o
+ .debug_abbrev    0x0018b6        0x140 build/default/production/_ext/1201319415/server.o
+ .debug_abbrev    0x0019f6        0x16f build/default/production/_ext/1209926055/task.o
+ .debug_abbrev    0x001b65         0xcc build/default/production/_ext/1209926055/timer.o
+ .debug_abbrev    0x001c31        0x29f build/default/production/_ext/1145713235/rf_task.o
+ .debug_abbrev    0x001ed0        0x225 build/default/production/_ext/1145713235/eth_task.o
+ .debug_abbrev    0x0020f5         0x34 build/default/production/_ext/1709695401/executiontime.o
+ .debug_abbrev    0x002129         0xf8 build/default/production/_ext/1709695401/spiArbiter.o
+ .debug_abbrev    0x002221         0xdd build/default/production/_ext/2125849857/ccbuf.o
+ .debug_abbrev    0x0022fe        0x259 build/default/production/_ext/296506934/router.o
+ .debug_abbrev    0x002557        0x187 build/default/production/_ext/681662318/main.o
 
-.debug_line       0x000000       0x4efd
+.debug_line       0x000000       0x507d
  *(.debug_line)
  .debug_line      0x000000         0x24 build/default/production/_ext/585513329/adc.o
  .debug_line      0x000024         0x8b build/default/production/_ext/585513329/context.o
  .debug_line      0x0000af         0x24 build/default/production/_ext/585513329/i2c.o
- .debug_line      0x0000d3        0x247 build/default/production/_ext/585513329/interrupt.o
- .debug_line      0x00031a         0x24 build/default/production/_ext/585513329/rtc.o
- .debug_line      0x00033e        0x1fd build/default/production/_ext/585513329/rtos.o
- .debug_line      0x00053b        0x452 build/default/production/_ext/585513329/spi.o
- .debug_line      0x00098d        0x2e3 build/default/production/_ext/585513329/timer.o
- .debug_line      0x000c70         0x24 build/default/production/_ext/585513329/uart.o
- .debug_line      0x000c94        0x1c1 build/default/production/_ext/767653358/SST26VF032.o
- .debug_line      0x000e55        0xab8 build/default/production/_ext/767653358/enc28j60.o
- .debug_line      0x00190d        0x12e build/default/production/_ext/767653358/mcp9800.o
- .debug_line      0x001a3b        0x1f4 build/default/production/_ext/767653358/mrf49xa.o
- .debug_line      0x001c2f        0x173 build/default/production/_ext/2033261600/arp.o
- .debug_line      0x001da2         0xdb build/default/production/_ext/2033261600/icmp.o
- .debug_line      0x001e7d        0x23f build/default/production/_ext/2033261600/ipv4.o
- .debug_line      0x0020bc        0x136 build/default/production/_ext/2033261600/ntp.o
- .debug_line      0x0021f2        0x853 build/default/production/_ext/2033261600/tcp.o
- .debug_line      0x002a45        0x1d1 build/default/production/_ext/2033261600/udp.o
- .debug_line      0x002c16         0x7f build/default/production/_ext/1201319415/packets.o
- .debug_line      0x002c95        0x328 build/default/production/_ext/1209926055/task.o
- .debug_line      0x002fbd        0x15e build/default/production/_ext/1209926055/timer.o
- .debug_line      0x00311b        0x306 build/default/production/_ext/1145713235/rf_task.o
- .debug_line      0x003421        0x2e2 build/default/production/_ext/1145713235/eth_task.o
- .debug_line      0x003703         0x86 build/default/production/_ext/1709695401/executiontime.o
- .debug_line      0x003789        0x1d2 build/default/production/_ext/1709695401/spiArbiter.o
- .debug_line      0x00395b        0x4c3 build/default/production/_ext/296506934/router.o
- .debug_line      0x003e1e        0x28a build/default/production/_ext/681662318/main.o
- .debug_line      0x0040a8        0x214 build/default/production/_ext/767653358/mrf49xa_cmd.o
- .debug_line      0x0042bc        0x2ed build/default/production/_ext/767653358/mrf49xa_data.o
- .debug_line      0x0045a9        0x3d2 build/default/production/_ext/767653358/mrf49xa_packet.o
- .debug_line      0x00497b        0x3ce build/default/production/_ext/2125849857/ccbuf.o
- .debug_line      0x004d49        0x1b4 build/default/production/_ext/1201319415/server.o
+ .debug_line      0x0000d3        0x23f build/default/production/_ext/585513329/interrupt.o
+ .debug_line      0x000312         0x24 build/default/production/_ext/585513329/rtc.o
+ .debug_line      0x000336        0x1fd build/default/production/_ext/585513329/rtos.o
+ .debug_line      0x000533        0x41a build/default/production/_ext/585513329/spi.o
+ .debug_line      0x00094d        0x2e3 build/default/production/_ext/585513329/timer.o
+ .debug_line      0x000c30         0x24 build/default/production/_ext/585513329/uart.o
+ .debug_line      0x000c54        0x1b9 build/default/production/_ext/767653358/SST26VF032.o
+ .debug_line      0x000e0d        0xa56 build/default/production/_ext/767653358/enc28j60.o
+ .debug_line      0x001863        0x12e build/default/production/_ext/767653358/mcp9800.o
+ .debug_line      0x001991        0x1e4 build/default/production/_ext/767653358/mrf49xa.o
+ .debug_line      0x001b75        0x214 build/default/production/_ext/767653358/mrf49xa_cmd.o
+ .debug_line      0x001d89        0x2ad build/default/production/_ext/767653358/mrf49xa_data.o
+ .debug_line      0x002036        0x3e0 build/default/production/_ext/767653358/mrf49xa_packet.o
+ .debug_line      0x002416        0x16b build/default/production/_ext/2033261600/arp.o
+ .debug_line      0x002581         0xdb build/default/production/_ext/2033261600/icmp.o
+ .debug_line      0x00265c        0x237 build/default/production/_ext/2033261600/ipv4.o
+ .debug_line      0x002893        0x12e build/default/production/_ext/2033261600/ntp.o
+ .debug_line      0x0029c1        0x7d3 build/default/production/_ext/2033261600/tcp.o
+ .debug_line      0x003194        0x1c1 build/default/production/_ext/2033261600/udp.o
+ .debug_line      0x003355         0x7f build/default/production/_ext/1201319415/packets.o
+ .debug_line      0x0033d4        0x168 build/default/production/_ext/1201319415/server.o
+ .debug_line      0x00353c        0x378 build/default/production/_ext/1209926055/task.o
+ .debug_line      0x0038b4        0x15e build/default/production/_ext/1209926055/timer.o
+ .debug_line      0x003a12        0x3d8 build/default/production/_ext/1145713235/rf_task.o
+ .debug_line      0x003dea        0x2e2 build/default/production/_ext/1145713235/eth_task.o
+ .debug_line      0x0040cc         0x86 build/default/production/_ext/1709695401/executiontime.o
+ .debug_line      0x004152        0x1f2 build/default/production/_ext/1709695401/spiArbiter.o
+ .debug_line      0x004344        0x3be build/default/production/_ext/2125849857/ccbuf.o
+ .debug_line      0x004702        0x6f9 build/default/production/_ext/296506934/router.o
+ .debug_line      0x004dfb        0x282 build/default/production/_ext/681662318/main.o
 
-.debug_frame      0x000000        0xda4
+.debug_frame      0x000000        0xf90
  *(.debug_frame)
  .debug_frame     0x000000         0x74 build/default/production/_ext/585513329/interrupt.o
  .debug_frame     0x000074         0x74 build/default/production/_ext/585513329/rtos.o
- .debug_frame     0x0000e8         0xdc build/default/production/_ext/585513329/spi.o
- .debug_frame     0x0001c4         0x70 build/default/production/_ext/585513329/timer.o
- .debug_frame     0x000234         0x54 build/default/production/_ext/767653358/SST26VF032.o
- .debug_frame     0x000288        0x1c4 build/default/production/_ext/767653358/enc28j60.o
- .debug_frame     0x00044c         0x34 build/default/production/_ext/767653358/mcp9800.o
- .debug_frame     0x000480         0x44 build/default/production/_ext/767653358/mrf49xa.o
- .debug_frame     0x0004c4         0x44 build/default/production/_ext/2033261600/arp.o
- .debug_frame     0x000508         0x24 build/default/production/_ext/2033261600/icmp.o
- .debug_frame     0x00052c         0x54 build/default/production/_ext/2033261600/ipv4.o
- .debug_frame     0x000580         0x44 build/default/production/_ext/2033261600/ntp.o
- .debug_frame     0x0005c4         0xf4 build/default/production/_ext/2033261600/tcp.o
- .debug_frame     0x0006b8         0x64 build/default/production/_ext/2033261600/udp.o
- .debug_frame     0x00071c         0xc4 build/default/production/_ext/1209926055/task.o
- .debug_frame     0x0007e0         0x44 build/default/production/_ext/1209926055/timer.o
- .debug_frame     0x000824         0x54 build/default/production/_ext/1145713235/rf_task.o
- .debug_frame     0x000878         0xb4 build/default/production/_ext/1145713235/eth_task.o
- .debug_frame     0x00092c         0x34 build/default/production/_ext/1709695401/executiontime.o
- .debug_frame     0x000960         0x74 build/default/production/_ext/1709695401/spiArbiter.o
- .debug_frame     0x0009d4        0x138 build/default/production/_ext/296506934/router.o
- .debug_frame     0x000b0c         0x94 build/default/production/_ext/681662318/main.o
- .debug_frame     0x000ba0         0x64 build/default/production/_ext/767653358/mrf49xa_cmd.o
- .debug_frame     0x000c04         0x24 build/default/production/_ext/767653358/mrf49xa_data.o
- .debug_frame     0x000c28         0x74 build/default/production/_ext/767653358/mrf49xa_packet.o
- .debug_frame     0x000c9c         0xe4 build/default/production/_ext/2125849857/ccbuf.o
- .debug_frame     0x000d80         0x24 build/default/production/_ext/1201319415/server.o
+ .debug_frame     0x0000e8         0xc4 build/default/production/_ext/585513329/spi.o
+ .debug_frame     0x0001ac         0x70 build/default/production/_ext/585513329/timer.o
+ .debug_frame     0x00021c         0x54 build/default/production/_ext/767653358/SST26VF032.o
+ .debug_frame     0x000270        0x1c4 build/default/production/_ext/767653358/enc28j60.o
+ .debug_frame     0x000434         0x34 build/default/production/_ext/767653358/mcp9800.o
+ .debug_frame     0x000468         0x44 build/default/production/_ext/767653358/mrf49xa.o
+ .debug_frame     0x0004ac         0x64 build/default/production/_ext/767653358/mrf49xa_cmd.o
+ .debug_frame     0x000510         0x24 build/default/production/_ext/767653358/mrf49xa_data.o
+ .debug_frame     0x000534         0x74 build/default/production/_ext/767653358/mrf49xa_packet.o
+ .debug_frame     0x0005a8         0x44 build/default/production/_ext/2033261600/arp.o
+ .debug_frame     0x0005ec         0x24 build/default/production/_ext/2033261600/icmp.o
+ .debug_frame     0x000610         0x54 build/default/production/_ext/2033261600/ipv4.o
+ .debug_frame     0x000664         0x44 build/default/production/_ext/2033261600/ntp.o
+ .debug_frame     0x0006a8         0xf4 build/default/production/_ext/2033261600/tcp.o
+ .debug_frame     0x00079c         0x64 build/default/production/_ext/2033261600/udp.o
+ .debug_frame     0x000800         0x24 build/default/production/_ext/1201319415/server.o
+ .debug_frame     0x000824         0xc4 build/default/production/_ext/1209926055/task.o
+ .debug_frame     0x0008e8         0x44 build/default/production/_ext/1209926055/timer.o
+ .debug_frame     0x00092c         0x64 build/default/production/_ext/1145713235/rf_task.o
+ .debug_frame     0x000990         0xb4 build/default/production/_ext/1145713235/eth_task.o
+ .debug_frame     0x000a44         0x34 build/default/production/_ext/1709695401/executiontime.o
+ .debug_frame     0x000a78         0x74 build/default/production/_ext/1709695401/spiArbiter.o
+ .debug_frame     0x000aec         0xe4 build/default/production/_ext/2125849857/ccbuf.o
+ .debug_frame     0x000bd0        0x32c build/default/production/_ext/296506934/router.o
+ .debug_frame     0x000efc         0x94 build/default/production/_ext/681662318/main.o
 
-.debug_str        0x000000        0x5c2
+.debug_str        0x000000        0x6a3
  *(.debug_str)
  .debug_str       0x000000         0x54 build/default/production/_ext/585513329/interrupt.o
  .debug_str       0x000054         0x30 build/default/production/_ext/585513329/rtos.o
@@ -935,23 +1157,23 @@ __CONFIG1         0x00abfe          0x2
  .debug_str       0x000159         0x1b build/default/production/_ext/767653358/SST26VF032.o
  .debug_str       0x000174         0x2e build/default/production/_ext/767653358/enc28j60.o
  .debug_str       0x0001a2         0x84 build/default/production/_ext/767653358/mrf49xa.o
- .debug_str       0x000226         0x19 build/default/production/_ext/2033261600/arp.o
- .debug_str       0x00023f         0x21 build/default/production/_ext/2033261600/ipv4.o
- .debug_str       0x000260         0x1e build/default/production/_ext/2033261600/ntp.o
- .debug_str       0x00027e         0x88 build/default/production/_ext/2033261600/tcp.o
- .debug_str       0x000306         0x10 build/default/production/_ext/2033261600/udp.o
- .debug_str       0x000316         0x45 build/default/production/_ext/1209926055/task.o
- .debug_str       0x00035b         0x33 build/default/production/_ext/1209926055/timer.o
- .debug_str       0x00038e         0x56 build/default/production/_ext/1145713235/rf_task.o
- .debug_str       0x0003e4         0x45 build/default/production/_ext/1145713235/eth_task.o
- .debug_str       0x000429         0x1e build/default/production/_ext/1709695401/spiArbiter.o
- .debug_str       0x000447         0x8e build/default/production/_ext/296506934/router.o
- .debug_str       0x0004d5         0x65 build/default/production/_ext/681662318/main.o
- .debug_str       0x00053a         0x15 build/default/production/_ext/767653358/mrf49xa_cmd.o
- .debug_str       0x00054f         0x2c build/default/production/_ext/767653358/mrf49xa_data.o
- .debug_str       0x00057b         0x29 build/default/production/_ext/767653358/mrf49xa_packet.o
- .debug_str       0x0005a4          0x6 build/default/production/_ext/2125849857/ccbuf.o
- .debug_str       0x0005aa         0x18 build/default/production/_ext/1201319415/server.o
+ .debug_str       0x000226         0x15 build/default/production/_ext/767653358/mrf49xa_cmd.o
+ .debug_str       0x00023b         0x2c build/default/production/_ext/767653358/mrf49xa_data.o
+ .debug_str       0x000267         0x36 build/default/production/_ext/767653358/mrf49xa_packet.o
+ .debug_str       0x00029d         0x19 build/default/production/_ext/2033261600/arp.o
+ .debug_str       0x0002b6         0x21 build/default/production/_ext/2033261600/ipv4.o
+ .debug_str       0x0002d7         0x1e build/default/production/_ext/2033261600/ntp.o
+ .debug_str       0x0002f5         0x88 build/default/production/_ext/2033261600/tcp.o
+ .debug_str       0x00037d         0x10 build/default/production/_ext/2033261600/udp.o
+ .debug_str       0x00038d         0x18 build/default/production/_ext/1201319415/server.o
+ .debug_str       0x0003a5         0x4f build/default/production/_ext/1209926055/task.o
+ .debug_str       0x0003f4         0x33 build/default/production/_ext/1209926055/timer.o
+ .debug_str       0x000427         0x8b build/default/production/_ext/1145713235/rf_task.o
+ .debug_str       0x0004b2         0x45 build/default/production/_ext/1145713235/eth_task.o
+ .debug_str       0x0004f7         0x1e build/default/production/_ext/1709695401/spiArbiter.o
+ .debug_str       0x000515          0x6 build/default/production/_ext/2125849857/ccbuf.o
+ .debug_str       0x00051b        0x123 build/default/production/_ext/296506934/router.o
+ .debug_str       0x00063e         0x65 build/default/production/_ext/681662318/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -960,7 +1182,7 @@ __CONFIG1         0x00abfe          0x2
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000       0x11aa
+                  0x000000       0x1231
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x7a build/default/production/_ext/585513329/interrupt.o
@@ -979,45 +1201,45 @@ __CONFIG1         0x00abfe          0x2
  .debug_pubnames
                   0x0005b3         0xda build/default/production/_ext/767653358/mrf49xa.o
  .debug_pubnames
-                  0x00068d         0x4a build/default/production/_ext/2033261600/arp.o
+                  0x00068d         0x5f build/default/production/_ext/767653358/mrf49xa_cmd.o
  .debug_pubnames
-                  0x0006d7         0x27 build/default/production/_ext/2033261600/icmp.o
+                  0x0006ec         0x23 build/default/production/_ext/767653358/mrf49xa_data.o
  .debug_pubnames
-                  0x0006fe         0x5a build/default/production/_ext/2033261600/ipv4.o
+                  0x00070f         0x8a build/default/production/_ext/767653358/mrf49xa_packet.o
  .debug_pubnames
-                  0x000758         0x67 build/default/production/_ext/2033261600/ntp.o
+                  0x000799         0x4a build/default/production/_ext/2033261600/arp.o
  .debug_pubnames
-                  0x0007bf        0x12a build/default/production/_ext/2033261600/tcp.o
+                  0x0007e3         0x27 build/default/production/_ext/2033261600/icmp.o
  .debug_pubnames
-                  0x0008e9         0x78 build/default/production/_ext/2033261600/udp.o
+                  0x00080a         0x5a build/default/production/_ext/2033261600/ipv4.o
  .debug_pubnames
-                  0x000961         0x21 build/default/production/_ext/1201319415/packets.o
+                  0x000864         0x67 build/default/production/_ext/2033261600/ntp.o
  .debug_pubnames
-                  0x000982        0x148 build/default/production/_ext/1209926055/task.o
+                  0x0008cb        0x12a build/default/production/_ext/2033261600/tcp.o
  .debug_pubnames
-                  0x000aca         0x78 build/default/production/_ext/1209926055/timer.o
+                  0x0009f5         0x78 build/default/production/_ext/2033261600/udp.o
  .debug_pubnames
-                  0x000b42         0x5d build/default/production/_ext/1145713235/rf_task.o
+                  0x000a6d         0x21 build/default/production/_ext/1201319415/packets.o
  .debug_pubnames
-                  0x000b9f        0x13d build/default/production/_ext/1145713235/eth_task.o
+                  0x000a8e         0x23 build/default/production/_ext/1201319415/server.o
  .debug_pubnames
-                  0x000cdc         0x36 build/default/production/_ext/1709695401/executiontime.o
+                  0x000ab1        0x15a build/default/production/_ext/1209926055/task.o
  .debug_pubnames
-                  0x000d12         0xb1 build/default/production/_ext/1709695401/spiArbiter.o
+                  0x000c0b         0x78 build/default/production/_ext/1209926055/timer.o
  .debug_pubnames
-                  0x000dc3         0xed build/default/production/_ext/296506934/router.o
+                  0x000c83         0x95 build/default/production/_ext/1145713235/rf_task.o
  .debug_pubnames
-                  0x000eb0         0xe5 build/default/production/_ext/681662318/main.o
+                  0x000d18        0x128 build/default/production/_ext/1145713235/eth_task.o
  .debug_pubnames
-                  0x000f95         0x5f build/default/production/_ext/767653358/mrf49xa_cmd.o
+                  0x000e40         0x36 build/default/production/_ext/1709695401/executiontime.o
  .debug_pubnames
-                  0x000ff4         0x23 build/default/production/_ext/767653358/mrf49xa_data.o
+                  0x000e76         0xb1 build/default/production/_ext/1709695401/spiArbiter.o
  .debug_pubnames
-                  0x001017         0x8a build/default/production/_ext/767653358/mrf49xa_packet.o
+                  0x000f27         0xe6 build/default/production/_ext/2125849857/ccbuf.o
  .debug_pubnames
-                  0x0010a1         0xe6 build/default/production/_ext/2125849857/ccbuf.o
+                  0x00100d        0x13f build/default/production/_ext/296506934/router.o
  .debug_pubnames
-                  0x001187         0x23 build/default/production/_ext/1201319415/server.o
+                  0x00114c         0xe5 build/default/production/_ext/681662318/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1043,57 +1265,57 @@ __CONFIG1         0x00abfe          0x2
  .debug_aranges
                   0x0000c8         0x18 build/default/production/_ext/767653358/mrf49xa.o
  .debug_aranges
-                  0x0000e0         0x18 build/default/production/_ext/2033261600/arp.o
+                  0x0000e0         0x18 build/default/production/_ext/767653358/mrf49xa_cmd.o
  .debug_aranges
-                  0x0000f8         0x18 build/default/production/_ext/2033261600/icmp.o
+                  0x0000f8         0x18 build/default/production/_ext/767653358/mrf49xa_data.o
  .debug_aranges
-                  0x000110         0x18 build/default/production/_ext/2033261600/ipv4.o
+                  0x000110         0x18 build/default/production/_ext/767653358/mrf49xa_packet.o
  .debug_aranges
-                  0x000128         0x18 build/default/production/_ext/2033261600/ntp.o
+                  0x000128         0x18 build/default/production/_ext/2033261600/arp.o
  .debug_aranges
-                  0x000140         0x18 build/default/production/_ext/2033261600/tcp.o
+                  0x000140         0x18 build/default/production/_ext/2033261600/icmp.o
  .debug_aranges
-                  0x000158         0x18 build/default/production/_ext/2033261600/udp.o
+                  0x000158         0x18 build/default/production/_ext/2033261600/ipv4.o
  .debug_aranges
-                  0x000170         0x18 build/default/production/_ext/1209926055/task.o
+                  0x000170         0x18 build/default/production/_ext/2033261600/ntp.o
  .debug_aranges
-                  0x000188         0x18 build/default/production/_ext/1209926055/timer.o
+                  0x000188         0x18 build/default/production/_ext/2033261600/tcp.o
  .debug_aranges
-                  0x0001a0         0x18 build/default/production/_ext/1145713235/rf_task.o
+                  0x0001a0         0x18 build/default/production/_ext/2033261600/udp.o
  .debug_aranges
-                  0x0001b8         0x18 build/default/production/_ext/1145713235/eth_task.o
+                  0x0001b8         0x18 build/default/production/_ext/1201319415/server.o
  .debug_aranges
-                  0x0001d0         0x18 build/default/production/_ext/1709695401/executiontime.o
+                  0x0001d0         0x18 build/default/production/_ext/1209926055/task.o
  .debug_aranges
-                  0x0001e8         0x18 build/default/production/_ext/1709695401/spiArbiter.o
+                  0x0001e8         0x18 build/default/production/_ext/1209926055/timer.o
  .debug_aranges
-                  0x000200         0x18 build/default/production/_ext/296506934/router.o
+                  0x000200         0x18 build/default/production/_ext/1145713235/rf_task.o
  .debug_aranges
-                  0x000218         0x18 build/default/production/_ext/681662318/main.o
+                  0x000218         0x18 build/default/production/_ext/1145713235/eth_task.o
  .debug_aranges
-                  0x000230         0x18 build/default/production/_ext/767653358/mrf49xa_cmd.o
+                  0x000230         0x18 build/default/production/_ext/1709695401/executiontime.o
  .debug_aranges
-                  0x000248         0x18 build/default/production/_ext/767653358/mrf49xa_data.o
+                  0x000248         0x18 build/default/production/_ext/1709695401/spiArbiter.o
  .debug_aranges
-                  0x000260         0x18 build/default/production/_ext/767653358/mrf49xa_packet.o
+                  0x000260         0x18 build/default/production/_ext/2125849857/ccbuf.o
  .debug_aranges
-                  0x000278         0x18 build/default/production/_ext/2125849857/ccbuf.o
+                  0x000278         0x18 build/default/production/_ext/296506934/router.o
  .debug_aranges
-                  0x000290         0x18 build/default/production/_ext/1201319415/server.o
+                  0x000290         0x18 build/default/production/_ext/681662318/main.o
 
 .ivt              0x000004         0xfc
                   0x000004          0x4 LONG 0x2dc DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
                   0x000006          0x4 LONG 0x2dc DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x27f6 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x2802 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x2804 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x45d2 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x45de DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x45e0 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00000e          0x4 LONG 0x2dc DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000010          0x4 LONG 0x2dc DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x2dc DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x2178 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x42ae DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2dc DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2dc DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x2d40 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x4a72 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2dc DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2dc DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2dc DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1110,7 +1332,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000036          0x4 LONG 0x2dc DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000038          0x4 LONG 0x2dc DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003a          0x4 LONG 0x2dc DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00003c          0x4 LONG 0x219e DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00003c          0x4 LONG 0x42d4 DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00003e          0x4 LONG 0x2dc DEFINED (__Interrupt21)?ABSOLUTE (__Interrupt21):ABSOLUTE (__DefaultInterrupt)
                   0x000040          0x4 LONG 0x2dc DEFINED (__Interrupt22)?ABSOLUTE (__Interrupt22):ABSOLUTE (__DefaultInterrupt)
                   0x000042          0x4 LONG 0x2dc DEFINED (__Interrupt23)?ABSOLUTE (__Interrupt23):ABSOLUTE (__DefaultInterrupt)
@@ -1119,7 +1341,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000048          0x4 LONG 0x2dc DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00004a          0x4 LONG 0x2dc DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00004c          0x4 LONG 0x2dc DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00004e          0x4 LONG 0x21c4 DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00004e          0x4 LONG 0x42fa DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000050          0x4 LONG 0x2dc DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000052          0x4 LONG 0x2dc DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000054          0x4 LONG 0x2dc DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1212,16 +1434,16 @@ __CONFIG1         0x00abfe          0x2
 .aivt             0x000104         0xfc
                   0x000104          0x4 LONG 0x2dc DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
                   0x000106          0x4 LONG 0x2dc DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000108          0x4 LONG 0x27f6 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00010a          0x4 LONG 0x2802 DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00010c          0x4 LONG 0x2804 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000108          0x4 LONG 0x45d2 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00010a          0x4 LONG 0x45de DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00010c          0x4 LONG 0x45e0 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00010e          0x4 LONG 0x2dc DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000110          0x4 LONG 0x2dc DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000112          0x4 LONG 0x2dc DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000114          0x4 LONG 0x2178 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000114          0x4 LONG 0x42ae DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x2dc DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x2dc DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x2d40 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x4a72 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x2dc DEFINED (__AltInterrupt4)?ABSOLUTE (__AltInterrupt4):DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x2dc DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x2dc DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1238,7 +1460,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000136          0x4 LONG 0x2dc DEFINED (__AltMI2C1Interrupt)?ABSOLUTE (__AltMI2C1Interrupt):DEFINED (__MI2C1Interrupt)?ABSOLUTE (__MI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000138          0x4 LONG 0x2dc DEFINED (__AltCompInterrupt)?ABSOLUTE (__AltCompInterrupt):DEFINED (__CompInterrupt)?ABSOLUTE (__CompInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00013a          0x4 LONG 0x2dc DEFINED (__AltCNInterrupt)?ABSOLUTE (__AltCNInterrupt):DEFINED (__CNInterrupt)?ABSOLUTE (__CNInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00013c          0x4 LONG 0x219e DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00013c          0x4 LONG 0x42d4 DEFINED (__AltINT1Interrupt)?ABSOLUTE (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?ABSOLUTE (__INT1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00013e          0x4 LONG 0x2dc DEFINED (__AltInterrupt21)?ABSOLUTE (__AltInterrupt21):DEFINED (__Interrupt21)?ABSOLUTE (__Interrupt21):ABSOLUTE (__DefaultInterrupt)
                   0x000140          0x4 LONG 0x2dc DEFINED (__AltInterrupt22)?ABSOLUTE (__AltInterrupt22):DEFINED (__Interrupt22)?ABSOLUTE (__Interrupt22):ABSOLUTE (__DefaultInterrupt)
                   0x000142          0x4 LONG 0x2dc DEFINED (__AltInterrupt23)?ABSOLUTE (__AltInterrupt23):DEFINED (__Interrupt23)?ABSOLUTE (__Interrupt23):ABSOLUTE (__DefaultInterrupt)
@@ -1247,7 +1469,7 @@ __CONFIG1         0x00abfe          0x2
                   0x000148          0x4 LONG 0x2dc DEFINED (__AltOC4Interrupt)?ABSOLUTE (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?ABSOLUTE (__OC4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00014a          0x4 LONG 0x2dc DEFINED (__AltT4Interrupt)?ABSOLUTE (__AltT4Interrupt):DEFINED (__T4Interrupt)?ABSOLUTE (__T4Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00014c          0x4 LONG 0x2dc DEFINED (__AltT5Interrupt)?ABSOLUTE (__AltT5Interrupt):DEFINED (__T5Interrupt)?ABSOLUTE (__T5Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00014e          0x4 LONG 0x21c4 DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00014e          0x4 LONG 0x42fa DEFINED (__AltINT2Interrupt)?ABSOLUTE (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?ABSOLUTE (__INT2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000150          0x4 LONG 0x2dc DEFINED (__AltU2RXInterrupt)?ABSOLUTE (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?ABSOLUTE (__U2RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000152          0x4 LONG 0x2dc DEFINED (__AltU2TXInterrupt)?ABSOLUTE (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?ABSOLUTE (__U2TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000154          0x4 LONG 0x2dc DEFINED (__AltSPI2ErrInterrupt)?ABSOLUTE (__AltSPI2ErrInterrupt):DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -2194,7 +2416,7 @@ LOAD default_isr
 LOAD data_init
 
 __c30_signature
-                  0x0002a8        0x126
+                  0x0002a8        0x1c2
  __c30_signature
                   0x0002a8          0x6 build/default/production/_ext/585513329/adc.o
  __c30_signature
@@ -2220,45 +2442,45 @@ __c30_signature
  __c30_signature
                   0x0002ea          0x6 build/default/production/_ext/767653358/mrf49xa.o
  __c30_signature
-                  0x0002f0          0x6 build/default/production/_ext/2033261600/arp.o
+                  0x0002f0          0x6 build/default/production/_ext/767653358/mrf49xa_cmd.o
  __c30_signature
-                  0x0002f6          0x6 build/default/production/_ext/2033261600/icmp.o
+                  0x0002f6          0x6 build/default/production/_ext/767653358/mrf49xa_data.o
  __c30_signature
-                  0x0002fc          0x6 build/default/production/_ext/2033261600/ipv4.o
+                  0x0002fc          0x6 build/default/production/_ext/767653358/mrf49xa_packet.o
  __c30_signature
-                  0x000302          0x6 build/default/production/_ext/2033261600/ntp.o
+                  0x000302          0x6 build/default/production/_ext/2033261600/arp.o
  __c30_signature
-                  0x000308          0x6 build/default/production/_ext/2033261600/tcp.o
+                  0x000308          0x6 build/default/production/_ext/2033261600/icmp.o
  __c30_signature
-                  0x00030e          0x6 build/default/production/_ext/2033261600/udp.o
+                  0x00030e          0x6 build/default/production/_ext/2033261600/ipv4.o
  __c30_signature
-                  0x000314          0x6 build/default/production/_ext/1201319415/packets.o
+                  0x000314          0x6 build/default/production/_ext/2033261600/ntp.o
  __c30_signature
-                  0x00031a          0x6 build/default/production/_ext/1209926055/task.o
+                  0x00031a          0x6 build/default/production/_ext/2033261600/tcp.o
  __c30_signature
-                  0x000320          0x6 build/default/production/_ext/1209926055/timer.o
+                  0x000320          0x6 build/default/production/_ext/2033261600/udp.o
  __c30_signature
-                  0x000326          0x6 build/default/production/_ext/1145713235/rf_task.o
+                  0x000326          0x6 build/default/production/_ext/1201319415/packets.o
  __c30_signature
-                  0x00032c          0x6 build/default/production/_ext/1145713235/eth_task.o
+                  0x00032c          0x6 build/default/production/_ext/1201319415/server.o
  __c30_signature
-                  0x000332          0x6 build/default/production/_ext/1709695401/executiontime.o
+                  0x000332          0x6 build/default/production/_ext/1209926055/task.o
  __c30_signature
-                  0x000338          0x6 build/default/production/_ext/1709695401/spiArbiter.o
+                  0x000338          0x6 build/default/production/_ext/1209926055/timer.o
  __c30_signature
-                  0x00033e          0x6 build/default/production/_ext/296506934/router.o
+                  0x00033e          0x6 build/default/production/_ext/1145713235/rf_task.o
  __c30_signature
-                  0x000344          0x6 build/default/production/_ext/681662318/main.o
+                  0x000344          0x6 build/default/production/_ext/1145713235/eth_task.o
  __c30_signature
-                  0x00034a          0x6 build/default/production/_ext/767653358/mrf49xa_cmd.o
+                  0x00034a          0x6 build/default/production/_ext/1709695401/executiontime.o
  __c30_signature
-                  0x000350          0x6 build/default/production/_ext/767653358/mrf49xa_data.o
+                  0x000350          0x6 build/default/production/_ext/1709695401/spiArbiter.o
  __c30_signature
-                  0x000356          0x6 build/default/production/_ext/767653358/mrf49xa_packet.o
+                  0x000356          0x6 build/default/production/_ext/2125849857/ccbuf.o
  __c30_signature
-                  0x00035c          0x6 build/default/production/_ext/2125849857/ccbuf.o
+                  0x00035c          0x6 build/default/production/_ext/296506934/router.o
  __c30_signature
-                  0x000362          0x6 build/default/production/_ext/1201319415/server.o
+                  0x000362          0x6 build/default/production/_ext/681662318/main.o
  __c30_signature
                   0x000368          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(crt0_standard.o)
  __c30_signature
@@ -2266,397 +2488,470 @@ __c30_signature
  __c30_signature
                   0x000374          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(udivsi3.eo)
  __c30_signature
-                  0x00037a          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memcmp.eo)
+                  0x00037a          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(mulsi3.eo)
  __c30_signature
-                  0x000380          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memset.eo)
+                  0x000380          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memcmp.eo)
  __c30_signature
-                  0x000386          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
+                  0x000386          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(memset.eo)
  __c30_signature
-                  0x00038c          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcmp.eo)
+                  0x00038c          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(puts.eo)
  __c30_signature
-                  0x000392          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
+                  0x000392          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf.eo)
  __c30_signature
-                  0x000398          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_cdnopuxX.XXeo)
+                  0x000398          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcmp.eo)
  __c30_signature
-                  0x00039e          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf_cdnopsuxX.XXeo)
+                  0x00039e          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(strcpy.eo)
  __c30_signature
-                  0x0003a4          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+                  0x0003a4          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
  __c30_signature
-                  0x0003aa          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_s.XXeo)
+                  0x0003aa          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(printf_cdnopuxX.XXeo)
  __c30_signature
-                  0x0003b0          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
+                  0x0003b0          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(sprintf_cdnopsuxX.XXeo)
  __c30_signature
-                  0x0003b6          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(flsbuf.eo)
+                  0x0003b6          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
  __c30_signature
-                  0x0003bc          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
+                  0x0003bc          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
  __c30_signature
-                  0x0003c2          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
+                  0x0003c2          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(fputc.eo)
  __c30_signature
-                  0x0003c8          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+                  0x0003c8          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(powers.eo)
+ __c30_signature
+                  0x0003ce          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(flsbuf.eo)
+ __c30_signature
+                  0x0003d4          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(write.eo)
+ __c30_signature
+                  0x0003da          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
+ __c30_signature
+                  0x0003e0          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(adddf3.eo)
+ __c30_signature
+                  0x0003e6          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(deqltle.eo)
+ __c30_signature
+                  0x0003ec          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dgtge.eo)
+ __c30_signature
+                  0x0003f2          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divdf3.eo)
+ __c30_signature
+                  0x0003f8          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dne.eo)
+ __c30_signature
+                  0x0003fe          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpack.eo)
+ __c30_signature
+                  0x000404          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack2.eo)
+ __c30_signature
+                  0x00040a          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(extendsfdf.eo)
+ __c30_signature
+                  0x000410          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfdi.eo)
+ __c30_signature
+                  0x000416          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fixunsdfsi.eo)
+ __c30_signature
+                  0x00041c          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatundidf.eo)
+ __c30_signature
+                  0x000422          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(floatunsidf.eo)
+ __c30_signature
+                  0x000428          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(frexp.eo)
+ __c30_signature
+                  0x00042e          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(funpack.eo)
+ __c30_signature
+                  0x000434          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(muldf3.eo)
+ __c30_signature
+                  0x00043a          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(subdf3.eo)
+ __c30_signature
+                  0x000440          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(truncdfsf.eo)
+ __c30_signature
+                  0x000446          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(divmoddi3.eo)
+ __c30_signature
+                  0x00044c          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dcompare.eo)
+ __c30_signature
+                  0x000452          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dpropagateNaN.eo)
+ __c30_signature
+                  0x000458          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dtype.eo)
+ __c30_signature
+                  0x00045e          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(dunpack.eo)
+ __c30_signature
+                  0x000464          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libm-elf.a(fpack.eo)
 
 .debug_pubtypes
-                  0x0003ce       0x1b77
+                  0x00046a       0x1c21
  .debug_pubtypes
-                  0x0003ce        0x154 build/default/production/_ext/585513329/interrupt.o
+                  0x00046a        0x154 build/default/production/_ext/585513329/interrupt.o
  .debug_pubtypes
-                  0x000522        0x119 build/default/production/_ext/585513329/rtos.o
+                  0x0005be        0x119 build/default/production/_ext/585513329/rtos.o
  .debug_pubtypes
-                  0x00063b        0x1b3 build/default/production/_ext/585513329/spi.o
+                  0x0006d7        0x1b3 build/default/production/_ext/585513329/spi.o
  .debug_pubtypes
-                  0x0007ee         0x95 build/default/production/_ext/585513329/timer.o
+                  0x00088a         0x95 build/default/production/_ext/585513329/timer.o
  .debug_pubtypes
-                  0x000883         0x95 build/default/production/_ext/767653358/SST26VF032.o
+                  0x00091f         0x95 build/default/production/_ext/767653358/SST26VF032.o
  .debug_pubtypes
-                  0x000918         0xff build/default/production/_ext/767653358/enc28j60.o
+                  0x0009b4         0xff build/default/production/_ext/767653358/enc28j60.o
  .debug_pubtypes
-                  0x000a17         0x58 build/default/production/_ext/767653358/mcp9800.o
+                  0x000ab3         0x58 build/default/production/_ext/767653358/mcp9800.o
  .debug_pubtypes
-                  0x000a6f        0x19a build/default/production/_ext/767653358/mrf49xa.o
+                  0x000b0b        0x19a build/default/production/_ext/767653358/mrf49xa.o
  .debug_pubtypes
-                  0x000c09         0x92 build/default/production/_ext/2033261600/arp.o
+                  0x000ca5         0x6e build/default/production/_ext/767653358/mrf49xa_cmd.o
  .debug_pubtypes
-                  0x000c9b         0xf6 build/default/production/_ext/2033261600/icmp.o
+                  0x000d13        0x162 build/default/production/_ext/767653358/mrf49xa_data.o
  .debug_pubtypes
-                  0x000d91         0xe5 build/default/production/_ext/2033261600/ipv4.o
+                  0x000e75        0x143 build/default/production/_ext/767653358/mrf49xa_packet.o
  .debug_pubtypes
-                  0x000e76        0x158 build/default/production/_ext/2033261600/ntp.o
+                  0x000fb8         0x92 build/default/production/_ext/2033261600/arp.o
  .debug_pubtypes
-                  0x000fce        0x1de build/default/production/_ext/2033261600/tcp.o
+                  0x00104a         0xf6 build/default/production/_ext/2033261600/icmp.o
  .debug_pubtypes
-                  0x0011ac        0x167 build/default/production/_ext/2033261600/udp.o
+                  0x001140         0xe5 build/default/production/_ext/2033261600/ipv4.o
  .debug_pubtypes
-                  0x001313         0x1f build/default/production/_ext/1201319415/packets.o
+                  0x001225        0x158 build/default/production/_ext/2033261600/ntp.o
  .debug_pubtypes
-                  0x001332         0x79 build/default/production/_ext/1209926055/task.o
+                  0x00137d        0x1de build/default/production/_ext/2033261600/tcp.o
  .debug_pubtypes
-                  0x0013ab         0x66 build/default/production/_ext/1209926055/timer.o
+                  0x00155b        0x167 build/default/production/_ext/2033261600/udp.o
  .debug_pubtypes
-                  0x001411        0x1fe build/default/production/_ext/1145713235/rf_task.o
+                  0x0016c2         0x1f build/default/production/_ext/1201319415/packets.o
  .debug_pubtypes
-                  0x00160f        0x19b build/default/production/_ext/1145713235/eth_task.o
+                  0x0016e1        0x100 build/default/production/_ext/1201319415/server.o
  .debug_pubtypes
-                  0x0017aa         0x12 build/default/production/_ext/1709695401/executiontime.o
+                  0x0017e1         0x79 build/default/production/_ext/1209926055/task.o
  .debug_pubtypes
-                  0x0017bc         0x91 build/default/production/_ext/1709695401/spiArbiter.o
+                  0x00185a         0x66 build/default/production/_ext/1209926055/timer.o
  .debug_pubtypes
-                  0x00184d        0x127 build/default/production/_ext/296506934/router.o
+                  0x0018c0        0x20f build/default/production/_ext/1145713235/rf_task.o
  .debug_pubtypes
-                  0x001974        0x155 build/default/production/_ext/681662318/main.o
+                  0x001acf        0x19b build/default/production/_ext/1145713235/eth_task.o
  .debug_pubtypes
-                  0x001ac9         0x6e build/default/production/_ext/767653358/mrf49xa_cmd.o
+                  0x001c6a         0x12 build/default/production/_ext/1709695401/executiontime.o
  .debug_pubtypes
-                  0x001b37        0x162 build/default/production/_ext/767653358/mrf49xa_data.o
+                  0x001c7c         0x91 build/default/production/_ext/1709695401/spiArbiter.o
  .debug_pubtypes
-                  0x001c99        0x143 build/default/production/_ext/767653358/mrf49xa_packet.o
+                  0x001d0d         0x69 build/default/production/_ext/2125849857/ccbuf.o
  .debug_pubtypes
-                  0x001ddc         0x69 build/default/production/_ext/2125849857/ccbuf.o
+                  0x001d76        0x1c0 build/default/production/_ext/296506934/router.o
  .debug_pubtypes
-                  0x001e45        0x100 build/default/production/_ext/1201319415/server.o
+                  0x001f36        0x155 build/default/production/_ext/681662318/main.o
 
-.nbss               0x0800        0xcaa
- .nbss              0x0800        0x770 build/default/production/_ext/1145713235/eth_task.o
-                    0x0800                  _ethFrameBuffer
-                    0x0c4c                  _ethTask
-                    0x0c60                  _tcpTicker
-                    0x0c70                  _ethTaskStk
- .nbss              0x0f70        0x234 build/default/production/_ext/1145713235/rf_task.o
-                    0x0f70                  _rfTask
-                    0x0f84                  _rfTimer
-                    0x0f94                  _rfPingTimer
-                    0x0fa4                  _rfTaskStk
- .nbss              0x11a4        0x11a build/default/production/_ext/1209926055/task.o
-                    0x11a4                  _RtosTaskIdleObj
-                    0x11b8                  _RtosKernelStackPos
-                    0x11ba                  _RtosCriticalNesting
- .nbss              0x12be         0xf0 build/default/production/_ext/2033261600/tcp.o
-                    0x12be                  _tcpConnections
-                    0x139e                  _tcpListeners
- .nbss              0x13ae         0x5c build/default/production/_ext/767653358/mrf49xa.o
-                    0x13ae                  _mrf49Status
-                    0x13b0                  _rfTrcvStatus
- .nbss              0x140a         0x5a build/default/production/_ext/2033261600/ntp.o
-                    0x140a                  _ntpRequestPacket
- .nbss              0x1464         0x20 build/default/production/_ext/2033261600/udp.o
-                    0x1464                  _handlers
- .nbss              0x1484         0x1c build/default/production/_ext/681662318/main.o
-                    0x1484                  _StkAddrLo
-                    0x1486                  _StkAddrHi
-                    0x1488                  _TrapMsgBuf
- .nbss              0x14a0          0x6 build/default/production/_ext/585513329/interrupt.o
- .nbss              0x14a6          0x4 build/default/production/_ext/767653358/enc28j60.o
+.nbss               0x0800       0x155a
+ .nbss              0x0800        0xac4 build/default/production/_ext/1145713235/rf_task.o
+                    0x0800                  _rfTask
+                    0x0824                  _rfHistoryPackets
+                    0x10a4                  _rfTimer
+                    0x10b4                  _rfPingTimer
+                    0x10c4                  _rfTaskStk
+ .nbss              0x12c4        0x780 build/default/production/_ext/1145713235/eth_task.o
+                    0x12c4                  _ethFrameBuffer
+                    0x1710                  _ethTask
+                    0x1734                  _tcpTicker
+                    0x1744                  _ethTaskStk
+ .nbss              0x1a44        0x12a build/default/production/_ext/1209926055/task.o
+                    0x1a44                  _RtosTaskIdleObj
+                    0x1a68                  _RtosKernelStackPos
+                    0x1a6a                  _RtosCriticalNesting
+ .nbss              0x1b6e         0xf0 build/default/production/_ext/2033261600/tcp.o
+                    0x1b6e                  _tcpConnections
+                    0x1c4e                  _tcpListeners
+ .nbss              0x1c5e         0x5c build/default/production/_ext/767653358/mrf49xa.o
+                    0x1c5e                  _mrf49Status
+                    0x1c60                  _rfTrcvStatus
+ .nbss              0x1cba         0x5a build/default/production/_ext/2033261600/ntp.o
+                    0x1cba                  _ntpRequestPacket
+ .nbss              0x1d14         0x20 build/default/production/_ext/2033261600/udp.o
+                    0x1d14                  _handlers
+ .nbss              0x1d34         0x1c build/default/production/_ext/681662318/main.o
+                    0x1d34                  _StkAddrLo
+                    0x1d36                  _StkAddrHi
+                    0x1d38                  _TrapMsgBuf
+ .nbss              0x1d50          0x6 build/default/production/_ext/585513329/interrupt.o
+ .nbss              0x1d56          0x4 build/default/production/_ext/767653358/enc28j60.o
 
-.ndata              0x14aa          0x4
- .ndata             0x14aa          0x4 build/default/production/_ext/2033261600/ntp.o
-                    0x14aa                  _ntpTimestamp
+.ndata              0x1d5a          0x4
+ .ndata             0x1d5a          0x4 build/default/production/_ext/2033261600/ntp.o
+                    0x1d5a                  _ntpTimestamp
 
-.nbss               0x14ae          0x4
- .nbss              0x14ae          0x4 build/default/production/_ext/1201319415/packets.o
-                    0x14ae                  _syncedTime
+.nbss               0x1d5e          0x4
+ .nbss              0x1d5e          0x4 build/default/production/_ext/1201319415/packets.o
+                    0x1d5e                  _syncedTime
 
-.ndata              0x14b2          0x4
- .ndata             0x14b2          0x4 build/default/production/_ext/1209926055/task.o
-                    0x14b2                  _RtosTimestamp
+.ndata              0x1d62          0x4
+ .ndata             0x1d62          0x4 build/default/production/_ext/1209926055/task.o
+                    0x1d62                  _RtosTimestamp
 
-.nbss               0x14b6          0x6
- .nbss              0x14b6          0x4 build/default/production/_ext/296506934/router.o
-                    0x14b6                  _webBf
-                    0x14b8                  _webBfPos
- .nbss              0x14ba          0x2 build/default/production/_ext/585513329/spi.o
-                    0x14ba                  _spiDummy
+.nbss               0x1d66          0x6
+ .nbss              0x1d66          0x4 build/default/production/_ext/296506934/router.o
+                    0x1d66                  _webBf
+                    0x1d68                  _webBfPos
+ .nbss              0x1d6a          0x2 build/default/production/_ext/585513329/spi.o
+                    0x1d6a                  _spiDummy
 
-.ndata              0x14bc          0x2
- .ndata             0x14bc          0x2 build/default/production/_ext/1209926055/timer.o
-                    0x14bc                  _rtosTimerChainStarted
+.ndata              0x1d6c          0x2
+ .ndata             0x1d6c          0x2 build/default/production/_ext/1209926055/timer.o
+                    0x1d6c                  _rtosTimerChainStarted
 
-.nbss               0x14be          0x4
- .nbss              0x14be          0x2 build/default/production/_ext/1209926055/timer.o
-                    0x14be                  _rtosTimerChain
- .nbss              0x14c0          0x2 build/default/production/_ext/1709695401/spiArbiter.o
-                    0x14c0                  _spiArbStat
+.nbss               0x1d6e          0x2
+ .nbss              0x1d6e          0x2 build/default/production/_ext/1209926055/timer.o
+                    0x1d6e                  _rtosTimerChain
 
-.data.dpowers       0x14c2         0xa0
- .data.dpowers      0x14c2         0xa0 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+.ndata              0x1d70          0x2
+ .ndata             0x1d70          0x2 build/default/production/_ext/1145713235/rf_task.o
+                    0x1d70                  _rfHistoryHead
 
-.data               0x1562         0x2a
- .data              0x1562         0x2a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+.nbss               0x1d72          0x2
+ .nbss              0x1d72          0x2 build/default/production/_ext/1709695401/spiArbiter.o
+                    0x1d72                  _spiArbStat
 
-.data._iob          0x158c         0x26
- .data._iob         0x158c         0x26 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
-                    0x158c                  __iob
-                    0x15b0                  __Files
+.data._powers_      0x1d74        0x160
+ .data._powers_
+                    0x1d74        0x160 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(powers.eo)
+                    0x1d74                  __powers_
+                    0x1e24                  __npowers_
 
-.bss                0x15b2          0x6
- .bss               0x15b2          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
-                    0x15b2                  __outdone
-                    0x15b3                  __sibuf
-                    0x15b5                  __sobuf
+.data.dpowers       0x1ed4        0x140
+ .data.dpowers      0x1ed4         0xa0 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+ .data.dpowers      0x1f74         0xa0 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+
+.data               0x2014         0x54
+ .data              0x2014         0x2a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt_cdnopsuxX.XXeo)
+ .data              0x203e         0x2a /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(doprnt.eo)
+
+.data._iob          0x2068         0x26
+ .data._iob         0x2068         0x26 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
+                    0x2068                  __iob
+                    0x208c                  __Files
+
+.bss                0x208e          0x6
+ .bss               0x208e          0x6 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libc-elf.a(_iob.eo)
+                    0x208e                  __outdone
+                    0x208f                  __sibuf
+                    0x2091                  __sobuf
 
 .data.__C30_UART
-                    0x15b8          0x2
+                    0x2094          0x2
  .data.__C30_UART
-                    0x15b8          0x2 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
-                    0x15b8                  ___C30_UART
+                    0x2094          0x2 /opt/microchip/xc16/v1.21/bin/bin/../../lib/libpic30-elf.a(c30_uart.eo)
+                    0x2094                  ___C30_UART
 
-.const              0x8b70        0x330 load address 0x000b70  
- .const             0x8b70        0x29c build/default/production/_ext/296506934/router.o
-                    0x8d0e                  _httpSysNavBar
-                    0x8d10                  _http200
-                    0x8d86                  _http404
-                    0x8d88                  _httpHelloWorld
-                    0x8dd4                  _webRoutes
- .const             0x8e0c         0x38 build/default/production/_ext/767653358/mrf49xa.o
-                    0x8e0c                  _mrfRegset_Init
-                    0x8e2c                  _mrfRegset_InitCnt
-                    0x8e2d                  _mrfRegset_Rx
-                    0x8e39                  _mrfRegset_RxCnt
-                    0x8e3a                  _mrfRegset_Tx
-                    0x8e42                  _mrfRegset_TxCnt
- .const             0x8e44         0x22 build/default/production/_ext/585513329/spi.o
- .const             0x8e66         0x18 build/default/production/_ext/1145713235/eth_task.o
-                    0x8e6a                  _myIp
-                    0x8e6e                  _myMac
-                    0x8e74                  _myGateway
-                    0x8e78                  _myGatewayMac
- .const             0x8e7e          0xe build/default/production/_ext/681662318/main.o
- .const             0x8e8c          0xa build/default/production/_ext/1201319415/server.o
- .const             0x8e96          0x6 build/default/production/_ext/1209926055/task.o
- .const             0x8e9c          0x4 build/default/production/_ext/1145713235/rf_task.o
+.const              0xa264        0x62c load address 0x002264  
+ .const             0xa264        0x570 build/default/production/_ext/296506934/router.o
+                    0xa6be                  _httpRfTable
+                    0xa6c0                  _httpRfRow
+                    0xa6c2                  _httpRfFooter
+                    0xa6c4                  _httpSysNavBar
+                    0xa6c6                  _http200
+                    0xa73c                  _http404
+                    0xa73e                  _httpHelloWorld
+                    0xa740                  _httpRtosTaskTable
+                    0xa794                  _webRoutes
+ .const             0xa7d4         0x50 build/default/production/_ext/1209926055/task.o
+                    0xa81a                  _RtosStateText
+ .const             0xa824         0x38 build/default/production/_ext/767653358/mrf49xa.o
+                    0xa824                  _mrfRegset_Init
+                    0xa844                  _mrfRegset_InitCnt
+                    0xa845                  _mrfRegset_Rx
+                    0xa851                  _mrfRegset_RxCnt
+                    0xa852                  _mrfRegset_Tx
+                    0xa85a                  _mrfRegset_TxCnt
+ .const             0xa85c         0x18 build/default/production/_ext/1145713235/eth_task.o
+                    0xa860                  _myIp
+                    0xa864                  _myMac
+                    0xa86a                  _myGateway
+                    0xa86e                  _myGatewayMac
+ .const             0xa874          0xe build/default/production/_ext/681662318/main.o
+ .const             0xa882          0xa build/default/production/_ext/1201319415/server.o
+ .const             0xa88c          0x4 build/default/production/_ext/1145713235/rf_task.o
 
-.text             0x000ea0       0x1488
- .text            0x000ea0        0x6c8 build/default/production/_ext/2033261600/tcp.o
-                  0x000ea0                  _tcpInit
-                  0x000eba                  _tcpPickFreeConnection
-                  0x000ee4                  _tcpMatchConnection
-                  0x000f34                  _tcpMatchPort
-                  0x000f5e                  _tcpListenMore
-                  0x000f92                  _tcpCrc
-                  0x001006                  _tcpTxReplyPacket
-                  0x0010ea                  _tcpGetDataPtr
-                  0x0010ee                  _tcpTxPacket
-                  0x0011e8                  _tcpCloseObj
-                  0x001206                  _tcpStatemachine
-                  0x00145e                  _tcpHandlePacket
-                  0x0014c0                  _tcpListen
-                  0x001536                  _tcpTick
- .text            0x001568        0x522 build/default/production/_ext/767653358/enc28j60.o
-                  0x001568                  _enc28j60WriteUint8
-                  0x001580                  _enc28j60BitSetUint8
-                  0x001598                  _enc28j60BitClrUint8
-                  0x0015b2                  _enc28j60WriteUint16
-                  0x0015ce                  _enc28j60ReadUint8
-                  0x0015e4                  _enc28j60ReadMacUint8
-                  0x0015fe                  _enc28j60ReadUint16
-                  0x001614                  _enc28j60SetBank
-                  0x001648                  _enc28j60WriteData
-                  0x001664                  _enc28j60ReadData
-                  0x001680                  _enc28j60ReadRegisterUint8
-                  0x0016a2                  _enc28j60ReadRegisterUint16
-                  0x0016c4                  _enc28j60WriteRegisterUint8
-                  0x0016ea                  _enc28j60BitSetRegisterUint8
-                  0x001710                  _enc28j60BitClrRegisterUint8
-                  0x001736                  _enc28j60WriteRegisterUint16
-                  0x001762                  _enc28j60WritePhyRegisterUint16
-                  0x001776                  _enc28j60ReadPhyRegisterUint16
-                  0x0017bc                  _enc28j60GetOverflowStatus
-                  0x0017c0                  _enc28j60TxFrame
-                  0x00185e                  _enc28j60TxReplyFrame
-                  0x001888                  _enc28j60PacketPending
-                  0x00189a                  _enc28j60GetPacketCount
-                  0x0018a0                  _enc28j60RxFrame
-                  0x00197c                  _enc28j60ResetRxBuffer
-                  0x0019b8                  _enc28j60Reset
-                  0x0019d2                  _enc28j60Initialize
- .text            0x001a8a        0x2ac build/default/production/_ext/296506934/router.o
-                  0x001a8a                  _webTest
-                  0x001abe                  _webIndex
-                  0x001ae6                  _webSysFlash
-                  0x001b82                  _webServeFlash
-                  0x001b86                  _web404
-                  0x001b8c                  _webSysTcpip
-                  0x001b90                  _webSysRtos
-                  0x001b94                  _WebserverHandle
- .text            0x001d36        0x1f2 build/default/production/_ext/585513329/spi.o
-                  0x001d36                  _spiSpeed
-                  0x001d6a                  _spiInit
-                  0x001e02                  _spiDeinit
-                  0x001e6a                  _spiBusy1
-                  0x001e72                  _spiTx1
-                  0x001e80                  _spiTx2
-                  0x001e8e                  _spiRx1
-                  0x001e98                  _spiRx2
-                  0x001ea2                  _spiTxRx1
-                  0x001eae                  _spiTxRx2
-                  0x001eba                  _spiTxRxBytes
- .text            0x001f28        0x174 build/default/production/_ext/767653358/mrf49xa_packet.o
-                  0x001f28                  _Mrf49xaPacketPending
-                  0x001f3e                  _Mrf49xaTxPacket
-                  0x001f8c                  _Mrf49xaTxAck
-                  0x001fa4                  _Mrf49xaFreePacket
-                  0x001fa8                  _Mrf49xaRxPacket
-                  0x001fc6                  _Mrf49xaTick
- .text            0x00209c        0x14e build/default/production/_ext/585513329/interrupt.o
-                  0x00209c                  _ExtIntDummy
-                  0x00209e                  _ExtIntSetup
-                  0x002158                  _ExtIntInit
-                  0x002178                  __INT0Interrupt
-                  0x00219e                  __INT1Interrupt
-                  0x0021c4                  __INT2Interrupt
- .text            0x0021ea        0x13e build/default/production/_ext/767653358/mrf49xa_data.o
-                  0x0021ea                  _Mrf49xaServe
+.text             0x002890       0x1056
+ .text            0x002890        0x664 build/default/production/_ext/2033261600/tcp.o
+                  0x002890                  _tcpInit
+                  0x0028aa                  _tcpPickFreeConnection
+                  0x0028c8                  _tcpMatchConnection
+                  0x002910                  _tcpMatchPort
+                  0x002938                  _tcpListenMore
+                  0x00296a                  _tcpCrc
+                  0x0029d8                  _tcpTxReplyPacket
+                  0x002ac6                  _tcpGetDataPtr
+                  0x002aca                  _tcpTxPacket
+                  0x002bc8                  _tcpCloseObj
+                  0x002be6                  _tcpStatemachine
+                  0x002df8                  _tcpHandlePacket
+                  0x002e5e                  _tcpListen
+                  0x002eca                  _tcpTick
+ .text            0x002ef4        0x4fe build/default/production/_ext/296506934/router.o
+                  0x002ef4                  _webTest
+                  0x002f2e                  _webIndex
+                  0x002f52                  _webSysRtos
+                  0x00307c                  _webSysRf
+                  0x003202                  _webSysFlash
+                  0x00329e                  _webServeFlash
+                  0x0032a0                  _web404
+                  0x0032a4                  _webSysTcpip
+                  0x0032a6                  _WebserverHandle
+ .text            0x0033f2        0x4f4 build/default/production/_ext/767653358/enc28j60.o
+                  0x0033f2                  _enc28j60WriteUint8
+                  0x00340a                  _enc28j60BitSetUint8
+                  0x003422                  _enc28j60BitClrUint8
+                  0x00343c                  _enc28j60WriteUint16
+                  0x003458                  _enc28j60ReadUint8
+                  0x00346e                  _enc28j60ReadMacUint8
+                  0x003488                  _enc28j60ReadUint16
+                  0x00349e                  _enc28j60SetBank
+                  0x0034d2                  _enc28j60WriteData
+                  0x0034f4                  _enc28j60ReadData
+                  0x003516                  _enc28j60ReadRegisterUint8
+                  0x003538                  _enc28j60ReadRegisterUint16
+                  0x00355a                  _enc28j60WriteRegisterUint8
+                  0x003580                  _enc28j60BitSetRegisterUint8
+                  0x0035a6                  _enc28j60BitClrRegisterUint8
+                  0x0035cc                  _enc28j60WriteRegisterUint16
+                  0x0035f8                  _enc28j60WritePhyRegisterUint16
+                  0x00360c                  _enc28j60ReadPhyRegisterUint16
+                  0x003650                  _enc28j60GetOverflowStatus
+                  0x003654                  _enc28j60TxFrame
+                  0x0036e2                  _enc28j60TxReplyFrame
+                  0x00370c                  _enc28j60PacketPending
+                  0x00371e                  _enc28j60GetPacketCount
+                  0x003722                  _enc28j60RxFrame
+                  0x0037ea                  _enc28j60ResetRxBuffer
+                  0x00381c                  _enc28j60Reset
+                  0x003836                  _enc28j60Initialize
 
-.dinit            0x002328        0x13a
- .dinit           0x002328        0x13a data_init
+.dinit            0x0038e6        0x2c8
+ .dinit           0x0038e6        0x2c8 data_init
 
-.text             0x002462        0x8fc
- .text            0x002462        0x106 build/default/production/_ext/1209926055/task.o
-                  0x002462                  _RtosTaskIdleFnc
-                  0x002466                  _RtosTaskCreate
-                  0x00248a                  _RtosTaskInit
-                  0x00249e                  _RtosTaskDelay
-                  0x0024b4                  _RtosTaskWake
-                  0x0024be                  _RtosKernelRestoreTask
-                  0x0024ca                  _RtosTaskRun
-                  0x0024de                  _RtosKernelStoreTask
-                  0x0024ee                  _RtosTaskChange
-                  0x00252c                  _RtosTaskWaitForEvent
-                  0x002552                  _RtosTaskSignalEvent
- .text            0x002568         0xfe build/default/production/_ext/2033261600/ipv4.o
-                  0x002568                  _ipv4HandlePacket
-                  0x002586                  _ipv4Crc
-                  0x0025ae                  _ipv4TxReplyPacket
-                  0x0025f4                  _ipv4TxPacket
- .text            0x002666         0xf0 build/default/production/_ext/767653358/mrf49xa.o
-                  0x002666                  _Mrf49xaModeRx
-                  0x0026a6                  _Mrf49xaModeTx
-                  0x0026e6                  _Mrf49xaInit
- .text            0x002756         0xda build/default/production/_ext/681662318/main.o
-                  0x002756                  _SysInitGpio
-                  0x00278e                  _UartTxStr
-                  0x0027a6                  _UartTxByte
-                  0x0027b6                  _UartInit
-                  0x0027f6                  __AddressError
-                  0x002802                  __StackError
-                  0x002804                  __MathError
-                  0x002806                  _main
- .text            0x002830         0xd6 build/default/production/_ext/1145713235/rf_task.o
-                  0x002830                  _RfPing
-                  0x00283e                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
-                  0x00284c                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
-                  0x00289e                  _RfInit
- .text            0x002906         0xc4 build/default/production/_ext/1145713235/eth_task.o
-                  0x002906                  _httpHandleConnection
-                  0x00290e                  _httpCloseConnection
-                  0x002916                  _enc28j60Int
-                  0x002920                  _ethTcpTick
-                  0x00292e                  _macRxFrame
-                  0x002932                  _macTxFrame
-                  0x002936                  _macTxReplyFrame
-                  0x00293a                  _EthInit
-                  0x002952                  _EthHwInit
-                  0x0029a0                  _EthTask
- .text            0x0029ca         0xb8 build/default/production/_ext/2033261600/udp.o
-                  0x0029ca                  _udpInit
-                  0x0029de                  _udpFirePacket
-                  0x002a10                  _udpRegisterHandler
-                  0x002a3c                  _udpHandlePacket
-                  0x002a5e                  _udpTxPacket
- .text            0x002a82         0x9a build/default/production/_ext/2033261600/arp.o
-                  0x002a82                  _arpBuildPacket
-                  0x002ade                  _arpAnnounce
-                  0x002af2                  _arpProcessPacket
- .text            0x002b1c         0x86 build/default/production/_ext/767653358/SST26VF032.o
-                  0x002b1c                  _FlashInit
-                  0x002b2a                  _FlashCsSet
-                  0x002b4c                  _FlashReadId
-                  0x002b66                  _FlashRxBytes
- .text            0x002ba2         0x74 build/default/production/_ext/1209926055/timer.o
-                  0x002ba2                  _RtosTimerRearm
-                  0x002bbc                  _RtosTimerCreate
-                  0x002be4                  _RtosTimerTick
- .text            0x002c16         0x72 build/default/production/_ext/2033261600/ntp.o
-                  0x002c16                  _ntpHandlePacket
-                  0x002c62                  _ntpInit
-                  0x002c6a                  _ntpRequest
- .text            0x002c88         0x72 build/default/production/_ext/1201319415/server.o
-                  0x002c88                  _HandlePacket
- .text            0x002cfa         0x64 build/default/production/_ext/585513329/rtos.o
-                  0x002cfa                  _RtosKernelPortInitStack
-                  0x002d14                  _RtosKernelPortTimerClear
-                  0x002d18                  _RtosKernelPortTimerStart
-                  0x002d34                  _RtosKernelContextStart
-                  0x002d3a                  _RtosKernelContextSuspend
-                  0x002d40                  __T1Interrupt
+.text             0x003bae        0xf44
+ .text            0x003bae        0x1d6 build/default/production/_ext/585513329/spi.o
+                  0x003bae                  _spiSpeed
+                  0x003bd8                  _spiInit
+                  0x003c6c                  _spiDeinit
+                  0x003cd0                  _spiBusy1
+                  0x003cd8                  _spiTx1
+                  0x003ce6                  _spiTx2
+                  0x003cf4                  _spiRx1
+                  0x003cfe                  _spiRx2
+                  0x003d08                  _spiTxRx1
+                  0x003d14                  _spiTxRx2
+                  0x003d20                  _spiTxRxBytes
+ .text            0x003d84        0x198 build/default/production/_ext/1145713235/rf_task.o
+                  0x003d84                  build/default/production/_ext/1145713235/rf_task.o:_RfTick
+                  0x003da8                  build/default/production/_ext/1145713235/rf_task.o:_RfTask
+                  0x003dfa                  _RfInit
+                  0x003e4c                  _RfPing
+                  0x003e58                  _rfHistoryPut
+ .text            0x003f1c        0x174 build/default/production/_ext/767653358/mrf49xa_packet.o
+                  0x003f1c                  _Mrf49xaPacketPending
+                  0x003f32                  _Mrf49xaTxPacket
+                  0x003f82                  _Mrf49xaTxAck
+                  0x003f98                  _Mrf49xaFreePacket
+                  0x003f9c                  _Mrf49xaRxPacket
+                  0x003fba                  _Mrf49xaTick
+ .text            0x004090        0x154 build/default/production/_ext/1209926055/task.o
+                  0x004090                  _RtosTaskIdleFnc
+                  0x004094                  _RtosTaskCreate
+                  0x0040ee                  _RtosTaskInit
+                  0x004102                  _RtosTaskDelay
+                  0x004116                  _RtosTaskWake
+                  0x004120                  _RtosKernelRestoreTask
+                  0x00412c                  _RtosTaskRun
+                  0x00413a                  _RtosKernelStoreTask
+                  0x00416c                  _RtosTaskChange
+                  0x0041a8                  _RtosTaskWaitForEvent
+                  0x0041ce                  _RtosTaskSignalEvent
+ .text            0x0041e4        0x13c build/default/production/_ext/585513329/interrupt.o
+                  0x0041e4                  _ExtIntDummy
+                  0x0041e6                  _ExtIntSetup
+                  0x004296                  _ExtIntInit
+                  0x0042ae                  __INT0Interrupt
+                  0x0042d4                  __INT1Interrupt
+                  0x0042fa                  __INT2Interrupt
+ .text            0x004320        0x11e build/default/production/_ext/767653358/mrf49xa_data.o
+                  0x004320                  _Mrf49xaServe
+ .text            0x00443e        0x100 build/default/production/_ext/2033261600/ipv4.o
+                  0x00443e                  _ipv4HandlePacket
+                  0x004460                  _ipv4Crc
+                  0x004486                  _ipv4TxReplyPacket
+                  0x0044cc                  _ipv4TxPacket
+ .text            0x00453e         0xcc build/default/production/_ext/681662318/main.o
+                  0x00453e                  _SysInitGpio
+                  0x004576                  _UartTxStr
+                  0x004588                  _UartTxByte
+                  0x004592                  _UartInit
+                  0x0045d2                  __AddressError
+                  0x0045de                  __StackError
+                  0x0045e0                  __MathError
+                  0x0045e2                  _main
+ .text            0x00460a         0xc4 build/default/production/_ext/767653358/mrf49xa.o
+                  0x00460a                  _Mrf49xaModeRx
+                  0x00463e                  _Mrf49xaModeTx
+                  0x004676                  _Mrf49xaInit
+ .text            0x0046ce         0xb8 build/default/production/_ext/1145713235/eth_task.o
+                  0x0046ce                  _httpHandleConnection
+                  0x0046d6                  _httpCloseConnection
+                  0x0046de                  _enc28j60Int
+                  0x0046e8                  _ethTcpTick
+                  0x0046f4                  _macRxFrame
+                  0x0046f6                  _macTxFrame
+                  0x0046f8                  _macTxReplyFrame
+                  0x0046fa                  _EthInit
+                  0x004710                  _EthHwInit
+                  0x00475e                  _EthTask
+ .text            0x004786         0xae build/default/production/_ext/2033261600/udp.o
+                  0x004786                  _udpInit
+                  0x00479a                  _udpFirePacket
+                  0x0047d2                  _udpRegisterHandler
+                  0x0047f2                  _udpHandlePacket
+                  0x004812                  _udpTxPacket
+ .text            0x004834         0x90 build/default/production/_ext/2033261600/arp.o
+                  0x004834                  _arpBuildPacket
+                  0x004886                  _arpAnnounce
+                  0x00489a                  _arpProcessPacket
+ .text            0x0048c4         0x88 build/default/production/_ext/767653358/SST26VF032.o
+                  0x0048c4                  _FlashInit
+                  0x0048d0                  _FlashCsSet
+                  0x0048f2                  _FlashReadId
+                  0x00490c                  _FlashRxBytes
+ .text            0x00494c         0x72 build/default/production/_ext/1209926055/timer.o
+                  0x00494c                  _RtosTimerRearm
+                  0x004966                  _RtosTimerCreate
+                  0x00498c                  _RtosTimerTick
+ .text            0x0049be         0x6e build/default/production/_ext/2033261600/ntp.o
+                  0x0049be                  _ntpHandlePacket
+                  0x004a0a                  _ntpInit
+                  0x004a10                  _ntpRequest
+ .text            0x004a2c         0x64 build/default/production/_ext/585513329/rtos.o
+                  0x004a2c                  _RtosKernelPortInitStack
+                  0x004a46                  _RtosKernelPortTimerClear
+                  0x004a4a                  _RtosKernelPortTimerStart
+                  0x004a66                  _RtosKernelContextStart
+                  0x004a6c                  _RtosKernelContextSuspend
+                  0x004a72                  __T1Interrupt
+ .text            0x004a90         0x62 build/default/production/_ext/1201319415/server.o
+                  0x004a90                  _HandlePacket
 
 ../../src/bsp/pic24/context.s.scn1
-                  0x002d5e         0x4c
+                  0x004af2         0x4c
  ../../src/bsp/pic24/context.s.scn1
-                  0x002d5e         0x4c build/default/production/_ext/585513329/context.o
-                  0x002d5e                  _RtosKernelContext
+                  0x004af2         0x4c build/default/production/_ext/585513329/context.o
+                  0x004af2                  _RtosKernelContext
 
-.text             0x002daa         0x8c
- .text            0x002daa         0x4c build/default/production/_ext/767653358/mrf49xa_cmd.o
-                  0x002daa                  _Mrf49TxCmd
-                  0x002dc0                  _Mrf49RxCmd
-                  0x002dd6                  _Mrf49RxSts
-                  0x002de8                  _Mrf49RxByte
-                  0x002dee                  _Mrf49TxByte
- .text            0x002df6         0x40 build/default/production/_ext/2033261600/icmp.o
-                  0x002df6                  _icmpHandlePacket
+.text             0x004b3e         0xbc
+ .text            0x004b3e         0x48 build/default/production/_ext/767653358/mrf49xa_cmd.o
+                  0x004b3e                  _Mrf49TxCmd
+                  0x004b54                  _Mrf49RxCmd
+                  0x004b6a                  _Mrf49RxSts
+                  0x004b7c                  _Mrf49RxByte
+                  0x004b80                  _Mrf49TxByte
+ .text            0x004b86         0x40 build/default/production/_ext/2033261600/icmp.o
+                  0x004b86                  _icmpHandlePacket
+ .text            0x004bc6         0x34 build/default/production/_ext/1709695401/spiArbiter.o
+                  0x004bc6                  _spiArbEthDisableIsr
+                  0x004bca                  _spiArbEthEnableIsr
+                  0x004bce                  _spiArbEthAcquire
+                  0x004bda                  _spiArbEthComplete
+                  0x004be8                  _spiArbRfAcquire
+                  0x004bf2                  _spiArbRfComplete
 
 ../../src/bsp/pic24/context.s.scn2
-                  0x002e36         0x22
+                  0x004bfa         0x22
  ../../src/bsp/pic24/context.s.scn2
-                  0x002e36         0x22 build/default/production/_ext/585513329/context.o
-                  0x002e36                  _RtosKernelStart
+                  0x004bfa         0x22 build/default/production/_ext/585513329/context.o
+                  0x004bfa                  _RtosKernelStart
 
-.text             0x002e58         0x26
- .text            0x002e58         0x22 build/default/production/_ext/1709695401/spiArbiter.o
-                  0x002e58                  _spiArbEthDisableIsr
-                  0x002e5c                  _spiArbEthEnableIsr
-                  0x002e60                  _spiArbEthAcquire
-                  0x002e68                  _spiArbEthComplete
-                  0x002e72                  _spiArbRfAcquire
-                  0x002e76                  _spiArbRfComplete
- .text            0x002e7a          0x4 build/default/production/_ext/1709695401/executiontime.o
-                  0x002e7a                  _execTimeReset
-                  0x002e7c                  _execTimePrint
+.text             0x004c1c          0x4
+ .text            0x004c1c          0x4 build/default/production/_ext/1709695401/executiontime.o
+                  0x004c1c                  _execTimeReset
+                  0x004c1e                  _execTimePrint

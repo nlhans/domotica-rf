@@ -284,9 +284,9 @@ typedef struct rfTrcvPacket_s
             uint8_t id;
             uint8_t opt;
             
-            uint8_t data[16];
+            uint8_t data[RF_DATA_LENGTH];
         } packet;
-        uint8_t raw[21];
+        uint8_t raw[RF_PACKET_LENGTH];
     };
     uint8_t crc;
     rfTrcvAckState_t needAck;

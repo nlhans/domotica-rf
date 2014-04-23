@@ -8,4 +8,5 @@ build/default/production/_ext/1201319415/packets.o:  \
 ../../inc/devices/mrf49xa.h  \
  ../../inc/devices/mrf49xa_defs.h  \
 ../../inc/server/utilities/spiArbiter.h  \
- ../../inc/bsp/spi.h 
+ ../../inc/bsp/spi.h  \
+

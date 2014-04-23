@@ -86,6 +86,10 @@ void Mrf49xaTick(void)
     {
         rfTrcvPacket_t* packet = Mrf49xaRxPacket();
 
+#ifdef RF_DEBUG
+        rfHistoryPut(packet);
+#endif
+
         // Is this packet for this node?
         if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == rfTrcvStatus.src)
         {
@@ -129,6 +133,10 @@ void Mrf49xaTick(void)
     if (packetTx.state == PKT_READY_FOR_TX &&
         rfTrcvStatus.state == RECV_IDLE)
     {
+
+#ifdef RF_DEBUG
+        rfHistoryPut(&packetTx);
+#endif
         if (packetTx.retry >= 10)
         {
             // Attempt to retransmit..

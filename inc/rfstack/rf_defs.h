@@ -4,18 +4,15 @@
 #include "stddefs.h"
 
 #ifdef PIC24_HW
+#define RF_DEBUG
+#define RF_HISTORY_DEPTH 64
 #include "rtos/task.h"
 #endif
 
-// Configuration
-#ifndef PIC24_HW
-#define RF_PACKET_BUFFER_DEPTH 2
-#define RF_NR_OF_NODES 2
-#else
-#define RF_PACKET_BUFFER_DEPTH 16
-#define RF_NR_OF_NODES 16
-#endif
+#define RF_DATA_LENGTH 16
+#define RF_PACKET_LENGTH (RF_DATA_LENGTH + 5)
 
+// Configuration
 #define RF_NETWORKID1 0x2D
 #define RF_NETWORKID2 0xD4
 
