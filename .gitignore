@@ -24,6 +24,10 @@ targets/mrf49xa_pic24/dist/
 targets/mrf49xa_pic24/disassembly/
 targets/mrf49xa_pic24/build/
 
+targets/mrf49xa_dbg/dist/
+targets/mrf49xa_dbg/disassembly/
+targets/mrf49xa_dbg/build/
+
 targets/mrf49xa_pic24b/dist/
 targets/mrf49xa_pic24b/disassembly/
 targets/mrf49xa_pic24b/build/
