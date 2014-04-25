@@ -7,7 +7,7 @@
 #include "rtos/task.h"
 #ifndef dsPIC33
 #define RF_DEBUG
-#define RF_HISTORY_DEPTH 64
+#define RF_HISTORY_DEPTH 2
 #else
 #undef RF_DEBUG
 #endif

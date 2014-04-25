@@ -37,9 +37,14 @@ void RfInit(void)
     PPSLock;
     
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
-    //RtosTimerCreate(&rfPingTimer, 2000, RfPing);
+    RtosTimerCreate(&rfPingTimer, 100, RfPing);
     RtosTimerCreate(&rfTimer, 25, RfTick);
 
+#ifdef RF_DEBUG
+    uint8_t i = 0;
+    for (i = 0; i < RF_HISTORY_DEPTH; i++)
+        rfHistoryPackets[i].needAck = 0xFF;
+#endif
 }
 
 void RfPing(void)
@@ -54,11 +59,6 @@ void RfTick(void)
     // Reduce CPU load of RF task.
     if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
         RtosTaskSignalEvent(&rfTask, RF_TICK);
-#ifdef RF_DEBUG
-    uint8_t i = 0;
-    for (i = 0; i < RF_HISTORY_DEPTH; i++)
-        rfHistoryPackets[i].needAck = 0xFF;
-#endif
     RtosTimerRearm(&rfTimer, 2);
 }
 

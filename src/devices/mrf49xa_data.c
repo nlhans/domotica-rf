@@ -14,6 +14,10 @@ bool_t Mrf49xaServe(void)
 #endif
 
     Mrf49RxSts();
+
+    if (mrf49Status.byte[0] == 0xFF && mrf49Status.byte[1] == 0xFF)
+        return;
+
     // Power-on-Reset
     if (mrf49Status.flags.msb.por == 1)
     {
