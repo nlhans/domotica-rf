@@ -17,7 +17,7 @@ void spiArbEthEnableIsr(void)
 UI16_t spiArbEthAcquire()
 {
     spiArbEthDisableIsr();
-    spiSpeed(1, TRUE);
+    //spiSpeed(1, TRUE);
     ENC28J60_CS_LOW;
     return TRUE;
 }
@@ -25,7 +25,7 @@ UI16_t spiArbEthComplete(void)
 {
     spiArbStat.ethBusy = 0;
     ENC28J60_CS_HIGH;
-    spiSpeed(1, FALSE);
+    //spiSpeed(1, FALSE);
     spiArbEthEnableIsr();
 
     return 1;
@@ -33,12 +33,12 @@ UI16_t spiArbEthComplete(void)
 
 void spiArbRfAcquire(void)
 {
-    spiSpeed(1, FALSE);
+    //spiSpeed(1, FALSE);
     RF_SPI_CS = 0;
 }
 
 void spiArbRfComplete(void)
 {
     RF_SPI_CS = 1;
-    spiSpeed(1, TRUE);
+    //spiSpeed(1, TRUE);
 }

@@ -152,6 +152,8 @@ void webSysFlash(TcpConnection_t* connection, char **params)
     tcpTxPacket(webBfPos, fl, connection);
 
 }
+
+#ifdef RF_DEBUG
 void webSysRf(TcpConnection_t* connection, char **params)
 {
     TcpFlags_t fl;
@@ -235,6 +237,12 @@ void webSysRf(TcpConnection_t* connection, char **params)
     tcpTxPacket(webBfPos, fl, connection);
 
 }
+#else
+void webSysRf(TcpConnection_t* connection, char **params)
+{
+    web404(connection);
+}
+#endif
 
 void webSysRtos(TcpConnection_t* connection, char **params)
 {

@@ -6,15 +6,15 @@
 #ifdef PIC24_HW
 #include "rtos/task.h"
 #ifndef dsPIC33
-#define RF_DEBUG
+//#define RF_DEBUG
 #define RF_HISTORY_DEPTH 2
 #else
 #undef RF_DEBUG
 #endif
 #endif
 
-#define RF_DATA_LENGTH 16
-#define RF_PACKET_LENGTH (RF_DATA_LENGTH + 5)
+#define RF_DATA_LENGTH      16
+#define RF_PACKET_LENGTH    (RF_DATA_LENGTH + 5)
 
 // Configuration
 #define RF_NETWORKID1 0x2D

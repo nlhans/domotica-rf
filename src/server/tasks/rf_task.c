@@ -57,8 +57,8 @@ void RfPing(void)
 void RfTick(void)
 {
     // Reduce CPU load of RF task.
-    if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
-        RtosTaskSignalEvent(&rfTask, RF_TICK);
+    //if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
+    RtosTaskSignalEvent(&rfTask, RF_TICK);
     RtosTimerRearm(&rfTimer, 2);
 }
 
@@ -143,7 +143,7 @@ void RfTask()
             for( i = 1; i < 16 ;i++)
                 ping.packet.data[i] = i;
             
-            Mrf49xaTxPacket(&ping, FALSE, TRUE);
+            Mrf49xaTxPacket(&ping, FALSE, FALSE);
         }
 
         if (evt & RF_TICK)
