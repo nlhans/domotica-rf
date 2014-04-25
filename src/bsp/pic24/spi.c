@@ -28,10 +28,10 @@ void spiInit(UI08_t port)
     {
         case 1:
             PPSUnLock;
-#ifdef PIC24
-            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK1OUT);
-#else
+#ifdef dsPIC33
             iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK1);
+#else
+            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK1OUT);
 #endif
             iPPSOutput(OUT_PIN_PPS_RP8, OUT_FN_PPS_SDO1);
             iPPSInput(IN_FN_PPS_SDI1, IN_PIN_PPS_RP20);
@@ -46,10 +46,10 @@ void spiInit(UI08_t port)
             break;
         case 2:
             PPSUnLock;
-#ifdef PIC24
-            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK2OUT);
-#else
+#ifdef dsPIC33
             iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK2);
+#else
+            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK2OUT);
 #endif
             iPPSOutput(OUT_PIN_PPS_RP16, OUT_FN_PPS_SDO2);
             iPPSInput(IN_FN_PPS_SDI2, IN_PIN_PPS_RP18);

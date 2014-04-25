@@ -23,38 +23,6 @@ void SysInitGpio(void)
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
 
-#ifdef SERVER
-void UartTxStr(char * str)
-{
-    while(*str != '\0')
-    {
-        U1TXREG = *str;
-        while ((U1STA & (1<<9)) != 0);
-    }
-}
-
-void UartTxByte(char c)
-{
-    while(U1STAbits.UTXBF == 1);
-    U1TXREG = c;
-}
-
-void UartInit()
-{
-#ifdef PIC24_HW
-    U1MODE = 0;
-    
-    PPSUnLock;
-    iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
-    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
-    PPSLock;
-
-    U1STA  = (1 << 10);
-    U1BRG  = F_OSC_DIV_2/16/38400 - 1;
-    U1MODE = (1 << 15); // high baud
-#endif
-}
-
 #define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
 int StkAddrLo;  // order matters
 int StkAddrHi;
@@ -74,7 +42,6 @@ void TRAP_ISR _MathError(void)
 {
     while(1);
 }
-#endif
 
 int main(void)
 {
@@ -103,7 +70,7 @@ int main(void)
 
     ExtIntInit();
     spiInit(1);
-    UartInit();
+    UartInit(1, 38400);
     printf("Hello world!\r\n");
 
     // Interrupts..
