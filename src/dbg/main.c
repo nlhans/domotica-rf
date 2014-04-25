@@ -3,10 +3,12 @@
 #include "stddefs.h"
 
 #include "tasks/rf_task.h"
+#include "dbg/dbg_task.h"
 #include "rtos/task.h"
 
 #include "bsp/interrupt.h"
 #include "bsp/spi.h"
+#include "bsp/uart.h"
 
 void SysInitGpio(void)
 {
@@ -17,38 +19,6 @@ void SysInitGpio(void)
     // Enable humidity analog function
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
-
-void UartTxStr(char * str)
-{
-    while(*str != '\0')
-    {
-        U1TXREG = *str;
-        while ((U1STA & (1<<9)) != 0);
-    }
-}
-
-void UartTxByte(char c)
-{
-    while(U1STAbits.UTXBF == 1);
-    U1TXREG = c;
-}
-
-void UartInit()
-{
-#ifdef PIC24_HW
-    U1MODE = 0;
-
-    PPSUnLock;
-    iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
-    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
-    PPSLock;
-
-    U1STA  = (1 << 10);
-    U1BRG  = F_OSC_DIV_2/16/38400 - 1;
-    U1MODE = (1 << 15); // high baud
-#endif
-}
-
 
 #define TRAP_ISR __attribute__((naked, no_auto_psv,__interrupt__))
 int StkAddrLo;  // order matters
@@ -82,18 +52,25 @@ int main(void)
     RF_POWER = 0;
     SENSOR_PWR = 0;
 
+    // Setup UART1 to ICSP pins
+    PPSUnLock;
+    iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
+    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
+    PPSLock;
+
     ExtIntInit();
     spiInit(1);
-    UartInit();
+    UartInit(1, 38400);
     printf("Hello world!\r\n");
 
-    // Interrupts..
+    // Disable nested ISR
     INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
 
     RfInit();
-
+    DbgInit();
+    
     RtosTaskRun();
 
     //while(1);

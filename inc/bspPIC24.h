@@ -80,7 +80,7 @@ typedef enum AdcChannels_e
 
 #define BSP_TIMER_COUNT 5
 #define BSP_EXT_INT_COUNT 3 // This PIC has 3 ext interrupt lines
-
+#define BSP_UART_COUNT 2
 
 #define TRUE 1
 #define FALSE 0

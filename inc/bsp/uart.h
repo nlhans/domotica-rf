@@ -3,6 +3,15 @@
 
 #include "stddefs.h"
 
-void uartTxByte(UI08_t uart, UI08_t byte);
+void UartInit(uint8_t port, const uint32_t baud);
+
+void UartTxStr(uint8_t port, const char * str);
+void UartTxArr(uint8_t port, unsigned char * bf, uint16_t size);
+void UartTxByte(uint8_t uart, uint8_t byte);
+
+#ifdef dsPIC33
+bool_t UartTxDmaStatus(uint8_t port);
+void UartTxDma(uint8_t port, uint8_t dmaCh, unsigned char * bf, uint16_t size);
+#endif
 
 #endif

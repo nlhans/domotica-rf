@@ -4,9 +4,13 @@
 #include "stddefs.h"
 
 #ifdef PIC24_HW
+#include "rtos/task.h"
+#ifndef dsPIC33
 #define RF_DEBUG
 #define RF_HISTORY_DEPTH 64
-#include "rtos/task.h"
+#else
+#undef RF_DEBUG
+#endif
 #endif
 
 #define RF_DATA_LENGTH 16
