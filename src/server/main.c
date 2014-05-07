@@ -68,6 +68,12 @@ int main(void)
     RF_POWER = 0;
     SENSOR_PWR = 0;
 
+    // Setup UART1 to ICSP pins
+    PPSUnLock;
+    iPPSOutput(OUT_PIN_PPS_RP0, OUT_FN_PPS_U1TX);
+    iPPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP1);
+    PPSLock;
+
     ExtIntInit();
     spiInit(1);
     UartInit(1, 38400);

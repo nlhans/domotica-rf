@@ -2,6 +2,7 @@
 
 void spiSpeed(UI08_t port, bool_t fast)
 {
+#ifndef dsPIC33
     switch(port)
     {
         case 1:
@@ -20,6 +21,7 @@ void spiSpeed(UI08_t port, bool_t fast)
                 SPI2CON1 = 0b0000000100111010;
             break;
     }
+#endif
 }
 
 void spiInit(UI08_t port)
@@ -40,8 +42,16 @@ void spiInit(UI08_t port)
             IFS0bits.SPI1IF = 0;
             IEC0bits.SPI1IE = 0;
 
+            SPI1STAT = 0;
+            SPI1CON1 = 0;
+            SPI1CON2 = 0;
+            
+#ifdef dsPIC33
+            // sck =  714kHz
+            SPI1CON1 = 0b0000000100111001; // Primary 1:16, secondary 1:2, -> 714kHz*32 = 22.848M
+#else
             SPI1CON1 = 0b0000000100111010;
-            //SPI1CON2 = 0b0;
+#endif
             SPI1STAT |= 0x1 << 15;
             break;
         case 2:
@@ -58,8 +68,16 @@ void spiInit(UI08_t port)
             IFS2bits.SPI2IF = 0;
             IEC2bits.SPI2IE = 0;
 
-            SPI2CON1 = 0b0000000100111011;
-            //SPI2CON2 = 0b0;
+            SPI2STAT = 0;
+            SPI2CON1 = 0;
+            SPI2CON2 = 0;
+
+#ifdef dsPIC33
+            SPI2CON1 = 0b0000000100111001;
+#else
+            SPI2CON1 = 0b0000000100111010;
+#endif
+            
             SPI2STAT |= 0x1 << 15;
             break;
     }
@@ -105,8 +123,26 @@ volatile UI16_t spiDummy;
 void spiTx1(UI08_t byte)
 {
     SPI1BUF = byte;
+    if (SPI1STATbits.SPIRBF == 1)
+        while(SPI1STATbits.SPIRBF == 1);
     while(SPI1STATbits.SPIRBF == 0);
     spiDummy = SPI1BUF;
+
+#ifdef dsPIC33
+
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+
+#endif
 }
 void spiTx2(UI08_t byte)
 {
@@ -119,6 +155,21 @@ UI08_t spiRx1()
 {
     SPI1BUF = 0;
     while(SPI1STATbits.SPIRBF == 0);
+#ifdef dsPIC33
+
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+
+#endif
     return SPI1BUF;
 }
 UI08_t spiRx2()

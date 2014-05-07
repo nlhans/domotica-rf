@@ -45,12 +45,16 @@ int main(void)
     ADPCFG = 0xFFFF; // Ports as digital, not analog
     #warning "Building for dsPIC33FJ128GP804"
 
+    ETH_CS = 1;
     RF_SPI_CS = 1;
+    FLASH_CS1 = 1;
+    FLASH_CS2 = 1;
 
     SysInitGpio();
 
     RF_POWER = 0;
     SENSOR_PWR = 0;
+    CNPU2bits.CN21PUE = 1;
 
     // Setup UART1 to ICSP pins
     PPSUnLock;
@@ -60,7 +64,7 @@ int main(void)
 
     ExtIntInit();
     spiInit(1);
-    UartInit(1, 38400);
+    UartInit(1, 115200*2);
     printf("Hello world!\r\n");
 
     // Disable nested ISR

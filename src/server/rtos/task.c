@@ -105,7 +105,7 @@ void RtosTaskRun()
     RtosKernelContextStart();
 }
 
-/* Insert a delay inside a testk. Enforces context switch, too. */
+/* Insert a delay inside a task. Enforces context switch, too. */
 void RtosTaskDelay(RtosTime_t time)
 {
     RtosActiveTask->nextRun = RtosTimestamp + time;

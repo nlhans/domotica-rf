@@ -10,6 +10,8 @@ void Mrf49TxCmd(uint8_t cmd, uint8_t val)
     Mrf49SpiTx(cmd);
     Mrf49SpiTx(val);
 
+    // CS gaat al omhoog voordat de laatste clock afgelopen is.
+    // Check de errata van de dsPIC33 chip
     RF_CS_REL();
 }
 

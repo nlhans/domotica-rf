@@ -13,7 +13,7 @@ uint8_t dmaBusy = 0;
 #endif
 DmaTransferCompleteHandler_t dmaHandlers[NR_OF_DMA_CHANNELS];
 
-void DmaDummy(void) {} 
+void DmaDummy(uint8_t ch) {}
 
 void DmaInit(void)
 {
@@ -22,25 +22,27 @@ void DmaInit(void)
         dmaHandlers[i] = DmaDummy;
 }
 
-void DmaSetup(uint8_t ch, uint8_t* bfA, uint8_t* bfB, uint16_t* hwReg, uint8_t direction, uint8_t options)
+void DmaSetup(uint8_t ch, uint16_t bfA, uint16_t bfB, uint16_t* hwReg, uint8_t direction, uint8_t options, uint8_t req)
 {
     switch (ch)
     {
         case 1:
             DMA1CON = 0;
+
+            DMA1CONbits.CHEN = 0;
             DMA1CONbits.SIZE = 1; // byte by default
             DMA1CONbits.DIR = direction;
             DMA1CONbits.HALF = 0;
             DMA1CONbits.NULLW = 0; // Null write, for SPI.
             DMA1CONbits.AMODE = 0;
-            DMA1CONbits.MODE = 0;
-            DMA1REQ = ch;
+            DMA1CONbits.MODE = 1;
+            DMA1REQ = req;
 
             DMA1STA = (uint16_t)bfA;
             DMA1STB = (uint16_t)bfB;
 
             DMA1PAD = (uint16_t)hwReg;
-            DMA1CNT = 8; // set in transfer
+            DMA1CNT = 0; // set in transfer
 
             IFS0bits.DMA1IF = 0;
             IEC0bits.DMA1IE = 1;
@@ -80,5 +82,8 @@ void DmaTransfer(uint8_t ch, uint16_t size)
 void __attribute__((__interrupt__,no_auto_psv)) _DMA1Interrupt(void)
 {
     IFS0bits.DMA1IF = 0;
-    dmaHandlers[1]();
+    IEC0bits.DMA1IE = 0;
+    DMA1CONbits.CHEN = 0;
+    
+    dmaHandlers[1](1);
 }

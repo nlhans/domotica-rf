@@ -5,7 +5,7 @@
 
 #include "devices/mrf49xa.h"
 
-#define HISTORY_SIZE 128
+#define HISTORY_SIZE 32
 extern rfTrcvPacket_t historyA[HISTORY_SIZE];
 extern rfTrcvPacket_t historyB[HISTORY_SIZE];
 extern rfTrcvPacket_t* bfHw;

@@ -83,14 +83,21 @@ void dbgSwapBuffer(void)
 
 void dbgTransferStart(void)
 {
-    bfHwSize = bfSwPacket * sizeof(rfTrcvPacket_t);
-    bfHwOffset = 0;
+    if (bfSwPacket > 0)
+    {
+        bfHwSize = bfSwPacket * sizeof(rfTrcvPacket_t);
+        bfHwOffset = 0;
 
-    dbgSwapBuffer();
+        dbgSwapBuffer();
 
-    bfTransferBusy = 1;
+        bfTransferBusy = 1;
 
-    dbgTransferTick();
+        UartTxByte(1, '$');
+        UartTxByte(1, '#');
+        UartTxByte(1, bfHwSize & 0xFF);
+        UartTxByte(1, bfHwSize >> 8);
+        dbgTransferTick();
+    }
 }
 
 void dbgTransferTick(void)
@@ -129,7 +136,7 @@ void dbgTransferTick(void)
     bfHwOffset += transferSize;
 
     // Transmit over uart using DMA
-    UartTxDma(1, 1, dmaBf, transferSize);
+    UartTxDma(1, 1, __builtin_dmaoffset(dmaBf), transferSize);
 }
 
 void DbgTask(void)
