@@ -1,5 +1,5 @@
-#ifndef BSP_UART_H
-#define BSP_UART_H
+#ifndef BSP_SPI_H
+#define BSP_SPI_H
 
 #include "stddefs.h"
 

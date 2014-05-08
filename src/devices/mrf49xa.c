@@ -113,8 +113,11 @@ void Mrf49xaShutdown(void)
 
 void Mrf49xaInit(void)
 {
-    UI08_t i, j, k;
-
+    UI08_t k;
+#ifdef PIC16_HW
+    UI08_t i, j;
+#endif
+    
     // Power chip, reset it.
     RF_RES = 0;
     RF_POWER = 1;

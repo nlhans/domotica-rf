@@ -13,6 +13,10 @@
 #endif
 #endif
 
+#ifdef dsPIC33
+#define RF_NO_ID_FILTER
+#endif
+
 #define RF_DATA_LENGTH      16
 #define RF_PACKET_LENGTH    (RF_DATA_LENGTH + 5)
 

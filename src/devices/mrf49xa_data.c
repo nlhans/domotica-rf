@@ -131,6 +131,9 @@ bool_t Mrf49xaServe(void)
             case TX_PACKET:
                 rfTrcvStatus.hwByte++;
 
+                if (rfTrcvStatus.hwByte == packetTx.packet.size)
+                    rfTrcvStatus.hwByte = 49;
+                
                 switch (rfTrcvStatus.hwByte)
                 {
                     case 100:
@@ -139,17 +142,12 @@ bool_t Mrf49xaServe(void)
 
                     case 101:
                         Mrf49TxByte(RF_NETWORKID2);
-                        rfTrcvStatus.hwByte = -1;
+                        rfTrcvStatus.hwByte = 0xFF;
                         break;
 
                         // 4..packet size
                     default:
                         Mrf49TxByte(packetTx.raw[rfTrcvStatus.hwByte]);
-                        packetTx.crc = packetTx.crc ^ packetTx.raw[rfTrcvStatus.hwByte];
-                        if (rfTrcvStatus.hwByte == packetTx.packet.size)
-                        {
-                            rfTrcvStatus.hwByte = 48;
-                        }
                         break;
 
                     case 49: // crc

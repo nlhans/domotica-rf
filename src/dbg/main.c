@@ -2,13 +2,13 @@
 
 #include "stddefs.h"
 
-#include "tasks/rf_task.h"
-#include "dbg/dbg_task.h"
-#include "rtos/task.h"
-
 #include "bsp/interrupt.h"
 #include "bsp/spi.h"
 #include "bsp/uart.h"
+
+#include "tasks/rf_task.h"
+#include "dbg/dbg_task.h"
+#include "rtos/task.h"
 
 void SysInitGpio(void)
 {

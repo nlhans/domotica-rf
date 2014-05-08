@@ -42,6 +42,7 @@ void Mrf49xaTick();
 bool_t Mrf49xaPacketPending(void);
 
 rfTrcvPacket_t* Mrf49xaRxPacket(void);
+rfTrcvPacket_t* Mrf49xaAllocPacket(void);
 void Mrf49xaFreePacket(rfTrcvPacket_t* packet);
 
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck);

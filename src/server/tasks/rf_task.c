@@ -42,7 +42,7 @@ void RfInit(void)
     RtosTimerCreate(&rfPingTimer, 100, RfPing);
 #endif
     
-    RtosTimerCreate(&rfTimer, 25, RfTick);
+    RtosTimerCreate(&rfTimer, 2, RfTick);
 
 #ifdef RF_DEBUG
     uint8_t i = 0;
@@ -55,7 +55,7 @@ void RfPing(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_PINGA);
 
-    RtosTimerRearm(&rfPingTimer, 100);
+    RtosTimerRearm(&rfPingTimer, 2000);
 }
 
 void RfTick(void)
@@ -140,7 +140,7 @@ void RfTask()
             ping.packet.src = 1;
             ping.packet.dst = 0xFF;
             ping.packet.id = RF_PING;
-            ping.packet.size = 0x10;
+            ping.packet.size = 16;
             ping.packet.opt = 0;
 
             ping.packet.data[0] = 1;

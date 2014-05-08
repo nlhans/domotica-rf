@@ -278,7 +278,7 @@ typedef struct rfTrcvPacket_s
     {
         struct
         {
-            uint8_t size;
+            uint8_t size; // size of whole packet. This is 5 bytes longer than the payload
             uint8_t src;
             uint8_t dst;
             uint8_t id;

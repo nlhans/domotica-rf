@@ -1,16 +1,18 @@
 #include "stddefs.h"
 
+#include "bsp/uart.h"
+
 #include "rtos/task.h"
 #include "rtos/timer.h"
 
 #include "dbg/dbg_task.h"
 
-#include "bsp/uart.h"
 
 void DbgTransfer(void);
 void DbgTick(void);
 void DbgTask(void);
 
+void dbgTransferTick(void);
 void dbgSwapBuffer(void);
 
 #define DBG_TICK 0x01

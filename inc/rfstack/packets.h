@@ -6,6 +6,7 @@
 
 #include "devices/mrf49xa.h"
 
+void RfSendPor(void);
 void HandlePacket(rfTrcvPacket_t* packet);
 
 extern uint32_t syncedTime;

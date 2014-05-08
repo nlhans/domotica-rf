@@ -4,7 +4,6 @@
 void HandlePacket(rfTrcvPacket_t* packet)
 {
     memcpy(& (bfSw[bfSwPacket]), packet, sizeof(rfTrcvPacket_t));
-
     bfSwPacket++;
 
     if (bfSwPacket == HISTORY_SIZE)

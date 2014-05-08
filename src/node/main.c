@@ -50,6 +50,8 @@ void main(void)
     
     Mrf49xaInit();
 
+    RfSendPor();
+
     while(1)
     {
         Mrf49xaTick();

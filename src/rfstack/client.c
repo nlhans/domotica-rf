@@ -1,5 +1,19 @@
 #include "rfstack/packets.h"
 
+void RfSendPor(void)
+{
+    rfTrcvPacket_t* packet = Mrf49xaAllocPacket();
+
+    packet->packet.size = 2;
+    packet->packet.id = RF_POR;
+    packet->packet.dst = 0xFF;
+    
+    packet->packet.data[0] = 0x55;
+    packet->packet.data[1] = 0xAA;
+
+    Mrf49xaTxPacket(packet, FALSE, TRUE);
+}
+
 void HandlePacket(rfTrcvPacket_t* packet)
 {
     bool_t sendMsg = FALSE;
