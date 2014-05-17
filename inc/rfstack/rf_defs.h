@@ -65,12 +65,16 @@ typedef struct RfNodeInfo_s
 
 typedef enum
 {
-    RF_PING = 0xA0,
-    RF_ACK  = 0xA1,
-    RF_TIMESYNC = 0xA2,
+    // Network management packets
+    RF_PING                 = 0xA0,
+    RF_ACK                  = 0xA1,
+    RF_TIME_SYNC            = 0xA2,
+    RF_POWER_STATUS         = 0xA3,
 
-    RF_POR  = 0xB0,
-    RF_SHDN = 0xB1,
+    // Firmware update packets
+    RF_FW_CMD               = 0xC0,
+    RF_FW_WRITE             = 0xC1,
+    RF_FW_READ              = 0xC2,
 
 } RfMsg_t;
 

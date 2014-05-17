@@ -3,6 +3,7 @@
 
 #include "bsp/adc.h"
 #include "bsp/interrupt.h"
+#include "bsp/softI2c.h"
 
 #include "rfstack/packets.h"
 
@@ -24,7 +25,6 @@
 #pragma config LPBOR = OFF      // Low-Power Brown Out Reset (Low-Power BOR is disabled)
 #pragma config LVP = ON         // Low-Voltage Programming Enable (Low-voltage programming enabled)
 
-
 void SysInitGpio(void)
 {
     SYS_GPIO_INIT_PORTA();
@@ -37,7 +37,7 @@ void SysInitGpio(void)
     // Enable humidity analog function
     //AdcPinEnable(BSP_HUMIDITY_ANALOG_PIN);
 }
-
+#include "devices/24aa64.h"
 void main(void)
 {
     #warning "Building for PIC16F1508"
@@ -45,12 +45,28 @@ void main(void)
     WPUAbits.WPUA2 = 1;
 
     SysInitGpio();
+    SoftI2cInit();
     AdcInit();
     ExtIntInit();
-    
+
+    /* Eeprom test program
+
+char bf[16];
+    uint8_t i = 0;
+    for(i=0;i<16;i++)
+        bf[i] = 0x55-i;
+    eepromTxBytes(0, bf, 16);
+    for(i=0;i<16;i++)
+        bf[i] = 0;
+    eepromRxBytes(0, bf, 16);
+
+    for(i=0;i<16;i++)
+        if ((0x55-i) != bf[i])
+            while(1);
+*/
+            
     Mrf49xaInit();
 
-    RfSendPor();
 
     while(1)
     {

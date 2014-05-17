@@ -1,5 +1,14 @@
 #include "bsp/softI2c.h"
-#define I2C_MIRROR()
+
+void SoftI2cNop()
+{
+    // 10=24.5kHz
+    // 50=7kHz
+    // 500 = 700Hz or so
+    // @ 16MHz PIC
+    __delay_us(10);
+}
+
 void SoftI2cInit(void)
 {
     // Write '0' (=HIGH)
@@ -9,11 +18,6 @@ void SoftI2cInit(void)
     // Configure as inputs
     TRIS_I2C_SCL = OUTPUT_PIN;
     TRIS_I2C_SDA = OUTPUT_PIN;
-
-#ifdef I2C_PK2_MIRROR
-    TRIS_I2C_MIRROR_SCL = OUTPUT_PIN;
-    TRIS_I2C_MIRROR_SDA = OUTPUT_PIN;
-#endif
 
     // Enable weak pullups
     // Should be disabled during sleep
@@ -26,15 +30,6 @@ void SoftI2cInit(void)
     SoftI2cTxByte(0x00);
     SoftI2cStop();
     
-}
-
-void SoftI2cNop(void)
-{
-    UI16_t i =0;
-    I2C_MIRROR();
-    __delay_us(50);
-    //for (i = 0; i < 1000; i++) asm volatile("nop");
-    I2C_MIRROR();
 }
 
 void SoftI2cStart(void)
@@ -84,11 +79,6 @@ void SoftI2cStop(void)
     I2C_SDA = I2C_HIGH;
     SoftI2cNop();
     SoftI2cNop();
-    SoftI2cNop();
-    SoftI2cNop();
-    SoftI2cNop();
-    SoftI2cNop();
-    SoftI2cNop();
 }
 
 UI08_t SoftI2cTxByte(UI08_t data)
@@ -136,7 +126,6 @@ UI08_t SoftI2cTxByte(UI08_t data)
     return ack;
 
 }
-
 
 UI08_t SoftI2cRxByte(UI08_t ack)
 {

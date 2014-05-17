@@ -20,9 +20,7 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet)
     packet->packet.id = RF_ACK;
     packet->packet.size = 2;
 
-    printf("[");
     Mrf49xaTxPacket(packet, TRUE, FALSE);
-    printf("]RF Tx Ack %d %d\n", packet->packet.data[0], packet->packet.data[1]);
 }
 
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
@@ -31,7 +29,6 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
 
     if (&(rfTrcvStatus.txPacket) == packet)
     {
-        printf("1");
         if (response)
         {
             packet->packet.dst = packet->packet.src;
@@ -46,17 +43,15 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
         packetTx.crc = 0;
         return TRUE;
     }
-        printf("2");
+
     // Packet in buffer is ready for transmission.
     if (rfTrcvStatus.txPacket.state != PKT_FREE)
     {
-        printf("3");
         // TODO: Error buffer is full
         return FALSE;
     }
     else
     {
-        printf("4");
         if (response)
         {
             packet->packet.dst = packet->packet.src;

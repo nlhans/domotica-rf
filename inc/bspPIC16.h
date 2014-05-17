@@ -77,16 +77,16 @@ RF_INT = 0; \
 } while(0);
 
 /*************** PORTB *************/
-#define I2C_SCL                 LATBbits.LATB4          // out
-#define I2C_SDA                 LATBbits.LATB6          // tri/out
-#define I2C_SDA_READ            PORTBbits.RB6        // tri/in
+#define I2C_SCL                 LATBbits.LATB6          // out
+#define I2C_SDA                 LATBbits.LATB4          // tri/out
+#define I2C_SDA_READ            PORTBbits.RB4        // tri/in
 
 #define UART_RX                 PORTBbits.RB5        // in
 
-#define RF_SPI_SDO              LATBbits.LATB7          // out
+#define RF_SPI_SDO              PORTBbits.RB7          // out
 
-#define TRIS_I2C_SCL            TRISBbits.TRISB4
-#define TRIS_I2C_SDA            TRISBbits.TRISB6
+#define TRIS_I2C_SCL            TRISBbits.TRISB6
+#define TRIS_I2C_SDA            TRISBbits.TRISB4
 
 #define SYS_GPIO_INIT_PORTB() do { \
 TRISBbits.TRISB4 = GPIO_OUTPUT; \
@@ -105,8 +105,9 @@ TRISBbits.TRISB5 = GPIO_INPUT; \
 #define RF_FINT                 PORTCbits.RC3           // in
 #define RF_FSEL                 LATCbits.LATC4          // out
 #define RF_SPI_SDI              PORTCbits.RC5           // in
-#define RF_SPI_CS               LATCbits.LATC6          // out
-#define RF_SPI_SCK              LATCbits.LATC7          // out
+#define RF_SPI_CS               PORTCbits.RC6           // out
+//#define RF_SPI_SCK              LATCbits.LATC7          // out
+#define RF_SPI_SCK              PORTCbits.RC7          // out
 
 #define SYS_GPIO_INIT_PORTC() do { \
 TRISCbits.TRISC1 = GPIO_OUTPUT; \

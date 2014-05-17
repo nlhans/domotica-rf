@@ -296,14 +296,12 @@ typedef struct rfTrcvPacket_s
 
 typedef struct rfTrcvStatus_s
 {
-    rfTrcvState_t state;
-
-    rfTrcvPacket_t txPacket;
-    rfTrcvPacket_t rxPacket[2];
-
     rfTrcvPacket_t* hwRx;
-    uint8_t hwByte;
+    rfTrcvPacket_t rxPacket[2];
+    rfTrcvPacket_t txPacket;
 
+    rfTrcvState_t state;
+    uint8_t hwByte;
     uint8_t src; // my node ID
 
 } rfTrcvStatus_t;

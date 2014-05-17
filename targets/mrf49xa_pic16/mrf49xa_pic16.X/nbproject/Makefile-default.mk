@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
+SOURCEFILES_QUOTED_IF_SPACED=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d ${OBJECTDIR}/_ext/1658841978/client.p1.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d ${OBJECTDIR}/_ext/608774428/main.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d ${OBJECTDIR}/_ext/1658841978/client.p1.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d ${OBJECTDIR}/_ext/608774428/main.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
+OBJECTFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
 
 # Source Files
-SOURCEFILES=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
+SOURCEFILES=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
 
 
 CFLAGS=
@@ -82,7 +82,7 @@ ${OBJECTDIR}/_ext/534562843/softI2c.p1: ../../../src/bsp/softI2c.c  nbproject/Ma
 	@${MKDIR} ${OBJECTDIR}/_ext/534562843 
 	@${RM} ${OBJECTDIR}/_ext/534562843/softI2c.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/534562843/softI2c.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/534562843/softI2c.p1  ../../../src/bsp/softI2c.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/534562843/softI2c.p1  ../../../src/bsp/softI2c.c 
 	@-${MV} ${OBJECTDIR}/_ext/534562843/softI2c.d ${OBJECTDIR}/_ext/534562843/softI2c.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/534562843/softI2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -90,7 +90,7 @@ ${OBJECTDIR}/_ext/421542533/adc16.p1: ../../../src/bsp/pic16/adc16.c  nbproject/
 	@${MKDIR} ${OBJECTDIR}/_ext/421542533 
 	@${RM} ${OBJECTDIR}/_ext/421542533/adc16.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/421542533/adc16.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/adc16.p1  ../../../src/bsp/pic16/adc16.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/adc16.p1  ../../../src/bsp/pic16/adc16.c 
 	@-${MV} ${OBJECTDIR}/_ext/421542533/adc16.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/421542533/adc16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -98,7 +98,7 @@ ${OBJECTDIR}/_ext/421542533/interrupt.p1: ../../../src/bsp/pic16/interrupt.c  nb
 	@${MKDIR} ${OBJECTDIR}/_ext/421542533 
 	@${RM} ${OBJECTDIR}/_ext/421542533/interrupt.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/421542533/interrupt.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/interrupt.p1  ../../../src/bsp/pic16/interrupt.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/interrupt.p1  ../../../src/bsp/pic16/interrupt.c 
 	@-${MV} ${OBJECTDIR}/_ext/421542533/interrupt.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/421542533/interrupt.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -106,7 +106,7 @@ ${OBJECTDIR}/_ext/2092508035/mcp9800.p1: ../../../src/devices/mcp9800.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mcp9800.p1  ../../../src/devices/mcp9800.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mcp9800.p1  ../../../src/devices/mcp9800.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mcp9800.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -114,7 +114,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1: ../../../src/devices/mrf49xa.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa.p1  ../../../src/devices/mrf49xa.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa.p1  ../../../src/devices/mrf49xa.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -122,7 +122,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1: ../../../src/devices/mrf49xa_
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1  ../../../src/devices/mrf49xa_spi_pic16.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1  ../../../src/devices/mrf49xa_spi_pic16.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -130,7 +130,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1: ../../../src/devices/mrf49xa_cmd.c 
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1  ../../../src/devices/mrf49xa_cmd.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1  ../../../src/devices/mrf49xa_cmd.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -138,7 +138,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1: ../../../src/devices/mrf49xa_pac
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1  ../../../src/devices/mrf49xa_packet.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1  ../../../src/devices/mrf49xa_packet.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -146,15 +146,23 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1: ../../../src/devices/mrf49xa_data.
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1  ../../../src/devices/mrf49xa_data.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1  ../../../src/devices/mrf49xa_data.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/2092508035/24aa64.p1: ../../../src/devices/24aa64.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
+	@${RM} ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/2092508035/24aa64.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/24aa64.p1  ../../../src/devices/24aa64.c 
+	@-${MV} ${OBJECTDIR}/_ext/2092508035/24aa64.d ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/_ext/1658841978/client.p1: ../../../src/rfstack/client.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1658841978 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/client.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/client.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/client.p1  ../../../src/rfstack/client.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/client.p1  ../../../src/rfstack/client.c 
 	@-${MV} ${OBJECTDIR}/_ext/1658841978/client.d ${OBJECTDIR}/_ext/1658841978/client.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1658841978/client.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -162,7 +170,7 @@ ${OBJECTDIR}/_ext/1658841978/packets.p1: ../../../src/rfstack/packets.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/1658841978 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/packets.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/packets.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/packets.p1  ../../../src/rfstack/packets.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/packets.p1  ../../../src/rfstack/packets.c 
 	@-${MV} ${OBJECTDIR}/_ext/1658841978/packets.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1658841978/packets.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -170,7 +178,7 @@ ${OBJECTDIR}/_ext/608774428/main.p1: ../../../src/node/main.c  nbproject/Makefil
 	@${MKDIR} ${OBJECTDIR}/_ext/608774428 
 	@${RM} ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/608774428/main.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/main.p1  ../../../src/node/main.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/main.p1  ../../../src/node/main.c 
 	@-${MV} ${OBJECTDIR}/_ext/608774428/main.d ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -179,7 +187,7 @@ ${OBJECTDIR}/_ext/534562843/softI2c.p1: ../../../src/bsp/softI2c.c  nbproject/Ma
 	@${MKDIR} ${OBJECTDIR}/_ext/534562843 
 	@${RM} ${OBJECTDIR}/_ext/534562843/softI2c.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/534562843/softI2c.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/534562843/softI2c.p1  ../../../src/bsp/softI2c.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/534562843/softI2c.p1  ../../../src/bsp/softI2c.c 
 	@-${MV} ${OBJECTDIR}/_ext/534562843/softI2c.d ${OBJECTDIR}/_ext/534562843/softI2c.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/534562843/softI2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -187,7 +195,7 @@ ${OBJECTDIR}/_ext/421542533/adc16.p1: ../../../src/bsp/pic16/adc16.c  nbproject/
 	@${MKDIR} ${OBJECTDIR}/_ext/421542533 
 	@${RM} ${OBJECTDIR}/_ext/421542533/adc16.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/421542533/adc16.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/adc16.p1  ../../../src/bsp/pic16/adc16.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/adc16.p1  ../../../src/bsp/pic16/adc16.c 
 	@-${MV} ${OBJECTDIR}/_ext/421542533/adc16.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/421542533/adc16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -195,7 +203,7 @@ ${OBJECTDIR}/_ext/421542533/interrupt.p1: ../../../src/bsp/pic16/interrupt.c  nb
 	@${MKDIR} ${OBJECTDIR}/_ext/421542533 
 	@${RM} ${OBJECTDIR}/_ext/421542533/interrupt.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/421542533/interrupt.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/interrupt.p1  ../../../src/bsp/pic16/interrupt.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/421542533/interrupt.p1  ../../../src/bsp/pic16/interrupt.c 
 	@-${MV} ${OBJECTDIR}/_ext/421542533/interrupt.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/421542533/interrupt.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -203,7 +211,7 @@ ${OBJECTDIR}/_ext/2092508035/mcp9800.p1: ../../../src/devices/mcp9800.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mcp9800.p1  ../../../src/devices/mcp9800.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mcp9800.p1  ../../../src/devices/mcp9800.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mcp9800.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -211,7 +219,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1: ../../../src/devices/mrf49xa.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa.p1  ../../../src/devices/mrf49xa.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa.p1  ../../../src/devices/mrf49xa.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -219,7 +227,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1: ../../../src/devices/mrf49xa_
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1  ../../../src/devices/mrf49xa_spi_pic16.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1  ../../../src/devices/mrf49xa_spi_pic16.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -227,7 +235,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1: ../../../src/devices/mrf49xa_cmd.c 
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1  ../../../src/devices/mrf49xa_cmd.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1  ../../../src/devices/mrf49xa_cmd.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -235,7 +243,7 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1: ../../../src/devices/mrf49xa_pac
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1  ../../../src/devices/mrf49xa_packet.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1  ../../../src/devices/mrf49xa_packet.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -243,15 +251,23 @@ ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1: ../../../src/devices/mrf49xa_data.
 	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1  ../../../src/devices/mrf49xa_data.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1  ../../../src/devices/mrf49xa_data.c 
 	@-${MV} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/2092508035/24aa64.p1: ../../../src/devices/24aa64.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/2092508035 
+	@${RM} ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/2092508035/24aa64.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/2092508035/24aa64.p1  ../../../src/devices/24aa64.c 
+	@-${MV} ${OBJECTDIR}/_ext/2092508035/24aa64.d ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/_ext/1658841978/client.p1: ../../../src/rfstack/client.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1658841978 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/client.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/client.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/client.p1  ../../../src/rfstack/client.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/client.p1  ../../../src/rfstack/client.c 
 	@-${MV} ${OBJECTDIR}/_ext/1658841978/client.d ${OBJECTDIR}/_ext/1658841978/client.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1658841978/client.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -259,7 +275,7 @@ ${OBJECTDIR}/_ext/1658841978/packets.p1: ../../../src/rfstack/packets.c  nbproje
 	@${MKDIR} ${OBJECTDIR}/_ext/1658841978 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/packets.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/1658841978/packets.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/packets.p1  ../../../src/rfstack/packets.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/1658841978/packets.p1  ../../../src/rfstack/packets.c 
 	@-${MV} ${OBJECTDIR}/_ext/1658841978/packets.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/1658841978/packets.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -267,7 +283,7 @@ ${OBJECTDIR}/_ext/608774428/main.p1: ../../../src/node/main.c  nbproject/Makefil
 	@${MKDIR} ${OBJECTDIR}/_ext/608774428 
 	@${RM} ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${RM} ${OBJECTDIR}/_ext/608774428/main.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/main.p1  ../../../src/node/main.c 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/main.p1  ../../../src/node/main.c 
 	@-${MV} ${OBJECTDIR}/_ext/608774428/main.d ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
@@ -284,13 +300,13 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) --chip=$(MP_PROCESSOR_OPTION) -G -mdist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.map  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"      --ram=default,-160-16f  -odist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_CC} $(MP_EXTRA_LD_PRE) --chip=$(MP_PROCESSOR_OPTION) -G -mdist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.map  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"      --ram=default,-160-16f  -odist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 	@${RM} dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.hex 
 	
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) --chip=$(MP_PROCESSOR_OPTION) -G -mdist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.map  --double=24 --float=24 --opt=default,+asm,+asmfile,+speed,-space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"     -odist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_CC} $(MP_EXTRA_LD_PRE) --chip=$(MP_PROCESSOR_OPTION) -G -mdist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.map  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --html --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"     -odist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic16.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 	
 endif
 

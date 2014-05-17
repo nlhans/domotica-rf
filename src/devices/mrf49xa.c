@@ -68,10 +68,17 @@ volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitRe
     if (array[k].reg == REG_DELAY) { Delay5Ms(); } else { \
     Mrf49TxCmd(array[k].reg, array[k].val); } }
 
+void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
+{
+    uint8_t k = 0;
+    SetupRegistersLoop(regs, count);
+}
+
 void Mrf49xaModeRx(void)
 {
     UI08_t k;
-    SetupRegistersWithoutDelay(Rx);
+    //SetupRegistersWithoutDelay(Rx);
+    mrf49xaCfg(mrfRegset_Rx, mrfRegset_RxCnt);
 
     rfTrcvStatus.state = RECV_IDLE;
     rfTrcvStatus.hwByte = 0;
@@ -80,7 +87,8 @@ void Mrf49xaModeRx(void)
 void Mrf49xaModeTx(void)
 {
     UI08_t k;
-    SetupRegistersWithoutDelay(Tx);
+    //SetupRegistersWithoutDelay(Tx);
+    mrf49xaCfg(mrfRegset_Tx, mrfRegset_TxCnt);
 
     rfTrcvStatus.state = TX_PACKET;
     rfTrcvStatus.hwByte = 99;
@@ -129,7 +137,8 @@ void Mrf49xaInit(void)
     RF_INT = 1;
 #endif
     
-    SetupRegisters(Init);
+    //SetupRegisters(Init);
+    mrf49xaCfg(mrfRegset_Init, mrfRegset_InitCnt);
 
     Mrf49xaModeRx();
 

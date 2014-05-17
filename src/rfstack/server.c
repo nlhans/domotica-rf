@@ -29,13 +29,13 @@ void HandlePacket(rfTrcvPacket_t* packet)
             }
             break;
 
-        case RF_POR:
+        case RF_POWER_STATUS:
             //TODO: Add node to client list
             sendMsg = FALSE;
             sendAck = TRUE;
             break;
 
-        case RF_TIMESYNC:
+        case RF_TIME_SYNC:
             syncedTime = *((uint32_t*) packet->packet.data);
             sendMsg = FALSE;
             sendAck = TRUE;
