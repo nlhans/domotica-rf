@@ -50,7 +50,7 @@ void main(void)
     ExtIntInit();
 
     /* Eeprom test program
-
+*/
 char bf[16];
     uint8_t i = 0;
     for(i=0;i<16;i++)
@@ -63,7 +63,8 @@ char bf[16];
     for(i=0;i<16;i++)
         if ((0x55-i) != bf[i])
             while(1);
-*/
+
+            while(1);
             
     Mrf49xaInit();
 

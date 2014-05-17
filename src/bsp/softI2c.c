@@ -85,12 +85,12 @@ UI08_t SoftI2cTxByte(UI08_t data)
 {
     UI08_t i;
 
-    for(i = 0; i < 8; i++)
+    for(i = 0x80; i != 0; i >>= 1)
     {
         I2C_SCL = I2C_LOW;
         SoftI2cNop();
 
-        if(data & 0x80)
+        if(data & i)
             I2C_SDA = I2C_HIGH;
         else
             I2C_SDA = I2C_LOW;
@@ -101,26 +101,22 @@ UI08_t SoftI2cTxByte(UI08_t data)
         I2C_SCL = I2C_HIGH;
         SoftI2cNop();
 
+        // TODO: Support clock stretching?
         //while((SCLPIN & (1<<SCL))==0);
-
-        data = data << 1;
     }
 
     //The 9th clock (ACK Phase)
     I2C_SCL = I2C_LOW;
     SoftI2cNop();
 
-    //I2C_SDA = I2C_HIGH;
     TRIS_I2C_SDA = INPUT_PIN;
     
     I2C_SCL = I2C_HIGH;
     SoftI2cNop();
 
-    UI08_t ack= !I2C_SDA_READ;
+    UI08_t ack = !I2C_SDA_READ;
 
     I2C_SCL = I2C_LOW;
-    SoftI2cNop();
-    SoftI2cNop();
     SoftI2cNop();
 
     return ack;
@@ -137,21 +133,21 @@ UI08_t SoftI2cRxByte(UI08_t ack)
     TRIS_I2C_SDA = INPUT_PIN;
     I2C_SDA = I2C_HIGH;
     
-    for(i = 0; i < 8; i++)
+    for (i = 0x80; i != 0; i >>= 1)
     {
         I2C_SCL = I2C_LOW;
         SoftI2cNop();
         I2C_SCL = I2C_HIGH;
         SoftI2cNop();
 
+        //Support clock stretching?
         //while((SCLPIN & (1<<SCL))==0);
 
         if(I2C_SDA_READ != 0)
-            data |= (0x80 >> i);
+            data |= i;
 
     }
 
-    
     I2C_SCL = I2C_LOW;
     SoftI2cNop();
 
@@ -171,9 +167,7 @@ UI08_t SoftI2cRxByte(UI08_t ack)
 
     I2C_SCL = I2C_LOW;
     SoftI2cNop();
-    SoftI2cNop();
-    SoftI2cNop();
-
+    
     return data;
 
 }
