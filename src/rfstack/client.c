@@ -67,9 +67,12 @@ void handleFwWrite(rfTrcvPacket_t* packet)
 {
     UI16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
     UI16_t* packetData = (UI16_t*) &(packet->packet.data[8]);
-
+    address=0;
     // TODO: Handle encryption
     eepromTxBytes(address, packet->packet.data+8, 8);
+
+    // Wait 5ms for EEPROM write cycle
+    __delay_ms(5);
 
     eepromRxBytes(address, packet->packet.data+8, 8);
 
@@ -78,7 +81,7 @@ void handleFwWrite(rfTrcvPacket_t* packet)
 
     for (uint8_t i = 0; i < 4; i++)
     {
-        address = address ^ packetData[i];
+        address = address ^ (packetData[i] ^ 0x5AA5);
     }
 
     packet->packet.data[8] = address >> 8;
@@ -92,7 +95,12 @@ void handleFwRead(rfTrcvPacket_t* packet)
 {
     packet->packet.size = 16;
     UI16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
-    
+    address=0;
+
+    // This call costs about 3.2ms.
+    // Each byte costs about 200us to receive, but the function transmits
+    // device adress 2x, start 2x, eeprom address 2 bytes, and ack bits 1 byte
+    // This results in a high overhead. 
     eepromRxBytes(address, packet->packet.data+8, 8);
 
 }
@@ -106,17 +114,17 @@ void HandlePacket(rfTrcvPacket_t* packet)
     // Ping-pong
     switch (packet->packet.id)
     {
+        case RF_PING:
+            packet->packet.data[0] = 2;
+            sendMsg = TRUE;
+            break;
+
         case RF_ACK:
             if (packetTx.crc == packet->packet.data[1] &&
                 packetTx.packet.id == packet->packet.data[0])
             {
                 packetTx.needAck = ACK_RECEIVED;
             }
-            break;
-            
-        case RF_PING:
-            packet->packet.data[0] = 2;
-            sendMsg = TRUE;
             break;
 
         case RF_TIME_SYNC:

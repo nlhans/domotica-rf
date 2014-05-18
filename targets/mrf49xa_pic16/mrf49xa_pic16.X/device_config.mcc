@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration device="PIC16LF1508" mcc_version="v1.1">
+    <managers>
+        <manager generated="true" name="Pin Manager">
+            <setting name="NCO1SEL" option="RC1"/>
+            <setting name="SSSEL" option="RC6"/>
+            <setting name="CLC1SEL" option="RA2"/>
+            <setting name="T1GSEL" option="RA4"/>
+            <setting name="package" option="SSOP20"/>
+            <file checksum="3002539778" modified="false" name="pin_manager.c" path="MCC_Generated_Files/pin_manager.c"/>
+            <file checksum="1818275916" modified="false" name="pin_manager.h" path="MCC_Generated_Files/pin_manager.h"/>
+        </manager>
+        <manager generated="true" name="Interrupt Manager">
+            <setting name="preempt" option="true"/>
+            <interrupt module="TMR1" name="TMRI"/>
+            <interrupt module="TMR0" name="TMRI"/>
+            <interrupt module="TMR2" name="TMRI"/>
+            <file checksum="2538697821" modified="false" name="interrupt_manager.c" path="MCC_Generated_Files/interrupt_manager.c"/>
+            <file checksum="3487049141" modified="false" name="interrupt_manager.h" path="MCC_Generated_Files/interrupt_manager.h"/>
+        </manager>
+        <manager generated="true" name="System">
+            <initializer comment="" name="InitializerDefault">
+                <setting name="SCS" option="FOSC"/>
+                <setting name="IRCF" option="16MHz_HF"/>
+                <setting name="OSTS" option="intosc"/>
+                <setting name="HFIOFR" option="disabled"/>
+                <setting name="HFIOFS" option="not0.5percent_acc"/>
+                <setting name="LFIOFR" option="disabled"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <setting name="FOSC" option="INTOSC"/>
+            <setting name="WDTE" option="OFF"/>
+            <setting name="PWRTE" option="OFF"/>
+            <setting name="MCLRE" option="ON"/>
+            <setting name="CP" option="OFF"/>
+            <setting name="BOREN" option="ON"/>
+            <setting name="CLKOUTEN" option="OFF"/>
+            <setting name="IESO" option="ON"/>
+            <setting name="FCMEN" option="ON"/>
+            <setting name="WRT" option="OFF"/>
+            <setting name="STVREN" option="ON"/>
+            <setting name="BORV" option="LO"/>
+            <setting name="LPBOR" option="OFF"/>
+            <setting name="LVP" option="OFF"/>
+            <file checksum="1450884860" modified="false" name="mcc.c" path="MCC_Generated_Files/mcc.c"/>
+            <file checksum="2428856576" modified="false" name="mcc.h" path="MCC_Generated_Files/mcc.h"/>
+        </manager>
+    </managers>
+    <modules>
+        <module generated="true" mode="Timer" name="TMR1" type="tmr_mid1">
+            <initializer comment="" name="InitializerDefault">
+                <setting name="T1OSCEN" option="disabled"/>
+                <setting name="nT1SYNC" option="synchronize"/>
+                <setting name="T1CKPS" option="1:8"/>
+                <setting name="TMR1CS" option="FOSC/4"/>
+                <setting name="TMR1ON" option="disabled"/>
+                <setting name="T1GVAL" option="disabled"/>
+                <setting name="T1GSPM" option="disabled"/>
+                <setting name="T1GSS" option="T1G"/>
+                <setting name="T1GTM" option="disabled"/>
+                <setting name="T1GPOL" option="low"/>
+                <setting name="T1GGO_nDONE" option="done"/>
+                <setting name="TMR1GE" option="disabled"/>
+                <setting name="TMR1H" option="177"/>
+                <setting name="TMR1L" option="224"/>
+                <additionalSetting name="externalFreq" option=""/>
+            </initializer>
+            <setting name="TMRI" option="true"/>
+            <setting name="TMRGI" option="false"/>
+            <setting name="ticker" option="100"/>
+            <file checksum="1982701729" modified="false" name="tmr1.c" path="MCC_Generated_Files/tmr1.c"/>
+            <file checksum="1890436613" modified="false" name="tmr1.h" path="MCC_Generated_Files/tmr1.h"/>
+        </module>
+        <module generated="true" mode="Timer" name="TMR0" type="tmr_0">
+            <initializer comment="" name="InitializerDefault">
+                <setting name="TMR0CS" option="FOSC/4"/>
+                <setting name="TMR0SE" option="Increment_hi_lo"/>
+                <setting name="PS" option="1:16"/>
+                <setting name="PSA" option="assigned"/>
+                <setting name="INTEDG" option="rising"/>
+                <setting name="nWPUEN" option="disabled"/>
+                <setting name="TMR0" option="6"/>
+                <additionalSetting name="extfreq" option="100 kHz"/>
+            </initializer>
+            <setting name="TMRI" option="true"/>
+            <setting name="ticker" option="1"/>
+            <file checksum="1357261893" modified="false" name="tmr0.c" path="MCC_Generated_Files/tmr0.c"/>
+            <file checksum="2998601060" modified="false" name="tmr0.h" path="MCC_Generated_Files/tmr0.h"/>
+        </module>
+        <module generated="true" mode="Timer" name="TMR2" type="tmr_2">
+            <initializer comment="" name="InitializerDefault">
+                <setting name="TMR2ON" option="off"/>
+                <setting name="T2CKPS" option="1:16"/>
+                <setting name="T2OUTPS" option="1:10"/>
+                <setting name="PR2" option="250"/>
+                <setting name="TMR2" option="0"/>
+                <additionalSetting name="ticker" option="100"/>
+                <additionalSetting name="T2CKPS" option="1:16"/>
+                <additionalSetting name="maxPeriodChanged" option="63.75 us"/>
+                <additionalSetting name="T2OUTPS" option="1:10"/>
+                <additionalSetting name="minPeriodChanged" option="0.0 ns"/>
+                <additionalSetting name="period" option="1.0 s"/>
+            </initializer>
+            <setting name="TMRI" option="true"/>
+            <setting name="ticker" option="100"/>
+            <file checksum="3992073725" modified="false" name="tmr2.c" path="MCC_Generated_Files/tmr2.c"/>
+            <file checksum="3406244805" modified="false" name="tmr2.h" path="MCC_Generated_Files/tmr2.h"/>
+        </module>
+    </modules>
+</configuration>

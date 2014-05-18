@@ -4,6 +4,16 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="MCC_Generated_Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>MCC_Generated_Files/tmr2.h</itemPath>
+        <itemPath>MCC_Generated_Files/tmr0.h</itemPath>
+        <itemPath>MCC_Generated_Files/tmr1.h</itemPath>
+        <itemPath>MCC_Generated_Files/pin_manager.h</itemPath>
+        <itemPath>MCC_Generated_Files/interrupt_manager.h</itemPath>
+        <itemPath>MCC_Generated_Files/mcc.h</itemPath>
+      </logicalFolder>
       <itemPath>../../../inc/bspPIC16.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -40,11 +50,13 @@
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
+      <itemPath>device_config.mcc</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
     <Elem>../../../src</Elem>
     <Elem>../../../inc</Elem>
+    <Elem>MCC_Generated_Files</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

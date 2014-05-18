@@ -5,8 +5,11 @@ void SoftI2cNop()
     // 10=24.5kHz
     // 50=7kHz
     // 500 = 700Hz or so
+    // 8 = 43kHz RX clock (which is marginal)
+    // Risetime of 100k pullups on this board with all devices fitted is 8us.
+    // The negative width of each pulse is about 8us now.
     // @ 16MHz PIC
-    __delay_us(10);
+    __delay_us(8);
 }
 
 void SoftI2cInit(void)

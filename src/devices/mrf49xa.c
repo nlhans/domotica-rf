@@ -77,8 +77,8 @@ void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
 void Mrf49xaModeRx(void)
 {
     UI08_t k;
-    //SetupRegistersWithoutDelay(Rx);
-    mrf49xaCfg(mrfRegset_Rx, mrfRegset_RxCnt);
+    SetupRegistersWithoutDelay(Rx);
+    //mrf49xaCfg(mrfRegset_Rx, mrfRegset_RxCnt);
 
     rfTrcvStatus.state = RECV_IDLE;
     rfTrcvStatus.hwByte = 0;
@@ -87,8 +87,8 @@ void Mrf49xaModeRx(void)
 void Mrf49xaModeTx(void)
 {
     UI08_t k;
-    //SetupRegistersWithoutDelay(Tx);
-    mrf49xaCfg(mrfRegset_Tx, mrfRegset_TxCnt);
+    SetupRegistersWithoutDelay(Tx);
+    //mrf49xaCfg(mrfRegset_Tx, mrfRegset_TxCnt);
 
     rfTrcvStatus.state = TX_PACKET;
     rfTrcvStatus.hwByte = 99;
@@ -137,8 +137,8 @@ void Mrf49xaInit(void)
     RF_INT = 1;
 #endif
     
-    //SetupRegisters(Init);
-    mrf49xaCfg(mrfRegset_Init, mrfRegset_InitCnt);
+    SetupRegisters(Init);
+    //mrf49xaCfg(mrfRegset_Init, mrfRegset_InitCnt);
 
     Mrf49xaModeRx();
 

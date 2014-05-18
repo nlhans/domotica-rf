@@ -112,6 +112,9 @@ bool_t Mrf49xaServe(void)
                     // TODO: Check CRC
                     // TODO: Check node ID (broadcast/myself)
                     packetRx->state = PKT_HW_READY_RX;
+#ifdef dsPIC33
+                    packetRx->timestamp = RtosTimestamp;
+#endif
 
                     // Reset modem
                     Mrf49xaModeRx();

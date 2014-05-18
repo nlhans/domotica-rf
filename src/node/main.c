@@ -50,7 +50,6 @@ void main(void)
     ExtIntInit();
 
     /* Eeprom test program
-*/
 char bf[16];
     uint8_t i = 0;
     for(i=0;i<16;i++)
@@ -58,6 +57,7 @@ char bf[16];
     eepromTxBytes(0, bf, 16);
     for(i=0;i<16;i++)
         bf[i] = 0;
+    __delay_ms(5);
     eepromRxBytes(0, bf, 16);
 
     for(i=0;i<16;i++)
@@ -65,10 +65,12 @@ char bf[16];
             while(1);
 
             while(1);
+*/
             
     Mrf49xaInit();
 
-
+    RfSendPowerState();
+    
     while(1)
     {
         Mrf49xaTick();

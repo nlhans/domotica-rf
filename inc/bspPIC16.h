@@ -106,8 +106,8 @@ TRISBbits.TRISB5 = GPIO_INPUT; \
 #define RF_FSEL                 LATCbits.LATC4          // out
 #define RF_SPI_SDI              PORTCbits.RC5           // in
 #define RF_SPI_CS               PORTCbits.RC6           // out
-//#define RF_SPI_SCK              LATCbits.LATC7          // out
-#define RF_SPI_SCK              PORTCbits.RC7          // out
+#define RF_SPI_SCK              LATCbits.LATC7          // out
+//#define RF_SPI_SCK              PORTCbits.RC7          // out
 
 #define SYS_GPIO_INIT_PORTC() do { \
 TRISCbits.TRISC1 = GPIO_OUTPUT; \

@@ -273,7 +273,9 @@ typedef enum rfTrcvAckState_e
 typedef struct rfTrcvPacket_s
 {
     rfTrcvPacketState_t state;
-
+#ifdef dsPIC33
+    uint32_t timestamp;
+#endif
     union
     {
         struct
