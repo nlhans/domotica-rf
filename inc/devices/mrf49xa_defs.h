@@ -34,6 +34,7 @@
 
 // Magic register for loop to request a delay
 #define REG_DELAY       0x55
+#define REG_CMSA        0xAA
 
 // ***** General Configuration Register (GENCREG) ******//
 #define	FREQ_BAND_433			0x10       //    433 MHz
@@ -257,6 +258,7 @@ typedef enum rfTrcvPacketState_e
 {
     PKT_FREE,               // Packet is unused
     PKT_READY_FOR_TX,       // Marked for transmit
+    PKT_HW_BUSY_TX,         // Hardware is busy transmitting this packet.
     PKT_WAITING_FOR_ACK,    // Packet was transmitted but is waiting for acknowledgement
     PKT_HW_BUSY_RX,         // Hardware is busy with receiving in this buffer
     PKT_HW_READY_RX,        // Hardware is done with receiving, software can pick it up

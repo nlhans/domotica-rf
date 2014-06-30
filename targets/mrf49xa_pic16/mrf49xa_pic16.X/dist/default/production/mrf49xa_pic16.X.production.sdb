@@ -39,12 +39,13 @@ Mcp9800_12bit 96
 [e E4301 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
-PKT_WAITING_FOR_ACK 2
-PKT_HW_BUSY_RX 3
-PKT_HW_READY_RX 4
-PKT_SW_BUSY 5
+PKT_HW_BUSY_TX 2
+PKT_WAITING_FOR_ACK 3
+PKT_HW_BUSY_RX 4
+PKT_HW_READY_RX 5
+PKT_SW_BUSY 6
 ]
-[e E4309 rfTrcvAckState_e `uc
+[e E4310 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
@@ -58,12 +59,13 @@ TX_PACKET 2
 [e E4301 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
-PKT_WAITING_FOR_ACK 2
-PKT_HW_BUSY_RX 3
-PKT_HW_READY_RX 4
-PKT_SW_BUSY 5
+PKT_HW_BUSY_TX 2
+PKT_WAITING_FOR_ACK 3
+PKT_HW_BUSY_RX 4
+PKT_HW_READY_RX 5
+PKT_SW_BUSY 6
 ]
-[e E4309 rfTrcvAckState_e `uc
+[e E4310 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
@@ -87,12 +89,13 @@ RF_FW_READ 194
 [e E4301 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
-PKT_WAITING_FOR_ACK 2
-PKT_HW_BUSY_RX 3
-PKT_HW_READY_RX 4
-PKT_SW_BUSY 5
+PKT_HW_BUSY_TX 2
+PKT_WAITING_FOR_ACK 3
+PKT_HW_BUSY_RX 4
+PKT_HW_READY_RX 5
+PKT_SW_BUSY 6
 ]
-[e E4309 rfTrcvAckState_e `uc
+[e E4310 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
@@ -106,12 +109,13 @@ TX_PACKET 2
 [e E4301 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
-PKT_WAITING_FOR_ACK 2
-PKT_HW_BUSY_RX 3
-PKT_HW_READY_RX 4
-PKT_SW_BUSY 5
+PKT_HW_BUSY_TX 2
+PKT_WAITING_FOR_ACK 3
+PKT_HW_BUSY_RX 4
+PKT_HW_READY_RX 5
+PKT_SW_BUSY 6
 ]
-[e E4309 rfTrcvAckState_e `uc
+[e E4310 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
@@ -180,14 +184,16 @@ TX_PACKET 2
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 "19
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
-"71 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"77 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v _mrf49xaCfg mrf49xaCfg `(v  1 e 0 0 ]
-"77
+"83
+[v _Mrf49xaSignalPresent Mrf49xaSignalPresent `(uc  1 e 1 0 ]
+"92
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-"87
+"102
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
-"122
+"137
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 "6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
@@ -215,24 +221,24 @@ TX_PACKET 2
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
 "84
 [v _Mrf49xaFreePacket Mrf49xaFreePacket `(v  1 e 0 0 ]
-"273 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
+"275 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "89 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S317  1 e 1 0 ]
-"273 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
+[v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S318  1 e 1 0 ]
+"275 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "106 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S317  1 e 1 0 ]
+[v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S318  1 e 1 0 ]
 "123
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
 "3 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_spi_pic16.c
@@ -346,26 +352,26 @@ TX_PACKET 2
 [s S290 . 2 `S275 1 msb 1 0 `S284 1 lsb 1 1 ]
 [u S293 mrf49xaStatus_u 2 `[2]uc 1 byte 2 0 `S290 1 flags 2 0 ]
 [v _mrf49Status mrf49Status `S293  1 e 2 0 ]
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "7
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[s S328 rfTrcvStatus_s 79 `*.4S317 1 hwRx 1 0 `[2]S317 1 rxPacket 50 1 `S317 1 txPacket 25 51 `E4296 1 state 1 76 `uc 1 hwByte 1 77 `uc 1 src 1 78 ]
-[v _rfTrcvStatus rfTrcvStatus `S328  1 e 79 0 ]
-[s S335 Mrf49InitReg_s 2 `uc 1 reg 1 0 `uc 1 val 1 1 ]
+[s S329 rfTrcvStatus_s 79 `*.4S318 1 hwRx 1 0 `[2]S318 1 rxPacket 50 1 `S318 1 txPacket 25 51 `E4296 1 state 1 76 `uc 1 hwByte 1 77 `uc 1 src 1 78 ]
+[v _rfTrcvStatus rfTrcvStatus `S329  1 e 79 0 ]
+[s S336 Mrf49InitReg_s 2 `uc 1 reg 1 0 `uc 1 val 1 1 ]
 "17
-[v _mrfRegset_Init mrfRegset_Init `DVCCE[16]S335  1 e 32 0 ]
-"40
+[v _mrfRegset_Init mrfRegset_Init `DVCCE[16]S336  1 e 32 0 ]
+"47
 [v _mrfRegset_InitCnt mrfRegset_InitCnt `DVCCEuc  1 e 1 0 ]
-"42
-[v _mrfRegset_Rx mrfRegset_Rx `DVCCE[6]S335  1 e 12 0 ]
-"50
+"49
+[v _mrfRegset_Rx mrfRegset_Rx `DVCCE[6]S336  1 e 12 0 ]
+"57
 [v _mrfRegset_RxCnt mrfRegset_RxCnt `DVCCEuc  1 e 1 0 ]
-"52
-[v _mrfRegset_Tx mrfRegset_Tx `DVCCE[4]S335  1 e 8 0 ]
-"58
+"59
+[v _mrfRegset_Tx mrfRegset_Tx `DVCCE[4]S336  1 e 8 0 ]
+"65
 [v _mrfRegset_TxCnt mrfRegset_TxCnt `DVCCEuc  1 e 1 0 ]
 [s S194 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
@@ -384,7 +390,7 @@ TX_PACKET 2
 ]
 [u S208 . 1 `S194 1 . 1 0 `S203 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES208  1 e 1 @11 ]
-[s S346 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S372 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -392,8 +398,8 @@ TX_PACKET 2
 `uc 1 LATA5 1 0 :1:5 
 ]
 "427
-[u S353 . 1 `S346 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES353  1 e 1 @12 ]
+[u S379 . 1 `S372 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES379  1 e 1 @12 ]
 [s S25 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 LATB4 1 0 :1:4 
 `uc 1 LATB5 1 0 :1:5 
@@ -403,7 +409,7 @@ TX_PACKET 2
 "475
 [u S31 . 1 `S25 1 . 1 0 ]
 [v _PORTBbits PORTBbits `VES31  1 e 1 @13 ]
-[s S363 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S351 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -413,12 +419,12 @@ TX_PACKET 2
 `uc 1 LATC7 1 0 :1:7 
 ]
 "516
-[u S372 . 1 `S363 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES372  1 e 1 @14 ]
+[u S360 . 1 `S351 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES360  1 e 1 @14 ]
 "1009
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1024
-[v _TRISAbits TRISAbits `VES353  1 e 1 @140 ]
+[v _TRISAbits TRISAbits `VES379  1 e 1 @140 ]
 "1058
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
 "1072
@@ -426,7 +432,7 @@ TX_PACKET 2
 "1096
 [v _TRISC TRISC `VEuc  1 e 1 @142 ]
 "1113
-[v _TRISCbits TRISCbits `VES372  1 e 1 @142 ]
+[v _TRISCbits TRISCbits `VES360  1 e 1 @142 ]
 [s S162 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 TMR0SE 1 0 :1:4 
@@ -457,11 +463,11 @@ TX_PACKET 2
 "1770
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
 "1832
-[v _LATAbits LATAbits `VES353  1 e 1 @268 ]
+[v _LATAbits LATAbits `VES379  1 e 1 @268 ]
 "1875
 [v _LATBbits LATBbits `VES31  1 e 1 @269 ]
 "1916
-[v _LATCbits LATCbits `VES372  1 e 1 @270 ]
+[v _LATCbits LATCbits `VES360  1 e 1 @270 ]
 "2271
 [v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
 "2475
@@ -470,7 +476,7 @@ TX_PACKET 2
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
 "2556
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S1223 . 1 `uc 1 WPUA0 1 0 :1:0 
+[s S1232 . 1 `uc 1 WPUA0 1 0 :1:0 
 `uc 1 WPUA1 1 0 :1:1 
 `uc 1 WPUA2 1 0 :1:2 
 `uc 1 WPUA3 1 0 :1:3 
@@ -478,14 +484,16 @@ TX_PACKET 2
 `uc 1 WPUA5 1 0 :1:5 
 ]
 "3055
-[s S1230 . 1 `uc 1 WPUA 1 0 :6:0 
+[s S1239 . 1 `uc 1 WPUA 1 0 :6:0 
 ]
-[u S1232 . 1 `S1223 1 . 1 0 `S1230 1 . 1 0 ]
-[v _WPUAbits WPUAbits `VES1232  1 e 1 @524 ]
+[u S1241 . 1 `S1232 1 . 1 0 `S1239 1 . 1 0 ]
+[v _WPUAbits WPUAbits `VES1241  1 e 1 @524 ]
 "41 C:\Projects\Firmware\domoticarf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"80
+"72
+[v main@k k `uc  1 a 1 26 ]
+"85
 } 0
 "28
 [v _SysInitGpio SysInitGpio `(v  1 e 0 0 ]
@@ -500,50 +508,50 @@ TX_PACKET 2
 "5 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
 [v _RfSendPowerState RfSendPowerState `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "7
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v RfSendPowerState@packet packet `*.4S317  1 a 1 6 ]
+[v RfSendPowerState@packet packet `*.4S318  1 a 1 6 ]
 "17
 } 0
-"273 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
+"275 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "106 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S317  1 e 1 0 ]
+[v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S318  1 e 1 0 ]
 {
 "121
 } 0
 "123
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
 {
-"198
+"194
 [v Mrf49xaTick@timeout timeout `uc  1 a 1 24 ]
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "127
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v Mrf49xaTick@packet packet `*.4S317  1 a 1 25 ]
-"229
+[v Mrf49xaTick@packet packet `*.4S318  1 a 1 25 ]
+"231
 } 0
-"273 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
+"275 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "89 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S317  1 e 1 0 ]
+[v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S318  1 e 1 0 ]
 {
 "104
 } 0
@@ -552,42 +560,42 @@ TX_PACKET 2
 {
 "12
 } 0
-"87 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"102 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
 {
-"89
+"104
 [v Mrf49xaModeTx@k k `uc  1 a 1 3 ]
-"95
+"110
 } 0
 "108 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
 [v _HandlePacket HandlePacket `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v HandlePacket@packet packet `*.4S317  1 a 1 wreg ]
+[v HandlePacket@packet packet `*.4S318  1 a 1 wreg ]
 "110
 [v HandlePacket@sendMsg sendMsg `uc  1 a 1 20 ]
 "111
 [v HandlePacket@sendAck sendAck `uc  1 a 1 19 ]
 "108
-[v HandlePacket@packet packet `*.4S317  1 a 1 wreg ]
+[v HandlePacket@packet packet `*.4S318  1 a 1 wreg ]
 "110
 "108
-[v HandlePacket@packet packet `*.4S317  1 a 1 21 ]
+[v HandlePacket@packet packet `*.4S318  1 a 1 21 ]
 "162
 } 0
 "66
 [v _handleFwWrite handleFwWrite `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v handleFwWrite@packet packet `*.4S317  1 a 1 wreg ]
+[v handleFwWrite@packet packet `*.4S318  1 a 1 wreg ]
 "82
 [v handleFwWrite@i i `uc  1 a 1 14 ]
 "68
@@ -595,8 +603,8 @@ TX_PACKET 2
 "69
 [v handleFwWrite@packetData packetData `*.4ui  1 a 1 13 ]
 "66
-[v handleFwWrite@packet packet `*.4S317  1 a 1 wreg ]
-[v handleFwWrite@packet packet `*.4S317  1 a 1 17 ]
+[v handleFwWrite@packet packet `*.4S318  1 a 1 wreg ]
+[v handleFwWrite@packet packet `*.4S318  1 a 1 17 ]
 "92
 } 0
 "25 C:\Projects\Firmware\domoticarf/src/devices/24aa64.c
@@ -610,29 +618,29 @@ TX_PACKET 2
 "94 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
 [v _handleFwRead handleFwRead `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v handleFwRead@packet packet `*.4S317  1 a 1 wreg ]
-[v handleFwRead@packet packet `*.4S317  1 a 1 wreg ]
+[v handleFwRead@packet packet `*.4S318  1 a 1 wreg ]
+[v handleFwRead@packet packet `*.4S318  1 a 1 wreg ]
 "96
 "94
-[v handleFwRead@packet packet `*.4S317  1 a 1 10 ]
+[v handleFwRead@packet packet `*.4S318  1 a 1 10 ]
 "106
 } 0
 "19
 [v _handleFwCmd handleFwCmd `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v handleFwCmd@packet packet `*.4S317  1 a 1 wreg ]
-[v handleFwCmd@packet packet `*.4S317  1 a 1 wreg ]
-[v handleFwCmd@packet packet `*.4S317  1 a 1 8 ]
+[v handleFwCmd@packet packet `*.4S318  1 a 1 wreg ]
+[v handleFwCmd@packet packet `*.4S318  1 a 1 wreg ]
+[v handleFwCmd@packet packet `*.4S318  1 a 1 8 ]
 "64
 } 0
 "4 C:\Projects\Firmware\domoticarf/src/devices/24aa64.c
@@ -692,60 +700,60 @@ TX_PACKET 2
 "14 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
 [v _Mrf49xaTxAck Mrf49xaTxAck `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v Mrf49xaTxAck@packet packet `*.4S317  1 a 1 wreg ]
-[v Mrf49xaTxAck@packet packet `*.4S317  1 a 1 wreg ]
+[v Mrf49xaTxAck@packet packet `*.4S318  1 a 1 wreg ]
+[v Mrf49xaTxAck@packet packet `*.4S318  1 a 1 wreg ]
 "16
 "14
-[v Mrf49xaTxAck@packet packet `*.4S317  1 a 1 6 ]
+[v Mrf49xaTxAck@packet packet `*.4S318  1 a 1 6 ]
 "24
 } 0
 "26
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v Mrf49xaTxPacket@packet packet `*.4S317  1 a 1 wreg ]
+[v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 wreg ]
 "28
 [v Mrf49xaTxPacket@i i `uc  1 a 1 4 ]
 [v Mrf49xaTxPacket@crc crc `uc  1 a 1 3 ]
 "26
-[v Mrf49xaTxPacket@packet packet `*.4S317  1 a 1 wreg ]
+[v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 wreg ]
 [v Mrf49xaTxPacket@response response `uc  1 p 1 0 ]
 [v Mrf49xaTxPacket@needAck needAck `uc  1 p 1 1 ]
 "28
 "26
-[v Mrf49xaTxPacket@packet packet `*.4S317  1 a 1 5 ]
+[v Mrf49xaTxPacket@packet packet `*.4S318  1 a 1 5 ]
 "82
 } 0
 "84
 [v _Mrf49xaFreePacket Mrf49xaFreePacket `(v  1 e 0 0 ]
 {
-[s S303 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-[u S310 . 21 `S303 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S317 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S310 1 . 21 1 `uc 1 crc 1 22 `E4309 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
+[s S304 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S311 . 21 `S304 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S318 rfTrcvPacket_s 25 `E4301 1 state 1 0 `S311 1 . 21 1 `uc 1 crc 1 22 `E4310 1 needAck 1 23 `uc 1 retry 1 24 :4:0 
 `uc 1 retransmit 1 24 :2:4 
 ]
-[v Mrf49xaFreePacket@packet packet `*.4S317  1 a 1 wreg ]
-[v Mrf49xaFreePacket@packet packet `*.4S317  1 a 1 wreg ]
+[v Mrf49xaFreePacket@packet packet `*.4S318  1 a 1 wreg ]
+[v Mrf49xaFreePacket@packet packet `*.4S318  1 a 1 wreg ]
 "86
 "84
-[v Mrf49xaFreePacket@packet packet `*.4S317  1 a 1 0 ]
+[v Mrf49xaFreePacket@packet packet `*.4S318  1 a 1 0 ]
 "87
 } 0
-"122 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"137 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 {
-"124
+"139
 [v Mrf49xaInit@k k `uc  1 a 1 9 ]
-"154
+"172
 } 0
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_data.c
 [v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
@@ -754,12 +762,12 @@ TX_PACKET 2
 [v Mrf49xaServe@data data `uc  1 a 1 5 ]
 "195
 } 0
-"77 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"92 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
-"79
+"94
 [v Mrf49xaModeRx@k k `uc  1 a 1 3 ]
-"85
+"100
 } 0
 "48 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
@@ -838,11 +846,11 @@ TX_PACKET 2
 [v i1Mrf49xaServe@data Mrf49xaServe `uc  1 a 1 5 ]
 "195
 } 0
-"77 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"92 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
 [v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
-"85
+"100
 } 0
 "48 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]

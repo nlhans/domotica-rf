@@ -181,10 +181,6 @@ void Mrf49xaTick(void)
     if (packetTx.state == PKT_READY_FOR_TX &&
         rfTrcvStatus.state == RECV_IDLE)
     {
-
-#ifdef RF_DEBUG
-        rfHistoryPut(&packetTx);
-#endif
         if (packetTx.retry >= 10)
         {
             // Attempt to retransmit..
@@ -196,6 +192,8 @@ void Mrf49xaTick(void)
         // Do a collision avoidence check.
         // TODO: This may need improvement & alot of testing.
         uint8_t timeout = 0;
+
+        // Remain in here while a signal is present.
         do
         {
             Mrf49RxSts();
@@ -216,14 +214,18 @@ void Mrf49xaTick(void)
             }
             
         }
-        // Remain in here while a signal is present.
         while (1);
+
+#ifdef RF_DEBUG
+        rfHistoryPut(&packetTx);
+#endif
 
         //printf("\nTx %X\n", rfTrcvStatus.txPacket.packet.id);
 
         // We've obtained air mission control.
         MRF_DISABLE_INT;
         Mrf49xaModeTx();
+        packetTx.state = PKT_HW_BUSY_TX;
         MRF_ENABLE_INT;
     }
 }

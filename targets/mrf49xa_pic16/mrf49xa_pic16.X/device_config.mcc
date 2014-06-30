@@ -18,10 +18,10 @@
             <file checksum="2538697821" modified="false" name="interrupt_manager.c" path="MCC_Generated_Files/interrupt_manager.c"/>
             <file checksum="3487049141" modified="false" name="interrupt_manager.h" path="MCC_Generated_Files/interrupt_manager.h"/>
         </manager>
-        <manager generated="true" name="System">
+        <manager generated="false" name="System">
             <initializer comment="" name="InitializerDefault">
                 <setting name="SCS" option="FOSC"/>
-                <setting name="IRCF" option="16MHz_HF"/>
+                <setting name="IRCF" option="31KHz_LF"/>
                 <setting name="OSTS" option="intosc"/>
                 <setting name="HFIOFR" option="disabled"/>
                 <setting name="HFIOFS" option="not0.5percent_acc"/>
@@ -48,7 +48,7 @@
         </manager>
     </managers>
     <modules>
-        <module generated="true" mode="Timer" name="TMR1" type="tmr_mid1">
+        <module generated="false" mode="Timer" name="TMR1" type="tmr_mid1">
             <initializer comment="" name="InitializerDefault">
                 <setting name="T1OSCEN" option="disabled"/>
                 <setting name="nT1SYNC" option="synchronize"/>
@@ -62,17 +62,17 @@
                 <setting name="T1GPOL" option="low"/>
                 <setting name="T1GGO_nDONE" option="done"/>
                 <setting name="TMR1GE" option="disabled"/>
-                <setting name="TMR1H" option="177"/>
-                <setting name="TMR1L" option="224"/>
+                <setting name="TMR1H" option="28"/>
+                <setting name="TMR1L" option="243"/>
                 <additionalSetting name="externalFreq" option=""/>
             </initializer>
             <setting name="TMRI" option="true"/>
             <setting name="TMRGI" option="false"/>
-            <setting name="ticker" option="100"/>
+            <setting name="ticker" option="1"/>
             <file checksum="1982701729" modified="false" name="tmr1.c" path="MCC_Generated_Files/tmr1.c"/>
             <file checksum="1890436613" modified="false" name="tmr1.h" path="MCC_Generated_Files/tmr1.h"/>
         </module>
-        <module generated="true" mode="Timer" name="TMR0" type="tmr_0">
+        <module generated="false" mode="Timer" name="TMR0" type="tmr_0">
             <initializer comment="" name="InitializerDefault">
                 <setting name="TMR0CS" option="FOSC/4"/>
                 <setting name="TMR0SE" option="Increment_hi_lo"/>
@@ -88,19 +88,19 @@
             <file checksum="1357261893" modified="false" name="tmr0.c" path="MCC_Generated_Files/tmr0.c"/>
             <file checksum="2998601060" modified="false" name="tmr0.h" path="MCC_Generated_Files/tmr0.h"/>
         </module>
-        <module generated="true" mode="Timer" name="TMR2" type="tmr_2">
+        <module generated="false" mode="Timer" name="TMR2" type="tmr_2">
             <initializer comment="" name="InitializerDefault">
                 <setting name="TMR2ON" option="off"/>
                 <setting name="T2CKPS" option="1:16"/>
                 <setting name="T2OUTPS" option="1:10"/>
-                <setting name="PR2" option="250"/>
+                <setting name="PR2" option="1"/>
                 <setting name="TMR2" option="0"/>
                 <additionalSetting name="ticker" option="100"/>
                 <additionalSetting name="T2CKPS" option="1:16"/>
-                <additionalSetting name="maxPeriodChanged" option="63.75 us"/>
+                <additionalSetting name="maxPeriodChanged" option="10.2 ms"/>
                 <additionalSetting name="T2OUTPS" option="1:10"/>
                 <additionalSetting name="minPeriodChanged" option="0.0 ns"/>
-                <additionalSetting name="period" option="1.0 s"/>
+                <additionalSetting name="period" option="20.645 ms"/>
             </initializer>
             <setting name="TMRI" option="true"/>
             <setting name="ticker" option="100"/>

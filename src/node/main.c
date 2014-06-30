@@ -69,11 +69,16 @@ char bf[16];
             
     Mrf49xaInit();
 
-    RfSendPowerState();
+    uint8_t k = 1;
     
     while(1)
     {
         Mrf49xaTick();
+        if (k)
+        {
+            RfSendPowerState();
+            k = 0;
+        }
     }
 
 

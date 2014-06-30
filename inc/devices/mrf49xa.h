@@ -13,6 +13,8 @@ void Mrf49xaInit(void);
 void Mrf49xaModeRx(void);
 void Mrf49xaModeTx(void);
 
+bool_t Mrf49xaSignalPresent(void);
+
 #ifdef MRF49XA_POWER_SWITCH
 void Mrf49xaBootup(void);
 void Mrf49xaShutdown(void);

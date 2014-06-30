@@ -55,7 +55,7 @@ void RfPing(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_PINGA);
 
-    RtosTimerRearm(&rfPingTimer, 2000);
+    RtosTimerRearm(&rfPingTimer, 50);
 }
 
 void RfTick(void)
