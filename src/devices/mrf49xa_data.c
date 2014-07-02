@@ -10,8 +10,11 @@ bool_t Mrf49xaServe(void)
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH
     if (rfTrcvStatus.state == POWERED_OFF)
-        return;
+        return FALSE;
 #endif
+
+    if (rfTrcvStatus.needsReset)
+        return FALSE;
 
     Mrf49RxSts();
 
@@ -119,10 +122,6 @@ bool_t Mrf49xaServe(void)
                     // Reset modem
                     Mrf49xaModeRx();
 
-                    // flag scope
-                    SENSOR_PWR = 1;
-                    SENSOR_PWR = 0;
-
                 }
                 else
                 {
@@ -145,7 +144,7 @@ bool_t Mrf49xaServe(void)
 
                     case 101:
                         Mrf49TxByte(RF_NETWORKID2);
-                        rfTrcvStatus.hwByte = 0xFF;
+                        rfTrcvStatus.hwByte = 0x7F;
                         break;
 
                         // 4..packet size

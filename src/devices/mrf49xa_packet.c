@@ -1,4 +1,5 @@
 #include "devices/mrf49xa.h"
+#include "bsp/interrupt.h"
 
 #include "rfstack/packets.h"
 
@@ -122,6 +123,13 @@ rfTrcvPacket_t* Mrf49xaAllocPacket(void)
 
 void Mrf49xaTick(void)
 {
+    if (rfTrcvStatus.needsReset)
+    {
+        Mrf49xaInit();
+        ExtIntInit();
+        return;
+    }
+
     if (Mrf49xaPacketPending())
     {
         rfTrcvPacket_t* packet = Mrf49xaRxPacket();

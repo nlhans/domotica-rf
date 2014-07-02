@@ -64,6 +64,7 @@
 #define GENCREG_RESET                   XTAL_LD_CAP_125 | FREQ_BAND_868
 #define GENCREG_MODE_RX                 GENCREG_RESET | GENC_RX_FIFO
 #define GENCREG_MODE_TX                 GENCREG_RESET | GENC_TX_DATA
+#define GENCREG_MODE_SLEEP              GENCREG_RESET | GENC_RX_FIFO
 
 
 // ***** Automatic Frequency Control Register (AFCREG) ******//
@@ -205,6 +206,7 @@
 
 #define PMCREG_MODE_RX          PMCREG_RXC
 #define PMCREG_MODE_TX          PMCREG_TXC
+#define PMCREG_MODE_SLEEP       0
 #define PMCREG_RESET            0
 
 // ***** Wake-up timer register ******//
@@ -305,7 +307,8 @@ typedef struct rfTrcvStatus_s
     rfTrcvPacket_t txPacket;
 
     rfTrcvState_t state;
-    uint8_t hwByte;
+    uint8_t hwByte:7;
+    bool_t needsReset:1;
     uint8_t src; // my node ID
 
 } rfTrcvStatus_t;

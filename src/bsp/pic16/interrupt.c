@@ -14,6 +14,11 @@ void ExtIntInit(void)
     INTCONbits.GIE = 1;
 }
 
+void ExtIntDeinit(void)
+{
+    INTCONbits.INTE = 0;
+}
+
 void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio)
 {
     cb = callback;
@@ -32,8 +37,17 @@ void interrupt extInt()
 {
     if (INTCONbits.INTF != 0)
     {
-        if (Mrf49xaServe())
-            INTCONbits.INTF = 0;
-        //cb(0);
+        uint8_t ofw = 0;
+        while (!Mrf49xaServe())
+        {
+            ofw++;
+            if (ofw == 255)
+            {
+                ExtIntDeinit();
+                Mrf49xaNeedsReset();
+                break;
+            }
+        }
+        INTCONbits.INTF = 0;
     }
 }

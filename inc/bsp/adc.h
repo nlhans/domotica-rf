@@ -3,6 +3,8 @@
 #include "stddefs.h"
 
 void AdcInit(void);
+void AdcDeinit(void);
+
 void AdcGo(void);
 UI08_t AdcIsBusy(void);
 void AdcPinEnable(UI08_t port, UI08_t portNumber);

@@ -3,10 +3,6 @@
 #ifdef ADC16_C
 void AdcInit(void)
 {
-    ANSELA = 0;
-    ANSELB = 0;
-    ANSELC = 0;
-
     FVRCON = 0b11100001; // Voltage reference 1.024V
 
     ADCON2 = 0b00000000;
@@ -14,6 +10,15 @@ void AdcInit(void)
     ADCON0 = 0b00000000;
 
     ADCON0 = 0b00010011;
+}
+
+void AdcDeinit(void)
+{
+    FVRCON = 0; // Voltage reference 1.024V
+
+    ADCON2 = 0;
+    ADCON1 = 0;
+    ADCON0 = 0;
 }
 
 inline UI16_t AdcGetResult(void)

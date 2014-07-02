@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
+SOURCEFILES_QUOTED_IF_SPACED=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c ../../../src/node/power.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d ${OBJECTDIR}/_ext/1658841978/client.p1.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d ${OBJECTDIR}/_ext/608774428/main.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1 ${OBJECTDIR}/_ext/608774428/power.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1.d ${OBJECTDIR}/_ext/421542533/adc16.p1.d ${OBJECTDIR}/_ext/421542533/interrupt.p1.d ${OBJECTDIR}/_ext/2092508035/mcp9800.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1.d ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1.d ${OBJECTDIR}/_ext/2092508035/24aa64.p1.d ${OBJECTDIR}/_ext/1658841978/client.p1.d ${OBJECTDIR}/_ext/1658841978/packets.p1.d ${OBJECTDIR}/_ext/608774428/main.p1.d ${OBJECTDIR}/_ext/608774428/power.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1
+OBJECTFILES=${OBJECTDIR}/_ext/534562843/softI2c.p1 ${OBJECTDIR}/_ext/421542533/adc16.p1 ${OBJECTDIR}/_ext/421542533/interrupt.p1 ${OBJECTDIR}/_ext/2092508035/mcp9800.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_spi_pic16.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_cmd.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_packet.p1 ${OBJECTDIR}/_ext/2092508035/mrf49xa_data.p1 ${OBJECTDIR}/_ext/2092508035/24aa64.p1 ${OBJECTDIR}/_ext/1658841978/client.p1 ${OBJECTDIR}/_ext/1658841978/packets.p1 ${OBJECTDIR}/_ext/608774428/main.p1 ${OBJECTDIR}/_ext/608774428/power.p1
 
 # Source Files
-SOURCEFILES=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c
+SOURCEFILES=../../../src/bsp/softI2c.c ../../../src/bsp/pic16/adc16.c ../../../src/bsp/pic16/interrupt.c ../../../src/devices/mcp9800.c ../../../src/devices/mrf49xa.c ../../../src/devices/mrf49xa_spi_pic16.c ../../../src/devices/mrf49xa_cmd.c ../../../src/devices/mrf49xa_packet.c ../../../src/devices/mrf49xa_data.c ../../../src/devices/24aa64.c ../../../src/rfstack/client.c ../../../src/rfstack/packets.c ../../../src/node/main.c ../../../src/node/power.c
 
 
 CFLAGS=
@@ -182,6 +182,14 @@ ${OBJECTDIR}/_ext/608774428/main.p1: ../../../src/node/main.c  nbproject/Makefil
 	@-${MV} ${OBJECTDIR}/_ext/608774428/main.d ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/_ext/608774428/power.p1: ../../../src/node/power.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/608774428 
+	@${RM} ${OBJECTDIR}/_ext/608774428/power.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/608774428/power.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/power.p1  ../../../src/node/power.c 
+	@-${MV} ${OBJECTDIR}/_ext/608774428/power.d ${OBJECTDIR}/_ext/608774428/power.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/power.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/_ext/534562843/softI2c.p1: ../../../src/bsp/softI2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/534562843 
@@ -286,6 +294,14 @@ ${OBJECTDIR}/_ext/608774428/main.p1: ../../../src/node/main.c  nbproject/Makefil
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/main.p1  ../../../src/node/main.c 
 	@-${MV} ${OBJECTDIR}/_ext/608774428/main.d ${OBJECTDIR}/_ext/608774428/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/608774428/power.p1: ../../../src/node/power.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/608774428 
+	@${RM} ${OBJECTDIR}/_ext/608774428/power.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/608774428/power.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 -I"../../../inc" --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%%f:%%l: error: (%%n) %%s" "--warnformat=%%f:%%l: warning: (%%n) %%s" "--msgformat=%%f:%%l: advisory: (%%n) %%s"    -o${OBJECTDIR}/_ext/608774428/power.p1  ../../../src/node/power.c 
+	@-${MV} ${OBJECTDIR}/_ext/608774428/power.d ${OBJECTDIR}/_ext/608774428/power.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/608774428/power.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

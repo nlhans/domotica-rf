@@ -5,7 +5,7 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.31\dat\en_msgs.txt -cs \
   -h+dist/default/production\mrf49xa_pic16.X.production.sym \
   --cmf=dist/default/production\mrf49xa_pic16.X.production.cmf -z \
-  -Q16LF1508 -oC:\Users\Desktop\AppData\Local\Temp\s4ks.6 \
+  -Q16LF1508 -oC:\Users\Desktop\AppData\Local\Temp\s6ks.6 \
   -Mdist/default/production/mrf49xa_pic16.X.production.map -E1 -ver=XC8 \
   -ASTACK=0209Fh-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
   -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -AENTRY=00h-0FFhx16 \
@@ -27,7 +27,7 @@ Linker command line:
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
   -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
-  C:\Users\Desktop\AppData\Local\Temp\s4ks.obj \
+  C:\Users\Desktop\AppData\Local\Temp\s6ks.obj \
   dist/default/production\mrf49xa_pic16.X.production.obj 
 
 Object code version is 3.11
@@ -37,57 +37,55 @@ Machine type is 16LF1508
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Desktop\AppData\Local\Temp\s4ks.obj
-                end_init                             14       14        2        8       0
+C:\Users\Desktop\AppData\Local\Temp\s6ks.obj
+                end_init                             20       20        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        2    1000E       0
 dist/default/production\mrf49xa_pic16.X.production.obj
-                cinit                                16       16        C        8       0
-                intentry                              4        4       10        8       0
-                text43                              41E      41E      1BA        8       0
-                text21                              710      710       8B        8       0
-                swtext1                             800      800       10     1000       0
-                text8                               7D3      7D3       22      FA6       0
-                text2                               5D8      5D8      138        8       0
-                maintext                             22       22      3FC        8       0
-                cstackBANK0                          20       20       1B       20       1
-                cstackCOMMON                         70       70        7       70       1
-                clrtext                             7F5      7F5        6      FA6       0
+                cinit                                22       22      70C        8       0
+                intentry                              4        4       1C        8       0
+                text71                              786      786        2      EFA       0
+                text70                              783      783        3      EFA       0
+                text67                              E2C      E2C      1D4     1C58       0
+                swtext1                             76D      76D       10      EDA       0
+                cstackBANK0                          20       20       19       20       1
+                cstackCOMMON                         70       70        8       70       1
+                clrtext                             77D      77D        6      EFA       0
                 bssBANK1                             A0       A0       4F       A0       1
-                bssBANK0                             3B       3B        2       20       1
-                strings                             79B      79B       38      F36       0
+                dataBANK0                            3B       3B        1       20       1
+                bssBANK0                             39       39        2       20       1
+                strings                             72E      72E       3F      E5C       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
 
         CLASS   CONST          
-                swtext1                             800      800       10         0
+                swtext1                             76D      76D       10         0
 
         CLASS   CODE           
-                end_init                             14       14        2         0
-                cinit                                16       16        C         0
-                intentry                              4        4       10         0
+                end_init                             20       20        2         0
+                cinit                                22       22      70C         0
+                intentry                              4        4       1C         0
                 reset_vec                             0        0        2         0
-                text43                              41E      41E      1BA         0
-                text21                              710      710       8B         0
-                text8                               7D3      7D3       22         0
-                text2                               5D8      5D8      138         0
-                maintext                             22       22      3FC         0
-                clrtext                             7F5      7F5        6         0
+                text71                              786      786        2         0
+                text70                              783      783        3         0
+                text67                              E2C      E2C      1D4         0
+                clrtext                             77D      77D        6         0
 
         CLASS   STRCODE        
 
         CLASS   ENTRY          
 
         CLASS   STRING         
-                strings                             79B      79B       38         0
+                strings                             72E      72E       3F         0
 
         CLASS   COMMON         
-                cstackCOMMON                         70       70        7         1
+                cstackCOMMON                         70       70        8         1
 
         CLASS   BANK0          
-                cstackBANK0                          20       20       1B         1
-                bssBANK0                             3B       3B        2         1
+                cstackBANK0                          20       20       19         1
+                dataBANK0                            3B       3B        1         1
+                bssBANK0                             39       39        2         1
 
         CLASS   BANK1          
                 bssBANK1                             A0       A0       4F         1
@@ -235,35 +233,33 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000002  000002         0       0  CODE        2
-                intentry                       000004  000797  00079B         8       0  CODE        2
-                cstackBANK0                    000020  00001D  00003D        20       1  BANK0       1
-                cstackCOMMON                   000070  000007  000077        70       1  COMMON      1
+                intentry                       000004  00072A  00072E         8       0  CODE        2
+                cstackBANK0                    000020  00001C  00003C        20       1  BANK0       1
+                cstackCOMMON                   000070  000008  000078        70       1  COMMON      1
                 bssBANK1                       0000A0  00004F  0000EF        A0       1  BANK1       1
-                strings                        00079B  000038  0007D3       F36       0  STRING      2
-                text8                          0007D3  000028  0007FB       FA6       0  CODE        2
-                swtext1                        000800  000010  000810      1000       0  CONST       2
+                strings                        00072E  00003F  00076D       E5C       0  STRING      2
+                swtext1                        00076D  000010  00077D       EDA       0  CONST       2
+                clrtext                        00077D  00000B  000788       EFA       0  CODE        2
+                text67                         000E2C  0001D4  001000      1C58       0  CODE        2
                 config                         008007  000002  008009     1000E       0  CONFIG      2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            0003D-0006F              33           1
+        BANK0            0003C-0006F              34           1
         BANK1            000EF-000EF               1           1
         BANK2            00120-0016F              50           1
         BIGRAM           02000-020EF              F0           1
         CODE             00002-00003               2           2
-                         007FB-007FF               5
-                         00810-00FFF             7F0
-        COMMON           00077-0007D               7           1
+                         00788-00E2B              78
+        COMMON           00078-0007D               6           1
         CONST            00002-00003               2           2
-                         007FB-007FF               5
-                         00810-00FFF             100
+                         00788-00E2B             100
         ENTRY            00002-00003               2           2
-                         007FB-007FF               5
-                         00810-00FFF             100
+                         00788-00E2B             100
         IDLOC            08000-08003               4           2
-        RAM              0003D-0006F              33           1
+        RAM              0003C-0006F              34           1
                          000EF-000EF               1
                          00120-0016F              50
         SFR0             00000-0001F              20           1
@@ -300,17 +296,20 @@ UNUSED ADDRESS RANGES
         SFR9             00480-004EF              70           1
         STACK            0209F-020EF              51           1
         STRCODE          00002-00003               2           2
-                         007FB-007FF               5
-                         00810-00FFF             7F0
+                         00788-00E2B             6A4
         STRING           00002-00003               2           2
-                         007FB-007FF               5
-                         00810-00FFF             100
+                         00788-00E2B             100
 
                                   Symbol Table
 
+?_AdcGetResult                 cstackBANK0  00020
+?_AdcSample                    cstackBANK0  00022
+AdcChSelect@channel            cstackBANK0  00020
+AdcSample@ch                   cstackBANK0  00025
 HandlePacket@packet            cstackBANK0  00035
 HandlePacket@sendAck           cstackBANK0  00033
 HandlePacket@sendMsg           cstackBANK0  00034
+Mcp9800Start@resolution        cstackBANK0  00024
 Mrf49RxCmd@cmd                 cstackBANK0  00021
 Mrf49RxCmd@val                 cstackBANK0  00022
 Mrf49SpiRx@data                cstackBANK0  00020
@@ -319,23 +318,33 @@ Mrf49TxByte@byte               cstackBANK0  00023
 Mrf49TxCmd@cmd                 cstackBANK0  00022
 Mrf49TxCmd@val                 cstackBANK0  00021
 Mrf49xaFreePacket@packet       cstackBANK0  00020
-Mrf49xaInit@k                  cstackBANK0  00029
+Mrf49xaInit@k                  cstackBANK0  00026
 Mrf49xaModeRx@k                cstackBANK0  00023
+Mrf49xaModeSleep@k             cstackBANK0  00023
 Mrf49xaModeTx@k                cstackBANK0  00023
 Mrf49xaServe@data              cstackBANK0  00025
-Mrf49xaTick@packet             cstackBANK0  00039
-Mrf49xaTick@timeout            cstackBANK0  00038
+Mrf49xaTick@packet             cstackBANK0  00038
+Mrf49xaTick@timeout            cstackBANK0  00037
 Mrf49xaTxAck@packet            cstackBANK0  00026
 Mrf49xaTxPacket@crc            cstackBANK0  00023
 Mrf49xaTxPacket@i              cstackBANK0  00024
 Mrf49xaTxPacket@needAck        cstackBANK0  00021
 Mrf49xaTxPacket@packet         cstackBANK0  00025
 Mrf49xaTxPacket@response       cstackBANK0  00020
-PL2                            text21       00776
-PL4                            maintext     003FD
-PL6                            text21       00791
-PL8                            maintext     0040B
-RfSendPowerState@packet        cstackBANK0  00026
+PL10                           cinit        006ED
+PL12                           cinit        006FB
+PL14                           cinit        00708
+PL16                           text67       00FF7
+PL18                           cinit        00712
+PL20                           cinit        00718
+PL22                           cinit        0071E
+PL24                           cinit        00724
+PL26                           cinit        00729
+PL8                            cinit        006D2
+RfSendPowerState@packet        cstackBANK0  00028
+RfSendPowerState@s             cstackBANK0  00026
+Sleepy@b                       cstackBANK0  00023
+Sleepy@ms                      cstackBANK0  00020
 SoftI2cRxByte@ack              cstackBANK0  00021
 SoftI2cRxByte@data             cstackBANK0  00022
 SoftI2cRxByte@i                cstackBANK0  00023
@@ -344,52 +353,80 @@ SoftI2cTxByte@i                cstackBANK0  00023
 _ADCON0                        (abs)        0009D
 _ADCON1                        (abs)        0009E
 _ADCON2                        (abs)        0009F
+_ADRESH                        (abs)        0009C
+_ADRESL                        (abs)        0009B
 _ANSELA                        (abs)        0018C
 _ANSELB                        (abs)        0018D
 _ANSELC                        (abs)        0018E
-_AdcInit                       maintext     002E8
-_ExtIntInit                    maintext     002F7
+_AdcChSelect                   cinit        00108
+_AdcDeinit                     cinit        006C0
+_AdcGetResult                  text10       00000
+_AdcGo                         cinit        00102
+_AdcInit                       cinit        006C7
+_AdcIsBusy                     cinit        00104
+_AdcSample                     cinit        000DA
+_ExtIntDeinit                  text71       00786
+_ExtIntInit                    cinit        00619
 _FVRCON                        (abs)        00117
-_HandlePacket                  maintext     00301
+_HandlePacket                  cinit        00121
 _INTCONbits                    (abs)        0000B
 _LATAbits                      (abs)        0010C
 _LATBbits                      (abs)        0010D
 _LATCbits                      (abs)        0010E
-_Mrf49RxByte                   maintext     00212
-_Mrf49RxCmd                    maintext     000D0
-_Mrf49RxSts                    maintext     00299
-_Mrf49SpiRx                    maintext     002A4
-_Mrf49SpiTx                    maintext     0023E
-_Mrf49TxByte                   maintext     0020D
-_Mrf49TxCmd                    maintext     00235
-_Mrf49xaAllocPacket            maintext     00411
-_Mrf49xaFreePacket             maintext     002FC
-_Mrf49xaInit                   maintext     000DA
-_Mrf49xaModeRx                 maintext     00214
-_Mrf49xaModeTx                 text8        007D3
-_Mrf49xaPacketPending          maintext     003A4
-_Mrf49xaRxPacket               maintext     003AE
-_Mrf49xaServe                  maintext     00143
-_Mrf49xaTick                   maintext     0003E
-_Mrf49xaTxAck                  text21       00710
-_Mrf49xaTxPacket               text21       00730
+_Mcp9800Read                   cinit        003BD
+_Mcp9800Start                  cinit        003FA
+_Mrf49RxByte                   cinit        0059D
+_Mrf49RxCmd                    cinit        00076
+_Mrf49RxSts                    cinit        005CD
+_Mrf49SpiRx                    cinit        0061F
+_Mrf49SpiTx                    cinit        00663
+_Mrf49TxByte                   cinit        00598
+_Mrf49TxCmd                    cinit        005C4
+_Mrf49xaAllocPacket            cinit        0010F
+_Mrf49xaFreePacket             cinit        005DF
+_Mrf49xaInit                   cinit        00342
+_Mrf49xaModeRx                 cinit        0059F
+_Mrf49xaModeSleep              cinit        00030
+_Mrf49xaModeTx                 cinit        00052
+_Mrf49xaNeedsReset             cinit        005DD
+_Mrf49xaPacketPending          cinit        005E4
+_Mrf49xaReboot                 cinit        006BF
+_Mrf49xaRxPacket               cinit        005ED
+_Mrf49xaServe                  cinit        004C1
+_Mrf49xaShutdown               cinit        006BE
+_Mrf49xaTick                   cinit        002B6
+_Mrf49xaTxAck                  cinit        0024F
+_Mrf49xaTxPacket               cinit        00209
 _OPTION_REGbits                (abs)        00095
 _OSCCON                        (abs)        00099
 _PORTAbits                     (abs)        0000C
 _PORTBbits                     (abs)        0000D
 _PORTCbits                     (abs)        0000E
-_RfSendPowerState              maintext     003BC
-_SoftI2cInit                   text2        005D8
-_SoftI2cNop                    text2        006FC
-_SoftI2cRepeatedStart          text2        00641
-_SoftI2cRxByte                 text2        006C4
-_SoftI2cStart                  text2        00703
-_SoftI2cStop                   text2        00632
-_SoftI2cTxByte                 text2        00696
-_SysInitGpio                   maintext     003DE
+_PwrAdcInit                    cinit        005FB
+_PwrAdcSleep                   cinit        00615
+_PwrAdcWake                    cinit        0011B
+_PwrI2cInit                    cinit        00600
+_PwrI2cSleep                   cinit        005D8
+_PwrI2cWake                    cinit        00608
+_PwrRfInit                     cinit        00080
+_PwrRfSleep                    cinit        00609
+_PwrRfWake                     cinit        0060C
+_PwrSensorInit                 cinit        0060E
+_PwrSensorSleep                cinit        005DA
+_PwrSensorWake                 cinit        00612
+_RfSendPowerState              cinit        000A1
+_Sleepy                        cinit        003A2
+_SoftI2cInit                   cinit        0026F
+_SoftI2cNop                    cinit        0049E
+_SoftI2cRepeatedStart          cinit        003C9
+_SoftI2cRxByte                 cinit        00465
+_SoftI2cStart                  cinit        004A5
+_SoftI2cStop                   cinit        004B2
+_SoftI2cTxByte                 cinit        00437
 _TRISAbits                     (abs)        0008C
 _TRISBbits                     (abs)        0008D
 _TRISCbits                     (abs)        0008E
+_WDTCONbits                    (abs)        00097
 _WPUAbits                      (abs)        0020C
 __CFG_BOREN$OFF                (abs)        00000
 __CFG_BORV$LO                  (abs)        00000
@@ -399,11 +436,11 @@ __CFG_FCMEN$ON                 (abs)        00000
 __CFG_FOSC$INTOSC              (abs)        00000
 __CFG_IESO$ON                  (abs)        00000
 __CFG_LPBOR$OFF                (abs)        00000
-__CFG_LVP$ON                   (abs)        00000
+__CFG_LVP$OFF                  (abs)        00000
 __CFG_MCLRE$ON                 (abs)        00000
 __CFG_PWRTE$OFF                (abs)        00000
 __CFG_STVREN$ON                (abs)        00000
-__CFG_WDTE$OFF                 (abs)        00000
+__CFG_WDTE$SWDTEN              (abs)        00000
 __CFG_WRT$OFF                  (abs)        00000
 __Habs1                        abs1         00000
 __Hbank0                       bank0        00000
@@ -441,19 +478,21 @@ __Hbank9                       bank9        00000
 __Hbigram                      bigram       00000
 __HbssBANK0                    bssBANK0     00000
 __HbssBANK1                    bssBANK1     00000
-__Hcinit                       cinit        00022
+__Hcinit                       cinit        0072E
 __Hclrtext                     clrtext      00000
 __Hcode                        code         00000
 __Hcommon                      common       00000
 __Hconfig                      config       08009
 __HcstackBANK0                 cstackBANK0  00000
 __HcstackCOMMON                cstackCOMMON 00000
+__HdataBANK0                   dataBANK0    00000
 __Heeprom_data                 eeprom_data  00000
-__Hend_init                    end_init     00016
+__Hend_init                    end_init     00022
 __Hfunctab                     functab      00000
+__HidataBANK0                  idataBANK0   00000
 __Hidloc                       idloc        00000
-__Hinit                        init         00014
-__Hintentry                    intentry     00014
+__Hinit                        init         00020
+__Hintentry                    intentry     00020
 __Hmaintext                    maintext     00000
 __Hpa_nodes                    pa_nodes     00000
 __Hpowerup                     powerup      00000
@@ -530,18 +569,20 @@ __Lbank9                       bank9        00000
 __Lbigram                      bigram       00000
 __LbssBANK0                    bssBANK0     00000
 __LbssBANK1                    bssBANK1     00000
-__Lcinit                       cinit        00016
+__Lcinit                       cinit        00022
 __Lclrtext                     clrtext      00000
 __Lcode                        code         00000
 __Lcommon                      common       00000
 __Lconfig                      config       08007
 __LcstackBANK0                 cstackBANK0  00000
 __LcstackCOMMON                cstackCOMMON 00000
+__LdataBANK0                   dataBANK0    00000
 __Leeprom_data                 eeprom_data  00000
-__Lend_init                    end_init     00014
+__Lend_init                    end_init     00020
 __Lfunctab                     functab      00000
+__LidataBANK0                  idataBANK0   00000
 __Lidloc                       idloc        00000
-__Linit                        init         00014
+__Linit                        init         00020
 __Lintentry                    intentry     00004
 __Lmaintext                    maintext     00000
 __Lpa_nodes                    pa_nodes     00000
@@ -589,120 +630,191 @@ __S2                           (abs)        00000
 ___int_sp                      stack        00000
 ___latbits                     (abs)        00001
 ___sp                          stack        00000
-__end_ofPL2                    text21       00791
-__end_ofPL4                    maintext     0040B
-__end_ofPL6                    text21       0079B
-__end_ofPL8                    maintext     00411
-__end_of_AdcInit               maintext     002F7
-__end_of_ExtIntInit            maintext     002FC
-__end_of_HandlePacket          maintext     00361
-__end_of_Mrf49RxByte           maintext     00214
-__end_of_Mrf49RxCmd            maintext     000DA
-__end_of_Mrf49RxSts            maintext     002A4
-__end_of_Mrf49SpiRx            maintext     002E8
-__end_of_Mrf49SpiTx            maintext     00299
-__end_of_Mrf49TxByte           maintext     00212
-__end_of_Mrf49TxCmd            maintext     0023E
-__end_of_Mrf49xaAllocPacket    maintext     0041E
-__end_of_Mrf49xaFreePacket     maintext     00301
-__end_of_Mrf49xaInit           maintext     00143
-__end_of_Mrf49xaModeRx         maintext     00235
-__end_of_Mrf49xaModeTx         text8        007F5
-__end_of_Mrf49xaPacketPending  maintext     003AE
-__end_of_Mrf49xaRxPacket       maintext     003BC
-__end_of_Mrf49xaServe          maintext     0020D
-__end_of_Mrf49xaTick           maintext     000D0
-__end_of_Mrf49xaTxAck          text21       00730
-__end_of_Mrf49xaTxPacket       text21       00776
-__end_of_RfSendPowerState      maintext     003DE
-__end_of_SoftI2cInit           text2        005E3
-__end_of_SoftI2cNop            text2        00703
-__end_of_SoftI2cRepeatedStart  text2        00656
-__end_of_SoftI2cRxByte         text2        006FC
-__end_of_SoftI2cStart          text2        00710
-__end_of_SoftI2cStop           text2        00641
-__end_of_SoftI2cTxByte         text2        006C4
-__end_of_SysInitGpio           maintext     003FD
-__end_of__initialization       cinit        0001F
-__end_of__stringtab            strings      0079C
-__end_of_eepromRxBytes         text2        00696
-__end_of_eepromTxBytes         text2        00672
-__end_of_extInt                intentry     00014
-__end_of_handleFwCmd           maintext     00395
-__end_of_handleFwRead          maintext     003A4
-__end_of_handleFwWrite         text2        00632
-__end_of_main                  maintext     0003E
-__end_of_mrfRegset_Init        strings      007BF
-__end_of_mrfRegset_InitCnt     strings      0079D
-__end_of_mrfRegset_Rx          strings      007CB
-__end_of_mrfRegset_RxCnt       strings      0079E
-__end_of_mrfRegset_Tx          strings      007D3
-__end_of_mrfRegset_TxCnt       strings      0079F
-__end_ofi1_Mrf49RxByte         text43       004FC
-__end_ofi1_Mrf49RxCmd          text43       0042A
-__end_ofi1_Mrf49RxSts          text43       00595
-__end_ofi1_Mrf49SpiRx          text43       005D8
-__end_ofi1_Mrf49SpiTx          text43       00588
-__end_ofi1_Mrf49TxByte         text43       004F9
-__end_ofi1_Mrf49TxCmd          text43       00526
-__end_ofi1_Mrf49xaModeRx       text43       0051C
-__end_ofi1_Mrf49xaServe        text43       004F4
-__initialization               cinit        00016
-__pbssBANK0                    bssBANK0     0003B
+__end_ofPL10                   cinit        006FB
+__end_ofPL12                   cinit        00708
+__end_ofPL14                   cinit        00712
+__end_ofPL16                   text67       01000
+__end_ofPL18                   cinit        00718
+__end_ofPL20                   cinit        0071E
+__end_ofPL22                   cinit        00724
+__end_ofPL24                   cinit        00729
+__end_ofPL26                   cinit        0072E
+__end_ofPL8                    cinit        006ED
+__end_of_AdcChSelect           cinit        0010F
+__end_of_AdcDeinit             cinit        006C7
+__end_of_AdcGetResult          text10       00000
+__end_of_AdcGo                 cinit        00104
+__end_of_AdcInit               cinit        006D2
+__end_of_AdcIsBusy             cinit        00108
+__end_of_AdcSample             cinit        00102
+__end_of_ExtIntDeinit          text71       00788
+__end_of_ExtIntInit            cinit        0061F
+__end_of_HandlePacket          cinit        0017E
+__end_of_Mcp9800Read           cinit        003C9
+__end_of_Mcp9800Start          cinit        00413
+__end_of_Mrf49RxByte           cinit        0059F
+__end_of_Mrf49RxCmd            cinit        00080
+__end_of_Mrf49RxSts            cinit        005D8
+__end_of_Mrf49SpiRx            cinit        00663
+__end_of_Mrf49SpiTx            cinit        006BE
+__end_of_Mrf49TxByte           cinit        0059D
+__end_of_Mrf49TxCmd            cinit        005CD
+__end_of_Mrf49xaAllocPacket    cinit        0011B
+__end_of_Mrf49xaFreePacket     cinit        005E4
+__end_of_Mrf49xaInit           cinit        003A2
+__end_of_Mrf49xaModeRx         cinit        005C4
+__end_of_Mrf49xaModeSleep      cinit        00052
+__end_of_Mrf49xaModeTx         cinit        00076
+__end_of_Mrf49xaNeedsReset     cinit        005DF
+__end_of_Mrf49xaPacketPending  cinit        005ED
+__end_of_Mrf49xaReboot         cinit        006C0
+__end_of_Mrf49xaRxPacket       cinit        005FB
+__end_of_Mrf49xaServe          cinit        00598
+__end_of_Mrf49xaShutdown       cinit        006BF
+__end_of_Mrf49xaTick           cinit        00342
+__end_of_Mrf49xaTxAck          cinit        0026F
+__end_of_Mrf49xaTxPacket       cinit        0024F
+__end_of_PwrAdcInit            cinit        00600
+__end_of_PwrAdcSleep           cinit        00619
+__end_of_PwrAdcWake            cinit        00121
+__end_of_PwrI2cInit            cinit        00608
+__end_of_PwrI2cSleep           cinit        005DA
+__end_of_PwrI2cWake            cinit        00609
+__end_of_PwrRfInit             cinit        000A1
+__end_of_PwrRfSleep            cinit        0060C
+__end_of_PwrRfWake             cinit        0060E
+__end_of_PwrSensorInit         cinit        00612
+__end_of_PwrSensorSleep        cinit        005DD
+__end_of_PwrSensorWake         cinit        00615
+__end_of_RfSendPowerState      cinit        000DA
+__end_of_Sleepy                cinit        003BD
+__end_of_SoftI2cInit           cinit        00277
+__end_of_SoftI2cNop            cinit        004A5
+__end_of_SoftI2cRepeatedStart  cinit        003DE
+__end_of_SoftI2cRxByte         cinit        0049E
+__end_of_SoftI2cStart          cinit        004B2
+__end_of_SoftI2cStop           cinit        004C1
+__end_of_SoftI2cTxByte         cinit        00465
+__end_of__initialization       cinit        0002E
+__end_of__stringtab            strings      0072F
+__end_of_eepromRxBytes         cinit        00437
+__end_of_eepromTxBytes         cinit        003FA
+__end_of_extInt                intentry     00020
+__end_of_handleFwCmd           cinit        001B0
+__end_of_handleFwRead          cinit        001BC
+__end_of_handleFwWrite         cinit        00209
+__end_of_main                  cinit        002B6
+__end_of_mrfRegset_Init        strings      00753
+__end_of_mrfRegset_InitCnt     strings      00730
+__end_of_mrfRegset_Rx          strings      0075F
+__end_of_mrfRegset_RxCnt       strings      00731
+__end_of_mrfRegset_Sleep       strings      0076D
+__end_of_mrfRegset_SleepCnt    strings      00732
+__end_of_mrfRegset_Tx          strings      00767
+__end_of_mrfRegset_TxCnt       strings      00733
+__end_ofi1_Mrf49RxByte         text67       00F17
+__end_ofi1_Mrf49RxCmd          text67       00E38
+__end_ofi1_Mrf49RxSts          text67       00FB4
+__end_ofi1_Mrf49SpiRx          text67       00FF7
+__end_ofi1_Mrf49SpiTx          text67       00FA7
+__end_ofi1_Mrf49TxByte         text67       00F14
+__end_ofi1_Mrf49TxCmd          text67       00F45
+__end_ofi1_Mrf49xaModeRx       text67       00F3B
+__end_ofi1_Mrf49xaNeedsReset   text70       00786
+__end_ofi1_Mrf49xaServe        text67       00F0F
+__initialization               cinit        00022
+__pbssBANK0                    bssBANK0     00039
 __pbssBANK1                    bssBANK1     000A0
 __pcstackBANK0                 cstackBANK0  00020
 __pcstackCOMMON                cstackCOMMON 00070
+__pdataBANK0                   dataBANK0    0003B
+__pidataBANK0                  idataBANK0   00000
 __pintentry                    intentry     00004
-__pmaintext                    maintext     00022
-__pstrings                     strings      0079B
-__pswtext1                     swtext1      00800
-__ptext1                       maintext     003DE
-__ptext10                      text2        005E3
-__ptext11                      text2        00656
-__ptext12                      maintext     00395
-__ptext13                      maintext     00361
-__ptext14                      text2        00672
-__ptext15                      text2        00696
-__ptext16                      text2        00632
-__ptext17                      text2        00703
-__ptext18                      text2        006C4
-__ptext19                      text2        00641
-__ptext2                       text2        005D8
-__ptext20                      text2        006FC
-__ptext21                      text21       00710
-__ptext22                      text21       00730
-__ptext23                      maintext     002FC
-__ptext24                      maintext     000DA
-__ptext25                      maintext     00143
-__ptext26                      maintext     00214
-__ptext27                      maintext     0020D
-__ptext28                      maintext     00235
-__ptext29                      maintext     00299
-__ptext3                       maintext     003BC
-__ptext30                      maintext     00212
-__ptext31                      maintext     000D0
-__ptext32                      maintext     0023E
-__ptext33                      maintext     002A4
-__ptext34                      maintext     002F7
-__ptext35                      maintext     002E8
-__ptext37                      text43       0042A
-__ptext38                      text43       004FC
-__ptext39                      text43       004F4
-__ptext4                       maintext     00411
-__ptext40                      text43       0051C
-__ptext41                      text43       00588
-__ptext42                      text43       004F9
-__ptext43                      text43       0041E
-__ptext44                      text43       00526
-__ptext45                      text43       00595
-__ptext5                       maintext     0003E
-__ptext6                       maintext     003AE
-__ptext7                       maintext     003A4
-__ptext8                       text8        007D3
-__ptext9                       maintext     00301
+__pmaintext                    cinit        00277
+__pstrings                     strings      0072E
+__pswtext1                     swtext1      0076D
+__ptext1                       cinit        000A1
+__ptext10                      text10       00000
+__ptext11                      cinit        00108
+__ptext12                      cinit        00612
+__ptext13                      cinit        005DA
+__ptext14                      cinit        0060E
+__ptext15                      cinit        0060C
+__ptext16                      cinit        006BF
+__ptext17                      cinit        00609
+__ptext18                      cinit        006BE
+__ptext19                      cinit        00030
+__ptext2                       cinit        0011B
+__ptext20                      cinit        00080
+__ptext21                      cinit        00608
+__ptext22                      cinit        005D8
+__ptext23                      cinit        00600
+__ptext24                      cinit        0026F
+__ptext25                      cinit        005FB
+__ptext26                      cinit        002B6
+__ptext27                      cinit        005ED
+__ptext28                      cinit        005E4
+__ptext29                      cinit        00052
+__ptext3                       cinit        006C7
+__ptext30                      cinit        00342
+__ptext31                      cinit        003A2
+__ptext32                      cinit        004C1
+__ptext33                      cinit        0059F
+__ptext34                      cinit        00598
+__ptext35                      cinit        005C4
+__ptext36                      cinit        005CD
+__ptext37                      cinit        0059D
+__ptext38                      cinit        00076
+__ptext39                      cinit        00663
+__ptext4                       cinit        00615
+__ptext40                      cinit        0061F
+__ptext41                      cinit        00121
+__ptext42                      cinit        001BC
+__ptext43                      cinit        003DE
+__ptext44                      cinit        001B0
+__ptext45                      cinit        0017E
+__ptext46                      cinit        00413
+__ptext47                      cinit        003C9
+__ptext48                      cinit        0024F
+__ptext49                      cinit        00209
+__ptext5                       cinit        006C0
+__ptext50                      cinit        005DF
+__ptext51                      cinit        00619
+__ptext52                      cinit        005DD
+__ptext53                      cinit        003FA
+__ptext54                      cinit        003BD
+__ptext55                      cinit        00437
+__ptext56                      cinit        004B2
+__ptext57                      cinit        004A5
+__ptext58                      cinit        00465
+__ptext59                      cinit        0049E
+__ptext6                       cinit        0010F
+__ptext61                      text67       00E38
+__ptext62                      text67       00F17
+__ptext63                      text67       00F0F
+__ptext64                      text67       00F3B
+__ptext65                      text67       00FA7
+__ptext66                      text67       00F14
+__ptext67                      text67       00E2C
+__ptext68                      text67       00F45
+__ptext69                      text67       00FB4
+__ptext7                       cinit        000DA
+__ptext70                      text70       00783
+__ptext71                      text71       00786
+__ptext8                       cinit        00104
+__ptext9                       cinit        00102
+__size_of_AdcChSelect          (abs)        00000
+__size_of_AdcDeinit            (abs)        00000
+__size_of_AdcGetResult         (abs)        00000
+__size_of_AdcGo                (abs)        00000
 __size_of_AdcInit              (abs)        00000
+__size_of_AdcIsBusy            (abs)        00000
+__size_of_AdcSample            (abs)        00000
+__size_of_ExtIntDeinit         (abs)        00000
 __size_of_ExtIntInit           (abs)        00000
 __size_of_HandlePacket         (abs)        00000
+__size_of_Mcp9800Read          (abs)        00000
+__size_of_Mcp9800Start         (abs)        00000
 __size_of_Mrf49RxByte          (abs)        00000
 __size_of_Mrf49RxCmd           (abs)        00000
 __size_of_Mrf49RxSts           (abs)        00000
@@ -714,14 +826,31 @@ __size_of_Mrf49xaAllocPacket   (abs)        00000
 __size_of_Mrf49xaFreePacket    (abs)        00000
 __size_of_Mrf49xaInit          (abs)        00000
 __size_of_Mrf49xaModeRx        (abs)        00000
+__size_of_Mrf49xaModeSleep     (abs)        00000
 __size_of_Mrf49xaModeTx        (abs)        00000
+__size_of_Mrf49xaNeedsReset    (abs)        00000
 __size_of_Mrf49xaPacketPending (abs)        00000
+__size_of_Mrf49xaReboot        (abs)        00000
 __size_of_Mrf49xaRxPacket      (abs)        00000
 __size_of_Mrf49xaServe         (abs)        00000
+__size_of_Mrf49xaShutdown      (abs)        00000
 __size_of_Mrf49xaTick          (abs)        00000
 __size_of_Mrf49xaTxAck         (abs)        00000
 __size_of_Mrf49xaTxPacket      (abs)        00000
+__size_of_PwrAdcInit           (abs)        00000
+__size_of_PwrAdcSleep          (abs)        00000
+__size_of_PwrAdcWake           (abs)        00000
+__size_of_PwrI2cInit           (abs)        00000
+__size_of_PwrI2cSleep          (abs)        00000
+__size_of_PwrI2cWake           (abs)        00000
+__size_of_PwrRfInit            (abs)        00000
+__size_of_PwrRfSleep           (abs)        00000
+__size_of_PwrRfWake            (abs)        00000
+__size_of_PwrSensorInit        (abs)        00000
+__size_of_PwrSensorSleep       (abs)        00000
+__size_of_PwrSensorWake        (abs)        00000
 __size_of_RfSendPowerState     (abs)        00000
+__size_of_Sleepy               (abs)        00000
 __size_of_SoftI2cInit          (abs)        00000
 __size_of_SoftI2cNop           (abs)        00000
 __size_of_SoftI2cRepeatedStart (abs)        00000
@@ -729,7 +858,6 @@ __size_of_SoftI2cRxByte        (abs)        00000
 __size_of_SoftI2cStart         (abs)        00000
 __size_of_SoftI2cStop          (abs)        00000
 __size_of_SoftI2cTxByte        (abs)        00000
-__size_of_SysInitGpio          (abs)        00000
 __size_of_eepromRxBytes        (abs)        00000
 __size_of_eepromTxBytes        (abs)        00000
 __size_of_extInt               (abs)        00000
@@ -745,32 +873,38 @@ __size_ofi1_Mrf49SpiTx         (abs)        00000
 __size_ofi1_Mrf49TxByte        (abs)        00000
 __size_ofi1_Mrf49TxCmd         (abs)        00000
 __size_ofi1_Mrf49xaModeRx      (abs)        00000
+__size_ofi1_Mrf49xaNeedsReset  (abs)        00000
 __size_ofi1_Mrf49xaServe       (abs)        00000
-__stringtab                    strings      0079B
-_eepromRxBytes                 text2        00672
-_eepromTxBytes                 text2        00656
+__stringtab                    strings      0072E
+_coldBoot                      dataBANK0    0003B
+_eepromRxBytes                 cinit        00413
+_eepromTxBytes                 cinit        003DE
 _extInt                        intentry     00004
-_handleFwCmd                   maintext     00361
-_handleFwRead                  maintext     00395
-_handleFwWrite                 text2        005E3
-_main                          maintext     00022
-_mrf49Status                   bssBANK0     0003B
-_mrfRegset_Init                strings      0079F
-_mrfRegset_InitCnt             strings      0079C
-_mrfRegset_Rx                  strings      007BF
-_mrfRegset_RxCnt               strings      0079D
-_mrfRegset_Tx                  strings      007CB
-_mrfRegset_TxCnt               strings      0079E
+_handleFwCmd                   cinit        0017E
+_handleFwRead                  cinit        001B0
+_handleFwWrite                 cinit        001BC
+_inlined$_AdcGetResult         (abs)        00001
+_main                          cinit        00277
+_mrf49Status                   bssBANK0     00039
+_mrfRegset_Init                strings      00733
+_mrfRegset_InitCnt             strings      0072F
+_mrfRegset_Rx                  strings      00753
+_mrfRegset_RxCnt               strings      00730
+_mrfRegset_Sleep               strings      00767
+_mrfRegset_SleepCnt            strings      00731
+_mrfRegset_Tx                  strings      0075F
+_mrfRegset_TxCnt               strings      00732
 _rfTrcvStatus                  bssBANK1     000A0
 btemp                          (abs)        0007E
-clear_ram0                     clrtext      007F5
+clear_ram0                     clrtext      0077D
 eepromRxBytes@address          cstackBANK0  00024
 eepromRxBytes@data             cstackBANK0  00026
 eepromRxBytes@size             cstackBANK0  00027
 eepromTxBytes@address          cstackBANK0  00024
 eepromTxBytes@data             cstackBANK0  00026
 eepromTxBytes@size             cstackBANK0  00027
-end_of_initialization          cinit        0001F
+end_of_initialization          cinit        0002E
+extInt@ofw                     cstackCOMMON 00077
 handleFwCmd@packet             cstackBANK0  00028
 handleFwRead@packet            cstackBANK0  0002A
 handleFwWrite@address          cstackBANK0  0002F
@@ -786,15 +920,16 @@ i1Mrf49TxCmd@cmd               cstackCOMMON 00072
 i1Mrf49TxCmd@val               cstackCOMMON 00071
 i1Mrf49xaModeRx@k              cstackCOMMON 00073
 i1Mrf49xaServe@data            cstackCOMMON 00075
-i1_Mrf49RxByte                 text43       004F9
-i1_Mrf49RxCmd                  text43       0041E
-i1_Mrf49RxSts                  text43       00588
-i1_Mrf49SpiRx                  text43       00595
-i1_Mrf49SpiTx                  text43       00526
-i1_Mrf49TxByte                 text43       004F4
-i1_Mrf49TxCmd                  text43       0051C
-i1_Mrf49xaModeRx               text43       004FC
-i1_Mrf49xaServe                text43       0042A
+i1_Mrf49RxByte                 text67       00F14
+i1_Mrf49RxCmd                  text67       00E2C
+i1_Mrf49RxSts                  text67       00FA7
+i1_Mrf49SpiRx                  text67       00FB4
+i1_Mrf49SpiTx                  text67       00F45
+i1_Mrf49TxByte                 text67       00F0F
+i1_Mrf49TxCmd                  text67       00F3B
+i1_Mrf49xaModeRx               text67       00F17
+i1_Mrf49xaNeedsReset           text70       00783
+i1_Mrf49xaServe                text67       00E38
 intlevel0                      functab      00000
 intlevel1                      functab      00000
 intlevel2                      functab      00000
@@ -806,12 +941,11 @@ ltemp0                         (abs)        0007E
 ltemp1                         (abs)        00082
 ltemp2                         (abs)        00086
 ltemp3                         (abs)        00080
-main@k                         cstackBANK0  0003A
 reset_vec                      reset_vec    00000
 stackhi                        (abs)        020EF
 stacklo                        (abs)        0209F
-start                          init         00014
-start_initialization           cinit        00016
+start                          init         00020
+start_initialization           cinit        00022
 ttemp                          (abs)        0007E
 ttemp0                         (abs)        0007E
 ttemp1                         (abs)        00081
@@ -832,11 +966,11 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 41 in file "../../../src/node/main.c"
+		line 27 in file "../../../src/node/main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  k               1   26[BANK0 ] unsigned char 
+		None
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -847,27 +981,287 @@ FUNCTION INFORMATION:
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK2
       Params:         0       0       0       0
-      Locals:         0       1       0       0
+      Locals:         0       0       0       0
       Temps:          0       0       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
  Hardware stack levels required when called:   11
  This function calls:
-		_AdcInit
-		_ExtIntInit
-		_Mrf49xaInit
+		_Mcp9800Read
+		_Mcp9800Start
+		_Mrf49xaNeedsReset
 		_Mrf49xaTick
+		_PwrAdcInit
+		_PwrAdcSleep
+		_PwrI2cInit
+		_PwrI2cSleep
+		_PwrI2cWake
+		_PwrRfInit
+		_PwrRfSleep
+		_PwrRfWake
+		_PwrSensorInit
+		_PwrSensorSleep
+		_PwrSensorWake
 		_RfSendPowerState
-		_SoftI2cInit
-		_SysInitGpio
+		_Sleepy
  This function is called by:
 		Startup code after reset
  This function uses a non-reentrant model
 
 
- *************** function _SysInitGpio *****************
+ *************** function _RfSendPowerState *****************
  Defined at:
-		line 28 in file "../../../src/node/main.c"
+		line 10 in file "../../../src/rfstack/client.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  s               2    6[BANK0 ] unsigned int 
+  packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_AdcSample
+		_Mrf49xaAllocPacket
+		_Mrf49xaTxPacket
+		_PwrAdcSleep
+		_PwrAdcWake
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrAdcWake *****************
+ Defined at:
+		line 168 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_AdcInit
+ This function is called by:
+		_RfSendPowerState
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcInit *****************
+ Defined at:
+		line 4 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_PwrAdcWake
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrAdcSleep *****************
+ Defined at:
+		line 159 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_AdcDeinit
+ This function is called by:
+		_RfSendPowerState
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcDeinit *****************
+ Defined at:
+		line 15 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_PwrAdcSleep
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaAllocPacket *****************
+ Defined at:
+		line 107 in file "../../../src/devices/mrf49xa_packet.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      PTR struct rfTrcvPacket_
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_RfSendPowerState
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcSample *****************
+ Defined at:
+		line 81 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+  ch              1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  ch              1    5[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  2    2[BANK0 ] unsigned int 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       2       0       0
+      Locals:         0       1       0       0
+      Temps:          0       1       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_AdcChSelect
+		_AdcGetResult
+		_AdcGo
+		_AdcIsBusy
+ This function is called by:
+		_RfSendPowerState
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcIsBusy *****************
+ Defined at:
+		line 34 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_AdcSample
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcGo *****************
+ Defined at:
+		line 29 in file "../../../src/bsp/pic16/adc16.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -890,6 +1284,428 @@ Total ram usage:        0 bytes
  Hardware stack levels required when called:    5
  This function calls:
 		Nothing
+ This function is called by:
+		_AdcSample
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcGetResult *****************
+ Defined at:
+		line 24 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  2    0[BANK0 ] unsigned int 
+ Registers used:
+		wreg
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       2       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       2       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_AdcSample
+ This function uses a non-reentrant model
+
+
+ *************** function _AdcChSelect *****************
+ Defined at:
+		line 76 in file "../../../src/bsp/pic16/adc16.c"
+ Parameters:    Size  Location     Type
+  channel         1    wreg     enum E4222
+ Auto vars:     Size  Location     Type
+  channel         1    0[BANK0 ] enum E4222
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_AdcSample
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrSensorWake *****************
+ Defined at:
+		line 143 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrSensorSleep *****************
+ Defined at:
+		line 138 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrSensorInit *****************
+ Defined at:
+		line 131 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrRfWake *****************
+ Defined at:
+		line 124 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    9
+ This function calls:
+		_Mrf49xaReboot
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaReboot *****************
+ Defined at:
+		line 139 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_Mrf49xaModeRx
+ This function is called by:
+		_PwrRfWake
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrRfSleep *****************
+ Defined at:
+		line 118 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    9
+ This function calls:
+		_Mrf49xaShutdown
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaShutdown *****************
+ Defined at:
+		line 131 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_Mrf49xaModeSleep
+ This function is called by:
+		_PwrRfSleep
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaModeSleep *****************
+ Defined at:
+		line 121 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  k               1    3[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_Mrf49TxCmd
+ This function is called by:
+		_Mrf49xaShutdown
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrRfInit *****************
+ Defined at:
+		line 87 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   10
+ This function calls:
+		_ExtIntInit
+		_Mrf49xaInit
+		_Sleepy
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrI2cWake *****************
+ Defined at:
+		line 81 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrI2cSleep *****************
+ Defined at:
+		line 72 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _PwrI2cInit *****************
+ Defined at:
+		line 61 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_SoftI2cInit
  This function is called by:
 		_main
  This function uses a non-reentrant model
@@ -923,53 +1739,21 @@ Total ram usage:        0 bytes
 		_SoftI2cStop
 		_SoftI2cTxByte
  This function is called by:
-		_main
+		_PwrI2cInit
  This function uses a non-reentrant model
 
 
- *************** function _RfSendPowerState *****************
+ *************** function _PwrAdcInit *****************
  Defined at:
-		line 5 in file "../../../src/rfstack/client.c"
+		line 149 in file "../../../src/node/power.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  packet          1    6[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		None
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       1       0       0
-      Temps:          0       0       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_Mrf49xaAllocPacket
-		_Mrf49xaTxPacket
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _Mrf49xaAllocPacket *****************
- Defined at:
-		line 106 in file "../../../src/devices/mrf49xa_packet.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      PTR struct rfTrcvPacket_
- Registers used:
-		wreg, status,2, status,0
+		status,2
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -985,18 +1769,18 @@ Total ram usage:        0 bytes
  This function calls:
 		Nothing
  This function is called by:
-		_RfSendPowerState
+		_main
  This function uses a non-reentrant model
 
 
  *************** function _Mrf49xaTick *****************
  Defined at:
-		line 123 in file "../../../src/devices/mrf49xa_packet.c"
+		line 124 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  timeout         1   24[BANK0 ] unsigned char 
-  packet          1   25[BANK0 ] PTR struct rfTrcvPacket_
+  timeout         1   23[BANK0 ] unsigned char 
+  packet          1   24[BANK0 ] PTR struct rfTrcvPacket_
 		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
  Return value:  Size  Location     Type
 		None               void
@@ -1009,18 +1793,21 @@ Total ram usage:        0 bytes
  Data sizes:     COMMON   BANK0   BANK1   BANK2
       Params:         0       0       0       0
       Locals:         0       2       0       0
-      Temps:          0       2       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
+      Temps:          0       1       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:   10
  This function calls:
+		_ExtIntInit
 		_HandlePacket
 		_Mrf49RxSts
 		_Mrf49xaFreePacket
+		_Mrf49xaInit
 		_Mrf49xaModeTx
 		_Mrf49xaPacketPending
 		_Mrf49xaRxPacket
+		_Sleepy
  This function is called by:
 		_main
  This function uses a non-reentrant model
@@ -1028,7 +1815,7 @@ Total ram usage:        4 bytes
 
  *************** function _Mrf49xaRxPacket *****************
  Defined at:
-		line 89 in file "../../../src/devices/mrf49xa_packet.c"
+		line 90 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1058,7 +1845,7 @@ Total ram usage:        0 bytes
 
  *************** function _Mrf49xaPacketPending *****************
  Defined at:
-		line 5 in file "../../../src/devices/mrf49xa_packet.c"
+		line 6 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1088,7 +1875,7 @@ Total ram usage:        0 bytes
 
  *************** function _Mrf49xaModeTx *****************
  Defined at:
-		line 102 in file "../../../src/devices/mrf49xa.c"
+		line 111 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1116,528 +1903,13 @@ Total ram usage:        1 bytes
  This function uses a non-reentrant model
 
 
- *************** function _HandlePacket *****************
- Defined at:
-		line 108 in file "../../../src/rfstack/client.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1   21[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
-  sendMsg         1   20[BANK0 ] unsigned char 
-  sendAck         1   19[BANK0 ] unsigned char 
-  needAck         1    0        unsigned char 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       4       0       0
-      Temps:          0       0       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    9
- This function calls:
-		_Mrf49xaFreePacket
-		_Mrf49xaTxAck
-		_Mrf49xaTxPacket
-		_handleFwCmd
-		_handleFwRead
-		_handleFwWrite
- This function is called by:
-		_Mrf49xaTick
- This function uses a non-reentrant model
-
-
- *************** function _handleFwWrite *****************
- Defined at:
-		line 66 in file "../../../src/rfstack/client.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1   17[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
-  i               1   14[BANK0 ] unsigned char 
-  address         2   15[BANK0 ] unsigned int 
-  packetData      1   13[BANK0 ] PTR unsigned int 
-		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwWrite@packet..(21), NULL(0), 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       5       0       0
-      Temps:          0       5       0       0
-      Totals:         0      10       0       0
-Total ram usage:       10 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    8
- This function calls:
-		_eepromRxBytes
-		_eepromTxBytes
- This function is called by:
-		_HandlePacket
- This function uses a non-reentrant model
-
-
- *************** function _eepromTxBytes *****************
- Defined at:
-		line 25 in file "../../../src/devices/24aa64.c"
- Parameters:    Size  Location     Type
-  address         2    4[BANK0 ] unsigned int 
-  data            1    6[BANK0 ] PTR unsigned char 
-		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwWrite@packet..(21), eepromTxByte@byte(1), 
-		 -> NULL(0), 
-  size            1    7[BANK0 ] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    7
- This function calls:
-		_SoftI2cStart
-		_SoftI2cStop
-		_SoftI2cTxByte
- This function is called by:
-		_handleFwWrite
- This function uses a non-reentrant model
-
-
- *************** function _handleFwRead *****************
- Defined at:
-		line 94 in file "../../../src/rfstack/client.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
-  address         2    0        unsigned int 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       3       0       0
-      Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    8
- This function calls:
-		_eepromRxBytes
- This function is called by:
-		_HandlePacket
- This function uses a non-reentrant model
-
-
- *************** function _handleFwCmd *****************
- Defined at:
-		line 19 in file "../../../src/rfstack/client.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       1       0       0
-      Temps:          0       0       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    8
- This function calls:
-		_eepromRxBytes
- This function is called by:
-		_HandlePacket
- This function uses a non-reentrant model
-
-
- *************** function _eepromRxBytes *****************
- Defined at:
-		line 4 in file "../../../src/devices/24aa64.c"
- Parameters:    Size  Location     Type
-  address         2    4[BANK0 ] unsigned int 
-  data            1    6[BANK0 ] PTR unsigned char 
-		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwRead@packet..(21), handleFwWrite@packet..(21), 
-		 -> handleFwCmd@packet..(21), eepromRxByte@dat(1), NULL(0), 
-  size            1    7[BANK0 ] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    7
- This function calls:
-		_SoftI2cRepeatedStart
-		_SoftI2cRxByte
-		_SoftI2cStart
-		_SoftI2cStop
-		_SoftI2cTxByte
- This function is called by:
-		_handleFwCmd
-		_handleFwWrite
-		_handleFwRead
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cTxByte *****************
- Defined at:
-		line 87 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-  data            1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  data            1    2[BANK0 ] unsigned char 
-  i               1    3[BANK0 ] unsigned char 
-  ack             1    0        unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       3       0       0
-      Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_SoftI2cInit
-		_eepromRxBytes
-		_eepromTxBytes
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cStop *****************
- Defined at:
-		line 73 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_SoftI2cInit
-		_eepromRxBytes
-		_eepromTxBytes
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cStart *****************
- Defined at:
-		line 38 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_SoftI2cInit
-		_eepromRxBytes
-		_eepromTxBytes
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cRxByte *****************
- Defined at:
-		line 129 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-  ack             1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  ack             1    1[BANK0 ] unsigned char 
-  i               1    3[BANK0 ] unsigned char 
-  data            1    2[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       3       0       0
-      Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_eepromRxBytes
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cRepeatedStart *****************
- Defined at:
-		line 52 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_eepromRxBytes
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cNop *****************
- Defined at:
-		line 3 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       1       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		Nothing
- This function is called by:
-		_SoftI2cStart
-		_SoftI2cRepeatedStart
-		_SoftI2cStop
-		_SoftI2cTxByte
-		_SoftI2cRxByte
- This function uses a non-reentrant model
-
-
- *************** function _Mrf49xaTxAck *****************
- Defined at:
-		line 14 in file "../../../src/devices/mrf49xa_packet.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1    6[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       1       0       0
-      Temps:          0       0       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_Mrf49xaTxPacket
- This function is called by:
-		_HandlePacket
- This function uses a non-reentrant model
-
-
- *************** function _Mrf49xaTxPacket *****************
- Defined at:
-		line 26 in file "../../../src/devices/mrf49xa_packet.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
-  response        1    0[BANK0 ] unsigned char 
-  needAck         1    1[BANK0 ] unsigned char 
- Auto vars:     Size  Location     Type
-  packet          1    5[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
-  i               1    4[BANK0 ] unsigned char 
-  crc             1    3[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       2       0       0
-      Locals:         0       3       0       0
-      Temps:          0       1       0       0
-      Totals:         0       6       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		Nothing
- This function is called by:
-		_Mrf49xaTxAck
-		_RfSendPowerState
-		_HandlePacket
- This function uses a non-reentrant model
-
-
- *************** function _Mrf49xaFreePacket *****************
- Defined at:
-		line 84 in file "../../../src/devices/mrf49xa_packet.c"
- Parameters:    Size  Location     Type
-  packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Auto vars:     Size  Location     Type
-  packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr1l, fsr1h, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       1       0       0
-      Temps:          0       0       0       0
-      Totals:         0       1       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		Nothing
- This function is called by:
-		_Mrf49xaTick
-		_HandlePacket
- This function uses a non-reentrant model
-
-
  *************** function _Mrf49xaInit *****************
  Defined at:
-		line 137 in file "../../../src/devices/mrf49xa.c"
+		line 150 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  k               1    9[BANK0 ] unsigned char 
+  k               1    6[BANK0 ] unsigned char 
   j               1    0        unsigned char 
   i               1    0        unsigned char 
  Return value:  Size  Location     Type
@@ -1651,17 +1923,52 @@ Total ram usage:        1 bytes
  Data sizes:     COMMON   BANK0   BANK1   BANK2
       Params:         0       0       0       0
       Locals:         0       1       0       0
-      Temps:          0       3       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    9
  This function calls:
 		_Mrf49TxCmd
 		_Mrf49xaModeRx
 		_Mrf49xaServe
+		_Sleepy
  This function is called by:
+		_Mrf49xaTick
+		_PwrRfInit
+ This function uses a non-reentrant model
+
+
+ *************** function _Sleepy *****************
+ Defined at:
+		line 41 in file "../../../src/node/power.c"
+ Parameters:    Size  Location     Type
+  ms              2    0[BANK0 ] unsigned int 
+ Auto vars:     Size  Location     Type
+  b               1    3[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       2       0       0
+      Locals:         0       1       0       0
+      Temps:          0       1       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_Mrf49xaInit
+		_Mrf49xaTick
 		_main
+		_PwrRfInit
  This function uses a non-reentrant model
 
 
@@ -1700,7 +2007,7 @@ Total ram usage:        2 bytes
 
  *************** function _Mrf49xaModeRx *****************
  Defined at:
-		line 92 in file "../../../src/devices/mrf49xa.c"
+		line 99 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1724,6 +2031,7 @@ Total ram usage:        1 bytes
  This function calls:
 		_Mrf49TxCmd
  This function is called by:
+		_Mrf49xaReboot
 		_Mrf49xaInit
 		_Mrf49xaServe
  This function uses a non-reentrant model
@@ -1788,6 +2096,7 @@ Total ram usage:        2 bytes
  This function is called by:
 		_Mrf49xaModeRx
 		_Mrf49xaModeTx
+		_Mrf49xaModeSleep
 		_Mrf49xaInit
 		_Mrf49TxByte
  This function uses a non-reentrant model
@@ -1948,6 +2257,357 @@ Total ram usage:        1 bytes
  This function uses a non-reentrant model
 
 
+ *************** function _HandlePacket *****************
+ Defined at:
+		line 119 in file "../../../src/rfstack/client.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1   21[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+  sendMsg         1   20[BANK0 ] unsigned char 
+  sendAck         1   19[BANK0 ] unsigned char 
+  needAck         1    0        unsigned char 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       4       0       0
+      Temps:          0       0       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    9
+ This function calls:
+		_Mrf49xaFreePacket
+		_Mrf49xaTxAck
+		_Mrf49xaTxPacket
+		_handleFwCmd
+		_handleFwRead
+		_handleFwWrite
+ This function is called by:
+		_Mrf49xaTick
+ This function uses a non-reentrant model
+
+
+ *************** function _handleFwWrite *****************
+ Defined at:
+		line 77 in file "../../../src/rfstack/client.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1   17[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+  i               1   14[BANK0 ] unsigned char 
+  address         2   15[BANK0 ] unsigned int 
+  packetData      1   13[BANK0 ] PTR unsigned int 
+		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwWrite@packet..(21), NULL(0), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       5       0       0
+      Temps:          0       5       0       0
+      Totals:         0      10       0       0
+Total ram usage:       10 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_eepromRxBytes
+		_eepromTxBytes
+ This function is called by:
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
+ *************** function _eepromTxBytes *****************
+ Defined at:
+		line 25 in file "../../../src/devices/24aa64.c"
+ Parameters:    Size  Location     Type
+  address         2    4[BANK0 ] unsigned int 
+  data            1    6[BANK0 ] PTR unsigned char 
+		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwWrite@packet..(21), eepromTxByte@byte(1), 
+		 -> NULL(0), 
+  size            1    7[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       4       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_SoftI2cStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+ This function is called by:
+		_handleFwWrite
+ This function uses a non-reentrant model
+
+
+ *************** function _handleFwRead *****************
+ Defined at:
+		line 105 in file "../../../src/rfstack/client.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+  address         2    0        unsigned int 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_eepromRxBytes
+ This function is called by:
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
+ *************** function _handleFwCmd *****************
+ Defined at:
+		line 30 in file "../../../src/rfstack/client.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_eepromRxBytes
+ This function is called by:
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
+ *************** function _eepromRxBytes *****************
+ Defined at:
+		line 4 in file "../../../src/devices/24aa64.c"
+ Parameters:    Size  Location     Type
+  address         2    4[BANK0 ] unsigned int 
+  data            1    6[BANK0 ] PTR unsigned char 
+		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwRead@packet..(21), handleFwWrite@packet..(21), 
+		 -> handleFwCmd@packet..(21), eepromRxByte@dat(1), NULL(0), 
+  size            1    7[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       4       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_SoftI2cRepeatedStart
+		_SoftI2cRxByte
+		_SoftI2cStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+ This function is called by:
+		_handleFwCmd
+		_handleFwWrite
+		_handleFwRead
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cRepeatedStart *****************
+ Defined at:
+		line 52 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
+		_eepromRxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaTxAck *****************
+ Defined at:
+		line 15 in file "../../../src/devices/mrf49xa_packet.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1    6[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_Mrf49xaTxPacket
+ This function is called by:
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaTxPacket *****************
+ Defined at:
+		line 27 in file "../../../src/devices/mrf49xa_packet.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+  response        1    0[BANK0 ] unsigned char 
+  needAck         1    1[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+  packet          1    5[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+  i               1    4[BANK0 ] unsigned char 
+  crc             1    3[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       2       0       0
+      Locals:         0       3       0       0
+      Temps:          0       1       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_Mrf49xaTxAck
+		_RfSendPowerState
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaFreePacket *****************
+ Defined at:
+		line 85 in file "../../../src/devices/mrf49xa_packet.c"
+ Parameters:    Size  Location     Type
+  packet          1    wreg     PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Auto vars:     Size  Location     Type
+  packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
+		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr1l, fsr1h, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_Mrf49xaTick
+		_HandlePacket
+ This function uses a non-reentrant model
+
+
  *************** function _ExtIntInit *****************
  Defined at:
 		line 8 in file "../../../src/bsp/pic16/interrupt.c"
@@ -1974,21 +2634,22 @@ Total ram usage:        0 bytes
  This function calls:
 		Nothing
  This function is called by:
-		_main
+		_Mrf49xaTick
+		_PwrRfInit
  This function uses a non-reentrant model
 
 
- *************** function _AdcInit *****************
+ *************** function _Mrf49xaNeedsReset *****************
  Defined at:
-		line 4 in file "../../../src/bsp/pic16/adc16.c"
+		line 145 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
 		None
  Return value:  Size  Location     Type
-		None               void
+                  2  119[COMMON] int 
  Registers used:
-		wreg, status,2
+		None
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -2008,13 +2669,250 @@ Total ram usage:        0 bytes
  This function uses a non-reentrant model
 
 
- *************** function _extInt *****************
+ *************** function _Mcp9800Start *****************
  Defined at:
-		line 31 in file "../../../src/bsp/pic16/interrupt.c"
+		line 4 in file "../../../src/devices/mcp9800.c"
+ Parameters:    Size  Location     Type
+  resolution      1    wreg     enum E4252
+ Auto vars:     Size  Location     Type
+  resolution      1    4[BANK0 ] enum E4252
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       1       0       0
+      Temps:          0       0       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_SoftI2cStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _Mcp9800Read *****************
+ Defined at:
+		line 19 in file "../../../src/devices/mcp9800.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  tempL           1    0        unsigned char 
+  tempH           1    0        unsigned char 
+ Return value:  Size  Location     Type
+                  2  155[COMMON] unsigned int 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       2       0       0
+      Temps:          0       0       0       0
+      Totals:         0       2       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_SoftI2cRxByte
+		_SoftI2cStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cTxByte *****************
+ Defined at:
+		line 87 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+  data            1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  data            1    2[BANK0 ] unsigned char 
+  i               1    3[BANK0 ] unsigned char 
+  ack             1    0        unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
+		_SoftI2cInit
+		_Mcp9800Start
+		_Mcp9800Read
+		_eepromRxBytes
+		_eepromTxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cStop *****************
+ Defined at:
+		line 73 in file "../../../src/bsp/softI2c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
 		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
+		_SoftI2cInit
+		_Mcp9800Start
+		_Mcp9800Read
+		_eepromRxBytes
+		_eepromTxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cStart *****************
+ Defined at:
+		line 38 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
+		_SoftI2cInit
+		_Mcp9800Start
+		_Mcp9800Read
+		_eepromRxBytes
+		_eepromTxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cRxByte *****************
+ Defined at:
+		line 129 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+  ack             1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  ack             1    1[BANK0 ] unsigned char 
+  i               1    3[BANK0 ] unsigned char 
+  data            1    2[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
+		_Mcp9800Read
+		_eepromRxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cNop *****************
+ Defined at:
+		line 3 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       1       0       0
+      Totals:         0       1       0       0
+Total ram usage:        1 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_SoftI2cStart
+		_SoftI2cRepeatedStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+		_SoftI2cRxByte
+ This function uses a non-reentrant model
+
+
+ *************** function _extInt *****************
+ Defined at:
+		line 36 in file "../../../src/bsp/pic16/interrupt.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  ofw             1    7[COMMON] unsigned char 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2025,13 +2923,15 @@ Total ram usage:        0 bytes
 		Unchanged: 
  Data sizes:     COMMON   BANK0   BANK1   BANK2
       Params:         0       0       0       0
-      Locals:         0       0       0       0
+      Locals:         1       0       0       0
       Temps:          1       0       0       0
-      Totals:         1       0       0       0
-Total ram usage:        1 bytes
+      Totals:         2       0       0       0
+Total ram usage:        2 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    4
  This function calls:
+		_ExtIntDeinit
+		i1_Mrf49xaNeedsReset
 		i1_Mrf49xaServe
  This function is called by:
 		Interrupt level 1
@@ -2073,7 +2973,7 @@ Total ram usage:        2 bytes
 
  *************** function i1_Mrf49xaModeRx *****************
  Defined at:
-		line 92 in file "../../../src/devices/mrf49xa.c"
+		line 99 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2315,113 +3215,213 @@ Total ram usage:        1 bytes
  This function uses a non-reentrant model
 
 
+ *************** function i1_Mrf49xaNeedsReset *****************
+ Defined at:
+		line 145 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  2    0[COMMON] int 
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_extInt
+ This function uses a non-reentrant model
+
+
+ *************** function _ExtIntDeinit *****************
+ Defined at:
+		line 17 in file "../../../src/bsp/pic16/interrupt.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_extInt
+ This function uses a non-reentrant model
+
+
 
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 ../../../src/rfstack/client.c
-		_handleFwCmd   		CODE           	0361	0000	52
-		_handleFwRead  		CODE           	0395	0000	15
-		_handleFwWrite 		CODE           	05E3	0000	79
-		_HandlePacket  		CODE           	0301	0000	96
-		_RfSendPowerSta		CODE           	03BC	0000	34
+		_handleFwCmd   		CODE           	017E	0000	50
+		_handleFwRead  		CODE           	01B0	0000	12
+		_handleFwWrite 		CODE           	01BC	0000	77
+		_HandlePacket  		CODE           	0121	0000	93
+		_RfSendPowerSta		CODE           	00A1	0000	57
 
-../../../src/rfstack/client.c estimated size: 276
+../../../src/rfstack/client.c estimated size: 289
 
 ../../../src/devices/mrf49xa_spi_pic16.c
-		_Mrf49SpiRx    		CODE           	02A4	0000	68
-		_Mrf49SpiTx    		CODE           	023E	0000	91
+		_Mrf49SpiRx    		CODE           	061F	0000	68
+		_Mrf49SpiTx    		CODE           	0663	0000	91
 
 ../../../src/devices/mrf49xa_spi_pic16.c estimated size: 159
 
 ../../../src/bsp/pic16/adc16.c
-		_AdcInit       		CODE           	02E8	0000	15
+		_AdcGetResult  		CODE           	0000	0000	0
+		_AdcDeinit     		CODE           	06C0	0000	7
+		_AdcInit       		CODE           	06C7	0000	11
+		_AdcGo         		CODE           	0102	0000	2
+		_AdcIsBusy     		CODE           	0104	0000	4
+		_AdcSample     		CODE           	00DA	0000	40
+		_AdcChSelect   		CODE           	0108	0000	7
 
-../../../src/bsp/pic16/adc16.c estimated size: 15
+../../../src/bsp/pic16/adc16.c estimated size: 71
 
 ../../../src/bsp/softI2c.c
-		_SoftI2cNop    		CODE           	06FC	0000	7
-		_SoftI2cInit   		CODE           	05D8	0000	11
-		_SoftI2cStop   		CODE           	0632	0000	15
-		_SoftI2cStart  		CODE           	0703	0000	13
-		_SoftI2cRxByte 		CODE           	06C4	0000	56
-		_SoftI2cTxByte 		CODE           	0696	0000	46
-		_SoftI2cRepeate		CODE           	0641	0000	21
+		_SoftI2cNop    		CODE           	049E	0000	7
+		_SoftI2cInit   		CODE           	026F	0000	8
+		_SoftI2cStop   		CODE           	04B2	0000	15
+		_SoftI2cStart  		CODE           	04A5	0000	13
+		_SoftI2cRxByte 		CODE           	0465	0000	57
+		_SoftI2cTxByte 		CODE           	0437	0000	46
+		_SoftI2cRepeate		CODE           	03C9	0000	21
 
-../../../src/bsp/softI2c.c estimated size: 169
+../../../src/bsp/softI2c.c estimated size: 167
 
 shared
-		PL8            		CODE           	040B	0000	6
-		i1_Mrf49xaModeR		CODE           	04FC	0000	32
-		_mrfRegset_Rx  		STRING         	07BF	0000	12
-		_mrfRegset_Tx  		STRING         	07CB	0000	8
-		__stringtab    		STRING         	079B	0000	1
-		_mrfRegset_Init		STRING         	079F	0000	32
-		_mrfRegset_Init		STRING         	079C	0000	1
-		__initializatio		CODE           	0016	0000	9
-		i1_Mrf49RxCmd  		CODE           	041E	0000	12
-		i1_Mrf49TxCmd  		CODE           	051C	0000	10
-		i1_Mrf49SpiRx  		CODE           	0595	0000	67
-		i1_Mrf49SpiTx  		CODE           	0526	0000	98
-		i1_Mrf49RxSts  		CODE           	0588	0000	13
-		i1_Mrf49RxByte 		CODE           	04F9	0000	3
-		i1_Mrf49TxByte 		CODE           	04F4	0000	5
-		_mrfRegset_RxCn		STRING         	079D	0000	1
-		_mrfRegset_TxCn		STRING         	079E	0000	1
-		i1_Mrf49xaServe		CODE           	042A	0000	202
-		PL2            		CODE           	0776	0000	27
-		PL4            		CODE           	03FD	0000	14
-		PL6            		CODE           	0791	0000	10
+		PL12           		CODE           	06FB	0000	13
+		PL8            		CODE           	06D2	0000	27
+		i1_Mrf49xaModeR		CODE           	0F17	0000	36
+		PL22           		CODE           	071E	0000	6
+		PL14           		CODE           	0708	0000	10
+		PL24           		CODE           	0724	0000	5
+		_mrfRegset_Rx  		STRING         	0753	0000	12
+		_mrfRegset_Tx  		STRING         	075F	0000	8
+		__stringtab    		STRING         	072E	0000	1
+		PL16           		CODE           	0FF7	0000	9
+		PL26           		CODE           	0729	0000	5
+		PL18           		CODE           	0712	0000	6
+		_mrfRegset_Init		STRING         	0733	0000	32
+		_mrfRegset_Init		STRING         	072F	0000	1
+		__initializatio		CODE           	0022	0000	12
+		i1_Mrf49RxCmd  		CODE           	0E2C	0000	12
+		i1_Mrf49TxCmd  		CODE           	0F3B	0000	10
+		i1_Mrf49SpiRx  		CODE           	0FB4	0000	67
+		i1_Mrf49SpiTx  		CODE           	0F45	0000	98
+		i1_Mrf49RxSts  		CODE           	0FA7	0000	13
+		i1_Mrf49RxByte 		CODE           	0F14	0000	3
+		i1_Mrf49TxByte 		CODE           	0F0F	0000	5
+		_mrfRegset_Slee		STRING         	0767	0000	6
+		_mrfRegset_RxCn		STRING         	0730	0000	1
+		_mrfRegset_TxCn		STRING         	0732	0000	1
+		_mrfRegset_Slee		STRING         	0731	0000	1
+		i1_Mrf49xaServe		CODE           	0E38	0000	215
+		i1_Mrf49xaNeeds		CODE           	0783	0000	3
+		PL10           		CODE           	06ED	0000	14
+		PL20           		CODE           	0718	0000	6
 
-shared estimated size: 564
+shared estimated size: 638
+
+../../../src/devices/mcp9800.c
+		_Mcp9800Read   		CODE           	03BD	0000	12
+		_Mcp9800Start  		CODE           	03FA	0000	25
+
+../../../src/devices/mcp9800.c estimated size: 37
 
 ../../../src/devices/mrf49xa_cmd.c
-		_Mrf49TxCmd    		CODE           	0235	0000	9
-		_Mrf49TxByte   		CODE           	020D	0000	5
-		_Mrf49RxCmd    		CODE           	00D0	0000	10
-		_Mrf49RxSts    		CODE           	0299	0000	11
-		_Mrf49RxByte   		CODE           	0212	0000	2
+		_Mrf49TxCmd    		CODE           	05C4	0000	9
+		_Mrf49TxByte   		CODE           	0598	0000	5
+		_Mrf49RxCmd    		CODE           	0076	0000	10
+		_Mrf49RxSts    		CODE           	05CD	0000	11
+		_Mrf49RxByte   		CODE           	059D	0000	2
 
 ../../../src/devices/mrf49xa_cmd.c estimated size: 37
 
 ../../../src/devices/mrf49xa_data.c
-		_Mrf49xaServe  		CODE           	0143	0000	202
+		_Mrf49xaServe  		CODE           	04C1	0000	215
 
-../../../src/devices/mrf49xa_data.c estimated size: 202
+../../../src/devices/mrf49xa_data.c estimated size: 215
 
 ../../../src/devices/mrf49xa.c
-		_Mrf49xaInit   		CODE           	00DA	0000	105
-		_Mrf49xaModeRx 		CODE           	0214	0000	33
-		_Mrf49xaModeTx 		CODE           	07D3	0000	34
+		_Mrf49xaInit   		CODE           	0342	0000	96
+		_Mrf49xaModeRx 		CODE           	059F	0000	37
+		_Mrf49xaModeTx 		CODE           	0052	0000	36
+		_Mrf49xaModeSle		CODE           	0030	0000	34
+		_Mrf49xaReboot 		CODE           	06BF	0000	1
+		_Mrf49xaNeedsRe		CODE           	05DD	0000	2
+		_Mrf49xaShutdow		CODE           	06BE	0000	1
 
-../../../src/devices/mrf49xa.c estimated size: 172
+../../../src/devices/mrf49xa.c estimated size: 207
 
 ../../../src/node/main.c
-		_main          		CODE           	0022	0000	28
-		_SysInitGpio   		CODE           	03DE	0000	31
+		_main          		CODE           	0277	0000	63
 
-../../../src/node/main.c estimated size: 59
+../../../src/node/main.c estimated size: 63
+
+../../../src/node/power.c
+		_PwrAdcWake    		CODE           	011B	0000	6
+		_PwrSensorSleep		CODE           	05DA	0000	3
+		_PwrI2cWake    		CODE           	0608	0000	1
+		_Sleepy        		CODE           	03A2	0000	27
+		_PwrAdcSleep   		CODE           	0615	0000	4
+		_PwrI2cSleep   		CODE           	05D8	0000	2
+		_PwrAdcInit    		CODE           	05FB	0000	5
+		_PwrI2cInit    		CODE           	0600	0000	8
+		_PwrRfWake     		CODE           	060C	0000	2
+		_PwrRfInit     		CODE           	0080	0000	33
+		_PwrRfSleep    		CODE           	0609	0000	3
+		_PwrSensorWake 		CODE           	0612	0000	3
+		_PwrSensorInit 		CODE           	060E	0000	4
+
+../../../src/node/power.c estimated size: 101
 
 ../../../src/devices/mrf49xa_packet.c
-		_Mrf49xaTick   		CODE           	003E	0000	146
-		_Mrf49xaPacketP		CODE           	03A4	0000	10
-		_Mrf49xaTxAck  		CODE           	0710	0000	32
-		_Mrf49xaFreePac		CODE           	02FC	0000	5
-		_Mrf49xaRxPacke		CODE           	03AE	0000	14
-		_Mrf49xaTxPacke		CODE           	0730	0000	70
-		_Mrf49xaAllocPa		CODE           	0411	0000	13
+		_Mrf49xaTick   		CODE           	02B6	0000	140
+		_Mrf49xaPacketP		CODE           	05E4	0000	9
+		_Mrf49xaTxAck  		CODE           	024F	0000	32
+		_Mrf49xaFreePac		CODE           	05DF	0000	5
+		_Mrf49xaRxPacke		CODE           	05ED	0000	14
+		_Mrf49xaTxPacke		CODE           	0209	0000	70
+		_Mrf49xaAllocPa		CODE           	010F	0000	12
 
-../../../src/devices/mrf49xa_packet.c estimated size: 290
+../../../src/devices/mrf49xa_packet.c estimated size: 282
 
 ../../../src/bsp/pic16/interrupt.c
-		_ExtIntInit    		CODE           	02F7	0000	5
-		_extInt        		CODE           	0004	0000	16
+		_ExtIntDeinit  		CODE           	0786	0000	2
+		_ExtIntInit    		CODE           	0619	0000	6
+		_extInt        		CODE           	0004	0000	28
 
-../../../src/bsp/pic16/interrupt.c estimated size: 21
+../../../src/bsp/pic16/interrupt.c estimated size: 36
 
 ../../../src/devices/24aa64.c
-		_eepromRxBytes 		CODE           	0672	0000	36
-		_eepromTxBytes 		CODE           	0656	0000	28
+		_eepromRxBytes 		CODE           	0413	0000	36
+		_eepromTxBytes 		CODE           	03DE	0000	28
 
 ../../../src/devices/24aa64.c estimated size: 64
 

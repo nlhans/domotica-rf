@@ -64,6 +64,13 @@ volatile const Mrf49InitReg_t const mrfRegset_Tx[] = {
 };
 volatile const uint8_t mrfRegset_TxCnt = sizeof(mrfRegset_Tx)/sizeof(Mrf49InitReg_t);
 
+volatile const Mrf49InitReg_t const mrfRegset_Sleep[] = {
+    REG(REG_PMCREG,         PMCREG_MODE_SLEEP),
+    REG(REG_FIFORSTREG,     FIFORST_RESET),
+    REG(REG_GENCREG,        GENCREG_MODE_SLEEP),
+};
+volatile const uint8_t mrfRegset_SleepCnt = sizeof(mrfRegset_Sleep)/sizeof(Mrf49InitReg_t);
+
 #define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
 #define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
 
@@ -97,6 +104,8 @@ void Mrf49xaModeRx(void)
 
     rfTrcvStatus.state = RECV_IDLE;
     rfTrcvStatus.hwByte = 0;
+
+    mrf49Status.flags.msb.fifoTxRx = 0;
 }
 
 void Mrf49xaModeTx(void)
@@ -109,30 +118,34 @@ void Mrf49xaModeTx(void)
     rfTrcvStatus.hwByte = 99;
 }
 
-#ifdef MRF49XA_POWER_SWITCH
-void Mrf49xaBootup(void)
+void Mrf49xaModeSleep(void)
 {
-    UI08_t i, j, k;
-    
-    RF_POWER = 1;
-    RF_RES = 0;
-    Delay50Ms();
-    RF_RES = 1;
-    Delay50Ms();
-
-    SetupRegisters(Init);
-
-    Mrf49xaModeRx();
-}
-
-void Mrf49xaShutdown(void)
-{
-    RF_POWER = 0;
+    UI08_t k;
+    SetupRegistersWithoutDelay(Sleep);
 
     rfTrcvStatus.state = POWERED_OFF;
+    rfTrcvStatus.hwByte = 0;
 }
 
-#else
+#ifdef MRF49XA_POWER_SWITCH
+void Mrf49xaShutdown(void)
+{
+    Mrf49xaModeSleep();
+    //RF_POWER = RF_PWR_OFF;
+
+    //rfTrcvStatus.state = POWERED_OFF;
+}
+
+void Mrf49xaReboot(void)
+{
+    Mrf49xaModeRx();
+}
+#endif
+
+void Mrf49xaNeedsReset(void)
+{
+    rfTrcvStatus.needsReset = TRUE;
+}
 
 void Mrf49xaInit(void)
 {
@@ -140,9 +153,19 @@ void Mrf49xaInit(void)
 #ifdef PIC16_HW
     UI08_t i, j;
 #endif
-    
+    reset:
+
+    for (k = 0; k < sizeof(rfTrcvStatus_t); k++)
+    {
+        ((uint8_t*)&rfTrcvStatus)[k] = 0;
+    }
+
     // Power chip, reset it.
-    RF_POWER = 1;
+    RF_SPI_CS = 1;
+    RF_SPI_SCK = 0;
+    RF_SPI_SDO = 0;
+
+    RF_POWER = RF_PWR_ON;
     RF_FSEL = 1;
 #ifdef PIC16_HW
     RF_INT = 1;
@@ -160,15 +183,22 @@ void Mrf49xaInit(void)
 
     Mrf49xaModeRx();
 
-#ifdef PIC24_HW
+    k = 0;
     while(RF_IRQ == 0)
+    {
+        k++;
+        if (k == 255)
+        {
+            k = 0;
+            // Overflow, reset..
+            goto reset;
+        }
+
+#ifdef PIC24_HW
         Mrf49xaServe(0);
 #else
-   
-    while(RF_IRQ == 0)
         Mrf49xaServe();
 #endif
+    }
     
 }
-
-#endif

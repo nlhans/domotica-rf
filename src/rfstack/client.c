@@ -2,16 +2,27 @@
 
 #include "devices/24aa64.h"
 
+#include "bsp/adc.h"
+#include "power.h"
+
+uint8_t coldBoot = 1;
+
 void RfSendPowerState(void)
 {
     rfTrcvPacket_t* packet = Mrf49xaAllocPacket();
 
-    packet->packet.size = 2;
+    packet->packet.size = 4;
     packet->packet.id = RF_POWER_STATUS;
     packet->packet.dst = 0xFF;
     
-    packet->packet.data[0] = 0x55;
-    packet->packet.data[1] = 0xAA;
+    packet->packet.data[0] = coldBoot;          coldBoot = 0;
+    packet->packet.data[1] = 0;
+
+    PwrAdcWake();
+    uint16_t s = AdcSample(ADC_FVR);
+    PwrAdcSleep();
+    packet->packet.data[2] = s & 0xFF;
+    packet->packet.data[3] = s >> 8;
 
     Mrf49xaTxPacket(packet, FALSE, TRUE);
 }

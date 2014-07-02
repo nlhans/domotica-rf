@@ -23,17 +23,14 @@
 #define SERVER
 #endif
 
-#ifdef _16F1508
-    #include "bspPIC16.h"
-#endif
-
 #ifdef _16LF1508
     #include "bspPIC16.h"
 #define PIC16_HW
 #endif
 
-#ifdef _16F1509
+#ifdef _16LF1509
     #include "bspPIC16.h"
+#define PIC16_HW
 #endif
 
 #ifdef _16F1933

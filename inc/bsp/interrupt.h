@@ -11,6 +11,8 @@ typedef struct ExtIntInstance_s
 } ExtIntInstance_t;
 
 void ExtIntInit(void);
+void ExtIntDeinit(void);
+
 void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio);
 
 

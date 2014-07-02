@@ -1,5 +1,6 @@
 #ifndef __MRF49XA_H
 #define __MRF49XA_H
+#define MRF49XA_POWER_SWITCH
 
 #include "stddefs.h"
 
@@ -12,11 +13,14 @@ void Mrf49xaInit(void);
 
 void Mrf49xaModeRx(void);
 void Mrf49xaModeTx(void);
+void Mrf49xaModeSleep(void);
+
+void Mrf49xaNeedsReset(void);
 
 bool_t Mrf49xaSignalPresent(void);
 
 #ifdef MRF49XA_POWER_SWITCH
-void Mrf49xaBootup(void);
+void Mrf49xaReboot(void);
 void Mrf49xaShutdown(void);
 #endif
 
@@ -53,13 +57,19 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet);
 
 // Platform dependant.
 #ifdef PIC16_HW
+#include "power.h"
 
 #define MRF_DISABLE_INT     INTCONbits.INTE = 0;
 #define MRF_ENABLE_INT      INTCONbits.INTE = 1;
 
 // These delays may be longer than the function name suggests(!)
-#define Delay5Ms() _delay(40000)
-#define Delay50Ms() _delay(400000)
+extern void LoseTime(uint16_t t);
+
+#define Delay5Ms() Sleepy(8)
+#define Delay50Ms() Sleepy(64)
+
+//#define Delay5Ms() _delay(40000)
+//#define Delay50Ms() _delay(400000)
 
 // -------
 // mrf49xa_spi_pic16.c
