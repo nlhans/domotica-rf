@@ -2,31 +2,7 @@
 
 #include "devices/24aa64.h"
 
-#include "bsp/adc.h"
-#include "power.h"
-
-uint8_t coldBoot = 1;
-
-void RfSendPowerState(void)
-{
-    rfTrcvPacket_t* packet = Mrf49xaAllocPacket();
-
-    packet->packet.size = 4;
-    packet->packet.id = RF_POWER_STATUS;
-    packet->packet.dst = 0xFF;
-    
-    packet->packet.data[0] = coldBoot;          coldBoot = 0;
-    packet->packet.data[1] = 0;
-
-    PwrAdcWake();
-    uint16_t s = AdcSample(ADC_FVR);
-    PwrAdcSleep();
-    packet->packet.data[2] = s & 0xFF;
-    packet->packet.data[3] = s >> 8;
-
-    Mrf49xaTxPacket(packet, FALSE, TRUE);
-}
-
+#ifdef PROTOCOL_SUPPORT_FIRMWARE
 void handleFwCmd(rfTrcvPacket_t* packet)
 {
     switch(packet->packet.data[0])
@@ -43,7 +19,7 @@ void handleFwCmd(rfTrcvPacket_t* packet)
             eepromRxBytes(FW_APPLICATION_VERSION, &(packet->packet.data[3]), 2);
 
             break;
-
+#ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
         case 2:
             packet->packet.size = 2;
             eepromRxBytes(FW_APPLICATION_STATE, &(packet->packet.data[1]), 1);
@@ -70,10 +46,12 @@ void handleFwCmd(rfTrcvPacket_t* packet)
         case 7:
             // TODO: Handle Application run status
             break;
+#endif
 
     }
 }
 
+#ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
 void handleFwWrite(rfTrcvPacket_t* packet)
 {
     UI16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
@@ -115,19 +93,25 @@ void handleFwRead(rfTrcvPacket_t* packet)
     eepromRxBytes(address, packet->packet.data+8, 8);
 
 }
+#endif
+#endif
 
 void HandlePacket(rfTrcvPacket_t* packet)
 {
-    bool_t sendMsg = FALSE;
-    bool_t sendAck = FALSE;
-    bool_t needAck = FALSE;
-
+    // Compact these booleans:
+    struct
+    {
+        bool_t needAck:1;
+        bool_t sendAck:1;
+        bool_t sendMsg:1;
+    } response;
+    
     // Ping-pong
     switch (packet->packet.id)
     {
         case RF_PING:
             packet->packet.data[0] = 2;
-            sendMsg = TRUE;
+            response.sendMsg = TRUE;
             break;
 
         case RF_ACK:
@@ -140,18 +124,20 @@ void HandlePacket(rfTrcvPacket_t* packet)
 
         case RF_TIME_SYNC:
             syncedTime = *((uint32_t*) packet->packet.data);
-            sendAck = TRUE;
+            response.sendAck = TRUE;
             break;
 
         case RF_POWER_STATUS:
             // Ignore, we're a client!
             break;
 
+#ifdef PROTOCOL_SUPPORT_FIRMWARE
         case RF_FW_CMD:
             handleFwCmd(packet);
-            sendMsg = TRUE;
+            response.sendMsg = TRUE;
             break;
 
+#ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
         case RF_FW_WRITE:
             handleFwWrite(packet);
             sendMsg = TRUE;
@@ -161,12 +147,19 @@ void HandlePacket(rfTrcvPacket_t* packet)
             handleFwRead(packet);
             sendMsg = TRUE;
             break;
+            
+#endif
+#endif
+
+#ifdef PROTOCOL_SUPPORT_EEPROM
+      // TODO: Support these commands
+#endif
     }
 
     // TODO: RF data response statemachine
-    if (sendMsg)
-        Mrf49xaTxPacket(packet, TRUE, needAck);
-    else if (sendAck)
+    if (response.sendMsg)
+        Mrf49xaTxPacket(packet, TRUE, response.needAck);
+    else if (response.sendAck)
         Mrf49xaTxAck(packet);
     else
         Mrf49xaFreePacket(packet);

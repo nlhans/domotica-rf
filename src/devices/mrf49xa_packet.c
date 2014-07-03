@@ -165,7 +165,7 @@ void Mrf49xaTick(void)
         }
         else if (packetTx.retry == 10)
         {
-            if (packetTx.retransmit == 3)
+            if (packetTx.retransmit == 1)
             {
                 // TODO: Add statistics.
                 // Packet failed to deliver..

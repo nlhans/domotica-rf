@@ -71,11 +71,20 @@ typedef enum
     RF_TIME_SYNC            = 0xA2,
     RF_POWER_STATUS         = 0xA3,
 
+    // Configuration manager
+    RF_CFG_CMD              = 0xB0,
+    RF_CFG_WRITE            = 0xB1,
+    RF_CFG_READ             = 0xB2,
+
     // Firmware update packets
     RF_FW_CMD               = 0xC0,
     RF_FW_WRITE             = 0xC1,
     RF_FW_READ              = 0xC2,
 
+    // Application specific
+    // Sensor nodes:
+    RF_APP_SAMPLE           = 0x00,
+            
 } RfMsg_t;
 
 #endif

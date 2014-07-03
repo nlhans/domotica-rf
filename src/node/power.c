@@ -15,26 +15,27 @@
  *
  * For reading the humidity sensor; both sensors and analog need to be enabled
  * For reading the temperature sensor; both sensors and I2C need to be enabled
- * For interfacing witht the EEPROM; only I2C needs to be enabled
+ * For interfacing with the EEPROM; only I2C needs to be enabled
  * For transmitting data; only the RF modem has to be enabled
  *
  * All blocks contain their own SysInit(), SysWake() and SysSleep() methods.
  *
- * It is recommended that the use of delay_ms is minimalized and LoseTime() is
+ * It is recommended that the use of delay_ms is minimalized and Sleepy() is
  * used instead. This function uses the watchdog and sleep opcode to shutdown.
- * LoseTime() will return prematurely if an interrupt is fired. As of now, only
+ * Sleepy() will NOT return prematurely if an interrupt is fired. As of now, only
  * the RF modem can issue an (external) interrupt to wake the PIC. There is no
- * feedback mechanism in place to detect an ISR has woken up the PIC.
+ * feedback mechanism in place to detect an ISR has woken up the PIC (reducing slept time).
  * Further more; interrupts will be delayed because the PIC has to restart
  * it's oscillator module. This takes 5-8us.
  *
  * The board will use ~5.5uA (4.5uA PIC + 0.5uA RF + 0.5uA E2PROM) in deep sleep
  * The RF modem will consume 13mA in RX, and 25mA in TX mode.
- * The sensors module can consume up to 200 + 70 uA.
+ * The sensors module can consume up to 200 (temperature converting) 
+ * plus 70 uA max (humidity). The humidity sensor needs to be sampled very briefly
+ * as self-heating will distort the measurement heavily.
  * The PIC running at 16MHz consumes approximately 880uA (with I/O).
  *
- * All in all: it is recommended to keep the RF modem operational for as
- * little time as possible.
+ * It is recommended to keep the RF modem operational for as little time as possible.
  * The sensors should be sampled in as little time as possible. Due to long
  * conversion times (Up 150ms @ 10-bit) it may be wise to put the PIC into sleep
  ******************************************************************************/

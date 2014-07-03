@@ -1,6 +1,8 @@
 #include "stddefs.h"
 #include "power.h"
 
+#include "bsp/adc.h"
+
 #include "devices/mrf49xa.h"
 #include "devices/mcp9800.h"
 
@@ -42,15 +44,18 @@ void main(void)
     while(1)
     {
         // 30.3s:
-        //LoseTime(24576);
-        Sleepy(500);
+        //Sleepy(24576);
+        Sleepy(1000);
         
         PwrSensorWake();
         PwrI2cWake();
 
-        Mcp9800Start(Mcp9800_10bit);
-        Sleepy(100);
-        Mcp9800Read();
+        Mcp9800Start(Mcp9800_12bit);
+
+        PwrAdcWake();
+        uint16_t humidity = AdcSample(BSP_HUMIDITY_CHANNEL);
+        Sleepy(300);
+        uint16_t temperature = Mcp9800Read();
 
         PwrSensorSleep();
         PwrI2cSleep();
@@ -63,7 +68,14 @@ void main(void)
             Mrf49xaTick();
         }
 
-        RfSendPowerState();
+        //RfSendPowerState();
+        do
+        {
+            Mrf49xaTick();
+        }
+        while (rfTrcvStatus.txPacket.state != PKT_FREE);
+
+        RfSendSampleWeatherNode(temperature, humidity);
         do
         {
             Mrf49xaTick();

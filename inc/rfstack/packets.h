@@ -6,6 +6,9 @@
 
 #include "devices/mrf49xa.h"
 
+#define PROTOCOL_SUPPORT_FIRMWARE
+//#define PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
+
 #define FW_RUNTIME_MAJOR 0
 #define FW_RUNTIME_MINOR 1
 
@@ -16,6 +19,8 @@
 #define FW_APPLICATION_STATE 0x2
 
 void RfSendPowerState(void);
+void RfSendSampleWeatherNode(uint16_t temperature, uint16_t humidity);
+
 void HandlePacket(rfTrcvPacket_t* packet);
 
 extern uint32_t syncedTime;
