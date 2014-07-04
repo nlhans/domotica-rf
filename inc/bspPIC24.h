@@ -99,7 +99,14 @@ typedef long I32_t;
 
 #define GPIO_OUTPUT 0
 #define GPIO_INPUT  1
-
+#define RF_PWR_NFET
+#ifdef RF_PWR_NFET
+#define RF_PWR_ON 1
+#define RF_PWR_OFF 0
+#else
+#define RF_PWR_ON 0
+#define RF_PWR_OFF 0 // TODO: Temporarely!
+#endif
 // BSP I/O mapping for 44QFP PIC24/dsPIC33/PIC32
 /*************** PORTA *************/
 #define FLASH_CS2               LATAbits.LATA0          // out

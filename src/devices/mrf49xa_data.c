@@ -46,11 +46,16 @@ bool_t Mrf49xaServe(void)
 
                 break;
 
+            case POWERED_OFF:
+                Mrf49xaNeedsReset();
+                break;
+
             case TX_PACKET:
                 // According to the datasheet, fifoTxRx is also always set.
                 // So we don't have to do anything, as after this the
                 // data-statemachine will run.
                 break;
+
         }
     }
 
@@ -66,6 +71,10 @@ bool_t Mrf49xaServe(void)
         // Depending on the driver status.
         switch (rfTrcvStatus.state)
         {
+            case POWERED_OFF:
+                Mrf49xaNeedsReset();
+                break;
+
             case RECV_IDLE:
                 data = Mrf49RxByte();
 

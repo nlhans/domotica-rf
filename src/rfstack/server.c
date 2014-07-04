@@ -40,6 +40,10 @@ void HandlePacket(rfTrcvPacket_t* packet)
             sendMsg = FALSE;
             sendAck = TRUE;
             break;
+
+        case RF_APP_SAMPLE:
+            sendAck = TRUE;
+            break;
     }
 
     // TODO: RF data response statemachine
