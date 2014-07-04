@@ -1,6 +1,6 @@
 #include "devices/mrf49xa.h"
 #include "bsp/interrupt.h"
-
+#include "config.h"
 #include "rfstack/packets.h"
 
 bool_t Mrf49xaPacketPending(void)
@@ -24,6 +24,11 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet)
     Mrf49xaTxPacket(packet, TRUE, FALSE);
 }
 
+void Mrf49xaTxPacketFeedback(void* ptr)
+{
+    rfTrcvStatus.txPacketHandler = ptr;
+}
+
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
 {
     uint8_t i, crc = 0;
@@ -34,7 +39,7 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
         {
             packet->packet.dst = packet->packet.src;
         }
-        packet->packet.src = rfTrcvStatus.src;
+        packet->packet.src = cfgRam.nodeId;
         packet->packet.size += 5;
 
         packetTx.state = PKT_READY_FOR_TX;
@@ -57,7 +62,7 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
         {
             packet->packet.dst = packet->packet.src;
         }
-        packet->packet.src = rfTrcvStatus.src;
+        packet->packet.src = cfgRam.nodeId;
         packet->packet.size += 5;
 
         packetTx.state = PKT_READY_FOR_TX;
@@ -140,7 +145,7 @@ void Mrf49xaTick(void)
 
         // Is this packet for this node?
 #ifndef RF_NO_ID_FILTER
-        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == rfTrcvStatus.src)
+        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == cfgRam.nodeId)
         {
             packet->packet.size -= 5;
 
@@ -204,7 +209,7 @@ void Mrf49xaTick(void)
         // Remain in here while a signal is present.
         do
         {
-            Mrf49RxSts();
+            Mrf49xaServe();
 
             if (rfTrcvStatus.state == RECV_IDLE && mrf49Status.flags.msb.signalPresent == 0)
             {

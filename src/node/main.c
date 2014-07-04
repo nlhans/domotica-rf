@@ -36,6 +36,8 @@ void main(void)
     PwrI2cInit();
     PwrRfInit();
 
+    CfgInit();
+
     PwrAdcSleep();
     PwrSensorSleep();
     PwrI2cSleep();

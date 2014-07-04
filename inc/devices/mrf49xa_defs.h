@@ -295,9 +295,9 @@ typedef struct rfTrcvPacket_s
         uint8_t raw[RF_PACKET_LENGTH];
     };
     uint8_t crc;
-    rfTrcvAckState_t needAck;
     uint8_t retry:4;
     uint8_t retransmit:2;
+    uint8_t needAck:2; // rfTrcvAckState_t
 } rfTrcvPacket_t;
 
 typedef struct rfTrcvStatus_s
@@ -305,11 +305,11 @@ typedef struct rfTrcvStatus_s
     rfTrcvPacket_t* hwRx;
     rfTrcvPacket_t rxPacket[2];
     rfTrcvPacket_t txPacket;
+    uint8_t* txPacketHandler;
 
     rfTrcvState_t state;
     uint8_t hwByte:7;
     bool_t needsReset:1;
-    uint8_t src; // my node ID
 
 } rfTrcvStatus_t;
 extern rfTrcvStatus_t rfTrcvStatus;

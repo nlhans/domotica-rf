@@ -1,7 +1,7 @@
 #include "bsp/interrupt.h"
 #include "stddefs.h"
 
-extern bool_t Mrf49xaServe(void);
+#include "devices/mrf49xa.h"
 
 ExtIntHandler_t cb;
 

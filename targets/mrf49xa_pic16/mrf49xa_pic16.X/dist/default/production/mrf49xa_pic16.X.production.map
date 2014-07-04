@@ -2,12 +2,12 @@ Microchip MPLAB XC8 Compiler V1.31 ()
 
 Linker command line:
 
---edf=C:\Program Files (x86)\Microchip\xc8\v1.31\dat\en_msgs.txt -cs \
-  -h+dist/default/production\mrf49xa_pic16.X.production.sym \
-  --cmf=dist/default/production\mrf49xa_pic16.X.production.cmf -z \
-  -Q16LF1508 -oC:\Users\Desktop\AppData\Local\Temp\s8ns.6 \
+--edf=/opt/microchip/xc8/v1.31/dat/en_msgs.txt -cs \
+  -h+dist/default/production/mrf49xa_pic16.X.production.sym \
+  --cmf=dist/default/production/mrf49xa_pic16.X.production.cmf -z \
+  -Q16LF1508 -o/tmp/cgtfQ7fRA \
   -Mdist/default/production/mrf49xa_pic16.X.production.map -E1 -ver=XC8 \
-  -ASTACK=0209Fh-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
+  -ASTACK=0209Dh-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
   -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -AENTRY=00h-0FFhx16 \
   -ASTRING=00h-0FFhx16 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
   -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh -ABIGRAM=02000h-020EFh \
@@ -26,9 +26,8 @@ Linker command line:
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
-  -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
-  C:\Users\Desktop\AppData\Local\Temp\s8ns.obj \
-  dist/default/production\mrf49xa_pic16.X.production.obj 
+  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/cgtLJhr65.obj \
+  dist/default/production/mrf49xa_pic16.X.production.obj 
 
 Object code version is 3.11
 
@@ -37,34 +36,32 @@ Machine type is 16LF1508
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Desktop\AppData\Local\Temp\s8ns.obj
+/tmp/cgtLJhr65.obj
                 end_init                             20       20        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        2    1000E       0
-dist/default/production\mrf49xa_pic16.X.production.obj
-                cinit                                22       22        C        8       0
+dist/default/production/mrf49xa_pic16.X.production.obj
+                cinit                                22       22        F        8       0
                 intentry                              4        4       1C        8       0
-                text68                                2        2        2        0       0
-                text67                              F4C      F4C        3     1E98       0
-                text64                              42E      42E      1D4        8       0
-                text33                              753      753       A9        8       0
-                text24                              FB3      FB3       24     1F66       0
-                text22                              F63      F63        E     1EC6       0
-                text18                              F71      F71        E     1EE2       0
-                text16                              F7F      F7F       11     1EFE       0
-                text15                               2E       2E      400        8       0
-                text14                              F5A      F5A        9     1EB4       0
-                text11                              FD7      FD7       29     1FAE       0
-                text9                               F90      F90       23     1F20       0
-                text6                               F4F      F4F        5     1E9E       0
-                text5                               7FC      7FC        4        8       0
-                text1                               602      602      151        8       0
+                text69                                2        2        2        0       0
+                text66                              430      430      1E8        8       0
+                text53                              7AE      7AE       37      F5C       0
+                text34                              F57      F57       A9     1EAE       0
+                text24                              EE4      EE4       24     1DC8       0
+                text18                              ED6      ED6        E     1DAC       0
+                text16                              7E5      7E5       11      F5C       0
+                text15                               31       31      3FF        8       0
+                text14                              7F6      7F6        9      F5C       0
+                text11                              F2E      F2E       29     1E5C       0
+                text8                               F08      F08       26     1E10       0
+                text3                               ECD      ECD        3     1D9A       0
+                text1                               618      618      157        8       0
                 cstackBANK0                          20       20       12       20       1
                 cstackCOMMON                         70       70        8       70       1
-                clrtext                             F54      F54        6     1EA8       0
-                bssBANK1                             A0       A0       4F       A0       1
-                bssBANK0                             32       32        2       20       1
-                strings                             800      800       3F     1000       0
+                clrtext                             ED0      ED0        6     1DA0       0
+                bssBANK1                             A0       A0       4D       A0       1
+                bssBANK0                             32       32        5       20       1
+                strings                             76F      76F       3F      EDE       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -73,42 +70,40 @@ TOTAL           Name                               Link     Load   Length     Sp
 
         CLASS   CODE           
                 end_init                             20       20        2         0
-                cinit                                22       22        C         0
+                cinit                                22       22        F         0
                 intentry                              4        4       1C         0
                 reset_vec                             0        0        2         0
-                text68                                2        2        2         0
-                text67                              F4C      F4C        3         0
-                text64                              42E      42E      1D4         0
-                text33                              753      753       A9         0
-                text24                              FB3      FB3       24         0
-                text22                              F63      F63        E         0
-                text18                              F71      F71        E         0
-                text16                              F7F      F7F       11         0
-                text15                               2E       2E      400         0
-                text14                              F5A      F5A        9         0
-                text11                              FD7      FD7       29         0
-                text9                               F90      F90       23         0
-                text6                               F4F      F4F        5         0
-                text5                               7FC      7FC        4         0
-                text1                               602      602      151         0
-                clrtext                             F54      F54        6         0
+                text69                                2        2        2         0
+                text66                              430      430      1E8         0
+                text53                              7AE      7AE       37         0
+                text34                              F57      F57       A9         0
+                text24                              EE4      EE4       24         0
+                text18                              ED6      ED6        E         0
+                text16                              7E5      7E5       11         0
+                text15                               31       31      3FF         0
+                text14                              7F6      7F6        9         0
+                text11                              F2E      F2E       29         0
+                text8                               F08      F08       26         0
+                text3                               ECD      ECD        3         0
+                text1                               618      618      157         0
+                clrtext                             ED0      ED0        6         0
 
         CLASS   STRCODE        
 
         CLASS   ENTRY          
 
         CLASS   STRING         
-                strings                             800      800       3F         0
+                strings                             76F      76F       3F         0
 
         CLASS   COMMON         
                 cstackCOMMON                         70       70        8         1
 
         CLASS   BANK0          
                 cstackBANK0                          20       20       12         1
-                bssBANK0                             32       32        2         1
+                bssBANK0                             32       32        5         1
 
         CLASS   BANK1          
-                bssBANK1                             A0       A0       4F         1
+                bssBANK1                             A0       A0       4D         1
 
         CLASS   BANK2          
 
@@ -253,38 +248,36 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000004  000004         0       0  CODE        2
-                intentry                       000004  0007FC  000800         8       0  CODE        2
-                cstackBANK0                    000020  000014  000034        20       1  BANK0       1
+                intentry                       000004  00076B  00076F         8       0  CODE        2
+                cstackBANK0                    000020  000017  000037        20       1  BANK0       1
                 cstackCOMMON                   000070  000008  000078        70       1  COMMON      1
-                bssBANK1                       0000A0  00004F  0000EF        A0       1  BANK1       1
-                strings                        000800  00003F  00083F      1000       0  STRING      2
-                text67                         000F4C  000003  000F4F      1E98       0  CODE        2
-                text6                          000F4F  000005  000F54      1E9E       0  CODE        2
-                clrtext                        000F54  000006  000F5A      1EA8       0  CODE        2
-                text14                         000F5A  000009  000F63      1EB4       0  CODE        2
-                text22                         000F63  00000E  000F71      1EC6       0  CODE        2
-                text18                         000F71  00000E  000F7F      1EE2       0  CODE        2
-                text16                         000F7F  000011  000F90      1EFE       0  CODE        2
-                text9                          000F90  000023  000FB3      1F20       0  CODE        2
-                text24                         000FB3  000024  000FD7      1F66       0  CODE        2
-                text11                         000FD7  000029  001000      1FAE       0  CODE        2
+                bssBANK1                       0000A0  00004D  0000ED        A0       1  BANK1       1
+                strings                        00076F  00003F  0007AE       EDE       0  STRING      2
+                text53                         0007AE  000051  0007FF       F5C       0  CODE        2
+                text3                          000ECD  000003  000ED0      1D9A       0  CODE        2
+                clrtext                        000ED0  000006  000ED6      1DA0       0  CODE        2
+                text18                         000ED6  00000E  000EE4      1DAC       0  CODE        2
+                text24                         000EE4  000024  000F08      1DC8       0  CODE        2
+                text8                          000F08  000026  000F2E      1E10       0  CODE        2
+                text11                         000F2E  000029  000F57      1E5C       0  CODE        2
+                text34                         000F57  0000A9  001000      1EAE       0  CODE        2
                 config                         008007  000002  008009     1000E       0  CONFIG      2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            00034-0006F              3C           1
-        BANK1            000EF-000EF               1           1
+        BANK0            00037-0006F              39           1
+        BANK1            000ED-000EF               3           1
         BANK2            00120-0016F              50           1
         BIGRAM           02000-020EF              F0           1
-        CODE             0083F-00F4B             70D           2
+        CODE             007FF-00ECC               1           2
         COMMON           00078-0007D               6           1
-        CONST            0083F-00F4B             100           2
-        ENTRY            0083F-00F4B             100           2
+        CONST            007FF-00ECC             100           2
+        ENTRY            007FF-00ECC             100           2
         IDLOC            08000-08003               4           2
-        RAM              00034-0006F              3C           1
-                         000EF-000EF               1
+        RAM              00037-0006F              39           1
+                         000ED-000EF               3
                          00120-0016F              50
         SFR0             00000-0001F              20           1
         SFR1             00080-0009F              20           1
@@ -318,9 +311,9 @@ UNUSED ADDRESS RANGES
         SFR7             00380-003EF              70           1
         SFR8             00400-0046F              70           1
         SFR9             00480-004EF              70           1
-        STACK            0209F-020EF              51           1
-        STRCODE          0083F-00F4B             70D           2
-        STRING           0083F-00F4B             100           2
+        STACK            0209D-020EF              53           1
+        STRCODE          007FF-00ECC             6CE           2
+        STRING           007FF-00ECC             100           2
 
                                   Symbol Table
 
@@ -355,14 +348,14 @@ Mrf49xaTxPacket@i                   cstackBANK0  00024
 Mrf49xaTxPacket@needAck             cstackBANK0  00021
 Mrf49xaTxPacket@packet              cstackBANK0  00025
 Mrf49xaTxPacket@response            cstackBANK0  00020
-PL10                                text15       003ED
-PL12                                text15       003FB
-PL14                                text1        00749
-PL16                                text64       005F9
-PL18                                text15       00408
-PL20                                text15       0040E
-PL22                                text15       00414
-PL8                                 text1        0072E
+PL10                                text15       003EF
+PL12                                text15       003FD
+PL14                                text1        00765
+PL16                                text66       0060F
+PL18                                text15       0040A
+PL20                                text15       00410
+PL22                                text15       00416
+PL8                                 text1        00742
 RfSendSampleWeatherNode@humidity    cstackBANK0  00028
 RfSendSampleWeatherNode@packet      cstackBANK0  0002A
 RfSendSampleWeatherNode@temperature cstackBANK0  00026
@@ -381,71 +374,72 @@ _ADRESL                             (abs)        0009B
 _ANSELA                             (abs)        0018C
 _ANSELB                             (abs)        0018D
 _ANSELC                             (abs)        0018E
-_AdcChSelect                        text15       003DF
-_AdcDeinit                          text18       00F78
-_AdcGetResult                       text55       00000
-_AdcGo                              text15       003D9
-_AdcInit                            text16       00F85
-_AdcIsBusy                          text15       003DB
-_AdcSample                          text15       003B1
-_ExtIntDeinit                       text68       00002
-_ExtIntInit                         text11       00FFA
+_AdcChSelect                        text53       007DE
+_AdcDeinit                          text18       00EDD
+_AdcGetResult                       text56       00000
+_AdcGo                              text53       007D8
+_AdcInit                            text16       007EB
+_AdcIsBusy                          text53       007DA
+_AdcSample                          text53       007AE
+_CfgInit                            text15       003C2
+_ExtIntDeinit                       text69       00002
+_ExtIntInit                         text11       00F51
 _FVRCON                             (abs)        00117
-_HandlePacket                       text1        00653
+_HandlePacket                       text1        00669
 _INTCONbits                         (abs)        0000B
 _LATAbits                           (abs)        0010C
 _LATBbits                           (abs)        0010D
 _LATCbits                           (abs)        0010E
-_Mcp9800Read                        text15       001AE
-_Mcp9800Start                       text15       001D8
-_Mrf49RxByte                        text15       0036C
-_Mrf49RxCmd                         text33       00753
-_Mrf49RxSts                         text15       0039F
-_Mrf49SpiRx                         text33       007B8
-_Mrf49SpiTx                         text33       0075D
-_Mrf49TxByte                        text15       00367
-_Mrf49TxCmd                         text15       00394
-_Mrf49xaAllocPacket                 text1        00646
-_Mrf49xaFreePacket                  text1        006C3
-_Mrf49xaInit                        text15       00124
-_Mrf49xaModeRx                      text15       0036F
-_Mrf49xaModeSleep                   text9        00F91
-_Mrf49xaModeTx                      text24       00FB3
-_Mrf49xaNeedsReset                  text15       003E6
-_Mrf49xaPacketPending               text15       00419
-_Mrf49xaReboot                      text6        00F52
-_Mrf49xaRxPacket                    text22       00F63
-_Mrf49xaServe                       text15       00290
-_Mrf49xaShutdown                    text9        00F90
-_Mrf49xaTick                        text15       00094
-_Mrf49xaTxAck                       text1        0070E
-_Mrf49xaTxPacket                    text1        006C8
+_Mcp9800Read                        text15       002DB
+_Mcp9800Start                       text15       00305
+_Mrf49RxByte                        text15       00296
+_Mrf49RxCmd                         text34       00F57
+_Mrf49RxSts                         text15       003CF
+_Mrf49SpiRx                         text34       00FBC
+_Mrf49SpiTx                         text34       00F61
+_Mrf49TxByte                        text15       00291
+_Mrf49TxCmd                         text15       002C1
+_Mrf49xaAllocPacket                 text1        0065C
+_Mrf49xaFreePacket                  text15       003CA
+_Mrf49xaInit                        text15       0012E
+_Mrf49xaModeRx                      text15       00299
+_Mrf49xaModeSleep                   text8        00F0C
+_Mrf49xaModeTx                      text24       00EE4
+_Mrf49xaNeedsReset                  text15       002BE
+_Mrf49xaPacketPending               text15       003DC
+_Mrf49xaReboot                      text15       0042B
+_Mrf49xaRxPacket                    text15       0041B
+_Mrf49xaServe                       text15       001A9
+_Mrf49xaShutdown                    text8        00F0B
+_Mrf49xaTick                        text15       000A0
+_Mrf49xaTxAck                       text1        00722
+_Mrf49xaTxPacket                    text1        006DC
 _OPTION_REGbits                     (abs)        00095
 _OSCCON                             (abs)        00099
 _PORTAbits                          (abs)        0000C
 _PORTBbits                          (abs)        0000D
 _PORTCbits                          (abs)        0000E
-_PwrAdcInit                         text15       00422
-_PwrAdcSleep                        text18       00F71
-_PwrAdcWake                         text16       00F7F
-_PwrI2cInit                         text14       00F5A
-_PwrI2cSleep                        text15       003AC
-_PwrI2cWake                         text15       003E8
-_PwrRfInit                          text11       00FD7
-_PwrRfSleep                         text15       003E9
-_PwrRfWake                          text6        00F4F
-_PwrSensorInit                      text5        007FC
-_PwrSensorSleep                     text15       003AE
-_PwrSensorWake                      text15       0042B
-_RfSendSampleWeatherNode            text1        00602
-_Sleepy                             text15       00184
-_SoftI2cInit                        text15       0002E
-_SoftI2cNop                         text15       0027C
-_SoftI2cRepeatedStart               text15       001C3
-_SoftI2cRxByte                      text15       00243
-_SoftI2cStart                       text15       00283
-_SoftI2cStop                        text15       0019F
-_SoftI2cTxByte                      text15       00215
+_PwrAdcInit                         text15       003E5
+_PwrAdcSleep                        text18       00ED6
+_PwrAdcWake                         text16       007E5
+_PwrI2cInit                         text14       007F6
+_PwrI2cSleep                        text15       003BD
+_PwrI2cWake                         text15       003EE
+_PwrRfInit                          text11       00F2E
+_PwrRfSleep                         text8        00F08
+_PwrRfWake                          text15       00429
+_PwrSensorInit                      text15       0042C
+_PwrSensorSleep                     text15       003BF
+_PwrSensorWake                      text3        00ECD
+_RfSendSampleWeatherNode            text1        00618
+_Sleepy                             text15       0018E
+_SoftI2cInit                        text15       00031
+_SoftI2cNop                         text15       003A9
+_SoftI2cRepeatedStart               text15       002F0
+_SoftI2cRxByte                      text15       00370
+_SoftI2cStart                       text15       003B0
+_SoftI2cStop                        text15       002CC
+_SoftI2cTxByte                      text15       00342
 _TRISAbits                          (abs)        0008C
 _TRISBbits                          (abs)        0008D
 _TRISCbits                          (abs)        0008E
@@ -501,7 +495,7 @@ __Hbank9                            bank9        00000
 __Hbigram                           bigram       00000
 __HbssBANK0                         bssBANK0     00000
 __HbssBANK1                         bssBANK1     00000
-__Hcinit                            cinit        0002E
+__Hcinit                            cinit        00031
 __Hclrtext                          clrtext      00000
 __Hcode                             code         00000
 __Hcommon                           common       00000
@@ -644,173 +638,175 @@ __Lstack                            stack        00000
 __Lstrings                          strings      00000
 __Ltext                             text         00000
 __S0                                (abs)        08009
-__S1                                (abs)        000EF
+__S1                                (abs)        000ED
 __S2                                (abs)        00000
 ___int_sp                           stack        00000
 ___latbits                          (abs)        00001
 ___sp                               stack        00000
-__end_ofPL10                        text15       003FB
-__end_ofPL12                        text15       00408
-__end_ofPL14                        text1        00753
-__end_ofPL16                        text64       00602
-__end_ofPL18                        text15       0040E
-__end_ofPL20                        text15       00414
-__end_ofPL22                        text15       00419
-__end_ofPL8                         text1        00749
-__end_of_AdcChSelect                text15       003E6
-__end_of_AdcDeinit                  text18       00F7F
-__end_of_AdcGetResult               text55       00000
-__end_of_AdcGo                      text15       003DB
-__end_of_AdcInit                    text16       00F90
-__end_of_AdcIsBusy                  text15       003DF
-__end_of_AdcSample                  text15       003D9
-__end_of_ExtIntDeinit               text68       00004
-__end_of_ExtIntInit                 text11       01000
-__end_of_HandlePacket               text1        0069F
-__end_of_Mcp9800Read                text15       001C3
-__end_of_Mcp9800Start               text15       001F1
-__end_of_Mrf49RxByte                text15       0036F
-__end_of_Mrf49RxCmd                 text33       0075D
-__end_of_Mrf49RxSts                 text15       003AC
-__end_of_Mrf49SpiRx                 text33       007FC
-__end_of_Mrf49SpiTx                 text33       007B8
-__end_of_Mrf49TxByte                text15       0036C
-__end_of_Mrf49TxCmd                 text15       0039F
-__end_of_Mrf49xaAllocPacket         text1        00653
-__end_of_Mrf49xaFreePacket          text1        006C8
-__end_of_Mrf49xaInit                text15       00184
-__end_of_Mrf49xaModeRx              text15       00394
-__end_of_Mrf49xaModeSleep           text9        00FB3
-__end_of_Mrf49xaModeTx              text24       00FD7
-__end_of_Mrf49xaNeedsReset          text15       003E8
-__end_of_Mrf49xaPacketPending       text15       00422
-__end_of_Mrf49xaReboot              text6        00F54
-__end_of_Mrf49xaRxPacket            text22       00F71
-__end_of_Mrf49xaServe               text15       00367
-__end_of_Mrf49xaShutdown            text9        00F91
-__end_of_Mrf49xaTick                text15       00124
-__end_of_Mrf49xaTxAck               text1        0072E
-__end_of_Mrf49xaTxPacket            text1        0070E
-__end_of_PwrAdcInit                 text15       0042B
-__end_of_PwrAdcSleep                text18       00F78
-__end_of_PwrAdcWake                 text16       00F85
-__end_of_PwrI2cInit                 text14       00F63
-__end_of_PwrI2cSleep                text15       003AE
-__end_of_PwrI2cWake                 text15       003E9
-__end_of_PwrRfInit                  text11       00FFA
-__end_of_PwrRfSleep                 text15       003ED
-__end_of_PwrRfWake                  text6        00F52
-__end_of_PwrSensorInit              text5        00800
-__end_of_PwrSensorSleep             text15       003B1
-__end_of_PwrSensorWake              text15       0042E
-__end_of_RfSendSampleWeatherNode    text1        00646
-__end_of_Sleepy                     text15       0019F
-__end_of_SoftI2cInit                text15       00036
-__end_of_SoftI2cNop                 text15       00283
-__end_of_SoftI2cRepeatedStart       text15       001D8
-__end_of_SoftI2cRxByte              text15       0027C
-__end_of_SoftI2cStart               text15       00290
-__end_of_SoftI2cStop                text15       001AE
-__end_of_SoftI2cTxByte              text15       00243
-__end_of__initialization            cinit        0002B
-__end_of__stringtab                 strings      00801
-__end_of_eepromRxBytes              text15       00215
+__end_ofPL10                        text15       003FD
+__end_ofPL12                        text15       0040A
+__end_ofPL14                        text1        0076F
+__end_ofPL16                        text66       00618
+__end_ofPL18                        text15       00410
+__end_ofPL20                        text15       00416
+__end_ofPL22                        text15       0041B
+__end_ofPL8                         text1        00765
+__end_of_AdcChSelect                text53       007E5
+__end_of_AdcDeinit                  text18       00EE4
+__end_of_AdcGetResult               text56       00000
+__end_of_AdcGo                      text53       007DA
+__end_of_AdcInit                    text16       007F6
+__end_of_AdcIsBusy                  text53       007DE
+__end_of_AdcSample                  text53       007D8
+__end_of_CfgInit                    text15       003CA
+__end_of_ExtIntDeinit               text69       00004
+__end_of_ExtIntInit                 text11       00F57
+__end_of_HandlePacket               text1        006B8
+__end_of_Mcp9800Read                text15       002F0
+__end_of_Mcp9800Start               text15       0031E
+__end_of_Mrf49RxByte                text15       00299
+__end_of_Mrf49RxCmd                 text34       00F61
+__end_of_Mrf49RxSts                 text15       003DC
+__end_of_Mrf49SpiRx                 text34       01000
+__end_of_Mrf49SpiTx                 text34       00FBC
+__end_of_Mrf49TxByte                text15       00296
+__end_of_Mrf49TxCmd                 text15       002CC
+__end_of_Mrf49xaAllocPacket         text1        00669
+__end_of_Mrf49xaFreePacket          text15       003CF
+__end_of_Mrf49xaInit                text15       0018E
+__end_of_Mrf49xaModeRx              text15       002BE
+__end_of_Mrf49xaModeSleep           text8        00F2E
+__end_of_Mrf49xaModeTx              text24       00F08
+__end_of_Mrf49xaNeedsReset          text15       002C1
+__end_of_Mrf49xaPacketPending       text15       003E5
+__end_of_Mrf49xaReboot              text15       0042C
+__end_of_Mrf49xaRxPacket            text15       00429
+__end_of_Mrf49xaServe               text15       00291
+__end_of_Mrf49xaShutdown            text8        00F0C
+__end_of_Mrf49xaTick                text15       0012E
+__end_of_Mrf49xaTxAck               text1        00742
+__end_of_Mrf49xaTxPacket            text1        00722
+__end_of_PwrAdcInit                 text15       003EE
+__end_of_PwrAdcSleep                text18       00EDD
+__end_of_PwrAdcWake                 text16       007EB
+__end_of_PwrI2cInit                 text14       007FF
+__end_of_PwrI2cSleep                text15       003BF
+__end_of_PwrI2cWake                 text15       003EF
+__end_of_PwrRfInit                  text11       00F51
+__end_of_PwrRfSleep                 text8        00F0B
+__end_of_PwrRfWake                  text15       0042B
+__end_of_PwrSensorInit              text15       00430
+__end_of_PwrSensorSleep             text15       003C2
+__end_of_PwrSensorWake              text3        00ED0
+__end_of_RfSendSampleWeatherNode    text1        0065C
+__end_of_Sleepy                     text15       001A9
+__end_of_SoftI2cInit                text15       00039
+__end_of_SoftI2cNop                 text15       003B0
+__end_of_SoftI2cRepeatedStart       text15       00305
+__end_of_SoftI2cRxByte              text15       003A9
+__end_of_SoftI2cStart               text15       003BD
+__end_of_SoftI2cStop                text15       002DB
+__end_of_SoftI2cTxByte              text15       00370
+__end_of__initialization            cinit        0002E
+__end_of__stringtab                 strings      00770
+__end_of_eepromRxBytes              text15       00342
 __end_of_extInt                     intentry     00020
-__end_of_handleFwCmd                text1        006C3
-__end_of_main                       text15       00094
-__end_of_mrfRegset_Init             strings      00825
-__end_of_mrfRegset_InitCnt          strings      00802
-__end_of_mrfRegset_Rx               strings      00831
-__end_of_mrfRegset_RxCnt            strings      00803
-__end_of_mrfRegset_Sleep            strings      0083F
-__end_of_mrfRegset_SleepCnt         strings      00804
-__end_of_mrfRegset_Tx               strings      00839
-__end_of_mrfRegset_TxCnt            strings      00805
-__end_ofi1_Mrf49RxByte              text64       00519
-__end_ofi1_Mrf49RxCmd               text64       0043A
-__end_ofi1_Mrf49RxSts               text64       005B6
-__end_ofi1_Mrf49SpiRx               text64       005F9
-__end_ofi1_Mrf49SpiTx               text64       005A9
-__end_ofi1_Mrf49TxByte              text64       00516
-__end_ofi1_Mrf49TxCmd               text64       00547
-__end_ofi1_Mrf49xaModeRx            text64       0053D
-__end_ofi1_Mrf49xaNeedsReset        text67       00F4F
-__end_ofi1_Mrf49xaServe             text64       00511
+__end_of_handleFwCmd                text1        006DC
+__end_of_main                       text15       000A0
+__end_of_mrfRegset_Init             strings      00794
+__end_of_mrfRegset_InitCnt          strings      00771
+__end_of_mrfRegset_Rx               strings      007A0
+__end_of_mrfRegset_RxCnt            strings      00772
+__end_of_mrfRegset_Sleep            strings      007AE
+__end_of_mrfRegset_SleepCnt         strings      00773
+__end_of_mrfRegset_Tx               strings      007A8
+__end_of_mrfRegset_TxCnt            strings      00774
+__end_ofi1_Mrf49RxByte              text66       0052C
+__end_ofi1_Mrf49RxCmd               text66       0043C
+__end_ofi1_Mrf49RxSts               text66       005CC
+__end_ofi1_Mrf49SpiRx               text66       0060F
+__end_ofi1_Mrf49SpiTx               text66       005BF
+__end_ofi1_Mrf49TxByte              text66       00529
+__end_ofi1_Mrf49TxCmd               text66       0055D
+__end_ofi1_Mrf49xaModeRx            text66       00550
+__end_ofi1_Mrf49xaNeedsReset        text66       00553
+__end_ofi1_Mrf49xaServe             text66       00524
 __initialization                    cinit        00022
 __pbssBANK0                         bssBANK0     00032
 __pbssBANK1                         bssBANK1     000A0
 __pcstackBANK0                      cstackBANK0  00020
 __pcstackCOMMON                     cstackCOMMON 00070
 __pintentry                         intentry     00004
-__pmaintext                         text15       00036
-__pstrings                          strings      00800
-__ptext1                            text1        00602
-__ptext10                           text9        00F91
-__ptext11                           text11       00FD7
-__ptext12                           text15       003E8
-__ptext13                           text15       003AC
-__ptext14                           text14       00F5A
-__ptext15                           text15       0002E
-__ptext16                           text16       00F7F
-__ptext17                           text16       00F85
-__ptext18                           text18       00F71
-__ptext19                           text18       00F78
-__ptext2                            text1        00646
-__ptext20                           text15       00422
-__ptext21                           text15       00094
-__ptext22                           text22       00F63
-__ptext23                           text15       00419
-__ptext24                           text24       00FB3
-__ptext25                           text15       00124
-__ptext26                           text15       00184
-__ptext27                           text15       00290
-__ptext28                           text15       0036F
-__ptext29                           text15       00367
-__ptext3                            text15       0042B
-__ptext30                           text15       00394
-__ptext31                           text15       0039F
-__ptext32                           text15       0036C
-__ptext33                           text33       00753
-__ptext34                           text33       0075D
-__ptext35                           text33       007B8
-__ptext36                           text1        00653
-__ptext37                           text1        0069F
-__ptext38                           text15       001F1
-__ptext39                           text15       001C3
-__ptext4                            text15       003AE
-__ptext40                           text1        0070E
-__ptext41                           text1        006C8
-__ptext42                           text1        006C3
-__ptext43                           text11       00FFA
-__ptext44                           text15       003E6
-__ptext45                           text15       001D8
-__ptext46                           text15       001AE
-__ptext47                           text15       00215
-__ptext48                           text15       0019F
-__ptext49                           text15       00283
-__ptext5                            text5        007FC
-__ptext50                           text15       00243
-__ptext51                           text15       0027C
-__ptext52                           text15       003B1
-__ptext53                           text15       003DB
-__ptext54                           text15       003D9
-__ptext55                           text55       00000
-__ptext56                           text15       003DF
-__ptext58                           text64       0043A
-__ptext59                           text64       00519
-__ptext6                            text6        00F4F
-__ptext60                           text64       00511
-__ptext61                           text64       0053D
-__ptext62                           text64       005A9
-__ptext63                           text64       00516
-__ptext64                           text64       0042E
-__ptext65                           text64       00547
-__ptext66                           text64       005B6
-__ptext67                           text67       00F4C
-__ptext68                           text68       00002
-__ptext7                            text6        00F52
-__ptext8                            text15       003E9
-__ptext9                            text9        00F90
+__pmaintext                         text15       00039
+__pstrings                          strings      0076F
+__ptext1                            text1        00618
+__ptext10                           text8        00F0C
+__ptext11                           text11       00F2E
+__ptext12                           text15       003EE
+__ptext13                           text15       003BD
+__ptext14                           text14       007F6
+__ptext15                           text15       00031
+__ptext16                           text16       007E5
+__ptext17                           text16       007EB
+__ptext18                           text18       00ED6
+__ptext19                           text18       00EDD
+__ptext2                            text1        0065C
+__ptext20                           text15       003E5
+__ptext21                           text15       000A0
+__ptext22                           text15       0041B
+__ptext23                           text15       003DC
+__ptext24                           text24       00EE4
+__ptext25                           text15       0012E
+__ptext26                           text15       0018E
+__ptext27                           text15       001A9
+__ptext28                           text15       002BE
+__ptext29                           text15       00299
+__ptext3                            text3        00ECD
+__ptext30                           text15       00291
+__ptext31                           text15       002C1
+__ptext32                           text15       003CF
+__ptext33                           text15       00296
+__ptext34                           text34       00F57
+__ptext35                           text34       00F61
+__ptext36                           text34       00FBC
+__ptext37                           text1        00669
+__ptext38                           text1        006B8
+__ptext39                           text1        00722
+__ptext4                            text15       003BF
+__ptext40                           text1        006DC
+__ptext41                           text15       003CA
+__ptext42                           text11       00F51
+__ptext43                           text15       00305
+__ptext44                           text15       002DB
+__ptext45                           text15       003C2
+__ptext46                           text15       0031E
+__ptext47                           text15       00342
+__ptext48                           text15       002CC
+__ptext49                           text15       003B0
+__ptext5                            text15       0042C
+__ptext50                           text15       00370
+__ptext51                           text15       002F0
+__ptext52                           text15       003A9
+__ptext53                           text53       007AE
+__ptext54                           text53       007DA
+__ptext55                           text53       007D8
+__ptext56                           text56       00000
+__ptext57                           text53       007DE
+__ptext59                           text66       0043C
+__ptext6                            text15       00429
+__ptext60                           text66       00550
+__ptext61                           text66       0052C
+__ptext62                           text66       00524
+__ptext63                           text66       00553
+__ptext64                           text66       005BF
+__ptext65                           text66       00529
+__ptext66                           text66       00430
+__ptext67                           text66       0055D
+__ptext68                           text66       005CC
+__ptext69                           text69       00002
+__ptext7                            text15       0042B
+__ptext8                            text8        00F08
+__ptext9                            text8        00F0B
 __size_of_AdcChSelect               (abs)        00000
 __size_of_AdcDeinit                 (abs)        00000
 __size_of_AdcGetResult              (abs)        00000
@@ -818,6 +814,7 @@ __size_of_AdcGo                     (abs)        00000
 __size_of_AdcInit                   (abs)        00000
 __size_of_AdcIsBusy                 (abs)        00000
 __size_of_AdcSample                 (abs)        00000
+__size_of_CfgInit                   (abs)        00000
 __size_of_ExtIntDeinit              (abs)        00000
 __size_of_ExtIntInit                (abs)        00000
 __size_of_HandlePacket              (abs)        00000
@@ -880,28 +877,29 @@ __size_ofi1_Mrf49TxCmd              (abs)        00000
 __size_ofi1_Mrf49xaModeRx           (abs)        00000
 __size_ofi1_Mrf49xaNeedsReset       (abs)        00000
 __size_ofi1_Mrf49xaServe            (abs)        00000
-__stringtab                         strings      00800
-_eepromRxBytes                      text15       001F1
+__stringtab                         strings      0076F
+_cfgRam                             bssBANK0     00032
+_eepromRxBytes                      text15       0031E
 _extInt                             intentry     00004
-_handleFwCmd                        text1        0069F
+_handleFwCmd                        text1        006B8
 _inlined$_AdcGetResult              (abs)        00001
-_main                               text15       00036
-_mrf49Status                        bssBANK0     00032
-_mrfRegset_Init                     strings      00805
-_mrfRegset_InitCnt                  strings      00801
-_mrfRegset_Rx                       strings      00825
-_mrfRegset_RxCnt                    strings      00802
-_mrfRegset_Sleep                    strings      00839
-_mrfRegset_SleepCnt                 strings      00803
-_mrfRegset_Tx                       strings      00831
-_mrfRegset_TxCnt                    strings      00804
+_main                               text15       00039
+_mrf49Status                        bssBANK0     00035
+_mrfRegset_Init                     strings      00774
+_mrfRegset_InitCnt                  strings      00770
+_mrfRegset_Rx                       strings      00794
+_mrfRegset_RxCnt                    strings      00771
+_mrfRegset_Sleep                    strings      007A8
+_mrfRegset_SleepCnt                 strings      00772
+_mrfRegset_Tx                       strings      007A0
+_mrfRegset_TxCnt                    strings      00773
 _rfTrcvStatus                       bssBANK1     000A0
 btemp                               (abs)        0007E
-clear_ram0                          clrtext      00F54
+clear_ram0                          clrtext      00ED0
 eepromRxBytes@address               cstackBANK0  00024
 eepromRxBytes@data                  cstackBANK0  00026
 eepromRxBytes@size                  cstackBANK0  00027
-end_of_initialization               cinit        0002B
+end_of_initialization               cinit        0002E
 extInt@ofw                          cstackCOMMON 00077
 handleFwCmd@packet                  cstackBANK0  00028
 i1Mrf49RxCmd@cmd                    cstackCOMMON 00071
@@ -913,16 +911,16 @@ i1Mrf49TxCmd@cmd                    cstackCOMMON 00072
 i1Mrf49TxCmd@val                    cstackCOMMON 00071
 i1Mrf49xaModeRx@k                   cstackCOMMON 00073
 i1Mrf49xaServe@data                 cstackCOMMON 00075
-i1_Mrf49RxByte                      text64       00516
-i1_Mrf49RxCmd                       text64       0042E
-i1_Mrf49RxSts                       text64       005A9
-i1_Mrf49SpiRx                       text64       005B6
-i1_Mrf49SpiTx                       text64       00547
-i1_Mrf49TxByte                      text64       00511
-i1_Mrf49TxCmd                       text64       0053D
-i1_Mrf49xaModeRx                    text64       00519
-i1_Mrf49xaNeedsReset                text67       00F4C
-i1_Mrf49xaServe                     text64       0043A
+i1_Mrf49RxByte                      text66       00529
+i1_Mrf49RxCmd                       text66       00430
+i1_Mrf49RxSts                       text66       005BF
+i1_Mrf49SpiRx                       text66       005CC
+i1_Mrf49SpiTx                       text66       0055D
+i1_Mrf49TxByte                      text66       00524
+i1_Mrf49TxCmd                       text66       00553
+i1_Mrf49xaModeRx                    text66       0052C
+i1_Mrf49xaNeedsReset                text66       00550
+i1_Mrf49xaServe                     text66       0043C
 intlevel0                           functab      00000
 intlevel1                           functab      00000
 intlevel2                           functab      00000
@@ -938,7 +936,7 @@ main@humidity                       cstackBANK0  0002E
 main@temperature                    cstackBANK0  00030
 reset_vec                           reset_vec    00000
 stackhi                             (abs)        020EF
-stacklo                             (abs)        0209F
+stacklo                             (abs)        0209D
 start                               init         00020
 start_initialization                cinit        00022
 ttemp                               (abs)        0007E
@@ -984,6 +982,7 @@ Total ram usage:        4 bytes
  Hardware stack levels required when called:   11
  This function calls:
 		_AdcSample
+		_CfgInit
 		_Mcp9800Read
 		_Mcp9800Start
 		_Mrf49xaNeedsReset
@@ -1015,7 +1014,7 @@ Total ram usage:        4 bytes
   humidity        2    8[BANK0 ] unsigned int 
  Auto vars:     Size  Location     Type
   packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1042,7 +1041,7 @@ Total ram usage:        5 bytes
 
  *************** function _Mrf49xaAllocPacket *****************
  Defined at:
-		line 107 in file "../../../src/devices/mrf49xa_packet.c"
+		line 112 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1616,13 +1615,13 @@ Total ram usage:        0 bytes
 
  *************** function _Mrf49xaTick *****************
  Defined at:
-		line 124 in file "../../../src/devices/mrf49xa_packet.c"
+		line 129 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
   timeout         1   12[BANK0 ] unsigned char 
   packet          1   13[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1642,12 +1641,12 @@ Total ram usage:        3 bytes
  This function calls:
 		_ExtIntInit
 		_HandlePacket
-		_Mrf49RxSts
 		_Mrf49xaFreePacket
 		_Mrf49xaInit
 		_Mrf49xaModeTx
 		_Mrf49xaPacketPending
 		_Mrf49xaRxPacket
+		_Mrf49xaServe
 		_Sleepy
  This function is called by:
 		_main
@@ -1656,7 +1655,7 @@ Total ram usage:        3 bytes
 
  *************** function _Mrf49xaRxPacket *****************
  Defined at:
-		line 90 in file "../../../src/devices/mrf49xa_packet.c"
+		line 95 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1841,8 +1840,41 @@ Total ram usage:        2 bytes
 		_Mrf49RxSts
 		_Mrf49TxByte
 		_Mrf49xaModeRx
+		_Mrf49xaNeedsReset
  This function is called by:
 		_Mrf49xaInit
+		_Mrf49xaTick
+ This function uses a non-reentrant model
+
+
+ *************** function _Mrf49xaNeedsReset *****************
+ Defined at:
+		line 145 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		Nothing
+ This function is called by:
+		_Mrf49xaServe
+		_main
  This function uses a non-reentrant model
 
 
@@ -1969,7 +2001,6 @@ Total ram usage:        0 bytes
  This function calls:
 		_Mrf49SpiRx
  This function is called by:
-		_Mrf49xaTick
 		_Mrf49xaServe
  This function uses a non-reentrant model
 
@@ -2103,10 +2134,10 @@ Total ram usage:        1 bytes
 		line 99 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Auto vars:     Size  Location     Type
   packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
   response        1    9[BANK0 ] struct .
  Return value:  Size  Location     Type
 		None               void
@@ -2139,10 +2170,10 @@ Total ram usage:        2 bytes
 		line 6 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Auto vars:     Size  Location     Type
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2166,83 +2197,15 @@ Total ram usage:        1 bytes
  This function uses a non-reentrant model
 
 
- *************** function _eepromRxBytes *****************
- Defined at:
-		line 4 in file "../../../src/devices/24aa64.c"
- Parameters:    Size  Location     Type
-  address         2    4[BANK0 ] unsigned int 
-  data            1    6[BANK0 ] PTR unsigned char 
-		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwCmd@packet..(21), eepromRxByte@dat(1), 
-		 -> NULL(0), 
-  size            1    7[BANK0 ] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       4       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    7
- This function calls:
-		_SoftI2cRepeatedStart
-		_SoftI2cRxByte
-		_SoftI2cStart
-		_SoftI2cStop
-		_SoftI2cTxByte
- This function is called by:
-		_handleFwCmd
- This function uses a non-reentrant model
-
-
- *************** function _SoftI2cRepeatedStart *****************
- Defined at:
-		line 52 in file "../../../src/bsp/softI2c.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_SoftI2cNop
- This function is called by:
-		_eepromRxBytes
- This function uses a non-reentrant model
-
-
  *************** function _Mrf49xaTxAck *****************
  Defined at:
 		line 15 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Auto vars:     Size  Location     Type
   packet          1    6[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2268,15 +2231,15 @@ Total ram usage:        1 bytes
 
  *************** function _Mrf49xaTxPacket *****************
  Defined at:
-		line 27 in file "../../../src/devices/mrf49xa_packet.c"
+		line 32 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
   response        1    0[BANK0 ] unsigned char 
   needAck         1    1[BANK0 ] unsigned char 
  Auto vars:     Size  Location     Type
   packet          1    5[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
   i               1    4[BANK0 ] unsigned char 
   crc             1    3[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
@@ -2306,13 +2269,13 @@ Total ram usage:        6 bytes
 
  *************** function _Mrf49xaFreePacket *****************
  Defined at:
-		line 85 in file "../../../src/devices/mrf49xa_packet.c"
+		line 90 in file "../../../src/devices/mrf49xa_packet.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Auto vars:     Size  Location     Type
   packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
-		 -> NULL(0), rfTrcvStatus.rxPacket(50), rfTrcvStatus(79), 
+		 -> NULL(0), rfTrcvStatus.rxPacket(48), rfTrcvStatus(77), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2365,36 +2328,6 @@ Total ram usage:        0 bytes
  This function is called by:
 		_Mrf49xaTick
 		_PwrRfInit
- This function uses a non-reentrant model
-
-
- *************** function _Mrf49xaNeedsReset *****************
- Defined at:
-		line 145 in file "../../../src/devices/mrf49xa.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  2  119[COMMON] int 
- Registers used:
-		None
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		Nothing
- This function is called by:
-		_main
  This function uses a non-reentrant model
 
 
@@ -2461,6 +2394,75 @@ Total ram usage:        4 bytes
 		_SoftI2cTxByte
  This function is called by:
 		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _CfgInit *****************
+ Defined at:
+		line 33 in file "../../../src/node/config.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  2  571[COMMON] int 
+ Registers used:
+		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		_eepromRxBytes
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _eepromRxBytes *****************
+ Defined at:
+		line 4 in file "../../../src/devices/24aa64.c"
+ Parameters:    Size  Location     Type
+  address         2    4[BANK0 ] unsigned int 
+  data            1    6[BANK0 ] PTR unsigned char 
+		 -> rfTrcvStatus.rxPacket...data(16), rfTrcvStatus...data(16), handleFwCmd@packet..(21), eepromRxByte@dat(1), 
+		 -> NULL(0), cfgRam(3), 
+  size            1    7[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       4       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		_SoftI2cRepeatedStart
+		_SoftI2cRxByte
+		_SoftI2cStart
+		_SoftI2cStop
+		_SoftI2cTxByte
+ This function is called by:
+		_handleFwCmd
+		_CfgInit
  This function uses a non-reentrant model
 
 
@@ -2594,6 +2596,36 @@ Total ram usage:        3 bytes
 		_SoftI2cNop
  This function is called by:
 		_Mcp9800Read
+		_eepromRxBytes
+ This function uses a non-reentrant model
+
+
+ *************** function _SoftI2cRepeatedStart *****************
+ Defined at:
+		line 52 in file "../../../src/bsp/softI2c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0, pclath, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_SoftI2cNop
+ This function is called by:
 		_eepromRxBytes
  This function uses a non-reentrant model
 
@@ -2845,8 +2877,39 @@ Total ram usage:        2 bytes
 		i1_Mrf49RxSts
 		i1_Mrf49TxByte
 		i1_Mrf49xaModeRx
+		i1_Mrf49xaNeedsReset
  This function is called by:
 		_extInt
+ This function uses a non-reentrant model
+
+
+ *************** function i1_Mrf49xaNeedsReset *****************
+ Defined at:
+		line 145 in file "../../../src/devices/mrf49xa.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		None
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMMON   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_extInt
+		i1_Mrf49xaServe
  This function uses a non-reentrant model
 
 
@@ -3094,35 +3157,6 @@ Total ram usage:        1 bytes
  This function uses a non-reentrant model
 
 
- *************** function i1_Mrf49xaNeedsReset *****************
- Defined at:
-		line 145 in file "../../../src/devices/mrf49xa.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  2    0[COMMON] int 
- Registers used:
-		None
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_extInt
- This function uses a non-reentrant model
-
-
  *************** function _ExtIntDeinit *****************
  Defined at:
 		line 17 in file "../../../src/bsp/pic16/interrupt.c"
@@ -3157,149 +3191,154 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 ../../../src/rfstack/client.c
-		_handleFwCmd   		CODE           	069F	0000	36
-		_HandlePacket  		CODE           	0653	0000	76
+		_handleFwCmd   		CODE           	06B8	0000	36
+		_HandlePacket  		CODE           	0669	0000	79
 
-../../../src/rfstack/client.c estimated size: 112
+../../../src/rfstack/client.c estimated size: 115
 
 ../../../src/rfstack/packets.c
-		_RfSendSampleWe		CODE           	0602	0000	68
+		_RfSendSampleWe		CODE           	0618	0000	68
 
 ../../../src/rfstack/packets.c estimated size: 68
 
 ../../../src/devices/mrf49xa_spi_pic16.c
-		_Mrf49SpiRx    		CODE           	07B8	0000	68
-		_Mrf49SpiTx    		CODE           	075D	0000	91
+		_Mrf49SpiRx    		CODE           	0FBC	0000	68
+		_Mrf49SpiTx    		CODE           	0F61	0000	91
 
 ../../../src/devices/mrf49xa_spi_pic16.c estimated size: 159
 
 ../../../src/bsp/pic16/adc16.c
 		_AdcGetResult  		CODE           	0000	0000	0
-		_AdcDeinit     		CODE           	0F78	0000	7
-		_AdcInit       		CODE           	0F85	0000	11
-		_AdcGo         		CODE           	03D9	0000	2
-		_AdcIsBusy     		CODE           	03DB	0000	4
-		_AdcSample     		CODE           	03B1	0000	40
-		_AdcChSelect   		CODE           	03DF	0000	7
+		_AdcDeinit     		CODE           	0EDD	0000	7
+		_AdcInit       		CODE           	07EB	0000	11
+		_AdcGo         		CODE           	07D8	0000	2
+		_AdcIsBusy     		CODE           	07DA	0000	4
+		_AdcSample     		CODE           	07AE	0000	42
+		_AdcChSelect   		CODE           	07DE	0000	7
 
-../../../src/bsp/pic16/adc16.c estimated size: 71
+../../../src/bsp/pic16/adc16.c estimated size: 73
 
 ../../../src/bsp/softI2c.c
-		_SoftI2cNop    		CODE           	027C	0000	7
-		_SoftI2cInit   		CODE           	002E	0000	8
-		_SoftI2cStop   		CODE           	019F	0000	15
-		_SoftI2cStart  		CODE           	0283	0000	13
-		_SoftI2cRxByte 		CODE           	0243	0000	57
-		_SoftI2cTxByte 		CODE           	0215	0000	46
-		_SoftI2cRepeate		CODE           	01C3	0000	21
+		_SoftI2cNop    		CODE           	03A9	0000	7
+		_SoftI2cInit   		CODE           	0031	0000	8
+		_SoftI2cStop   		CODE           	02CC	0000	15
+		_SoftI2cStart  		CODE           	03B0	0000	13
+		_SoftI2cRxByte 		CODE           	0370	0000	57
+		_SoftI2cTxByte 		CODE           	0342	0000	46
+		_SoftI2cRepeate		CODE           	02F0	0000	21
 
 ../../../src/bsp/softI2c.c estimated size: 167
 
 shared
-		PL12           		CODE           	03FB	0000	13
-		PL8            		CODE           	072E	0000	27
-		i1_Mrf49xaModeR		CODE           	0519	0000	36
-		PL22           		CODE           	0414	0000	5
-		PL14           		CODE           	0749	0000	10
-		_mrfRegset_Rx  		STRING         	0825	0000	12
-		_mrfRegset_Tx  		STRING         	0831	0000	8
-		__stringtab    		STRING         	0800	0000	1
-		PL16           		CODE           	05F9	0000	9
-		PL18           		CODE           	0408	0000	6
-		_mrfRegset_Init		STRING         	0805	0000	32
-		_mrfRegset_Init		STRING         	0801	0000	1
-		__initializatio		CODE           	0022	0000	9
-		i1_Mrf49RxCmd  		CODE           	042E	0000	12
-		i1_Mrf49TxCmd  		CODE           	053D	0000	10
-		i1_Mrf49SpiRx  		CODE           	05B6	0000	67
-		i1_Mrf49SpiTx  		CODE           	0547	0000	98
-		i1_Mrf49RxSts  		CODE           	05A9	0000	13
-		i1_Mrf49RxByte 		CODE           	0516	0000	3
-		i1_Mrf49TxByte 		CODE           	0511	0000	5
-		_mrfRegset_Slee		STRING         	0839	0000	6
-		_mrfRegset_RxCn		STRING         	0802	0000	1
-		_mrfRegset_TxCn		STRING         	0804	0000	1
-		_mrfRegset_Slee		STRING         	0803	0000	1
-		i1_Mrf49xaServe		CODE           	043A	0000	215
-		i1_Mrf49xaNeeds		CODE           	0F4C	0000	3
-		PL10           		CODE           	03ED	0000	14
-		PL20           		CODE           	040E	0000	6
+		PL12           		CODE           	03FD	0000	13
+		PL8            		CODE           	0742	0000	35
+		i1_Mrf49xaModeR		CODE           	052C	0000	36
+		PL22           		CODE           	0416	0000	5
+		PL14           		CODE           	0765	0000	10
+		_mrfRegset_Rx  		STRING         	0794	0000	12
+		_mrfRegset_Tx  		STRING         	07A0	0000	8
+		__stringtab    		STRING         	076F	0000	1
+		PL16           		CODE           	060F	0000	9
+		PL18           		CODE           	040A	0000	6
+		_mrfRegset_Init		STRING         	0774	0000	32
+		_mrfRegset_Init		STRING         	0770	0000	1
+		__initializatio		CODE           	0022	0000	12
+		i1_Mrf49RxCmd  		CODE           	0430	0000	12
+		i1_Mrf49TxCmd  		CODE           	0553	0000	10
+		i1_Mrf49SpiRx  		CODE           	05CC	0000	67
+		i1_Mrf49SpiTx  		CODE           	055D	0000	98
+		i1_Mrf49RxSts  		CODE           	05BF	0000	13
+		i1_Mrf49RxByte 		CODE           	0529	0000	3
+		i1_Mrf49TxByte 		CODE           	0524	0000	5
+		_mrfRegset_Slee		STRING         	07A8	0000	6
+		_mrfRegset_RxCn		STRING         	0771	0000	1
+		_mrfRegset_TxCn		STRING         	0773	0000	1
+		_mrfRegset_Slee		STRING         	0772	0000	1
+		i1_Mrf49xaServe		CODE           	043C	0000	232
+		i1_Mrf49xaNeeds		CODE           	0550	0000	3
+		PL10           		CODE           	03EF	0000	14
+		PL20           		CODE           	0410	0000	6
 
-shared estimated size: 624
+shared estimated size: 652
+
+../../../src/node/config.c
+		_CfgInit       		CODE           	03C2	0000	8
+
+../../../src/node/config.c estimated size: 8
 
 ../../../src/devices/mcp9800.c
-		_Mcp9800Read   		CODE           	01AE	0000	21
-		_Mcp9800Start  		CODE           	01D8	0000	25
+		_Mcp9800Read   		CODE           	02DB	0000	21
+		_Mcp9800Start  		CODE           	0305	0000	25
 
 ../../../src/devices/mcp9800.c estimated size: 46
 
 ../../../src/devices/mrf49xa_cmd.c
-		_Mrf49TxCmd    		CODE           	0394	0000	11
-		_Mrf49TxByte   		CODE           	0367	0000	5
-		_Mrf49RxCmd    		CODE           	0753	0000	10
-		_Mrf49RxSts    		CODE           	039F	0000	13
-		_Mrf49RxByte   		CODE           	036C	0000	3
+		_Mrf49TxCmd    		CODE           	02C1	0000	11
+		_Mrf49TxByte   		CODE           	0291	0000	5
+		_Mrf49RxCmd    		CODE           	0F57	0000	10
+		_Mrf49RxSts    		CODE           	03CF	0000	13
+		_Mrf49RxByte   		CODE           	0296	0000	3
 
 ../../../src/devices/mrf49xa_cmd.c estimated size: 42
 
 ../../../src/devices/mrf49xa_data.c
-		_Mrf49xaServe  		CODE           	0290	0000	215
+		_Mrf49xaServe  		CODE           	01A9	0000	232
 
-../../../src/devices/mrf49xa_data.c estimated size: 215
+../../../src/devices/mrf49xa_data.c estimated size: 232
 
 ../../../src/devices/mrf49xa.c
-		_Mrf49xaInit   		CODE           	0124	0000	96
-		_Mrf49xaModeRx 		CODE           	036F	0000	37
-		_Mrf49xaModeTx 		CODE           	0FB3	0000	36
-		_Mrf49xaModeSle		CODE           	0F91	0000	34
-		_Mrf49xaReboot 		CODE           	0F52	0000	2
-		_Mrf49xaNeedsRe		CODE           	03E6	0000	2
-		_Mrf49xaShutdow		CODE           	0F90	0000	1
+		_Mrf49xaInit   		CODE           	012E	0000	96
+		_Mrf49xaModeRx 		CODE           	0299	0000	37
+		_Mrf49xaModeTx 		CODE           	0EE4	0000	36
+		_Mrf49xaModeSle		CODE           	0F0C	0000	34
+		_Mrf49xaReboot 		CODE           	042B	0000	1
+		_Mrf49xaNeedsRe		CODE           	02BE	0000	3
+		_Mrf49xaShutdow		CODE           	0F0B	0000	1
 
 ../../../src/devices/mrf49xa.c estimated size: 208
 
 ../../../src/node/main.c
-		_main          		CODE           	0036	0000	94
+		_main          		CODE           	0039	0000	103
 
-../../../src/node/main.c estimated size: 94
+../../../src/node/main.c estimated size: 103
 
 ../../../src/node/power.c
-		_PwrAdcWake    		CODE           	0F7F	0000	6
-		_PwrSensorSleep		CODE           	03AE	0000	3
-		_PwrI2cWake    		CODE           	03E8	0000	1
-		_Sleepy        		CODE           	0184	0000	27
-		_PwrAdcSleep   		CODE           	0F71	0000	7
-		_PwrI2cSleep   		CODE           	03AC	0000	2
-		_PwrAdcInit    		CODE           	0422	0000	9
-		_PwrI2cInit    		CODE           	0F5A	0000	9
-		_PwrRfWake     		CODE           	0F4F	0000	3
-		_PwrRfInit     		CODE           	0FD7	0000	35
-		_PwrRfSleep    		CODE           	03E9	0000	4
-		_PwrSensorWake 		CODE           	042B	0000	3
-		_PwrSensorInit 		CODE           	07FC	0000	4
+		_PwrAdcWake    		CODE           	07E5	0000	6
+		_PwrSensorSleep		CODE           	03BF	0000	3
+		_PwrI2cWake    		CODE           	03EE	0000	1
+		_Sleepy        		CODE           	018E	0000	27
+		_PwrAdcSleep   		CODE           	0ED6	0000	7
+		_PwrI2cSleep   		CODE           	03BD	0000	2
+		_PwrAdcInit    		CODE           	03E5	0000	9
+		_PwrI2cInit    		CODE           	07F6	0000	9
+		_PwrRfWake     		CODE           	0429	0000	2
+		_PwrRfInit     		CODE           	0F2E	0000	35
+		_PwrRfSleep    		CODE           	0F08	0000	3
+		_PwrSensorWake 		CODE           	0ECD	0000	3
+		_PwrSensorInit 		CODE           	042C	0000	4
 
-../../../src/node/power.c estimated size: 113
+../../../src/node/power.c estimated size: 111
 
 ../../../src/devices/mrf49xa_packet.c
-		_Mrf49xaTick   		CODE           	0094	0000	144
-		_Mrf49xaPacketP		CODE           	0419	0000	9
-		_Mrf49xaTxAck  		CODE           	070E	0000	32
-		_Mrf49xaFreePac		CODE           	06C3	0000	5
-		_Mrf49xaRxPacke		CODE           	0F63	0000	14
-		_Mrf49xaTxPacke		CODE           	06C8	0000	70
-		_Mrf49xaAllocPa		CODE           	0646	0000	13
+		_Mrf49xaTick   		CODE           	00A0	0000	142
+		_Mrf49xaPacketP		CODE           	03DC	0000	9
+		_Mrf49xaTxAck  		CODE           	0722	0000	32
+		_Mrf49xaFreePac		CODE           	03CA	0000	5
+		_Mrf49xaRxPacke		CODE           	041B	0000	14
+		_Mrf49xaTxPacke		CODE           	06DC	0000	70
+		_Mrf49xaAllocPa		CODE           	065C	0000	13
 
-../../../src/devices/mrf49xa_packet.c estimated size: 287
+../../../src/devices/mrf49xa_packet.c estimated size: 285
 
 ../../../src/bsp/pic16/interrupt.c
 		_ExtIntDeinit  		CODE           	0002	0000	2
-		_ExtIntInit    		CODE           	0FFA	0000	6
+		_ExtIntInit    		CODE           	0F51	0000	6
 		_extInt        		CODE           	0004	0000	28
 
 ../../../src/bsp/pic16/interrupt.c estimated size: 36
 
 ../../../src/devices/24aa64.c
-		_eepromRxBytes 		CODE           	01F1	0000	36
+		_eepromRxBytes 		CODE           	031E	0000	36
 
 ../../../src/devices/24aa64.c estimated size: 36
 

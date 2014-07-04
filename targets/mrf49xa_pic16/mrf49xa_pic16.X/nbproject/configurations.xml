@@ -46,6 +46,7 @@
       </logicalFolder>
       <itemPath>../../../src/node/main.c</itemPath>
       <itemPath>../../../src/node/power.c</itemPath>
+      <itemPath>../../../src/node/config.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -70,7 +71,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.31</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -79,6 +80,7 @@
         </linkerTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
       </compileType>
@@ -102,7 +104,8 @@
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
-        <property key="extra-include-directories" value="../../../inc"/>
+        <property key="extra-include-directories"
+                  value="../../../inc;../../../inc/node"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="pro"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
@@ -110,6 +113,8 @@
         <property key="optimization-assembler-files" value="true"/>
         <property key="optimization-debug" value="false"/>
         <property key="optimization-global" value="true"/>
+        <property key="optimization-invariant-enable" value="false"/>
+        <property key="optimization-invariant-value" value="16"/>
         <property key="optimization-level" value="9"/>
         <property key="optimization-set" value="default"/>
         <property key="optimization-speed" value="false"/>
@@ -180,6 +185,7 @@
         <property key="memories.programmemory.start" value="0x0"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmertogo.imagename" value=""/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmspeed" value="2"/>
         <property key="programoptions.preserveeeprom" value="false"/>
