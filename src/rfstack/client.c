@@ -2,6 +2,8 @@
 
 #include "devices/24aa64.h"
 
+#include "config.h"
+
 #ifdef PROTOCOL_SUPPORT_FIRMWARE
 void handleFwCmd(rfTrcvPacket_t* packet)
 {
@@ -96,6 +98,55 @@ void handleFwRead(rfTrcvPacket_t* packet)
 #endif
 #endif
 
+#ifdef PROTCOL_SUPPORT_CONFIG
+void handleCfgRead(rfTrcvPacket_t* packet)
+{
+    uint8_t index = packet->packet.data[0];
+    uint8_t nrOfBytes = CfgGetSizeByType(parameters[index].type);
+
+    packet->packet.size = nrOfBytes + 2;
+    packet->packet.id = RF_CFG_READ;
+
+    packet->packet.data[1] = parameters[index].id;
+
+    memcpy(packet->packet.data + 2, parameters[index].ptr, nrOfBytes);
+}
+
+void handleCfgWrite(rfTrcvPacket_t* packet)
+{
+    uint8_t index = packet->packet.data[0];
+    uint8_t nrOfBytes = CfgGetSizeByType(parameters[index].type);
+
+    memcpy(parameters[index].ptr, packet->packet.data + 1, nrOfBytes);
+
+}
+
+void handleCfgCmd(rfTrcvPacket_t* packet)
+{
+    switch (packet->packet.data[0])
+    {
+        case 1:
+            CfgSave();
+            break;
+
+        case 2:
+            CfgLoad();
+            break;
+
+        case 3:
+            packet->packet.size = 2;
+            packet->packet.data[1] = CfgParameterCount;
+            break;
+
+        case 4:
+            packet->packet.size = 3;
+            packet->packet.data[1] = cfgRam.checksum >> 8;
+            packet->packet.data[2] = cfgRam.checksum & 0xFF;
+            break;
+    }
+}
+#endif
+
 void HandlePacket(rfTrcvPacket_t* packet)
 {
     // Compact these booleans:
@@ -131,6 +182,23 @@ void HandlePacket(rfTrcvPacket_t* packet)
             // Ignore, we're a client!
             break;
 
+#ifdef PROTCOL_SUPPORT_CONFIG
+
+            // Command
+        case RF_CFG_CMD:
+            handleCfgCmd(packet);
+            response.sendMsg = TRUE;
+            break;
+
+            // Write reports a read action back.
+        case RF_CFG_WRITE:
+            handleCfgWrite(packet);
+        case RF_CFG_READ:
+            handleCfgRead(packet);
+            response.sendMsg = TRUE;
+           break;
+#endif
+           
 #ifdef PROTOCOL_SUPPORT_FIRMWARE
         case RF_FW_CMD:
             handleFwCmd(packet);

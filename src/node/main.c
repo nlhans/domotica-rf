@@ -1,5 +1,6 @@
 #include "stddefs.h"
 #include "power.h"
+#include "config.h"
 
 #include "bsp/adc.h"
 
@@ -36,7 +37,7 @@ void main(void)
     PwrI2cInit();
     PwrRfInit();
 
-    CfgInit();
+    CfgLoad();
 
     PwrAdcSleep();
     PwrSensorSleep();

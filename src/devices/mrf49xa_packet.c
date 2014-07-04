@@ -24,11 +24,6 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet)
     Mrf49xaTxPacket(packet, TRUE, FALSE);
 }
 
-void Mrf49xaTxPacketFeedback(void* ptr)
-{
-    rfTrcvStatus.txPacketHandler = ptr;
-}
-
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
 {
     uint8_t i, crc = 0;

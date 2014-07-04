@@ -305,7 +305,6 @@ typedef struct rfTrcvStatus_s
     rfTrcvPacket_t* hwRx;
     rfTrcvPacket_t rxPacket[2];
     rfTrcvPacket_t txPacket;
-    uint8_t* txPacketHandler;
 
     rfTrcvState_t state;
     uint8_t hwByte:7;
