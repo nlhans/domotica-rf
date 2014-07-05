@@ -3,12 +3,12 @@
 
 #include "stddefs.h"
 
-//#define TCP_DEBUG
+#define TCP_DEBUG
 
 #define ETHERNET_FRAME_SIZE 1100
 
 #define TCP_MAX_LISTEN_PORTS 2
-#define TCP_MAX_CONNECTIONS 8
+#define TCP_MAX_CONNECTIONS 4
 
 // http://en.wikipedia.org/wiki/Ethernet_frame
 typedef struct EthernetFrame_s
