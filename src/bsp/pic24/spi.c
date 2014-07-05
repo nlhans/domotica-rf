@@ -22,7 +22,7 @@ void spiInit(UI08_t port)
             SPI1CON1 = 0;
             SPI1CON2 = 0;
             
-            SPI1CON1 = 0b0000000100110001;
+            SPI1CON1 = 0b0000000100111010;
             
             SPI1STAT |= 0x1 << 15;
             break;
