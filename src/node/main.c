@@ -27,6 +27,8 @@
 #pragma config LPBOR = OFF      // Low-Power Brown Out Reset (Low-Power BOR is disabled)
 #pragma config LVP = OFF         // Low-Voltage Programming Enable (Low-voltage programming enabled)
 
+uint8_t powerStatusTicker = 0;
+
 void main(void)
 {
     #warning "Building for PIC16F1508"
@@ -48,16 +50,16 @@ void main(void)
     {
         // 30.3s:
         //Sleepy(24576);
-        Sleepy(1000);
+        Sleepy(5000);
         
         PwrSensorWake();
         PwrI2cWake();
 
-        Mcp9800Start(Mcp9800_12bit);
+        Mcp9800Start(Mcp9800_9bit);
 
         PwrAdcWake();
         uint16_t humidity = AdcSample(BSP_HUMIDITY_CHANNEL);
-        Sleepy(300);
+        Sleepy(100);
         uint16_t temperature = Mcp9800Read();
 
         PwrSensorSleep();
@@ -71,12 +73,20 @@ void main(void)
             Mrf49xaTick();
         }
 
-        //RfSendPowerState();
-        do
+        powerStatusTicker++;
+
+        if (powerStatusTicker >= 15)
         {
-            Mrf49xaTick();
+            powerStatusTicker = 0;
+        
+
+            RfSendPowerState();
+            do
+            {
+                Mrf49xaTick();
+            }
+            while (rfTrcvStatus.txPacket.state != PKT_FREE);
         }
-        while (rfTrcvStatus.txPacket.state != PKT_FREE);
 
         RfSendSampleWeatherNode(temperature, humidity);
         do

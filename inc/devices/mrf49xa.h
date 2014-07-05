@@ -52,7 +52,7 @@ rfTrcvPacket_t* Mrf49xaAllocPacket(void);
 void Mrf49xaFreePacket(rfTrcvPacket_t* packet);
 
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck);
-void Mrf49xaTxAck(rfTrcvPacket_t* packet);
+bool_t Mrf49xaTxAck(rfTrcvPacket_t* packet);
 
 
 // Platform dependant.
@@ -65,7 +65,7 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet);
 // These delays may be longer than the function name suggests(!)
 extern void LoseTime(uint16_t t);
 
-#define Delay5Ms() Sleepy(8)
+#define Delay5Ms() Sleepy(5)
 #define Delay50Ms() Sleepy(64)
 
 //#define Delay5Ms() _delay(40000)

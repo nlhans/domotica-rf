@@ -119,12 +119,12 @@ void PwrRfInit(void)
 void PwrRfSleep(void)
 {
     Mrf49xaShutdown();
-    MRF_ENABLE_INT
+    MRF_DISABLE_INT
 }
 
 void PwrRfWake(void)
 {
-    MRF_DISABLE_INT
+    MRF_ENABLE_INT
     Mrf49xaReboot();
 }
 

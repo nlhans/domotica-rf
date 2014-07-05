@@ -139,14 +139,14 @@ RF_FW_WRITE 193
 RF_FW_READ 194
 RF_APP_SAMPLE 0
 ]
-"170
+"171
 [e E4300 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"172
+"173
 [e E4315 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
@@ -194,14 +194,14 @@ ADC_TEMP 29
 ADC_DAC 30
 ADC_FVR 31
 ]
-"56 C:\Projects\Firmware\domoticarf/src/node/main.c
+"58 C:\Projects\Firmware\domoticarf/src/node/main.c
 [e E4468 Mcp9800Resolution_e `uc
 Mcp9800_9bit 0
 Mcp9800_10bit 32
 Mcp9800_11bit 64
 Mcp9800_12bit 96
 ]
-"59
+"61
 [e E4222 AdcChannels_e `uc
 ADC_AN0 0
 ADC_AN1 1
@@ -219,7 +219,7 @@ ADC_TEMP 29
 ADC_DAC 30
 ADC_FVR 31
 ]
-"68
+"70
 [e E4377 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
@@ -334,7 +334,7 @@ CFG_TYPE_INT32 2
 "6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
 [v _Mrf49xaPacketPending Mrf49xaPacketPending `(uc  1 e 1 0 ]
 "15
-[v _Mrf49xaTxAck Mrf49xaTxAck `(v  1 e 0 0 ]
+[v _Mrf49xaTxAck Mrf49xaTxAck `(uc  1 e 1 0 ]
 "27
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
 "85
@@ -373,7 +373,7 @@ CFG_TYPE_INT32 2
 [v _CfgSave CfgSave `(v  1 e 0 0 ]
 "29
 [v _CfgGetSizeByType CfgGetSizeByType `(uc  1 e 1 0 ]
-"30 C:\Projects\Firmware\domoticarf/src/node/main.c
+"32 C:\Projects\Firmware\domoticarf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 "42 C:\Projects\Firmware\domoticarf/src/node/power.c
 [v _Sleepy Sleepy `(v  1 e 0 0 ]
@@ -542,6 +542,10 @@ CFG_TYPE_INT32 2
 [s S1054 CfgParameter_s 3 `uc 1 type 1 0 `uc 1 id 1 1 `*.4uc 1 ptr 1 2 ]
 "12
 [v _parameters parameters `DCC[2]S1054  1 e 6 0 ]
+"30 C:\Projects\Firmware\domoticarf/src/node/main.c
+[v _powerStatusTicker powerStatusTicker `uc  1 e 1 0 ]
+"7 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
+[v _coldBoot coldBoot `uc  1 e 1 0 ]
 [s S195 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
@@ -619,19 +623,19 @@ CFG_TYPE_INT32 2
 ]
 [u S177 . 1 `S163 1 . 1 0 `S170 1 . 1 0 ]
 [v _OPTION_REGbits OPTION_REGbits `VES177  1 e 1 @149 ]
-[s S1466 . 1 `uc 1 SWDTEN 1 0 :1:0 
+[s S1470 . 1 `uc 1 SWDTEN 1 0 :1:0 
 `uc 1 WDTPS 1 0 :5:1 
 ]
 "1452
-[s S1469 . 1 `uc 1 . 1 0 :1:0 
+[s S1473 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WDTPS0 1 0 :1:1 
 `uc 1 WDTPS1 1 0 :1:2 
 `uc 1 WDTPS2 1 0 :1:3 
 `uc 1 WDTPS3 1 0 :1:4 
 `uc 1 WDTPS4 1 0 :1:5 
 ]
-[u S1476 . 1 `S1466 1 . 1 0 `S1469 1 . 1 0 ]
-[v _WDTCONbits WDTCONbits `VES1476  1 e 1 @151 ]
+[u S1480 . 1 `S1470 1 . 1 0 `S1473 1 . 1 0 ]
+[v _WDTCONbits WDTCONbits `VES1480  1 e 1 @151 ]
 "1491
 [v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
 "1607
@@ -658,7 +662,7 @@ CFG_TYPE_INT32 2
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
 "2556
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S1590 . 1 `uc 1 WPUA0 1 0 :1:0 
+[s S1594 . 1 `uc 1 WPUA0 1 0 :1:0 
 `uc 1 WPUA1 1 0 :1:1 
 `uc 1 WPUA2 1 0 :1:2 
 `uc 1 WPUA3 1 0 :1:3 
@@ -666,18 +670,18 @@ CFG_TYPE_INT32 2
 `uc 1 WPUA5 1 0 :1:5 
 ]
 "3055
-[s S1597 . 1 `uc 1 WPUA 1 0 :6:0 
+[s S1601 . 1 `uc 1 WPUA 1 0 :6:0 
 ]
-[u S1599 . 1 `S1590 1 . 1 0 `S1597 1 . 1 0 ]
-[v _WPUAbits WPUAbits `VES1599  1 e 1 @524 ]
-"30 C:\Projects\Firmware\domoticarf/src/node/main.c
+[u S1603 . 1 `S1594 1 . 1 0 `S1601 1 . 1 0 ]
+[v _WPUAbits WPUAbits `VES1603  1 e 1 @524 ]
+"32 C:\Projects\Firmware\domoticarf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 {
+"63
+[v main@temperature temperature `ui  1 a 2 17 ]
 "61
-[v main@temperature temperature `ui  1 a 2 16 ]
-"59
-[v main@humidity humidity `ui  1 a 2 14 ]
-"90
+[v main@humidity humidity `ui  1 a 2 15 ]
+"100
 } 0
 "33 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
 [v _RfSendSampleWeatherNode RfSendSampleWeatherNode `(v  1 e 0 0 ]
@@ -695,6 +699,41 @@ CFG_TYPE_INT32 2
 [v RfSendSampleWeatherNode@humidity humidity `ui  1 p 2 8 ]
 "57
 } 0
+"13
+[v _RfSendPowerState RfSendPowerState `(v  1 e 0 0 ]
+{
+"25
+[v RfSendPowerState@s s `ui  1 a 2 6 ]
+[s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+"15
+[u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+`uc 1 retransmit 1 23 :2:4 
+`uc 1 needAck 1 23 :2:6 
+]
+[v RfSendPowerState@packet packet `*.4S321  1 a 1 8 ]
+"31
+} 0
+"169 C:\Projects\Firmware\domoticarf/src/node/power.c
+[v _PwrAdcWake PwrAdcWake `(v  1 e 0 0 ]
+{
+"175
+} 0
+"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[v _AdcInit AdcInit `(v  1 e 0 0 ]
+{
+"13
+} 0
+"160 C:\Projects\Firmware\domoticarf/src/node/power.c
+[v _PwrAdcSleep PwrAdcSleep `(v  1 e 0 0 ]
+{
+"167
+} 0
+"15 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[v _AdcDeinit AdcDeinit `(v  1 e 0 0 ]
+{
+"22
+} 0
 "277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
 "7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
@@ -707,6 +746,39 @@ CFG_TYPE_INT32 2
 [v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S321  1 e 1 0 ]
 {
 "122
+} 0
+"81 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+[v _AdcSample AdcSample `(ui  1 e 2 0 ]
+{
+[v AdcSample@ch ch `uc  1 a 1 wreg ]
+[v AdcSample@ch ch `uc  1 a 1 wreg ]
+"83
+[v AdcSample@ch ch `uc  1 a 1 5 ]
+"93
+} 0
+"34
+[v _AdcIsBusy AdcIsBusy `(uc  1 e 1 0 ]
+{
+"37
+} 0
+"29
+[v _AdcGo AdcGo `(v  1 e 0 0 ]
+{
+"32
+} 0
+"24
+[v _AdcGetResult AdcGetResult `T(ui  1 e 2 0 ]
+{
+"27
+} 0
+"76
+[v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
+{
+[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
+[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
+"78
+[v AdcChSelect@channel channel `E4222  1 a 1 0 ]
+"79
 } 0
 "144 C:\Projects\Firmware\domoticarf/src/node/power.c
 [v _PwrSensorWake PwrSensorWake `(v  1 e 0 0 ]
@@ -775,26 +847,6 @@ CFG_TYPE_INT32 2
 {
 "36
 } 0
-"169 C:\Projects\Firmware\domoticarf/src/node/power.c
-[v _PwrAdcWake PwrAdcWake `(v  1 e 0 0 ]
-{
-"175
-} 0
-"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
-[v _AdcInit AdcInit `(v  1 e 0 0 ]
-{
-"13
-} 0
-"160 C:\Projects\Firmware\domoticarf/src/node/power.c
-[v _PwrAdcSleep PwrAdcSleep `(v  1 e 0 0 ]
-{
-"167
-} 0
-"15 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
-[v _AdcDeinit AdcDeinit `(v  1 e 0 0 ]
-{
-"22
-} 0
 "150 C:\Projects\Firmware\domoticarf/src/node/power.c
 [v _PwrAdcInit PwrAdcInit `(v  1 e 0 0 ]
 {
@@ -804,7 +856,7 @@ CFG_TYPE_INT32 2
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
 {
 "202
-[v Mrf49xaTick@timeout timeout `uc  1 a 1 12 ]
+[v Mrf49xaTick@timeout timeout `uc  1 a 1 13 ]
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "135
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
@@ -812,7 +864,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v Mrf49xaTick@packet packet `*.4S321  1 a 1 13 ]
+[v Mrf49xaTick@packet packet `*.4S321  1 a 1 14 ]
 "239
 } 0
 "277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
@@ -941,16 +993,17 @@ CFG_TYPE_INT32 2
 `uc 1 needAck 1 23 :2:6 
 ]
 [v HandlePacket@packet packet `*.4S321  1 a 1 wreg ]
-[s S1212 . 1 `uc 1 needAck 1 0 :1:0 
-`uc 1 sendAck 1 0 :1:1 
-`uc 1 sendMsg 1 0 :1:2 
+[s S1212 . 1 `uc 1 reset 1 0 :1:0 
+`uc 1 needAck 1 0 :1:1 
+`uc 1 sendAck 1 0 :1:2 
+`uc 1 sendMsg 1 0 :1:3 
 ]
-"158
-[v HandlePacket@response response `S1212  1 a 1 9 ]
+"159
+[v HandlePacket@response response `S1212  1 a 1 10 ]
 "150
 [v HandlePacket@packet packet `*.4S321  1 a 1 wreg ]
-[v HandlePacket@packet packet `*.4S321  1 a 1 10 ]
-"234
+[v HandlePacket@packet packet `*.4S321  1 a 1 11 ]
+"240
 } 0
 "8
 [v _handleFwCmd handleFwCmd `(v  1 e 0 0 ]
@@ -1078,7 +1131,7 @@ CFG_TYPE_INT32 2
 "71
 } 0
 "15 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[v _Mrf49xaTxAck Mrf49xaTxAck `(v  1 e 0 0 ]
+[v _Mrf49xaTxAck Mrf49xaTxAck `(uc  1 e 1 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
@@ -1194,39 +1247,6 @@ CFG_TYPE_INT32 2
 [v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
 {
 "13
-} 0
-"81 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
-[v _AdcSample AdcSample `(ui  1 e 2 0 ]
-{
-[v AdcSample@ch ch `uc  1 a 1 wreg ]
-[v AdcSample@ch ch `uc  1 a 1 wreg ]
-"83
-[v AdcSample@ch ch `uc  1 a 1 5 ]
-"93
-} 0
-"34
-[v _AdcIsBusy AdcIsBusy `(uc  1 e 1 0 ]
-{
-"37
-} 0
-"29
-[v _AdcGo AdcGo `(v  1 e 0 0 ]
-{
-"32
-} 0
-"24
-[v _AdcGetResult AdcGetResult `T(ui  1 e 2 0 ]
-{
-"27
-} 0
-"76
-[v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
-{
-[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
-[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
-"78
-[v AdcChSelect@channel channel `E4222  1 a 1 0 ]
-"79
 } 0
 "36 C:\Projects\Firmware\domoticarf/src/bsp/pic16/interrupt.c
 [v _extInt extInt `II(v  1 e 0 0 ]

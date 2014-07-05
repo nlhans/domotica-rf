@@ -12,7 +12,7 @@ bool_t Mrf49xaPacketPending(void)
         return FALSE;
 }
 
-void Mrf49xaTxAck(rfTrcvPacket_t* packet)
+bool_t Mrf49xaTxAck(rfTrcvPacket_t* packet)
 {
     packet->packet.data[0] = packet->packet.id;
     packet->packet.data[1] = packet->crc;
@@ -21,7 +21,7 @@ void Mrf49xaTxAck(rfTrcvPacket_t* packet)
     packet->packet.id = RF_ACK;
     packet->packet.size = 2;
 
-    Mrf49xaTxPacket(packet, TRUE, FALSE);
+    return Mrf49xaTxPacket(packet, TRUE, FALSE);
 }
 
 bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
@@ -32,10 +32,10 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
     {
         if (response)
         {
-            packet->packet.dst = packet->packet.src;
+            packetTx.packet.dst = packetTx.packet.src;
         }
-        packet->packet.src = cfgRam.nodeId;
-        packet->packet.size += 5;
+        packetTx.packet.src = cfgRam.nodeId;
+        packetTx.packet.size += 5;
 
         packetTx.state = PKT_READY_FOR_TX;
         packetTx.retry = 0;
@@ -60,11 +60,6 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
         packet->packet.src = cfgRam.nodeId;
         packet->packet.size += 5;
 
-        packetTx.state = PKT_READY_FOR_TX;
-        packetTx.retry = 0;
-        packetTx.retransmit = 0;
-        packetTx.needAck = (needAck == TRUE) ? NEED_ACK : NO_ACK;
-
         packet->state = PKT_FREE;
 
         // Copy complete packet.
@@ -76,6 +71,11 @@ bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck)
         {
             crc = crc ^ packetTx.raw[i];
         }
+
+        packetTx.state = PKT_READY_FOR_TX;
+        packetTx.retry = 0;
+        packetTx.retransmit = 0;
+        packetTx.needAck = (needAck == TRUE) ? NEED_ACK : NO_ACK;
 
         packetTx.crc = crc;
         return TRUE;
@@ -204,7 +204,7 @@ void Mrf49xaTick(void)
         // Remain in here while a signal is present.
         do
         {
-            Mrf49xaServe();
+            Mrf49RxSts();
 
             if (rfTrcvStatus.state == RECV_IDLE && mrf49Status.flags.msb.signalPresent == 0)
             {

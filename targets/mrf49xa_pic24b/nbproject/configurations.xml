@@ -61,6 +61,7 @@
         <itemPath>../../src/server/webserver/router.c</itemPath>
       </logicalFolder>
       <itemPath>../../src/server/main.c</itemPath>
+      <itemPath>../../src/server/config.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

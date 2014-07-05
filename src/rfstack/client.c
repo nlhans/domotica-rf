@@ -152,6 +152,7 @@ void HandlePacket(rfTrcvPacket_t* packet)
     // Compact these booleans:
     struct
     {
+        bool_t reset:1;
         bool_t needAck:1;
         bool_t sendAck:1;
         bool_t sendMsg:1;
@@ -224,11 +225,16 @@ void HandlePacket(rfTrcvPacket_t* packet)
 #endif
     }
 
+    response.reset = TRUE;
+
     // TODO: RF data response statemachine
     if (response.sendMsg)
-        Mrf49xaTxPacket(packet, TRUE, response.needAck);
+        response.reset = Mrf49xaTxPacket(packet, TRUE, response.needAck);
     else if (response.sendAck)
-        Mrf49xaTxAck(packet);
+        response.reset = Mrf49xaTxAck(packet);
     else
+        response.reset = FALSE;
+
+    if (!response.reset)
         Mrf49xaFreePacket(packet);
 }

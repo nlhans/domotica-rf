@@ -1,4 +1,5 @@
 #include "stddefs.h"
+#include "config.h"
 
 #include "rtos/task.h"
 #include "rtos/timer.h"
@@ -128,7 +129,7 @@ void RfTask()
     Mrf49xaInit();
     RtosTaskDelay(100);
 
-    rfTrcvStatus.src = 1;
+    cfgRam.nodeId = 1;
 
     while(1)
     {
