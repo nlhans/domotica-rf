@@ -299,8 +299,6 @@ bool_t enc28j60GetOverflowStatus(void)
 void enc28j60Initialize()
 {
     ENC28J60_CS_HIGH; // deselect chip
-
-    spiArbEthDisableIsr();
     
     // reset
     enc28j60Reset();
@@ -367,8 +365,6 @@ void enc28j60Initialize()
     
     enc28j60WritePhyRegisterUint16(PHCON2, 0b000000100000000); // hdldis
     enc28j60BitSetRegisterUint8(ECON1, 0b00000100); // rxen
-    
-    spiArbEthEnableIsr();
 
     // set phy LED status settings:
     //enc28j60WritePhyRegisterUint16(PHLCON, 0b0000010010100000); // B: blink fast, A: link status, no stretching
@@ -422,9 +418,7 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     
     enc28j60BitClrRegisterUint8(EIR,    0b00001010); // TX complete, TX error
     
-    spiArbEthDisableIsr();
     enc28j60BitSetRegisterUint8(ECON1, 0b00001000); // TXRTS
-    spiArbEthEnableIsr();
 
     while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0 && (timeout--) > 0);
 
@@ -544,10 +538,7 @@ void enc28j60RxFrame(void)
             enc28j60WriteRegisterUint16(ERXRDPTL, dataPtr-1);
         }
 
-        spiArbEthDisableIsr();
         enc28j60BitSetRegisterUint8(ECON2, 0b01000000); // decrease packet counter
-        spiArbEthEnableIsr();
-
 
         packetCount = enc28j60GetPacketCount();
 

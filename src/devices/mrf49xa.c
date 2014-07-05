@@ -118,6 +118,7 @@ void Mrf49xaModeTx(void)
     rfTrcvStatus.hwByte = 99;
 }
 
+#ifdef MRF49XA_POWER_SWITCH
 void Mrf49xaModeSleep(void)
 {
     UI08_t k;
@@ -127,7 +128,6 @@ void Mrf49xaModeSleep(void)
     rfTrcvStatus.hwByte = 0;
 }
 
-#ifdef MRF49XA_POWER_SWITCH
 void Mrf49xaShutdown(void)
 {
     Mrf49xaModeSleep();

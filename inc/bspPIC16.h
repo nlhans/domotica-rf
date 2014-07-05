@@ -84,6 +84,7 @@ typedef long int32_t;
 #define BSP_HUMIDITY_ANALOG_PIN      PC, 0              // A/D
 #define BSP_HUMIDITY_CHANNEL         ADC_AN4            // A/D
 
+#define MRF49XA_POWER_SWITCH
 #ifdef RF_PWR_NFET
 #define RF_PWR_ON 1
 #define RF_PWR_OFF 0

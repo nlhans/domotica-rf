@@ -45,11 +45,11 @@ bool_t Mrf49xaServe(void)
                 // TODO: Wait until end of this packet burst is done.
 
                 break;
-
+#ifdef MRF49XA_POWER_SWITCH
             case POWERED_OFF:
                 Mrf49xaNeedsReset();
                 break;
-
+#endif
             case TX_PACKET:
                 // According to the datasheet, fifoTxRx is also always set.
                 // So we don't have to do anything, as after this the
@@ -71,9 +71,11 @@ bool_t Mrf49xaServe(void)
         // Depending on the driver status.
         switch (rfTrcvStatus.state)
         {
+#ifdef MRF49XA_POWER_SWITCH
             case POWERED_OFF:
                 Mrf49xaNeedsReset();
                 break;
+#endif
 
             case RECV_IDLE:
                 data = Mrf49RxByte();
@@ -112,7 +114,7 @@ bool_t Mrf49xaServe(void)
                 // Reset radio & wait for sync byte. Current pattern is rubbish data.
                 if (mrf49Status.flags.lsb.dataQualityOK == 0)
                 {
-                    packetRx->state = PKT_HW_READY_RX;
+                    packetRx->state = PKT_FREE;
                     Mrf49xaModeRx();
                     break;
                 }

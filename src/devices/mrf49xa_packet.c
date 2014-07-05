@@ -123,12 +123,18 @@ rfTrcvPacket_t* Mrf49xaAllocPacket(void)
 
 void Mrf49xaTick(void)
 {
+    if (rfTrcvStatus.rxPacket[0].state == PKT_HW_BUSY_RX &&
+        rfTrcvStatus.rxPacket[1].state == PKT_HW_BUSY_RX)
+    {
+        Mrf49xaNeedsReset();
+    }
     if (rfTrcvStatus.needsReset)
     {
         Mrf49xaInit();
         ExtIntInit();
         return;
     }
+
 
     if (Mrf49xaPacketPending())
     {

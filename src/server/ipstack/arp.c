@@ -15,12 +15,12 @@ void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
     arp->plen  = 4;                  // Length of IP
     arp->oper  = htons( ((reply) ? 2 : 1) );  // request or reply
 
+    memcpy(arp->tha, arp->sha, 6);       // 00:00:00:00:00:00
+    memcpy(arp->tpa, targetIp, 4);        // 192.168.1.1?
     memcpy(arp->sha, myMac, 6);           // My MAC
     memcpy(arp->spa, myIp, 4);            // My IP
-    memcpy(arp->tha, targetMac, 6);       // 00:00:00:00:00:00
-    memcpy(arp->tpa, targetIp, 4);        // 192.168.1.1?
 
-    memset(arp->frame.dstMac, 0xFF, 6);
+    memcpy(arp->frame.dstMac, myGatewayMac, 6);
     memcpy(arp->frame.srcMac, myMac, 6);
     arp->frame.type = htons(ProtocolARP);
 

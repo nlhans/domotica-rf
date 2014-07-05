@@ -1,6 +1,6 @@
 #define MAIN_C
 
-//#define COMPILE_ETHERNET
+#define COMPILE_ETHERNET
 
 #include "stddefs.h"
 
@@ -76,6 +76,7 @@ int main(void)
 
     ExtIntInit();
     spiInit(1);
+    spiInit(2);
     UartInit(1, 38400);
     printf("Hello world!\r\n");
 
@@ -85,7 +86,7 @@ int main(void)
     RtosTaskInit();
     
 #ifdef COMPILE_ETHERNET
-    EthInit();
+    //EthInit();
 #endif
     RfInit();
     

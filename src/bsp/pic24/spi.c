@@ -1,29 +1,5 @@
 #include "bsp/spi.h"
 
-void spiSpeed(UI08_t port, bool_t fast)
-{
-#ifndef dsPIC33
-    switch(port)
-    {
-        case 1:
-            SPI1CON1 = 0;
-
-            if(fast == TRUE)
-                SPI1CON1 = 0b0000000100111011;
-            else
-                SPI1CON1 = 0b0000000100111010;
-            break;
-        case 2:
-            SPI2CON1 = 0;
-            if(fast == TRUE)
-                SPI2CON1 = 0b0000000100111011;
-            else
-                SPI2CON1 = 0b0000000100111010;
-            break;
-    }
-#endif
-}
-
 void spiInit(UI08_t port)
 {
     switch(port)
@@ -46,20 +22,17 @@ void spiInit(UI08_t port)
             SPI1CON1 = 0;
             SPI1CON2 = 0;
             
-#ifdef dsPIC33
-            // sck =  714kHz
-            SPI1CON1 = 0b0000000100111001; // Primary 1:16, secondary 1:2, -> 714kHz*32 = 22.848M
-#else
-            SPI1CON1 = 0b0000000100111010;
-#endif
+            SPI1CON1 = 0b0000000100110001;
+            
             SPI1STAT |= 0x1 << 15;
             break;
         case 2:
             PPSUnLock;
 #ifdef dsPIC33
-            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK2);
+#warning "SPI2 sck pin not good?"
+            iPPSOutput(OUT_PIN_PPS_RP14, OUT_FN_PPS_SCK2);
 #else
-            iPPSOutput(OUT_PIN_PPS_RP7, OUT_FN_PPS_SCK2OUT);
+            iPPSOutput(OUT_PIN_PPS_RP14, OUT_FN_PPS_SCK2OUT);
 #endif
             iPPSOutput(OUT_PIN_PPS_RP16, OUT_FN_PPS_SDO2);
             iPPSInput(IN_FN_PPS_SDI2, IN_PIN_PPS_RP18);
@@ -72,11 +45,7 @@ void spiInit(UI08_t port)
             SPI2CON1 = 0;
             SPI2CON2 = 0;
 
-#ifdef dsPIC33
-            SPI2CON1 = 0b0000000100111001;
-#else
-            SPI2CON1 = 0b0000000100111010;
-#endif
+            SPI2CON1 = 0b0000000100111011;
             
             SPI2STAT |= 0x1 << 15;
             break;
@@ -123,59 +92,51 @@ volatile UI16_t spiDummy;
 void spiTx1(UI08_t byte)
 {
     SPI1BUF = byte;
-    if (SPI1STATbits.SPIRBF == 1)
-        while(SPI1STATbits.SPIRBF == 1);
     while(SPI1STATbits.SPIRBF == 0);
     spiDummy = SPI1BUF;
-
-#ifdef dsPIC33
-
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-
-#endif
 }
 void spiTx2(UI08_t byte)
 {
     SPI2BUF = byte;
     while(SPI2STATbits.SPIRBF == 0);
     spiDummy = SPI2BUF;
+
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
 }
 
 UI08_t spiRx1()
 {
     SPI1BUF = 0;
     while(SPI1STATbits.SPIRBF == 0);
-#ifdef dsPIC33
-
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-
-#endif
     return SPI1BUF;
 }
 UI08_t spiRx2()
 {
     SPI2BUF = 0;
     while(SPI2STATbits.SPIRBF == 0);
+
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    
     return SPI2BUF;
 }
 

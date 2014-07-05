@@ -28,19 +28,11 @@ void RfInit(void)
 {
     RF_RES = 1;
     RF_POWER = 0;
-
-    // Connect up MRF49XA ISR
-    PPSUnLock;
-
-    iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
-
-    PPSLock;
     
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
 
 #ifdef PIC24GB
-    RtosTimerCreate(&rfPingTimer, 100, RfPing);
+    RtosTimerCreate(&rfPingTimer, 1000, RfPing);
 #endif
     
     RtosTimerCreate(&rfTimer, 2, RfTick);
@@ -56,7 +48,7 @@ void RfPing(void)
 {
     RtosTaskSignalEvent(&rfTask, RF_PINGA);
 
-    //RtosTimerRearm(&rfPingTimer, 500);
+    RtosTimerRearm(&rfPingTimer, 5000);
 }
 
 void RfTick(void)
@@ -124,9 +116,22 @@ void RfTask()
 {
     rfTrcvPacket_t ping;
     UI08_t i;
+    
     RtosTaskDelay(100);
 
+    MRF_DISABLE_INT;
     Mrf49xaInit();
+
+    // Connect up MRF49XA ISR
+    PPSUnLock;
+
+    iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
+    ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
+    
+    PPSLock;
+
+    MRF_ENABLE_INT;
+
     RtosTaskDelay(100);
 
     cfgRam.nodeId = 1;

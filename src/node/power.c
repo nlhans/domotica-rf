@@ -66,8 +66,8 @@ void PwrI2cInit(void)
     TRISBbits.TRISB4 = GPIO_OUTPUT;
     TRISBbits.TRISB6 = GPIO_OUTPUT;
 
-    TRISBbits.TRISB5 = GPIO_INPUT; // UART: not used
-    PORTBbits.RB5 = 1;
+    TRISBbits.TRISB5 = GPIO_OUTPUT; // UART: not used
+    LATBbits.LATB5 = 1;
 }
 
 void PwrI2cSleep(void)
@@ -120,10 +120,29 @@ void PwrRfSleep(void)
 {
     Mrf49xaShutdown();
     MRF_DISABLE_INT
+
+    LATAbits.LATA5 = 1;
+    LATCbits.LATC5 = 1;
+    
+    LATBbits.LATB7 = 1;
+    LATCbits.LATC7 = 1;
+
+    WPUAbits.WPUA5 = 0;
+
+    TRISAbits.TRISA5 = 0;
+    TRISCbits.TRISC5 = 0;
 }
 
 void PwrRfWake(void)
 {
+    WPUAbits.WPUA5 = 1;
+
+    LATBbits.LATB7 = 0;
+    LATCbits.LATC7 = 0;
+    
+    TRISAbits.TRISA5 = 1;
+    TRISCbits.TRISC5 = 1;
+
     MRF_ENABLE_INT
     Mrf49xaReboot();
 }
@@ -160,7 +179,6 @@ void PwrAdcInit(void)
 void PwrAdcSleep(void)
 {
     ANSELC = 0;
-    PORTCbits.RC0 = 1;
     TRISCbits.TRISC0 = 0;
 
     AdcDeinit();
@@ -168,7 +186,7 @@ void PwrAdcSleep(void)
 
 void PwrAdcWake(void)
 {
-    ANSELC = (1<<0);
+    ANSELCbits.ANSC0 = 1;
     TRISCbits.TRISC0 = 1;
 
     AdcInit();

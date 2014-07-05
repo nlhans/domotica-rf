@@ -1,6 +1,5 @@
 #ifndef __MRF49XA_H
 #define __MRF49XA_H
-#define MRF49XA_POWER_SWITCH
 
 #include "stddefs.h"
 
