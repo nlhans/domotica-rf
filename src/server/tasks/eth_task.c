@@ -110,7 +110,6 @@ void ethTcpTick(void)
 
 bool_t enc28j60Int(UI08_t foo)
 {
-    printf(".");
     RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
     return TRUE;
 }

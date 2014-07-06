@@ -121,8 +121,19 @@ rfTrcvPacket_t* Mrf49xaAllocPacket(void)
     return NULL;
 }
 
+#ifdef PIC24GB
+RtosTime_t TransmissionStart;
+#endif
+
 void Mrf49xaTick(void)
 {
+#ifdef PIC24GB
+    if ((RtosTimestamp - TransmissionStart) > 250 &&
+            rfTrcvStatus.state == TX_PACKET)
+    {
+        Mrf49xaNeedsReset();
+    }
+#endif
     if (rfTrcvStatus.rxPacket[0].state == PKT_HW_BUSY_RX &&
         rfTrcvStatus.rxPacket[1].state == PKT_HW_BUSY_RX)
     {
@@ -240,6 +251,9 @@ void Mrf49xaTick(void)
         MRF_DISABLE_INT;
         Mrf49xaModeTx();
         packetTx.state = PKT_HW_BUSY_TX;
+#ifdef PIC24GB
+        TransmissionStart = RtosTimestamp;
+#endif
         MRF_ENABLE_INT;
     }
 }

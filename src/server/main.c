@@ -81,7 +81,7 @@ int main(void)
     printf("Hello world!\r\n");
 
     // Interrupts..
-    INTCON1bits.NSTDIS = 1;
+    //INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
     

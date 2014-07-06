@@ -126,7 +126,7 @@ void RfTask()
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
+    ExtIntSetup(2, Mrf49xaServe, TRUE, 1);
     
     PPSLock;
 

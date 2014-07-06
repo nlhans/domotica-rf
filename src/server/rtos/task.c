@@ -45,7 +45,6 @@ void RtosTaskIdleFnc()
 {
     while(1)
     {
-        RtosTimerTick();
         //asm volatile("PWRSAV #1");
     }
 }

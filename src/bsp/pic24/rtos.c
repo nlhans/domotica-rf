@@ -35,7 +35,7 @@ void RtosKernelPortTimerStart()
     PR1 = F_OSC_DIV_2/1000; // 1kHz
 
     RtosKernelPortTimerClear();
-    IPC0bits.T1IP = 0x01;
+    IPC0bits.T1IP = 0x06;
     IEC0bits.T1IE = 1;
 
     T1CONbits.TON = 1;
@@ -53,6 +53,7 @@ void RtosKernelPortTimerClear()
 void __attribute__((__interrupt__, __shadow__, auto_psv)) _T1Interrupt(void)
 {
     RtosKernelPortTimerClear();
+    RtosTimerTick();
     RtosKernelContextSuspend();
 }
 
