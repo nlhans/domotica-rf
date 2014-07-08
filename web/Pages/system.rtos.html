@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Domotica</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Domotica</a>
+        </div>
+        <div class="navbar-collapse collapse">
+			{include: navigation/index.html}
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>OS statistics</h1>
+        <p>System uptime <span id="uptime">0 seconds</span></p>
+      </div>
+    </div>
+
+    <div class="container">
+
+	  <div class="table-responsive">
+		<table id="tasks" class="table table-striped">
+			<thead>
+				<td>#</td>
+				<td>Priority</td>
+				<td>Name</td>
+				<td>Status</td>
+				<td>Memory</td>
+				<td>Time</td>
+				<td>Events</td>
+				<td>CPU Load</td>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+      </div>
+	
+      <hr>
+
+      <footer>
+	    Status: <span id="status">OK</span>
+        <p>&copy; Hans de Jong 2013 / 2014</p>
+      </footer>
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="./application/global.js"></script>
+	<script src="./application/system.rtos.js"></script>
+</body>
+</html>

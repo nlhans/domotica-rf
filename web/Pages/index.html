@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Domotica</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Domotica</a>
+        </div>
+        <div class="navbar-collapse collapse">
+			{include: navigation/index.html}
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Hello <span id="name">person</span>!</h1>
+        <p>Welcome back!</p>
+        <p><a class="btn btn-primary btn-lg" role="button">Check past events &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Upstairs</h2>
+          <p><b>Temperature:</b> <span id="upstairs_temperature">25 C</span> </p>
+          <p><b>Humidity:</b> <span id="upstairs_humidity">55 %</span> </p>
+          <p><a class="btn btn-default" href="#" role="button">View graphs &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Downstairs</h2>
+          <p><b>Temperature:</b> <span id="downstairs_temperature">25 C</span> </p>
+          <p><b>Humidity:</b> <span id="downstairs_humidity">55 %</span> </p>
+		  <p><a class="btn btn-default" href="#" role="button">View graphs &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Scullery</h2>
+          <p><b>Temperature:</b> <span id="scullery_temperature">25 C</span> </p>
+          <p><b>Humidity:</b> <span id="scullery_humidity">55 %</span> </p>
+		  <p><a class="btn btn-default" href="#" role="button">View graphs &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+	    Status: <span id="status">OK</span>
+        <p>&copy; Hans de Jong 2013 / 2014</p>
+      </footer>
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="./application/global.js"></script>
+	<script src="./application/index.js"></script>
+
+</body>
+</html>
