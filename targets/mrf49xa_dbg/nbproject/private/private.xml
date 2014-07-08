@@ -5,4 +5,19 @@
             <line>104</line>
         </file>
     </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Projects/Firmware/domoticarf/src/devices/mrf49xa.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/devices/mrf49xa_spi_dspic33.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/bsp/pic24/rtos.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/dbg/main.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/bsp/pic24/spi.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/server/rtos/task.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/server/rtos/timer.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/dbg/dbg_task.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/server/tasks/rf_task.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/bsp/pic24/timer.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/devices/mrf49xa_packet.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/devices/mrf49xa_data.c</file>
+        <file>file:/C:/Projects/Firmware/domoticarf/src/bsp/pic24/interrupt.c</file>
+    </open-files>
 </project-private>

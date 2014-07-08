@@ -10,7 +10,6 @@ uint32_t syncedTime;
 // TODO: These are all client-specific packets
 // Seperate them?
 
-#ifndef dsPIC33
 void RfSendPowerState(void)
 {
     rfTrcvPacket_t* packet = Mrf49xaAllocPacket();

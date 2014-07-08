@@ -51,7 +51,9 @@ void RfPing(void)
 void RfTick(void)
 {
     // Reduce CPU load of RF task.
+#ifndef dsPIC33
     if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
+#endif
         RtosTaskSignalEvent(&rfTask, RF_TICK);
     RtosTimerRearm(&rfTimer, 2);
 }
@@ -123,7 +125,7 @@ void RfTask()
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntSetup(2, Mrf49xaServe, TRUE, 1);
+    ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
 
     PPSLock;
 

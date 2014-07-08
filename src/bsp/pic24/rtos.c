@@ -35,7 +35,7 @@ void RtosKernelPortTimerStart()
     PR1 = F_OSC_DIV_2/1000; // 1kHz
 
     RtosKernelPortTimerClear();
-    IPC0bits.T1IP = 0x06;
+    IPC0bits.T1IP = 1;
     IEC0bits.T1IE = 1;
 
     T1CONbits.TON = 1;

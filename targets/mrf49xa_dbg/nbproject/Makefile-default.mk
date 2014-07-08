@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/pic24/context.s ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/bsp/pic24/dma.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/rfstack/debugger.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/dbg/dbg_task.c ../../src/utilities/ccbuf.c ../../src/server/utilities/spiArbiter.c ../../src/dbg/main.c ../../src/dbg/config.c ../../src/devices/mrf49xa_spi_dspic33.c
+SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/pic24/context.s ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/bsp/pic24/dma.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/devices/mrf49xa_spi_dspic33.c ../../src/rfstack/debugger.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/dbg/dbg_task.c ../../src/utilities/ccbuf.c ../../src/server/utilities/spiArbiter.c ../../src/dbg/main.c ../../src/dbg/config.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/585513329/dma.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/1201319415/debugger.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1161280674/dbg_task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/1161280674/main.o ${OBJECTDIR}/_ext/1161280674/config.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/585513329/dma.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d ${OBJECTDIR}/_ext/1201319415/debugger.o.d ${OBJECTDIR}/_ext/1209926055/task.o.d ${OBJECTDIR}/_ext/1209926055/timer.o.d ${OBJECTDIR}/_ext/1145713235/rf_task.o.d ${OBJECTDIR}/_ext/1161280674/dbg_task.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/1709695401/spiArbiter.o.d ${OBJECTDIR}/_ext/1161280674/main.o.d ${OBJECTDIR}/_ext/1161280674/config.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/585513329/dma.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o ${OBJECTDIR}/_ext/1201319415/debugger.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1161280674/dbg_task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/1161280674/main.o ${OBJECTDIR}/_ext/1161280674/config.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/585513329/dma.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d ${OBJECTDIR}/_ext/1201319415/debugger.o.d ${OBJECTDIR}/_ext/1209926055/task.o.d ${OBJECTDIR}/_ext/1209926055/timer.o.d ${OBJECTDIR}/_ext/1145713235/rf_task.o.d ${OBJECTDIR}/_ext/1161280674/dbg_task.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/1709695401/spiArbiter.o.d ${OBJECTDIR}/_ext/1161280674/main.o.d ${OBJECTDIR}/_ext/1161280674/config.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/585513329/dma.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/1201319415/debugger.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1161280674/dbg_task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/1161280674/main.o ${OBJECTDIR}/_ext/1161280674/config.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o
+OBJECTFILES=${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/585513329/dma.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o ${OBJECTDIR}/_ext/1201319415/debugger.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1161280674/dbg_task.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/1161280674/main.o ${OBJECTDIR}/_ext/1161280674/config.o
 
 # Source Files
-SOURCEFILES=../../src/bsp/pic24/context.s ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/bsp/pic24/dma.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/rfstack/debugger.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/dbg/dbg_task.c ../../src/utilities/ccbuf.c ../../src/server/utilities/spiArbiter.c ../../src/dbg/main.c ../../src/dbg/config.c ../../src/devices/mrf49xa_spi_dspic33.c
+SOURCEFILES=../../src/bsp/pic24/context.s ../../src/bsp/pic24/adc.c ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/bsp/pic24/dma.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/devices/mrf49xa_spi_dspic33.c ../../src/rfstack/debugger.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/dbg/dbg_task.c ../../src/utilities/ccbuf.c ../../src/server/utilities/spiArbiter.c ../../src/dbg/main.c ../../src/dbg/config.c
 
 
 CFLAGS=
@@ -170,6 +170,13 @@ ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o: ../../src/devices/mrf49xa_packet.c
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_packet.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o: ../../src/devices/mrf49xa_spi_dspic33.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_spi_dspic33.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/_ext/1201319415/debugger.o: ../../src/rfstack/debugger.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/debugger.o.d 
@@ -232,13 +239,6 @@ ${OBJECTDIR}/_ext/1161280674/config.o: ../../src/dbg/config.c  nbproject/Makefil
 	@${RM} ${OBJECTDIR}/_ext/1161280674/config.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/dbg/config.c  -o ${OBJECTDIR}/_ext/1161280674/config.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161280674/config.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1161280674/config.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o: ../../src/devices/mrf49xa_spi_dspic33.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_spi_dspic33.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/_ext/585513329/adc.o: ../../src/bsp/pic24/adc.c  nbproject/Makefile-${CND_CONF}.mk
@@ -332,6 +332,13 @@ ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o: ../../src/devices/mrf49xa_packet.c
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_packet.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o: ../../src/devices/mrf49xa_spi_dspic33.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_spi_dspic33.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/_ext/1201319415/debugger.o: ../../src/rfstack/debugger.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1201319415 
 	@${RM} ${OBJECTDIR}/_ext/1201319415/debugger.o.d 
@@ -394,13 +401,6 @@ ${OBJECTDIR}/_ext/1161280674/config.o: ../../src/dbg/config.c  nbproject/Makefil
 	@${RM} ${OBJECTDIR}/_ext/1161280674/config.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/dbg/config.c  -o ${OBJECTDIR}/_ext/1161280674/config.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1161280674/config.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1161280674/config.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o: ../../src/devices/mrf49xa_spi_dspic33.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_spi_dspic33.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_spi_dspic33.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

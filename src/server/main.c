@@ -90,7 +90,7 @@ int main(void)
     RtosTaskInit();
     
 #ifdef COMPILE_ETHERNET
-    //EthInit();
+    EthInit();
 #endif
     RfInit();
     

@@ -89,7 +89,7 @@ void EthHwInit(void)
 
     // Hook up external interrupt to enc28j60 driver
     iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    ExtIntSetup(1, enc28j60Int, TRUE, 5);
+    ExtIntSetup(1, enc28j60Int, TRUE, 2);
 
     PPSLock;
 

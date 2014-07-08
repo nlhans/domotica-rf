@@ -12,6 +12,9 @@ void Mrf49SpiTx(uint8_t byte)
     Nop(); \
     Nop(); \
     Nop(); \
+    Nop(); \
+    Nop(); \
+    Nop(); \
     RF_SPI_SCK = 0; \
     Nop(); \
     Nop(); \
@@ -37,6 +40,9 @@ uint8_t Mrf49SpiRx(void)
 
     #define SPI_RX_TICK(a) do { if (RF_SPI_SDI) data |= (1<<a); \
     RF_SPI_SCK = 1; \
+    Nop(); \
+    Nop(); \
+    Nop(); \
     Nop(); \
     Nop(); \
     Nop(); \
