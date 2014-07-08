@@ -79,6 +79,7 @@ volatile const uint8_t mrfRegset_SleepCnt = sizeof(mrfRegset_Sleep)/sizeof(Mrf49
 #define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
     if (array[k].reg == REG_DELAY) { Delay5Ms(); } else \
 { Mrf49TxCmd(array[k].reg, array[k].val); } }
+
 //if (array[k].reg == REG_CMSA) { while(Mrf49xaSignalPresent()); } else { \
     
 void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)

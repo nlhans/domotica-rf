@@ -63,7 +63,7 @@ int main(void)
     PPSLock;
 
     ExtIntInit();
-    spiInit(1);
+    //spiInit(1);
     UartInit(1, 115200*2);
     printf("Hello world!\r\n");
 

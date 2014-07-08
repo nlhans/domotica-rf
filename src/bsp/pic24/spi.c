@@ -24,7 +24,7 @@ void spiInit(UI08_t port)
             
             SPI1CON1 = 0b0000000100111010;
             
-            SPI1STAT |= 0x1 << 15;
+            SPI1STATbits.SPIEN = 1;
             break;
         case 2:
             PPSUnLock;
@@ -46,8 +46,8 @@ void spiInit(UI08_t port)
             SPI2CON2 = 0;
 
             SPI2CON1 = 0b0000000100111011;
-            
-            SPI2STAT |= 0x1 << 15;
+
+            SPI2STATbits.SPIEN = 1;
             break;
     }
 }
@@ -83,74 +83,23 @@ void spiDeinit(UI08_t port)
     }
 }
 
-bool_t spiBusy1()
-{
-    return (SPI1STATbits.SPIRBF == 0);
-}
-volatile UI16_t spiDummy;
-
-void spiTx1(UI08_t byte)
-{
-    SPI1BUF = byte;
-    while(SPI1STATbits.SPIRBF == 0);
-    spiDummy = SPI1BUF;
-}
-void spiTx2(UI08_t byte)
-{
-    SPI2BUF = byte;
-    while(SPI2STATbits.SPIRBF == 0);
-    spiDummy = SPI2BUF;
-
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-}
-
-UI08_t spiRx1()
-{
-    SPI1BUF = 0;
-    while(SPI1STATbits.SPIRBF == 0);
-    return SPI1BUF;
-}
-UI08_t spiRx2()
-{
-    SPI2BUF = 0;
-    while(SPI2STATbits.SPIRBF == 0);
-
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    Nop();
-    
-    return SPI2BUF;
-}
+volatile uint8_t skip = 0;
 
 UI08_t spiTxRx1(UI08_t byte)
 {
+    return 0;
     SPI1BUF = byte;
-    while(SPI1STATbits.SPIRBF == 0);
-    return SPI1BUF;
+    while(!SPI1STATbits.SPIRBF)
+        if (skip != 0) break;
+
+    skip = 0;
+    return (SPI1BUF & 0xFF);
 }
 UI08_t spiTxRx2(UI08_t byte)
 {
     SPI2BUF = byte;
-    while(SPI2STATbits.SPIRBF == 0);
-    return SPI2BUF;
+    while(!SPI2STATbits.SPIRBF);
+    return (SPI2BUF & 0xFF);
 }
 
 #ifndef spiTxByte

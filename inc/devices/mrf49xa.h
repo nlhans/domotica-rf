@@ -91,8 +91,8 @@ uint8_t Mrf49SpiRx(void);
 #define RF_CS_ACQ() spiArbRfAcquire();
 #define RF_CS_REL() spiArbRfComplete();
 
-#define Mrf49SpiTx(x) spiTx1(x)
-#define Mrf49SpiRx() spiRx1()
+//#define Mrf49SpiTx(x) spiTxRx1(x)
+//#define Mrf49SpiRx() spiTxRx1(0)
 
 #define Delay5Ms() RtosTaskDelay(10)
 #define Delay50Ms() RtosTaskDelay(50)

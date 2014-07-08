@@ -28,6 +28,9 @@ int StkAddrLo;  // order matters
 int StkAddrHi;
 char TrapMsgBuf[24];
 
+// 8CC
+// 214
+
 void TRAP_ISR _AddressError(void)
 {
     asm("mov #_StkAddrHi,w1\n\tpop [w1--]\n\tpop [w1++]\n\tpush [w1--]\n\tpush [w1++]");
@@ -75,18 +78,19 @@ int main(void)
     PPSLock;
 
     ExtIntInit();
-    spiInit(1);
+    
+    //spiInit(1);
     spiInit(2);
+
+    RF_POWER = 1;
+
     UartInit(1, 38400);
     printf("Hello world!\r\n");
-
-    // Interrupts..
-    //INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
     
 #ifdef COMPILE_ETHERNET
-    EthInit();
+    //EthInit();
 #endif
     RfInit();
     

@@ -26,9 +26,6 @@ void RfPing(void);
 
 void RfInit(void)
 {
-    RF_RES = 1;
-    RF_POWER = 0;
-    
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
 
 #ifdef PIC24GB
@@ -116,20 +113,22 @@ void RfTask()
 {
     rfTrcvPacket_t ping;
     UI08_t i;
-    
-    RtosTaskDelay(100);
 
-    MRF_DISABLE_INT;
-    Mrf49xaInit();
+    RF_RES = 1;
+    RF_POWER = 0;
+
+    RtosTaskDelay(100);
 
     // Connect up MRF49XA ISR
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
     ExtIntSetup(2, Mrf49xaServe, TRUE, 1);
-    
+
     PPSLock;
 
+    MRF_DISABLE_INT;
+    Mrf49xaInit();
     MRF_ENABLE_INT;
 
     RtosTaskDelay(100);

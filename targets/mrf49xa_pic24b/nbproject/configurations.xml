@@ -31,6 +31,7 @@
         <itemPath>../../src/devices/mrf49xa_cmd.c</itemPath>
         <itemPath>../../src/devices/mrf49xa_data.c</itemPath>
         <itemPath>../../src/devices/mrf49xa_packet.c</itemPath>
+        <itemPath>../../src/devices/mrf49xa_spi_pic24.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="IP" projectFiles="true">
         <itemPath>../../src/server/ipstack/arp.c</itemPath>
@@ -217,13 +218,6 @@
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
       </C30Global>
-      <PICkit2PlatformTool>
-        <property key="pk2settings.3state" value="false"/>
-        <property key="pk2settings.preserveee" value="false"/>
-        <property key="pk2settings.setvddvoltage" value=""/>
-        <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
-      </PICkit2PlatformTool>
       <PICkit3PlatformTool>
         <property key="ADC 1" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>
