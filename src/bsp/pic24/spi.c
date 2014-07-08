@@ -84,6 +84,7 @@ void spiDeinit(UI08_t port)
 }
 
 volatile uint8_t skip = 0;
+volatile uint8_t monotic = 0;
 
 UI08_t spiTxRx1(UI08_t byte)
 {
@@ -97,9 +98,14 @@ UI08_t spiTxRx1(UI08_t byte)
 }
 UI08_t spiTxRx2(UI08_t byte)
 {
+    monotic++;
     SPI2BUF = byte;
     while(!SPI2STATbits.SPIRBF);
-    return (SPI2BUF & 0xFF);
+    uint8_t retW = (SPI2BUF & 0xFF);
+
+    monotic--;
+
+    return retW;
 }
 
 #ifndef spiTxByte

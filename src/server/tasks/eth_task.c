@@ -114,6 +114,9 @@ bool_t enc28j60Int(UI08_t foo)
     return TRUE;
 }
 
+volatile uint8_t econ1, econ2, estat, aha;
+volatile uint8_t v = 0;
+
 void EthTask(void)
 {
     EthHwInit();
@@ -133,14 +136,38 @@ void EthTask(void)
 
         if ((evt & ETH_ENC_ISR) != 0)
         {
-            while (enc28j60PacketPending())
+            uint8_t isrPending = enc28j60ReadRegisterUint8(EIR);
+
+            if ((isrPending & (1<<0)) != 0)
             {
-                macRxFrame();
+                enc28j60NeedsReset();
             }
+            else if ((isrPending & (1<<6)) != 0)
+            {
+                while (enc28j60PacketPending())
+                {
+                    macRxFrame();
+                }
+            }
+
+            if (enc28j60IsDirty())
+                enc28j60Initialize();
         }
 
         if ((evt & ETH_TCP_TICK) != 0)
         {
+            uint8_t isrPending = enc28j60ReadRegisterUint8(EIR);
+
+            if ((isrPending & (1<<0)) != 0 || enc28j60IsDirty())
+            {
+                enc28j60Initialize();
+            }
+
+            econ1 = enc28j60ReadRegisterUint8(ECON1);
+            econ2 = enc28j60ReadRegisterUint8(ECON2);
+            estat = enc28j60ReadRegisterUint8(ESTAT);
+            aha = enc28j60ReadRegisterUint8(v);
+            
             tcpTick();
         }
     }
