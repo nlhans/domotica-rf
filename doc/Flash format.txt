@@ -1,0 +1,76 @@
+4MB
+
+-> 2MB aan file system
+
+Index table
+
+Data randomly spread
+
+Wordt vanaf PC met UDP verwerkt.
+
+-> 2MB of history data
+
+Resolutie 1		1min		[512k]
+Stel ik sla elke 1 minuut 2 sensor waarden van 4 nodes op
+
+2 sensor waarden per node per minuut.
++ timestamp
+-> 2*2 + 4 = 8 bytes
+
+4 nodes
+32 bytes per minuut
+
+
+46080 bytes per dag
+
+322560 bytes per week
+
+~1,5 week volhouden
+
+1 week aan minuut data? -> naar grote database
+
+Resolutie 2		5min		[512k]
+Comprimeren naar elk 5 minuten
+
+9216 per dag
+64512 per week
+285696 per maand
+
+~2 maand volhouden
+
+Resolutie 3		30min		[1MB]
+Comprimeren naar elk half uur?
+
+1536 per dag
+10752 per week
+47616 per maand
+
+571392 per jaar
+
+~2 jaar volhouden
+
+
+Memory access time: 3x8 bit @ 8MHz		= 3us
+10-15us?
+
+1024 bytes -> 32 byte header
+512x50us = 25.6ms
+
+Header:
+[type 			 1 byte]
+[reserved		 3 byte]
+[timestamp start	 4 byte]
+[timestamp end		 4 byte]
+[reserved		16 byte]
+[sensor table		32 byte]
+	Elke byte geeft op zijn index aan welke sensor ID in het gehele netwerk dit is
+	Zit deze byte er niet in, heeft de sensor niet in dit blok gesampled.
+	
+	Sensor waarden worden op de seconde nauwkeurig bijgehouden, maar wel afgerond naar minuten.
+	Sensor waarden zijn standaard 16-bit. Meeste sensors zijn slechts 10-bit.
+	De overige 6-bits worden dan gebruikt om de sensor ID aan te geven.
+	Wanneer de MSB bit 1 is , echter, dan bevat die byte geen sensor data, maar
+	volgen er nog 3 bytes met sensor data.
+	Op die manier houden we altijd een alignment van 4 bytes.
+[sensor data		992 bytes]
+Per minuut wordt er een timestamp van 4 bytes aangegeven. 
