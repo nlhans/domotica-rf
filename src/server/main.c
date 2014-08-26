@@ -10,6 +10,7 @@
 
 #include "bsp/interrupt.h"
 #include "bsp/spi.h"
+#include "bsp/uart.h"
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
 

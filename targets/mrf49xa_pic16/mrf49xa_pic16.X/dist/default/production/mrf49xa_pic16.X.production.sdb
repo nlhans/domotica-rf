@@ -3,15 +3,15 @@
 [d edition pro ]
 [d chip 16LF1508 ]
 [d frameptr 6 ]
-"42 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
-[e E4216 Pic16PortDefs_e `uc
+"42 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
+[e E4215 Pic16PortDefs_e `uc
 PA 0
 PB 1
 PC 2
 PINT 3
 ]
 "77
-[e E4222 AdcChannels_e `uc
+[e E4221 AdcChannels_e `uc
 ADC_AN0 0
 ADC_AN1 1
 ADC_AN2 2
@@ -28,15 +28,15 @@ ADC_TEMP 29
 ADC_DAC 30
 ADC_FVR 31
 ]
-"5 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
-[e E4252 Mcp9800Resolution_e `uc
+"5 /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c
+[e E4251 Mcp9800Resolution_e `uc
 Mcp9800_9bit 0
 Mcp9800_10bit 32
 Mcp9800_11bit 64
 Mcp9800_12bit 96
 ]
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
-[e E4306 rfTrcvPacketState_e `uc
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+[e E4305 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -45,14 +45,14 @@ PKT_HW_BUSY_RX 4
 PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
-[e E4300 rfTrcvState_e `uc
+[e E4299 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"9 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
-[e E4306 rfTrcvPacketState_e `uc
+"9 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
+[e E4305 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -61,14 +61,20 @@ PKT_HW_BUSY_RX 4
 PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
-[e E4300 rfTrcvState_e `uc
+[e E4299 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"21
-[e E4264 . `uc
+"33
+[e E4314 rfTrcvAckState_e `uc
+NO_ACK 0
+NEED_ACK 1
+ACK_RECEIVED 2
+]
+"81
+[e E4263 . `uc
 RF_PING 160
 RF_ACK 161
 RF_TIME_SYNC 162
@@ -81,14 +87,8 @@ RF_FW_WRITE 193
 RF_FW_READ 194
 RF_APP_SAMPLE 0
 ]
-"43
-[e E4315 rfTrcvAckState_e `uc
-NO_ACK 0
-NEED_ACK 1
-ACK_RECEIVED 2
-]
-"12 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_data.c
-[e E4306 rfTrcvPacketState_e `uc
+"14 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c
+[e E4305 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -97,20 +97,20 @@ PKT_HW_BUSY_RX 4
 PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
-[e E4300 rfTrcvState_e `uc
+[e E4299 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"178
-[e E4315 rfTrcvAckState_e `uc
+"183
+[e E4314 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
 ]
-"9 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
-[e E4306 rfTrcvPacketState_e `uc
+"9 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
+[e E4305 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -120,13 +120,13 @@ PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
 "105
-[e E4444 CfgParameterType_e `uc
+[e E4450 CfgParameterType_e `uc
 CFG_TYPE_INT8 0
 CFG_TYPE_INT16 1
 CFG_TYPE_INT32 2
 ]
 "108
-[e E4264 . `uc
+[e E4263 . `uc
 RF_PING 160
 RF_ACK 161
 RF_TIME_SYNC 162
@@ -139,21 +139,21 @@ RF_FW_WRITE 193
 RF_FW_READ 194
 RF_APP_SAMPLE 0
 ]
-"171
-[e E4300 rfTrcvState_e `uc
+"151
+[e E4299 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
 "173
-[e E4315 rfTrcvAckState_e `uc
+[e E4314 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
 ACK_RECEIVED 2
 ]
-"15 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
-[e E4306 rfTrcvPacketState_e `uc
+"15 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
+[e E4305 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -162,8 +162,14 @@ PKT_HW_BUSY_RX 4
 PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
-"18
-[e E4264 . `uc
+[e E4299 rfTrcvState_e `uc
+POWERED_OFF 0
+RECV_IDLE 1
+RECV_DATA 2
+TX_PACKET 3
+]
+"19
+[e E4263 . `uc
 RF_PING 160
 RF_ACK 161
 RF_TIME_SYNC 162
@@ -176,8 +182,8 @@ RF_FW_WRITE 193
 RF_FW_READ 194
 RF_APP_SAMPLE 0
 ]
-"25
-[e E4222 AdcChannels_e `uc
+"26
+[e E4221 AdcChannels_e `uc
 ADC_AN0 0
 ADC_AN1 1
 ADC_AN2 2
@@ -194,33 +200,8 @@ ADC_TEMP 29
 ADC_DAC 30
 ADC_FVR 31
 ]
-"58 C:\Projects\Firmware\domoticarf/src/node/main.c
-[e E4468 Mcp9800Resolution_e `uc
-Mcp9800_9bit 0
-Mcp9800_10bit 32
-Mcp9800_11bit 64
-Mcp9800_12bit 96
-]
-"61
-[e E4222 AdcChannels_e `uc
-ADC_AN0 0
-ADC_AN1 1
-ADC_AN2 2
-ADC_AN3 3
-ADC_AN4 4
-ADC_AN5 5
-ADC_AN6 6
-ADC_AN7 7
-ADC_AN8 8
-ADC_AN9 9
-ADC_AN10 10
-ADC_AN11 11
-ADC_TEMP 29
-ADC_DAC 30
-ADC_FVR 31
-]
-"70
-[e E4377 rfTrcvPacketState_e `uc
+"33 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
+[e E4376 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
 PKT_HW_BUSY_TX 2
@@ -229,19 +210,60 @@ PKT_HW_BUSY_RX 4
 PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
-[e E4371 rfTrcvState_e `uc
+[e E4370 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"13 C:\Projects\Firmware\domoticarf/src/node/config.c
-[e E4252 CfgParameterType_e `uc
+"62
+[e E4471 Mcp9800Resolution_e `uc
+Mcp9800_9bit 0
+Mcp9800_10bit 32
+Mcp9800_11bit 64
+Mcp9800_12bit 96
+]
+"65
+[e E4221 AdcChannels_e `uc
+ADC_AN0 0
+ADC_AN1 1
+ADC_AN2 2
+ADC_AN3 3
+ADC_AN4 4
+ADC_AN5 5
+ADC_AN6 6
+ADC_AN7 7
+ADC_AN8 8
+ADC_AN9 9
+ADC_AN10 10
+ADC_AN11 11
+ADC_TEMP 29
+ADC_DAC 30
+ADC_FVR 31
+]
+"114 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
+[e E4331 rfTrcvPacketState_e `uc
+PKT_FREE 0
+PKT_READY_FOR_TX 1
+PKT_HW_BUSY_TX 2
+PKT_WAITING_FOR_ACK 3
+PKT_HW_BUSY_RX 4
+PKT_HW_READY_RX 5
+PKT_SW_BUSY 6
+]
+[e E4325 rfTrcvState_e `uc
+POWERED_OFF 0
+RECV_IDLE 1
+RECV_DATA 2
+TX_PACKET 3
+]
+"13 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
+[e E4251 CfgParameterType_e `uc
 CFG_TYPE_INT8 0
 CFG_TYPE_INT16 1
 CFG_TYPE_INT32 2
 ]
-"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
 [v _AdcInit AdcInit `(v  1 e 0 0 ]
 "15
 [v _AdcDeinit AdcDeinit `(v  1 e 0 0 ]
@@ -259,7 +281,7 @@ CFG_TYPE_INT32 2
 [v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
 "81
 [v _AdcSample AdcSample `(ui  1 e 2 0 ]
-"8 C:\Projects\Firmware\domoticarf/src/bsp/pic16/interrupt.c
+"8 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
 [v _ExtIntInit ExtIntInit `(v  1 e 0 0 ]
 "17
 [v _ExtIntDeinit ExtIntDeinit `(v  1 e 0 0 ]
@@ -267,7 +289,7 @@ CFG_TYPE_INT32 2
 [v _ExtIntSetup ExtIntSetup `(v  1 e 0 0 ]
 "36
 [v _extInt extInt `II(v  1 e 0 0 ]
-"3 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+"3 /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c
 [v _SoftI2cNop SoftI2cNop `(v  1 e 0 0 ]
 "15
 [v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
@@ -281,7 +303,7 @@ CFG_TYPE_INT32 2
 [v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
 "129
 [v _SoftI2cRxByte SoftI2cRxByte `(uc  1 e 1 0 ]
-"4 C:\Projects\Firmware\domoticarf/src/devices/24aa64.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/24aa64.c
 [v _eepromRxBytes eepromRxBytes `(v  1 e 0 0 ]
 "25
 [v _eepromTxBytes eepromTxBytes `(v  1 e 0 0 ]
@@ -289,93 +311,115 @@ CFG_TYPE_INT32 2
 [v _eepromRxByte eepromRxByte `(uc  1 e 1 0 ]
 "49
 [v _eepromTxByte eepromTxByte `(v  1 e 0 0 ]
-"4 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 "19
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
-"84 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"85 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _mrf49xaCfg mrf49xaCfg `(v  1 e 0 0 ]
-"90
+"91
 [v _Mrf49xaSignalPresent Mrf49xaSignalPresent `(uc  1 e 1 0 ]
-"99
+"100
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-"111
+[v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
+"112
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
-"121
+"123
 [v _Mrf49xaModeSleep Mrf49xaModeSleep `(v  1 e 0 0 ]
-"131
+"132
 [v _Mrf49xaShutdown Mrf49xaShutdown `(v  1 e 0 0 ]
-"139
+"140
 [v _Mrf49xaReboot Mrf49xaReboot `(v  1 e 0 0 ]
-"145
+"146
 [v _Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 [v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
-"150
-[v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
-"6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
+[v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
+"303 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"277
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+[s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+"151
+[u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+`uc 1 retransmit 1 23 :2:4 
+`uc 1 needAck 1 23 :2:6 
+]
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v _Mrf49xaInit Mrf49xaInit `(*.4S333  1 e 1 0 ]
+"6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
+[v i1_Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
 [v i1_Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
 "18
 [v _Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
 [v i1_Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
+[v i1_Mrf49RxCmd Mrf49RxCmd `(uc  1 e 1 0 ]
 "31
 [v _Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
+[v i1_Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
 [v i1_Mrf49RxSts Mrf49RxSts `(v  1 e 0 0 ]
 "43
 [v _Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
 [v i1_Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
+[v i1_Mrf49RxByte Mrf49RxByte `(uc  1 e 1 0 ]
 "48
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_data.c
-[v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
-[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
-"6 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+[v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
+"8 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [v _Mrf49xaPacketPending Mrf49xaPacketPending `(uc  1 e 1 0 ]
-"15
-[v _Mrf49xaTxAck Mrf49xaTxAck `(uc  1 e 1 0 ]
-"27
+"17
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
-"85
+"75
+[v _Mrf49xaTxAck Mrf49xaTxAck `(uc  1 e 1 0 ]
+"87
 [v _Mrf49xaFreePacket Mrf49xaFreePacket `(v  1 e 0 0 ]
-"277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"277 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"90 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"92 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
 [v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S321  1 e 1 0 ]
-"277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"277 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"107 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"109 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
 [v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S321  1 e 1 0 ]
-"124
+"130
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
-"3 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_spi_pic16.c
+"9 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c
+[v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
+[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
+[v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
+"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
 [v _Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
+[v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 [v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 "21
 [v _Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
 [v i1_Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
-"19 C:\Projects\Firmware\domoticarf/src/node/config.c
+[v i1_Mrf49SpiRx Mrf49SpiRx `(uc  1 e 1 0 ]
+"19 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
 [v _CfgLoad CfgLoad `(v  1 e 0 0 ]
 "24
 [v _CfgSave CfgSave `(v  1 e 0 0 ]
 "29
 [v _CfgGetSizeByType CfgGetSizeByType `(uc  1 e 1 0 ]
-"32 C:\Projects\Firmware\domoticarf/src/node/main.c
+"35 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
-"42 C:\Projects\Firmware\domoticarf/src/node/power.c
+"42 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _Sleepy Sleepy `(v  1 e 0 0 ]
 "62
 [v _PwrI2cInit PwrI2cInit `(v  1 e 0 0 ]
@@ -383,25 +427,25 @@ CFG_TYPE_INT32 2
 [v _PwrI2cSleep PwrI2cSleep `(v  1 e 0 0 ]
 "82
 [v _PwrI2cWake PwrI2cWake `(v  1 e 0 0 ]
-"88
+"87
 [v _PwrRfInit PwrRfInit `(v  1 e 0 0 ]
-"119
+"118
 [v _PwrRfSleep PwrRfSleep `(v  1 e 0 0 ]
-"136
+"135
 [v _PwrRfWake PwrRfWake `(v  1 e 0 0 ]
-"151
+"150
 [v _PwrSensorInit PwrSensorInit `(v  1 e 0 0 ]
-"158
+"157
 [v _PwrSensorSleep PwrSensorSleep `(v  1 e 0 0 ]
-"163
+"162
 [v _PwrSensorWake PwrSensorWake `(v  1 e 0 0 ]
-"169
+"168
 [v _PwrAdcInit PwrAdcInit `(v  1 e 0 0 ]
-"179
+"178
 [v _PwrAdcSleep PwrAdcSleep `(v  1 e 0 0 ]
-"187
+"186
 [v _PwrAdcWake PwrAdcWake `(v  1 e 0 0 ]
-"8 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
+"8 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
 [v _handleFwCmd handleFwCmd `(v  1 e 0 0 ]
 "102
 [v _handleCfgRead handleCfgRead `(v  1 e 0 0 ]
@@ -411,83 +455,83 @@ CFG_TYPE_INT32 2
 [v _handleCfgCmd handleCfgCmd `(v  1 e 0 0 ]
 "150
 [v _HandlePacket HandlePacket `(v  1 e 0 0 ]
-"13 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
+"14 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
 [v _RfSendPowerState RfSendPowerState `(v  1 e 0 0 ]
-"33
+"34
 [v _RfSendSampleWeatherNode RfSendSampleWeatherNode `(v  1 e 0 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\abdiv.c
+"4 /opt/microchip/xc8/v1.30/sources/common/abdiv.c
 [v ___abdiv __abdiv `(c  1 e 1 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\abmod.c
+"4 /opt/microchip/xc8/v1.30/sources/common/abmod.c
 [v ___abmod __abmod `(c  1 e 1 0 ]
-"33 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\abtoft.c
+"33 /opt/microchip/xc8/v1.30/sources/common/abtoft.c
 [v ___abtoft __abtoft `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\aldiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/aldiv.c
 [v ___aldiv __aldiv `(l  1 e 4 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\almod.c
+"5 /opt/microchip/xc8/v1.30/sources/common/almod.c
 [v ___almod __almod `(l  1 e 4 0 ]
-"42 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\altoft.c
+"42 /opt/microchip/xc8/v1.30/sources/common/altoft.c
 [v ___altoft __altoft `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\atdiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/atdiv.c
 [v ___atdiv __atdiv `(m  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\atmod.c
+"6 /opt/microchip/xc8/v1.30/sources/common/atmod.c
 [v ___atmod __atmod `(m  1 e 3 0 ]
-"37 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\attoft.c
+"37 /opt/microchip/xc8/v1.30/sources/common/attoft.c
 [v ___attoft __attoft `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\awdiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\awmod.c
+"6 /opt/microchip/xc8/v1.30/sources/common/awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
-"32 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\awtoft.c
+"32 /opt/microchip/xc8/v1.30/sources/common/awtoft.c
 [v ___awtoft __awtoft `(f  1 e 3 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\bmul.c
+"2 /opt/microchip/xc8/v1.30/sources/common/bmul.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
-"62 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\float.c
+"62 /opt/microchip/xc8/v1.30/sources/common/float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
-"86 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ftadd.c
+"86 /opt/microchip/xc8/v1.30/sources/common/ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ftge.c
+"4 /opt/microchip/xc8/v1.30/sources/common/ftge.c
 [v ___ftge __ftge `(b  1 e 0 0 ]
-"51 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ftmul.c
+"51 /opt/microchip/xc8/v1.30/sources/common/ftmul.c
 [v ___ftmul __ftmul `(f  1 e 3 0 ]
-"15 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ftneg.c
+"15 /opt/microchip/xc8/v1.30/sources/common/ftneg.c
 [v ___ftneg __ftneg `(f  1 e 3 0 ]
-"18 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ftsub.c
+"18 /opt/microchip/xc8/v1.30/sources/common/ftsub.c
 [v ___ftsub __ftsub `(f  1 e 3 0 ]
-"44 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\fttol.c
+"44 /opt/microchip/xc8/v1.30/sources/common/fttol.c
 [v ___fttol __fttol `(l  1 e 4 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lbdiv.c
+"4 /opt/microchip/xc8/v1.30/sources/common/lbdiv.c
 [v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
-"4 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lbmod.c
+"4 /opt/microchip/xc8/v1.30/sources/common/lbmod.c
 [v ___lbmod __lbmod `(uc  1 e 1 0 ]
-"27 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lbtoft.c
+"27 /opt/microchip/xc8/v1.30/sources/common/lbtoft.c
 [v ___lbtoft __lbtoft `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lldiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\llmod.c
+"6 /opt/microchip/xc8/v1.30/sources/common/llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
-"35 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lltoft.c
+"35 /opt/microchip/xc8/v1.30/sources/common/lltoft.c
 [v ___lltoft __lltoft `(f  1 e 3 0 ]
-"9 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lmul.c
+"2 /opt/microchip/xc8/v1.30/sources/common/lmul.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ltdiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/ltdiv.c
 [v ___ltdiv __ltdiv `(um  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\ltmod.c
+"6 /opt/microchip/xc8/v1.30/sources/common/ltmod.c
 [v ___ltmod __ltmod `(um  1 e 3 0 ]
-"30 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lttoft.c
+"30 /opt/microchip/xc8/v1.30/sources/common/lttoft.c
 [v ___lttoft __lttoft `(f  1 e 3 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lwdiv.c
+"6 /opt/microchip/xc8/v1.30/sources/common/lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
-"6 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lwmod.c
+"6 /opt/microchip/xc8/v1.30/sources/common/lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\lwtoft.c
+"28 /opt/microchip/xc8/v1.30/sources/common/lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
-"11 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\memcpy.c
+"11 /opt/microchip/xc8/v1.30/sources/common/memcpy.c
 [v _memcpy memcpy `(*.4v  1 e 1 0 ]
-"9 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\tmul.c
+"2 /opt/microchip/xc8/v1.30/sources/common/tmul.c
 [v ___tmul __tmul `(um  1 e 3 0 ]
-"3 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\wmul.c
+"4 /opt/microchip/xc8/v1.30/sources/common/wmul.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"49 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\pic\ftdiv.c
+"49 /opt/microchip/xc8/v1.30/sources/pic/ftdiv.c
 [v ___ftdiv __ftdiv `(f  1 e 3 0 ]
 [s S282 . 1 `uc 1 signalPresent 1 0 :1:0 
 `uc 1 fifoEmpty 1 0 :1:1 
@@ -498,7 +542,7 @@ CFG_TYPE_INT32 2
 `uc 1 por 1 0 :1:6 
 `uc 1 fifoTxRx 1 0 :1:7 
 ]
-"4 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [s S291 . 1 `uc 1 offset 1 0 :4:0 
 `uc 1 offsetSign 1 0 :1:4 
 `uc 1 afc 1 0 :1:5 
@@ -511,11 +555,11 @@ CFG_TYPE_INT32 2
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 "7
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4300 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
 `uc 1 needsReset 1 74 :1:7 
 ]
 [v _rfTrcvStatus rfTrcvStatus `S333  1 e 75 0 ]
@@ -537,14 +581,16 @@ CFG_TYPE_INT32 2
 "72
 [v _mrfRegset_SleepCnt mrfRegset_SleepCnt `DVCCEuc  1 e 1 0 ]
 [s S720 CfgRam_s 9 `uc 1 nodeId 1 0 `ui 1 sensorRate 2 1 `ui 1 tempResolution 2 3 `ui 1 tempSleepTime 2 5 `ui 1 checksum 2 7 ]
-"8 C:\Projects\Firmware\domoticarf/src/node/config.c
+"8 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
 [v _cfgRam cfgRam `S720  1 e 9 0 ]
-[s S1054 CfgParameter_s 3 `uc 1 type 1 0 `uc 1 id 1 1 `*.4uc 1 ptr 1 2 ]
+[s S1218 CfgParameter_s 3 `uc 1 type 1 0 `uc 1 id 1 1 `*.4uc 1 ptr 1 2 ]
 "12
-[v _parameters parameters `DCC[2]S1054  1 e 6 0 ]
-"30 C:\Projects\Firmware\domoticarf/src/node/main.c
+[v _parameters parameters `DCC[2]S1218  1 e 6 0 ]
+"30 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _powerStatusTicker powerStatusTicker `uc  1 e 1 0 ]
-"7 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
+"33
+[v _macPtr macPtr `*.4S333  1 e 1 0 ]
+"8 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
 [v _coldBoot coldBoot `uc  1 e 1 0 ]
 [s S195 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
@@ -555,7 +601,7 @@ CFG_TYPE_INT32 2
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-"358 C:\Program Files (x86)\Microchip\xc8\v1.31\include\pic16lf1508.h
+"355 /opt/microchip/xc8/v1.30/include/pic16lf1508.h
 [s S204 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -570,7 +616,7 @@ CFG_TYPE_INT32 2
 `uc 1 LATA4 1 0 :1:4 
 `uc 1 LATA5 1 0 :1:5 
 ]
-"427
+"424
 [u S416 . 1 `S409 1 . 1 0 ]
 [v _PORTAbits PORTAbits `VES416  1 e 1 @12 ]
 [s S25 . 1 `uc 1 . 1 0 :4:0 
@@ -579,7 +625,7 @@ CFG_TYPE_INT32 2
 `uc 1 LATB6 1 0 :1:6 
 `uc 1 LATB7 1 0 :1:7 
 ]
-"475
+"472
 [u S31 . 1 `S25 1 . 1 0 ]
 [v _PORTBbits PORTBbits `VES31  1 e 1 @13 ]
 [s S358 . 1 `uc 1 RC0 1 0 :1:0 
@@ -591,20 +637,20 @@ CFG_TYPE_INT32 2
 `uc 1 RC6 1 0 :1:6 
 `uc 1 RC7 1 0 :1:7 
 ]
-"516
+"513
 [u S367 . 1 `S358 1 . 1 0 ]
 [v _PORTCbits PORTCbits `VES367  1 e 1 @14 ]
-"1009
+"1006
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
-"1024
+"1021
 [v _TRISAbits TRISAbits `VES416  1 e 1 @140 ]
-"1058
+"1055
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
-"1072
+"1069
 [v _TRISBbits TRISBbits `VES31  1 e 1 @141 ]
-"1096
+"1093
 [v _TRISC TRISC `VEuc  1 e 1 @142 ]
-"1113
+"1110
 [v _TRISCbits TRISCbits `VES367  1 e 1 @142 ]
 [s S163 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
@@ -613,7 +659,7 @@ CFG_TYPE_INT32 2
 `uc 1 INTEDG 1 0 :1:6 
 `uc 1 nWPUEN 1 0 :1:7 
 ]
-"1318
+"1315
 [s S170 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
@@ -623,46 +669,46 @@ CFG_TYPE_INT32 2
 ]
 [u S177 . 1 `S163 1 . 1 0 `S170 1 . 1 0 ]
 [v _OPTION_REGbits OPTION_REGbits `VES177  1 e 1 @149 ]
-[s S1470 . 1 `uc 1 SWDTEN 1 0 :1:0 
+[s S1675 . 1 `uc 1 SWDTEN 1 0 :1:0 
 `uc 1 WDTPS 1 0 :5:1 
 ]
-"1452
-[s S1473 . 1 `uc 1 . 1 0 :1:0 
+"1449
+[s S1678 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WDTPS0 1 0 :1:1 
 `uc 1 WDTPS1 1 0 :1:2 
 `uc 1 WDTPS2 1 0 :1:3 
 `uc 1 WDTPS3 1 0 :1:4 
 `uc 1 WDTPS4 1 0 :1:5 
 ]
-[u S1480 . 1 `S1470 1 . 1 0 `S1473 1 . 1 0 ]
-[v _WDTCONbits WDTCONbits `VES1480  1 e 1 @151 ]
-"1491
+[u S1685 . 1 `S1675 1 . 1 0 `S1678 1 . 1 0 ]
+[v _WDTCONbits WDTCONbits `VES1685  1 e 1 @151 ]
+"1488
 [v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
-"1607
+"1604
 [v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
-"1626
+"1623
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
-"1645
+"1642
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
-"1724
+"1721
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
-"1770
+"1767
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
-"1832
+"1829
 [v _LATAbits LATAbits `VES416  1 e 1 @268 ]
-"1875
+"1872
 [v _LATBbits LATBbits `VES31  1 e 1 @269 ]
-"1916
+"1913
 [v _LATCbits LATCbits `VES367  1 e 1 @270 ]
-"2271
+"2268
 [v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
-"2475
+"2472
 [v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
-"2521
+"2518
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
-"2556
+"2553
 [v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
-[s S1642 . 1 `uc 1 ANSC0 1 0 :1:0 
+[s S1884 . 1 `uc 1 ANSC0 1 0 :1:0 
 `uc 1 ANSC1 1 0 :1:1 
 `uc 1 ANSC2 1 0 :1:2 
 `uc 1 ANSC3 1 0 :1:3 
@@ -670,97 +716,122 @@ CFG_TYPE_INT32 2
 `uc 1 ANSC6 1 0 :1:6 
 `uc 1 ANSC7 1 0 :1:7 
 ]
-"2575
-[s S1650 . 1 `uc 1 ANSELC 1 0 :8:0 
+"2572
+[s S1892 . 1 `uc 1 ANSELC 1 0 :8:0 
 ]
-[u S1652 . 1 `S1642 1 . 1 0 `S1650 1 . 1 0 ]
-[v _ANSELCbits ANSELCbits `VES1652  1 e 1 @398 ]
-[s S1594 . 1 `uc 1 WPUA0 1 0 :1:0 
+[u S1894 . 1 `S1884 1 . 1 0 `S1892 1 . 1 0 ]
+[v _ANSELCbits ANSELCbits `VES1894  1 e 1 @398 ]
+[s S1799 . 1 `uc 1 WPUA0 1 0 :1:0 
 `uc 1 WPUA1 1 0 :1:1 
 `uc 1 WPUA2 1 0 :1:2 
 `uc 1 WPUA3 1 0 :1:3 
 `uc 1 WPUA4 1 0 :1:4 
 `uc 1 WPUA5 1 0 :1:5 
 ]
-"3055
-[s S1601 . 1 `uc 1 WPUA 1 0 :6:0 
+"3052
+[s S1806 . 1 `uc 1 WPUA 1 0 :6:0 
 ]
-[u S1603 . 1 `S1594 1 . 1 0 `S1601 1 . 1 0 ]
-[v _WPUAbits WPUAbits `VES1603  1 e 1 @524 ]
-"32 C:\Projects\Firmware\domoticarf/src/node/main.c
+[u S1808 . 1 `S1799 1 . 1 0 `S1806 1 . 1 0 ]
+[v _WPUAbits WPUAbits `VES1808  1 e 1 @524 ]
+"35 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
 [v _main main `(v  1 e 0 0 ]
 {
-"63
-[v main@temperature temperature `ui  1 a 2 17 ]
-"61
-[v main@humidity humidity `ui  1 a 2 15 ]
-"100
+"67
+[v main@temperature temperature `ui  1 a 2 20 ]
+"65
+[v main@humidity humidity `ui  1 a 2 18 ]
+"104
 } 0
-"33 C:\Projects\Firmware\domoticarf/src/rfstack/packets.c
+"34 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
 [v _RfSendSampleWeatherNode RfSendSampleWeatherNode `(v  1 e 0 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"35
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v RfSendSampleWeatherNode@packet packet `*.4S321  1 a 1 10 ]
-"33
-[v RfSendSampleWeatherNode@temperature temperature `ui  1 p 2 6 ]
-[v RfSendSampleWeatherNode@humidity humidity `ui  1 p 2 8 ]
-"57
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v RfSendSampleWeatherNode@inst inst `*.4S333  1 a 1 wreg ]
+"36
+[v RfSendSampleWeatherNode@packet packet `*.4S321  1 a 1 13 ]
+"34
+[v RfSendSampleWeatherNode@inst inst `*.4S333  1 a 1 wreg ]
+[v RfSendSampleWeatherNode@temperature temperature `ui  1 p 2 8 ]
+[v RfSendSampleWeatherNode@humidity humidity `ui  1 p 2 10 ]
+"36
+"34
+[v RfSendSampleWeatherNode@inst inst `*.4S333  1 a 1 12 ]
+"58
 } 0
-"13
+"14
 [v _RfSendPowerState RfSendPowerState `(v  1 e 0 0 ]
 {
-"25
-[v RfSendPowerState@s s `ui  1 a 2 6 ]
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"15
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v RfSendPowerState@packet packet `*.4S321  1 a 1 8 ]
-"31
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v RfSendPowerState@inst inst `*.4S333  1 a 1 wreg ]
+"26
+[v RfSendPowerState@s s `ui  1 a 2 8 ]
+"16
+[v RfSendPowerState@packet packet `*.4S321  1 a 1 11 ]
+"14
+[v RfSendPowerState@inst inst `*.4S333  1 a 1 wreg ]
+"16
+"14
+[v RfSendPowerState@inst inst `*.4S333  1 a 1 10 ]
+"32
 } 0
-"187 C:\Projects\Firmware\domoticarf/src/node/power.c
+"186 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrAdcWake PwrAdcWake `(v  1 e 0 0 ]
 {
-"193
+"192
 } 0
-"4 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
 [v _AdcInit AdcInit `(v  1 e 0 0 ]
 {
 "13
 } 0
-"179 C:\Projects\Firmware\domoticarf/src/node/power.c
+"178 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrAdcSleep PwrAdcSleep `(v  1 e 0 0 ]
 {
-"185
+"184
 } 0
-"15 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+"15 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
 [v _AdcDeinit AdcDeinit `(v  1 e 0 0 ]
 {
 "22
 } 0
-"277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"277 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"107 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"109 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
 [v _Mrf49xaAllocPacket Mrf49xaAllocPacket `(*.4S321  1 e 1 0 ]
 {
-"122
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaAllocPacket@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaAllocPacket@inst inst `*.4S333  1 a 1 wreg ]
+"111
+"109
+[v Mrf49xaAllocPacket@inst inst `*.4S333  1 a 1 0 ]
+"124
 } 0
-"81 C:\Projects\Firmware\domoticarf/src/bsp/pic16/adc16.c
+"81 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/adc16.c
 [v _AdcSample AdcSample `(ui  1 e 2 0 ]
 {
 [v AdcSample@ch ch `uc  1 a 1 wreg ]
@@ -787,58 +858,58 @@ CFG_TYPE_INT32 2
 "76
 [v _AdcChSelect AdcChSelect `(v  1 e 0 0 ]
 {
-[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
-[v AdcChSelect@channel channel `E4222  1 a 1 wreg ]
+[v AdcChSelect@channel channel `E4221  1 a 1 wreg ]
+[v AdcChSelect@channel channel `E4221  1 a 1 wreg ]
 "78
-[v AdcChSelect@channel channel `E4222  1 a 1 0 ]
+[v AdcChSelect@channel channel `E4221  1 a 1 0 ]
 "79
 } 0
-"163 C:\Projects\Firmware\domoticarf/src/node/power.c
+"162 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrSensorWake PwrSensorWake `(v  1 e 0 0 ]
 {
-"166
+"165
 } 0
-"158
+"157
 [v _PwrSensorSleep PwrSensorSleep `(v  1 e 0 0 ]
 {
-"161
+"160
 } 0
-"151
+"150
 [v _PwrSensorInit PwrSensorInit `(v  1 e 0 0 ]
 {
-"156
+"155
 } 0
-"136
+"135
 [v _PwrRfWake PwrRfWake `(v  1 e 0 0 ]
 {
-"148
+"147
 } 0
-"139 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"140 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaReboot Mrf49xaReboot `(v  1 e 0 0 ]
 {
-"142
+"143
 } 0
-"119 C:\Projects\Firmware\domoticarf/src/node/power.c
+"118 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrRfSleep PwrRfSleep `(v  1 e 0 0 ]
 {
-"134
+"133
 } 0
-"131 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"132 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaShutdown Mrf49xaShutdown `(v  1 e 0 0 ]
 {
-"137
+"138
 } 0
-"121
+"123
 [v _Mrf49xaModeSleep Mrf49xaModeSleep `(v  1 e 0 0 ]
 {
-"123
+"125
 [v Mrf49xaModeSleep@k k `uc  1 a 1 3 ]
-"128
+"130
 } 0
-"88 C:\Projects\Firmware\domoticarf/src/node/power.c
+"87 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrRfInit PwrRfInit `(v  1 e 0 0 ]
 {
-"117
+"116
 } 0
 "82
 [v _PwrI2cWake PwrI2cWake `(v  1 e 0 0 ]
@@ -855,64 +926,107 @@ CFG_TYPE_INT32 2
 {
 "71
 } 0
-"15 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+"15 /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c
 [v _SoftI2cInit SoftI2cInit `(v  1 e 0 0 ]
 {
 "36
 } 0
-"169 C:\Projects\Firmware\domoticarf/src/node/power.c
+"168 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrAdcInit PwrAdcInit `(v  1 e 0 0 ]
 {
-"177
+"176
 } 0
-"124 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"130 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [v _Mrf49xaTick Mrf49xaTick `(v  1 e 0 0 ]
 {
-"202
-[v Mrf49xaTick@timeout timeout `uc  1 a 1 13 ]
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"135
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v Mrf49xaTick@packet packet `*.4S321  1 a 1 14 ]
-"239
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaTick@inst inst `*.4S333  1 a 1 wreg ]
+"221
+[v Mrf49xaTick@timeout timeout `uc  1 a 1 15 ]
+"154
+[v Mrf49xaTick@packet packet `*.4S321  1 a 1 16 ]
+"130
+[v Mrf49xaTick@inst inst `*.4S333  1 a 1 wreg ]
+"140
+"130
+[v Mrf49xaTick@inst inst `*.4S333  1 a 1 17 ]
+"261
 } 0
-"277 C:\Projects\Firmware\domoticarf/inc\devices/mrf49xa_defs.h
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"277 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
-"90 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"92 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
 [v _Mrf49xaRxPacket Mrf49xaRxPacket `(*.4S321  1 e 1 0 ]
 {
-"105
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaRxPacket@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaRxPacket@inst inst `*.4S333  1 a 1 wreg ]
+"94
+"92
+[v Mrf49xaRxPacket@inst inst `*.4S333  1 a 1 0 ]
+"107
 } 0
-"6
+"8
 [v _Mrf49xaPacketPending Mrf49xaPacketPending `(uc  1 e 1 0 ]
 {
-"13
+[s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+[u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+`uc 1 retransmit 1 23 :2:4 
+`uc 1 needAck 1 23 :2:6 
+]
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaPacketPending@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaPacketPending@inst inst `*.4S333  1 a 1 wreg ]
+"11
+"8
+[v Mrf49xaPacketPending@inst inst `*.4S333  1 a 1 0 ]
+"15
 } 0
-"111 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"112 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
 {
-"113
+"114
 [v Mrf49xaModeTx@k k `uc  1 a 1 3 ]
-"119
+"120
 } 0
-"150
-[v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
+"303 /home/hans/Projects/Firmware/domoticaRf/inc/devices/mrf49xa_defs.h
+"277
+"7 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+[s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
+"151
+[u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+`uc 1 retransmit 1 23 :2:4 
+`uc 1 needAck 1 23 :2:6 
+]
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v _Mrf49xaInit Mrf49xaInit `(*.4S333  1 e 1 0 ]
 {
-"152
+"153
 [v Mrf49xaInit@k k `uc  1 a 1 6 ]
-"204
+"206
 } 0
-"42 C:\Projects\Firmware\domoticarf/src/node/power.c
+"42 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _Sleepy Sleepy `(v  1 e 0 0 ]
 {
 "44
@@ -921,26 +1035,26 @@ CFG_TYPE_INT32 2
 [v Sleepy@ms ms `ui  1 p 2 0 ]
 "60
 } 0
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_data.c
+"9 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c
 [v _Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
 {
-"10
+"12
 [v Mrf49xaServe@data data `uc  1 a 1 5 ]
-"203
+"208
 } 0
-"145 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"146 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 {
-"148
+"149
 } 0
-"99
+"100
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
-"101
+"102
 [v Mrf49xaModeRx@k k `uc  1 a 1 3 ]
-"109
+"110
 } 0
-"48 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
+"48 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 {
 [v Mrf49TxByte@byte byte `uc  1 a 1 wreg ]
@@ -981,7 +1095,7 @@ CFG_TYPE_INT32 2
 [v Mrf49RxCmd@cmd cmd `uc  1 a 1 1 ]
 "29
 } 0
-"3 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_spi_pic16.c
+"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
 [v _Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 {
 [v Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
@@ -996,26 +1110,30 @@ CFG_TYPE_INT32 2
 [v Mrf49SpiRx@data data `uc  1 a 1 0 ]
 "41
 } 0
-"150 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
+"150 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
 [v _HandlePacket HandlePacket `(v  1 e 0 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v HandlePacket@packet packet `*.4S321  1 a 1 wreg ]
-[s S1212 . 1 `uc 1 reset 1 0 :1:0 
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v HandlePacket@inst inst `*.4S333  1 a 1 wreg ]
+[s S1376 . 1 `uc 1 reset 1 0 :1:0 
 `uc 1 needAck 1 0 :1:1 
 `uc 1 sendAck 1 0 :1:2 
 `uc 1 sendMsg 1 0 :1:3 
 ]
 "159
-[v HandlePacket@response response `S1212  1 a 1 10 ]
+[v HandlePacket@response response `S1376  1 a 1 12 ]
 "150
-[v HandlePacket@packet packet `*.4S321  1 a 1 wreg ]
-[v HandlePacket@packet packet `*.4S321  1 a 1 11 ]
+[v HandlePacket@inst inst `*.4S333  1 a 1 wreg ]
+[v HandlePacket@packet packet `*.4S321  1 p 1 10 ]
+[v HandlePacket@inst inst `*.4S333  1 a 1 13 ]
 "240
 } 0
 "8
@@ -1023,7 +1141,7 @@ CFG_TYPE_INT32 2
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
@@ -1037,7 +1155,7 @@ CFG_TYPE_INT32 2
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
@@ -1058,7 +1176,7 @@ CFG_TYPE_INT32 2
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
@@ -1074,7 +1192,7 @@ CFG_TYPE_INT32 2
 [v handleCfgRead@packet packet `*.4S321  1 a 1 8 ]
 "113
 } 0
-"11 C:\Program Files (x86)\Microchip\xc8\v1.31\sources\common\memcpy.c
+"11 /opt/microchip/xc8/v1.30/sources/common/memcpy.c
 [v _memcpy memcpy `(*.4v  1 e 1 0 ]
 {
 [v memcpy@d1 d1 `*.4v  1 a 1 wreg ]
@@ -1090,20 +1208,20 @@ CFG_TYPE_INT32 2
 [v memcpy@d1 d1 `*.4v  1 a 1 5 ]
 "32
 } 0
-"29 C:\Projects\Firmware\domoticarf/src/node/config.c
+"29 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
 [v _CfgGetSizeByType CfgGetSizeByType `(uc  1 e 1 0 ]
 {
-[v CfgGetSizeByType@type type `E4252  1 a 1 wreg ]
-[v CfgGetSizeByType@type type `E4252  1 a 1 wreg ]
-[v CfgGetSizeByType@type type `E4252  1 a 1 0 ]
+[v CfgGetSizeByType@type type `E4251  1 a 1 wreg ]
+[v CfgGetSizeByType@type type `E4251  1 a 1 wreg ]
+[v CfgGetSizeByType@type type `E4251  1 a 1 0 ]
 "38
 } 0
-"124 C:\Projects\Firmware\domoticarf/src/rfstack/client.c
+"124 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
 [v _handleCfgCmd handleCfgCmd `(v  1 e 0 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
@@ -1112,12 +1230,12 @@ CFG_TYPE_INT32 2
 [v handleCfgCmd@packet packet `*.4S321  1 a 1 8 ]
 "147
 } 0
-"24 C:\Projects\Firmware\domoticarf/src/node/config.c
+"24 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
 [v _CfgSave CfgSave `(v  1 e 0 0 ]
 {
 "27
 } 0
-"25 C:\Projects\Firmware\domoticarf/src/devices/24aa64.c
+"25 /home/hans/Projects/Firmware/domoticaRf/src/devices/24aa64.c
 [v _eepromTxBytes eepromTxBytes `(v  1 e 0 0 ]
 {
 [v eepromTxBytes@address address `ui  1 p 2 4 ]
@@ -1125,12 +1243,12 @@ CFG_TYPE_INT32 2
 [v eepromTxBytes@size size `uc  1 p 1 7 ]
 "41
 } 0
-"19 C:\Projects\Firmware\domoticarf/src/node/config.c
+"19 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
 [v _CfgLoad CfgLoad `(v  1 e 0 0 ]
 {
 "22
 } 0
-"4 C:\Projects\Firmware\domoticarf/src/devices/24aa64.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/24aa64.c
 [v _eepromRxBytes eepromRxBytes `(v  1 e 0 0 ]
 {
 [v eepromRxBytes@address address `ui  1 p 2 4 ]
@@ -1138,77 +1256,86 @@ CFG_TYPE_INT32 2
 [v eepromRxBytes@size size `uc  1 p 1 7 ]
 "24
 } 0
-"52 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+"52 /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c
 [v _SoftI2cRepeatedStart SoftI2cRepeatedStart `(v  1 e 0 0 ]
 {
 "71
 } 0
-"15 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_packet.c
+"75 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c
 [v _Mrf49xaTxAck Mrf49xaTxAck `(uc  1 e 1 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v Mrf49xaTxAck@packet packet `*.4S321  1 a 1 wreg ]
-[v Mrf49xaTxAck@packet packet `*.4S321  1 a 1 wreg ]
-"17
-"15
-[v Mrf49xaTxAck@packet packet `*.4S321  1 a 1 6 ]
-"25
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaTxAck@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaTxAck@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaTxAck@packet packet `*.4S321  1 p 1 8 ]
+"77
+"75
+[v Mrf49xaTxAck@inst inst `*.4S333  1 a 1 9 ]
+"85
 } 0
-"27
+"17
 [v _Mrf49xaTxPacket Mrf49xaTxPacket `(uc  1 e 1 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v Mrf49xaTxPacket@packet packet `*.4S321  1 a 1 wreg ]
-"29
-[v Mrf49xaTxPacket@i i `uc  1 a 1 4 ]
-[v Mrf49xaTxPacket@crc crc `uc  1 a 1 3 ]
-"27
-[v Mrf49xaTxPacket@packet packet `*.4S321  1 a 1 wreg ]
-[v Mrf49xaTxPacket@response response `uc  1 p 1 0 ]
-[v Mrf49xaTxPacket@needAck needAck `uc  1 p 1 1 ]
-"29
-"27
-[v Mrf49xaTxPacket@packet packet `*.4S321  1 a 1 5 ]
-"83
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaTxPacket@inst inst `*.4S333  1 a 1 wreg ]
+"19
+[v Mrf49xaTxPacket@i i `uc  1 a 1 6 ]
+[v Mrf49xaTxPacket@crc crc `uc  1 a 1 5 ]
+"17
+[v Mrf49xaTxPacket@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaTxPacket@packet packet `*.4S321  1 p 1 0 ]
+[v Mrf49xaTxPacket@response response `uc  1 p 1 1 ]
+[v Mrf49xaTxPacket@needAck needAck `uc  1 p 1 2 ]
+"19
+"17
+[v Mrf49xaTxPacket@inst inst `*.4S333  1 a 1 7 ]
+"73
 } 0
-"85
+"87
 [v _Mrf49xaFreePacket Mrf49xaFreePacket `(v  1 e 0 0 ]
 {
 [s S311 . 21 `uc 1 size 1 0 `uc 1 src 1 1 `uc 1 dst 1 2 `uc 1 id 1 3 `uc 1 opt 1 4 `[16]uc 1 data 16 5 ]
 [u S318 . 21 `S311 1 packet 21 0 `[21]uc 1 raw 21 0 ]
-[s S321 rfTrcvPacket_s 24 `E4306 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
+[s S321 rfTrcvPacket_s 24 `E4305 1 state 1 0 `S318 1 . 21 1 `uc 1 crc 1 22 `uc 1 retry 1 23 :4:0 
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[v Mrf49xaFreePacket@packet packet `*.4S321  1 a 1 wreg ]
-[v Mrf49xaFreePacket@packet packet `*.4S321  1 a 1 wreg ]
-"87
-"85
-[v Mrf49xaFreePacket@packet packet `*.4S321  1 a 1 0 ]
-"88
+[s S333 rfTrcvStatus_s 75 `*.4S321 1 hwRx 1 0 `[2]S321 1 rxPacket 48 1 `S321 1 txPacket 24 49 `E4299 1 state 1 73 `uc 1 hwByte 1 74 :7:0 
+`uc 1 needsReset 1 74 :1:7 
+]
+[v Mrf49xaFreePacket@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaFreePacket@inst inst `*.4S333  1 a 1 wreg ]
+[v Mrf49xaFreePacket@packet packet `*.4S321  1 p 1 0 ]
+"90
 } 0
-"8 C:\Projects\Firmware\domoticarf/src/bsp/pic16/interrupt.c
+"8 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
 [v _ExtIntInit ExtIntInit `(v  1 e 0 0 ]
 {
 "15
 } 0
-"4 C:\Projects\Firmware\domoticarf/src/devices/mcp9800.c
+"4 /home/hans/Projects/Firmware/domoticaRf/src/devices/mcp9800.c
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 {
-[v Mcp9800Start@resolution resolution `E4252  1 a 1 wreg ]
-[v Mcp9800Start@resolution resolution `E4252  1 a 1 wreg ]
+[v Mcp9800Start@resolution resolution `E4251  1 a 1 wreg ]
+[v Mcp9800Start@resolution resolution `E4251  1 a 1 wreg ]
 "6
-[v Mcp9800Start@resolution resolution `E4252  1 a 1 4 ]
+[v Mcp9800Start@resolution resolution `E4251  1 a 1 4 ]
 "17
 } 0
 "19
@@ -1220,7 +1347,7 @@ CFG_TYPE_INT32 2
 [v Mcp9800Read@tempH tempH `uc  1 a 1 6 ]
 "28
 } 0
-"87 C:\Projects\Firmware\domoticarf/src/bsp/softI2c.c
+"87 /home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c
 [v _SoftI2cTxByte SoftI2cTxByte `(uc  1 e 1 0 ]
 {
 [v SoftI2cTxByte@data data `uc  1 a 1 wreg ]
@@ -1261,31 +1388,31 @@ CFG_TYPE_INT32 2
 {
 "13
 } 0
-"36 C:\Projects\Firmware\domoticarf/src/bsp/pic16/interrupt.c
+"36 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
 [v _extInt extInt `II(v  1 e 0 0 ]
 {
 "40
 [v extInt@ofw ofw `uc  1 a 1 7 ]
 "53
 } 0
-"7 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_data.c
+"9 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c
 [v i1_Mrf49xaServe Mrf49xaServe `(uc  1 e 1 0 ]
 {
 [v i1Mrf49xaServe@data Mrf49xaServe `uc  1 a 1 5 ]
-"203
+"208
 } 0
-"145 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa.c
+"146 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 {
-"148
+"149
 } 0
-"99
+"100
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
 [v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
-"109
+"110
 } 0
-"48 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_cmd.c
+"48 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
 {
 [v i1Mrf49TxByte@byte byte `uc  1 a 1 wreg ]
@@ -1324,7 +1451,7 @@ CFG_TYPE_INT32 2
 [v i1Mrf49RxCmd@cmd cmd `uc  1 a 1 1 ]
 "29
 } 0
-"3 C:\Projects\Firmware\domoticarf/src/devices/mrf49xa_spi_pic16.c
+"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_spi_pic16.c
 [v i1_Mrf49SpiTx Mrf49SpiTx `(v  1 e 0 0 ]
 {
 [v i1Mrf49SpiTx@byte byte `uc  1 a 1 wreg ]
@@ -1338,7 +1465,7 @@ CFG_TYPE_INT32 2
 [v i1Mrf49SpiRx@data Mrf49SpiRx `uc  1 a 1 0 ]
 "41
 } 0
-"17 C:\Projects\Firmware\domoticarf/src/bsp/pic16/interrupt.c
+"17 /home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c
 [v _ExtIntDeinit ExtIntDeinit `(v  1 e 0 0 ]
 {
 "20

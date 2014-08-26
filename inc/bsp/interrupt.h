@@ -1,9 +1,10 @@
 #ifndef BSP_INTERRUPT
 #define BSP_INTERRUPT
 
+#include <stdint.h>
 #include "stddefs.h"
 
-typedef bool_t (*ExtIntHandler_t) (UI08_t ind);
+typedef bool (*ExtIntHandler_t) (uint8_t ind);
 
 typedef struct ExtIntInstance_s
 {
@@ -13,7 +14,7 @@ typedef struct ExtIntInstance_s
 void ExtIntInit(void);
 void ExtIntDeinit(void);
 
-void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio);
+void ExtIntSetup(uint8_t ind, ExtIntHandler_t callback, bool fallingEdge, uint8_t prio);
 
 
 #endif

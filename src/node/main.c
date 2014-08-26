@@ -29,8 +29,12 @@
 
 uint8_t powerStatusTicker = 0;
 
+extern Mrf49xaMac_t rfTrcvStatus;
+Mrf49xaMac_t* macPtr = &rfTrcvStatus;
+
 void main(void)
 {
+    
     #warning "Building for PIC16F1508"
     OSCCON = 0b01111000; // 16MHz
 
@@ -70,7 +74,7 @@ void main(void)
         if (rfTrcvStatus.txPacket.state != PKT_FREE)
         {
             Mrf49xaNeedsReset();
-            Mrf49xaTick();
+            Mrf49xaTick(macPtr);
         }
 
         powerStatusTicker++;
@@ -80,18 +84,18 @@ void main(void)
             powerStatusTicker = 0;
         
 
-            RfSendPowerState();
+            RfSendPowerState(macPtr);
             do
             {
-                Mrf49xaTick();
+                Mrf49xaTick(macPtr);
             }
             while (rfTrcvStatus.txPacket.state != PKT_FREE);
         }
 
-        RfSendSampleWeatherNode(temperature, humidity);
+        RfSendSampleWeatherNode(macPtr, temperature, humidity);
         do
         {
-            Mrf49xaTick();
+            Mrf49xaTick(macPtr);
         }
         while (rfTrcvStatus.txPacket.state != PKT_FREE);
 

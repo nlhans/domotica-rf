@@ -33,9 +33,9 @@
         <itemPath>../../../src/devices/mrf49xa.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_spi_pic16.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_cmd.c</itemPath>
-        <itemPath>../../../src/devices/mrf49xa_packet.c</itemPath>
-        <itemPath>../../../src/devices/mrf49xa_data.c</itemPath>
         <itemPath>../../../src/devices/24aa64.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_mac.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_phy.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
         <itemPath>../../../src/rfstack/client.c</itemPath>
@@ -70,7 +70,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.31</languageToolchainVersion>
+        <languageToolchainVersion>1.30</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>

@@ -1,6 +1,13 @@
 #ifndef STDDEFS_H
 #define STDDEFS_H
 
+#ifdef QT_CORE_LIB
+#include <stdint.h>
+
+#define MRF_DISABLE_INT
+#define MRF_ENABLE_INT
+
+#else
 #include <xc.h>
 #include <stdio.h>
 #include <string.h>
@@ -35,6 +42,23 @@
 
 #ifdef _16F1933
     #include "bspPIC16.h"
+#endif
+#endif
+
+#ifndef bool
+#define bool uint8_t
+#endif
+
+#ifndef true
+#define true ((bool)1)
+#endif
+
+#ifndef false
+#define false ((bool)0)
+#endif
+
+#ifndef NULL
+#define NULL 0
 #endif
 
 #endif

@@ -4,7 +4,7 @@
 mrf49xaStatus_t mrf49Status;
 
 // Software driver status
-rfTrcvStatus_t rfTrcvStatus;
+Mrf49xaMac_t rfTrcvStatus;
 // TODO: make object
 
 typedef struct Mrf49InitReg_s
@@ -80,7 +80,7 @@ volatile const uint8_t mrfRegset_SleepCnt = sizeof(mrfRegset_Sleep)/sizeof(Mrf49
     if (array[k].reg == REG_DELAY) { Delay5Ms(); } else \
 { Mrf49TxCmd(array[k].reg, array[k].val); } }
 
-//if (array[k].reg == REG_CMSA) { while(Mrf49xaSignalPresent()); } else { \
+//if (array[k].reg == REG_CMSA) { while(Mrf49xaSignalPresent()); } else {
     
 void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
 {
@@ -148,7 +148,7 @@ void Mrf49xaNeedsReset(void)
     rfTrcvStatus.needsReset = TRUE;
 }
 
-void Mrf49xaInit(void)
+Mrf49xaMac_t* Mrf49xaInit(void)
 {
     UI08_t k;
 #ifdef PIC16_HW
@@ -156,7 +156,7 @@ void Mrf49xaInit(void)
 #endif
     reset:
 
-    for (k = 0; k < sizeof(rfTrcvStatus_t); k++)
+    for (k = 0; k < sizeof(Mrf49xaMac_t); k++)
     {
         ((uint8_t*)&rfTrcvStatus)[k] = 0;
     }
@@ -201,5 +201,6 @@ void Mrf49xaInit(void)
         Mrf49xaServe();
 #endif
     }
-    
+
+    return &rfTrcvStatus;
 }

@@ -8,7 +8,7 @@
 
 // -------
 // mrf49xa.c
-void Mrf49xaInit(void);
+Mrf49xaMac_t* Mrf49xaInit(void);
 
 void Mrf49xaModeRx(void);
 void Mrf49xaModeTx(void);
@@ -16,7 +16,7 @@ void Mrf49xaModeSleep(void);
 
 void Mrf49xaNeedsReset(void);
 
-bool_t Mrf49xaSignalPresent(void);
+bool Mrf49xaSignalPresent(void);
 
 #ifdef MRF49XA_POWER_SWITCH
 void Mrf49xaReboot(void);
@@ -35,23 +35,23 @@ void Mrf49TxByte(uint8_t byte);
 // -------
 // mrf49xa_data.c
 #ifdef PIC24_HW
-bool_t Mrf49xaServe(uint8_t foo);
+bool Mrf49xaServe(uint8_t foo);
 #else
-bool_t Mrf49xaServe(void);
+bool Mrf49xaServe(void);
 #endif
 
 // -------
 // mrf49xa_packet.c
-void Mrf49xaTick();
+void Mrf49xaTick(Mrf49xaMac_t* inst);
 
-bool_t Mrf49xaPacketPending(void);
+bool Mrf49xaPacketPending(Mrf49xaMac_t* inst);
 
-rfTrcvPacket_t* Mrf49xaRxPacket(void);
-rfTrcvPacket_t* Mrf49xaAllocPacket(void);
-void Mrf49xaFreePacket(rfTrcvPacket_t* packet);
+rfTrcvPacket_t* Mrf49xaRxPacket(Mrf49xaMac_t* inst);
+rfTrcvPacket_t* Mrf49xaAllocPacket(Mrf49xaMac_t* inst);
+void Mrf49xaFreePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 
-bool_t Mrf49xaTxPacket(rfTrcvPacket_t* packet, bool_t response, bool_t needAck);
-bool_t Mrf49xaTxAck(rfTrcvPacket_t* packet);
+bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, bool needAck);
+bool Mrf49xaTxAck(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 
 
 // Platform dependant.
@@ -93,6 +93,9 @@ uint8_t Mrf49SpiRx(void);
 
 //#define Mrf49SpiTx(x) spiTxRx1(x)
 //#define Mrf49SpiRx() spiTxRx1(0)
+
+void Mrf49SpiTx(uint8_t byte);
+uint8_t Mrf49SpiRx(void);
 
 #define Delay5Ms() RtosTaskDelay(10)
 #define Delay50Ms() RtosTaskDelay(50)

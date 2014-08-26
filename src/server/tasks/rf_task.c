@@ -6,6 +6,7 @@
 
 #include "tasks/rf_task.h"
 #include "rfstack/packets.h"
+#include "devices/mrf49xa.h"
 
 #include "bsp/interrupt.h"
 
@@ -14,6 +15,8 @@ RtosTimer_t rfPingTimer;
 
 RtosTask_t rfTask;
 UI08_t rfTaskStk[512];
+
+Mrf49xaMac_t* macPtr;
 
 #ifdef RF_DEBUG
 RfDiagnosticPacket_t rfHistoryPackets[RF_HISTORY_DEPTH];
@@ -52,7 +55,7 @@ void RfTick(void)
 {
     // Reduce CPU load of RF task.
 #ifndef dsPIC33
-    if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
+    if (Mrf49xaPacketPending(macPtr) || macPtr->txPacket.state != PKT_FREE)
 #endif
         RtosTaskSignalEvent(&rfTask, RF_TICK);
     RtosTimerRearm(&rfTimer, 2);
@@ -130,7 +133,7 @@ void RfTask()
     PPSLock;
 
     MRF_DISABLE_INT;
-    Mrf49xaInit();
+    macPtr = Mrf49xaInit();
     MRF_ENABLE_INT;
 
     RtosTaskDelay(100);
@@ -154,12 +157,12 @@ void RfTask()
             for( i = 1; i < 16 ;i++)
                 ping.packet.data[i] = i;
             
-            Mrf49xaTxPacket(&ping, FALSE, FALSE);
+            Mrf49xaTxPacket(macPtr, &ping, FALSE, FALSE);
         }
 
         if (evt & RF_TICK)
         {
-            Mrf49xaTick();
+            Mrf49xaTick(macPtr);
         }
     }
 }

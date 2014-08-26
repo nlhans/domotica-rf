@@ -29,24 +29,24 @@
 typedef struct RfNodeInfo_s
 {
     union {
-        UI08_t ee;
+        uint8_t ee;
         struct
         {
-            UI08_t id:6;
-            UI08_t type:2;
+            uint8_t id:6;
+            uint8_t type:2;
         } ;
     } node;
     struct
     {
-        UI08_t isServer:1;
+        uint8_t isServer:1;
     } options;
 
 #ifdef SERVER
     struct
     {
-        UI08_t sensors;
-        UI16_t battery;
-        UI32_t firmwareVersion;
+        uint8_t sensors;
+        uint16_t battery;
+        uint32_t firmwareVersion;
         RtosTime_t lastWake;
         RtosTime_t nextWake;
     }entity;
@@ -54,11 +54,11 @@ typedef struct RfNodeInfo_s
 #ifdef PIC24_HW
     struct
     {
-        UI32_t rxCnt;
-        UI32_t txCnt;
-        UI32_t crcErr;
-        UI32_t idErr;
-        UI32_t nackErr;
+        uint32_t rxCnt;
+        uint32_t txCnt;
+        uint32_t crcErr;
+        uint32_t idErr;
+        uint32_t nackErr;
     } stats;
 #endif
 } RfNodeInfo_t;

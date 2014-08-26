@@ -1,5 +1,5 @@
 #include "rfstack/packets.h"
-
+#include "devices/mrf49xa.h"
 #include "devices/24aa64.h"
 
 #include "config.h"
@@ -147,7 +147,7 @@ void handleCfgCmd(rfTrcvPacket_t* packet)
 }
 #endif
 
-void HandlePacket(rfTrcvPacket_t* packet)
+void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
     // Compact these booleans:
     struct
@@ -167,10 +167,10 @@ void HandlePacket(rfTrcvPacket_t* packet)
             break;
 
         case RF_ACK:
-            if (packetTx.crc == packet->packet.data[1] &&
-                packetTx.packet.id == packet->packet.data[0])
+            if (inst->txPacket.crc == packet->packet.data[1] &&
+                inst->txPacket.packet.id == packet->packet.data[0])
             {
-                packetTx.needAck = ACK_RECEIVED;
+                inst->txPacket.needAck = ACK_RECEIVED;
             }
             break;
 
@@ -229,12 +229,12 @@ void HandlePacket(rfTrcvPacket_t* packet)
 
     // TODO: RF data response statemachine
     if (response.sendMsg)
-        response.reset = Mrf49xaTxPacket(packet, TRUE, response.needAck);
+        response.reset = Mrf49xaTxPacket(inst, packet, TRUE, response.needAck);
     else if (response.sendAck)
-        response.reset = Mrf49xaTxAck(packet);
+        response.reset = Mrf49xaTxAck(inst, packet);
     else
         response.reset = FALSE;
 
     if (!response.reset)
-        Mrf49xaFreePacket(packet);
+        Mrf49xaFreePacket(inst, packet);
 }

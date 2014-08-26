@@ -29,9 +29,9 @@
         <itemPath>../../src/devices/mcp9800.c</itemPath>
         <itemPath>../../src/devices/mrf49xa.c</itemPath>
         <itemPath>../../src/devices/mrf49xa_cmd.c</itemPath>
-        <itemPath>../../src/devices/mrf49xa_data.c</itemPath>
-        <itemPath>../../src/devices/mrf49xa_packet.c</itemPath>
         <itemPath>../../src/devices/mrf49xa_spi_pic24.c</itemPath>
+        <itemPath>../../src/devices/mrf49xa_mac.c</itemPath>
+        <itemPath>../../src/devices/mrf49xa_phy.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="IP" projectFiles="true">
         <itemPath>../../src/server/ipstack/arp.c</itemPath>
@@ -85,7 +85,7 @@
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.21</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>

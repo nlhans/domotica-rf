@@ -84,7 +84,6 @@ void PwrI2cWake(void)
     
 }
 
-
 void PwrRfInit(void)
 {
     TRISAbits.TRISA2 = GPIO_INPUT;

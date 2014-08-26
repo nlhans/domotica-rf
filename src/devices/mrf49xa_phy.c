@@ -1,5 +1,7 @@
 #include "devices/mrf49xa.h"
 
+extern Mrf49xaMac_t rfTrcvStatus;
+
 // Serve MRf49XA chipset when requires attention.
 #ifdef PIC24_HW
 bool_t Mrf49xaServe(uint8_t foo)
@@ -97,9 +99,10 @@ bool_t Mrf49xaServe(void)
                     Mrf49xaModeRx();
                     break;
                 }
-                packetRx->packet.size = data;
-                packetRx->crc = 0;
-                packetRx->state = PKT_HW_BUSY_RX;
+
+                rfTrcvStatus.hwRx->packet.size = data;
+                rfTrcvStatus.hwRx->crc = 0;
+                rfTrcvStatus.hwRx->state = PKT_HW_BUSY_RX;
 
                 rfTrcvStatus.state = RECV_DATA;
                 rfTrcvStatus.hwByte = 1;
@@ -114,18 +117,18 @@ bool_t Mrf49xaServe(void)
                 // Reset radio & wait for sync byte. Current pattern is rubbish data.
                 if (mrf49Status.flags.lsb.dataQualityOK == 0)
                 {
-                    packetRx->state = PKT_FREE;
+                    rfTrcvStatus.hwRx->state = PKT_FREE;
                     Mrf49xaModeRx();
                     break;
                 }
 
-                if (rfTrcvStatus.hwByte == packetRx->packet.size)
+                if (rfTrcvStatus.hwByte == rfTrcvStatus.hwRx->packet.size)
                 {
-                    packetRx->crc = data;
+                    rfTrcvStatus.hwRx->crc = data;
 
                     // TODO: Check CRC
                     // TODO: Check node ID (broadcast/myself)
-                    packetRx->state = PKT_HW_READY_RX;
+                    rfTrcvStatus.hwRx->state = PKT_HW_READY_RX;
 #ifdef dsPIC33
                     packetRx->timestamp = RtosTimestamp;
 #endif
@@ -136,7 +139,7 @@ bool_t Mrf49xaServe(void)
                 }
                 else
                 {
-                    packetRx->raw[rfTrcvStatus.hwByte++] = data;
+                    rfTrcvStatus.hwRx->raw[rfTrcvStatus.hwByte++] = data;
                 }
 
                 break;
@@ -144,7 +147,7 @@ bool_t Mrf49xaServe(void)
             case TX_PACKET:
                 rfTrcvStatus.hwByte++;
 
-                if (rfTrcvStatus.hwByte == packetTx.packet.size)
+                if (rfTrcvStatus.hwByte == rfTrcvStatus.txPacket.packet.size)
                     rfTrcvStatus.hwByte = 49;
                 
                 switch (rfTrcvStatus.hwByte)
@@ -160,11 +163,11 @@ bool_t Mrf49xaServe(void)
 
                         // 4..packet size
                     default:
-                        Mrf49TxByte(packetTx.raw[rfTrcvStatus.hwByte]);
+                        Mrf49TxByte(rfTrcvStatus.txPacket.raw[rfTrcvStatus.hwByte]);
                         break;
 
                     case 49: // crc
-                        Mrf49TxByte(packetTx.crc);
+                        Mrf49TxByte(rfTrcvStatus.txPacket.crc);
                         break;
 
                     case 50:
@@ -175,12 +178,12 @@ bool_t Mrf49xaServe(void)
                         Mrf49TxByte(0x00);
                         Mrf49xaModeRx();
 
-                        packetTx.retry = 0;
+                        rfTrcvStatus.txPacket.retry = 0;
 
-                        if (packetTx.needAck == NEED_ACK)
-                            packetTx.state = PKT_WAITING_FOR_ACK;
+                        if (rfTrcvStatus.txPacket.needAck == NEED_ACK)
+                            rfTrcvStatus.txPacket.state = PKT_WAITING_FOR_ACK;
                         else
-                            packetTx.state = PKT_FREE;
+                            rfTrcvStatus.txPacket.state = PKT_FREE;
                         break;
                 }
 

@@ -19,7 +19,7 @@ endif
 endif
 
 # Environment
-MKDIR=gnumkdir -p
+MKDIR=mkdir -p
 RM=rm -f 
 MV=mv 
 CP=cp 
@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/pic24/adc.c ../../src/bsp/pic24/context.s ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/devices/SST26VF032.c ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/devices/mrf49xa_spi_pic24.c ../../src/server/ipstack/arp.c ../../src/server/ipstack/icmp.c ../../src/server/ipstack/ipv4.c ../../src/server/ipstack/ntp.c ../../src/server/ipstack/tcp.c ../../src/server/ipstack/udp.c ../../src/rfstack/packets.c ../../src/rfstack/server.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/server/tasks/eth_task.c ../../src/server/utilities/executiontime.c ../../src/server/utilities/spiArbiter.c ../../src/utilities/ccbuf.c ../../src/server/webserver/router.c ../../src/server/main.c ../../src/server/config.c
+SOURCEFILES_QUOTED_IF_SPACED=../../src/bsp/pic24/adc.c ../../src/bsp/pic24/context.s ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/devices/SST26VF032.c ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_spi_pic24.c ../../src/server/ipstack/arp.c ../../src/server/ipstack/icmp.c ../../src/server/ipstack/ipv4.c ../../src/server/ipstack/ntp.c ../../src/server/ipstack/tcp.c ../../src/server/ipstack/udp.c ../../src/rfstack/packets.c ../../src/rfstack/server.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/server/tasks/eth_task.c ../../src/server/utilities/executiontime.c ../../src/server/utilities/spiArbiter.c ../../src/utilities/ccbuf.c ../../src/server/webserver/router.c ../../src/server/main.c ../../src/server/config.c ../../src/devices/mrf49xa_mac.c ../../src/devices/mrf49xa_phy.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o ${OBJECTDIR}/_ext/2033261600/arp.o ${OBJECTDIR}/_ext/2033261600/icmp.o ${OBJECTDIR}/_ext/2033261600/ipv4.o ${OBJECTDIR}/_ext/2033261600/ntp.o ${OBJECTDIR}/_ext/2033261600/tcp.o ${OBJECTDIR}/_ext/2033261600/udp.o ${OBJECTDIR}/_ext/1201319415/packets.o ${OBJECTDIR}/_ext/1201319415/server.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1145713235/eth_task.o ${OBJECTDIR}/_ext/1709695401/executiontime.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/296506934/router.o ${OBJECTDIR}/_ext/681662318/main.o ${OBJECTDIR}/_ext/681662318/config.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/767653358/enc28j60.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o.d ${OBJECTDIR}/_ext/2033261600/arp.o.d ${OBJECTDIR}/_ext/2033261600/icmp.o.d ${OBJECTDIR}/_ext/2033261600/ipv4.o.d ${OBJECTDIR}/_ext/2033261600/ntp.o.d ${OBJECTDIR}/_ext/2033261600/tcp.o.d ${OBJECTDIR}/_ext/2033261600/udp.o.d ${OBJECTDIR}/_ext/1201319415/packets.o.d ${OBJECTDIR}/_ext/1201319415/server.o.d ${OBJECTDIR}/_ext/1209926055/task.o.d ${OBJECTDIR}/_ext/1209926055/timer.o.d ${OBJECTDIR}/_ext/1145713235/rf_task.o.d ${OBJECTDIR}/_ext/1145713235/eth_task.o.d ${OBJECTDIR}/_ext/1709695401/executiontime.o.d ${OBJECTDIR}/_ext/1709695401/spiArbiter.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/296506934/router.o.d ${OBJECTDIR}/_ext/681662318/main.o.d ${OBJECTDIR}/_ext/681662318/config.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o ${OBJECTDIR}/_ext/2033261600/arp.o ${OBJECTDIR}/_ext/2033261600/icmp.o ${OBJECTDIR}/_ext/2033261600/ipv4.o ${OBJECTDIR}/_ext/2033261600/ntp.o ${OBJECTDIR}/_ext/2033261600/tcp.o ${OBJECTDIR}/_ext/2033261600/udp.o ${OBJECTDIR}/_ext/1201319415/packets.o ${OBJECTDIR}/_ext/1201319415/server.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1145713235/eth_task.o ${OBJECTDIR}/_ext/1709695401/executiontime.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/296506934/router.o ${OBJECTDIR}/_ext/681662318/main.o ${OBJECTDIR}/_ext/681662318/config.o ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/585513329/adc.o.d ${OBJECTDIR}/_ext/585513329/context.o.d ${OBJECTDIR}/_ext/585513329/i2c.o.d ${OBJECTDIR}/_ext/585513329/interrupt.o.d ${OBJECTDIR}/_ext/585513329/rtc.o.d ${OBJECTDIR}/_ext/585513329/rtos.o.d ${OBJECTDIR}/_ext/585513329/spi.o.d ${OBJECTDIR}/_ext/585513329/timer.o.d ${OBJECTDIR}/_ext/585513329/uart.o.d ${OBJECTDIR}/_ext/767653358/SST26VF032.o.d ${OBJECTDIR}/_ext/767653358/enc28j60.o.d ${OBJECTDIR}/_ext/767653358/mcp9800.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o.d ${OBJECTDIR}/_ext/2033261600/arp.o.d ${OBJECTDIR}/_ext/2033261600/icmp.o.d ${OBJECTDIR}/_ext/2033261600/ipv4.o.d ${OBJECTDIR}/_ext/2033261600/ntp.o.d ${OBJECTDIR}/_ext/2033261600/tcp.o.d ${OBJECTDIR}/_ext/2033261600/udp.o.d ${OBJECTDIR}/_ext/1201319415/packets.o.d ${OBJECTDIR}/_ext/1201319415/server.o.d ${OBJECTDIR}/_ext/1209926055/task.o.d ${OBJECTDIR}/_ext/1209926055/timer.o.d ${OBJECTDIR}/_ext/1145713235/rf_task.o.d ${OBJECTDIR}/_ext/1145713235/eth_task.o.d ${OBJECTDIR}/_ext/1709695401/executiontime.o.d ${OBJECTDIR}/_ext/1709695401/spiArbiter.o.d ${OBJECTDIR}/_ext/2125849857/ccbuf.o.d ${OBJECTDIR}/_ext/296506934/router.o.d ${OBJECTDIR}/_ext/681662318/main.o.d ${OBJECTDIR}/_ext/681662318/config.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o ${OBJECTDIR}/_ext/2033261600/arp.o ${OBJECTDIR}/_ext/2033261600/icmp.o ${OBJECTDIR}/_ext/2033261600/ipv4.o ${OBJECTDIR}/_ext/2033261600/ntp.o ${OBJECTDIR}/_ext/2033261600/tcp.o ${OBJECTDIR}/_ext/2033261600/udp.o ${OBJECTDIR}/_ext/1201319415/packets.o ${OBJECTDIR}/_ext/1201319415/server.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1145713235/eth_task.o ${OBJECTDIR}/_ext/1709695401/executiontime.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/296506934/router.o ${OBJECTDIR}/_ext/681662318/main.o ${OBJECTDIR}/_ext/681662318/config.o
+OBJECTFILES=${OBJECTDIR}/_ext/585513329/adc.o ${OBJECTDIR}/_ext/585513329/context.o ${OBJECTDIR}/_ext/585513329/i2c.o ${OBJECTDIR}/_ext/585513329/interrupt.o ${OBJECTDIR}/_ext/585513329/rtc.o ${OBJECTDIR}/_ext/585513329/rtos.o ${OBJECTDIR}/_ext/585513329/spi.o ${OBJECTDIR}/_ext/585513329/timer.o ${OBJECTDIR}/_ext/585513329/uart.o ${OBJECTDIR}/_ext/767653358/SST26VF032.o ${OBJECTDIR}/_ext/767653358/enc28j60.o ${OBJECTDIR}/_ext/767653358/mcp9800.o ${OBJECTDIR}/_ext/767653358/mrf49xa.o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o ${OBJECTDIR}/_ext/2033261600/arp.o ${OBJECTDIR}/_ext/2033261600/icmp.o ${OBJECTDIR}/_ext/2033261600/ipv4.o ${OBJECTDIR}/_ext/2033261600/ntp.o ${OBJECTDIR}/_ext/2033261600/tcp.o ${OBJECTDIR}/_ext/2033261600/udp.o ${OBJECTDIR}/_ext/1201319415/packets.o ${OBJECTDIR}/_ext/1201319415/server.o ${OBJECTDIR}/_ext/1209926055/task.o ${OBJECTDIR}/_ext/1209926055/timer.o ${OBJECTDIR}/_ext/1145713235/rf_task.o ${OBJECTDIR}/_ext/1145713235/eth_task.o ${OBJECTDIR}/_ext/1709695401/executiontime.o ${OBJECTDIR}/_ext/1709695401/spiArbiter.o ${OBJECTDIR}/_ext/2125849857/ccbuf.o ${OBJECTDIR}/_ext/296506934/router.o ${OBJECTDIR}/_ext/681662318/main.o ${OBJECTDIR}/_ext/681662318/config.o ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o
 
 # Source Files
-SOURCEFILES=../../src/bsp/pic24/adc.c ../../src/bsp/pic24/context.s ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/devices/SST26VF032.c ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_data.c ../../src/devices/mrf49xa_packet.c ../../src/devices/mrf49xa_spi_pic24.c ../../src/server/ipstack/arp.c ../../src/server/ipstack/icmp.c ../../src/server/ipstack/ipv4.c ../../src/server/ipstack/ntp.c ../../src/server/ipstack/tcp.c ../../src/server/ipstack/udp.c ../../src/rfstack/packets.c ../../src/rfstack/server.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/server/tasks/eth_task.c ../../src/server/utilities/executiontime.c ../../src/server/utilities/spiArbiter.c ../../src/utilities/ccbuf.c ../../src/server/webserver/router.c ../../src/server/main.c ../../src/server/config.c
+SOURCEFILES=../../src/bsp/pic24/adc.c ../../src/bsp/pic24/context.s ../../src/bsp/pic24/i2c.c ../../src/bsp/pic24/interrupt.c ../../src/bsp/pic24/rtc.c ../../src/bsp/pic24/rtos.c ../../src/bsp/pic24/spi.c ../../src/bsp/pic24/timer.c ../../src/bsp/pic24/uart.c ../../src/devices/SST26VF032.c ../../src/devices/enc28j60.c ../../src/devices/mcp9800.c ../../src/devices/mrf49xa.c ../../src/devices/mrf49xa_cmd.c ../../src/devices/mrf49xa_spi_pic24.c ../../src/server/ipstack/arp.c ../../src/server/ipstack/icmp.c ../../src/server/ipstack/ipv4.c ../../src/server/ipstack/ntp.c ../../src/server/ipstack/tcp.c ../../src/server/ipstack/udp.c ../../src/rfstack/packets.c ../../src/rfstack/server.c ../../src/server/rtos/task.c ../../src/server/rtos/timer.c ../../src/server/tasks/rf_task.c ../../src/server/tasks/eth_task.c ../../src/server/utilities/executiontime.c ../../src/server/utilities/spiArbiter.c ../../src/utilities/ccbuf.c ../../src/server/webserver/router.c ../../src/server/main.c ../../src/server/config.c ../../src/devices/mrf49xa_mac.c ../../src/devices/mrf49xa_phy.c
 
 
 CFLAGS=
@@ -72,7 +72,7 @@ LDLIBSOPTIONS=
 FIXDEPS=fixDeps
 
 .build-conf:  ${BUILD_SUBPROJECTS}
-	${MAKE} ${MAKE_OPTIONS} -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+	${MAKE}  -f nbproject/Makefile-default.mk dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=24FJ64GB004
 MP_LINKER_FILE_OPTION=,--script=p24FJ64GB004.gld
@@ -169,20 +169,6 @@ ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o: ../../src/devices/mrf49xa_cmd.c  nbpr
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_cmd.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_data.o: ../../src/devices/mrf49xa_data.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_data.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o: ../../src/devices/mrf49xa_packet.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_packet.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o: ../../src/devices/mrf49xa_spi_pic24.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
@@ -317,6 +303,20 @@ ${OBJECTDIR}/_ext/681662318/config.o: ../../src/server/config.c  nbproject/Makef
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/server/config.c  -o ${OBJECTDIR}/_ext/681662318/config.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/681662318/config.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/681662318/config.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o: ../../src/devices/mrf49xa_mac.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_mac.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o: ../../src/devices/mrf49xa_phy.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_phy.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/_ext/585513329/adc.o: ../../src/bsp/pic24/adc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/585513329 
@@ -408,20 +408,6 @@ ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o: ../../src/devices/mrf49xa_cmd.c  nbpr
 	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_cmd.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_cmd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_data.o: ../../src/devices/mrf49xa_data.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_data.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_data.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_data.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o: ../../src/devices/mrf49xa_packet.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d 
-	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_packet.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/767653358/mrf49xa_spi_pic24.o: ../../src/devices/mrf49xa_spi_pic24.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
@@ -556,6 +542,20 @@ ${OBJECTDIR}/_ext/681662318/config.o: ../../src/server/config.c  nbproject/Makef
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/server/config.c  -o ${OBJECTDIR}/_ext/681662318/config.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/681662318/config.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/681662318/config.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o: ../../src/devices/mrf49xa_mac.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_mac.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_mac.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o: ../../src/devices/mrf49xa_phy.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/767653358 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d 
+	@${RM} ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../src/devices/mrf49xa_phy.c  -o ${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d"        -g -omf=elf -Os -I"../../inc" -I"../../inc/server" -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/767653358/mrf49xa_phy.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 endif
 
 # ------------------------------------------------------------------------------------
@@ -595,7 +595,7 @@ else
 dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
 	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}      -mcpu=$(MP_PROCESSOR_OPTION)        -omf=elf -Wl,,--defsym=__MPLAB_BUILD=1,$(MP_LINKER_FILE_OPTION),--heap=0,--stack=16,--check-sections,--data-init,--pack-data,--handles,--isr,--gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--report-mem$(MP_EXTRA_LD_POST) 
-	${MP_CC_DIR}\\xc16-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -a  -omf=elf 
+	${MP_CC_DIR}/xc16-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/mrf49xa_pic24b.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -a  -omf=elf 
 	
 endif
 
@@ -615,7 +615,7 @@ endif
 # Enable dependency checking
 .dep.inc: .depcheck-impl
 
-DEPFILES=$(shell mplabwildcard ${POSSIBLE_DEPFILES})
+DEPFILES=$(shell "${PATH_TO_IDE_BIN}"mplabwildcard ${POSSIBLE_DEPFILES})
 ifneq (${DEPFILES},)
 include ${DEPFILES}
 endif
