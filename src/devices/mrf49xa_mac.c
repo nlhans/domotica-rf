@@ -24,7 +24,7 @@ bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, 
         {
             inst->txPacket.packet.dst = inst->txPacket.packet.src;
         }
-        inst->txPacket.packet.src = cfgRam.nodeId;
+        inst->txPacket.packet.src = inst->nodeId;
         inst->txPacket.packet.size += 5;
 
         inst->txPacket.state = PKT_READY_FOR_TX;
@@ -47,7 +47,7 @@ bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, 
         {
             packet->packet.dst = packet->packet.src;
         }
-        packet->packet.src = cfgRam.nodeId;
+        packet->packet.src = inst->nodeId;
         packet->packet.size += 5;
 
         packet->state = PKT_FREE;
@@ -159,7 +159,7 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
 
         // Is this packet for this node?
 #ifndef RF_NO_ID_FILTER
-        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == cfgRam.nodeId)
+        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == inst->nodeId)
         {
             packet->packet.size -= 5;
 

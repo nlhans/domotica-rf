@@ -5,9 +5,9 @@ Linker command line:
 --edf=/opt/microchip/xc8/v1.30/dat/en_msgs.txt -cs \
   -h+dist/default/production/mrf49xa_pic16.X.production.sym \
   --cmf=dist/default/production/mrf49xa_pic16.X.production.cmf -z \
-  -Q16LF1508 -o/tmp/cgthGuEmo \
+  -Q16LF1508 -o/tmp/cgtC2KSBU \
   -Mdist/default/production/mrf49xa_pic16.X.production.map -E1 -ver=XC8 \
-  -ASTACK=0209Bh-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
+  -ASTACK=0209Ch-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
   -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -AENTRY=00h-0FFhx16 \
   -ASTRING=00h-0FFhx16 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
   -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh -ABIGRAM=02000h-020EFh \
@@ -26,7 +26,7 @@ Linker command line:
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
-  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/cgt2FjBSk.obj \
+  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/cgtiqY99N.obj \
   dist/default/production/mrf49xa_pic16.X.production.obj 
 
 Object code version is 3.11
@@ -36,27 +36,29 @@ Machine type is 16LF1508
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/cgt2FjBSk.obj
+/tmp/cgtiqY99N.obj
                 end_init                             20       20        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        2    1000E       0
 dist/default/production/mrf49xa_pic16.X.production.obj
-                cinit                               801      801      7FF     1002       0
+                cinit                               806      806      7FA     100C       0
                 intentry                              4        4       1C        8       0
-                text77                              321      321        2      4BE       0
+                text77                              331      331        2      4BE       0
                 text74                               22       22      1F8        8       0
-                text50                              313      313        8      4BE       0
+                text50                              31C      31C        8      4BE       0
                 text47                              2D2      2D2       19      4BE       0
                 text44                              28F      28F       24      4BE       0
                 text29                              2EB      2EB       10      4BE       0
                 text28                              2B3      2B3       1F      4BE       0
+                text26                              313      313        9      4BE       0
                 text18                              25F      25F       30      4BE       0
                 text16                              2FB      2FB        D      4BE       0
+                text6                               324      324        7      4BE       0
                 text4                               308      308        B      4BE       0
                 cstackBANK0                          20       20       16       20       1
                 cstackCOMMON                         70       70        8       70       1
-                clrtext                             31B      31B        6      4BE       0
-                bssBANK1                             A0       A0       4B       A0       1
+                clrtext                             32B      32B        6      4BE       0
+                bssBANK1                             A0       A0       4C       A0       1
                 dataBANK0                            42       42        1       20       1
                 bssBANK0                             36       36        C       20       1
                 dataCOMMON                           78       78        1       70       1
@@ -69,20 +71,22 @@ TOTAL           Name                               Link     Load   Length     Sp
 
         CLASS   CODE           
                 end_init                             20       20        2         0
-                cinit                               801      801      7FF         0
+                cinit                               806      806      7FA         0
                 intentry                              4        4       1C         0
                 reset_vec                             0        0        2         0
-                text77                              321      321        2         0
+                text77                              331      331        2         0
                 text74                               22       22      1F8         0
-                text50                              313      313        8         0
+                text50                              31C      31C        8         0
                 text47                              2D2      2D2       19         0
                 text44                              28F      28F       24         0
                 text29                              2EB      2EB       10         0
                 text28                              2B3      2B3       1F         0
+                text26                              313      313        9         0
                 text18                              25F      25F       30         0
                 text16                              2FB      2FB        D         0
+                text6                               324      324        7         0
                 text4                               308      308        B         0
-                clrtext                             31B      31B        6         0
+                clrtext                             32B      32B        6         0
 
         CLASS   STRCODE        
 
@@ -101,7 +105,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 bssBANK0                             36       36        C         1
 
         CLASS   BANK1          
-                bssBANK1                             A0       A0       4B         1
+                bssBANK1                             A0       A0       4C         1
 
         CLASS   BANK2          
 
@@ -249,10 +253,10 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 intentry                       000004  000216  00021A         8       0  CODE        2
                 cstackBANK0                    000020  000023  000043        20       1  BANK0       1
                 cstackCOMMON                   000070  000009  000079        70       1  COMMON      1
-                bssBANK1                       0000A0  00004B  0000EB        A0       1  BANK1       1
+                bssBANK1                       0000A0  00004C  0000EC        A0       1  BANK1       1
                 strings                        00021A  000045  00025F       434       0  STRING      2
-                text18                         00025F  0000C4  000323       4BE       0  CODE        2
-                cinit                          000801  0007FF  001000      1002       0  CODE        2
+                text18                         00025F  0000D4  000333       4BE       0  CODE        2
+                cinit                          000806  0007FA  001000      100C       0  CODE        2
                 config                         008007  000002  008009     1000E       0  CONFIG      2
 
 
@@ -260,19 +264,19 @@ UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
         BANK0            00043-0006F              2D           1
-        BANK1            000EB-000EF               5           1
+        BANK1            000EC-000EF               4           1
         BANK2            00120-0016F              50           1
         BIGRAM           02000-020EF              F0           1
         CODE             00002-00003               2           2
-                         00323-00800             4DD
+                         00333-00805             4CD
         COMMON           00079-0007D               5           1
         CONST            00002-00003               2           2
-                         00323-00800             100
+                         00333-00805             100
         ENTRY            00002-00003               2           2
-                         00323-00800             100
+                         00333-00805             100
         IDLOC            08000-08003               4           2
         RAM              00043-0006F              2D           1
-                         000EB-000EF               5
+                         000EC-000EF               4
                          00120-0016F              50
         SFR0             00000-0001F              20           1
         SFR1             00080-0009F              20           1
@@ -306,11 +310,11 @@ UNUSED ADDRESS RANGES
         SFR7             00380-003EF              70           1
         SFR8             00400-0046F              70           1
         SFR9             00480-004EF              70           1
-        STACK            0209B-020EF              55           1
+        STACK            0209C-020EF              54           1
         STRCODE          00002-00003               2           2
-                         00323-00800             4DE
+                         00333-00805             4D3
         STRING           00002-00003               2           2
-                         00323-00800             100
+                         00333-00805             100
 
                                   Symbol Table
 
@@ -354,14 +358,15 @@ Mrf49xaTxPacket@inst                cstackBANK0  00027
 Mrf49xaTxPacket@needAck             cstackBANK0  00022
 Mrf49xaTxPacket@packet              cstackBANK0  00020
 Mrf49xaTxPacket@response            cstackBANK0  00021
-PL10                                cinit        00FCA
-PL12                                cinit        00FD7
+PL10                                cinit        00FCC
+PL12                                cinit        00FD9
 PL14                                text74       00211
-PL16                                cinit        00FE3
-PL18                                cinit        00FE9
-PL20                                cinit        00FEF
-PL22                                cinit        00FF4
-PL8                                 cinit        00FAA
+PL16                                cinit        00FE5
+PL18                                cinit        00FEB
+PL20                                cinit        00FF1
+PL22                                cinit        00FF6
+PL24                                cinit        00FFB
+PL8                                 cinit        00FAC
 RfSendPowerState@inst               cstackBANK0  0002A
 RfSendPowerState@packet             cstackBANK0  0002B
 RfSendPowerState@s                  cstackBANK0  00028
@@ -385,75 +390,75 @@ _ANSELA                             (abs)        0018C
 _ANSELB                             (abs)        0018D
 _ANSELC                             (abs)        0018E
 _ANSELCbits                         (abs)        0018E
-_AdcChSelect                        cinit        00E7F
-_AdcDeinit                          cinit        00FF9
+_AdcChSelect                        cinit        00E80
+_AdcDeinit                          text6        00324
 _AdcGetResult                       text11       00000
-_AdcGo                              cinit        00E79
+_AdcGo                              cinit        00E7A
 _AdcInit                            text4        00308
-_AdcIsBusy                          cinit        00E7B
-_AdcSample                          cinit        00E51
-_CfgGetSizeByType                   cinit        00F94
-_CfgLoad                            cinit        00B27
-_CfgSave                            text50       00313
-_ExtIntDeinit                       text77       00321
-_ExtIntInit                         cinit        0084B
+_AdcIsBusy                          cinit        00E7C
+_AdcSample                          cinit        00E52
+_CfgGetSizeByType                   cinit        00F9A
+_CfgLoad                            cinit        00B2F
+_CfgSave                            text50       0031C
+_ExtIntDeinit                       text77       00331
+_ExtIntInit                         cinit        00850
 _FVRCON                             (abs)        00117
-_HandlePacket                       cinit        00B2F
+_HandlePacket                       cinit        00B37
 _INTCONbits                         (abs)        0000B
 _LATAbits                           (abs)        0010C
 _LATBbits                           (abs)        0010D
 _LATCbits                           (abs)        0010E
-_Mcp9800Read                        cinit        00A1E
-_Mcp9800Start                       cinit        00A4F
-_Mrf49RxByte                        cinit        00D32
-_Mrf49RxCmd                         cinit        00E0C
-_Mrf49RxSts                         cinit        00DBD
-_Mrf49SpiRx                         cinit        00DC8
-_Mrf49SpiTx                         cinit        00D62
-_Mrf49TxByte                        cinit        00D2D
-_Mrf49TxCmd                         cinit        00D59
-_Mrf49xaAllocPacket                 cinit        00ED7
-_Mrf49xaFreePacket                  cinit        00B22
-_Mrf49xaInit                        cinit        0098F
-_Mrf49xaModeRx                      cinit        00D34
+_Mcp9800Read                        cinit        00A26
+_Mcp9800Start                       cinit        00A57
+_Mrf49RxByte                        cinit        00D33
+_Mrf49RxCmd                         cinit        00E0D
+_Mrf49RxSts                         cinit        00DBE
+_Mrf49SpiRx                         cinit        00DC9
+_Mrf49SpiTx                         cinit        00D63
+_Mrf49TxByte                        cinit        00D2E
+_Mrf49TxCmd                         cinit        00D5A
+_Mrf49xaAllocPacket                 cinit        00ED9
+_Mrf49xaFreePacket                  cinit        00B2A
+_Mrf49xaInit                        cinit        00997
+_Mrf49xaModeRx                      cinit        00D35
 _Mrf49xaModeSleep                   text18       0026D
-_Mrf49xaModeTx                      cinit        00C21
-_Mrf49xaNeedsReset                  cinit        00B16
+_Mrf49xaModeTx                      cinit        00C22
+_Mrf49xaNeedsReset                  cinit        00B1E
 _Mrf49xaPacketPending               text29       002EB
 _Mrf49xaReboot                      text16       00306
 _Mrf49xaRxPacket                    text28       002B3
-_Mrf49xaServe                       cinit        00C45
+_Mrf49xaServe                       cinit        00C46
 _Mrf49xaShutdown                    text18       0026C
-_Mrf49xaTick                        cinit        008BC
-_Mrf49xaTxAck                       cinit        00BAA
-_Mrf49xaTxPacket                    cinit        00EF4
+_Mrf49xaTick                        cinit        008C2
+_Mrf49xaTxAck                       cinit        00BB0
+_Mrf49xaTxPacket                    cinit        00EF6
 _OPTION_REGbits                     (abs)        00095
 _OSCCON                             (abs)        00099
 _PORTAbits                          (abs)        0000C
 _PORTBbits                          (abs)        0000D
 _PORTCbits                          (abs)        0000E
-_PwrAdcInit                         cinit        00C14
-_PwrAdcSleep                        cinit        00E86
-_PwrAdcWake                         cinit        00E8B
-_PwrI2cInit                         cinit        00817
-_PwrI2cSleep                        cinit        00B19
-_PwrI2cWake                         cinit        00C1D
-_PwrRfInit                          cinit        0082A
+_PwrAdcInit                         text26       00313
+_PwrAdcSleep                        cinit        00E87
+_PwrAdcWake                         cinit        00E8D
+_PwrI2cInit                         cinit        0081C
+_PwrI2cSleep                        cinit        00B21
+_PwrI2cWake                         cinit        00C1A
+_PwrRfInit                          cinit        0082F
 _PwrRfSleep                         text18       0025F
 _PwrRfWake                          text16       002FB
-_PwrSensorInit                      cinit        00FA6
-_PwrSensorSleep                     cinit        00B1F
-_PwrSensorWake                      cinit        00C1E
-_RfSendPowerState                   cinit        00E16
-_RfSendSampleWeatherNode            cinit        00E91
-_Sleepy                             cinit        009EE
-_SoftI2cInit                        cinit        0081F
-_SoftI2cNop                         cinit        00AF3
-_SoftI2cRepeatedStart               cinit        00A09
-_SoftI2cRxByte                      cinit        00ABA
-_SoftI2cStart                       cinit        00AFA
-_SoftI2cStop                        cinit        00B07
-_SoftI2cTxByte                      cinit        00A8C
+_PwrSensorInit                      cinit        00C1B
+_PwrSensorSleep                     cinit        00B27
+_PwrSensorWake                      cinit        00C1F
+_RfSendPowerState                   cinit        00E17
+_RfSendSampleWeatherNode            cinit        00E93
+_Sleepy                             cinit        009F6
+_SoftI2cInit                        cinit        00824
+_SoftI2cNop                         cinit        00AFB
+_SoftI2cRepeatedStart               cinit        00A11
+_SoftI2cRxByte                      cinit        00AC2
+_SoftI2cStart                       cinit        00B02
+_SoftI2cStop                        cinit        00B0F
+_SoftI2cTxByte                      cinit        00A94
 _TRISAbits                          (abs)        0008C
 _TRISBbits                          (abs)        0008D
 _TRISCbits                          (abs)        0008E
@@ -602,7 +607,7 @@ __Lbank9                            bank9        00000
 __Lbigram                           bigram       00000
 __LbssBANK0                         bssBANK0     00000
 __LbssBANK1                         bssBANK1     00000
-__Lcinit                            cinit        00801
+__Lcinit                            cinit        00806
 __Lclrtext                          clrtext      00000
 __Lcode                             code         00000
 __Lcommon                           common       00000
@@ -660,88 +665,89 @@ __Lstack                            stack        00000
 __Lstrings                          strings      00000
 __Ltext                             text         00000
 __S0                                (abs)        08009
-__S1                                (abs)        000EB
+__S1                                (abs)        000EC
 __S2                                (abs)        00000
 ___int_sp                           stack        00000
 ___latbits                          (abs)        00001
 ___sp                               stack        00000
-__end_ofPL10                        cinit        00FD7
-__end_ofPL12                        cinit        00FE3
+__end_ofPL10                        cinit        00FD9
+__end_ofPL12                        cinit        00FE5
 __end_ofPL14                        text74       0021A
-__end_ofPL16                        cinit        00FE9
-__end_ofPL18                        cinit        00FEF
-__end_ofPL20                        cinit        00FF4
-__end_ofPL22                        cinit        00FF9
-__end_ofPL8                         cinit        00FCA
-__end_of_AdcChSelect                cinit        00E86
-__end_of_AdcDeinit                  cinit        01000
+__end_ofPL16                        cinit        00FEB
+__end_ofPL18                        cinit        00FF1
+__end_ofPL20                        cinit        00FF6
+__end_ofPL22                        cinit        00FFB
+__end_ofPL24                        cinit        01000
+__end_ofPL8                         cinit        00FCC
+__end_of_AdcChSelect                cinit        00E87
+__end_of_AdcDeinit                  text6        0032B
 __end_of_AdcGetResult               text11       00000
-__end_of_AdcGo                      cinit        00E7B
+__end_of_AdcGo                      cinit        00E7C
 __end_of_AdcInit                    text4        00313
-__end_of_AdcIsBusy                  cinit        00E7F
-__end_of_AdcSample                  cinit        00E79
-__end_of_CfgGetSizeByType           cinit        00FA6
-__end_of_CfgLoad                    cinit        00B2F
-__end_of_CfgSave                    text50       0031B
-__end_of_ExtIntDeinit               text77       00323
-__end_of_ExtIntInit                 cinit        00851
-__end_of_HandlePacket               cinit        00BAA
-__end_of_Mcp9800Read                cinit        00A33
-__end_of_Mcp9800Start               cinit        00A68
-__end_of_Mrf49RxByte                cinit        00D34
-__end_of_Mrf49RxCmd                 cinit        00E16
-__end_of_Mrf49RxSts                 cinit        00DC8
-__end_of_Mrf49SpiRx                 cinit        00E0C
-__end_of_Mrf49SpiTx                 cinit        00DBD
-__end_of_Mrf49TxByte                cinit        00D32
-__end_of_Mrf49TxCmd                 cinit        00D62
-__end_of_Mrf49xaAllocPacket         cinit        00EF4
-__end_of_Mrf49xaFreePacket          cinit        00B27
-__end_of_Mrf49xaInit                cinit        009EE
-__end_of_Mrf49xaModeRx              cinit        00D59
+__end_of_AdcIsBusy                  cinit        00E80
+__end_of_AdcSample                  cinit        00E7A
+__end_of_CfgGetSizeByType           cinit        00FAC
+__end_of_CfgLoad                    cinit        00B37
+__end_of_CfgSave                    text50       00324
+__end_of_ExtIntDeinit               text77       00333
+__end_of_ExtIntInit                 cinit        00856
+__end_of_HandlePacket               cinit        00BB0
+__end_of_Mcp9800Read                cinit        00A3B
+__end_of_Mcp9800Start               cinit        00A70
+__end_of_Mrf49RxByte                cinit        00D35
+__end_of_Mrf49RxCmd                 cinit        00E17
+__end_of_Mrf49RxSts                 cinit        00DC9
+__end_of_Mrf49SpiRx                 cinit        00E0D
+__end_of_Mrf49SpiTx                 cinit        00DBE
+__end_of_Mrf49TxByte                cinit        00D33
+__end_of_Mrf49TxCmd                 cinit        00D63
+__end_of_Mrf49xaAllocPacket         cinit        00EF6
+__end_of_Mrf49xaFreePacket          cinit        00B2F
+__end_of_Mrf49xaInit                cinit        009F6
+__end_of_Mrf49xaModeRx              cinit        00D5A
 __end_of_Mrf49xaModeSleep           text18       0028F
-__end_of_Mrf49xaModeTx              cinit        00C45
-__end_of_Mrf49xaNeedsReset          cinit        00B19
+__end_of_Mrf49xaModeTx              cinit        00C46
+__end_of_Mrf49xaNeedsReset          cinit        00B21
 __end_of_Mrf49xaPacketPending       text29       002FB
 __end_of_Mrf49xaReboot              text16       00308
 __end_of_Mrf49xaRxPacket            text28       002D2
-__end_of_Mrf49xaServe               cinit        00D2D
+__end_of_Mrf49xaServe               cinit        00D2E
 __end_of_Mrf49xaShutdown            text18       0026D
-__end_of_Mrf49xaTick                cinit        0098F
-__end_of_Mrf49xaTxAck               cinit        00BCD
-__end_of_Mrf49xaTxPacket            cinit        00F62
-__end_of_PwrAdcInit                 cinit        00C1D
-__end_of_PwrAdcSleep                cinit        00E8B
-__end_of_PwrAdcWake                 cinit        00E91
-__end_of_PwrI2cInit                 cinit        0081F
-__end_of_PwrI2cSleep                cinit        00B1F
-__end_of_PwrI2cWake                 cinit        00C1E
-__end_of_PwrRfInit                  cinit        0084B
+__end_of_Mrf49xaTick                cinit        00997
+__end_of_Mrf49xaTxAck               cinit        00BD3
+__end_of_Mrf49xaTxPacket            cinit        00F68
+__end_of_PwrAdcInit                 text26       0031C
+__end_of_PwrAdcSleep                cinit        00E8D
+__end_of_PwrAdcWake                 cinit        00E93
+__end_of_PwrI2cInit                 cinit        00824
+__end_of_PwrI2cSleep                cinit        00B27
+__end_of_PwrI2cWake                 cinit        00C1B
+__end_of_PwrRfInit                  cinit        00850
 __end_of_PwrRfSleep                 text18       0026C
 __end_of_PwrRfWake                  text16       00306
-__end_of_PwrSensorInit              cinit        00FAA
-__end_of_PwrSensorSleep             cinit        00B22
-__end_of_PwrSensorWake              cinit        00C21
-__end_of_RfSendPowerState           cinit        00E51
-__end_of_RfSendSampleWeatherNode    cinit        00ED7
-__end_of_Sleepy                     cinit        00A09
-__end_of_SoftI2cInit                cinit        0082A
-__end_of_SoftI2cNop                 cinit        00AFA
-__end_of_SoftI2cRepeatedStart       cinit        00A1E
-__end_of_SoftI2cRxByte              cinit        00AF3
-__end_of_SoftI2cStart               cinit        00B07
-__end_of_SoftI2cStop                cinit        00B16
-__end_of_SoftI2cTxByte              cinit        00ABA
-__end_of__initialization            cinit        00815
+__end_of_PwrSensorInit              cinit        00C1F
+__end_of_PwrSensorSleep             cinit        00B2A
+__end_of_PwrSensorWake              cinit        00C22
+__end_of_RfSendPowerState           cinit        00E52
+__end_of_RfSendSampleWeatherNode    cinit        00ED9
+__end_of_Sleepy                     cinit        00A11
+__end_of_SoftI2cInit                cinit        0082F
+__end_of_SoftI2cNop                 cinit        00B02
+__end_of_SoftI2cRepeatedStart       cinit        00A26
+__end_of_SoftI2cRxByte              cinit        00AFB
+__end_of_SoftI2cStart               cinit        00B0F
+__end_of_SoftI2cStop                cinit        00B1E
+__end_of_SoftI2cTxByte              cinit        00AC2
+__end_of__initialization            cinit        0081A
 __end_of__stringtab                 strings      0021B
-__end_of_eepromRxBytes              cinit        00A8C
-__end_of_eepromTxBytes              cinit        00A4F
+__end_of_eepromRxBytes              cinit        00A94
+__end_of_eepromTxBytes              cinit        00A57
 __end_of_extInt                     intentry     00020
-__end_of_handleCfgCmd               cinit        00BF8
-__end_of_handleCfgRead              cinit        00F94
-__end_of_handleCfgWrite             cinit        00C14
+__end_of_handleCfgCmd               cinit        00BFE
+__end_of_handleCfgRead              cinit        00F9A
+__end_of_handleCfgWrite             cinit        00C1A
 __end_of_handleFwCmd                text44       002B3
-__end_of_main                       cinit        008BC
+__end_of_main                       cinit        008C2
 __end_of_memcpy                     text47       002EB
 __end_of_mrfRegset_Init             strings      0023F
 __end_of_mrfRegset_InitCnt          strings      0021C
@@ -762,7 +768,7 @@ __end_ofi1_Mrf49TxCmd               text74       00151
 __end_ofi1_Mrf49xaModeRx            text74       00144
 __end_ofi1_Mrf49xaNeedsReset        text74       00147
 __end_ofi1_Mrf49xaServe             text74       00116
-__initialization                    cinit        00801
+__initialization                    cinit        00806
 __pbssBANK0                         bssBANK0     00036
 __pbssBANK1                         bssBANK1     000A0
 __pcstackBANK0                      cstackBANK0  00020
@@ -772,74 +778,74 @@ __pdataCOMMON                       dataCOMMON   00078
 __pidataBANK0                       idataBANK0   00000
 __pidataCOMMON                      idataCOMMON  00000
 __pintentry                         intentry     00004
-__pmaintext                         cinit        00851
+__pmaintext                         cinit        00856
 __pstrings                          strings      0021A
-__ptext1                            cinit        00E91
-__ptext10                           cinit        00E79
+__ptext1                            cinit        00E93
+__ptext10                           cinit        00E7A
 __ptext11                           text11       00000
-__ptext12                           cinit        00E7F
-__ptext13                           cinit        00C1E
-__ptext14                           cinit        00B1F
-__ptext15                           cinit        00FA6
+__ptext12                           cinit        00E80
+__ptext13                           cinit        00C1F
+__ptext14                           cinit        00B27
+__ptext15                           cinit        00C1B
 __ptext16                           text16       002FB
 __ptext17                           text16       00306
 __ptext18                           text18       0025F
 __ptext19                           text18       0026C
-__ptext2                            cinit        00E16
+__ptext2                            cinit        00E17
 __ptext20                           text18       0026D
-__ptext21                           cinit        0082A
-__ptext22                           cinit        00C1D
-__ptext23                           cinit        00B19
-__ptext24                           cinit        00817
-__ptext25                           cinit        0081F
-__ptext26                           cinit        00C14
-__ptext27                           cinit        008BC
+__ptext21                           cinit        0082F
+__ptext22                           cinit        00C1A
+__ptext23                           cinit        00B21
+__ptext24                           cinit        0081C
+__ptext25                           cinit        00824
+__ptext26                           text26       00313
+__ptext27                           cinit        008C2
 __ptext28                           text28       002B3
 __ptext29                           text29       002EB
-__ptext3                            cinit        00E8B
-__ptext30                           cinit        00C21
-__ptext31                           cinit        0098F
-__ptext32                           cinit        009EE
-__ptext33                           cinit        00C45
-__ptext34                           cinit        00B16
-__ptext35                           cinit        00D34
-__ptext36                           cinit        00D2D
-__ptext37                           cinit        00D59
-__ptext38                           cinit        00DBD
-__ptext39                           cinit        00D32
+__ptext3                            cinit        00E8D
+__ptext30                           cinit        00C22
+__ptext31                           cinit        00997
+__ptext32                           cinit        009F6
+__ptext33                           cinit        00C46
+__ptext34                           cinit        00B1E
+__ptext35                           cinit        00D35
+__ptext36                           cinit        00D2E
+__ptext37                           cinit        00D5A
+__ptext38                           cinit        00DBE
+__ptext39                           cinit        00D33
 __ptext4                            text4        00308
-__ptext40                           cinit        00E0C
-__ptext41                           cinit        00D62
-__ptext42                           cinit        00DC8
-__ptext43                           cinit        00B2F
+__ptext40                           cinit        00E0D
+__ptext41                           cinit        00D63
+__ptext42                           cinit        00DC9
+__ptext43                           cinit        00B37
 __ptext44                           text44       0028F
-__ptext45                           cinit        00BF8
-__ptext46                           cinit        00F62
+__ptext45                           cinit        00BFE
+__ptext46                           cinit        00F68
 __ptext47                           text47       002D2
-__ptext48                           cinit        00F94
-__ptext49                           cinit        00BCD
-__ptext5                            cinit        00E86
-__ptext50                           text50       00313
-__ptext51                           cinit        00A33
-__ptext52                           cinit        00B27
-__ptext53                           cinit        00A68
-__ptext54                           cinit        00A09
-__ptext55                           cinit        00BAA
-__ptext56                           cinit        00EF4
-__ptext57                           cinit        00B22
-__ptext58                           cinit        0084B
-__ptext59                           cinit        00A4F
-__ptext6                            cinit        00FF9
-__ptext60                           cinit        00A1E
-__ptext61                           cinit        00A8C
-__ptext62                           cinit        00B07
-__ptext63                           cinit        00AFA
-__ptext64                           cinit        00ABA
-__ptext65                           cinit        00AF3
+__ptext48                           cinit        00F9A
+__ptext49                           cinit        00BD3
+__ptext5                            cinit        00E87
+__ptext50                           text50       0031C
+__ptext51                           cinit        00A3B
+__ptext52                           cinit        00B2F
+__ptext53                           cinit        00A70
+__ptext54                           cinit        00A11
+__ptext55                           cinit        00BB0
+__ptext56                           cinit        00EF6
+__ptext57                           cinit        00B2A
+__ptext58                           cinit        00850
+__ptext59                           cinit        00A57
+__ptext6                            text6        00324
+__ptext60                           cinit        00A26
+__ptext61                           cinit        00A94
+__ptext62                           cinit        00B0F
+__ptext63                           cinit        00B02
+__ptext64                           cinit        00AC2
+__ptext65                           cinit        00AFB
 __ptext67                           text74       0002E
 __ptext68                           text74       00144
 __ptext69                           text74       0011E
-__ptext7                            cinit        00ED7
+__ptext7                            cinit        00ED9
 __ptext70                           text74       00116
 __ptext71                           text74       00147
 __ptext72                           text74       001C1
@@ -847,9 +853,9 @@ __ptext73                           text74       0011B
 __ptext74                           text74       00022
 __ptext75                           text74       00151
 __ptext76                           text74       001CE
-__ptext77                           text77       00321
-__ptext8                            cinit        00E51
-__ptext9                            cinit        00E7B
+__ptext77                           text77       00331
+__ptext8                            cinit        00E52
+__ptext9                            cinit        00E7C
 __size_of_AdcChSelect               (abs)        00000
 __size_of_AdcDeinit                 (abs)        00000
 __size_of_AdcGetResult              (abs)        00000
@@ -931,16 +937,16 @@ __size_ofi1_Mrf49xaServe            (abs)        00000
 __stringtab                         strings      0021A
 _cfgRam                             bssBANK0     00037
 _coldBoot                           dataBANK0    00042
-_eepromRxBytes                      cinit        00A68
-_eepromTxBytes                      cinit        00A33
+_eepromRxBytes                      cinit        00A70
+_eepromTxBytes                      cinit        00A3B
 _extInt                             intentry     00004
-_handleCfgCmd                       cinit        00BCD
-_handleCfgRead                      cinit        00F62
-_handleCfgWrite                     cinit        00BF8
+_handleCfgCmd                       cinit        00BD3
+_handleCfgRead                      cinit        00F68
+_handleCfgWrite                     cinit        00BFE
 _handleFwCmd                        text44       0028F
 _inlined$_AdcGetResult              (abs)        00001
 _macPtr                             dataCOMMON   00078
-_main                               cinit        00851
+_main                               cinit        00856
 _memcpy                             text47       002D2
 _mrf49Status                        bssBANK0     00040
 _mrfRegset_Init                     strings      0021F
@@ -955,14 +961,14 @@ _parameters                         strings      00259
 _powerStatusTicker                  bssBANK0     00036
 _rfTrcvStatus                       bssBANK1     000A0
 btemp                               (abs)        0007E
-clear_ram0                          clrtext      0031B
+clear_ram0                          clrtext      0032B
 eepromRxBytes@address               cstackBANK0  00024
 eepromRxBytes@data                  cstackBANK0  00026
 eepromRxBytes@size                  cstackBANK0  00027
 eepromTxBytes@address               cstackBANK0  00024
 eepromTxBytes@data                  cstackBANK0  00026
 eepromTxBytes@size                  cstackBANK0  00027
-end_of_initialization               cinit        00815
+end_of_initialization               cinit        0081A
 extInt@ofw                          cstackCOMMON 00077
 handleCfgCmd@packet                 cstackBANK0  00028
 handleCfgRead@index                 cstackBANK0  00027
@@ -1011,9 +1017,9 @@ memcpy@s                            cstackBANK0  00024
 memcpy@s1                           cstackBANK0  00020
 reset_vec                           reset_vec    00000
 stackhi                             (abs)        020EF
-stacklo                             (abs)        0209B
+stacklo                             (abs)        0209C
 start                               init         00020
-start_initialization                cinit        00801
+start_initialization                cinit        00806
 ttemp                               (abs)        0007E
 ttemp0                              (abs)        0007E
 ttemp1                              (abs)        00081
@@ -1087,14 +1093,14 @@ Total ram usage:        4 bytes
 		line 34 in file "../../../src/rfstack/packets.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   temperature     2    8[BANK0 ] unsigned int 
   humidity        2   10[BANK0 ] unsigned int 
  Auto vars:     Size  Location     Type
   inst            1   12[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   packet          1   13[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1124,13 +1130,13 @@ Total ram usage:        6 bytes
 		line 14 in file "../../../src/rfstack/packets.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1   10[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   s               2    8[BANK0 ] unsigned int 
   packet          1   11[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1285,10 +1291,10 @@ Total ram usage:        0 bytes
 		line 109 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Return value:  Size  Location     Type
                   1    wreg      PTR struct rfTrcvPacket_
  Registers used:
@@ -1896,13 +1902,13 @@ Total ram usage:        0 bytes
 		line 130 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1   17[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   timeout         1   15[BANK0 ] unsigned char 
   packet          1   16[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1940,10 +1946,10 @@ Total ram usage:        4 bytes
 		line 92 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Return value:  Size  Location     Type
                   1    wreg      PTR struct rfTrcvPacket_
  Registers used:
@@ -1972,10 +1978,10 @@ Total ram usage:        1 bytes
 		line 8 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Return value:  Size  Location     Type
                   1    wreg      unsigned char 
  Registers used:
@@ -2421,12 +2427,12 @@ Total ram usage:        1 bytes
 		line 150 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1   13[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   response        1   12[BANK0 ] struct .
  Return value:  Size  Location     Type
 		None               void
@@ -2462,10 +2468,10 @@ Total ram usage:        4 bytes
 		line 8 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2494,10 +2500,10 @@ Total ram usage:        1 bytes
 		line 115 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
   index           1    7[BANK0 ] unsigned char 
   nrOfBytes       1    6[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
@@ -2529,10 +2535,10 @@ Total ram usage:        3 bytes
 		line 102 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
   index           1    7[BANK0 ] unsigned char 
   nrOfBytes       1    6[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
@@ -2640,10 +2646,10 @@ Total ram usage:        1 bytes
 		line 124 in file "../../../src/rfstack/client.c"
  Parameters:    Size  Location     Type
   packet          1    wreg     PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -2838,12 +2844,12 @@ Total ram usage:        0 bytes
 		line 75 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   packet          1    8[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1    9[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Return value:  Size  Location     Type
                   1    wreg      unsigned char 
  Registers used:
@@ -2872,14 +2878,14 @@ Total ram usage:        2 bytes
 		line 17 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
   response        1    1[BANK0 ] unsigned char 
   needAck         1    2[BANK0 ] unsigned char 
  Auto vars:     Size  Location     Type
   inst            1    7[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   i               1    6[BANK0 ] unsigned char 
   crc             1    5[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
@@ -2913,12 +2919,12 @@ Total ram usage:        8 bytes
 		line 87 in file "../../../src/devices/mrf49xa_mac.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
   packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
-		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(75), 
+		 -> rfTrcvStatus.rxPacket(48), NULL(0), rfTrcvStatus(76), 
  Auto vars:     Size  Location     Type
   inst            1    1[BANK0 ] PTR struct rfTrcvStatus_
-		 -> rfTrcvStatus(75), 
+		 -> rfTrcvStatus(76), 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -3585,34 +3591,34 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 ../../../src/rfstack/client.c
-		_handleCfgCmd  		CODE           	0BCD	0000	43
+		_handleCfgCmd  		CODE           	0BD3	0000	43
 		_handleFwCmd   		CODE           	028F	0000	36
-		_handleCfgRead 		CODE           	0F62	0000	50
-		_handleCfgWrite		CODE           	0BF8	0000	28
-		_HandlePacket  		CODE           	0B2F	0000	123
+		_handleCfgRead 		CODE           	0F68	0000	50
+		_handleCfgWrite		CODE           	0BFE	0000	28
+		_HandlePacket  		CODE           	0B37	0000	121
 
-../../../src/rfstack/client.c estimated size: 280
+../../../src/rfstack/client.c estimated size: 278
 
 ../../../src/rfstack/packets.c
-		_RfSendSampleWe		CODE           	0E91	0000	70
-		_RfSendPowerSta		CODE           	0E16	0000	59
+		_RfSendSampleWe		CODE           	0E93	0000	70
+		_RfSendPowerSta		CODE           	0E17	0000	59
 
 ../../../src/rfstack/packets.c estimated size: 129
 
 ../../../src/devices/mrf49xa_spi_pic16.c
-		_Mrf49SpiRx    		CODE           	0DC8	0000	68
-		_Mrf49SpiTx    		CODE           	0D62	0000	91
+		_Mrf49SpiRx    		CODE           	0DC9	0000	68
+		_Mrf49SpiTx    		CODE           	0D63	0000	91
 
 ../../../src/devices/mrf49xa_spi_pic16.c estimated size: 159
 
 ../../../src/bsp/pic16/adc16.c
 		_AdcGetResult  		CODE           	0000	0000	0
-		_AdcDeinit     		CODE           	0FF9	0000	7
+		_AdcDeinit     		CODE           	0324	0000	7
 		_AdcInit       		CODE           	0308	0000	11
-		_AdcGo         		CODE           	0E79	0000	2
-		_AdcIsBusy     		CODE           	0E7B	0000	4
-		_AdcSample     		CODE           	0E51	0000	40
-		_AdcChSelect   		CODE           	0E7F	0000	7
+		_AdcGo         		CODE           	0E7A	0000	2
+		_AdcIsBusy     		CODE           	0E7C	0000	4
+		_AdcSample     		CODE           	0E52	0000	40
+		_AdcChSelect   		CODE           	0E80	0000	7
 
 ../../../src/bsp/pic16/adc16.c estimated size: 71
 
@@ -3622,30 +3628,31 @@ Module		Function		Class		Link	Load	Size
 /opt/microchip/xc8/v1.30/sources/common/memcpy.c estimated size: 25
 
 ../../../src/bsp/softI2c.c
-		_SoftI2cNop    		CODE           	0AF3	0000	7
-		_SoftI2cInit   		CODE           	081F	0000	11
-		_SoftI2cStop   		CODE           	0B07	0000	15
-		_SoftI2cStart  		CODE           	0AFA	0000	13
-		_SoftI2cRxByte 		CODE           	0ABA	0000	57
-		_SoftI2cTxByte 		CODE           	0A8C	0000	46
-		_SoftI2cRepeate		CODE           	0A09	0000	21
+		_SoftI2cNop    		CODE           	0AFB	0000	7
+		_SoftI2cInit   		CODE           	0824	0000	11
+		_SoftI2cStop   		CODE           	0B0F	0000	15
+		_SoftI2cStart  		CODE           	0B02	0000	13
+		_SoftI2cRxByte 		CODE           	0AC2	0000	57
+		_SoftI2cTxByte 		CODE           	0A94	0000	46
+		_SoftI2cRepeate		CODE           	0A11	0000	21
 
 ../../../src/bsp/softI2c.c estimated size: 170
 
 shared
-		PL12           		CODE           	0FD7	0000	12
-		PL8            		CODE           	0FAA	0000	32
+		PL12           		CODE           	0FD9	0000	12
+		PL8            		CODE           	0FAC	0000	32
 		i1_Mrf49xaModeR		CODE           	011E	0000	38
-		PL22           		CODE           	0FF4	0000	5
+		PL22           		CODE           	0FF6	0000	5
 		PL14           		CODE           	0211	0000	9
+		PL24           		CODE           	0FFB	0000	5
 		_mrfRegset_Rx  		STRING         	023F	0000	12
 		_mrfRegset_Tx  		STRING         	024B	0000	8
 		__stringtab    		STRING         	021A	0000	1
-		PL16           		CODE           	0FE3	0000	6
-		PL18           		CODE           	0FE9	0000	6
+		PL16           		CODE           	0FE5	0000	6
+		PL18           		CODE           	0FEB	0000	6
 		_mrfRegset_Init		STRING         	021F	0000	32
 		_mrfRegset_Init		STRING         	021B	0000	1
-		__initializatio		CODE           	0801	0000	20
+		__initializatio		CODE           	0806	0000	20
 		i1_Mrf49RxCmd  		CODE           	0022	0000	12
 		i1_Mrf49TxCmd  		CODE           	0147	0000	10
 		i1_Mrf49SpiRx  		CODE           	01CE	0000	67
@@ -3660,92 +3667,92 @@ shared
 		i1_Mrf49xaServe		CODE           	002E	0000	232
 		i1_Mrf49xaNeeds		CODE           	0144	0000	3
 		_parameters    		STRING         	0259	0000	6
-		PL10           		CODE           	0FCA	0000	13
-		PL20           		CODE           	0FEF	0000	5
+		PL10           		CODE           	0FCC	0000	13
+		PL20           		CODE           	0FF1	0000	5
 
-shared estimated size: 672
+shared estimated size: 677
 
 ../../../src/devices/mrf49xa_mac.c
-		_Mrf49xaTick   		CODE           	08BC	0000	211
+		_Mrf49xaTick   		CODE           	08C2	0000	213
 		_Mrf49xaPacketP		CODE           	02EB	0000	16
-		_Mrf49xaTxAck  		CODE           	0BAA	0000	35
-		_Mrf49xaFreePac		CODE           	0B22	0000	5
+		_Mrf49xaTxAck  		CODE           	0BB0	0000	35
+		_Mrf49xaFreePac		CODE           	0B2A	0000	5
 		_Mrf49xaRxPacke		CODE           	02B3	0000	31
-		_Mrf49xaTxPacke		CODE           	0EF4	0000	110
-		_Mrf49xaAllocPa		CODE           	0ED7	0000	29
+		_Mrf49xaTxPacke		CODE           	0EF6	0000	114
+		_Mrf49xaAllocPa		CODE           	0ED9	0000	29
 
-../../../src/devices/mrf49xa_mac.c estimated size: 437
+../../../src/devices/mrf49xa_mac.c estimated size: 443
 
 ../../../src/node/config.c
-		_CfgGetSizeByTy		CODE           	0F94	0000	18
-		_CfgLoad       		CODE           	0B27	0000	8
-		_CfgSave       		CODE           	0313	0000	8
+		_CfgGetSizeByTy		CODE           	0F9A	0000	18
+		_CfgLoad       		CODE           	0B2F	0000	8
+		_CfgSave       		CODE           	031C	0000	8
 
 ../../../src/node/config.c estimated size: 34
 
 ../../../src/devices/mrf49xa_phy.c
-		_Mrf49xaServe  		CODE           	0C45	0000	232
+		_Mrf49xaServe  		CODE           	0C46	0000	232
 
 ../../../src/devices/mrf49xa_phy.c estimated size: 232
 
 ../../../src/devices/mcp9800.c
-		_Mcp9800Read   		CODE           	0A1E	0000	21
-		_Mcp9800Start  		CODE           	0A4F	0000	25
+		_Mcp9800Read   		CODE           	0A26	0000	21
+		_Mcp9800Start  		CODE           	0A57	0000	25
 
 ../../../src/devices/mcp9800.c estimated size: 46
 
 ../../../src/devices/mrf49xa_cmd.c
-		_Mrf49TxCmd    		CODE           	0D59	0000	9
-		_Mrf49TxByte   		CODE           	0D2D	0000	5
-		_Mrf49RxCmd    		CODE           	0E0C	0000	10
-		_Mrf49RxSts    		CODE           	0DBD	0000	11
-		_Mrf49RxByte   		CODE           	0D32	0000	2
+		_Mrf49TxCmd    		CODE           	0D5A	0000	9
+		_Mrf49TxByte   		CODE           	0D2E	0000	5
+		_Mrf49RxCmd    		CODE           	0E0D	0000	10
+		_Mrf49RxSts    		CODE           	0DBE	0000	11
+		_Mrf49RxByte   		CODE           	0D33	0000	2
 
 ../../../src/devices/mrf49xa_cmd.c estimated size: 37
 
 ../../../src/devices/mrf49xa.c
-		_Mrf49xaInit   		CODE           	098F	0000	95
-		_Mrf49xaModeRx 		CODE           	0D34	0000	37
-		_Mrf49xaModeTx 		CODE           	0C21	0000	36
+		_Mrf49xaInit   		CODE           	0997	0000	95
+		_Mrf49xaModeRx 		CODE           	0D35	0000	37
+		_Mrf49xaModeTx 		CODE           	0C22	0000	36
 		_Mrf49xaModeSle		CODE           	026D	0000	34
 		_Mrf49xaReboot 		CODE           	0306	0000	2
-		_Mrf49xaNeedsRe		CODE           	0B16	0000	3
+		_Mrf49xaNeedsRe		CODE           	0B1E	0000	3
 		_Mrf49xaShutdow		CODE           	026C	0000	1
 
 ../../../src/devices/mrf49xa.c estimated size: 208
 
 ../../../src/node/main.c
-		_main          		CODE           	0851	0000	107
+		_main          		CODE           	0856	0000	108
 
-../../../src/node/main.c estimated size: 107
+../../../src/node/main.c estimated size: 108
 
 ../../../src/node/power.c
-		_PwrAdcWake    		CODE           	0E8B	0000	6
-		_PwrSensorSleep		CODE           	0B1F	0000	3
-		_PwrI2cWake    		CODE           	0C1D	0000	1
-		_Sleepy        		CODE           	09EE	0000	27
-		_PwrAdcSleep   		CODE           	0E86	0000	5
-		_PwrI2cSleep   		CODE           	0B19	0000	6
-		_PwrAdcInit    		CODE           	0C14	0000	9
-		_PwrI2cInit    		CODE           	0817	0000	8
+		_PwrAdcWake    		CODE           	0E8D	0000	6
+		_PwrSensorSleep		CODE           	0B27	0000	3
+		_PwrI2cWake    		CODE           	0C1A	0000	1
+		_Sleepy        		CODE           	09F6	0000	27
+		_PwrAdcSleep   		CODE           	0E87	0000	6
+		_PwrI2cSleep   		CODE           	0B21	0000	6
+		_PwrAdcInit    		CODE           	0313	0000	9
+		_PwrI2cInit    		CODE           	081C	0000	8
 		_PwrRfWake     		CODE           	02FB	0000	11
-		_PwrRfInit     		CODE           	082A	0000	33
+		_PwrRfInit     		CODE           	082F	0000	33
 		_PwrRfSleep    		CODE           	025F	0000	13
-		_PwrSensorWake 		CODE           	0C1E	0000	3
-		_PwrSensorInit 		CODE           	0FA6	0000	4
+		_PwrSensorWake 		CODE           	0C1F	0000	3
+		_PwrSensorInit 		CODE           	0C1B	0000	4
 
-../../../src/node/power.c estimated size: 129
+../../../src/node/power.c estimated size: 130
 
 ../../../src/bsp/pic16/interrupt.c
-		_ExtIntDeinit  		CODE           	0321	0000	2
-		_ExtIntInit    		CODE           	084B	0000	6
+		_ExtIntDeinit  		CODE           	0331	0000	2
+		_ExtIntInit    		CODE           	0850	0000	6
 		_extInt        		CODE           	0004	0000	28
 
 ../../../src/bsp/pic16/interrupt.c estimated size: 36
 
 ../../../src/devices/24aa64.c
-		_eepromRxBytes 		CODE           	0A68	0000	36
-		_eepromTxBytes 		CODE           	0A33	0000	28
+		_eepromRxBytes 		CODE           	0A70	0000	36
+		_eepromTxBytes 		CODE           	0A3B	0000	28
 
 ../../../src/devices/24aa64.c estimated size: 64
 

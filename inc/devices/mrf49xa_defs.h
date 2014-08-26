@@ -307,6 +307,7 @@ typedef struct rfTrcvStatus_s
     rfTrcvPacket_t txPacket;
 
     rfTrcvState_t state;
+    uint8_t nodeId;
     uint8_t hwByte:7;
     bool needsReset:1;
 
