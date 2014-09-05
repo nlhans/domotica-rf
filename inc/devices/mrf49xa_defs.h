@@ -301,7 +301,7 @@ typedef struct rfTrcvPacket_s
     uint8_t needAck:2; // rfTrcvAckState_t
 } rfTrcvPacket_t;
 
-typedef struct rfTrcvStatus_s
+typedef struct Mrf49xaMac_s
 {
     mrf49xaStatus_t status;
     
@@ -313,6 +313,9 @@ typedef struct rfTrcvStatus_s
     uint8_t nodeId;
     uint8_t hwByte:7;
     bool needsReset:1;
+#ifdef BSP_SIMULATOR
+    HwRfClient* client;
+#endif
 } Mrf49xaMac_t;
 
 // Node ID for broadcasts

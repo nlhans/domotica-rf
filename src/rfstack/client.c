@@ -147,6 +147,8 @@ void handleCfgCmd(rfTrcvPacket_t* packet)
 }
 #endif
 
+uint32_t syncedTime;
+
 void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
     // Compact these booleans:

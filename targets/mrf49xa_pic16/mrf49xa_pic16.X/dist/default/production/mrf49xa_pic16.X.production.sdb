@@ -171,14 +171,14 @@ RF_FW_WRITE 193
 RF_FW_READ 194
 RF_APP_SAMPLE 0
 ]
-"151
+"153
 [e E4320 rfTrcvState_e `uc
 POWERED_OFF 0
 RECV_IDLE 1
 RECV_DATA 2
 TX_PACKET 3
 ]
-"173
+"175
 [e E4335 rfTrcvAckState_e `uc
 NO_ACK 0
 NEED_ACK 1
@@ -473,7 +473,7 @@ CFG_TYPE_INT32 2
 [v _handleCfgWrite handleCfgWrite `(v  1 e 0 0 ]
 "124
 [v _handleCfgCmd handleCfgCmd `(v  1 e 0 0 ]
-"150
+"152
 [v _HandlePacket HandlePacket `(v  1 e 0 0 ]
 "14 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c
 [v _RfSendPowerState RfSendPowerState `(v  1 e 0 0 ]
@@ -602,7 +602,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v _mrf49xaInst mrf49xaInst `S278  1 e 78 0 ]
@@ -786,7 +786,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v RfSendSampleWeatherNode@inst inst `*.4S278  1 a 1 wreg ]
@@ -824,7 +824,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v RfSendPowerState@inst inst `*.4S278  1 a 1 wreg ]
@@ -884,7 +884,7 @@ CFG_TYPE_INT32 2
 ]
 [s S242 . 2 `S227 1 msb 1 0 `S236 1 lsb 1 1 ]
 [u S245 mrf49xaStatus_u 2 `[2]uc 1 byte 2 0 `S242 1 flags 2 0 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaAllocPacket@inst inst `*.4S278  1 a 1 wreg ]
@@ -970,7 +970,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaReboot@inst inst `*.4S278  1 a 1 wreg ]
@@ -1008,7 +1008,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaShutdown@inst inst `*.4S278  1 a 1 wreg ]
@@ -1041,7 +1041,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeSleep@inst inst `*.4S278  1 a 1 wreg ]
@@ -1107,7 +1107,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaTick@inst inst `*.4S278  1 a 1 wreg ]
@@ -1147,7 +1147,7 @@ CFG_TYPE_INT32 2
 ]
 [s S242 . 2 `S227 1 msb 1 0 `S236 1 lsb 1 1 ]
 [u S245 mrf49xaStatus_u 2 `[2]uc 1 byte 2 0 `S242 1 flags 2 0 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaRxPacket@inst inst `*.4S278  1 a 1 wreg ]
@@ -1180,7 +1180,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaPacketPending@inst inst `*.4S278  1 a 1 wreg ]
@@ -1213,7 +1213,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeTx@inst inst `*.4S278  1 a 1 wreg ]
@@ -1249,7 +1249,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaInit@inst inst `*.4S278  1 a 1 wreg ]
@@ -1294,7 +1294,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaServe@inst inst `*.4S278  1 a 1 wreg ]
@@ -1330,7 +1330,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
@@ -1363,7 +1363,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
@@ -1418,7 +1418,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49RxSts@inst inst `*.4S278  1 a 1 wreg ]
@@ -1457,7 +1457,7 @@ CFG_TYPE_INT32 2
 [v Mrf49SpiRx@data data `uc  1 a 1 0 ]
 "41
 } 0
-"150 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
+"152 /home/hans/Projects/Firmware/domoticaRf/src/rfstack/client.c
 [v _HandlePacket HandlePacket `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1483,7 +1483,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v HandlePacket@inst inst `*.4S278  1 a 1 wreg ]
@@ -1492,12 +1492,12 @@ CFG_TYPE_INT32 2
 `uc 1 sendAck 1 0 :1:2 
 `uc 1 sendMsg 1 0 :1:3 
 ]
-"159
+"161
 [v HandlePacket@response response `S1349  1 a 1 12 ]
-"150
+"152
 [v HandlePacket@inst inst `*.4S278  1 a 1 wreg ]
 [v HandlePacket@packet packet `*.4S266  1 p 1 9 ]
-"240
+"242
 } 0
 "8
 [v _handleFwCmd handleFwCmd `(v  1 e 0 0 ]
@@ -1650,7 +1650,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaTxAck@inst inst `*.4S278  1 a 1 wreg ]
@@ -1684,7 +1684,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaTxPacket@inst inst `*.4S278  1 a 1 wreg ]
@@ -1724,7 +1724,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaFreePacket@inst inst `*.4S278  1 a 1 wreg ]
@@ -1829,7 +1829,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v i1Mrf49xaServe@inst inst `*.4S278  1 a 1 wreg ]
@@ -1863,7 +1863,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v i1Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
@@ -1896,7 +1896,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v i1Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
@@ -1949,7 +1949,7 @@ CFG_TYPE_INT32 2
 `uc 1 retransmit 1 23 :2:4 
 `uc 1 needAck 1 23 :2:6 
 ]
-[s S278 rfTrcvStatus_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
+[s S278 Mrf49xaMac_s 78 `S245 1 status 2 0 `*.4S266 1 hwRx 1 2 `[2]S266 1 rxPacket 48 3 `S266 1 txPacket 24 51 `E4335 1 state 1 75 `uc 1 nodeId 1 76 `uc 1 hwByte 1 77 :7:0 
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v i1Mrf49RxSts@inst inst `*.4S278  1 a 1 wreg ]

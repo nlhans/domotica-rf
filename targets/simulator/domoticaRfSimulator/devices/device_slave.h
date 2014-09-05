@@ -18,7 +18,7 @@ class DeviceSlave : public QThread
 
     // Create "fake" hardware peripherals
     HardwareEeprom_t* eeprom;          // EEPROM
-    HwRfBus* rf;               // RF module
+    HwRfClient* rf;               // RF module
     HardwareSensor_t* sensor[16];      // up to 16 sensors
 
     public:

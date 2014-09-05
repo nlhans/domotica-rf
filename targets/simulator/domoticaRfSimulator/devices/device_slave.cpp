@@ -6,10 +6,12 @@
 
 #include "hardware/rf.h"
 
+#include "devices/mrf49xa.h"
+
 DeviceSlave::DeviceSlave(uint16_t id)
 {
     this->id = id;
-    this->rf = new HwRfBus(id);
+    this->rf = new HwRfClient(id);
 }
 
 void DeviceSlave::run()
@@ -17,7 +19,9 @@ void DeviceSlave::run()
     while(1)
     {
         this->rf->Tick();
-        //qDebug() << "Boo!";
-        //sleep(1);
+
+        Mrf49xaTick(this->rf->mac);
+
+        usleep(1000);
     }
 }

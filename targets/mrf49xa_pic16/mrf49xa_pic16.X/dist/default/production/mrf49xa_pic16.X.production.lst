@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC PRO Macro Assembler V1.30 build 55553 
-                                                                                               Fri Sep  5 18:35:24 2014
+                                                                                               Fri Sep  5 20:04:57 2014
 
 Microchip Technology Omniscient Code Generator (PRO mode) build 55553
      1                           	processor	16LF1508
@@ -3377,10 +3377,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3371 ;; Defined at:
   3372 ;;		line 130 in file "../../../src/devices/mrf49xa_mac.c"
   3373 ;; Parameters:    Size  Location     Type
-  3374 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  3374 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   3375 ;;		 -> mrf49xaInst(78), 
   3376 ;; Auto vars:     Size  Location     Type
-  3377 ;;  inst            1   15[BANK0 ] PTR struct rfTrcvStatus_
+  3377 ;;  inst            1   15[BANK0 ] PTR struct Mrf49xaMac_s
   3378 ;;		 -> mrf49xaInst(78), 
   3379 ;;  timeout         1   14[BANK0 ] unsigned char 
   3380 ;;  packet          1   16[BANK0 ] PTR struct rfTrcvPacket_
@@ -3703,10 +3703,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3688 ;; Defined at:
   3689 ;;		line 126 in file "../../../src/devices/mrf49xa.c"
   3690 ;; Parameters:    Size  Location     Type
-  3691 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  3691 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   3692 ;;		 -> mrf49xaInst(78), 
   3693 ;; Auto vars:     Size  Location     Type
-  3694 ;;  inst            1    8[BANK0 ] PTR struct rfTrcvStatus_
+  3694 ;;  inst            1    8[BANK0 ] PTR struct Mrf49xaMac_s
   3695 ;;		 -> mrf49xaInst(78), 
   3696 ;;  k               1    9[BANK0 ] unsigned char 
   3697 ;;  j               1    0        unsigned char 
@@ -4877,10 +4877,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   4860 ;; Defined at:
   4861 ;;		line 121 in file "../../../src/devices/mrf49xa.c"
   4862 ;; Parameters:    Size  Location     Type
-  4863 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  4863 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   4864 ;;		 -> mrf49xaInst(78), 
   4865 ;; Auto vars:     Size  Location     Type
-  4866 ;;  inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
+  4866 ;;  inst            1    0[BANK0 ] PTR struct Mrf49xaMac_s
   4867 ;;		 -> mrf49xaInst(78), 
   4868 ;; Return value:  Size  Location     Type
   4869 ;;		None               void
@@ -5015,12 +5015,12 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   4998 ;; Defined at:
   4999 ;;		line 87 in file "../../../src/devices/mrf49xa_mac.c"
   5000 ;; Parameters:    Size  Location     Type
-  5001 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5001 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5002 ;;		 -> mrf49xaInst(78), 
   5003 ;;  packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
   5004 ;;		 -> NULL(0), mrf49xaInst.rxPacket(48), mrf49xaInst(78), 
   5005 ;; Auto vars:     Size  Location     Type
-  5006 ;;  inst            1    1[BANK0 ] PTR struct rfTrcvStatus_
+  5006 ;;  inst            1    1[BANK0 ] PTR struct Mrf49xaMac_s
   5007 ;;		 -> mrf49xaInst(78), 
   5008 ;; Return value:  Size  Location     Type
   5009 ;;		None               void
@@ -5114,14 +5114,14 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5097  0AEA                     __ptext43:	
   5098 ;; *************** function _HandlePacket *****************
   5099 ;; Defined at:
-  5100 ;;		line 150 in file "../../../src/rfstack/client.c"
+  5100 ;;		line 152 in file "../../../src/rfstack/client.c"
   5101 ;; Parameters:    Size  Location     Type
-  5102 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5102 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5103 ;;		 -> mrf49xaInst(78), 
   5104 ;;  packet          1    9[BANK0 ] PTR struct rfTrcvPacket_
   5105 ;;		 -> NULL(0), mrf49xaInst.rxPacket(48), mrf49xaInst(78), 
   5106 ;; Auto vars:     Size  Location     Type
-  5107 ;;  inst            1   11[BANK0 ] PTR struct rfTrcvStatus_
+  5107 ;;  inst            1   11[BANK0 ] PTR struct Mrf49xaMac_s
   5108 ;;		 -> mrf49xaInst(78), 
   5109 ;;  response        1   12[BANK0 ] struct .
   5110 ;; Return value:  Size  Location     Type
@@ -5157,21 +5157,21 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5140                           ;psect for function _HandlePacket
   5141  0AEA                     _HandlePacket:	
   5142                           
-  5143                           ;client.c: 153: struct
-  5144                           ;client.c: 154: {
-  5145                           ;client.c: 155: uint8_t reset:1;
-  5146                           ;client.c: 156: uint8_t needAck:1;
-  5147                           ;client.c: 157: uint8_t sendAck:1;
-  5148                           ;client.c: 158: uint8_t sendMsg:1;
-  5149                           ;client.c: 159: } response;
-  5150                           ;client.c: 162: switch (packet->packet.id)
+  5143                           ;client.c: 155: struct
+  5144                           ;client.c: 156: {
+  5145                           ;client.c: 157: uint8_t reset:1;
+  5146                           ;client.c: 158: uint8_t needAck:1;
+  5147                           ;client.c: 159: uint8_t sendAck:1;
+  5148                           ;client.c: 160: uint8_t sendMsg:1;
+  5149                           ;client.c: 161: } response;
+  5150                           ;client.c: 164: switch (packet->packet.id)
   5151                           
   5152                           ;incstack = 0
   5153                           ; Regs used in _HandlePacket: [allreg]
   5154  0AEA  2B1C               	goto	l3395
   5155  0AEB                     l3369:	
   5156                           
-  5157                           ;client.c: 165: packet->packet.data[0] = 2;
+  5157                           ;client.c: 167: packet->packet.data[0] = 2;
   5158  0AEB  0829               	movf	HandlePacket@packet,w
   5159  0AEC  3E06               	addlw	6
   5160  0AED  0086               	movwf	6
@@ -5180,17 +5180,17 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5163  0AF0  0081               	movwf	1
   5164  0AF1                     l3371:	
   5165                           
-  5166                           ;client.c: 166: response.sendMsg = ((uint8_t)1);
+  5166                           ;client.c: 168: response.sendMsg = ((uint8_t)1);
   5167  0AF1  0020               	movlb	0	; select bank0
   5168  0AF2  15AC               	bsf	HandlePacket@response,3
   5169                           
-  5170                           ;client.c: 167: break;
+  5170                           ;client.c: 169: break;
   5171  0AF3  2B3A               	goto	l550
   5172  0AF4                     l3373:	
   5173                           
-  5174                           ;client.c: 170: if (((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.crc == packet->packet.data
+  5174                           ;client.c: 172: if (((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.crc == packet->packet.data
       +                          [1] &&
-  5175                           ;client.c: 171: ((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.packet.id == packet->packet.da
+  5175                           ;client.c: 173: ((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.packet.id == packet->packet.da
       +                          ta[0])
   5176  0AF4  0829               	movf	HandlePacket@packet,w
   5177  0AF5  3E07               	addlw	7
@@ -5211,42 +5211,42 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5192  0B04  1D03               	skipz
   5193  0B05  2B3A               	goto	l550
   5194                           
-  5195                           ;client.c: 172: {
-  5196                           ;client.c: 173: ((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.needAck = ACK_RECEIVED;
+  5195                           ;client.c: 174: {
+  5196                           ;client.c: 175: ((Mrf49xaMac_t*)(&mrf49xaInst))->txPacket.needAck = ACK_RECEIVED;
   5197  0B06  086A               	movf	(_mrf49xaInst^(0+128)+74),w
   5198  0B07  393F               	andlw	-193
   5199  0B08  3880               	iorlw	128
   5200  0B09  00EA               	movwf	(_mrf49xaInst^(0+128)+74)
   5201  0B0A  2B3A               	goto	l550
   5202  0B0B                     l553:	
-  5203                           ;client.c: 178: syncedTime = *((uint32_t*) packet->packet.data);
+  5203                           ;client.c: 180: syncedTime = *((uint32_t*) packet->packet.data);
   5204                           
   5205                           
-  5206                           ;client.c: 179: response.sendAck = ((uint8_t)0);
+  5206                           ;client.c: 181: response.sendAck = ((uint8_t)0);
   5207  0B0B  112C               	bcf	HandlePacket@response,2
   5208                           
-  5209                           ;client.c: 180: break;
+  5209                           ;client.c: 182: break;
   5210  0B0C  2B3A               	goto	l550
   5211  0B0D                     l3379:	
   5212                           
-  5213                           ;client.c: 190: handleCfgCmd(packet);
+  5213                           ;client.c: 192: handleCfgCmd(packet);
   5214  0B0D  0829               	movf	HandlePacket@packet,w
   5215  0B0E  26C6  3188         	fcall	_handleCfgCmd
   5216  0B10  2AF1               	goto	l3371
   5217  0B11                     l3383:	
   5218                           
-  5219                           ;client.c: 196: handleCfgWrite(packet);
+  5219                           ;client.c: 198: handleCfgWrite(packet);
   5220  0B11  0829               	movf	HandlePacket@packet,w
   5221  0B12  2734  3188         	fcall	_handleCfgWrite
   5222  0B14                     l3385:	
   5223                           
-  5224                           ;client.c: 198: handleCfgRead(packet);
+  5224                           ;client.c: 200: handleCfgRead(packet);
   5225  0B14  0829               	movf	HandlePacket@packet,w
   5226  0B15  26F1  3188         	fcall	_handleCfgRead
   5227  0B17  2AF1               	goto	l3371
   5228  0B18                     l3389:	
   5229                           
-  5230                           ;client.c: 205: handleFwCmd(packet);
+  5230                           ;client.c: 207: handleFwCmd(packet);
   5231  0B18  0829               	movf	HandlePacket@packet,w
   5232  0B19  27D9  3188         	fcall	_handleFwCmd
   5233  0B1B  2AF1               	goto	l3371
@@ -5292,15 +5292,15 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5273  0B39  2B3A               	goto	l550
   5274  0B3A                     l550:	
   5275                           
-  5276                           ;client.c: 228: response.reset = ((uint8_t)1);
+  5276                           ;client.c: 230: response.reset = ((uint8_t)1);
   5277  0B3A  0020               	movlb	0	; select bank0
   5278  0B3B  142C               	bsf	HandlePacket@response,0
   5279                           
-  5280                           ;client.c: 231: if (response.sendMsg)
+  5280                           ;client.c: 233: if (response.sendMsg)
   5281  0B3C  1DAC               	btfss	HandlePacket@response,3
   5282  0B3D  2B4A               	goto	l559
   5283                           
-  5284                           ;client.c: 232: response.reset = Mrf49xaTxPacket(((Mrf49xaMac_t*)(&mrf49xaInst)), packet
+  5284                           ;client.c: 234: response.reset = Mrf49xaTxPacket(((Mrf49xaMac_t*)(&mrf49xaInst)), packet
       +                          , ((uint8_t)1), response.needAck);
   5285  0B3E  0829               	movf	HandlePacket@packet,w
   5286  0B3F  00A0               	movwf	Mrf49xaTxPacket@packet
@@ -5315,11 +5315,11 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5295  0B49  2B51               	goto	L3
   5296  0B4A                     l559:	
   5297                           
-  5298                           ;client.c: 233: else if (response.sendAck)
+  5298                           ;client.c: 235: else if (response.sendAck)
   5299  0B4A  1D2C               	btfss	HandlePacket@response,2
   5300  0B4B  2B58               	goto	l561
   5301                           
-  5302                           ;client.c: 234: response.reset = Mrf49xaTxAck(((Mrf49xaMac_t*)(&mrf49xaInst)), packet);
+  5302                           ;client.c: 236: response.reset = Mrf49xaTxAck(((Mrf49xaMac_t*)(&mrf49xaInst)), packet);
   5303  0B4C  0829               	movf	HandlePacket@packet,w
   5304  0B4D  00A7               	movwf	Mrf49xaTxAck@packet
   5305  0B4E  30A0               	movlw	_mrf49xaInst& (0+255)
@@ -5334,16 +5334,16 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5314  0B57  2B59               	goto	l560
   5315  0B58                     l561:	
   5316                           
-  5317                           ;client.c: 235: else
-  5318                           ;client.c: 236: response.reset = ((uint8_t)0);
+  5317                           ;client.c: 237: else
+  5318                           ;client.c: 238: response.reset = ((uint8_t)0);
   5319  0B58  102C               	bcf	HandlePacket@response,0
   5320  0B59                     l560:	
   5321                           
-  5322                           ;client.c: 238: if (!response.reset)
+  5322                           ;client.c: 240: if (!response.reset)
   5323  0B59  182C               	btfsc	HandlePacket@response,0
   5324  0B5A  0008               	return
   5325                           
-  5326                           ;client.c: 239: Mrf49xaFreePacket(((Mrf49xaMac_t*)(&mrf49xaInst)), packet);
+  5326                           ;client.c: 241: Mrf49xaFreePacket(((Mrf49xaMac_t*)(&mrf49xaInst)), packet);
   5327  0B5B  0829               	movf	HandlePacket@packet,w
   5328  0B5C  00A0               	movwf	Mrf49xaFreePacket@packet
   5329  0B5D  2ADD               	ljmp	l3247
@@ -5353,14 +5353,14 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5333 ;; Defined at:
   5334 ;;		line 17 in file "../../../src/devices/mrf49xa_mac.c"
   5335 ;; Parameters:    Size  Location     Type
-  5336 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5336 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5337 ;;		 -> mrf49xaInst(78), 
   5338 ;;  packet          1    0[BANK0 ] PTR struct rfTrcvPacket_
   5339 ;;		 -> NULL(0), mrf49xaInst.rxPacket(48), mrf49xaInst(78), 
   5340 ;;  response        1    1[BANK0 ] unsigned char 
   5341 ;;  needAck         1    2[BANK0 ] unsigned char 
   5342 ;; Auto vars:     Size  Location     Type
-  5343 ;;  inst            1    5[BANK0 ] PTR struct rfTrcvStatus_
+  5343 ;;  inst            1    5[BANK0 ] PTR struct Mrf49xaMac_s
   5344 ;;		 -> mrf49xaInst(78), 
   5345 ;;  i               1    6[BANK0 ] unsigned char 
   5346 ;;  crc             1    4[BANK0 ] unsigned char 
@@ -5575,12 +5575,12 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5551 ;; Defined at:
   5552 ;;		line 75 in file "../../../src/devices/mrf49xa_mac.c"
   5553 ;; Parameters:    Size  Location     Type
-  5554 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5554 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5555 ;;		 -> mrf49xaInst(78), 
   5556 ;;  packet          1    7[BANK0 ] PTR struct rfTrcvPacket_
   5557 ;;		 -> NULL(0), mrf49xaInst.rxPacket(48), mrf49xaInst(78), 
   5558 ;; Auto vars:     Size  Location     Type
-  5559 ;;  inst            1    8[BANK0 ] PTR struct rfTrcvStatus_
+  5559 ;;  inst            1    8[BANK0 ] PTR struct Mrf49xaMac_s
   5560 ;;		 -> mrf49xaInst(78), 
   5561 ;; Return value:  Size  Location     Type
   5562 ;;                  1    wreg      unsigned char 
@@ -5661,10 +5661,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5636 ;; Defined at:
   5637 ;;		line 8 in file "../../../src/devices/mrf49xa_mac.c"
   5638 ;; Parameters:    Size  Location     Type
-  5639 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5639 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5640 ;;		 -> mrf49xaInst(78), 
   5641 ;; Auto vars:     Size  Location     Type
-  5642 ;;  inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
+  5642 ;;  inst            1    0[BANK0 ] PTR struct Mrf49xaMac_s
   5643 ;;		 -> mrf49xaInst(78), 
   5644 ;; Return value:  Size  Location     Type
   5645 ;;                  1    wreg      unsigned char 
@@ -5759,10 +5759,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5732 ;; Defined at:
   5733 ;;		line 87 in file "../../../src/devices/mrf49xa.c"
   5734 ;; Parameters:    Size  Location     Type
-  5735 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5735 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5736 ;;		 -> mrf49xaInst(78), 
   5737 ;; Auto vars:     Size  Location     Type
-  5738 ;;  inst            1    3[BANK0 ] PTR struct rfTrcvStatus_
+  5738 ;;  inst            1    3[BANK0 ] PTR struct Mrf49xaMac_s
   5739 ;;		 -> mrf49xaInst(78), 
   5740 ;;  k               1    4[BANK0 ] unsigned char 
   5741 ;; Return value:  Size  Location     Type
@@ -5847,10 +5847,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5819 ;; Defined at:
   5820 ;;		line 7 in file "../../../src/devices/mrf49xa_phy.c"
   5821 ;; Parameters:    Size  Location     Type
-  5822 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  5822 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   5823 ;;		 -> mrf49xaInst(78), 
   5824 ;; Auto vars:     Size  Location     Type
-  5825 ;;  inst            1    6[BANK0 ] PTR struct rfTrcvStatus_
+  5825 ;;  inst            1    6[BANK0 ] PTR struct Mrf49xaMac_s
   5826 ;;		 -> mrf49xaInst(78), 
   5827 ;;  data            1    7[BANK0 ] unsigned char 
   5828 ;; Return value:  Size  Location     Type
@@ -6364,10 +6364,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6325 ;; Defined at:
   6326 ;;		line 75 in file "../../../src/devices/mrf49xa.c"
   6327 ;; Parameters:    Size  Location     Type
-  6328 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  6328 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   6329 ;;		 -> mrf49xaInst(78), 
   6330 ;; Auto vars:     Size  Location     Type
-  6331 ;;  inst            1    4[BANK0 ] PTR struct rfTrcvStatus_
+  6331 ;;  inst            1    4[BANK0 ] PTR struct Mrf49xaMac_s
   6332 ;;		 -> mrf49xaInst(78), 
   6333 ;;  k               1    3[BANK0 ] unsigned char 
   6334 ;; Return value:  Size  Location     Type
@@ -6710,10 +6710,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6669 ;; Defined at:
   6670 ;;		line 31 in file "../../../src/devices/mrf49xa_cmd.c"
   6671 ;; Parameters:    Size  Location     Type
-  6672 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  6672 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   6673 ;;		 -> mrf49xaInst(78), 
   6674 ;; Auto vars:     Size  Location     Type
-  6675 ;;  inst            1    1[BANK0 ] PTR struct rfTrcvStatus_
+  6675 ;;  inst            1    1[BANK0 ] PTR struct Mrf49xaMac_s
   6676 ;;		 -> mrf49xaInst(78), 
   6677 ;; Return value:  Size  Location     Type
   6678 ;;		None               void
@@ -6971,10 +6971,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6923 ;; Defined at:
   6924 ;;		line 14 in file "../../../src/rfstack/packets.c"
   6925 ;; Parameters:    Size  Location     Type
-  6926 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  6926 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   6927 ;;		 -> mrf49xaInst(78), 
   6928 ;; Auto vars:     Size  Location     Type
-  6929 ;;  inst            1    7[BANK0 ] PTR struct rfTrcvStatus_
+  6929 ;;  inst            1    7[BANK0 ] PTR struct Mrf49xaMac_s
   6930 ;;		 -> mrf49xaInst(78), 
   6931 ;;  s               2    8[BANK0 ] unsigned int 
   6932 ;;  packet          1   10[BANK0 ] PTR struct rfTrcvPacket_
@@ -7431,12 +7431,12 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   7382 ;; Defined at:
   7383 ;;		line 34 in file "../../../src/rfstack/packets.c"
   7384 ;; Parameters:    Size  Location     Type
-  7385 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  7385 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   7386 ;;		 -> mrf49xaInst(78), 
   7387 ;;  temperature     2    7[BANK0 ] unsigned int 
   7388 ;;  humidity        2    9[BANK0 ] unsigned int 
   7389 ;; Auto vars:     Size  Location     Type
-  7390 ;;  inst            1   11[BANK0 ] PTR struct rfTrcvStatus_
+  7390 ;;  inst            1   11[BANK0 ] PTR struct Mrf49xaMac_s
   7391 ;;		 -> mrf49xaInst(78), 
   7392 ;;  packet          1   12[BANK0 ] PTR struct rfTrcvPacket_
   7393 ;;		 -> NULL(0), mrf49xaInst.rxPacket(48), mrf49xaInst(78), 
@@ -7573,10 +7573,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   7523 ;; Defined at:
   7524 ;;		line 109 in file "../../../src/devices/mrf49xa_mac.c"
   7525 ;; Parameters:    Size  Location     Type
-  7526 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  7526 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   7527 ;;		 -> mrf49xaInst(78), 
   7528 ;; Auto vars:     Size  Location     Type
-  7529 ;;  inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
+  7529 ;;  inst            1    0[BANK0 ] PTR struct Mrf49xaMac_s
   7530 ;;		 -> mrf49xaInst(78), 
   7531 ;; Return value:  Size  Location     Type
   7532 ;;                  1    wreg      PTR struct rfTrcvPacket_
@@ -7872,8 +7872,8 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   7822  0EEC  3A07               	xorlw	7	; case 4
   7823  0EED  1903               	skipnz
   7824  0EEE  2ED2               	goto	l3475
-  7825  0EEF  2EF0               	goto	l545
-  7826  0EF0                     l545:	
+  7825  0EEF  2EF0               	goto	l543
+  7826  0EF0                     l543:	
   7827  0EF0  0008               	return
   7828  0EF1                     __end_of_handleCfgCmd:	
   7829  0EF1                     __ptext46:	
@@ -8217,10 +8217,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   8167 ;; Defined at:
   8168 ;;		line 92 in file "../../../src/devices/mrf49xa_mac.c"
   8169 ;; Parameters:    Size  Location     Type
-  8170 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  8170 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   8171 ;;		 -> mrf49xaInst(78), 
   8172 ;; Auto vars:     Size  Location     Type
-  8173 ;;  inst            1    0[BANK0 ] PTR struct rfTrcvStatus_
+  8173 ;;  inst            1    0[BANK0 ] PTR struct Mrf49xaMac_s
   8174 ;;		 -> mrf49xaInst(78), 
   8175 ;; Return value:  Size  Location     Type
   8176 ;;                  1    wreg      PTR struct rfTrcvPacket_
@@ -8598,11 +8598,11 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   8546                           ;	Chosen strategy is simple_byte
   8547  0FDE  3A00               	xorlw	0	; case 0
   8548  0FDF  1903               	skipnz
-  8549  0FE0  2FFB               	goto	l530
+  8549  0FE0  2FFB               	goto	l528
   8550  0FE1  3A01               	xorlw	1	; case 1
   8551  0FE2  1903               	skipnz
   8552  0FE3  2FE5               	goto	l3405
-  8553  0FE4  2FFB               	goto	l530
+  8553  0FE4  2FFB               	goto	l528
   8554  0FE5                     l3405:	
   8555                           
   8556                           ;client.c: 17: packet->packet.size = 5;
@@ -8634,7 +8634,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   8582  0FF8  3002               	movlw	2
   8583  0FF9  00A7               	movwf	eepromRxBytes@size
   8584  0FFA  2A27               	ljmp	l3131
-  8585  0FFB                     l530:	
+  8585  0FFB                     l528:	
   8586  0FFB  0008               	return
   8587  0FFC                     __end_of_handleFwCmd:	
   8588  0FFC                     __ptext15:	
@@ -9603,10 +9603,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9551 ;; Defined at:
   9552 ;;		line 115 in file "../../../src/devices/mrf49xa.c"
   9553 ;; Parameters:    Size  Location     Type
-  9554 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  9554 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   9555 ;;		 -> mrf49xaInst(78), 
   9556 ;; Auto vars:     Size  Location     Type
-  9557 ;;  inst            1    5[BANK0 ] PTR struct rfTrcvStatus_
+  9557 ;;  inst            1    5[BANK0 ] PTR struct Mrf49xaMac_s
   9558 ;;		 -> mrf49xaInst(78), 
   9559 ;; Return value:  Size  Location     Type
   9560 ;;		None               void
@@ -9718,10 +9718,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9666 ;; Defined at:
   9667 ;;		line 107 in file "../../../src/devices/mrf49xa.c"
   9668 ;; Parameters:    Size  Location     Type
-  9669 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  9669 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   9670 ;;		 -> mrf49xaInst(78), 
   9671 ;; Auto vars:     Size  Location     Type
-  9672 ;;  inst            1    5[BANK0 ] PTR struct rfTrcvStatus_
+  9672 ;;  inst            1    5[BANK0 ] PTR struct Mrf49xaMac_s
   9673 ;;		 -> mrf49xaInst(78), 
   9674 ;; Return value:  Size  Location     Type
   9675 ;;		None               void
@@ -9761,10 +9761,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9709 ;; Defined at:
   9710 ;;		line 98 in file "../../../src/devices/mrf49xa.c"
   9711 ;; Parameters:    Size  Location     Type
-  9712 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+  9712 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
   9713 ;;		 -> mrf49xaInst(78), 
   9714 ;; Auto vars:     Size  Location     Type
-  9715 ;;  inst            1    3[BANK0 ] PTR struct rfTrcvStatus_
+  9715 ;;  inst            1    3[BANK0 ] PTR struct Mrf49xaMac_s
   9716 ;;		 -> mrf49xaInst(78), 
   9717 ;;  k               1    4[BANK0 ] unsigned char 
   9718 ;; Return value:  Size  Location     Type
@@ -10050,10 +10050,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9997 ;; Defined at:
   9998 ;;		line 7 in file "../../../src/devices/mrf49xa_phy.c"
   9999 ;; Parameters:    Size  Location     Type
- 10000 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+ 10000 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
  10001 ;;		 -> mrf49xaInst(78), 
  10002 ;; Auto vars:     Size  Location     Type
- 10003 ;;  inst            1  (no storage) PTR struct rfTrcvStatus_
+ 10003 ;;  inst            1  (no storage) PTR struct Mrf49xaMac_s
  10004 ;;		 -> mrf49xaInst(78), 
  10005 ;;  Mrf49xaServe    1    5[COMMON] unsigned char 
  10006 ;; Return value:  Size  Location     Type
@@ -10569,10 +10569,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10505 ;; Defined at:
  10506 ;;		line 75 in file "../../../src/devices/mrf49xa.c"
  10507 ;; Parameters:    Size  Location     Type
- 10508 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+ 10508 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
  10509 ;;		 -> mrf49xaInst(78), 
  10510 ;; Auto vars:     Size  Location     Type
- 10511 ;;  inst            1  (no storage) PTR struct rfTrcvStatus_
+ 10511 ;;  inst            1  (no storage) PTR struct Mrf49xaMac_s
  10512 ;;		 -> mrf49xaInst(78), 
  10513 ;;  Mrf49xaModeR    1    3[COMMON] unsigned char 
  10514 ;; Return value:  Size  Location     Type
@@ -10701,10 +10701,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10636 ;; Defined at:
  10637 ;;		line 121 in file "../../../src/devices/mrf49xa.c"
  10638 ;; Parameters:    Size  Location     Type
- 10639 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+ 10639 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
  10640 ;;		 -> mrf49xaInst(78), 
  10641 ;; Auto vars:     Size  Location     Type
- 10642 ;;  inst            1  (no storage) PTR struct rfTrcvStatus_
+ 10642 ;;  inst            1  (no storage) PTR struct Mrf49xaMac_s
  10643 ;;		 -> mrf49xaInst(78), 
  10644 ;; Return value:  Size  Location     Type
  10645 ;;		None               void
@@ -10983,10 +10983,10 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10917 ;; Defined at:
  10918 ;;		line 31 in file "../../../src/devices/mrf49xa_cmd.c"
  10919 ;; Parameters:    Size  Location     Type
- 10920 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
+ 10920 ;;  inst            1    wreg     PTR struct Mrf49xaMac_s
  10921 ;;		 -> mrf49xaInst(78), 
  10922 ;; Auto vars:     Size  Location     Type
- 10923 ;;  inst            1  (no storage) PTR struct rfTrcvStatus_
+ 10923 ;;  inst            1  (no storage) PTR struct Mrf49xaMac_s
  10924 ;;		 -> mrf49xaInst(78), 
  10925 ;; Return value:  Size  Location     Type
  10926 ;;		None               void
@@ -11269,61 +11269,61 @@ Auto Spaces:
 
 Pointer List with Targets:
 
-    Mrf49xaReboot@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaReboot@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaShutdown@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaShutdown@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    RfSendSampleWeatherNode@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    RfSendSampleWeatherNode@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    RfSendPowerState@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    RfSendPowerState@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaTick@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaTick@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaAllocPacket@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaAllocPacket@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaTxAck@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaTxAck@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaModeTx@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaModeTx@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaFreePacket@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaFreePacket@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    HandlePacket@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    HandlePacket@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaRxPacket@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaRxPacket@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaPacketPending@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaPacketPending@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaInit@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaInit@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaTxPacket@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaTxPacket@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaModeRx@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaModeRx@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaModeSleep@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaModeSleep@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49RxSts@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49RxSts@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaServe@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaServe@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    Mrf49xaNeedsReset@inst	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    Mrf49xaNeedsReset@inst	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
     memcpy@d1	PTR void  size(1) Largest target is 21
@@ -11345,7 +11345,7 @@ Pointer List with Targets:
     macPtr.hwRx	PTR struct rfTrcvPacket_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
-    macPtr	PTR struct rfTrcvStatus_s size(1) Largest target is 79
+    macPtr	PTR struct Mrf49xaMac_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
     RfSendSampleWeatherNode@packet	PTR struct rfTrcvPacket_s size(1) Largest target is 79
@@ -11407,7 +11407,7 @@ Pointer List with Targets:
     cb	PTR FTN(unsigned char ,)unsigned char  size(1) Largest target is 1
 		 -> Absolute function(), 
 
-    S278rfTrcvStatus_s$hwRx	PTR struct rfTrcvPacket_s size(1) Largest target is 79
+    S278Mrf49xaMac_s$hwRx	PTR struct rfTrcvPacket_s size(1) Largest target is 79
 		 -> mrf49xaInst(BANK1[78]), 
 
     mrf49xaInst.hwRx	PTR struct rfTrcvPacket_s size(1) Largest target is 79
@@ -12125,7 +12125,7 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.30 build 55553 
-Symbol Table                                                                                   Fri Sep  5 18:35:24 2014
+Symbol Table                                                                                   Fri Sep  5 20:04:57 2014
 
                 Mrf49xaTxPacket@crc 0024                 Mrf49xaTxPacket@inst 0025  
                        __CFG_CP$OFF 0000                                  PL8 0F8A  
@@ -12142,14 +12142,14 @@ Symbol Table                                                                    
                                l271 0D64                                 l263 0D4E  
                                l255 0D38                                 l280 0D7B  
                                l272 0D65                                 l264 0D4F  
-                               l256 0D39                                 l530 0FFB  
-                               l442 0944                                 l283 0D85  
-                               l275 0D6F                                 l267 0D59  
-                               l259 0D43                                 l284 0D86  
-                               l276 0D70                                 l268 0D5A  
-                               l550 0B3A                                 l279 0D7A  
-                               l560 0B59                                 l464 0C1D  
-                               l545 0EF0                                 l561 0B58  
+                               l256 0D39                                 l442 0944  
+                               l283 0D85                                 l275 0D6F  
+                               l267 0D59                                 l259 0D43  
+                               l284 0D86                                 l276 0D70  
+                               l268 0D5A                                 l550 0B3A  
+                               l543 0EF0                                 l279 0D7A  
+                               l528 0FFB                                 l560 0B59  
+                               l464 0C1D                                 l561 0B58  
                                l553 0B0B                                 l465 0C3C  
                                l395 0B6A                                 l559 0B4A  
                    ??_PwrSensorInit 0020                     ??_PwrSensorWake 0020  

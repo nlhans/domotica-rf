@@ -1,6 +1,10 @@
 #ifndef __MRF49XA_H
 #define __MRF49XA_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "stddefs.h"
 
 #include "rfstack/rf_defs.h"
@@ -69,4 +73,7 @@ void Mrf49xaFreePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, bool needAck);
 bool Mrf49xaTxAck(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
