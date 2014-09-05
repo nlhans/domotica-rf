@@ -5,7 +5,7 @@ Linker command line:
 --edf=/opt/microchip/xc8/v1.30/dat/en_msgs.txt -cs \
   -h+dist/default/production/mrf49xa_pic16.X.production.sym \
   --cmf=dist/default/production/mrf49xa_pic16.X.production.cmf -z \
-  -Q16LF1508 -o/tmp/cgtAcJAuy \
+  -Q16LF1508 -o/tmp/cgt0tpYGd \
   -Mdist/default/production/mrf49xa_pic16.X.production.map -E1 -ver=XC8 \
   -ASTACK=0209Eh-020efh -pstack=STACK -ACONST=00h-0FFhx16 \
   -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -AENTRY=00h-0FFhx16 \
@@ -26,7 +26,7 @@ Linker command line:
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
-  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/cgtiRVGpT.obj \
+  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/cgt8KzKim.obj \
   dist/default/production/mrf49xa_pic16.X.production.obj 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Machine type is 16LF1508
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/cgtiRVGpT.obj
+/tmp/cgt8KzKim.obj
                 end_init                             22       22        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        2    1000E       0
@@ -1589,7 +1589,7 @@ Total ram usage:        0 bytes
 
  *************** function _Mrf49xaReboot *****************
  Defined at:
-		line 133 in file "../../../src/devices/mrf49xa.c"
+		line 115 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -1651,7 +1651,7 @@ Total ram usage:        0 bytes
 
  *************** function _Mrf49xaShutdown *****************
  Defined at:
-		line 125 in file "../../../src/devices/mrf49xa.c"
+		line 107 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -1683,7 +1683,7 @@ Total ram usage:        1 bytes
 
  *************** function _Mrf49xaModeSleep *****************
  Defined at:
-		line 116 in file "../../../src/devices/mrf49xa.c"
+		line 98 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -2008,7 +2008,7 @@ Total ram usage:        1 bytes
 
  *************** function _Mrf49xaModeTx *****************
  Defined at:
-		line 105 in file "../../../src/devices/mrf49xa.c"
+		line 87 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -2041,7 +2041,7 @@ Total ram usage:        2 bytes
 
  *************** function _Mrf49xaInit *****************
  Defined at:
-		line 144 in file "../../../src/devices/mrf49xa.c"
+		line 126 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -2150,7 +2150,7 @@ Total ram usage:        3 bytes
 
  *************** function _Mrf49xaNeedsReset *****************
  Defined at:
-		line 139 in file "../../../src/devices/mrf49xa.c"
+		line 121 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -2184,7 +2184,7 @@ Total ram usage:        1 bytes
 
  *************** function _Mrf49xaModeRx *****************
  Defined at:
-		line 93 in file "../../../src/devices/mrf49xa.c"
+		line 75 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -3305,7 +3305,7 @@ Total ram usage:        2 bytes
 
  *************** function i1_Mrf49xaNeedsReset *****************
  Defined at:
-		line 139 in file "../../../src/devices/mrf49xa.c"
+		line 121 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 
@@ -3337,7 +3337,7 @@ Total ram usage:        0 bytes
 
  *************** function i1_Mrf49xaModeRx *****************
  Defined at:
-		line 93 in file "../../../src/devices/mrf49xa.c"
+		line 75 in file "../../../src/devices/mrf49xa.c"
  Parameters:    Size  Location     Type
   inst            1    wreg     PTR struct rfTrcvStatus_
 		 -> mrf49xaInst(78), 

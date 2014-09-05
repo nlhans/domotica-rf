@@ -7,6 +7,25 @@
 #include "devices/mrf49xa_defs.h"
 #include "mrf49xa_bsp.h"
 
+// Code used for initialzing registers into INIT, RX, TX and SLEEP states.
+typedef struct Mrf49InitReg_s
+{
+    uint8_t reg;
+    uint8_t val;
+}Mrf49InitReg_t;
+#define REG(a, b) { a, b}
+
+#define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
+#define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
+
+#define SetupRegistersLoopWithoutDelay(array, count) for (k = 0; k < count; k++) { Mrf49TxCmd(array[k].reg, array[k].val); }
+
+#define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
+    if (array[k].reg == REG_DELAY) { Delay5Ms(); } else \
+{ Mrf49TxCmd(array[k].reg, array[k].val); } }
+
+
+
 // -------
 // mrf49xa.c
 void Mrf49xaInit(Mrf49xaMac_t* inst);

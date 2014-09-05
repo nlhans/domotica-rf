@@ -1,12 +1,5 @@
 #include "devices/mrf49xa.h"
 
-typedef struct Mrf49InitReg_s
-{
-    uint8_t reg;
-    uint8_t val;
-}Mrf49InitReg_t;
-#define REG(a, b) { a, b}
-
 volatile const Mrf49InitReg_t const mrfRegset_Init[] = {
     REG(REG_FIFORSTREG,   FIFORST_RESET),
     REG(REG_FIFORSTREG,   FIFORST_MODE_RX),
@@ -63,17 +56,6 @@ volatile const Mrf49InitReg_t const mrfRegset_Sleep[] = {
     REG(REG_GENCREG,        GENCREG_MODE_SLEEP),
 };
 volatile const uint8_t mrfRegset_SleepCnt = sizeof(mrfRegset_Sleep)/sizeof(Mrf49InitReg_t);
-
-#define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
-#define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
-
-#define SetupRegistersLoopWithoutDelay(array, count) for (k = 0; k < count; k++) { Mrf49TxCmd(array[k].reg, array[k].val); }
-
-#define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
-    if (array[k].reg == REG_DELAY) { Delay5Ms(); } else \
-{ Mrf49TxCmd(array[k].reg, array[k].val); } }
-
-//if (array[k].reg == REG_CMSA) { while(Mrf49xaSignalPresent()); } else {
     
 void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
 {

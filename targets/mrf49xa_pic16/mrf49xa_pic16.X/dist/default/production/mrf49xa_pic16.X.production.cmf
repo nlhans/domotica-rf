@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$/tmp/cgtiRVGpT.obj
+$/tmp/cgt8KzKim.obj
 end_init CODE 0 22 22 2 2
 reset_vec CODE 0 0 0 2 2
 config CONFIG 0 8007 8007 2 2
@@ -196,20 +196,20 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":48 124 text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":50 125 text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":51 128 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":93 129 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":96 129 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":99 147 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":100 148 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":99 149 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":100 14B text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":102 14C text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":103 14D text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":75 129 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":78 129 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":81 147 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":82 148 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":81 149 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":82 14B text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":84 14C text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":85 14D text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":43 14E text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":45 14E text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":46 150 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":139 151 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":141 151 text74 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":142 153 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":121 151 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":123 151 text74 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":124 153 text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":6 154 text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":8 155 text74 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":10 157 text74 CODE
@@ -259,16 +259,16 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":134 278 text18 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":135 27A text18 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":136 27B text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":125 27C text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":127 27C text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":116 27D text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":119 27D text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":131 27D text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":121 29A text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":122 29B text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":121 29C text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":122 29D text18 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":123 29E text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":107 27C text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":109 27C text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":98 27D text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":101 27D text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":113 27D text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":103 29A text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":104 29B text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":103 29C text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":104 29D text18 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":105 29E text18 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":138 29F text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":140 29F text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":142 2A1 text16 CODE
@@ -277,45 +277,45 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":146 2A6 text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":148 2A7 text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":149 2A8 text16 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":133 2AA text16 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":135 2AA text16 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":115 2AA text16 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":117 2AA text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":150 2AA text16 CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":136 2AC text16 CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":118 2AC text16 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/config.c":24 2AC text50 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/config.c":26 2AC text50 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/config.c":27 2B4 text50 CODE
-"/tmp/cgtLAl10s":5964 2B4 clrtext CODE
-"/tmp/cgtLAl10s":5965 2B4 clrtext CODE
-"/tmp/cgtLAl10s":5966 2B5 clrtext CODE
-"/tmp/cgtLAl10s":5967 2B5 clrtext CODE
-"/tmp/cgtLAl10s":5968 2B6 clrtext CODE
-"/tmp/cgtLAl10s":5969 2B7 clrtext CODE
-"/tmp/cgtLAl10s":5970 2B8 clrtext CODE
-"/tmp/cgtLAl10s":5971 2B9 clrtext CODE
+"/tmp/cgtQOnm6j":5964 2B4 clrtext CODE
+"/tmp/cgtQOnm6j":5965 2B4 clrtext CODE
+"/tmp/cgtQOnm6j":5966 2B5 clrtext CODE
+"/tmp/cgtQOnm6j":5967 2B5 clrtext CODE
+"/tmp/cgtQOnm6j":5968 2B6 clrtext CODE
+"/tmp/cgtQOnm6j":5969 2B7 clrtext CODE
+"/tmp/cgtQOnm6j":5970 2B8 clrtext CODE
+"/tmp/cgtQOnm6j":5971 2B9 clrtext CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c":17 2BA text77 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c":19 2BA text77 CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/pic16/interrupt.c":20 2BB text77 CODE
-"/tmp/cgtLAl10s":5923 801 cinit CODE
-"/tmp/cgtLAl10s":5926 801 cinit CODE
-"/tmp/cgtLAl10s":5975 801 cinit CODE
-"/tmp/cgtLAl10s":5976 802 cinit CODE
-"/tmp/cgtLAl10s":5977 803 cinit CODE
-"/tmp/cgtLAl10s":5978 804 cinit CODE
-"/tmp/cgtLAl10s":5979 805 cinit CODE
-"/tmp/cgtLAl10s":5980 806 cinit CODE
-"/tmp/cgtLAl10s":5984 809 cinit CODE
-"/tmp/cgtLAl10s":5985 80A cinit CODE
-"/tmp/cgtLAl10s":5986 80B cinit CODE
-"/tmp/cgtLAl10s":5987 80C cinit CODE
-"/tmp/cgtLAl10s":5988 80D cinit CODE
-"/tmp/cgtLAl10s":5989 80E cinit CODE
+"/tmp/cgtQOnm6j":5923 801 cinit CODE
+"/tmp/cgtQOnm6j":5926 801 cinit CODE
+"/tmp/cgtQOnm6j":5975 801 cinit CODE
+"/tmp/cgtQOnm6j":5976 802 cinit CODE
+"/tmp/cgtQOnm6j":5977 803 cinit CODE
+"/tmp/cgtQOnm6j":5978 804 cinit CODE
+"/tmp/cgtQOnm6j":5979 805 cinit CODE
+"/tmp/cgtQOnm6j":5980 806 cinit CODE
+"/tmp/cgtQOnm6j":5984 809 cinit CODE
+"/tmp/cgtQOnm6j":5985 80A cinit CODE
+"/tmp/cgtQOnm6j":5986 80B cinit CODE
+"/tmp/cgtQOnm6j":5987 80C cinit CODE
+"/tmp/cgtQOnm6j":5988 80D cinit CODE
+"/tmp/cgtQOnm6j":5989 80E cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":9 811 cinit CODE
-"/tmp/cgtLAl10s":5995 812 cinit CODE
+"/tmp/cgtQOnm6j":5995 812 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/rfstack/packets.c":8 813 cinit CODE
-"/tmp/cgtLAl10s":6000 814 cinit CODE
-"/tmp/cgtLAl10s":6006 815 cinit CODE
-"/tmp/cgtLAl10s":6007 815 cinit CODE
-"/tmp/cgtLAl10s":6008 816 cinit CODE
+"/tmp/cgtQOnm6j":6000 814 cinit CODE
+"/tmp/cgtQOnm6j":6006 815 cinit CODE
+"/tmp/cgtQOnm6j":6007 815 cinit CODE
+"/tmp/cgtQOnm6j":6008 816 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":15 817 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":32 819 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":33 81B cinit CODE
@@ -429,34 +429,34 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c":255 946 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c":259 948 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c":261 949 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":144 94A cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":150 94A cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":152 94A cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":154 94C cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":152 94F cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":154 950 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":152 952 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":158 956 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":159 957 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":160 959 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":162 95B cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":163 95D cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":165 95E cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":167 95F cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":168 963 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":169 967 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":170 969 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":171 96D cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":173 96E cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":175 971 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":178 99C cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":180 99F cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":181 9A1 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":183 9A4 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":184 9A5 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":194 9A9 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":181 9AC cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":197 9AD cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":126 94A cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":132 94A cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":134 94A cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":136 94C cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":134 94F cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":136 950 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":134 952 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":140 956 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":141 957 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":142 959 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":144 95B cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":145 95D cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":147 95E cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":149 95F cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":150 963 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":151 967 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":152 969 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":153 96D cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":155 96E cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":157 971 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":160 99C cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":162 99F cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":163 9A1 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":165 9A4 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":166 9A5 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":176 9A9 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":163 9AC cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":179 9AD cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":45 9AD cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":47 9AD cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":49 9AE cinit CODE
@@ -604,9 +604,9 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":83 AD2 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":84 AD4 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/bsp/softI2c.c":85 AD5 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":139 AD5 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":141 AD5 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":142 AD7 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":121 AD5 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":123 AD5 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":124 AD7 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":76 AD8 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":78 AD8 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":83 AD9 cinit CODE
@@ -688,11 +688,11 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_mac.c":15 BE5 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":85 BE5 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/node/power.c":88 BE5 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":105 BE6 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":108 BE6 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":111 C03 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":112 C06 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":113 C0A cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":87 BE6 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":90 BE6 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":93 C03 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":94 C06 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":95 C0A cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c":7 C0B cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c":12 C0B cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c":13 C0E cinit CODE
@@ -764,15 +764,15 @@ $dist/default/production/mrf49xa_pic16.X.production.obj
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_phy.c":206 CFE cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":48 CFF cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":50 D01 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":93 D04 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":96 D04 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":75 D04 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":78 D04 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":51 D04 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":99 D21 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":100 D22 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":99 D23 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":100 D25 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":102 D26 cinit CODE
-"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":103 D27 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":81 D21 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":82 D22 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":81 D23 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":82 D25 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":84 D26 cinit CODE
+"/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c":85 D27 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":43 D28 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":45 D28 cinit CODE
 "/home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c":6 D2A cinit CODE
@@ -1034,13 +1034,13 @@ i1_Mrf49RxByte 29C 0 CODE 0 text74 dist/default/production/mrf49xa_pic16.X.produ
 Mrf49xaPacketPending@inst 20 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 i1_Mrf49TxByte 248 0 CODE 0 text74 dist/default/production/mrf49xa_pic16.X.production.obj
 _main 108E 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
-___sp 0 0 STACK 2 stack /tmp/cgtiRVGpT.obj
+___sp 0 0 STACK 2 stack /tmp/cgt8KzKim.obj
 btemp 7E 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 ltemp 7E 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 ttemp 7E 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 wtemp 7E 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 _mrfRegset_InitCnt 454 0 STRING 0 strings dist/default/production/mrf49xa_pic16.X.production.obj
-start 44 0 CODE 0 init /tmp/cgtiRVGpT.obj
+start 44 0 CODE 0 init /tmp/cgt8KzKim.obj
 __end_of_handleCfgCmd 1DE2 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 Mrf49xaTxAck@inst 28 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 __size_of_SoftI2cStart 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
@@ -1048,7 +1048,7 @@ __end_of_Mrf49xaTxAck 17B8 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.
 __end_of_Mrf49xaServe 19FE 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 __end_of_eepromRxBytes 1496 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 __end_ofPL14 452 0 CODE 0 text74 dist/default/production/mrf49xa_pic16.X.production.obj
-reset_vec 0 0 CODE 0 reset_vec /tmp/cgtiRVGpT.obj
+reset_vec 0 0 CODE 0 reset_vec /tmp/cgt8KzKim.obj
 Mrf49xaTxPacket@needAck 22 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 __end_of_PwrAdcWake 1CC6 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 _PwrI2cSleep 15B0 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
@@ -1118,7 +1118,7 @@ _coldBoot 3F 0 BANK0 1 dataBANK0 dist/default/production/mrf49xa_pic16.X.product
 _LATAbits 10C 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 _LATBbits 10D 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 _LATCbits 10E 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
-___int_sp 0 0 STACK 2 stack /tmp/cgtiRVGpT.obj
+___int_sp 0 0 STACK 2 stack /tmp/cgt8KzKim.obj
 _WPUAbits 20C 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 __CFG_CLKOUTEN$OFF 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 _ANSELA 18C 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
@@ -1181,13 +1181,13 @@ __Hcode 0 0 ABS 0 code -
 __Lcode 0 0 ABS 0 code -
 _cfgRam 36 0 BANK0 1 bssBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 _SoftI2cInit 102E 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
-stackhi 20EF 0 ABS 0 - /tmp/cgtiRVGpT.obj
+stackhi 20EF 0 ABS 0 - /tmp/cgt8KzKim.obj
 __HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __LcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 _AdcChSelect 1CA4 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 _macPtr 78 0 COMMON 1 dataCOMMON dist/default/production/mrf49xa_pic16.X.production.obj
-stacklo 209E 0 ABS 0 - /tmp/cgtiRVGpT.obj
+stacklo 209E 0 ABS 0 - /tmp/cgt8KzKim.obj
 _extInt 8 0 CODE 0 intentry dist/default/production/mrf49xa_pic16.X.production.obj
 __end_of_AdcInit 1D8C 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 __end_of_handleCfgWrite 1E9E 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
@@ -1626,24 +1626,24 @@ __size_of_AdcChSelect 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.produc
 i1_Mrf49TxCmd 2A8 0 CODE 0 text74 dist/default/production/mrf49xa_pic16.X.production.obj
 ?_AdcGetResult 20 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 _parameters 4D0 0 STRING 0 strings dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel0 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel0 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 __size_of_Mcp9800Read 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 Mrf49xaTxPacket@i 26 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel1 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel1 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 _handleCfgCmd 1D8C 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 __end_of_RfSendSampleWeatherNode 1D4E 0 CODE 0 cinit dist/default/production/mrf49xa_pic16.X.production.obj
 __size_of_PwrRfWake 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 __size_of_Mrf49TxCmd 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel2 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel2 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 __size_of_CfgGetSizeByType 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel3 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel3 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 __end_of_PwrRfSleep 4F8 0 CODE 0 text18 dist/default/production/mrf49xa_pic16.X.production.obj
 Mrf49xaTxPacket@crc 24 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel4 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel4 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 __CFG_LPBOR$OFF 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 AdcChSelect@channel 20 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj
 __size_of_Mrf49xaModeRx 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
-intlevel5 0 0 CODE 0 functab /tmp/cgtiRVGpT.obj
+intlevel5 0 0 CODE 0 functab /tmp/cgt8KzKim.obj
 __size_of_Mrf49xaModeTx 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 __size_of_Mrf49xaModeSleep 0 0 ABS 0 - dist/default/production/mrf49xa_pic16.X.production.obj
 Mrf49xaRxPacket@inst 20 0 BANK0 1 cstackBANK0 dist/default/production/mrf49xa_pic16.X.production.obj

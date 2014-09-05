@@ -51,7 +51,7 @@ Mcp9800_10bit 32
 Mcp9800_11bit 64
 Mcp9800_12bit 96
 ]
-"85 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"67 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [e E4326 rfTrcvPacketState_e `uc
 PKT_FREE 0
 PKT_READY_FOR_TX 1
@@ -152,7 +152,7 @@ PKT_HW_READY_RX 5
 PKT_SW_BUSY 6
 ]
 "105
-[e E4473 CfgParameterType_e `uc
+[e E4477 CfgParameterType_e `uc
 CFG_TYPE_INT8 0
 CFG_TYPE_INT16 1
 CFG_TYPE_INT32 2
@@ -233,7 +233,7 @@ ADC_DAC 30
 ADC_FVR 31
 ]
 "59 /home/hans/Projects/Firmware/domoticaRf/src/node/main.c
-[e E4495 Mcp9800Resolution_e `uc
+[e E4499 Mcp9800Resolution_e `uc
 Mcp9800_9bit 0
 Mcp9800_10bit 32
 Mcp9800_11bit 64
@@ -347,27 +347,27 @@ CFG_TYPE_INT32 2
 [v _Mcp9800Start Mcp9800Start `(v  1 e 0 0 ]
 "19
 [v _Mcp9800Read Mcp9800Read `(ui  1 e 2 0 ]
-"78 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"60 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _mrf49xaCfg mrf49xaCfg `(v  1 e 0 0 ]
-"84
+"66
 [v _Mrf49xaSignalPresent Mrf49xaSignalPresent `(uc  1 e 1 0 ]
-"93
+"75
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
-"105
+"87
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
-"116
+"98
 [v _Mrf49xaModeSleep Mrf49xaModeSleep `(v  1 e 0 0 ]
-"125
+"107
 [v _Mrf49xaShutdown Mrf49xaShutdown `(v  1 e 0 0 ]
-"133
+"115
 [v _Mrf49xaReboot Mrf49xaReboot `(v  1 e 0 0 ]
-"139
+"121
 [v _Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 [v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 [v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
-"144
+"126
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 "6 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxCmd Mrf49TxCmd `(v  1 e 0 0 ]
@@ -554,21 +554,21 @@ CFG_TYPE_INT32 2
 "49 /opt/microchip/xc8/v1.30/sources/pic/ftdiv.c
 [v ___ftdiv __ftdiv `(f  1 e 3 0 ]
 [s S384 Mrf49InitReg_s 2 `uc 1 reg 1 0 `uc 1 val 1 1 ]
-"10 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"3 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _mrfRegset_Init mrfRegset_Init `DVCCE[16]S384  1 e 32 0 ]
-"40
+"33
 [v _mrfRegset_InitCnt mrfRegset_InitCnt `DVCCEuc  1 e 1 0 ]
-"42
+"35
 [v _mrfRegset_Rx mrfRegset_Rx `DVCCE[6]S384  1 e 12 0 ]
-"50
+"43
 [v _mrfRegset_RxCnt mrfRegset_RxCnt `DVCCEuc  1 e 1 0 ]
-"52
+"45
 [v _mrfRegset_Tx mrfRegset_Tx `DVCCE[4]S384  1 e 8 0 ]
-"58
+"51
 [v _mrfRegset_TxCnt mrfRegset_TxCnt `DVCCEuc  1 e 1 0 ]
-"60
+"53
 [v _mrfRegset_Sleep mrfRegset_Sleep `DVCCE[3]S384  1 e 6 0 ]
-"65
+"58
 [v _mrfRegset_SleepCnt mrfRegset_SleepCnt `DVCCEuc  1 e 1 0 ]
 [s S1195 CfgRam_s 9 `uc 1 nodeId 1 0 `ui 1 sensorRate 2 1 `ui 1 tempResolution 2 3 `ui 1 tempSleepTime 2 5 `ui 1 checksum 2 7 ]
 "8 /home/hans/Projects/Firmware/domoticaRf/src/node/config.c
@@ -944,7 +944,7 @@ CFG_TYPE_INT32 2
 {
 "150
 } 0
-"133 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"115 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaReboot Mrf49xaReboot `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -975,14 +975,14 @@ CFG_TYPE_INT32 2
 ]
 [v Mrf49xaReboot@inst inst `*.4S278  1 a 1 wreg ]
 [v Mrf49xaReboot@inst inst `*.4S278  1 a 1 wreg ]
-"136
+"118
 } 0
 "121 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrRfSleep PwrRfSleep `(v  1 e 0 0 ]
 {
 "136
 } 0
-"125 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"107 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaShutdown Mrf49xaShutdown `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1013,9 +1013,9 @@ CFG_TYPE_INT32 2
 ]
 [v Mrf49xaShutdown@inst inst `*.4S278  1 a 1 wreg ]
 [v Mrf49xaShutdown@inst inst `*.4S278  1 a 1 wreg ]
-"131
+"113
 } 0
-"116
+"98
 [v _Mrf49xaModeSleep Mrf49xaModeSleep `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1045,11 +1045,11 @@ CFG_TYPE_INT32 2
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeSleep@inst inst `*.4S278  1 a 1 wreg ]
-"118
+"100
 [v Mrf49xaModeSleep@k k `uc  1 a 1 4 ]
-"116
+"98
 [v Mrf49xaModeSleep@inst inst `*.4S278  1 a 1 wreg ]
-"123
+"105
 } 0
 "90 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _PwrRfInit PwrRfInit `(v  1 e 0 0 ]
@@ -1187,7 +1187,7 @@ CFG_TYPE_INT32 2
 [v Mrf49xaPacketPending@inst inst `*.4S278  1 a 1 wreg ]
 "15
 } 0
-"105 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"87 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaModeTx Mrf49xaModeTx `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1217,13 +1217,13 @@ CFG_TYPE_INT32 2
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeTx@inst inst `*.4S278  1 a 1 wreg ]
-"107
+"89
 [v Mrf49xaModeTx@k k `uc  1 a 1 4 ]
-"105
+"87
 [v Mrf49xaModeTx@inst inst `*.4S278  1 a 1 wreg ]
-"113
+"95
 } 0
-"144
+"126
 [v _Mrf49xaInit Mrf49xaInit `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1253,11 +1253,11 @@ CFG_TYPE_INT32 2
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaInit@inst inst `*.4S278  1 a 1 wreg ]
-"146
+"128
 [v Mrf49xaInit@k k `uc  1 a 1 9 ]
-"144
+"126
 [v Mrf49xaInit@inst inst `*.4S278  1 a 1 wreg ]
-"197
+"179
 } 0
 "45 /home/hans/Projects/Firmware/domoticaRf/src/node/power.c
 [v _Sleepy Sleepy `(v  1 e 0 0 ]
@@ -1304,7 +1304,7 @@ CFG_TYPE_INT32 2
 [v Mrf49xaServe@inst inst `*.4S278  1 a 1 wreg ]
 "206
 } 0
-"139 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"121 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v _Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1335,9 +1335,9 @@ CFG_TYPE_INT32 2
 ]
 [v Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
 [v Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
-"142
+"124
 } 0
-"93
+"75
 [v _Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1367,11 +1367,11 @@ CFG_TYPE_INT32 2
 `uc 1 needsReset 1 77 :1:7 
 ]
 [v Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
-"95
+"77
 [v Mrf49xaModeRx@k k `uc  1 a 1 3 ]
-"93
+"75
 [v Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
-"103
+"85
 } 0
 "48 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v _Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]
@@ -1837,7 +1837,7 @@ CFG_TYPE_INT32 2
 [v i1Mrf49xaServe@inst inst `*.4S278  1 a 1 wreg ]
 "206
 } 0
-"139 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
+"121 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa.c
 [v i1_Mrf49xaNeedsReset Mrf49xaNeedsReset `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1868,9 +1868,9 @@ CFG_TYPE_INT32 2
 ]
 [v i1Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
 [v i1Mrf49xaNeedsReset@inst inst `*.4S278  1 a 1 wreg ]
-"142
+"124
 } 0
-"93
+"75
 [v i1_Mrf49xaModeRx Mrf49xaModeRx `(v  1 e 0 0 ]
 {
 [s S227 . 1 `uc 1 signalPresent 1 0 :1:0 
@@ -1902,7 +1902,7 @@ CFG_TYPE_INT32 2
 [v i1Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
 [v i1Mrf49xaModeRx@k Mrf49xaModeRx `uc  1 a 1 3 ]
 [v i1Mrf49xaModeRx@inst inst `*.4S278  1 a 1 wreg ]
-"103
+"85
 } 0
 "48 /home/hans/Projects/Firmware/domoticaRf/src/devices/mrf49xa_cmd.c
 [v i1_Mrf49TxByte Mrf49TxByte `(v  1 e 0 0 ]

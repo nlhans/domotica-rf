@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC PRO Macro Assembler V1.30 build 55553 
-                                                                                               Fri Sep  5 18:16:18 2014
+                                                                                               Fri Sep  5 18:35:24 2014
 
 Microchip Technology Omniscient Code Generator (PRO mode) build 55553
      1                           	processor	16LF1508
@@ -3701,7 +3701,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3686  094A                     __ptext31:	
   3687 ;; *************** function _Mrf49xaInit *****************
   3688 ;; Defined at:
-  3689 ;;		line 144 in file "../../../src/devices/mrf49xa.c"
+  3689 ;;		line 126 in file "../../../src/devices/mrf49xa.c"
   3690 ;; Parameters:    Size  Location     Type
   3691 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   3692 ;;		 -> mrf49xaInst(78), 
@@ -3744,18 +3744,18 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3729  094A                     l234:	
   3730                           ;incstack = 0
   3731                           ; Regs used in _Mrf49xaInit: [allreg]
-  3732                           ;mrf49xa.c: 146: UI08_t k;
-  3733                           ;mrf49xa.c: 148: UI08_t i, j;
-  3734                           ;mrf49xa.c: 150: reset:
+  3732                           ;mrf49xa.c: 128: UI08_t k;
+  3733                           ;mrf49xa.c: 130: UI08_t i, j;
+  3734                           ;mrf49xa.c: 132: reset:
   3735                           
   3736                           
-  3737                           ;mrf49xa.c: 152: for (k = 0; k < sizeof(Mrf49xaMac_t); k++)
+  3737                           ;mrf49xa.c: 134: for (k = 0; k < sizeof(Mrf49xaMac_t); k++)
   3738  094A  0020               	movlb	0	; select bank0
   3739  094B  01A9               	clrf	Mrf49xaInit@k
   3740  094C                     l3011:	
   3741                           
-  3742                           ;mrf49xa.c: 153: {
-  3743                           ;mrf49xa.c: 154: ((uint8_t*)((Mrf49xaMac_t*)(&mrf49xaInst)))[k] = 0;
+  3742                           ;mrf49xa.c: 135: {
+  3743                           ;mrf49xa.c: 136: ((uint8_t*)((Mrf49xaMac_t*)(&mrf49xaInst)))[k] = 0;
   3744  094C  0829               	movf	Mrf49xaInit@k,w
   3745  094D  3EA0               	addlw	_mrf49xaInst& (0+255)
   3746  094E  0086               	movwf	6
@@ -3767,54 +3767,54 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3752  0954  1C03               	skipc
   3753  0955  294C               	goto	l3011
   3754                           
-  3755                           ;mrf49xa.c: 155: }
-  3756                           ;mrf49xa.c: 158: PORTCbits.RC6 = 1;
+  3755                           ;mrf49xa.c: 137: }
+  3756                           ;mrf49xa.c: 140: PORTCbits.RC6 = 1;
   3757  0956  170E               	bsf	14,6	;volatile
   3758                           
-  3759                           ;mrf49xa.c: 159: LATCbits.LATC7 = 0;
+  3759                           ;mrf49xa.c: 141: LATCbits.LATC7 = 0;
   3760  0957  0022               	movlb	2	; select bank2
   3761  0958  138E               	bcf	14,7	;volatile
   3762                           
-  3763                           ;mrf49xa.c: 160: PORTBbits.RB7 = 0;
+  3763                           ;mrf49xa.c: 142: PORTBbits.RB7 = 0;
   3764  0959  0020               	movlb	0	; select bank0
   3765  095A  138D               	bcf	13,7	;volatile
   3766                           
-  3767                           ;mrf49xa.c: 162: LATCbits.LATC1 = 0;
+  3767                           ;mrf49xa.c: 144: LATCbits.LATC1 = 0;
   3768  095B  0022               	movlb	2	; select bank2
   3769  095C  108E               	bcf	14,1	;volatile
   3770                           
-  3771                           ;mrf49xa.c: 163: LATCbits.LATC4 = 1;
+  3771                           ;mrf49xa.c: 145: LATCbits.LATC4 = 1;
   3772  095D  160E               	bsf	14,4	;volatile
   3773                           
-  3774                           ;mrf49xa.c: 165: LATAbits.LATA5 = 1;
+  3774                           ;mrf49xa.c: 147: LATAbits.LATA5 = 1;
   3775  095E  168C               	bsf	12,5	;volatile
   3776                           
-  3777                           ;mrf49xa.c: 167: Sleepy(64);
+  3777                           ;mrf49xa.c: 149: Sleepy(64);
   3778  095F  27CF  3188         	fcall	PL22	;call to abstracted procedure
   3779  0961  21AD  3188         	fcall	_Sleepy
   3780                           
-  3781                           ;mrf49xa.c: 168: LATAbits.LATA4 = 0;
+  3781                           ;mrf49xa.c: 150: LATAbits.LATA4 = 0;
   3782  0963  0022               	movlb	2	; select bank2
   3783  0964  120C               	bcf	12,4	;volatile
   3784                           
-  3785                           ;mrf49xa.c: 169: Sleepy(64);
+  3785                           ;mrf49xa.c: 151: Sleepy(64);
   3786  0965  27CF  3188         	fcall	PL22	;call to abstracted procedure
   3787  0967  21AD  3188         	fcall	_Sleepy
   3788                           
-  3789                           ;mrf49xa.c: 170: LATAbits.LATA4 = 1;
+  3789                           ;mrf49xa.c: 152: LATAbits.LATA4 = 1;
   3790  0969  0022               	movlb	2	; select bank2
   3791  096A  160C               	bsf	12,4	;volatile
   3792                           
-  3793                           ;mrf49xa.c: 171: Sleepy(64);
+  3793                           ;mrf49xa.c: 153: Sleepy(64);
   3794  096B  27CF  3188         	fcall	PL22	;call to abstracted procedure
   3795  096D  21AD               	fcall	_Sleepy
   3796                           
-  3797                           ;mrf49xa.c: 173: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
+  3797                           ;mrf49xa.c: 155: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
   3798  096E  0021               	movlb	1	; select bank1
   3799  096F  01EB               	clrf	(_mrf49xaInst^(0+128)+75)
   3800  0970  0AEB               	incf	(_mrf49xaInst^(0+128)+75),f
   3801                           
-  3802                           ;mrf49xa.c: 175: for (k = 0; k < mrfRegset_InitCnt; k++) { if (mrfRegset_Init[k].reg == 
+  3802                           ;mrf49xa.c: 157: for (k = 0; k < mrfRegset_InitCnt; k++) { if (mrfRegset_Init[k].reg == 
       +                          0x55) { Sleepy(5); } else { Mrf49TxCmd(mrfRegset_Init[k].reg, mrfRegset_Init[k].val); } 
       +                          };
   3803  0971  0020               	movlb	0	; select bank0
@@ -3864,34 +3864,34 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   3847  099B  297A               	goto	l3031
   3848  099C                     l3041:	
   3849                           
-  3850                           ;mrf49xa.c: 178: Mrf49xaModeRx(((Mrf49xaMac_t*)(&mrf49xaInst)));
+  3850                           ;mrf49xa.c: 160: Mrf49xaModeRx(((Mrf49xaMac_t*)(&mrf49xaInst)));
   3851  099C  30A0               	movlw	_mrf49xaInst& (0+255)
   3852  099D  2504  3188         	fcall	_Mrf49xaModeRx
   3853                           
-  3854                           ;mrf49xa.c: 180: k = 0;
+  3854                           ;mrf49xa.c: 162: k = 0;
   3855  099F  0020               	movlb	0	; select bank0
   3856  09A0  01A9               	clrf	Mrf49xaInit@k
   3857  09A1                     l3053:	
-  3858                           ;mrf49xa.c: 181: while(PORTAbits.RA2 == 0)
+  3858                           ;mrf49xa.c: 163: while(PORTAbits.RA2 == 0)
   3859                           
   3860  09A1  0020               	movlb	0	; select bank0
   3861  09A2  190C               	btfsc	12,2	;volatile
   3862  09A3  0008               	return
   3863                           
-  3864                           ;mrf49xa.c: 182: {
-  3865                           ;mrf49xa.c: 183: k++;
+  3864                           ;mrf49xa.c: 164: {
+  3865                           ;mrf49xa.c: 165: k++;
   3866  09A4  0AA9               	incf	Mrf49xaInit@k,f
   3867                           
-  3868                           ;mrf49xa.c: 184: if (k == 255)
+  3868                           ;mrf49xa.c: 166: if (k == 255)
   3869  09A5  0829               	movf	Mrf49xaInit@k,w
   3870  09A6  3AFF               	xorlw	255
   3871  09A7  1903               	btfsc	3,2
   3872  09A8  294A               	goto	l234
   3873                           
-  3874                           ;mrf49xa.c: 189: }
-  3875                           ;mrf49xa.c: 194: Mrf49xaServe(((Mrf49xaMac_t*)(&mrf49xaInst)));
+  3874                           ;mrf49xa.c: 171: }
+  3875                           ;mrf49xa.c: 176: Mrf49xaServe(((Mrf49xaMac_t*)(&mrf49xaInst)));
   3876                           
-  3877                           ;mrf49xa.c: 188: goto reset;
+  3877                           ;mrf49xa.c: 170: goto reset;
   3878  09A9  30A0               	movlw	_mrf49xaInst& (0+255)
   3879  09AA  240B  3188         	fcall	_Mrf49xaServe
   3880  09AC  29A1               	goto	l3053
@@ -4875,7 +4875,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   4858  0AD5                     __ptext34:	
   4859 ;; *************** function _Mrf49xaNeedsReset *****************
   4860 ;; Defined at:
-  4861 ;;		line 139 in file "../../../src/devices/mrf49xa.c"
+  4861 ;;		line 121 in file "../../../src/devices/mrf49xa.c"
   4862 ;; Parameters:    Size  Location     Type
   4863 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   4864 ;;		 -> mrf49xaInst(78), 
@@ -4911,7 +4911,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   4894                           ;psect for function _Mrf49xaNeedsReset
   4895  0AD5                     _Mrf49xaNeedsReset:	
   4896                           
-  4897                           ;mrf49xa.c: 141: ((Mrf49xaMac_t*)(&mrf49xaInst))->needsReset = 1;
+  4897                           ;mrf49xa.c: 123: ((Mrf49xaMac_t*)(&mrf49xaInst))->needsReset = 1;
   4898                           
   4899                           ;incstack = 0
   4900                           ; Regs used in _Mrf49xaNeedsReset: [wreg]
@@ -5757,7 +5757,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5730  0BE6                     __ptext30:	
   5731 ;; *************** function _Mrf49xaModeTx *****************
   5732 ;; Defined at:
-  5733 ;;		line 105 in file "../../../src/devices/mrf49xa.c"
+  5733 ;;		line 87 in file "../../../src/devices/mrf49xa.c"
   5734 ;; Parameters:    Size  Location     Type
   5735 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   5736 ;;		 -> mrf49xaInst(78), 
@@ -5792,9 +5792,9 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5765                           ;psect for function _Mrf49xaModeTx
   5766  0BE6                     _Mrf49xaModeTx:	
   5767                           
-  5768                           ;mrf49xa.c: 107: UI08_t k;
-  5769                           ;mrf49xa.c: 108: for (k = 0; k < mrfRegset_TxCnt; k++) { Mrf49TxCmd(mrfRegset_Tx[k].reg,
-      +                           mrfRegset_Tx[k].val); };
+  5768                           ;mrf49xa.c: 89: UI08_t k;
+  5769                           ;mrf49xa.c: 90: for (k = 0; k < mrfRegset_TxCnt; k++) { Mrf49TxCmd(mrfRegset_Tx[k].reg, 
+      +                          mrfRegset_Tx[k].val); };
   5770                           
   5771                           ;incstack = 0
   5772                           ; Regs used in _Mrf49xaModeTx: [wreg+status,2+status,0+pclath+cstack]
@@ -5830,12 +5830,12 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   5802  0C02  2BEF               	goto	l2975
   5803  0C03                     l2981:	
   5804                           
-  5805                           ;mrf49xa.c: 111: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = TX_PACKET;
+  5805                           ;mrf49xa.c: 93: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = TX_PACKET;
   5806  0C03  3003               	movlw	3
   5807  0C04  0021               	movlb	1	; select bank1
   5808  0C05  00EB               	movwf	(_mrf49xaInst^(0+128)+75)
   5809                           
-  5810                           ;mrf49xa.c: 112: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 99;
+  5810                           ;mrf49xa.c: 94: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 99;
   5811  0C06  086D               	movf	(_mrf49xaInst^(0+128)+77),w
   5812  0C07  3980               	andlw	-128
   5813  0C08  3863               	iorlw	99
@@ -6362,7 +6362,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6323  0D04                     __ptext35:	
   6324 ;; *************** function _Mrf49xaModeRx *****************
   6325 ;; Defined at:
-  6326 ;;		line 93 in file "../../../src/devices/mrf49xa.c"
+  6326 ;;		line 75 in file "../../../src/devices/mrf49xa.c"
   6327 ;; Parameters:    Size  Location     Type
   6328 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   6329 ;;		 -> mrf49xaInst(78), 
@@ -6403,8 +6403,8 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6364                           ; Regs used in _Mrf49xaModeRx: [wreg+status,2+status,0+pclath+cstack]
   6365                           
   6366                           
-  6367                           ;mrf49xa.c: 95: UI08_t k;
-  6368                           ;mrf49xa.c: 96: for (k = 0; k < mrfRegset_RxCnt; k++) { Mrf49TxCmd(mrfRegset_Rx[k].reg, 
+  6367                           ;mrf49xa.c: 77: UI08_t k;
+  6368                           ;mrf49xa.c: 78: for (k = 0; k < mrfRegset_RxCnt; k++) { Mrf49TxCmd(mrfRegset_Rx[k].reg, 
       +                          mrfRegset_Rx[k].val); };
   6369  0D04  0020               	movlb	0	; select bank0
   6370  0D05  302B               	movlw	low (_mrfRegset_RxCnt| (0+32768))
@@ -6438,16 +6438,16 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   6398  0D20  2D0D               	goto	l2959
   6399  0D21                     l211:	
   6400                           
-  6401                           ;mrf49xa.c: 99: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
+  6401                           ;mrf49xa.c: 81: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
   6402  0D21  0021               	movlb	1	; select bank1
   6403  0D22  3080               	movlw	-128
   6404  0D23  01EB               	clrf	(_mrf49xaInst^(0+128)+75)
   6405  0D24  0AEB               	incf	(_mrf49xaInst^(0+128)+75),f
   6406                           
-  6407                           ;mrf49xa.c: 100: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
+  6407                           ;mrf49xa.c: 82: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
   6408  0D25  05ED               	andwf	(_mrf49xaInst^(0+128)+77),f
   6409                           
-  6410                           ;mrf49xa.c: 102: ((Mrf49xaMac_t*)(&mrf49xaInst))->status.flags.msb.fifoTxRx = 0;
+  6410                           ;mrf49xa.c: 84: ((Mrf49xaMac_t*)(&mrf49xaInst))->status.flags.msb.fifoTxRx = 0;
   6411  0D26  13A0               	bcf	_mrf49xaInst^(0+128),7
   6412  0D27  0008               	return
   6413  0D28                     __end_of_Mrf49xaModeRx:	
@@ -9601,7 +9601,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9549  02AA                     __ptext17:	
   9550 ;; *************** function _Mrf49xaReboot *****************
   9551 ;; Defined at:
-  9552 ;;		line 133 in file "../../../src/devices/mrf49xa.c"
+  9552 ;;		line 115 in file "../../../src/devices/mrf49xa.c"
   9553 ;; Parameters:    Size  Location     Type
   9554 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   9555 ;;		 -> mrf49xaInst(78), 
@@ -9635,7 +9635,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9583                           ;psect for function _Mrf49xaReboot
   9584  02AA                     _Mrf49xaReboot:	
   9585                           
-  9586                           ;mrf49xa.c: 135: Mrf49xaModeRx(((Mrf49xaMac_t*)(&mrf49xaInst)));
+  9586                           ;mrf49xa.c: 117: Mrf49xaModeRx(((Mrf49xaMac_t*)(&mrf49xaInst)));
   9587                           
   9588                           ;incstack = 0
   9589                           ; Regs used in _Mrf49xaReboot: [wreg+status,2+status,0+pclath+cstack]
@@ -9716,7 +9716,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9664  027C                     __ptext19:	
   9665 ;; *************** function _Mrf49xaShutdown *****************
   9666 ;; Defined at:
-  9667 ;;		line 125 in file "../../../src/devices/mrf49xa.c"
+  9667 ;;		line 107 in file "../../../src/devices/mrf49xa.c"
   9668 ;; Parameters:    Size  Location     Type
   9669 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   9670 ;;		 -> mrf49xaInst(78), 
@@ -9750,7 +9750,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9698                           ;psect for function _Mrf49xaShutdown
   9699  027C                     _Mrf49xaShutdown:	
   9700                           
-  9701                           ;mrf49xa.c: 127: Mrf49xaModeSleep(((Mrf49xaMac_t*)(&mrf49xaInst)));
+  9701                           ;mrf49xa.c: 109: Mrf49xaModeSleep(((Mrf49xaMac_t*)(&mrf49xaInst)));
   9702                           
   9703                           ;incstack = 0
   9704                           ; Regs used in _Mrf49xaShutdown: [wreg+status,2+status,0+pclath+cstack]
@@ -9759,7 +9759,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9707  027D                     __ptext20:	
   9708 ;; *************** function _Mrf49xaModeSleep *****************
   9709 ;; Defined at:
-  9710 ;;		line 116 in file "../../../src/devices/mrf49xa.c"
+  9710 ;;		line 98 in file "../../../src/devices/mrf49xa.c"
   9711 ;; Parameters:    Size  Location     Type
   9712 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
   9713 ;;		 -> mrf49xaInst(78), 
@@ -9798,8 +9798,8 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9746                           ; Regs used in _Mrf49xaModeSleep: [wreg+status,2+status,0+pclath+cstack]
   9747                           
   9748                           
-  9749                           ;mrf49xa.c: 118: UI08_t k;
-  9750                           ;mrf49xa.c: 119: for (k = 0; k < mrfRegset_SleepCnt; k++) { Mrf49TxCmd(mrfRegset_Sleep[k
+  9749                           ;mrf49xa.c: 100: UI08_t k;
+  9750                           ;mrf49xa.c: 101: for (k = 0; k < mrfRegset_SleepCnt; k++) { Mrf49TxCmd(mrfRegset_Sleep[k
       +                          ].reg, mrfRegset_Sleep[k].val); };
   9751  027D  0020               	movlb	0	; select bank0
   9752  027E  302C               	movlw	low (_mrfRegset_SleepCnt| (0+32768))
@@ -9831,12 +9831,12 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
   9778  0299  2A86               	goto	l2991
   9779  029A                     l2997:	
   9780                           
-  9781                           ;mrf49xa.c: 121: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = POWERED_OFF;
+  9781                           ;mrf49xa.c: 103: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = POWERED_OFF;
   9782  029A  0021               	movlb	1	; select bank1
   9783  029B  3080               	movlw	-128
   9784  029C  01EB               	clrf	(_mrf49xaInst^(0+128)+75)
   9785                           
-  9786                           ;mrf49xa.c: 122: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
+  9786                           ;mrf49xa.c: 104: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
   9787  029D  05ED               	andwf	(_mrf49xaInst^(0+128)+77),f
   9788  029E  0008               	return
   9789  029F                     __end_of_Mrf49xaModeSleep:	
@@ -10567,7 +10567,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10503  0129                     __ptext69:	
  10504 ;; *************** function i1_Mrf49xaModeRx *****************
  10505 ;; Defined at:
- 10506 ;;		line 93 in file "../../../src/devices/mrf49xa.c"
+ 10506 ;;		line 75 in file "../../../src/devices/mrf49xa.c"
  10507 ;; Parameters:    Size  Location     Type
  10508 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
  10509 ;;		 -> mrf49xaInst(78), 
@@ -10603,8 +10603,8 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10539  0129                     i1_Mrf49xaModeRx:	
  10540  0129  302B               	movlw	low (_mrfRegset_RxCnt| (0+32768))
  10541                           
- 10542                           ;mrf49xa.c: 95: UI08_t k;
- 10543                           ;mrf49xa.c: 96: for (k = 0; k < mrfRegset_RxCnt; k++) { Mrf49TxCmd(mrfRegset_Rx[k].reg, 
+ 10542                           ;mrf49xa.c: 77: UI08_t k;
+ 10543                           ;mrf49xa.c: 78: for (k = 0; k < mrfRegset_RxCnt; k++) { Mrf49TxCmd(mrfRegset_Rx[k].reg, 
       +                          mrfRegset_Rx[k].val); };
  10544                           
  10545                           ;incstack = 0
@@ -10640,16 +10640,16 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10575  0146  2933               	goto	i1l3765
  10576  0147                     i1l211:	
  10577                           
- 10578                           ;mrf49xa.c: 99: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
+ 10578                           ;mrf49xa.c: 81: ((Mrf49xaMac_t*)(&mrf49xaInst))->state = RECV_IDLE;
  10579  0147  0021               	movlb	1	; select bank1
  10580  0148  3080               	movlw	-128
  10581  0149  01EB               	clrf	(_mrf49xaInst^(0+128)+75)
  10582  014A  0AEB               	incf	(_mrf49xaInst^(0+128)+75),f
  10583                           
- 10584                           ;mrf49xa.c: 100: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
+ 10584                           ;mrf49xa.c: 82: ((Mrf49xaMac_t*)(&mrf49xaInst))->hwByte = 0;
  10585  014B  05ED               	andwf	(_mrf49xaInst^(0+128)+77),f
  10586                           
- 10587                           ;mrf49xa.c: 102: ((Mrf49xaMac_t*)(&mrf49xaInst))->status.flags.msb.fifoTxRx = 0;
+ 10587                           ;mrf49xa.c: 84: ((Mrf49xaMac_t*)(&mrf49xaInst))->status.flags.msb.fifoTxRx = 0;
  10588  014C  13A0               	bcf	_mrf49xaInst^(0+128),7
  10589  014D  0008               	return
  10590  014E                     __end_ofi1_Mrf49xaModeRx:	
@@ -10699,7 +10699,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10634  0151                     __ptext68:	
  10635 ;; *************** function i1_Mrf49xaNeedsReset *****************
  10636 ;; Defined at:
- 10637 ;;		line 139 in file "../../../src/devices/mrf49xa.c"
+ 10637 ;;		line 121 in file "../../../src/devices/mrf49xa.c"
  10638 ;; Parameters:    Size  Location     Type
  10639 ;;  inst            1    wreg     PTR struct rfTrcvStatus_
  10640 ;;		 -> mrf49xaInst(78), 
@@ -10733,7 +10733,7 @@ Microchip Technology Omniscient Code Generator (PRO mode) build 55553
  10668                           ;psect for function i1_Mrf49xaNeedsReset
  10669  0151                     i1_Mrf49xaNeedsReset:	
  10670                           
- 10671                           ;mrf49xa.c: 141: ((Mrf49xaMac_t*)(&mrf49xaInst))->needsReset = 1;
+ 10671                           ;mrf49xa.c: 123: ((Mrf49xaMac_t*)(&mrf49xaInst))->needsReset = 1;
  10672                           
  10673                           ;incstack = 0
  10674                           ; Regs used in i1_Mrf49xaNeedsReset: [wreg]
@@ -12125,7 +12125,7 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.30 build 55553 
-Symbol Table                                                                                   Fri Sep  5 18:16:18 2014
+Symbol Table                                                                                   Fri Sep  5 18:35:24 2014
 
                 Mrf49xaTxPacket@crc 0024                 Mrf49xaTxPacket@inst 0025  
                        __CFG_CP$OFF 0000                                  PL8 0F8A  
