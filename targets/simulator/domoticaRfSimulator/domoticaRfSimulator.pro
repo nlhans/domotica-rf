@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     hardware/ethernet.cpp \
     hardware/rf.cpp \
     hardware/sensor.cpp \
-    ../../../src/devices/mrf49xa_mac.c
+    ../../../src/devices/mrf49xa_mac.c \
+    devices/mrf49xa_phy.c \
+    ../../../src/rfstack/client.c
 
 HEADERS  += domoticasimulator.h \
     devices/device_slave.h \
@@ -32,3 +34,4 @@ HEADERS  += domoticasimulator.h \
 FORMS    += domoticasimulator.ui
 
 INCLUDEPATH += /home/hans/Projects/Firmware/domoticaRf/inc
+INCLUDEPATH += /home/hans/Projects/Firmware/domoticaRf/inc/bsp/sim

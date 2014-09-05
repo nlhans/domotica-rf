@@ -1,6 +1,8 @@
 #ifndef DEVICES_MRF49XA_DEFS
 #define DEVICES_MRF49XA_DEFS
 
+#include <stdint.h>
+
 #define RF_DATARATE 2400
 #define RF_DATARATE_SLOW
 
@@ -241,7 +243,6 @@ typedef union mrf49xaStatus_u
         } lsb;
     } flags;
 }mrf49xaStatus_t;
-extern mrf49xaStatus_t mrf49Status;
 
 // Software status for receiving & transmitting packets
 typedef enum rfTrcvState_e
@@ -302,6 +303,8 @@ typedef struct rfTrcvPacket_s
 
 typedef struct rfTrcvStatus_s
 {
+    mrf49xaStatus_t status;
+    
     rfTrcvPacket_t* hwRx;
     rfTrcvPacket_t rxPacket[2];
     rfTrcvPacket_t txPacket;
@@ -310,9 +313,7 @@ typedef struct rfTrcvStatus_s
     uint8_t nodeId;
     uint8_t hwByte:7;
     bool needsReset:1;
-
 } Mrf49xaMac_t;
-extern Mrf49xaMac_t rfTrcvStatus;
 
 // Node ID for broadcasts
 #define RF_BROADCAST 0xFF

@@ -5,6 +5,9 @@
 #include "bsp/softI2c.h"
 #include "bsp/adc.h"
 
+Mrf49xaMac_t mrf49xaInst;
+Mrf49xaMac_t* macPtr = &mrf49xaInst;
+
 /*******************************************************************************
  * The system has 4 major blocks which can be operated:
  * - RF
@@ -111,13 +114,13 @@ void PwrRfInit(void)
     WPUAbits.WPUA2 = 1;
     Sleepy(10);
 
-    Mrf49xaInit();
+    Mrf49xaInit(&mrf49xaInst);
     ExtIntInit();
 }
 
 void PwrRfSleep(void)
 {
-    Mrf49xaShutdown();
+    Mrf49xaShutdown(&mrf49xaInst);
     MRF_DISABLE_INT
 
     LATAbits.LATA5 = 1;
@@ -143,7 +146,7 @@ void PwrRfWake(void)
     TRISCbits.TRISC5 = 1;
 
     MRF_ENABLE_INT
-    Mrf49xaReboot();
+    Mrf49xaReboot(&mrf49xaInst);
 }
 
 

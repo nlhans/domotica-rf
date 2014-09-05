@@ -13,7 +13,7 @@ uint32_t syncedTime;
 
 void RfSendPowerState(Mrf49xaMac_t* inst)
 {
-    rfTrcvPacket_t* packet = Mrf49xaAllocPacket(inst);
+    rfTrcvPacket_t* packet = Mrf49xaAllocPacket(mrf49Inst);
 
     packet->packet.size = 4;
     packet->packet.id = RF_POWER_STATUS;
@@ -28,12 +28,12 @@ void RfSendPowerState(Mrf49xaMac_t* inst)
     packet->packet.data[2] = s & 0xFF;
     packet->packet.data[3] = s >> 8;
 
-    Mrf49xaTxPacket(inst, packet, FALSE, TRUE);
+    Mrf49xaTxPacket(mrf49Inst, packet, FALSE, TRUE);
 }
 
 void RfSendSampleWeatherNode(Mrf49xaMac_t* inst, uint16_t temperature, uint16_t humidity)
 {
-    rfTrcvPacket_t* packet = Mrf49xaAllocPacket(inst);
+    rfTrcvPacket_t* packet = Mrf49xaAllocPacket(mrf49Inst);
 
     packet->packet.size = 10;
     packet->packet.id = RF_APP_SAMPLE;
@@ -54,5 +54,5 @@ void RfSendSampleWeatherNode(Mrf49xaMac_t* inst, uint16_t temperature, uint16_t 
     packet->packet.data[9] = humidity >> 8;
     packet->packet.data[8] = humidity & 0xFF;
 
-    Mrf49xaTxPacket(inst, packet, FALSE, TRUE);
+    Mrf49xaTxPacket(mrf49Inst, packet, FALSE, TRUE);
 }

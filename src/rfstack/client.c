@@ -152,10 +152,10 @@ void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
     // Compact these booleans:
     struct
     {
-        bool_t reset:1;
-        bool_t needAck:1;
-        bool_t sendAck:1;
-        bool_t sendMsg:1;
+        bool reset:1;
+        bool needAck:1;
+        bool sendAck:1;
+        bool sendMsg:1;
     } response;
     
     // Ping-pong
@@ -163,20 +163,20 @@ void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
     {
         case RF_PING:
             packet->packet.data[0] = 2;
-            response.sendMsg = TRUE;
+            response.sendMsg = true;
             break;
 
         case RF_ACK:
-            if (inst->txPacket.crc == packet->packet.data[1] &&
-                inst->txPacket.packet.id == packet->packet.data[0])
+            if (mrf49Inst->txPacket.crc == packet->packet.data[1] &&
+                mrf49Inst->txPacket.packet.id == packet->packet.data[0])
             {
-                inst->txPacket.needAck = ACK_RECEIVED;
+                mrf49Inst->txPacket.needAck = ACK_RECEIVED;
             }
             break;
 
         case RF_TIME_SYNC:
             syncedTime = *((uint32_t*) packet->packet.data);
-            response.sendAck = TRUE;
+            response.sendAck = false;
             break;
 
         case RF_POWER_STATUS:
@@ -203,7 +203,7 @@ void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 #ifdef PROTOCOL_SUPPORT_FIRMWARE
         case RF_FW_CMD:
             handleFwCmd(packet);
-            response.sendMsg = TRUE;
+            response.sendMsg = true;
             break;
 
 #ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
@@ -225,16 +225,16 @@ void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 #endif
     }
 
-    response.reset = TRUE;
+    response.reset = true;
 
     // TODO: RF data response statemachine
     if (response.sendMsg)
-        response.reset = Mrf49xaTxPacket(inst, packet, TRUE, response.needAck);
+        response.reset = Mrf49xaTxPacket(mrf49Inst, packet, true, response.needAck);
     else if (response.sendAck)
-        response.reset = Mrf49xaTxAck(inst, packet);
+        response.reset = Mrf49xaTxAck(mrf49Inst, packet);
     else
-        response.reset = FALSE;
+        response.reset = false;
 
     if (!response.reset)
-        Mrf49xaFreePacket(inst, packet);
+        Mrf49xaFreePacket(mrf49Inst, packet);
 }

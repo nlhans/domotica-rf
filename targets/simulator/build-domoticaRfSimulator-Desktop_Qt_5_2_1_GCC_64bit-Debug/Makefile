@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I../../../../../../Qt/5.2.1/gcc_64/mkspecs/linux-g++ -I../domoticaRfSimulator -I../../../inc -I../../../../../../Qt/5.2.1/gcc_64/include -I../../../../../../Qt/5.2.1/gcc_64/include/QtWidgets -I../../../../../../Qt/5.2.1/gcc_64/include/QtGui -I../../../../../../Qt/5.2.1/gcc_64/include/QtCore -I. -I. -I.
+INCPATH       = -I../../../../../../Qt/5.2.1/gcc_64/mkspecs/linux-g++ -I../domoticaRfSimulator -I../../../inc -I../../../inc/bsp/sim -I../../../../../../Qt/5.2.1/gcc_64/include -I../../../../../../Qt/5.2.1/gcc_64/include/QtWidgets -I../../../../../../Qt/5.2.1/gcc_64/include/QtGui -I../../../../../../Qt/5.2.1/gcc_64/include/QtCore -I. -I. -I.
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/hans/Qt/5.2.1/gcc_64 -Wl,-rpath,/home/hans/Qt/5.2.1/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/home/hans/Qt/5.2.1/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -52,7 +52,9 @@ SOURCES       = ../domoticaRfSimulator/main.cpp \
 		../domoticaRfSimulator/hardware/ethernet.cpp \
 		../domoticaRfSimulator/hardware/rf.cpp \
 		../domoticaRfSimulator/hardware/sensor.cpp \
-		../../../src/devices/mrf49xa_mac.c moc_domoticasimulator.cpp \
+		../../../src/devices/mrf49xa_mac.c \
+		../domoticaRfSimulator/devices/mrf49xa_phy.c \
+		../../../src/rfstack/client.c moc_domoticasimulator.cpp \
 		moc_device_slave.cpp
 OBJECTS       = main.o \
 		domoticasimulator.o \
@@ -62,6 +64,8 @@ OBJECTS       = main.o \
 		rf.o \
 		sensor.o \
 		mrf49xa_mac.o \
+		mrf49xa_phy.o \
+		client.o \
 		moc_domoticasimulator.o \
 		moc_device_slave.o
 DIST          = ../../../../../../Qt/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -427,7 +431,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/domoticaRfSimulator1.0.0 || mkdir -p .tmp/domoticaRfSimulator1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.h ../domoticaRfSimulator/devices/device_slave.h ../domoticaRfSimulator/hardware/eeprom.h ../domoticaRfSimulator/hardware/ethernet.h ../domoticaRfSimulator/hardware/rf.h ../domoticaRfSimulator/hardware/sensor.h ../domoticaRfSimulator/config.h .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/main.cpp ../domoticaRfSimulator/domoticasimulator.cpp ../domoticaRfSimulator/devices/device_slave.cpp ../domoticaRfSimulator/hardware/eeprom.cpp ../domoticaRfSimulator/hardware/ethernet.cpp ../domoticaRfSimulator/hardware/rf.cpp ../domoticaRfSimulator/hardware/sensor.cpp ../../../src/devices/mrf49xa_mac.c .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.ui .tmp/domoticaRfSimulator1.0.0/ && (cd `dirname .tmp/domoticaRfSimulator1.0.0` && $(TAR) domoticaRfSimulator1.0.0.tar domoticaRfSimulator1.0.0 && $(COMPRESS) domoticaRfSimulator1.0.0.tar) && $(MOVE) `dirname .tmp/domoticaRfSimulator1.0.0`/domoticaRfSimulator1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/domoticaRfSimulator1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.h ../domoticaRfSimulator/devices/device_slave.h ../domoticaRfSimulator/hardware/eeprom.h ../domoticaRfSimulator/hardware/ethernet.h ../domoticaRfSimulator/hardware/rf.h ../domoticaRfSimulator/hardware/sensor.h ../domoticaRfSimulator/config.h .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/main.cpp ../domoticaRfSimulator/domoticasimulator.cpp ../domoticaRfSimulator/devices/device_slave.cpp ../domoticaRfSimulator/hardware/eeprom.cpp ../domoticaRfSimulator/hardware/ethernet.cpp ../domoticaRfSimulator/hardware/rf.cpp ../domoticaRfSimulator/hardware/sensor.cpp ../../../src/devices/mrf49xa_mac.c ../domoticaRfSimulator/devices/mrf49xa_phy.c ../../../src/rfstack/client.c .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.ui .tmp/domoticaRfSimulator1.0.0/ && (cd `dirname .tmp/domoticaRfSimulator1.0.0` && $(TAR) domoticaRfSimulator1.0.0.tar domoticaRfSimulator1.0.0 && $(COMPRESS) domoticaRfSimulator1.0.0.tar) && $(MOVE) `dirname .tmp/domoticaRfSimulator1.0.0`/domoticaRfSimulator1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/domoticaRfSimulator1.0.0
 
 
 clean:compiler_clean 
@@ -1175,11 +1179,32 @@ mrf49xa_mac.o: ../../../src/devices/mrf49xa_mac.c ../../../inc/devices/mrf49xa.h
 		../../../inc/bspPIC16.h \
 		../../../inc/rfstack/rf_defs.h \
 		../../../inc/devices/mrf49xa_defs.h \
-		../../../inc/bsp/spi.h \
+		../../../inc/bsp/sim/mrf49xa_bsp.h \
 		../domoticaRfSimulator/config.h \
 		../../../inc/bsp/interrupt.h \
 		../../../inc/rfstack/packets.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o mrf49xa_mac.o ../../../src/devices/mrf49xa_mac.c
+
+mrf49xa_phy.o: ../domoticaRfSimulator/devices/mrf49xa_phy.c ../../../inc/devices/mrf49xa.h \
+		../../../inc/stddefs.h \
+		../../../inc/bspPIC24.h \
+		../../../inc/bspPIC16.h \
+		../../../inc/rfstack/rf_defs.h \
+		../../../inc/devices/mrf49xa_defs.h \
+		../../../inc/bsp/sim/mrf49xa_bsp.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o mrf49xa_phy.o ../domoticaRfSimulator/devices/mrf49xa_phy.c
+
+client.o: ../../../src/rfstack/client.c ../../../inc/rfstack/packets.h \
+		../../../inc/stddefs.h \
+		../../../inc/bspPIC24.h \
+		../../../inc/bspPIC16.h \
+		../../../inc/rfstack/rf_defs.h \
+		../../../inc/devices/mrf49xa_defs.h \
+		../../../inc/devices/mrf49xa.h \
+		../../../inc/bsp/sim/mrf49xa_bsp.h \
+		../../../inc/devices/24aa64.h \
+		../domoticaRfSimulator/config.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o client.o ../../../src/rfstack/client.c
 
 moc_domoticasimulator.o: moc_domoticasimulator.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_domoticasimulator.o moc_domoticasimulator.cpp

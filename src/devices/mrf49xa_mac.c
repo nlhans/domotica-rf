@@ -7,8 +7,8 @@
 
 bool Mrf49xaPacketPending(Mrf49xaMac_t* inst)
 {
-    if (inst->rxPacket[0].state == PKT_HW_READY_RX ||
-        inst->rxPacket[1].state == PKT_HW_READY_RX)
+    if (mrf49Inst->rxPacket[0].state == PKT_HW_READY_RX ||
+        mrf49Inst->rxPacket[1].state == PKT_HW_READY_RX)
         return true;
     else
         return false;
@@ -18,25 +18,25 @@ bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, 
 {
     uint8_t i, crc = 0;
 
-    if (&(inst->txPacket) == packet)
+    if (&(mrf49Inst->txPacket) == packet)
     {
         if (response)
         {
-            inst->txPacket.packet.dst = inst->txPacket.packet.src;
+            mrf49Inst->txPacket.packet.dst = mrf49Inst->txPacket.packet.src;
         }
-        inst->txPacket.packet.src = inst->nodeId;
-        inst->txPacket.packet.size += 5;
+        mrf49Inst->txPacket.packet.src = mrf49Inst->nodeId;
+        mrf49Inst->txPacket.packet.size += 5;
 
-        inst->txPacket.state = PKT_READY_FOR_TX;
-        inst->txPacket.retry = 0;
-        inst->txPacket.retransmit = 0;
-        inst->txPacket.needAck = (needAck == true) ? NEED_ACK : NO_ACK;
-        inst->txPacket.crc = 0;
+        mrf49Inst->txPacket.state = PKT_READY_FOR_TX;
+        mrf49Inst->txPacket.retry = 0;
+        mrf49Inst->txPacket.retransmit = 0;
+        mrf49Inst->txPacket.needAck = (needAck == true) ? NEED_ACK : NO_ACK;
+        mrf49Inst->txPacket.crc = 0;
         return true;
     }
 
     // Packet in buffer is ready for transmission.
-    if (inst->txPacket.state != PKT_FREE)
+    if (mrf49Inst->txPacket.state != PKT_FREE)
     {
         // TODO: Error buffer is full
         return false;
@@ -47,7 +47,7 @@ bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, 
         {
             packet->packet.dst = packet->packet.src;
         }
-        packet->packet.src = inst->nodeId;
+        packet->packet.src = mrf49Inst->nodeId;
         packet->packet.size += 5;
 
         packet->state = PKT_FREE;
@@ -55,19 +55,19 @@ bool Mrf49xaTxPacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet, bool response, 
         // Copy complete packet.
         for (i = 0; i < RF_PACKET_LENGTH; i++)
         {
-            inst->txPacket.raw[i] = packet->raw[i];
+            mrf49Inst->txPacket.raw[i] = packet->raw[i];
         }
         for (i = 0; i < packet->packet.size; i++)
         {
-            crc = crc ^ inst->txPacket.raw[i];
+            crc = crc ^ mrf49Inst->txPacket.raw[i];
         }
 
-        inst->txPacket.state = PKT_READY_FOR_TX;
-        inst->txPacket.retry = 0;
-        inst->txPacket.retransmit = 0;
-        inst->txPacket.needAck = (needAck == true) ? NEED_ACK : NO_ACK;
+        mrf49Inst->txPacket.state = PKT_READY_FOR_TX;
+        mrf49Inst->txPacket.retry = 0;
+        mrf49Inst->txPacket.retransmit = 0;
+        mrf49Inst->txPacket.needAck = (needAck == true) ? NEED_ACK : NO_ACK;
 
-        inst->txPacket.crc = crc;
+        mrf49Inst->txPacket.crc = crc;
         return true;
     }
 }
@@ -81,7 +81,7 @@ bool Mrf49xaTxAck(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
     packet->packet.id = RF_ACK;
     packet->packet.size = 2;
 
-    return Mrf49xaTxPacket(inst, packet, true, false);
+    return Mrf49xaTxPacket(mrf49Inst, packet, true, false);
 }
 
 void Mrf49xaFreePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
@@ -91,16 +91,16 @@ void Mrf49xaFreePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 
 rfTrcvPacket_t* Mrf49xaRxPacket(Mrf49xaMac_t* inst)
 {
-    if (inst->rxPacket[0].state == PKT_HW_READY_RX)
+    if (mrf49Inst->rxPacket[0].state == PKT_HW_READY_RX)
     {
-        inst->rxPacket[0].state = PKT_SW_BUSY;
-        return &(inst->rxPacket[0]);
+        mrf49Inst->rxPacket[0].state = PKT_SW_BUSY;
+        return &(mrf49Inst->rxPacket[0]);
     }
 
-    if (inst->rxPacket[1].state == PKT_HW_READY_RX)
+    if (mrf49Inst->rxPacket[1].state == PKT_HW_READY_RX)
     {
-        inst->rxPacket[1].state = PKT_SW_BUSY;
-        return &(inst->rxPacket[1]);
+        mrf49Inst->rxPacket[1].state = PKT_SW_BUSY;
+        return &(mrf49Inst->rxPacket[1]);
     }
 
     return NULL;
@@ -108,16 +108,16 @@ rfTrcvPacket_t* Mrf49xaRxPacket(Mrf49xaMac_t* inst)
 
 rfTrcvPacket_t* Mrf49xaAllocPacket(Mrf49xaMac_t* inst)
 {
-    if (inst->rxPacket[0].state == PKT_FREE)
+    if (mrf49Inst->rxPacket[0].state == PKT_FREE)
     {
-        inst->rxPacket[0].state = PKT_SW_BUSY;
-        return &(inst->rxPacket[0]);
+        mrf49Inst->rxPacket[0].state = PKT_SW_BUSY;
+        return &(mrf49Inst->rxPacket[0]);
     }
 
-    if (inst->rxPacket[1].state == PKT_FREE)
+    if (mrf49Inst->rxPacket[1].state == PKT_FREE)
     {
-        inst->rxPacket[1].state = PKT_SW_BUSY;
-        return &(inst->rxPacket[1]);
+        mrf49Inst->rxPacket[1].state = PKT_SW_BUSY;
+        return &(mrf49Inst->rxPacket[1]);
     }
 
     return NULL;
@@ -131,27 +131,27 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
 {
 #ifdef PIC24GB
     if ((RtosTimestamp - TransmissionStart) > 250 &&
-            inst->state == TX_PACKET)
+            mrf49Inst->state == TX_PACKET)
     {
         Mrf49xaNeedsReset();
     }
 #endif
-    if (inst->rxPacket[0].state == PKT_HW_BUSY_RX &&
-        inst->rxPacket[1].state == PKT_HW_BUSY_RX)
+    if (mrf49Inst->rxPacket[0].state == PKT_HW_BUSY_RX &&
+        mrf49Inst->rxPacket[1].state == PKT_HW_BUSY_RX)
     {
-        Mrf49xaNeedsReset();
+        Mrf49xaNeedsReset(mrf49Inst);
     }
-    if (inst->needsReset)
+    if (mrf49Inst->needsReset)
     {
-        Mrf49xaInit();
+        Mrf49xaInit(mrf49Inst);
         ExtIntInit();
         return;
     }
 
 
-    if (Mrf49xaPacketPending(inst))
+    if (Mrf49xaPacketPending(mrf49Inst))
     {
-        rfTrcvPacket_t* packet = Mrf49xaRxPacket(inst);
+        rfTrcvPacket_t* packet = Mrf49xaRxPacket(mrf49Inst);
 
 #ifdef RF_DEBUG
         rfHistoryPut(packet);
@@ -159,60 +159,60 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
 
         // Is this packet for this node?
 #ifndef RF_NO_ID_FILTER
-        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == inst->nodeId)
+        if (packet->packet.dst == RF_BROADCAST || packet->packet.dst == mrf49Inst->nodeId)
         {
             packet->packet.size -= 5;
 
 #endif
-            HandlePacket(inst, packet);
+            HandlePacket(mrf49Inst, packet);
 #ifndef RF_NO_ID_FILTER
         }
         else
         {
-            Mrf49xaFreePacket(inst, packet);
+            Mrf49xaFreePacket(mrf49Inst, packet);
         }
 #else
         Mrf49xaFreePacket(packet);
 #endif
     }
 
-    if (inst->txPacket.state == PKT_WAITING_FOR_ACK)
+    if (mrf49Inst->txPacket.state == PKT_WAITING_FOR_ACK)
     {
-        if (inst->txPacket.needAck == ACK_RECEIVED)
+        if (mrf49Inst->txPacket.needAck == ACK_RECEIVED)
         {
-            inst->txPacket.state = PKT_FREE;
+            mrf49Inst->txPacket.state = PKT_FREE;
         }
-        else if (inst->txPacket.retry == 10)
+        else if (mrf49Inst->txPacket.retry == 10)
         {
-            if (inst->txPacket.retransmit == 1)
+            if (mrf49Inst->txPacket.retransmit == 1)
             {
                 // TODO: Add statistics.
                 // Packet failed to deliver..
-                inst->txPacket.state = PKT_FREE;
+                mrf49Inst->txPacket.state = PKT_FREE;
             }
             else
             {
                 // mark for new tx
-                inst->txPacket.retry = 0;
-                inst->txPacket.retransmit++;
-                inst->txPacket.state = PKT_READY_FOR_TX;
+                mrf49Inst->txPacket.retry = 0;
+                mrf49Inst->txPacket.retransmit++;
+                mrf49Inst->txPacket.state = PKT_READY_FOR_TX;
             }
         }
         else
         {
-            inst->txPacket.retry++;
+            mrf49Inst->txPacket.retry++;
             Delay5Ms();
         }
     }
 
-    if (inst->txPacket.state == PKT_READY_FOR_TX &&
-        inst->state == RECV_IDLE)
+    if (mrf49Inst->txPacket.state == PKT_READY_FOR_TX &&
+        mrf49Inst->state == RECV_IDLE)
     {
-        if (inst->txPacket.retry >= 10)
+        if (mrf49Inst->txPacket.retry >= 10)
         {
             // Attempt to retransmit..
-            inst->txPacket.retry = 0;
-            inst->txPacket.state = PKT_WAITING_FOR_ACK;
+            mrf49Inst->txPacket.retry = 0;
+            mrf49Inst->txPacket.state = PKT_WAITING_FOR_ACK;
             return;
         }
         
@@ -223,9 +223,9 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
         // Remain in here while a signal is present.
         do
         {
-            Mrf49RxSts();
+            Mrf49RxSts(mrf49Inst);
 
-            if (inst->state == RECV_IDLE && mrf49Status.flags.msb.signalPresent == 0)
+            if (mrf49Inst->state == RECV_IDLE && mrf49Inst->status.flags.msb.signalPresent == 0)
             {
                 // Succes!
                 break;
@@ -236,7 +236,7 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
 
             if (timeout > 10)
             {
-                inst->txPacket.retry++;
+                mrf49Inst->txPacket.retry++;
                 return;
             }
             
@@ -247,12 +247,12 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
         rfHistoryPut(&packetTx);
 #endif
 
-        //printf("\nTx %X\n", rfTrcvStatus.txPacket.packet.id);
+        //printf("\nTx %X\n", mrf49Inst->txPacket.packet.id);
 
         // We've obtained air mission control.
         MRF_DISABLE_INT;
-        Mrf49xaModeTx();
-        inst->txPacket.state = PKT_HW_BUSY_TX;
+        Mrf49xaModeTx(mrf49Inst);
+        mrf49Inst->txPacket.state = PKT_HW_BUSY_TX;
 #ifdef PIC24GB
         TransmissionStart = RtosTimestamp;
 #endif

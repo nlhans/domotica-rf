@@ -29,9 +29,6 @@
 
 uint8_t powerStatusTicker = 0;
 
-extern Mrf49xaMac_t rfTrcvStatus;
-Mrf49xaMac_t* macPtr = &rfTrcvStatus;
-
 void main(void)
 {
     
@@ -71,9 +68,9 @@ void main(void)
 
         PwrRfWake();
 
-        if (rfTrcvStatus.txPacket.state != PKT_FREE)
+        if (macPtr->txPacket.state != PKT_FREE)
         {
-            Mrf49xaNeedsReset();
+            Mrf49xaNeedsReset(macPtr);
             Mrf49xaTick(macPtr);
         }
 
@@ -83,13 +80,12 @@ void main(void)
         {
             powerStatusTicker = 0;
         
-
             RfSendPowerState(macPtr);
             do
             {
                 Mrf49xaTick(macPtr);
             }
-            while (rfTrcvStatus.txPacket.state != PKT_FREE);
+            while (macPtr->txPacket.state != PKT_FREE);
         }
 
         RfSendSampleWeatherNode(macPtr, temperature, humidity);
@@ -97,7 +93,7 @@ void main(void)
         {
             Mrf49xaTick(macPtr);
         }
-        while (rfTrcvStatus.txPacket.state != PKT_FREE);
+        while (macPtr->txPacket.state != PKT_FREE);
 
         PwrRfSleep();
     }

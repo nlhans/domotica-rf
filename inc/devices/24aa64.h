@@ -3,9 +3,9 @@
 
 #include "stddefs.h"
 
-void eepromRxBytes(UI16_t address, UI08_t* data, UI08_t size);
-void eepromTxBytes(UI16_t address, UI08_t* data, UI08_t size);
-UI08_t eepromRxByte(UI16_t address);
-void eepromTxByte(UI16_t address, UI08_t byte);
+void eepromRxBytes(uint16_t address, uint8_t* data, uint8_t size);
+void eepromTxBytes(uint16_t address, uint8_t* data, uint8_t size);
+uint8_t eepromRxByte(uint16_t address);
+void eepromTxByte(uint16_t address, uint8_t byte);
 
 #endif
