@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <QString>
+#include <QThread>
 
 #include "devices/mrf49xa.h"
 
@@ -31,11 +32,13 @@
     */
 typedef enum HwRfBusMode_e
 {
+    MODE_ERR,
     MODE_RX,
     MODE_TX,
     MODE_SLEEP
 } HwRfBusMode_t;
 
+class HwRfMain;
 class HwRfClient
 {
     protected:
@@ -43,14 +46,14 @@ class HwRfClient
         mrf49xaStatus_t status;
 
         uint8_t phyByte;
-        HwRfBusMode_t mode;
 
-        HwRfMain main;
+        HwRfMain* main;
 
     public:
         Mrf49xaMac_t* mac;
+        HwRfBusMode_t mode;
 
-        HwRfClient(uint16_t id);
+        HwRfClient(uint16_t id, HwRfMain* main);
         ~HwRfClient();
 
         void Tick();
@@ -62,6 +65,12 @@ class HwRfMain
         HwRfClient* rfClients[RF_MAX_CLIENTS];
 
     public:
+        uint8_t airByte;
+        uint8_t dataQuality;
+
+        HwRfMain();
+
+        void Tick();
 
         void Connect(HwRfClient* client);
         void Disconnect(HwRfClient* client);
@@ -73,6 +82,11 @@ class HwRfMain
 
         void TxPacket(HwRfClient* client, rfTrcvPacket_t* packet);
         uint8_t RxPacket(HwRfClient* client, rfTrcvPacket_t* packet);
+
+        static void msleep(unsigned long msecs)
+        {
+            QThread::msleep(msecs);
+        }
 };
 
 #endif

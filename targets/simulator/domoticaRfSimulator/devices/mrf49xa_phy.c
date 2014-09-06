@@ -2,13 +2,11 @@
 
 void Mrf49xaInit(Mrf49xaMac_t* inst)
 {
-    //
     inst->needsReset = false;
 }
 
 void Mrf49xaNeedsReset(Mrf49xaMac_t* inst)
 {
-    //
     inst->needsReset = true;
 }
 

@@ -6,6 +6,8 @@
 
 #include "stdint.h"
 
+#include "device_hardware.h"
+
 #include "hardware/eeprom.h"
 #include "hardware/rf.h"
 #include "hardware/sensor.h"
@@ -21,8 +23,11 @@ class DeviceSlave : public QThread
     HwRfClient* rf;               // RF module
     HardwareSensor_t* sensor[16];      // up to 16 sensors
 
+    DeviceHardware* hw;
+
     public:
-        DeviceSlave(uint16_t id);
+        void Sleepy(uint16_t timeMs);
+        DeviceSlave(uint16_t id, DeviceHardware* hw);
 
     protected:
         void run();

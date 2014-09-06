@@ -61,4 +61,6 @@
 #define NULL 0
 #endif
 
+#define AdcChannel_t uint8_t
+
 #endif

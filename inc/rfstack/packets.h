@@ -1,6 +1,11 @@
 #ifndef RFSTACK_PACKETS_H
 #define RFSTACK_PACKETS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #include "stddefs.h"
 #include "rfstack/rf_defs.h"
 
@@ -27,5 +32,11 @@ void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 
 extern Mrf49xaMac_t* macPtr;
 extern uint32_t syncedTime;
+
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

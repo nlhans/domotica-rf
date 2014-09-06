@@ -2,7 +2,9 @@
 #include <QApplication>
 
 #include "devices/device_slave.h"
+#include "devices/device_hardware.h"
 
+DeviceHardware* hardware;
 DeviceSlave* slaves [8];
 
 int main(int argc, char *argv[])
@@ -11,9 +13,12 @@ int main(int argc, char *argv[])
     DomoticaSimulator w;
     w.show();
 
-    for (int k = 0; k < 8; k++)
+    hardware = new DeviceHardware();
+    hardware->start();
+
+    for (int k = 0; k < 10; k++)
     {
-        slaves[k] = new DeviceSlave(k);
+        slaves[k] = new DeviceSlave(k, hardware);
         slaves[k]->start();
     }
 
