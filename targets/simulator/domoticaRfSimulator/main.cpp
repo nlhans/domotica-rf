@@ -4,6 +4,8 @@
 #include "devices/device_slave.h"
 #include "devices/device_hardware.h"
 
+#include <stdio.h>
+
 DeviceHardware* hardware;
 DeviceSlave* slaves [8];
 
@@ -16,7 +18,7 @@ int main(int argc, char *argv[])
     hardware = new DeviceHardware();
     hardware->start();
 
-    for (int k = 0; k < 10; k++)
+    for (int k = 0; k < 8; k++)
     {
         slaves[k] = new DeviceSlave(k, hardware);
         slaves[k]->start();

@@ -20,11 +20,12 @@ SOURCES += main.cpp\
     hardware/rf.cpp \
     hardware/sensor.cpp \
     ../../../src/devices/mrf49xa_mac.c \
-    devices/mrf49xa_phy.c \
     ../../../src/rfstack/client.c \
     devices/device_hardware.cpp \
     ../../../src/rfstack/packets.c \
-    hardware/power.cpp
+    hardware/power.cpp \
+    devices/mrf49xa_phy.cpp \
+    devices/device.cpp
 
 HEADERS  += domoticasimulator.h \
     devices/device_slave.h \
@@ -34,7 +35,8 @@ HEADERS  += domoticasimulator.h \
     hardware/sensor.h \
     config.h \
     devices/device_hardware.h \
-    hardware/power.h
+    hardware/power.h \
+    devices/device.h
 
 FORMS    += domoticasimulator.ui
 

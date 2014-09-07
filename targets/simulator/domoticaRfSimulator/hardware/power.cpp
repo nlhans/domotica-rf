@@ -2,6 +2,8 @@
 
 #include "hardware/power.h"
 
+#include <math.h>
+
 void PwrI2cWake() {}
 void PwrI2cSleep() {}
 
@@ -30,7 +32,7 @@ uint16_t Mcp9800Read()
     return 0xAA55;
 }
 
-uint8_t AdcSample(uint8_t ch)
+uint16_t AdcSample(uint8_t ch)
 {
-    return 0x55;
+    return rand();
 }

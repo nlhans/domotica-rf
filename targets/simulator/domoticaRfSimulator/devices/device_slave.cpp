@@ -7,6 +7,7 @@
 #include "hardware/rf.h"
 
 #include "devices/mrf49xa.h"
+#include "devices/device.h"
 
 #include "rfstack/packets.h"
 
@@ -18,20 +19,23 @@ DeviceSlave::DeviceSlave(uint16_t id, DeviceHardware* hw)
     this->hw = hw;
 
     this->id = id;
-    this->rf = new HwRfClient(id, hw->rfBus);
+    this->rf = new HwRfClient((Device*)hw, id, hw->rfBus);
 
     this->hw->rfBus->Connect(this->rf);
 }
 
-void DeviceSlave::Sleepy(uint16_t sleepTime)
+void DeviceSlave::Sleepy(uint16_t time)
 {
-    usleep(sleepTime*1000);
+    this->usleep(time*100);
 }
 
 void DeviceSlave::run()
 {
     uint16_t powerStatusTicker;
     Mrf49xaMac_t* macPtr = this->rf->mac;
+
+    Sleepy(this->id*334);
+
     while(1)
     {
         // 30.3s:
@@ -78,12 +82,11 @@ void DeviceSlave::run()
         do
         {
             Mrf49xaTick(macPtr);
+            Sleepy(1);
         }
         while (macPtr->txPacket.state != PKT_FREE);
 
         PwrRfSleep();
         //Mrf49xaTick(this->rf->mac);
-
-        usleep(1000);
     }
 }

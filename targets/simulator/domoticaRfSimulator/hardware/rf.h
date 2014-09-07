@@ -6,6 +6,7 @@
 #include <QThread>
 
 #include "devices/mrf49xa.h"
+#include "devices/device.h"
 
 #define RF_MAX_CLIENTS 32
 
@@ -30,20 +31,12 @@
         uint8_t dataQualityOK:1;    // Y
     } lsb;
     */
-typedef enum HwRfBusMode_e
-{
-    MODE_ERR,
-    MODE_RX,
-    MODE_TX,
-    MODE_SLEEP
-} HwRfBusMode_t;
 
 class HwRfMain;
 class HwRfClient
 {
     protected:
         uint16_t id;
-        mrf49xaStatus_t status;
 
         uint8_t phyByte;
 
@@ -51,11 +44,12 @@ class HwRfClient
 
     public:
         Mrf49xaMac_t* mac;
-        HwRfBusMode_t mode;
+        mrf49xaStatus_t status;
+        Device* device;
 
-        HwRfClient(uint16_t id, HwRfMain* main);
+        HwRfClient(Device* device, uint16_t id, HwRfMain* main);
         ~HwRfClient();
-
+        void SwitchBuffer(bool tx);
         void Tick();
 };
 
@@ -67,6 +61,7 @@ class HwRfMain
     public:
         uint8_t airByte;
         uint8_t dataQuality;
+        bool sof;
 
         HwRfMain();
 

@@ -12,11 +12,9 @@
 #include "hardware/rf.h"
 #include "hardware/sensor.h"
 
-class DeviceSlave : public QThread
+class DeviceSlave : public QThread, Device
 {
     Q_OBJECT
-
-    uint16_t    id;
 
     // Create "fake" hardware peripherals
     HardwareEeprom_t* eeprom;          // EEPROM
@@ -26,6 +24,7 @@ class DeviceSlave : public QThread
     DeviceHardware* hw;
 
     public:
+        uint16_t id;
         void Sleepy(uint16_t timeMs);
         DeviceSlave(uint16_t id, DeviceHardware* hw);
 

@@ -10,8 +10,16 @@ DeviceHardware::~DeviceHardware()
     delete(this->rfBus);
 }
 
+void DeviceHardware::Sleepy(uint16_t time)
+{
+    this->usleep(time*1000);
+}
+
 void DeviceHardware::run()
 {
-    this->rfBus->Tick();
-    usleep(1000);
+    while(1)
+    {
+        this->rfBus->Tick();
+        this->usleep(10);
+    }
 }
