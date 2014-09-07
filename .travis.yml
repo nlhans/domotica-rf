@@ -1,4 +1,7 @@
 language: cpp
 compiler:
   - gcc
-
+script: ./configure && make
+env:
+  - TARGET=client
+  - TARGET=server
