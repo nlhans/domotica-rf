@@ -33,9 +33,9 @@
         <itemPath>../../../src/devices/mrf49xa.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_spi_pic16.c</itemPath>
         <itemPath>../../../src/devices/mrf49xa_cmd.c</itemPath>
-        <itemPath>../../../src/devices/mrf49xa_packet.c</itemPath>
-        <itemPath>../../../src/devices/mrf49xa_data.c</itemPath>
         <itemPath>../../../src/devices/24aa64.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_mac.c</itemPath>
+        <itemPath>../../../src/devices/mrf49xa_phy.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="RFStack" projectFiles="true">
         <itemPath>../../../src/rfstack/client.c</itemPath>
@@ -70,8 +70,8 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.31</languageToolchainVersion>
-        <platform>3</platform>
+        <languageToolchainVersion>1.30</languageToolchainVersion>
+        <platform>2</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -104,12 +104,12 @@
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
         <property key="extra-include-directories"
-                  value="../../../inc;../../../inc/node"/>
+                  value="../../../inc;../../../inc/node;../../../inc/bsp/pic16"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="pro"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
         <property key="optimization-assembler" value="true"/>
-        <property key="optimization-assembler-files" value="true"/>
+        <property key="optimization-assembler-files" value="false"/>
         <property key="optimization-debug" value="false"/>
         <property key="optimization-global" value="true"/>
         <property key="optimization-level" value="9"/>

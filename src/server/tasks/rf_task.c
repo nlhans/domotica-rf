@@ -6,6 +6,7 @@
 
 #include "tasks/rf_task.h"
 #include "rfstack/packets.h"
+#include "devices/mrf49xa.h"
 
 #include "bsp/interrupt.h"
 
@@ -14,6 +15,8 @@ RtosTimer_t rfPingTimer;
 
 RtosTask_t rfTask;
 UI08_t rfTaskStk[512];
+
+Mrf49xaMac_t* macPtr;
 
 #ifdef RF_DEBUG
 RfDiagnosticPacket_t rfHistoryPackets[RF_HISTORY_DEPTH];
@@ -26,9 +29,6 @@ void RfPing(void);
 
 void RfInit(void)
 {
-    RF_RES = 1;
-    RF_POWER = 0;
-    
     RtosTaskCreate(&rfTask, "RF", RfTask, 40, rfTaskStk, sizeof(rfTaskStk));
 
 #ifdef PIC24GB
@@ -54,7 +54,9 @@ void RfPing(void)
 void RfTick(void)
 {
     // Reduce CPU load of RF task.
-    if (Mrf49xaPacketPending() || packetTx.state != PKT_FREE)
+#ifndef dsPIC33
+    if (Mrf49xaPacketPending(macPtr) || macPtr->txPacket.state != PKT_FREE)
+#endif
         RtosTaskSignalEvent(&rfTask, RF_TICK);
     RtosTimerRearm(&rfTimer, 2);
 }
@@ -116,20 +118,22 @@ void RfTask()
 {
     rfTrcvPacket_t ping;
     UI08_t i;
-    
-    RtosTaskDelay(100);
 
-    MRF_DISABLE_INT;
-    Mrf49xaInit();
+    RF_RES = 1;
+    RF_POWER = 0;
+
+    RtosTaskDelay(100);
 
     // Connect up MRF49XA ISR
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
     ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
-    
+
     PPSLock;
 
+    MRF_DISABLE_INT;
+    macPtr = Mrf49xaInit();
     MRF_ENABLE_INT;
 
     RtosTaskDelay(100);
@@ -153,12 +157,12 @@ void RfTask()
             for( i = 1; i < 16 ;i++)
                 ping.packet.data[i] = i;
             
-            Mrf49xaTxPacket(&ping, FALSE, FALSE);
+            Mrf49xaTxPacket(macPtr, &ping, FALSE, FALSE);
         }
 
         if (evt & RF_TICK)
         {
-            Mrf49xaTick();
+            Mrf49xaTick(macPtr);
         }
     }
 }

@@ -2,15 +2,24 @@
 #define ADC_H
 #include "stddefs.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void AdcInit(void);
 void AdcDeinit(void);
 
 void AdcGo(void);
-UI08_t AdcIsBusy(void);
-void AdcPinEnable(UI08_t port, UI08_t portNumber);
-void AdcPinDisable(UI08_t port, UI08_t portNumber);
-inline UI16_t AdcGetResult(void);
-UI16_t AdcSample(UI08_t ch);
+uint8_t AdcIsBusy(void);
+void AdcPinEnable(uint8_t port, uint8_t portNumber);
+void AdcPinDisable(uint8_t port, uint8_t portNumber);
+inline uint16_t AdcGetResult(void);
+uint8_t AdcSample(uint8_t ch);
 void AdcChSelect(AdcChannel_t channel);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

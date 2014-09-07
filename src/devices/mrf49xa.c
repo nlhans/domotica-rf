@@ -1,19 +1,5 @@
 #include "devices/mrf49xa.h"
 
-// Hardware chip status
-mrf49xaStatus_t mrf49Status;
-
-// Software driver status
-rfTrcvStatus_t rfTrcvStatus;
-// TODO: make object
-
-typedef struct Mrf49InitReg_s
-{
-    uint8_t reg;
-    uint8_t val;
-}Mrf49InitReg_t;
-#define REG(a, b) { a, b}
-
 volatile const Mrf49InitReg_t const mrfRegset_Init[] = {
     REG(REG_FIFORSTREG,   FIFORST_RESET),
     REG(REG_FIFORSTREG,   FIFORST_MODE_RX),
@@ -70,16 +56,6 @@ volatile const Mrf49InitReg_t const mrfRegset_Sleep[] = {
     REG(REG_GENCREG,        GENCREG_MODE_SLEEP),
 };
 volatile const uint8_t mrfRegset_SleepCnt = sizeof(mrfRegset_Sleep)/sizeof(Mrf49InitReg_t);
-
-#define SetupRegisters(type) SetupRegistersLoop(mrfRegset_## type, mrfRegset_## type ##Cnt)
-#define SetupRegistersWithoutDelay(type) SetupRegistersLoopWithoutDelay(mrfRegset_## type, mrfRegset_## type ##Cnt)
-
-#define SetupRegistersLoopWithoutDelay(array, count) for (k = 0; k < count; k++) { Mrf49TxCmd(array[k].reg, array[k].val); }
-
-#define SetupRegistersLoop(array, count) for (k = 0; k < count; k++) { \
-    if (array[k].reg == REG_DELAY) { Delay5Ms(); } else \
-{ Mrf49TxCmd(array[k].reg, array[k].val); } }
-//if (array[k].reg == REG_CMSA) { while(Mrf49xaSignalPresent()); } else { \
     
 void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
 {
@@ -87,67 +63,67 @@ void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
     SetupRegistersLoop(regs, count);
 }
 
-bool_t Mrf49xaSignalPresent(void)
+bool_t Mrf49xaSignalPresent(Mrf49xaMac_t* inst)
 {
-    Mrf49RxSts();
-    if (mrf49Status.flags.msb.signalPresent == 0)
+    Mrf49RxSts(mrf49Inst);
+    if (mrf49Inst->status.flags.msb.signalPresent == 0)
         return TRUE;
     else
         return FALSE;
 }
 
-void Mrf49xaModeRx(void)
+void Mrf49xaModeRx(Mrf49xaMac_t* inst)
 {
     UI08_t k;
     SetupRegistersWithoutDelay(Rx);
     //mrf49xaCfg(mrfRegset_Rx, mrfRegset_RxCnt);
 
-    rfTrcvStatus.state = RECV_IDLE;
-    rfTrcvStatus.hwByte = 0;
+    mrf49Inst->state = RECV_IDLE;
+    mrf49Inst->hwByte = 0;
 
-    mrf49Status.flags.msb.fifoTxRx = 0;
+    mrf49Inst->status.flags.msb.fifoTxRx = 0;
 }
 
-void Mrf49xaModeTx(void)
+void Mrf49xaModeTx(Mrf49xaMac_t* inst)
 {
     UI08_t k;
     SetupRegistersWithoutDelay(Tx);
     //mrf49xaCfg(mrfRegset_Tx, mrfRegset_TxCnt);
 
-    rfTrcvStatus.state = TX_PACKET;
-    rfTrcvStatus.hwByte = 99;
+    mrf49Inst->state = TX_PACKET;
+    mrf49Inst->hwByte = 99;
 }
 
 #ifdef MRF49XA_POWER_SWITCH
-void Mrf49xaModeSleep(void)
+void Mrf49xaModeSleep(Mrf49xaMac_t* inst)
 {
     UI08_t k;
     SetupRegistersWithoutDelay(Sleep);
 
-    rfTrcvStatus.state = POWERED_OFF;
-    rfTrcvStatus.hwByte = 0;
+    mrf49Inst->state = POWERED_OFF;
+    mrf49Inst->hwByte = 0;
 }
 
-void Mrf49xaShutdown(void)
+void Mrf49xaShutdown(Mrf49xaMac_t* inst)
 {
-    Mrf49xaModeSleep();
+    Mrf49xaModeSleep(mrf49Inst);
     //RF_POWER = RF_PWR_OFF;
 
-    //rfTrcvStatus.state = POWERED_OFF;
+    //mrf49Inst->state = POWERED_OFF;
 }
 
-void Mrf49xaReboot(void)
+void Mrf49xaReboot(Mrf49xaMac_t* inst)
 {
-    Mrf49xaModeRx();
+    Mrf49xaModeRx(mrf49Inst);
 }
 #endif
 
-void Mrf49xaNeedsReset(void)
+void Mrf49xaNeedsReset(Mrf49xaMac_t* inst)
 {
-    rfTrcvStatus.needsReset = TRUE;
+    mrf49Inst->needsReset = TRUE;
 }
 
-void Mrf49xaInit(void)
+void Mrf49xaInit(Mrf49xaMac_t* inst)
 {
     UI08_t k;
 #ifdef PIC16_HW
@@ -155,9 +131,9 @@ void Mrf49xaInit(void)
 #endif
     reset:
 
-    for (k = 0; k < sizeof(rfTrcvStatus_t); k++)
+    for (k = 0; k < sizeof(Mrf49xaMac_t); k++)
     {
-        ((uint8_t*)&rfTrcvStatus)[k] = 0;
+        ((uint8_t*)mrf49Inst)[k] = 0;
     }
 
     // Power chip, reset it.
@@ -176,12 +152,12 @@ void Mrf49xaInit(void)
     RF_RES = 1;
     Delay50Ms();
 
-    rfTrcvStatus.state = RECV_IDLE;
+    mrf49Inst->state = RECV_IDLE;
     
     SetupRegisters(Init);
     //mrf49xaCfg(mrfRegset_Init, mrfRegset_InitCnt);
 
-    Mrf49xaModeRx();
+    Mrf49xaModeRx(mrf49Inst);
 
     k = 0;
     while(RF_IRQ == 0)
@@ -197,8 +173,7 @@ void Mrf49xaInit(void)
 #ifdef PIC24_HW
         Mrf49xaServe(0);
 #else
-        Mrf49xaServe();
+        Mrf49xaServe(mrf49Inst);
 #endif
     }
-    
 }

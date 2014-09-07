@@ -8,6 +8,4 @@ void HandlePacket(rfTrcvPacket_t* packet)
 
     if (bfSwPacket == HISTORY_SIZE)
         DbgTransferPackets();
-
-    Mrf49xaFreePacket(packet);
 }

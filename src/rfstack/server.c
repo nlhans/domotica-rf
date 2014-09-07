@@ -1,6 +1,8 @@
 #include "rfstack/packets.h"
 
-void HandlePacket(rfTrcvPacket_t* packet)
+#include "devices/mrf49xa.h"
+
+void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
     bool_t sendMsg = FALSE;
     bool_t sendAck = FALSE;
@@ -9,10 +11,10 @@ void HandlePacket(rfTrcvPacket_t* packet)
     switch (packet->packet.id)
     {
         case RF_ACK:
-            if (packetTx.crc == packet->packet.data[1] &&
-                packetTx.packet.id == packet->packet.data[0])
+            if (inst->txPacket.crc == packet->packet.data[1] &&
+                inst->txPacket.packet.id == packet->packet.data[0])
             {
-                packetTx.needAck = ACK_RECEIVED;
+                inst->txPacket.needAck = ACK_RECEIVED;
             }
             break;
             
@@ -48,9 +50,9 @@ void HandlePacket(rfTrcvPacket_t* packet)
 
     // TODO: RF data response statemachine
     if (sendMsg)
-        Mrf49xaTxPacket(packet, TRUE, sendAck);
+        Mrf49xaTxPacket(inst, packet, TRUE, sendAck);
     else if (sendAck)
-        Mrf49xaTxAck(packet);
+        Mrf49xaTxAck(inst, packet);
     else
-        Mrf49xaFreePacket(packet);
+        Mrf49xaFreePacket(inst, packet);
 }

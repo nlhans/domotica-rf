@@ -6,19 +6,19 @@
 void spiDeinit(UI08_t port);
 void spiInit(UI08_t port);
 void spiSpeed(UI08_t port, bool_t fast);
-
+/*
 void spiTx1(UI08_t b);
 void spiTx2(UI08_t b);
 UI08_t spiRx1();
-UI08_t spiRx2();
+UI08_t spiRx2();*/
 UI08_t spiTxRx1(UI08_t b);
 UI08_t spiTxRx2(UI08_t b);
 
 bool_t spiBusy1();
 
-#define spiTxByte(p, b) ((p==1) ? spiTx1(b): spiTx2(b))
+#define spiTxByte(p, b) ((p==1) ? spiTxRx1(b): spiTxRx2(b))
 #define spiTxRxByte(p, b) ((p==1) ? spiTxRx1(b): spiTxRx2(b))
-#define spiRxByte(p) ((p==1) ? spiRx1(): spiRx2())
+#define spiRxByte(p) ((p==1) ? spiTxRx1(0): spiTxRx2(0))
 
 //void spiTxByte(UI08_t port, UI08_t byte);
 //UI08_t spiRxByte(UI08_t port);

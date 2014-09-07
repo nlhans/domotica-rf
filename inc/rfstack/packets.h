@@ -1,10 +1,15 @@
 #ifndef RFSTACK_PACKETS_H
 #define RFSTACK_PACKETS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #include "stddefs.h"
 #include "rfstack/rf_defs.h"
 
-#include "devices/mrf49xa.h"
+#include "devices/mrf49xa_defs.h"
 
 #define PROTOCOL_SUPPORT_FIRMWARE
 //#define PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
@@ -18,11 +23,20 @@
 
 #define FW_APPLICATION_STATE 0x2
 
-void RfSendPowerState(void);
-void RfSendSampleWeatherNode(uint16_t temperature, uint16_t humidity);
+void RfSendPowerState(Mrf49xaMac_t* inst);
+void RfSendSampleWeatherNode(Mrf49xaMac_t* inst, uint16_t temperature, uint16_t humidity);
 
-void HandlePacket(rfTrcvPacket_t* packet);
+void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet);
 
+
+
+extern Mrf49xaMac_t* macPtr;
 extern uint32_t syncedTime;
+
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

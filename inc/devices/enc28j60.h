@@ -202,11 +202,13 @@ typedef enum enc28j60Registers_e
 #define ENC28J60_TXBUF_END      8191
 
 #define enc28j60_spi_bus 2
-#define enc28j60_spi_write(data) spiTxByte(enc28j60_spi_bus, data);
-#define enc28j60_spi_read(data) spiRxByte(enc28j60_spi_bus)
+#define enc28j60_spi_write(data) spiTxRxByte(enc28j60_spi_bus, data);
+#define enc28j60_spi_read(data) spiTxRxByte(enc28j60_spi_bus, 0)
 #define enc28j60_spi_transferBytes(dataTx, dataRx, size) spiTxRxBytes(enc28j60_spi_bus, dataTx, dataRx, size)
 
 void enc28j60Initialize();
+void enc28j60NeedsReset(void);
+bool_t enc28j60IsDirty(void);
 void enc28j60Reset(void);
 void enc28j60ResetRxBuffer();
 bool_t enc28j60GetOverflowStatus(void);

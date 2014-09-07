@@ -1,6 +1,8 @@
 #ifndef DEVICES_MRF49XA_DEFS
 #define DEVICES_MRF49XA_DEFS
 
+#include <stdint.h>
+
 #define RF_DATARATE 2400
 #define RF_DATARATE_SLOW
 
@@ -217,31 +219,30 @@
 // (obtained by 2 reads)
 typedef union mrf49xaStatus_u
 {
-    UI08_t byte[2];
+    uint8_t byte[2];
     struct
     {
         struct
         {
-            UI08_t signalPresent:1;
-            UI08_t fifoEmpty:1;
-            UI08_t lowBat:1;
-            UI08_t extIntPin:1;
-            UI08_t wakeup:1;
-            UI08_t overflow:1;
-            UI08_t por:1;
-            UI08_t fifoTxRx:1;
+            uint8_t signalPresent:1;
+            uint8_t fifoEmpty:1;
+            uint8_t lowBat:1;
+            uint8_t extIntPin:1;
+            uint8_t wakeup:1;
+            uint8_t overflow:1;
+            uint8_t por:1;
+            uint8_t fifoTxRx:1;
         } msb;
         struct
         {
-            UI08_t offset:4;
-            UI08_t offsetSign:1;
-            UI08_t afc:1;
-            UI08_t clockLock:1;
-            UI08_t dataQualityOK:1;
+            uint8_t offset:4;
+            uint8_t offsetSign:1;
+            uint8_t afc:1;
+            uint8_t clockLock:1;
+            uint8_t dataQualityOK:1;
         } lsb;
     } flags;
 }mrf49xaStatus_t;
-extern mrf49xaStatus_t mrf49Status;
 
 // Software status for receiving & transmitting packets
 typedef enum rfTrcvState_e
@@ -300,22 +301,22 @@ typedef struct rfTrcvPacket_s
     uint8_t needAck:2; // rfTrcvAckState_t
 } rfTrcvPacket_t;
 
-typedef struct rfTrcvStatus_s
+typedef struct Mrf49xaMac_s
 {
+    mrf49xaStatus_t status;
+    
     rfTrcvPacket_t* hwRx;
     rfTrcvPacket_t rxPacket[2];
     rfTrcvPacket_t txPacket;
 
     rfTrcvState_t state;
+    uint8_t nodeId;
     uint8_t hwByte:7;
-    bool_t needsReset:1;
-
-} rfTrcvStatus_t;
-extern rfTrcvStatus_t rfTrcvStatus;
-
-#define packetRx rfTrcvStatus.hwRx
-#define packetTx rfTrcvStatus.txPacket
-
+    bool needsReset:1;
+#ifdef BSP_SIMULATOR
+    HwRfClient* client;
+#endif
+} Mrf49xaMac_t;
 
 // Node ID for broadcasts
 #define RF_BROADCAST 0xFF

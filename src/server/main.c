@@ -10,6 +10,7 @@
 
 #include "bsp/interrupt.h"
 #include "bsp/spi.h"
+#include "bsp/uart.h"
 
 //const UI16_t humids30c[15] = {65535, 39000, 20000, 9800, 4700, 1310, 770, 440, 250, 170, 105, 72, 50, 36, 25 };
 
@@ -27,6 +28,9 @@ void SysInitGpio(void)
 int StkAddrLo;  // order matters
 int StkAddrHi;
 char TrapMsgBuf[24];
+
+// 8CC
+// 214
 
 void TRAP_ISR _AddressError(void)
 {
@@ -75,13 +79,14 @@ int main(void)
     PPSLock;
 
     ExtIntInit();
-    spiInit(1);
+    
+    //spiInit(1);
     spiInit(2);
+
+    RF_POWER = 1;
+
     UartInit(1, 38400);
     printf("Hello world!\r\n");
-
-    // Interrupts..
-    INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
     

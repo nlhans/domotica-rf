@@ -1,0 +1,22 @@
+{
+	"name": "Hans",
+	
+	"data":
+	{
+		"upstairs":
+		{
+			"temperature": 28.25,
+			"humidity": 50.5
+		},
+		"downstairs":
+		{
+			"temperature": 38.25,
+			"humidity": 51.5
+		},
+		"scullery":
+		{
+			"temperature": 18.25,
+			"humidity": 70.5
+		}
+	}
+}

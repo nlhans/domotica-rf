@@ -338,7 +338,12 @@ void webSysTcpip(TcpConnection_t* connection, char **params)
     {
         TcpConnection_t* c = &(tcpConnections[i]);
 
-        webBfPos += sprintf(webBf + webBfPos, "<tr><td>%d</td><td>%d.%d.%d.%d</td><td>%u</td><td>%s</td></tr>",
+        uint8_t* pos = webBf + webBfPos;
+        uint16_t sizeLeft = ETHERNET_FRAME_SIZE - (uint16_t)(pos - ethFrameBuffer) - 2;
+
+        if (sizeLeft < 32) break;
+        
+        webBfPos += snprintf(pos, sizeLeft,  "<tr><td>%d</td><td>%d.%d.%d.%d</td><td>%u</td><td>%s</td></tr>",
                 i,
                 c->remoteIp[0],
                 c->remoteIp[1],

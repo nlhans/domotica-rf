@@ -33,18 +33,20 @@ void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_
     
 }
 
+extern Mrf49xaMac_t mrf49xaInst;
+
 void interrupt extInt()
 {
     if (INTCONbits.INTF != 0)
     {
         uint8_t ofw = 0;
-        while (!Mrf49xaServe())
+        while (!Mrf49xaServe(&mrf49xaInst))
         {
             ofw++;
             if (ofw == 255)
             {
                 ExtIntDeinit();
-                Mrf49xaNeedsReset();
+                Mrf49xaNeedsReset(&mrf49xaInst);
                 break;
             }
         }

@@ -63,12 +63,12 @@ int main(void)
     PPSLock;
 
     ExtIntInit();
-    spiInit(1);
+    //spiInit(1);
     UartInit(1, 115200*2);
     printf("Hello world!\r\n");
 
     // Disable nested ISR
-    INTCON1bits.NSTDIS = 1;
+    //INTCON1bits.NSTDIS = 1;
 
     RtosTaskInit();
 

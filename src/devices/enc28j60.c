@@ -11,7 +11,8 @@
 #include "utilities/insight.h"
 #include "utilities/executiontime.h"
 
-#define BLOCK_TFR_SIZE 8
+UI16_t dataPtr;;
+bool_t needReset = FALSE;
 
 const UI08_t* ethPacketBuffer = ethFrameBuffer;
 
@@ -298,6 +299,8 @@ bool_t enc28j60GetOverflowStatus(void)
 
 void enc28j60Initialize()
 {
+    needReset = FALSE;
+     dataPtr            = ENC28J60_RXBUF_START;
     ENC28J60_CS_HIGH; // deselect chip
     
     // reset
@@ -373,12 +376,8 @@ void enc28j60Initialize()
 bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
 {
     execProfile(ENC_TX_FRAME);
-    static UI08_t controlByte = 0x00;
+    UI08_t controlByte = 0x00;
     UI32_t timeout = 0xFFFFF;
-
-    UI16_t bufferPos = 0;
-    UI08_t writeSize = BLOCK_TFR_SIZE;
-    UI08_t* packetBf = (UI08_t*)packet;
 
     // clear status/error flags
     // Errata B7.10
@@ -398,21 +397,10 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     execProfile(ENC_TX_BUFFER);
     enc28j60WriteData(&controlByte, 1);
 
-    // Split up the writing into segments of 16 bytes each
-    // This is because SPI1 peripheral is shared with RF, and cannot handle
-    // long bursts.
-    for (bufferPos = 0; bufferPos < length; bufferPos += BLOCK_TFR_SIZE)
-    {
-        // Set phy buffer write pointer to start of TXBUFFER
-        enc28j60WriteRegisterUint16(EWRPTL, ENC28J60_TXBUF_START + 1 + bufferPos);
+    // Set phy buffer write pointer to start of TXBUFFER
+    enc28j60WriteRegisterUint16(EWRPTL, ENC28J60_TXBUF_START + 1);
 
-        if (length - bufferPos > BLOCK_TFR_SIZE)
-            writeSize = BLOCK_TFR_SIZE;
-        else
-            writeSize = length - bufferPos;
-        enc28j60WriteData((packetBf + bufferPos), writeSize);
-        
-    }
+    enc28j60WriteData((uint8_t*) packet, length);
 
     execProfile(ENC_TX_SEND);
     
@@ -420,7 +408,15 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     
     enc28j60BitSetRegisterUint8(ECON1, 0b00001000); // TXRTS
 
-    while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0 && (timeout--) > 0);
+    while ((enc28j60ReadRegisterUint8(EIR) & 0x08) == 0)
+    {
+        timeout -- ;
+
+        if (timeout == 0)
+        {
+            enc28j60NeedsReset();
+        }
+    }
 
     execProfile(ENC_TX_DONE);
     
@@ -452,13 +448,10 @@ void enc28j60RxFrame(void)
     UI16_t              length              = sizeof(ethFrameBuffer);
 
     UI08_t              packetCount         = enc28j60GetPacketCount();
-    static UI16_t       dataPtr             = ENC28J60_RXBUF_START;
     UI08_t              packetHeader[6];
     EthernetFrame_t*    frame;
 
     UI08_t i = 0;
-    UI16_t readPos;
-    UI08_t readSize = BLOCK_TFR_SIZE;
 
     while(packetCount > 0)
     {
@@ -487,19 +480,9 @@ void enc28j60RxFrame(void)
                 packetSize = length-2;
             }
 
-            // Read the data
-            for (readPos = 0; readPos < packetSize+2-4; readPos += BLOCK_TFR_SIZE)
-            {
-                // Set read pointer to packet
-                enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4 + readPos);
-
-                if ((packetSize+2-4)-readPos > BLOCK_TFR_SIZE)
-                    readSize = BLOCK_TFR_SIZE;
-                else
-                    readSize = (packetSize+2-4) - readPos;
-
-                enc28j60ReadData(packet + readPos, readSize); // -4 for CRC, +2 for some status bytes or something?
-            }
+            // Set read pointer to packet
+            enc28j60WriteRegisterUint16(ERDPTL, dataPtr + 4);
+            enc28j60ReadData(packet, packetSize+2-4); // -4 for CRC, +2 for some status bytes or something?
 
             execProfile(ENC_RX_PACKET_DONE);
 
@@ -579,13 +562,24 @@ void enc28j60ResetRxBuffer()
 
 void enc28j60Reset(void)
 {
+    currentBank = 5;
     ENC28J60_RST_HIGH;
-    Nop();
+    RtosTaskDelay(5);
     ENC28J60_RST_LOW;
-    Nop();
+    RtosTaskDelay(5);
     ENC28J60_RST_HIGH;
     RtosTaskDelay(5);
     ENC28J60_CS_LOW;
     enc28j60_spi_write(SC);
     ENC28J60_CS_HIGH;
+}
+
+void enc28j60NeedsReset(void)
+{
+    needReset = TRUE;
+}
+
+bool_t enc28j60IsDirty(void)
+{
+    return needReset;
 }
