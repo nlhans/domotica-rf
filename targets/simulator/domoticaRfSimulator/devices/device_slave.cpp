@@ -26,7 +26,7 @@ DeviceSlave::DeviceSlave(uint16_t id, DeviceHardware* hw)
 
 void DeviceSlave::Sleepy(uint16_t time)
 {
-    this->usleep(time*100);
+    this->usleep(time*500);
 }
 
 void DeviceSlave::run()
@@ -35,6 +35,12 @@ void DeviceSlave::run()
     Mrf49xaMac_t* macPtr = this->rf->mac;
 
     Sleepy(this->id*334);
+
+    while(1)
+    {
+        Mrf49xaTick(this->rf->mac);
+        Sleepy(1);
+    }
 
     while(1)
     {

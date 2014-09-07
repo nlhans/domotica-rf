@@ -58,10 +58,10 @@ SOURCES       = ../domoticaRfSimulator/main.cpp \
 		../../../src/rfstack/packets.c \
 		../domoticaRfSimulator/hardware/power.cpp \
 		../domoticaRfSimulator/devices/mrf49xa_phy.cpp \
-		../domoticaRfSimulator/devices/device.cpp moc_domoticasimulator.cpp \
+		../domoticaRfSimulator/devices/device.cpp \
+		../domoticaRfSimulator/devices/device_master.cpp moc_domoticasimulator.cpp \
 		moc_device_slave.cpp \
-		moc_device_hardware.cpp \
-		moc_device.cpp
+		moc_device_hardware.cpp
 OBJECTS       = main.o \
 		domoticasimulator.o \
 		device_slave.o \
@@ -76,10 +76,10 @@ OBJECTS       = main.o \
 		power.o \
 		mrf49xa_phy.o \
 		device.o \
+		device_master.o \
 		moc_domoticasimulator.o \
 		moc_device_slave.o \
-		moc_device_hardware.o \
-		moc_device.o
+		moc_device_hardware.o
 DIST          = ../../../../../../Qt/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../../../Qt/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		../../../../../../Qt/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -443,7 +443,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/domoticaRfSimulator1.0.0 || mkdir -p .tmp/domoticaRfSimulator1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.h ../domoticaRfSimulator/devices/device_slave.h ../domoticaRfSimulator/hardware/eeprom.h ../domoticaRfSimulator/hardware/ethernet.h ../domoticaRfSimulator/hardware/rf.h ../domoticaRfSimulator/hardware/sensor.h ../domoticaRfSimulator/config.h ../domoticaRfSimulator/devices/device_hardware.h ../domoticaRfSimulator/hardware/power.h ../domoticaRfSimulator/devices/device.h .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/main.cpp ../domoticaRfSimulator/domoticasimulator.cpp ../domoticaRfSimulator/devices/device_slave.cpp ../domoticaRfSimulator/hardware/eeprom.cpp ../domoticaRfSimulator/hardware/ethernet.cpp ../domoticaRfSimulator/hardware/rf.cpp ../domoticaRfSimulator/hardware/sensor.cpp ../../../src/devices/mrf49xa_mac.c ../../../src/rfstack/client.c ../domoticaRfSimulator/devices/device_hardware.cpp ../../../src/rfstack/packets.c ../domoticaRfSimulator/hardware/power.cpp ../domoticaRfSimulator/devices/mrf49xa_phy.cpp ../domoticaRfSimulator/devices/device.cpp .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.ui .tmp/domoticaRfSimulator1.0.0/ && (cd `dirname .tmp/domoticaRfSimulator1.0.0` && $(TAR) domoticaRfSimulator1.0.0.tar domoticaRfSimulator1.0.0 && $(COMPRESS) domoticaRfSimulator1.0.0.tar) && $(MOVE) `dirname .tmp/domoticaRfSimulator1.0.0`/domoticaRfSimulator1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/domoticaRfSimulator1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.h ../domoticaRfSimulator/devices/device_slave.h ../domoticaRfSimulator/hardware/eeprom.h ../domoticaRfSimulator/hardware/ethernet.h ../domoticaRfSimulator/hardware/rf.h ../domoticaRfSimulator/hardware/sensor.h ../domoticaRfSimulator/config.h ../domoticaRfSimulator/devices/device_hardware.h ../domoticaRfSimulator/hardware/power.h ../domoticaRfSimulator/devices/device.h ../domoticaRfSimulator/devices/device_master.h .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/main.cpp ../domoticaRfSimulator/domoticasimulator.cpp ../domoticaRfSimulator/devices/device_slave.cpp ../domoticaRfSimulator/hardware/eeprom.cpp ../domoticaRfSimulator/hardware/ethernet.cpp ../domoticaRfSimulator/hardware/rf.cpp ../domoticaRfSimulator/hardware/sensor.cpp ../../../src/devices/mrf49xa_mac.c ../../../src/rfstack/client.c ../domoticaRfSimulator/devices/device_hardware.cpp ../../../src/rfstack/packets.c ../domoticaRfSimulator/hardware/power.cpp ../domoticaRfSimulator/devices/mrf49xa_phy.cpp ../domoticaRfSimulator/devices/device.cpp ../domoticaRfSimulator/devices/device_master.cpp .tmp/domoticaRfSimulator1.0.0/ && $(COPY_FILE) --parents ../domoticaRfSimulator/domoticasimulator.ui .tmp/domoticaRfSimulator1.0.0/ && (cd `dirname .tmp/domoticaRfSimulator1.0.0` && $(TAR) domoticaRfSimulator1.0.0.tar domoticaRfSimulator1.0.0 && $(COMPRESS) domoticaRfSimulator1.0.0.tar) && $(MOVE) `dirname .tmp/domoticaRfSimulator1.0.0`/domoticaRfSimulator1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/domoticaRfSimulator1.0.0
 
 
 clean:compiler_clean 
@@ -466,9 +466,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_domoticasimulator.cpp moc_device_slave.cpp moc_device_hardware.cpp moc_device.cpp
+compiler_moc_header_make_all: moc_domoticasimulator.cpp moc_device_slave.cpp moc_device_hardware.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_domoticasimulator.cpp moc_device_slave.cpp moc_device_hardware.cpp moc_device.cpp
+	-$(DEL_FILE) moc_domoticasimulator.cpp moc_device_slave.cpp moc_device_hardware.cpp
 moc_domoticasimulator.cpp: ../../../../../../Qt/5.2.1/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../../../Qt/5.2.1/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../../../Qt/5.2.1/gcc_64/include/QtWidgets/qwidget.h \
@@ -786,67 +786,6 @@ moc_device_hardware.cpp: ../../../../../../Qt/5.2.1/gcc_64/include/QtCore/QThrea
 		../domoticaRfSimulator/devices/device_hardware.h
 	/home/hans/Qt/5.2.1/gcc_64/bin/moc $(DEFINES) $(INCPATH) ../domoticaRfSimulator/devices/device_hardware.h -o moc_device_hardware.cpp
 
-moc_device.cpp: ../../../../../../Qt/5.2.1/gcc_64/include/QtCore/QThread \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qthread.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobject.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qnamespace.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qglobal.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qconfig.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qfeatures.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_integrity.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qoldbasicatomic.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_vxworks.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_power.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_alpha.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv7.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv6.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv5.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_bfin.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_ia64.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_mips.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_s390.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_sh4a.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_sparc.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_x86.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_gcc.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_unix.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qmutex.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qlogging.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qflags.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qtypetraits.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qsysinfo.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qstring.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qchar.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qbytearray.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qrefcount.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qarraydata.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qlist.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qalgorithms.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qiterator.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcoreevent.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qmetatype.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qisenum.h \
-		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobject_impl.h \
-		../domoticaRfSimulator/devices/device.h
-	/home/hans/Qt/5.2.1/gcc_64/bin/moc $(DEFINES) $(INCPATH) ../domoticaRfSimulator/devices/device.h -o moc_device.cpp
-
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all: ui_domoticasimulator.h
@@ -999,7 +938,11 @@ main.o: ../domoticaRfSimulator/main.cpp ../domoticaRfSimulator/domoticasimulator
 		../../../inc/bsp/sim/mrf49xa_bsp.h \
 		../domoticaRfSimulator/devices/device.h \
 		../domoticaRfSimulator/hardware/eeprom.h \
-		../domoticaRfSimulator/hardware/sensor.h
+		../domoticaRfSimulator/hardware/sensor.h \
+		../domoticaRfSimulator/devices/device_master.h \
+		../domoticaRfSimulator/hardware/ethernet.h \
+		../domoticaRfSimulator/hardware/power.h \
+		../../../inc/bsp/adc.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../domoticaRfSimulator/main.cpp
 
 domoticasimulator.o: ../domoticaRfSimulator/domoticasimulator.cpp ../domoticaRfSimulator/domoticasimulator.h \
@@ -1691,6 +1634,83 @@ device.o: ../domoticaRfSimulator/devices/device.cpp ../domoticaRfSimulator/devic
 		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobject_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device.o ../domoticaRfSimulator/devices/device.cpp
 
+device_master.o: ../domoticaRfSimulator/devices/device_master.cpp ../domoticaRfSimulator/devices/device_master.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/QThread \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qthread.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobject.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qfeatures.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_integrity.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qoldbasicatomic.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_vxworks.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_power.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_alpha.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_bfin.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_mips.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_s390.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_sh4a.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_sparc.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qflags.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qstring.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qchar.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qlist.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qisenum.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/qobject_impl.h \
+		../domoticaRfSimulator/devices/device.h \
+		../domoticaRfSimulator/hardware/eeprom.h \
+		../domoticaRfSimulator/hardware/ethernet.h \
+		../domoticaRfSimulator/hardware/rf.h \
+		../../../../../../Qt/5.2.1/gcc_64/include/QtCore/QString \
+		../../../inc/devices/mrf49xa.h \
+		../../../inc/stddefs.h \
+		../../../inc/bspPIC24.h \
+		../../../inc/bspPIC16.h \
+		../../../inc/rfstack/rf_defs.h \
+		../../../inc/devices/mrf49xa_defs.h \
+		../../../inc/bsp/sim/mrf49xa_bsp.h \
+		../domoticaRfSimulator/hardware/power.h \
+		../../../inc/bsp/adc.h \
+		../domoticaRfSimulator/hardware/sensor.h \
+		../domoticaRfSimulator/devices/device_hardware.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device_master.o ../domoticaRfSimulator/devices/device_master.cpp
+
 moc_domoticasimulator.o: moc_domoticasimulator.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_domoticasimulator.o moc_domoticasimulator.cpp
 
@@ -1699,9 +1719,6 @@ moc_device_slave.o: moc_device_slave.cpp
 
 moc_device_hardware.o: moc_device_hardware.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_device_hardware.o moc_device_hardware.cpp
-
-moc_device.o: moc_device.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_device.o moc_device.cpp
 
 ####### Install
 

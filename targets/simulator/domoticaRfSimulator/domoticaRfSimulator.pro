@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     ../../../src/rfstack/packets.c \
     hardware/power.cpp \
     devices/mrf49xa_phy.cpp \
-    devices/device.cpp
+    devices/device.cpp \
+    devices/device_master.cpp
 
 HEADERS  += domoticasimulator.h \
     devices/device_slave.h \
@@ -36,7 +37,8 @@ HEADERS  += domoticasimulator.h \
     config.h \
     devices/device_hardware.h \
     hardware/power.h \
-    devices/device.h
+    devices/device.h \
+    devices/device_master.h
 
 FORMS    += domoticasimulator.ui
 
