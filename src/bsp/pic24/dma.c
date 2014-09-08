@@ -1,5 +1,5 @@
 #include "bsp/dma.h"
-
+#ifdef dsPIC3333
 #define NR_OF_DMA_CHANNELS 8
 
 #if NR_OF_DMA_CHANNELS < 8
@@ -87,3 +87,4 @@ void __attribute__((__interrupt__,no_auto_psv)) _DMA1Interrupt(void)
     
     dmaHandlers[1](1);
 }
+#endif

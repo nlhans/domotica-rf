@@ -1,4 +1,6 @@
+#include "stddefs.h"
 
+#ifdef PIC24GB
 #include "rtos/task.h"
 
 #include "bsp/spi.h"
@@ -583,3 +585,5 @@ bool_t enc28j60IsDirty(void)
 {
     return needReset;
 }
+
+#endif

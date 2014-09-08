@@ -1,5 +1,7 @@
 #include "devices/mrf49xa.h"
 
+#ifdef PIC24GB
+
 void Mrf49SpiTx(uint8_t byte)
 {
     #define SPI_TX_TICK(a) do { if ((byte & (1<<a)) != 0) RF_SPI_SDO = 1; else RF_SPI_SDO = 0; \
@@ -57,3 +59,5 @@ uint8_t Mrf49SpiRx(void)
 
     return data;
 }
+
+#endif

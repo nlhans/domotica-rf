@@ -147,7 +147,7 @@ void handleCfgCmd(rfTrcvPacket_t* packet)
 }
 #endif
 
-void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
+void HandlePacketClient(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
     // Compact these booleans:
     struct

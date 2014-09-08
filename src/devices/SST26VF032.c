@@ -1,5 +1,7 @@
 #include "devices/SST26VF032.h"
 
+#ifdef PIC24GB
+
 void FlashInit(void)
 {
     FLASH_SIO2 = 1;
@@ -62,3 +64,5 @@ void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
 
     FlashCsSet(addr, FALSE);
 }
+
+#endif

@@ -16,7 +16,8 @@ RtosTimer_t rfPingTimer;
 RtosTask_t rfTask;
 UI08_t rfTaskStk[512];
 
-Mrf49xaMac_t* macPtr;
+Mrf49xaMac_t mrf49xaInst;
+Mrf49xaMac_t* macPtr = &mrf49xaInst;
 
 #ifdef RF_DEBUG
 RfDiagnosticPacket_t rfHistoryPackets[RF_HISTORY_DEPTH];
@@ -133,7 +134,7 @@ void RfTask()
     PPSLock;
 
     MRF_DISABLE_INT;
-    macPtr = Mrf49xaInit();
+    Mrf49xaInit(macPtr);
     MRF_ENABLE_INT;
 
     RtosTaskDelay(100);

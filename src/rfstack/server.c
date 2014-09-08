@@ -2,7 +2,7 @@
 
 #include "devices/mrf49xa.h"
 
-void HandlePacket(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
+void HandlePacketServer(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
     bool_t sendMsg = FALSE;
     bool_t sendAck = FALSE;

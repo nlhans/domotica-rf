@@ -2,6 +2,7 @@
 
 void SoftI2cNop()
 {
+    uint8_t i;
     // 10=24.5kHz
     // 50=7kHz
     // 500 = 700Hz or so

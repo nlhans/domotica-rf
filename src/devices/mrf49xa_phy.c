@@ -1,11 +1,7 @@
 #include "devices/mrf49xa.h"
 
 // Serve MRf49XA chipset when requires attention.
-#ifdef PIC24_HW
-bool_t Mrf49xaServe(uint8_t foo)
-#else
 bool_t Mrf49xaServe(Mrf49xaMac_t* inst)
-#endif
 {
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH

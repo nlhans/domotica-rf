@@ -3,10 +3,12 @@
 
 #include "rtos/task.h"
 
+#include "devices/mrf49xa.h"
 #include "rfstack/rf_defs.h"
 
 extern RtosTask_t rfTask;
 extern UI08_t mrfInRx;
+extern Mrf49xaMac_t mrf49xaInst;
 
 #define RF_RX_PACKET   0x01
 #define RF_TX_PACKET   0x02

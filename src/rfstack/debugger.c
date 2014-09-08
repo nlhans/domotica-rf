@@ -1,7 +1,9 @@
+#ifdef DEBUGGER
+
 #include "rfstack/packets.h"
 #include "dbg/dbg_task.h"
 
-void HandlePacket(rfTrcvPacket_t* packet)
+void HandlePacketDebugger(rfTrcvPacket_t* packet)
 {
     memcpy(& (bfSw[bfSwPacket]), packet, sizeof(rfTrcvPacket_t));
     bfSwPacket++;
@@ -9,3 +11,4 @@ void HandlePacket(rfTrcvPacket_t* packet)
     if (bfSwPacket == HISTORY_SIZE)
         DbgTransferPackets();
 }
+#endif

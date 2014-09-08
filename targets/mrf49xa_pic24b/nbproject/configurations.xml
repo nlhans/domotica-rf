@@ -22,6 +22,7 @@
         <itemPath>../../src/bsp/pic24/spi.c</itemPath>
         <itemPath>../../src/bsp/pic24/timer.c</itemPath>
         <itemPath>../../src/bsp/pic24/uart.c</itemPath>
+        <itemPath>../../src/bsp/common/softI2c.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f7" displayName="Devices" projectFiles="true">
         <itemPath>../../src/devices/SST26VF032.c</itemPath>
@@ -120,7 +121,8 @@
         <property key="enable-short-double" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
-        <property key="extra-include-directories" value="../../inc;../../inc/server"/>
+        <property key="extra-include-directories"
+                  value="../../inc;../../inc/server;../../inc/bsp/pic24"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>

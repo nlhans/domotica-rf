@@ -13,6 +13,8 @@
 // These delays may be longer than the function name suggests(!)
 extern void LoseTime(uint16_t t);
 
+#define HandlePacket HandlePacketClient
+
 #define Delay5Ms() Sleepy(5)
 #define Delay50Ms() Sleepy(64)
 

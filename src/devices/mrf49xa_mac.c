@@ -133,7 +133,7 @@ void Mrf49xaTick(Mrf49xaMac_t* inst)
     if ((RtosTimestamp - TransmissionStart) > 250 &&
             mrf49Inst->state == TX_PACKET)
     {
-        Mrf49xaNeedsReset();
+        Mrf49xaNeedsReset(inst);
     }
 #endif
     if (mrf49Inst->rxPacket[0].state == PKT_HW_BUSY_RX &&
