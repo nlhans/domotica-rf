@@ -5,7 +5,7 @@
 
 #include "stddefs.h"
 
-#define RtosTime_t UI32_t
+#define RtosTime_t uint32_t
 
 typedef enum RtosTaskState_e
 {
@@ -20,9 +20,9 @@ typedef struct RtosTask_s
 {
     struct RtosTask_t* list;
     void* method;
-    UI08_t* stack;
-    UI08_t* stackPosition;
-    UI08_t priority;
+    uint8_t* stack;
+    uint8_t* stackPosition;
+    uint8_t priority;
 
     RtosTaskState_t state;
 
@@ -30,16 +30,16 @@ typedef struct RtosTask_s
     RtosTime_t nextRun;
 
 #ifdef RTOS_EVENTS
-    UI16_t eventMask;
-    UI16_t eventStore;
+    uint16_t eventMask;
+    uint16_t eventStore;
 #endif
 
 #ifdef RTOS_DEBUG
     RtosTime_t lastRun;
     RtosTime_t timeRan;
-    UI16_t stackSize;
-    UI16_t stackUsage;
-    UI16_t stackMaxUsage;
+    uint16_t stackSize;
+    uint16_t stackUsage;
+    uint16_t stackMaxUsage;
     char* name;
 #endif
 
@@ -53,7 +53,7 @@ extern RtosTask_t RtosTaskIdleObj;
 extern RtosTime_t RtosTimestamp;
 
 void RtosTaskInit();
-void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priority, UI08_t* stack, UI16_t stackSize);
+void RtosTaskCreate(RtosTask_t* task, char* name, void* function, uint8_t priority, uint8_t* stack, uint16_t stackSize);
 void RtosTaskRun();
 
 void RtosTaskTick();
@@ -63,8 +63,8 @@ void RtosTaskDelay(RtosTime_t time);
 void RtosTaskWake(RtosTask_t* task);
 
 #ifdef RTOS_EVENTS
-UI16_t RtosTaskWaitForEvent(UI16_t mask);
-void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event);
+uint16_t RtosTaskWaitForEvent(uint16_t mask);
+void RtosTaskSignalEvent(RtosTask_t* task, uint16_t event);
 #endif
 
 extern void RtosKernelPortInitStack(RtosTask_t* task);

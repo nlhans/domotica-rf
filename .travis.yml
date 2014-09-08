@@ -1,7 +1,6 @@
 language: cpp
 compiler:
   - gcc
-script: ./configure && make
+script: make
 env:
-  - TARGET=client
-  - TARGET=server
+  - TARGET=sim

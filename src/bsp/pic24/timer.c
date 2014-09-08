@@ -2,14 +2,14 @@
 
 TimerCfg_t hwTimers[BSP_TIMER_COUNT];
 
-const UI32_t const divis[4] = {
+const uint32_t const divis[4] = {
     F_OSC_DIV_2/1,
     F_OSC_DIV_2/8, 
     F_OSC_DIV_2/64,
     F_OSC_DIV_2/256
 };
 
-void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
+void timerSetup(uint8_t index, uint16_t ctrlReg, uint16_t periodReg)
 {
     printf("[Timer] Initializing timer %d\n", index);
     switch(index)
@@ -48,10 +48,10 @@ void timerSetup(UI08_t index, UI16_t ctrlReg, UI16_t periodReg)
     }
 }
 
-void Timer16InitPeriod(UI08_t index, UI32_t period)
+void Timer16InitPeriod(uint8_t index, uint32_t period)
 {
-    UI08_t i, tmrDivider = 0;
-    UI32_t tmrPeriod = 0;
+    uint8_t i, tmrDivider = 0;
+    uint32_t tmrPeriod = 0;
 
     // Calculate maximum period for each division setting
     for (i = 0; i < 4; i++)
@@ -64,15 +64,15 @@ void Timer16InitPeriod(UI08_t index, UI32_t period)
     timerSetup(index, (1<<15) | (tmrDivider << 4), tmrPeriod);
 }
 
-void Timer32Init(UI08_t index, UI08_t tmrDivider)
+void Timer32Init(uint8_t index, uint8_t tmrDivider)
 {
     timerSetup(index, (1<<15) | (1<<3) | (tmrDivider << 4), 0xFFFF);
     timerSetup(index+1, (1<<15) | (tmrDivider << 4), 0xFFFF);
 }
 
-void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback)
+void TimerInitPeriodic16Isr(uint8_t index, uint32_t period, TimerHandler_t callback)
 {
-    if (hwTimers[index-1].used == TRUE || index >= BSP_TIMER_COUNT)
+    if (hwTimers[index-1].used == true || index >= BSP_TIMER_COUNT)
     {
         // TODO: Error?
     }

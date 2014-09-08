@@ -3,26 +3,26 @@
 
 #include "stddefs.h"
 
-void spiDeinit(UI08_t port);
-void spiInit(UI08_t port);
-void spiSpeed(UI08_t port, bool_t fast);
+void spiDeinit(uint8_t port);
+void spiInit(uint8_t port);
+void spiSpeed(uint8_t port, bool fast);
 /*
-void spiTx1(UI08_t b);
-void spiTx2(UI08_t b);
-UI08_t spiRx1();
-UI08_t spiRx2();*/
-UI08_t spiTxRx1(UI08_t b);
-UI08_t spiTxRx2(UI08_t b);
+void spiTx1(uint8_t b);
+void spiTx2(uint8_t b);
+uint8_t spiRx1();
+uint8_t spiRx2();*/
+uint8_t spiTxRx1(uint8_t b);
+uint8_t spiTxRx2(uint8_t b);
 
-bool_t spiBusy1();
+bool spiBusy1();
 
 #define spiTxByte(p, b) ((p==1) ? spiTxRx1(b): spiTxRx2(b))
 #define spiTxRxByte(p, b) ((p==1) ? spiTxRx1(b): spiTxRx2(b))
 #define spiRxByte(p) ((p==1) ? spiTxRx1(0): spiTxRx2(0))
 
-//void spiTxByte(UI08_t port, UI08_t byte);
-//UI08_t spiRxByte(UI08_t port);
-//UI08_t spiTxRxByte(UI08_t port, UI08_t byte);
-void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size);
+//void spiTxByte(uint8_t port, uint8_t byte);
+//uint8_t spiRxByte(uint8_t port);
+//uint8_t spiTxRxByte(uint8_t port, uint8_t byte);
+void spiTxRxBytes(uint8_t port, uint8_t *dataTx, uint8_t *dataRx, uint16_t size);
 
 #endif

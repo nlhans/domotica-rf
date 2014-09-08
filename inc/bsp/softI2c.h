@@ -11,8 +11,8 @@ void SoftI2cNop(void);
 
 
 void SoftI2cStart(void);
-UI08_t SoftI2cRxByte(UI08_t ack);
-UI08_t SoftI2cTxByte(UI08_t data);
+uint8_t SoftI2cRxByte(uint8_t ack);
+uint8_t SoftI2cTxByte(uint8_t data);
 void SoftI2cStop(void);
 
 #endif

@@ -10,14 +10,14 @@ typedef struct spiArbstat_s
     bool_t rfBusy:1;
 } spiArbStat_t;
 
-extern UI08_t ethFault;
+extern uint8_t ethFault;
 
 extern volatile spiArbStat_t spiArbStat;
 
 void spiArbEthAbort(void);
-UI16_t spiArbEthWasAborted(void);
-UI16_t spiArbEthAcquire(void);
-UI16_t spiArbEthComplete(void);
+uint16_t spiArbEthWasAborted(void);
+uint16_t spiArbEthAcquire(void);
+uint16_t spiArbEthComplete(void);
 
 void spiArbRfAcquire(void);
 void spiArbRfComplete(void);

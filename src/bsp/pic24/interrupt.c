@@ -3,18 +3,18 @@
 
 static ExtIntInstance_t intHandlers[BSP_EXT_INT_COUNT];
 
-void ExtIntDummy(UI08_t ind) { }
+void ExtIntDummy(uint8_t ind) { }
 
 void ExtIntInit(void)
 {
-    UI08_t i = 0;
+    uint8_t i = 0;
     for (i = 0; i < BSP_EXT_INT_COUNT; i++)
     {
         ExtIntSetup(i, NULL, 0, 0);
     }
 }
 
-void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio)
+void ExtIntSetup(uint8_t ind, ExtIntHandler_t callback, bool fallingEdge, uint8_t prio)
 {
     intHandlers[ind].callback = (ExtIntHandler_t) ((callback == NULL) ? ExtIntDummy : callback);
 

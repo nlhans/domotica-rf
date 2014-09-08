@@ -25,11 +25,11 @@ if (i == 1) {if (s) FLASH_CS1_SELECT else FLASH_CS1_DESELECT } \
 else{ if (s) FLASH_CS2_SELECT else FLASH_CS2_DESELECT } } while (0); \
 
 void FlashInit(void);
-UI16_t FlashReadId(void);
+uint16_t FlashReadId(void);
 
-void FlashCsSet(UI32_t addr, bool_t state);
-void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size);
-void FlashTxBytes(UI32_t addr, UI08_t *bf, UI16_t size);
-void FlashEraseSector(UI32_t addr);
+void FlashCsSet(uint32_t addr, bool_t state);
+void FlashRxBytes(uint32_t addr, uint8_t *bf, uint16_t size);
+void FlashTxBytes(uint32_t addr, uint8_t *bf, uint16_t size);
+void FlashEraseSector(uint32_t addr);
 
 #endif

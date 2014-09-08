@@ -67,14 +67,14 @@ bool_t Mrf49xaSignalPresent(Mrf49xaMac_t* inst)
 {
     Mrf49RxSts(mrf49Inst);
     if (mrf49Inst->status.flags.msb.signalPresent == 0)
-        return TRUE;
+        return true;
     else
-        return FALSE;
+        return false;
 }
 
 void Mrf49xaModeRx(Mrf49xaMac_t* inst)
 {
-    UI08_t k;
+    uint8_t k;
     SetupRegistersWithoutDelay(Rx);
     //mrf49xaCfg(mrfRegset_Rx, mrfRegset_RxCnt);
 
@@ -86,7 +86,7 @@ void Mrf49xaModeRx(Mrf49xaMac_t* inst)
 
 void Mrf49xaModeTx(Mrf49xaMac_t* inst)
 {
-    UI08_t k;
+    uint8_t k;
     SetupRegistersWithoutDelay(Tx);
     //mrf49xaCfg(mrfRegset_Tx, mrfRegset_TxCnt);
 
@@ -97,7 +97,7 @@ void Mrf49xaModeTx(Mrf49xaMac_t* inst)
 #ifdef MRF49XA_POWER_SWITCH
 void Mrf49xaModeSleep(Mrf49xaMac_t* inst)
 {
-    UI08_t k;
+    uint8_t k;
     SetupRegistersWithoutDelay(Sleep);
 
     mrf49Inst->state = POWERED_OFF;
@@ -120,14 +120,14 @@ void Mrf49xaReboot(Mrf49xaMac_t* inst)
 
 void Mrf49xaNeedsReset(Mrf49xaMac_t* inst)
 {
-    mrf49Inst->needsReset = TRUE;
+    mrf49Inst->needsReset = true;
 }
 
 void Mrf49xaInit(Mrf49xaMac_t* inst)
 {
-    UI08_t k;
+    uint8_t k;
 #ifdef PIC16_HW
-    UI08_t i, j;
+    uint8_t i, j;
 #endif
     reset:
 

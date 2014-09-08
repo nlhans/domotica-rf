@@ -16,12 +16,12 @@ void Mcp9800Start(Mcp9800Resolution_t resolution)
 
 }
 
-UI16_t Mcp9800Read(void)
+uint16_t Mcp9800Read(void)
 {
     SoftI2cStart();
     SoftI2cTxByte(0b10010001);
-    UI08_t tempH = SoftI2cRxByte(1);
-    UI08_t tempL = SoftI2cRxByte(0);
+    uint8_t tempH = SoftI2cRxByte(1);
+    uint8_t tempL = SoftI2cRxByte(0);
     SoftI2cStop();
 
     return (tempH << 8) | tempL;

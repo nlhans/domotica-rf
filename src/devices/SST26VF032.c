@@ -12,7 +12,7 @@ void FlashInit(void)
     spiInit(FLASH_SPI_PORT);
 }
 
-void FlashCsSet(UI32_t addr, bool_t state)
+void FlashCsSet(uint32_t addr, bool_t state)
 {
     if (addr <= 524288)
     {
@@ -24,9 +24,9 @@ void FlashCsSet(UI32_t addr, bool_t state)
     }
 }
 
-UI16_t FlashReadId(void)
+uint16_t FlashReadId(void)
 {
-    UI16_t id = 0;
+    uint16_t id = 0;
 
     FLASH_CS(1, TRUE);
 
@@ -50,7 +50,7 @@ UI16_t FlashReadId(void)
     return id;
 }
 
-void FlashRxBytes(UI32_t addr, UI08_t *bf, UI16_t size)
+void FlashRxBytes(uint32_t addr, uint8_t *bf, uint16_t size)
 {
     FlashCsSet(addr, TRUE);
 

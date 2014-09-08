@@ -3,7 +3,7 @@
 
 #include "stddefs.h"
 
-typedef bool_t (*TimerHandler_t) (UI08_t ind, UI16_t count);
+typedef bool (*TimerHandler_t) (uint8_t ind, uint16_t count);
 
 typedef enum TimerCfgType_e
 {
@@ -13,25 +13,25 @@ typedef enum TimerCfgType_e
 } TimerCfgType_t;
 typedef struct TimerCfg_s
 {
-    UI08_t used:1;
+    uint8_t used:1;
     TimerCfgType_t type:7;
 
     union
     {
         struct
         {
-            UI16_t period;
-            UI16_t count;
+            uint16_t period;
+            uint16_t count;
             TimerHandler_t callback;
         } ISR;
 
-        UI08_t data[6];
+        uint8_t data[6];
     };
 } TimerCfg_t;
 
-void Timer32Init(UI08_t index, UI08_t tmrDivider);
+void Timer32Init(uint8_t index, uint8_t tmrDivider);
 
-void Timer16InitPeriod(UI08_t index, UI32_t period);
-void TimerInitPeriodic16Isr(UI08_t index, UI32_t period, TimerHandler_t callback);
+void Timer16InitPeriod(uint8_t index, uint32_t period);
+void TimerInitPeriodic16Isr(uint8_t index, uint32_t period, TimerHandler_t callback);
 
 #endif

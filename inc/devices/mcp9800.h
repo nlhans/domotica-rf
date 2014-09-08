@@ -13,7 +13,7 @@ typedef enum Mcp9800Resolution_e
 
 
 void Mcp9800Start(Mcp9800Resolution_t resolution);
-UI08_t Mcp9800Ready(void);
-UI16_t Mcp9800Read(void);
+uint8_t Mcp9800Ready(void);
+uint16_t Mcp9800Read(void);
 
 #endif

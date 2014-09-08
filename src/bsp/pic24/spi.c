@@ -1,6 +1,6 @@
 #include "bsp/spi.h"
 
-void spiInit(UI08_t port)
+void spiInit(uint8_t port)
 {
     switch(port)
     {
@@ -52,7 +52,7 @@ void spiInit(UI08_t port)
     }
 }
 
-void spiDeinit(UI08_t port)
+void spiDeinit(uint8_t port)
 {
     switch(port)
     {
@@ -86,7 +86,7 @@ void spiDeinit(UI08_t port)
 volatile uint8_t skip = 0;
 volatile uint8_t monotic = 0;
 
-UI08_t spiTxRx1(UI08_t byte)
+uint8_t spiTxRx1(uint8_t byte)
 {
     return 0;
     SPI1BUF = byte;
@@ -96,7 +96,7 @@ UI08_t spiTxRx1(UI08_t byte)
     skip = 0;
     return (SPI1BUF & 0xFF);
 }
-UI08_t spiTxRx2(UI08_t byte)
+uint8_t spiTxRx2(uint8_t byte)
 {
     monotic++;
     SPI2BUF = byte;
@@ -109,7 +109,7 @@ UI08_t spiTxRx2(UI08_t byte)
 }
 
 #ifndef spiTxByte
-void spiTxByte(UI08_t port, UI08_t byte)
+void spiTxByte(uint8_t port, uint8_t byte)
 {
     switch(port)
     {
@@ -124,7 +124,7 @@ void spiTxByte(UI08_t port, UI08_t byte)
 #endif
 
 #ifndef spiRxByte
-UI08_t spiRxByte(UI08_t port)
+uint8_t spiRxByte(uint8_t port)
 {
     switch(port)
     {
@@ -140,7 +140,7 @@ UI08_t spiRxByte(UI08_t port)
 #endif
 
 #ifndef spiTxRxByte
-UI08_t spiTxRxByte(UI08_t port, UI08_t byte)
+uint8_t spiTxRxByte(uint8_t port, uint8_t byte)
 {
     switch(port)
     {
@@ -154,9 +154,9 @@ UI08_t spiTxRxByte(UI08_t port, UI08_t byte)
     }
 }
 #endif
-void spiTxRxBytes(UI08_t port, UI08_t *dataTx, UI08_t *dataRx, UI16_t size)
+void spiTxRxBytes(uint8_t port, uint8_t *dataTx, uint8_t *dataRx, uint16_t size)
 {
-    UI16_t i = 0;
+    uint16_t i = 0;
     if (dataRx == NULL)
     {
         while (size > 0)

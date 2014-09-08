@@ -13,37 +13,39 @@ CXXFLAGS := -g
 
 # Create build environment depending on functionality build
 ifeq ($(TARGET),sim)
-	ENV := x86
-	DEFINES := -DTARGET=SIM
+	ENV := sim
+	DEFINES := -DBUILD_TARGET=99
 	SOURCES_DIR += $(SRCDIR)/sim/
 	INCLUDES += -I "$(INCDIR)/sim/"
 endif
 
 ifeq ($(TARGET),server)
 	ENV := pic24
-	DEFINES := -DTARGET=SERVER
+	DEFINES := -DBUILD_TARGET=21
 	SOURCES_DIR += $(SRCDIR)/server/
-	INCLUDES += -I "$(INCDIR)/server/"
+	SOURCES_DIR += $(SRCDIR)/bsp/common/
 	SOURCES_DIR += $(SRCDIR)/utilities/
+	INCLUDES += -I "$(INCDIR)/server/"
 endif
 
 ifeq ($(TARGET),client)
 	ENV := pic16
-	DEFINES := -DTARGET=CLIENT
+	DEFINES := -DBUILD_TARGET=10
 	SOURCES_DIR += $(SRCDIR)/node/
+	SOURCES_DIR += $(SRCDIR)/bsp/common/
 	INCLUDES += -I"$(INCDIR)/node/"
 endif
 
 ifeq ($(TARGET),sniffer)
 	ENV := pic24
-	DEFINES := -DTARGET=SNIFFER
+	DEFINES := -DBUILD_TARGET=32
 	SOURCES_DIR += $(SRCDIR)/dbg/
+	SOURCES_DIR += $(SRCDIR)/bsp/common/
 	INCLUDES += -I "$(INCDIR)/dbg/"
 endif
 
 # Add C directories accordingly
 SOURCES_DIR += $(SRCDIR)/bsp/$(ENV)/
-SOURCES_DIR += $(SRCDIR)/bsp/common/
 
 SOURCES_DIR += $(SRCDIR)/devices/
 SOURCES_DIR += $(SRCDIR)/rfstack/
@@ -52,9 +54,19 @@ INCLUDES += -I"$(INCDIR)/"
 INCLUDES += -I"$(INCDIR)/bsp/$(ENV)/"
 
 # Set up compiler environment
-ifeq ($(ENV),x86)
+ifeq ($(ENV),sim)
 	CC := gcc
 	OBJEXT := o
+
+	# Compiler Configuration
+	CFLAGS += $(INCLUDES)
+
+	# Linker configuration
+	LFLAGS += $(INCLUDES)
+
+	# Elf > hex not needed
+	EXEFILE := $(TARGETDIR)/$(TARGET).hex
+	BIN2HEX := /dev/null
 else
 	ifeq ($(ENV),pic16)
 
