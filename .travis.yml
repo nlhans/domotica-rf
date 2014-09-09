@@ -10,4 +10,5 @@ script:
 env:
   - TARGET=sim
 after_success:
+  - rake test:all
   - coveralls --exclude lib --exclude tests --gcov-options '\-lp'

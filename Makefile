@@ -58,13 +58,16 @@ ifeq ($(ENV),sim)
 	CXX := g++
 	CLK := g++
 	OBJEXT := o
+	COVERAGE := gcov
 
 	# Compiler Configuration
 	CFLAGS += -Wall -pthread
 	CFLAGS += $(INCLUDES)
+	CFLAGS += -ftest-coverage
 
 	CXXFLAGS += -Wall
 	CXXFLAGS += $(INCLUDES)
+	CXXFLAGS += -ftest-coverage
 
 	# Linker configuration
 	LFLAGS += -lstdc++ -pthread
@@ -150,8 +153,6 @@ $(EXEFILE): $(OBJECTS_C) $(OBJECTS_ASM) $(OBJECTS_CPP) $(SOURCES_H)
 	$(MKPATH) $(TARGETDIR) $(BUILDDIR)
 	@echo " Linking..."; $(CLK) $(LFLAGS) $^ -o$(EXEFILE) $(LIB)
 #	@echo " $(CC) $(LFLAGS) $^ -o $(TARGETDIR) $(LIB)";
-	
-	$(RM) -r $(BUILDDIR)
 
 .PHONY: clean
 
@@ -162,10 +163,12 @@ clean:
 build/%.$(OBJEXT) : src/%.$(SRCEXT_C)
 	@echo "\r\n**** Compiling file $^"; $(MKPATH) $(shell dirname $@)
 	@echo ""; $(CC) $(CFLAGS) $(DEFINES) -o$@ -c $^ 
+	$(COVERAGE) $^ -o $@
 
 build/%.$(OBJEXT) : src/%.$(SRCEXT_CPP)
 	@echo "\r\n**** Compiling file $^"; $(MKPATH) $(shell dirname $@)
 	@echo ""; $(CXX) $(CXXFLAGS) $(DEFINES) -o$@ -c $^ 
+	$(COVERAGE) $^ -o $@
 
 #	@echo " $(MKPATH) $(shell dirname $@)"; 
 #	@echo " $(CC) $(CFLAGS) $(DEFINES) -o$@ $^ "; 
