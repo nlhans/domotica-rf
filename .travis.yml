@@ -2,8 +2,8 @@ language: cpp
 compiler:
   - gcc
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libqt4-core libqt4-gui libqt4-dev qt4-dev-tools qt4-qmake
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -qq libqt4-core libqt4-gui libqt4-dev qt4-dev-tools qt4-qmake
   - sudo pip install cpp-coveralls
 script:
   - make
