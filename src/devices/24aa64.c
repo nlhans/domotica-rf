@@ -1,6 +1,8 @@
 #include "bsp/softI2c.h"
 #include "devices/24aa64.h"
 
+#if BUILD_TARGET != TARGET_SIMULATOR
+
 void eepromRxBytes(uint16_t address, uint8_t* data, uint8_t size)
 {
     // Random read
@@ -50,3 +52,5 @@ void eepromTxByte(uint16_t address, uint8_t byte)
 {
     eepromTxBytes(address, &byte, 1);
 }
+
+#endif

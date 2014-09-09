@@ -1,5 +1,7 @@
 #include "devices/mrf49xa.h"
 
+#if BUILD_TARGET != TARGET_SIMULATOR
+
 #define Mrf49DataTx(d)  Mrf49TxCmd(MRF_REG_TXBREG, d);
 //#define Mrf49DataRx(d)  Mrf49RxCmd(MRF_REG_TXBREG, d);
 
@@ -49,3 +51,5 @@ void Mrf49TxByte(uint8_t byte)
 {
     Mrf49TxCmd(REG_TXBREG, byte);
 }
+
+#endif

@@ -1,6 +1,8 @@
 #include "devices/mcp9800.h"
 #include "bsp/softI2c.h"
 
+#if BUILD_TARGET != TARGET_SIMULATOR
+
 void Mcp9800Start(Mcp9800Resolution_t resolution)
 {
     SoftI2cStart();
@@ -26,3 +28,5 @@ uint16_t Mcp9800Read(void)
 
     return (tempH << 8) | tempL;
 }
+
+#endif
