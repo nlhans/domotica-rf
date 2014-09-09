@@ -27,7 +27,7 @@ else{ if (s) FLASH_CS2_SELECT else FLASH_CS2_DESELECT } } while (0); \
 void FlashInit(void);
 uint16_t FlashReadId(void);
 
-void FlashCsSet(uint32_t addr, bool_t state);
+void FlashCsSet(uint32_t addr, bool state);
 void FlashRxBytes(uint32_t addr, uint8_t *bf, uint16_t size);
 void FlashTxBytes(uint32_t addr, uint8_t *bf, uint16_t size);
 void FlashEraseSector(uint32_t addr);

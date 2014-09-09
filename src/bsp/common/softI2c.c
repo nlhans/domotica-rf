@@ -85,9 +85,9 @@ void SoftI2cStop(void)
     SoftI2cNop();
 }
 
-UI08_t SoftI2cTxByte(UI08_t data)
+uint8_t SoftI2cTxByte(uint8_t data)
 {
-    UI08_t i;
+    uint8_t i;
 
     for(i = 0x80; i != 0; i >>= 1)
     {
@@ -118,7 +118,7 @@ UI08_t SoftI2cTxByte(UI08_t data)
     I2C_SCL = I2C_HIGH;
     SoftI2cNop();
 
-    UI08_t ack = !I2C_SDA_READ;
+    uint8_t ack = !I2C_SDA_READ;
 
     I2C_SCL = I2C_LOW;
     SoftI2cNop();
@@ -127,10 +127,10 @@ UI08_t SoftI2cTxByte(UI08_t data)
 
 }
 
-UI08_t SoftI2cRxByte(UI08_t ack)
+uint8_t SoftI2cRxByte(uint8_t ack)
 {
-    UI08_t data=0x00;
-    UI08_t i;
+    uint8_t data=0x00;
+    uint8_t i;
 
     I2C_SCL = I2C_LOW;
     SoftI2cNop();

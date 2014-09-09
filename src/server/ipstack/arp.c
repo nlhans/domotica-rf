@@ -3,9 +3,9 @@
 #include "ipstack/ethdefs.h"
 #include "utilities/insight.h"
 
-void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply);
+void arpBuildPacket(uint8_t* targetMac, uint8_t* targetIp, bool reply);
 
-void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
+void arpBuildPacket(uint8_t* targetMac, uint8_t* targetIp, bool reply)
 {
     ArpPacket_t* arp = (ArpPacket_t*) ethFrameBuffer;
 
@@ -29,8 +29,8 @@ void arpBuildPacket(UI08_t* targetMac, UI08_t* targetIp, bool_t reply)
 
 void arpAnnounce()
 {
-    UI08_t zerosMac[6] = { 0, 0, 0, 0, 0, 0 };
-    arpBuildPacket(zerosMac, (UI08_t*)myGateway, FALSE);
+    uint8_t zerosMac[6] = { 0, 0, 0, 0, 0, 0 };
+    arpBuildPacket(zerosMac, (uint8_t*)myGateway, false);
 
     INSIGHT(ARP_ANNOUNCE, myIp[0], myIp[1], myIp[2], myIp[3]);
 }
@@ -47,7 +47,7 @@ void arpProcessPacket(EthernetFrame_t* frame)
         if (memcmp(arp->tpa, myIp, 4) == 0)
         {
             // It's a match; meaning requesting a MAC address for this 'machine'
-            arpBuildPacket(arp->sha, arp->spa, TRUE);
+            arpBuildPacket(arp->sha, arp->spa, true);
         }
     }
 }

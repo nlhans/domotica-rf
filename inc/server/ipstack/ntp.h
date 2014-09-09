@@ -13,18 +13,18 @@
 
 typedef struct NTPPacketContent_s
 {
-    UI08_t flags;
-    UI08_t stratum;
-    UI08_t interval;
-    UI08_t precision;
-    UI32_t rootdelay;
-    UI32_t rootdispersion;
-    UI32_t id;
+    uint8_t flags;
+    uint8_t stratum;
+    uint8_t interval;
+    uint8_t precision;
+    uint32_t rootdelay;
+    uint32_t rootdispersion;
+    uint32_t id;
 
-    UI32_t stampRef[2];
-    UI32_t stampOrigin[2];
-    UI32_t stampReceive[2];
-    UI32_t stampTransmit[2];
+    uint32_t stampRef[2];
+    uint32_t stampOrigin[2];
+    uint32_t stampReceive[2];
+    uint32_t stampTransmit[2];
 
 } NTPPacketContent_t;
 
@@ -34,10 +34,10 @@ typedef struct NTPPacket_s
     NTPPacketContent_t ntp;
 } NTPPacket_t;
 
-extern UI32_t ntpTimestamp;
+extern uint32_t ntpTimestamp;
 
 void ntpInit();
-void ntpRequest(UI08_t* ip);
+void ntpRequest(uint8_t* ip);
 void ntpHandle (UDPPacket_t* packet);
 
 #endif	/* NTP_H */

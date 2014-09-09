@@ -17,10 +17,10 @@ extern "C" {
 
 typedef struct ICMPacketHeader_s
 {
-    UI08_t type;
-    UI08_t code;
-    volatile UI16_t crc;
-    UI16_t rest;
+    uint8_t type;
+    uint8_t code;
+    volatile uint16_t crc;
+    uint16_t rest;
 } ICMPacketHeader_t;
 
 typedef struct ICMPPacket_s

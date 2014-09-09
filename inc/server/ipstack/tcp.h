@@ -20,30 +20,30 @@ typedef union TcpFlags_u
 {
     struct
     {
-        UI08_t fin:1;
-        UI08_t syn:1;
-        UI08_t rst:1;
-        UI08_t psh:1;
-        UI08_t ack:1;
-        UI08_t urg:1;
-        UI08_t ece:1;
-        UI08_t cwr:1;
-        UI08_t ns:1;
-        UI08_t resvr:3;
-        UI08_t dataOffset:4;
+        uint8_t fin:1;
+        uint8_t syn:1;
+        uint8_t rst:1;
+        uint8_t psh:1;
+        uint8_t ack:1;
+        uint8_t urg:1;
+        uint8_t ece:1;
+        uint8_t cwr:1;
+        uint8_t ns:1;
+        uint8_t resvr:3;
+        uint8_t dataOffset:4;
     }bits;
-    UI16_t data;
+    uint16_t data;
 } TcpFlags_t;
 typedef struct TcpPacketHeader_s
 {
-    UI16_t portSource;          // 2
-    UI16_t portDestination;     // 4
-    UI32_t sequenceNumber;      // 8
-    UI32_t acknowledgement;     // 12
+    uint16_t portSource;          // 2
+    uint16_t portDestination;     // 4
+    uint32_t sequenceNumber;      // 8
+    uint32_t acknowledgement;     // 12
     TcpFlags_t flags;           // 14?
-    UI16_t length;              // 16
-    UI16_t crc;                 // 18
-    UI16_t urgPointer;          // 20
+    uint16_t length;              // 16
+    uint16_t crc;                 // 18
+    uint16_t urgPointer;          // 20
 
 } TcpPacketHeader_t;
 
@@ -95,28 +95,28 @@ typedef enum TcpState_e
 extern const char * const TcpStateStrings[NUM_OF_TCP_STATES];
 #endif
 
-typedef bool_t (*TcpConnectedHandler_t) (void* connectionHandle);
-typedef void (*TcpRxDataHandler_t) (void* connectionHandle, bool_t push, UI08_t* data, UI16_t length);
+typedef bool (*TcpConnectedHandler_t) (void* connectionHandle);
+typedef void (*TcpRxDataHandler_t) (void* connectionHandle, bool push, uint8_t* data, uint16_t length);
 
 typedef struct TcpListener_s
 {
-    bool_t InUse;
-    UI08_t maxConnections;
-    UI16_t localPort;
+    bool InUse;
+    uint8_t maxConnections;
+    uint16_t localPort;
     TcpConnectedHandler_t acceptConnectionHandler;
     TcpConnectedHandler_t closeConnectionHandler;
 } TcpListener_t;
 
 typedef struct TcpConnection_s
 {
-    UI32_t lastSequenceNumber;
-    UI32_t lastAcknowledgeNumber;
+    uint32_t lastSequenceNumber;
+    uint32_t lastAcknowledgeNumber;
     TcpListener_t* listener;
     TcpState_t state;
-    UI08_t remoteIp[4];
-    UI08_t remoteMac[6];
-    UI16_t remotePort;
-    UI16_t timer;
+    uint8_t remoteIp[4];
+    uint8_t remoteMac[6];
+    uint16_t remotePort;
+    uint16_t timer;
     TcpRxDataHandler_t rxData;
 } TcpConnection_t;
 
@@ -124,10 +124,10 @@ extern TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 void tcpInit();
 void tcpHandlePacket(EthernetIpv4_t* ipv4);
-bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);
+bool tcpListen(uint16_t port, uint8_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close);
 
-void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);
-void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
+void tcpTxReplyPacket(uint16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection);
+void tcpTxPacket(uint16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection);
 
 char* tcpGetDataPtr();
 

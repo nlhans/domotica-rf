@@ -13,9 +13,9 @@
 // http://en.wikipedia.org/wiki/Ethernet_frame
 typedef struct EthernetFrame_s
 {
-    UI08_t dstMac[6];
-    UI08_t srcMac[6];
-    UI16_t type;
+    uint8_t dstMac[6];
+    uint8_t srcMac[6];
+    uint16_t type;
 } EthernetFrame_t;
 
 typedef enum EthernetProtocol_e
@@ -25,20 +25,20 @@ typedef enum EthernetProtocol_e
 
 } EthernetProtocol_t;
 
-typedef void (*EthernetPacketHandler_t) (EthernetFrame_t* frame, bool_t* handled);
+typedef void (*EthernetPacketHandler_t) (EthernetFrame_t* frame, bool* handled);
 
 #define htonl(x) ( ((x & 0xFF000000) >> 24) | ((x & 0x00FF0000) >> 8) | ((x & 0x0000FF00) << 8) | ((x & 0x000000FF) << 24) )
 #define htons(x) ( (( x & 0xFF00) >> 8) | ((x & 0xFF) << 8))
 
-extern void macTxFrame(EthernetFrame_t* frame, UI16_t size);
-extern void macTxReplyFrame(EthernetFrame_t* frame, UI16_t size);
+extern void macTxFrame(EthernetFrame_t* frame, uint16_t size);
+extern void macTxReplyFrame(EthernetFrame_t* frame, uint16_t size);
 extern void macRxFrame();
 
-extern const UI08_t myIp[4];
-extern const UI08_t myMac[6];
-extern const UI08_t myGateway[4];
-extern const UI08_t myGatewayMac[6];
+extern const uint8_t myIp[4];
+extern const uint8_t myMac[6];
+extern const uint8_t myGateway[4];
+extern const uint8_t myGatewayMac[6];
 
-extern UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
+extern uint8_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
 
 #endif

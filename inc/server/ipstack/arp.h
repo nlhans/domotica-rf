@@ -19,22 +19,22 @@ typedef struct ArpPacket_s
 {
     EthernetFrame_t frame;
     
-    UI16_t htype;
-    UI16_t ptype;
-    UI08_t hlen;
-    UI08_t plen;
-    UI16_t oper;
-    UI08_t sha[6]; // mac
-    UI08_t spa[4]; // ip
-    UI08_t tha[6]; // mac
-    UI08_t tpa[4]; // ip
+    uint16_t htype;
+    uint16_t ptype;
+    uint8_t hlen;
+    uint8_t plen;
+    uint16_t oper;
+    uint8_t sha[6]; // mac
+    uint8_t spa[4]; // ip
+    uint8_t tha[6]; // mac
+    uint8_t tpa[4]; // ip
 } ArpPacket_t;
 
 void arpAnnounce();
 void arpProcessPacket(EthernetFrame_t* frame);
 
-extern  UI08_t thisIp[4];
-extern  UI08_t thisMac[6];
+extern  uint8_t thisIp[4];
+extern  uint8_t thisMac[6];
 
 #ifdef	__cplusplus
 }

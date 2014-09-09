@@ -21,7 +21,7 @@ void AdcDeinit(void)
     ADCON0 = 0;
 }
 
-inline UI16_t AdcGetResult(void)
+inline uint16_t AdcGetResult(void)
 {
     return ((ADRESH << 8) | ADRESL);
 }
@@ -31,12 +31,12 @@ void AdcGo(void)
     ADCON0 |= 1<<1;
 }
 
-UI08_t AdcIsBusy(void)
+uint8_t AdcIsBusy(void)
 {
     return ((ADCON0 >> 1) & 1);
 }
 
-void AdcPinEnable(UI08_t port, UI08_t portNumber)
+void AdcPinEnable(uint8_t port, uint8_t portNumber)
 {
     //
     switch (port)
@@ -56,7 +56,7 @@ void AdcPinEnable(UI08_t port, UI08_t portNumber)
     }
 }
 
-void AdcPinDisable(UI08_t port, UI08_t portNumber)
+void AdcPinDisable(uint8_t port, uint8_t portNumber)
 {
     //
     switch (port)
@@ -78,7 +78,7 @@ void AdcChSelect(AdcChannel_t channel)
     ADCON0 = channel << 2 | 1; // enable ADC
 }
 
-UI16_t AdcSample(UI08_t ch)
+uint16_t AdcSample(uint8_t ch)
 {
     AdcChSelect(ch);
 

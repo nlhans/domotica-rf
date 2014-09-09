@@ -5,9 +5,9 @@
 
 typedef struct spiArbstat_s
 {
-    bool_t ethBusy:1;
-    bool_t ethAbort:1;
-    bool_t rfBusy:1;
+    bool ethBusy:1;
+    bool ethAbort:1;
+    bool rfBusy:1;
 } spiArbStat_t;
 
 extern uint8_t ethFault;

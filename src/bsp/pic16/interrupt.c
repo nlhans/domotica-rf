@@ -19,7 +19,7 @@ void ExtIntDeinit(void)
     INTCONbits.INTE = 0;
 }
 
-void ExtIntSetup(UI08_t ind, ExtIntHandler_t callback, bool_t fallingEdge, UI08_t prio)
+void ExtIntSetup(uint8_t ind, ExtIntHandler_t callback, bool fallingEdge, uint8_t prio)
 {
     cb = callback;
     INTCONbits.INTF = 0;

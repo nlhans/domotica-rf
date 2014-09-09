@@ -3,15 +3,15 @@
 
 typedef struct RtosPic24Stack_s
 {
-    UI16_t lowPc;
-    UI16_t highPc;
-    UI16_t sr;
-    UI16_t w[15];
-    UI16_t rcount;
-    UI16_t tblpag;
-    UI16_t corcon;
-    UI16_t psvpag;
-    UI16_t nest;
+    uint16_t lowPc;
+    uint16_t highPc;
+    uint16_t sr;
+    uint16_t w[15];
+    uint16_t rcount;
+    uint16_t tblpag;
+    uint16_t corcon;
+    uint16_t psvpag;
+    uint16_t nest;
 } RtosPic24Stack_t;
 
 void RtosKernelPortInitStack(RtosTask_t* task)
@@ -19,11 +19,11 @@ void RtosKernelPortInitStack(RtosTask_t* task)
     RtosPic24Stack_t *stack = (RtosPic24Stack_t*) task->stack;
 
     memset(stack, 0, sizeof(RtosPic24Stack_t));
-    stack->lowPc = (UI16_t)task->method;
+    stack->lowPc = (uint16_t)task->method;
     stack->corcon = CORCON;
     stack->psvpag = PSVPAG;
 
-    task->stackPosition = (UI08_t*)(stack+1);
+    task->stackPosition = (uint8_t*)(stack+1);
 
 }
 

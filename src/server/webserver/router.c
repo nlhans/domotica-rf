@@ -10,7 +10,7 @@
 #include "devices/SST26VF032.h"
 
 char * webBf;
-UI16_t webBfPos;
+uint16_t webBfPos;
 
 
 
@@ -42,7 +42,7 @@ void webSysTcpip(TcpConnection_t* connection, char **params);
 void webSysRtos(TcpConnection_t* connection, char **params);
 void webSysRf(TcpConnection_t* connection, char **params);
 
-void webServeFlash(TcpConnection_t* connection, UI16_t location);
+void webServeFlash(TcpConnection_t* connection, uint16_t location);
 
 
 
@@ -60,7 +60,7 @@ typedef void (*RouterPageHandler_t) (TcpConnection_t* connection, char **params)
 #define DEF_STR_CONCAT_COUNT(a,b) DEF_STR_CONCAT(a,b)
 
 #define routerIndexDef(cnt, method, url, options, callback) \
-    { (const char*) method, (const char*) url, (UI16_t) options, (RouterPageHandler_t) callback },
+    { (const char*) method, (const char*) url, (uint16_t) options, (RouterPageHandler_t) callback },
 
 #define routerIndexCnt(cnt, method, url, options, callback) \
     DEF_STR_CONCAT_COUNT(ROUTE_, __COUNTER__),
@@ -94,11 +94,11 @@ typedef struct Route_s
     const char *url;
     union
     {
-         const UI16_t _opt;
+         const uint16_t _opt;
          struct
          {
-             const UI16_t location:15;
-             const UI08_t arguments:1;
+             const uint16_t location:15;
+             const uint8_t arguments:1;
          } options;
     };
     const RouterPageHandler_t callback;
@@ -123,16 +123,16 @@ void webSysFlash(TcpConnection_t* connection, char **params)
     webBfPos += sprintf(webBf+webBfPos, httpSysNavBar);
     webBfPos += sprintf(webBf + webBfPos, "Flash ID: %X<br />", FlashReadId());
 
-    UI16_t contentLength = 0;
-    UI32_t flashLocation = 0;
-    UI16_t fileTypeLength = 0;
+    uint16_t contentLength = 0;
+    uint32_t flashLocation = 0;
+    uint16_t fileTypeLength = 0;
     char fileType[64];
 
-    FlashRxBytes(0*32, (UI08_t*) &contentLength, 2);
-    FlashRxBytes(0*32+2, (UI08_t*) &fileTypeLength, 2);
+    FlashRxBytes(0*32, (uint8_t*) &contentLength, 2);
+    FlashRxBytes(0*32+2, (uint8_t*) &fileTypeLength, 2);
     if (fileTypeLength < sizeof(fileType))
     {
-        FlashRxBytes(0*32+4, (UI08_t*) fileType, fileTypeLength);
+        FlashRxBytes(0*32+4, (uint8_t*) fileType, fileTypeLength);
         fileType[fileTypeLength] = 0;
     }
     else
@@ -248,9 +248,9 @@ void webSysRtos(TcpConnection_t* connection, char **params)
 {
 #ifdef RTOS_DEBUG
     TcpFlags_t fl;
-    UI08_t i = 0;
-    UI08_t loadInt = 0;
-    UI32_t runTimeRemaining;
+    uint8_t i = 0;
+    uint8_t loadInt = 0;
+    uint32_t runTimeRemaining;
     char state [32];
     char load[4];
     RtosTask_t* ptr = &RtosTaskIdleObj;
@@ -321,7 +321,7 @@ void webSysRtos(TcpConnection_t* connection, char **params)
 #ifdef TCP_DEBUG
 void webSysTcpip(TcpConnection_t* connection, char **params)
 {
-    UI08_t i;
+    uint8_t i;
     TcpFlags_t fl;
 
     // Tcp flags for HTTP header
@@ -414,23 +414,23 @@ void web404(TcpConnection_t * connection)
     tcpTxPacket(strlen(http404), fl, connection);
 }
 
-void webServeFlash(TcpConnection_t* connection, UI16_t location)
+void webServeFlash(TcpConnection_t* connection, uint16_t location)
 {
     tcpCloseObj(connection);
     return;
 
     TcpFlags_t fl;
 
-    UI16_t bfSize = sizeof(ethFrameBuffer) - sizeof(TcpPacket_t);
-    UI16_t contentIndex = 0;
-    UI16_t contentLength = 0;
-    UI32_t flashLocation = 0;
-    UI16_t fileTypeLength = 0;
+    uint16_t bfSize = sizeof(ethFrameBuffer) - sizeof(TcpPacket_t);
+    uint16_t contentIndex = 0;
+    uint16_t contentLength = 0;
+    uint32_t flashLocation = 0;
+    uint16_t fileTypeLength = 0;
     char fileType[64];
 
-    FlashRxBytes(location*32,   (UI08_t*)&contentLength, 2);
-    FlashRxBytes(location*32+2, (UI08_t*)&fileTypeLength, 2);
-    FlashRxBytes(location*32+4, (UI08_t*)fileType, fileTypeLength);
+    FlashRxBytes(location*32,   (uint8_t*)&contentLength, 2);
+    FlashRxBytes(location*32+2, (uint8_t*)&fileTypeLength, 2);
+    FlashRxBytes(location*32+4, (uint8_t*)fileType, fileTypeLength);
     fileType[fileTypeLength] = 0;
 
     // Tcp flags for HTTP header
@@ -451,7 +451,7 @@ void webServeFlash(TcpConnection_t* connection, UI16_t location)
             bfSize = contentLength - contentIndex;
         }
 
-        FlashRxBytes(flashLocation, (UI08_t*)webBf, bfSize);
+        FlashRxBytes(flashLocation, (uint8_t*)webBf, bfSize);
         tcpTxPacket(bfSize, fl, connection);
 
         // TODO: Figure out how big our available buffer is
@@ -464,11 +464,11 @@ void webServeFlash(TcpConnection_t* connection, UI16_t location)
 
 }
 
-void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
+void WebserverHandle(void* con, bool push, char* d, uint16_t s)
 {
-    UI08_t i;
-    UI08_t argInd = 0;
-    UI08_t argCnt = 0;
+    uint8_t i;
+    uint8_t argInd = 0;
+    uint8_t argCnt = 0;
 
     char webRequestType[4];
     char webRequestUri[64];
@@ -477,7 +477,7 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
 
     TcpConnection_t *connection = (TcpConnection_t*) con;
     const Route_t *route;
-    bool_t routeMatched = FALSE;
+    bool routeMatched = false;
     char* args[8];
 
     webBfPos = 0;
@@ -511,12 +511,12 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
 
             // If the route table says there are no arguments, we can save
             // time by using strcmp() instead of parsing it letter-by-letter.
-            if (route->options.arguments == FALSE)
+            if (route->options.arguments == false)
             {
                 if (strcmp(route->url, webRequestUri) == 0)
                 {
                     // Reset args
-                    routeMatched = TRUE;
+                    routeMatched = true;
                     memset(args, 0, sizeof(args));
                     break;
                 }
@@ -529,9 +529,9 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
                 argCnt = 0;
                 argInd = 0;
 
-                routeMatched = TRUE;
+                routeMatched = true;
 
-                // Parse the route to disapprove our "routeMatched = TRUE"
+                // Parse the route to disapprove our "routeMatched = true"
                 while (*routeUriPtr != '\0')
                 {
                     // If the route Uri contains a ':', then it's a "wildcard"
@@ -571,7 +571,7 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
                         // Match both strings
                         if (*strPtr != *routeUriPtr)
                         {
-                            routeMatched = FALSE;
+                            routeMatched = false;
                             break;
                         }
 
@@ -580,7 +580,7 @@ void WebserverHandle(void* con, bool_t push, char* d, UI16_t s)
                     }
                 }
 
-                if (routeMatched == FALSE)
+                if (routeMatched == false)
                 {
                     memset(args, 0, sizeof(args));
                 }

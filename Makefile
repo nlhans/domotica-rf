@@ -59,6 +59,7 @@ ifeq ($(ENV),sim)
 	OBJEXT := o
 
 	# Compiler Configuration
+	CFLAGS += -Wall
 	CFLAGS += $(INCLUDES)
 
 	# Linker configuration
@@ -91,7 +92,7 @@ else
 			CS := /opt/microchip/xc16/v1.21/bin/xc16-as
 			OBJEXT := d
 
-			CFLAGS = -c -mcpu=24FJ64GB004  -MMD -g -omf=elf -Os -msmart-io=1 -Wall -msfr-warn=off
+			CFLAGS = -c -mcpu=24FJ64GB004  -MMD -g -omf=elf -O1 -msmart-io=1 -Wall -msfr-warn=off
 			CFLAGS += $(INCLUDES)
 
 			# Linker configuration
@@ -105,16 +106,15 @@ else
 	endif
 endif
 
-#https://github.com/WellDone/MoMo-Firmware/blob/dev/momo_modules/mainboard/project.yml
-#https://github.com/WellDone/MoMo-Firmware/blob/dev/momo_modules/mainboard/rakefile.rb
-
 # Scan Source directories
 SRCEXT_CPP := cpp
 SRCEXT_C   := c
+SRCEXT_H   := h
 SRCEXT_ASM := s
 
 SOURCES_CPP := $(shell find $(SOURCES_DIR) -type f -name *.$(SRCEXT_CPP))
 SOURCES_C   := $(shell find $(SOURCES_DIR) -type f -name *.$(SRCEXT_C))
+SOURCES_H   := $(shell find $(SOURCES_DIR) -type f -name *.$(SRCEXT_H))
 SOURCES_ASM := $(shell find $(SOURCES_DIR) -type f -name *.$(SRCEXT_ASM))
 
 OBJECTS_CPP := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES_CPP:.$(SRCEXT_CPP)=.$(OBJEXT)))
@@ -131,28 +131,33 @@ $(DESIRED_EXEFILE):
 	@echo "$(BIN2HEX) $(EXEFILE) -a  -omf=elf"
 	$(BIN2HEX) $(EXEFILE) -a  -omf=elf 
 
-$(EXEFILE): $(OBJECTS_C) $(OBJECTS_ASM)
+$(EXEFILE): $(OBJECTS_C) $(OBJECTS_ASM) $(SOURCES_H)
 	@echo "Working directory: $(shell pwd)"
 	@echo "Build target $(TARGET), environment $(ENV), compiler $(CC)"	 
 	@echo "Sources path: $(SOURCES_DIR)"
 	@echo "Includes path: $(INCLUDES)"
 
 	$(MKPATH) $(TARGETDIR) $(BUILDDIR)
-	@echo " Linking..."
-	@echo " $(CC) $(LFLAGS) $^ -o $(TARGETDIR) $(LIB)"; $(CC) $(LFLAGS) $^ -o$(EXEFILE) $(LIB)
+	@echo " Linking..."; $(CC) $(LFLAGS) $^ -o$(EXEFILE) $(LIB)
+#	@echo " $(CC) $(LFLAGS) $^ -o $(TARGETDIR) $(LIB)";
 	
 	$(RM) -r $(BUILDDIR)
+
+.PHONY: clean
 
 clean:
 	@echo " Cleaning..."; 
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGETDIR)
 
 build/%.$(OBJEXT) : src/%.$(SRCEXT_C)
-	@echo "\r\n\r\n**** Compiling file $^";
-	@echo " $(MKPATH) $(shell dirname $@)"; $(MKPATH) $(shell dirname $@)
-	@echo " $(CC) $(CFLAGS) $(DEFINES) -o$@ $^ "; $(CC) $(CFLAGS) $(DEFINES) -o$@ $^ 
+	@echo "\r\n**** Compiling file $^"; $(MKPATH) $(shell dirname $@)
+	@echo ""; $(CC) $(CFLAGS) $(DEFINES) -o$@ -c $^ 
+
+#	@echo " $(MKPATH) $(shell dirname $@)"; 
+#	@echo " $(CC) $(CFLAGS) $(DEFINES) -o$@ $^ "; 
 
 build/%.$(OBJEXT) : src/%.$(SRCEXT_ASM)
-	@echo "\r\n\r\n**** Assembling file $^";
-	@echo " $(MKPATH) $(shell dirname $@)"; $(MKPATH) $(shell dirname $@)
-	@echo " $(CS) $(CFLAGS) $(DEFINES) -o$@ $^ "; $(CS) $(SFLAGS) -o$@ $^ 
+	@echo "\r\n**** Assembling file $^"; $(MKPATH) $(shell dirname $@)
+#	@echo " $(MKPATH) $(shell dirname $@)"; 
+#	@echo " $(CS) $(CFLAGS) $(DEFINES) -o$@ $^ "; 
+	@echo ""; $(CS) $(SFLAGS) -o$@ $^ 

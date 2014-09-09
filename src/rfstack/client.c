@@ -56,8 +56,8 @@ void handleFwCmd(rfTrcvPacket_t* packet)
 #ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
 void handleFwWrite(rfTrcvPacket_t* packet)
 {
-    UI16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
-    UI16_t* packetData = (UI16_t*) &(packet->packet.data[8]);
+    uint16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
+    uint16_t* packetData = (uint16_t*) &(packet->packet.data[8]);
     address=0;
     // TODO: Handle encryption
     eepromTxBytes(address, packet->packet.data+8, 8);
@@ -85,7 +85,7 @@ void handleFwWrite(rfTrcvPacket_t* packet)
 void handleFwRead(rfTrcvPacket_t* packet)
 {
     packet->packet.size = 16;
-    UI16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
+    uint16_t address = (packet->packet.data[2] << 8) | packet->packet.data[3];
     address=0;
 
     // This call costs about 3.2ms.
@@ -188,7 +188,7 @@ void HandlePacketClient(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
             // Command
         case RF_CFG_CMD:
             handleCfgCmd(packet);
-            response.sendMsg = TRUE;
+            response.sendMsg = true;
             break;
 
             // Write reports a read action back.
@@ -196,7 +196,7 @@ void HandlePacketClient(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
             handleCfgWrite(packet);
         case RF_CFG_READ:
             handleCfgRead(packet);
-            response.sendMsg = TRUE;
+            response.sendMsg = true;
            break;
 #endif
            
@@ -209,12 +209,12 @@ void HandlePacketClient(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 #ifdef PROTOCOL_SUPPORT_FIRMWARE_BOOTLOADER
         case RF_FW_WRITE:
             handleFwWrite(packet);
-            sendMsg = TRUE;
+            sendMsg = true;
             break;
 
         case RF_FW_READ:
             handleFwRead(packet);
-            sendMsg = TRUE;
+            sendMsg = true;
             break;
             
 #endif

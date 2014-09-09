@@ -7,7 +7,7 @@
 
 typedef struct UDPSocketHandlerInfo_s
 {
-    UI16_t port;
+    uint16_t port;
     UDPSocketHandler_t handler;
 }UDPSocketHandlerInfo_t;
 
@@ -15,7 +15,7 @@ UDPSocketHandlerInfo_t handlers[UDP_MAX_HANDLERS];
 
 void udpInit()
 {
-    UI08_t i = 0;
+    uint8_t i = 0;
 
     while (i < UDP_MAX_HANDLERS)
     {
@@ -26,8 +26,8 @@ void udpInit()
 
 void udpFirePacket(UDPPacket_t* packet)
 {
-    UI08_t i =0 ;
-    bool_t done= FALSE;
+    uint8_t i =0 ;
+    bool done = false;
     
     while (i < UDP_MAX_HANDLERS && !done)
     {
@@ -39,9 +39,9 @@ void udpFirePacket(UDPPacket_t* packet)
     }
 }
 
-void udpRegisterHandler(UDPSocketHandler_t handler, UI16_t port)
+void udpRegisterHandler(UDPSocketHandler_t handler, uint16_t port)
 {
-    UI08_t i =0 ;
+    uint8_t i =0 ;
     while (i < UDP_MAX_HANDLERS)
     {
         if(handlers[i].port == 0xFFFF) // it matches our port
@@ -66,7 +66,7 @@ void udpHandlePacket (EthernetIpv4_t* ipv4)
     udpFirePacket(packet);
 
 }
-void udpTxPacket(UDPPacket_t* packet, UI16_t size, UI08_t* ip, UI16_t port)
+void udpTxPacket(UDPPacket_t* packet, uint16_t size, uint8_t* ip, uint16_t port)
 {
     execProfile(UDP_TX);
     size += sizeof(UDPPacketHeader_t);

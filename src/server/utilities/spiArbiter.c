@@ -3,12 +3,12 @@
 #include "devices/enc28j60.h"
 #include "devices/mrf49xa.h"
 
-UI16_t spiArbEthAcquire()
+uint16_t spiArbEthAcquire()
 {
     ENC28J60_CS_LOW;
-    return TRUE;
+    return true;
 }
-UI16_t spiArbEthComplete(void)
+uint16_t spiArbEthComplete(void)
 {
     ENC28J60_CS_HIGH;
 

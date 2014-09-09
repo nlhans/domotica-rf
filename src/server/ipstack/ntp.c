@@ -2,9 +2,9 @@
 #include "bsp/uart.h"
 #include "utilities/insight.h"
 
-void ntpHandlePacket(UDPPacket_t* udp, bool_t* handled);
+void ntpHandlePacket(UDPPacket_t* udp, bool* handled);
 
-UI32_t ntpTimestamp = 0;
+uint32_t ntpTimestamp = 0;
 
 NTPPacket_t ntpRequestPacket;
 
@@ -12,7 +12,7 @@ void ntpInit()
 {
     udpRegisterHandler(ntpHandlePacket, 123);
 }
-void ntpRequest(UI08_t* ip)
+void ntpRequest(uint8_t* ip)
 {
     memset(&ntpRequestPacket, 0, sizeof(NTPPacket_t));
     
@@ -25,9 +25,9 @@ void ntpRequest(UI08_t* ip)
 
 }
 
-void ntpHandlePacket(UDPPacket_t* udp, bool_t* handled)
+void ntpHandlePacket(UDPPacket_t* udp, bool* handled)
 {
-    *handled = TRUE;
+    *handled = true;
 
     if (udp->udp.portDestination == 123)
     {

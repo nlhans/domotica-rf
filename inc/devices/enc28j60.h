@@ -22,11 +22,11 @@ typedef union enc28j60Register_u
 {
     struct
     {
-        UI08_t addr:5;
-        UI08_t bank:2;
-        UI08_t global:1;
+        uint8_t addr:5;
+        uint8_t bank:2;
+        uint8_t global:1;
     } registerObj;
-    UI08_t registerByte;
+    uint8_t registerByte;
 
 } enc28j60Register_t;
 
@@ -208,22 +208,22 @@ typedef enum enc28j60Registers_e
 
 void enc28j60Initialize();
 void enc28j60NeedsReset(void);
-bool_t enc28j60IsDirty(void);
+bool enc28j60IsDirty(void);
 void enc28j60Reset(void);
 void enc28j60ResetRxBuffer();
-bool_t enc28j60GetOverflowStatus(void);
+bool enc28j60GetOverflowStatus(void);
 
-UI08_t enc28j60PacketPending();
-UI08_t enc28j60GetPacketCount();
-UI08_t enc28j60ReadRegisterUint8(UI08_t address);
+uint8_t enc28j60PacketPending();
+uint8_t enc28j60GetPacketCount();
+uint8_t enc28j60ReadRegisterUint8(uint8_t address);
 
-UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address);
+uint16_t enc28j60ReadPhyRegisterUint16(uint8_t address);
 
 void enc28j60RxFrame(void);
-bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length);
-bool_t enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length);
+bool enc28j60TxFrame(EthernetFrame_t* packet, uint16_t length);
+bool enc28j60TxReplyFrame(EthernetFrame_t* frame, uint16_t length);
 
-bool_t enc28j60RegisterTxHandler(EthernetPacketHandler_t handler);
+bool enc28j60RegisterTxHandler(EthernetPacketHandler_t handler);
 void enc28j60UnregisterTxHandler(EthernetPacketHandler_t handler);
 
 #ifdef DEBUG_CONSOLE

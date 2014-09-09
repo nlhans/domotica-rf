@@ -14,7 +14,7 @@ RtosTimer_t rfTimer;
 RtosTimer_t rfPingTimer;
 
 RtosTask_t rfTask;
-UI08_t rfTaskStk[512];
+uint8_t rfTaskStk[512];
 
 Mrf49xaMac_t mrf49xaInst;
 Mrf49xaMac_t* macPtr = &mrf49xaInst;
@@ -118,7 +118,7 @@ void rfHistoryPut(rfTrcvPacket_t* packet)
 void RfTask()
 {
     rfTrcvPacket_t ping;
-    UI08_t i;
+    uint8_t i;
 
     RF_RES = 1;
     RF_POWER = 0;
@@ -129,7 +129,7 @@ void RfTask()
     PPSUnLock;
 
     iPPSInput(IN_FN_PPS_INT2, IN_PIN_PPS_RP9);
-    ExtIntSetup(2, Mrf49xaServe, TRUE, 6);
+    ExtIntSetup(2, Mrf49xaServe, true, 6);
 
     PPSLock;
 
@@ -143,7 +143,7 @@ void RfTask()
 
     while(1)
     {
-        UI16_t evt = RtosTaskWaitForEvent(
+        uint16_t evt = RtosTaskWaitForEvent(
                             RF_TICK | RF_PINGA);
 
         if (evt & RF_PINGA)
@@ -158,7 +158,7 @@ void RfTask()
             for( i = 1; i < 16 ;i++)
                 ping.packet.data[i] = i;
             
-            Mrf49xaTxPacket(macPtr, &ping, FALSE, FALSE);
+            Mrf49xaTxPacket(macPtr, &ping, false, false);
         }
 
         if (evt & RF_TICK)

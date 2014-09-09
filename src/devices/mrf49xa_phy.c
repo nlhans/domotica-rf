@@ -1,21 +1,23 @@
 #include "devices/mrf49xa.h"
 
+#if BUILD_TARGET != TARGET_SIMULATOR
+
 // Serve MRf49XA chipset when requires attention.
-bool_t Mrf49xaServe(Mrf49xaMac_t* inst)
+bool Mrf49xaServe(Mrf49xaMac_t* inst)
 {
     uint8_t data;
 #ifdef MRF49XA_POWER_SWITCH
     if (mrf49Inst->state == POWERED_OFF)
-        return FALSE;
+        return false;
 #endif
 
     if (mrf49Inst->needsReset)
-        return FALSE;
+        return false;
 
     Mrf49RxSts(mrf49Inst);
 
     if (mrf49Inst->status.byte[0] == 0xFF && mrf49Inst->status.byte[1] == 0xFF)
-        return FALSE;
+        return false;
 
     // Power-on-Reset
     if (mrf49Inst->status.flags.msb.por == 1)
@@ -198,5 +200,7 @@ bool_t Mrf49xaServe(Mrf49xaMac_t* inst)
     // If a packet isn't completely received within that period, the WUT flag
     // occurs & signals the RX statemachine to abort.
 
-    return RF_IRQ == 1 ? TRUE : FALSE;
+    return RF_IRQ == 1 ? true : false;
 }
+
+#endif

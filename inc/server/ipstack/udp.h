@@ -19,11 +19,11 @@ extern "C" {
 
 typedef struct UDPPacketHeader_s
 {
-    UI16_t portSource;
-    UI16_t portDestination;
+    uint16_t portSource;
+    uint16_t portDestination;
 
-    UI16_t length;
-    UI16_t crc;
+    uint16_t length;
+    uint16_t crc;
 } UDPPacketHeader_t;
 
 typedef struct UDPPacket_s
@@ -32,13 +32,13 @@ typedef struct UDPPacket_s
     UDPPacketHeader_t udp;
 } UDPPacket_t;
 
-typedef void (*UDPSocketHandler_t) (UDPPacket_t* udp, bool_t* handled);
+typedef void (*UDPSocketHandler_t) (UDPPacket_t* udp, bool* handled);
 
 void udpInit();
 void udpHandlePacket (EthernetIpv4_t* ipv4);
 
-void udpRegisterHandler(UDPSocketHandler_t handler, UI16_t port);
-void udpTxPacket(UDPPacket_t* packet, UI16_t size, UI08_t* ip, UI16_t port);
+void udpRegisterHandler(UDPSocketHandler_t handler, uint16_t port);
+void udpTxPacket(UDPPacket_t* packet, uint16_t size, uint8_t* ip, uint16_t port);
 
 #ifdef	__cplusplus
 }

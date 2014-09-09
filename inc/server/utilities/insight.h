@@ -77,13 +77,13 @@ typedef enum insightMessages_e
 
 typedef struct insightFormats_s
 {
-    UI16_t msgId;
-    UI16_t msgLvl;
-    UI16_t msgCount;
-    UI16_t msgSizes[16];
+    uint16_t msgId;
+    uint16_t msgLvl;
+    uint16_t msgCount;
+    uint16_t msgSizes[16];
 }insightFormats_t;
 
 void insight_init();
-void insight_msg(UI16_t msgCode, UI16_t fileNumber, UI16_t line, ...);
+void insight_msg(uint16_t msgCode, uint16_t fileNumber, uint16_t line, ...);
 
 #endif

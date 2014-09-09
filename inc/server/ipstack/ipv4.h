@@ -27,19 +27,19 @@ typedef enum EthernetIpv4Protocol_e
 
 typedef struct EthernetIpv4Header_s
 {
-    UI08_t ihl:4;
-    UI08_t version:4;
-    UI08_t DSCP;
-    UI16_t length;
+    uint8_t ihl:4;
+    uint8_t version:4;
+    uint8_t DSCP;
+    uint16_t length;
 
-    UI16_t ID;
-    UI16_t flags;
-    UI08_t timeToLive;
-    UI08_t protocol;
-    volatile UI16_t crc;
+    uint16_t ID;
+    uint16_t flags;
+    uint8_t timeToLive;
+    uint8_t protocol;
+    volatile uint16_t crc;
 
-    UI08_t sourceIp[4];
-    UI08_t destinationIp[4];
+    uint8_t sourceIp[4];
+    uint8_t destinationIp[4];
 
 } EthernetIpv4Header_t;
 
@@ -49,17 +49,17 @@ typedef struct EthernetIpv4_s
     EthernetIpv4Header_t header;
 } EthernetIpv4_t;
 
-typedef void (*Ipv4PacketHandler_t) (EthernetIpv4_t* header, bool_t* handled);
+typedef void (*Ipv4PacketHandler_t) (EthernetIpv4_t* header, bool* handled);
 
 
 void ipv4Init();
 void ipv4RegisterHandler(Ipv4PacketHandler_t myHandler);
 void ipv4UnregisterHandler(Ipv4PacketHandler_t myHandler);
-void ipvFireHandlers(EthernetIpv4_t* frame, UI08_t* data, UI16_t length);
+void ipvFireHandlers(EthernetIpv4_t* frame, uint8_t* data, uint16_t length);
 void ipv4HandlePacket(EthernetFrame_t* frame);
-void ipv4TxPacket(UI08_t* dstIp, UI08_t protocol, EthernetIpv4_t *data, UI16_t size);
-void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize);
-UI16_t ipv4Crc(UI08_t* data, UI16_t size);
+void ipv4TxPacket(uint8_t* dstIp, uint8_t protocol, EthernetIpv4_t *data, uint16_t size);
+void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, uint8_t totalSize);
+uint16_t ipv4Crc(uint8_t* data, uint16_t size);
 
 #ifdef	__cplusplus
 }

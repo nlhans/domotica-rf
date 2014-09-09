@@ -38,27 +38,6 @@ typedef enum AdcChannels_e {
 // Process clocking & fuse bits
 #define _XTAL_FREQ 16000000
 
-#define TRUE 1
-#define FALSE 0
-
-// Standard types
-typedef unsigned char bool_t;
-typedef unsigned char UI08_t;
-typedef unsigned int UI16_t;
-typedef unsigned long UI32_t;
-
-typedef char I08_t;
-typedef int I16_t;
-typedef long I32_t;
-
-typedef unsigned char uint8_t;
-typedef unsigned int uint16_t;
-typedef unsigned long uint32_t;
-
-typedef char int8_t;
-typedef int int16_t;
-typedef long int32_t;
-
 #define GPIO_OUTPUT 0
 #define GPIO_INPUT  1
 

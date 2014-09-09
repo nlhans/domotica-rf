@@ -13,31 +13,31 @@
 #include "utilities/insight.h"
 #include "utilities/executiontime.h"
 
-UI16_t dataPtr;;
-bool_t needReset = FALSE;
+uint16_t dataPtr;;
+bool needReset = false;
 
-const UI08_t* ethPacketBuffer = ethFrameBuffer;
+const uint8_t* ethPacketBuffer = ethFrameBuffer;
 
 void enc28j60SetBank(enc28j60Register_t bank);
 
-void enc28j60WriteUint8(UI08_t reg, UI08_t value);
-void enc28j60WriteUint16(UI08_t reg, UI16_t value);
-UI08_t enc28j60ReadUint8(UI08_t reg);
-UI16_t enc28j60ReadUint16(UI08_t reg);
+void enc28j60WriteUint8(uint8_t reg, uint8_t value);
+void enc28j60WriteUint16(uint8_t reg, uint16_t value);
+uint8_t enc28j60ReadUint8(uint8_t reg);
+uint16_t enc28j60ReadUint16(uint8_t reg);
 
-UI08_t enc28j60ReadRegisterUint16(UI08_t address);
+uint8_t enc28j60ReadRegisterUint16(uint8_t address);
 
-void enc28j60WriteRegisterUint8(UI08_t address, UI08_t value);
-void enc28j60WriteRegisterUint16(UI08_t address, UI16_t value);
+void enc28j60WriteRegisterUint8(uint8_t address, uint8_t value);
+void enc28j60WriteRegisterUint16(uint8_t address, uint16_t value);
 
-static UI08_t currentBank = 0;
+static uint8_t currentBank = 0;
 
 /******************************************************************************/
 /****                                                                      ****/
 /****                   ENC28J60 SPI Command functions                     ****/
 /****                                                                      ****/
 /******************************************************************************/
-void enc28j60WriteUint8(UI08_t reg, UI08_t value)
+void enc28j60WriteUint8(uint8_t reg, uint8_t value)
 {
     spiArbEthAcquire();
     
@@ -48,7 +48,7 @@ void enc28j60WriteUint8(UI08_t reg, UI08_t value)
     
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
-void enc28j60BitSetUint8(UI08_t reg, UI08_t value)
+void enc28j60BitSetUint8(uint8_t reg, uint8_t value)
 {
     spiArbEthAcquire();
 
@@ -59,7 +59,7 @@ void enc28j60BitSetUint8(UI08_t reg, UI08_t value)
 
     INSIGHT(ENC28J60_BITSET_REG, reg, value);
 }
-void enc28j60BitClrUint8(UI08_t reg, UI08_t value)
+void enc28j60BitClrUint8(uint8_t reg, uint8_t value)
 {
     spiArbEthAcquire();
 
@@ -70,7 +70,7 @@ void enc28j60BitClrUint8(UI08_t reg, UI08_t value)
 
     INSIGHT(ENC28J60_BITCLR_REG, reg, value);
 }
-void enc28j60WriteUint16(UI08_t reg, UI16_t value)
+void enc28j60WriteUint16(uint8_t reg, uint16_t value)
 {
     spiArbEthAcquire();
     
@@ -83,9 +83,9 @@ void enc28j60WriteUint16(UI08_t reg, UI16_t value)
     INSIGHT(ENC28J60_WRITE_REG, reg, value);
 }
 
-UI08_t enc28j60ReadUint8(UI08_t reg)
+uint8_t enc28j60ReadUint8(uint8_t reg)
 {
-    UI08_t d;
+    uint8_t d;
 
     spiArbEthAcquire();
 
@@ -97,9 +97,9 @@ UI08_t enc28j60ReadUint8(UI08_t reg)
     return d;
 }
 
-UI08_t enc28j60ReadMacUint8(UI08_t reg)
+uint8_t enc28j60ReadMacUint8(uint8_t reg)
 {
-    UI08_t d;
+    uint8_t d;
 
     spiArbEthAcquire();
 
@@ -115,9 +115,9 @@ UI08_t enc28j60ReadMacUint8(UI08_t reg)
     return d;
 }
 
-UI16_t enc28j60ReadUint16(UI08_t reg)
+uint16_t enc28j60ReadUint16(uint8_t reg)
 {
-    UI16_t d  = 0;
+    uint16_t d  = 0;
     d =      enc28j60ReadUint8(reg);                // low
     d = d | (enc28j60ReadUint8(reg+1) << 8);        // high
 
@@ -146,7 +146,7 @@ void enc28j60SetBank(enc28j60Register_t reg)
 
 }
 
-void enc28j60WriteData(UI08_t* bf, UI16_t size)
+void enc28j60WriteData(uint8_t* bf, uint16_t size)
 {
     spiArbEthAcquire();
     enc28j60_spi_write(WBM | 0x1A);
@@ -155,7 +155,7 @@ void enc28j60WriteData(UI08_t* bf, UI16_t size)
 
 }
 
-void enc28j60ReadData(UI08_t* bf, UI16_t size)
+void enc28j60ReadData(uint8_t* bf, uint16_t size)
 {
     spiArbEthAcquire();
     enc28j60_spi_write(RBM | 0x1A);
@@ -170,7 +170,7 @@ void enc28j60ReadData(UI08_t* bf, UI16_t size)
 /****                                                                      ****/
 /******************************************************************************/
 
-UI08_t enc28j60ReadRegisterUint8(UI08_t address)
+uint8_t enc28j60ReadRegisterUint8(uint8_t address)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -182,7 +182,7 @@ UI08_t enc28j60ReadRegisterUint8(UI08_t address)
     return enc28j60ReadUint8(address);
 }
 
-UI08_t enc28j60ReadRegisterUint16(UI08_t address)
+uint8_t enc28j60ReadRegisterUint16(uint8_t address)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -194,7 +194,7 @@ UI08_t enc28j60ReadRegisterUint16(UI08_t address)
     return enc28j60ReadUint16(address);
 }
 
-void enc28j60WriteRegisterUint8(UI08_t address, UI08_t value)
+void enc28j60WriteRegisterUint8(uint8_t address, uint8_t value)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -207,7 +207,7 @@ void enc28j60WriteRegisterUint8(UI08_t address, UI08_t value)
 }
 
 
-void enc28j60BitSetRegisterUint8(UI08_t address, UI08_t value)
+void enc28j60BitSetRegisterUint8(uint8_t address, uint8_t value)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -220,7 +220,7 @@ void enc28j60BitSetRegisterUint8(UI08_t address, UI08_t value)
 }
 
 
-void enc28j60BitClrRegisterUint8(UI08_t address, UI08_t value)
+void enc28j60BitClrRegisterUint8(uint8_t address, uint8_t value)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -232,7 +232,7 @@ void enc28j60BitClrRegisterUint8(UI08_t address, UI08_t value)
     enc28j60BitClrUint8(address, value);
 }
 
-void enc28j60WriteRegisterUint16(UI08_t address, UI16_t value)
+void enc28j60WriteRegisterUint16(uint8_t address, uint16_t value)
 {
     enc28j60Register_t reg;
     reg.registerByte = address;
@@ -246,7 +246,7 @@ void enc28j60WriteRegisterUint16(UI08_t address, UI16_t value)
     enc28j60WriteUint8(address+1, (value & 0xFF00)>>8);
 }
 
-void enc28j60WritePhyRegisterUint16(UI08_t address, UI16_t value)
+void enc28j60WritePhyRegisterUint16(uint8_t address, uint16_t value)
 {
     // write MIREGADR
     enc28j60WriteRegisterUint8(MIREGADR, address);
@@ -255,9 +255,9 @@ void enc28j60WritePhyRegisterUint16(UI08_t address, UI16_t value)
     enc28j60WriteRegisterUint16(MIWRL, value);
 }
 
-UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
+uint16_t enc28j60ReadPhyRegisterUint16(uint8_t address)
 {
-    UI16_t temp;
+    uint16_t temp;
     
     // write MIREGADR
     enc28j60WriteRegisterUint8(MIREGADR, address);
@@ -293,15 +293,15 @@ UI16_t enc28j60ReadPhyRegisterUint16(UI08_t address)
 /****                                                                      ****/
 /******************************************************************************/
 
-bool_t enc28j60GetOverflowStatus(void)
+bool enc28j60GetOverflowStatus(void)
 {
-    return FALSE;
-    //return (((enc28j60ReadRegisterUint8(EIR) & 0x1) == 0x0) ? TRUE : FALSE);
+    return false;
+    //return (((enc28j60ReadRegisterUint8(EIR) & 0x1) == 0x0) ? true : false);
 }
 
 void enc28j60Initialize()
 {
-    needReset = FALSE;
+    needReset = false;
      dataPtr            = ENC28J60_RXBUF_START;
     ENC28J60_CS_HIGH; // deselect chip
     
@@ -375,11 +375,11 @@ void enc28j60Initialize()
     //enc28j60WritePhyRegisterUint16(PHLCON, 0b0000010010100000); // B: blink fast, A: link status, no stretching
 }
 
-bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
+bool enc28j60TxFrame(EthernetFrame_t* packet, uint16_t length)
 {
     execProfile(ENC_TX_FRAME);
-    UI08_t controlByte = 0x00;
-    UI32_t timeout = 0xFFFFF;
+    uint8_t controlByte = 0x00;
+    uint32_t timeout = 0xFFFFF;
 
     // clear status/error flags
     // Errata B7.10
@@ -426,13 +426,13 @@ bool_t enc28j60TxFrame(EthernetFrame_t* packet, UI16_t length)
     // Todo: report status
     INSIGHT(ENC28J60_TX, length, packet->dstMac[0], packet->dstMac[1], packet->dstMac[2], packet->dstMac[3], packet->dstMac[4], packet->dstMac[5]);
     
-    return (timeout < 2) ? FALSE : TRUE;
+    return (timeout < 2) ? false : true;
 }
 
-bool_t enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
+bool enc28j60TxReplyFrame(EthernetFrame_t* frame, uint16_t length)
 {
     execProfile(ENC_TX_REPLY_FRAME);
-    UI08_t tmpMac[6];
+    uint8_t tmpMac[6];
 
     // Swap MAC addresses.
     memcpy(tmpMac,          frame->dstMac   , 6);
@@ -446,14 +446,14 @@ bool_t enc28j60TxReplyFrame(EthernetFrame_t* frame, UI16_t length)
 void enc28j60RxFrame(void)
 {
     // Buffer information, which were previously parameters.
-    UI08_t*             packet              = ethFrameBuffer;
-    UI16_t              length              = sizeof(ethFrameBuffer);
+    uint8_t*             packet              = ethFrameBuffer;
+    uint16_t              length              = sizeof(ethFrameBuffer);
 
-    UI08_t              packetCount         = enc28j60GetPacketCount();
-    UI08_t              packetHeader[6];
+    uint8_t              packetCount         = enc28j60GetPacketCount();
+    uint8_t              packetHeader[6];
     EthernetFrame_t*    frame;
 
-    UI08_t i = 0;
+    uint8_t i = 0;
 
     while(packetCount > 0)
     {
@@ -468,9 +468,9 @@ void enc28j60RxFrame(void)
         // Read the ENC header.
         enc28j60ReadData(packetHeader+i, 6);
 
-        UI16_t  nextPacketOffset    = packetHeader[0] | (packetHeader[1] << 8);
-        UI16_t  packetSize          = packetHeader[2] | (packetHeader[3] << 8);
-        UI16_t  receiveStatus       = packetHeader[4] | (packetHeader[5] << 8);
+        uint16_t  nextPacketOffset    = packetHeader[0] | (packetHeader[1] << 8);
+        uint16_t  packetSize          = packetHeader[2] | (packetHeader[3] << 8);
+        uint16_t  receiveStatus       = packetHeader[4] | (packetHeader[5] << 8);
 
         if (((receiveStatus >> 4) & 0x1) == 0)
         {
@@ -534,12 +534,12 @@ void enc28j60RxFrame(void)
     return;
 }
 
-UI08_t enc28j60PacketPending()
+uint8_t enc28j60PacketPending()
 {
     return (enc28j60ReadRegisterUint8(EIR) & 0x40) > 0;
 }
 
-UI08_t enc28j60GetPacketCount()
+uint8_t enc28j60GetPacketCount()
 {
     return enc28j60ReadRegisterUint8(EPKTCNT);
 }
@@ -578,10 +578,10 @@ void enc28j60Reset(void)
 
 void enc28j60NeedsReset(void)
 {
-    needReset = TRUE;
+    needReset = true;
 }
 
-bool_t enc28j60IsDirty(void)
+bool enc28j60IsDirty(void)
 {
     return needReset;
 }

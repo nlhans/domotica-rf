@@ -13,7 +13,7 @@ void icmpHandlePacket (EthernetIpv4_t* header)
     {
         packet->icmp.type = 0;
         packet->icmp.crc = 0;
-        packet->icmp.crc = htons( ipv4Crc( (UI08_t*) (&packet->icmp), header->header.length - sizeof(EthernetIpv4Header_t)) );
+        packet->icmp.crc = htons( ipv4Crc( (uint8_t*) (&packet->icmp), header->header.length - sizeof(EthernetIpv4Header_t)) );
 
         INSIGHT(ICMP_PINGPONG);
         ipv4TxReplyPacket((EthernetIpv4_t*) packet, header->header.length - sizeof(EthernetIpv4Header_t) );

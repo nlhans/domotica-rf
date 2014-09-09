@@ -38,16 +38,16 @@
 #endif
 
 #ifdef PIC24GA
-    #define F_OSC_DIV_2 ((UI32_t)16000000)
+    #define F_OSC_DIV_2 ((uint32_t)16000000)
 #include <PPS.h>
 #endif
 #ifdef PIC24GB
-    #define F_OSC_DIV_2 ((UI32_t)8000000)
+    #define F_OSC_DIV_2 ((uint32_t)8000000)
 #include <PPS.h>
 #endif
 #ifdef dsPIC33
-    //#define F_OSC_DIV_2 ((UI32_t)26000000)
-#define F_OSC_DIV_2 ((UI32_t)22848000)
+    //#define F_OSC_DIV_2 ((uint32_t)26000000)
+#define F_OSC_DIV_2 ((uint32_t)22848000)
 #include <pps.h>
 #endif
 
@@ -83,17 +83,6 @@ typedef enum AdcChannels_e
 #define BSP_EXT_INT_COUNT 3 // This PIC has 3 ext interrupt lines
 #define BSP_UART_COUNT 2
 
-#define TRUE 1
-#define FALSE 0
-
-typedef unsigned char bool_t;
-typedef unsigned char UI08_t;
-typedef unsigned int UI16_t;
-typedef unsigned long UI32_t;
-
-typedef char I08_t;
-typedef int I16_t;
-typedef long I32_t;
 #define __delay_ms(x)
 #define __delay_us(x) do { for(i = 0; i < x; i++) asm volatile("nop"); } while(0);
 

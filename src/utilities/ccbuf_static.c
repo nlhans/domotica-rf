@@ -10,7 +10,7 @@ inline void _CCBufInit(void)
 inline void _CCBufReset(void)
 {
     // Reset buffer
-    UI08_t i = CCDef->size;
+    uint8_t i = CCDef->size;
     while (i > 0)
     {
         i--;
@@ -21,24 +21,24 @@ inline void _CCBufReset(void)
     CCDef->wrPt = 0;
 }
 
-UI08_t _CCBufCalcPt(UI08_t entry, I08_t move)
+uint8_t _CCBufCalcPt(uint8_t entry, I08_t move)
 {
     I08_t result = ((I08_t)entry) + move;
 
     while (result < 0) result += CCDef->size;
     while (result >= CCDef->size) result -= CCDef->size;
 
-    return (UI08_t) result;
+    return (uint8_t) result;
 }
 
-inline bool_t _CCBufCanWr(void)
+inline bool _CCBufCanWr(void)
 {
-    if (CCDef->wrPt == CCDef->rdPt) return FALSE;
-    else return TRUE;
+    if (CCDef->wrPt == CCDef->rdPt) return false;
+    else return true;
 }
 
 
-inline void _CCBufRdReverse(UI08_t qty)
+inline void _CCBufRdReverse(uint8_t qty)
 {
     CCDef->rdPt = _CCBufCalcPt(CCDef->rdPt, 0-qty);
     if (CCDef->rdPt == CCDef->wrPt)
@@ -48,50 +48,50 @@ inline void _CCBufRdReverse(UI08_t qty)
     }
 }
 
-inline bool_t _CCBufCanRd(void)
+inline bool _CCBufCanRd(void)
 {
     // If RD pt is done +1, is it at WR pt?
     // If that is the case, then the buffer is empty.
-    if (_CCBufCalcPt(CCDef->rdPt, 1) == CCDef->wrPt) return FALSE;
-    else return TRUE;
+    if (_CCBufCalcPt(CCDef->rdPt, 1) == CCDef->wrPt) return false;
+    else return true;
 }
 
-UI08_t _CCBufRdByte(void)
+uint8_t _CCBufRdByte(void)
 {
     if (_CCBufCanRd())
     {
         CCDef->rdPt = _CCBufCalcPt(CCDef->rdPt, 1);
-        UI08_t res = CCDef->bf[CCDef->rdPt];
+        uint8_t res = CCDef->bf[CCDef->rdPt];
         //CCDef->bf[CCDef->rdPt] = 0;
         return res;
     }
     return 0;
 }
 
-UI08_t _CCBufPeekByte(void)
+uint8_t _CCBufPeekByte(void)
 {
     if (_CCBufCanRd())
     {
-        UI08_t res = CCDef->bf[_CCBufCalcPt(CCDef->rdPt, 1)];
+        uint8_t res = CCDef->bf[_CCBufCalcPt(CCDef->rdPt, 1)];
         return res;
     }
     return 0;
 }
 
-UI08_t _CCBufRd(UI08_t* bf, UI08_t max)
+uint8_t _CCBufRd(uint8_t* bf, uint8_t max)
 {
-    UI08_t read = 0;
+    uint8_t read = 0;
 
     while (_CCBufCanRd() && read < max)
     {
-        bf[read] = (UI08_t) _CCBufRdByte();
+        bf[read] = (uint8_t) _CCBufRdByte();
         read++;
     }
 
     return read;
 }
 
-void _CCBufWrByte(UI08_t data)
+void _CCBufWrByte(uint8_t data)
 {
     if (_CCBufCanWr())
     {
@@ -100,7 +100,7 @@ void _CCBufWrByte(UI08_t data)
     }
 }
 
-void _CCBufWr(UI08_t* bf, UI08_t count)
+void _CCBufWr(uint8_t* bf, uint8_t count)
 {
     while (count > 0)
     {
@@ -110,9 +110,9 @@ void _CCBufWr(UI08_t* bf, UI08_t count)
     }
 }
 
-UI08_t _CCBufGetRdCount(void)
+uint8_t _CCBufGetRdCount(void)
 {
-    UI08_t distance = CCDef->wrPt - CCDef->rdPt;
+    uint8_t distance = CCDef->wrPt - CCDef->rdPt;
     if (CCDef->rdPt > CCDef->wrPt)
     {
         distance += CCDef->size;

@@ -33,11 +33,11 @@ const char* const RtosStateText[5] = {
 RtosTask_t RtosTaskIdleObj;
 
 
-static UI08_t RtosTaskIdleStk[256];
+static uint8_t RtosTaskIdleStk[256];
 
 static RtosTask_t* RtosActiveTask;
-volatile UI08_t* RtosKernelStackPos;
-volatile UI16_t RtosCriticalNesting;
+volatile uint8_t* RtosKernelStackPos;
+volatile uint16_t RtosCriticalNesting;
 
 
 /* Idle task */
@@ -52,12 +52,12 @@ void RtosTaskIdleFnc()
 /* Initialize task kernel */
 void RtosTaskInit()
 {
-    RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, (UI08_t*)RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
+    RtosTaskCreate(&RtosTaskIdleObj, "Idle", RtosTaskIdleFnc, 0, (uint8_t*)RtosTaskIdleStk, sizeof(RtosTaskIdleStk));
     RtosActiveTask = &RtosTaskIdleObj;
 }
 
 /* Initialize task object. */
-void RtosTaskCreate(RtosTask_t* task, char* name, void* function, UI08_t priority, UI08_t* stack, UI16_t stackSize)
+void RtosTaskCreate(RtosTask_t* task, char* name, void* function, uint8_t priority, uint8_t* stack, uint16_t stackSize)
 {
     if (task == &RtosTaskIdleObj)
     {
@@ -163,14 +163,14 @@ void RtosKernelRestoreTask(RtosTask_t* task)
 {
     RtosActiveTask = task;
     RtosKernelStackPos = task->stackPosition;
-    //SPLIM = (UI16_t) (task->stack + task->stackSize) - 1;
+    //SPLIM = (uint16_t) (task->stack + task->stackSize) - 1;
     task->state = TASK_STATE_RUNNING;
 }
 
 /* Store task context. */
 void RtosKernelStoreTask(RtosTask_t* task)
 {
-    task->stackPosition = (UI08_t*) RtosKernelStackPos;
+    task->stackPosition = (uint8_t*) RtosKernelStackPos;
     if (task->state == TASK_STATE_RUNNING)
     {
         task->state = TASK_STATE_READY;
@@ -179,7 +179,7 @@ void RtosKernelStoreTask(RtosTask_t* task)
     task->lastRun = RtosTimestamp;
     task->timeRan++;
     
-    task->stackUsage = ((UI16_t)task->stackPosition - (UI16_t)task->stack);
+    task->stackUsage = ((uint16_t)task->stackPosition - (uint16_t)task->stack);
     if (task->stackUsage > task->stackMaxUsage)
         task->stackMaxUsage = task->stackUsage;
 #endif
@@ -187,7 +187,7 @@ void RtosKernelStoreTask(RtosTask_t* task)
 
 
 #ifdef RTOS_EVENTS
-UI16_t RtosTaskWaitForEvent(UI16_t mask)
+uint16_t RtosTaskWaitForEvent(uint16_t mask)
 {
     // Suspend the current task untill the event is fired.
     RtosActiveTask->eventMask = mask;
@@ -202,13 +202,13 @@ UI16_t RtosTaskWaitForEvent(UI16_t mask)
     // Reset mask
     RtosActiveTask->eventMask = 0;
     
-    UI16_t t = RtosActiveTask->eventStore;
+    uint16_t t = RtosActiveTask->eventStore;
     RtosActiveTask->eventStore &= ~mask;
 
     return t;
 }
 
-void RtosTaskSignalEvent(RtosTask_t* task, UI16_t event)
+void RtosTaskSignalEvent(RtosTask_t* task, uint16_t event)
 {
     if (task != NULL)
     {

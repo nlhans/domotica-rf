@@ -23,56 +23,56 @@ void EthTask(void);
 void EthHwInit(void);
 
 void ethTcpTick(void);
-bool_t enc28j60Int(UI08_t foo);
+bool enc28j60Int(uint8_t foo);
 
 // ethernet OS objects
 RtosTask_t ethTask;
 RtosTimer_t tcpTicker;
-UI08_t ethTaskStk[768];
+uint8_t ethTaskStk[768];
 
 #define ETH_TCP_TICK 0x01
 #define ETH_ENC_ISR 0x02
 #define ETH_ENC_ERR 0x04
 
 // IP stack constants
-UI08_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
-const UI08_t myIp[4]            = {192, 168, 1, 123};
-const UI08_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x66};
-const UI08_t myGateway[4]       = {192, 168, 1, 1};
-//const UI08_t myGatewayMac[6]    = {0xE0, 0x3F, 0x49, 0x95, 0x36, 0xA8 };
+uint8_t ethFrameBuffer[ETHERNET_FRAME_SIZE];
+const uint8_t myIp[4]            = {192, 168, 1, 123};
+const uint8_t myMac[6]           = {0x00, 0x04, 0xA3, 0x12, 0x34, 0x66};
+const uint8_t myGateway[4]       = {192, 168, 1, 1};
+//const uint8_t myGatewayMac[6]    = {0xE0, 0x3F, 0x49, 0x95, 0x36, 0xA8 };
 const uint8_t myGatewayMac[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-//const UI08_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
-//const UI08_t myGatewayMac[6]    = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
+//const uint8_t myGatewayMac[6]    = {0xB0, 0x48, 0x7A, 0xDB, 0x5B, 0xEA };
+//const uint8_t myGatewayMac[6]    = {0xC8, 0x60, 0x00, 0xE3, 0x4F, 0xE3};
 
 // Redirect to ENC28J60 device
 void macRxFrame()
 {
     enc28j60RxFrame();
 }
-void macTxFrame(EthernetFrame_t* packet, UI16_t length)
+void macTxFrame(EthernetFrame_t* packet, uint16_t length)
 {
     enc28j60TxFrame(packet, length);
 }
-void macTxReplyFrame(EthernetFrame_t* packet, UI16_t length)
+void macTxReplyFrame(EthernetFrame_t* packet, uint16_t length)
 {
     enc28j60TxReplyFrame(packet, length);
 }
 
 // Webserver handling
-bool_t httpHandleConnection(void* con)
+bool httpHandleConnection(void* con)
 {
     TcpConnection_t* connection = (TcpConnection_t*) con;
     connection->rxData = (TcpRxDataHandler_t) WebserverHandle;
 
-    return TRUE;
+    return true;
 }
 
-bool_t httpCloseConnection(void* con)
+bool httpCloseConnection(void* con)
 {
     TcpConnection_t* connection = (TcpConnection_t*) con;
     connection->rxData = NULL;
 
-    return TRUE;
+    return true;
 }
 
 // Initialize ethernet task
@@ -89,7 +89,7 @@ void EthHwInit(void)
 
     // Hook up external interrupt to enc28j60 driver
     iPPSInput(IN_FN_PPS_INT1, IN_PIN_PPS_RP15);
-    ExtIntSetup(1, enc28j60Int, TRUE, 2);
+    ExtIntSetup(1, enc28j60Int, true, 2);
 
     PPSLock;
 
@@ -108,10 +108,10 @@ void ethTcpTick(void)
     RtosTimerRearm(&tcpTicker, 100);
 }
 
-bool_t enc28j60Int(UI08_t foo)
+bool enc28j60Int(uint8_t foo)
 {
     RtosTaskSignalEvent(&ethTask, ETH_ENC_ISR);
-    return TRUE;
+    return true;
 }
 
 volatile uint8_t econ1, econ2, estat, aha;
@@ -124,7 +124,7 @@ void EthTask(void)
     
     while(1)
     {
-        UI16_t evt = RtosTaskWaitForEvent(
+        uint16_t evt = RtosTaskWaitForEvent(
                 ETH_TCP_TICK |
                 ETH_ENC_ERR |
                 ETH_ENC_ISR);

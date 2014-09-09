@@ -1,10 +1,10 @@
 #include "rtos/timer.h"
 #include "rtos/task.h"
 
-UI08_t rtosTimerChainStarted = 0;
+uint8_t rtosTimerChainStarted = 0;
 RtosTimer_t* rtosTimerChain;
 
-void RtosTimerCreate(RtosTimer_t* tObj, UI16_t inTime, TimerHandler_t handler)
+void RtosTimerCreate(RtosTimer_t* tObj, uint16_t inTime, TimerHandler_t handler)
 {
     if (rtosTimerChainStarted == 0)
     {
@@ -23,7 +23,7 @@ void RtosTimerCreate(RtosTimer_t* tObj, UI16_t inTime, TimerHandler_t handler)
     RtosTimerRearm(tObj, inTime);
 }
 
-void RtosTimerRearm(RtosTimer_t* tObj, UI16_t inTime)
+void RtosTimerRearm(RtosTimer_t* tObj, uint16_t inTime)
 {
     tObj->lastRun = RtosTimestamp;
     tObj->nextRun = RtosTimestamp + inTime;

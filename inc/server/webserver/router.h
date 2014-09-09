@@ -3,6 +3,6 @@
 
 #include "stddefs.h"
 
-void WebserverHandle(void* con, bool_t push, char* d, UI16_t s);
+void WebserverHandle(void* con, bool push, char* d, uint16_t s);
 
 #endif

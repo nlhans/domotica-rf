@@ -12,7 +12,7 @@
 void ipv4HandlePacket(EthernetFrame_t* frame)
 {
     EthernetIpv4_t*         ipv4Header;
-    UI08_t                  headerSize;
+    uint8_t                  headerSize;
     
     ipv4Header = (EthernetIpv4_t*) frame;
     ipv4Header->header.length = htons(ipv4Header->header.length);
@@ -42,13 +42,13 @@ void ipv4HandlePacket(EthernetFrame_t* frame)
     
 }
 
-UI16_t ipv4Crc(UI08_t* data, UI16_t size)
+uint16_t ipv4Crc(uint8_t* data, uint16_t size)
 {
-    UI16_t b = 0;
-    UI16_t* dataUI16 = (UI16_t*) (data);
-    UI32_t crc = 0;
-    UI32_t sum = 0;
-    UI08_t counts = 0;
+    uint16_t b = 0;
+    uint16_t* dataUI16 = (uint16_t*) (data);
+    uint32_t crc = 0;
+    uint32_t sum = 0;
+    uint8_t counts = 0;
 
     while (b < size/2)
     {
@@ -63,10 +63,10 @@ UI16_t ipv4Crc(UI08_t* data, UI16_t size)
     sum += b;
     crc = ~sum;
 
-    return (UI16_t) crc;
+    return (uint16_t) crc;
 }
 
-void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize)
+void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, uint8_t totalSize)
 {
     execProfile(IPV4_TX_REPLY);
     totalSize += sizeof(EthernetIpv4Header_t);
@@ -82,7 +82,7 @@ void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize)
     ipv4Packet->frame.type          = htons(ipv4Packet->frame.type);
     ipv4Packet->header.length       = htons(ipv4Packet->header.length);
     execProfile(IPV4_CRC_S);
-    ipv4Packet->header.crc          = htons(ipv4Crc((UI08_t*)(&ipv4Packet->header), 4*ipv4Packet->header.ihl ) );
+    ipv4Packet->header.crc          = htons(ipv4Crc((uint8_t*)(&ipv4Packet->header), 4*ipv4Packet->header.ihl ) );
     execProfile(IPV4_CRC_E);
 
     INSIGHT(IPV4_TX_REPLY, totalSize, ipv4Packet->header.protocol, htons(ipv4Packet->header.crc),
@@ -91,7 +91,7 @@ void ipv4TxReplyPacket(EthernetIpv4_t* ipv4Packet, UI08_t totalSize)
     macTxReplyFrame((EthernetFrame_t*)ipv4Packet, totalSize);
 }
 
-void ipv4TxPacket(UI08_t* dstIp, UI08_t protocol, EthernetIpv4_t *ipv4Packet, UI16_t size)
+void ipv4TxPacket(uint8_t* dstIp, uint8_t protocol, EthernetIpv4_t *ipv4Packet, uint16_t size)
 {
     execProfile(IPV4_TX);
     size += sizeof(EthernetIpv4Header_t);
@@ -114,7 +114,7 @@ void ipv4TxPacket(UI08_t* dstIp, UI08_t protocol, EthernetIpv4_t *ipv4Packet, UI
     ipv4Packet->header.protocol     = protocol;
     ipv4Packet->header.crc          = 0;
     execProfile(IPV4_CRC_S);
-    ipv4Packet->header.crc          = htons(ipv4Crc((UI08_t*)(&ipv4Packet->header), 4*ipv4Packet->header.ihl ) );
+    ipv4Packet->header.crc          = htons(ipv4Crc((uint8_t*)(&ipv4Packet->header), 4*ipv4Packet->header.ihl ) );
     execProfile(IPV4_CRC_E);
 
     INSIGHT(IPV4_TX, size, ipv4Packet->header.protocol, htons(ipv4Packet->header.crc),

@@ -1,7 +1,7 @@
 #include "bsp/softI2c.h"
 #include "devices/24aa64.h"
 
-void eepromRxBytes(UI16_t address, UI08_t* data, UI08_t size)
+void eepromRxBytes(uint16_t address, uint8_t* data, uint8_t size)
 {
     // Random read
     SoftI2cStart();
@@ -22,7 +22,7 @@ void eepromRxBytes(UI16_t address, UI08_t* data, UI08_t size)
     }
     SoftI2cStop();
 }
-void eepromTxBytes(UI16_t address, UI08_t* data, UI08_t size)
+void eepromTxBytes(uint16_t address, uint8_t* data, uint8_t size)
 {
     // Random-write
     SoftI2cStart();
@@ -40,13 +40,13 @@ void eepromTxBytes(UI16_t address, UI08_t* data, UI08_t size)
     SoftI2cStop();
 }
 
-UI08_t eepromRxByte(UI16_t address)
+uint8_t eepromRxByte(uint16_t address)
 {
-    UI08_t dat;
+    uint8_t dat;
     eepromRxBytes(address, &dat, 1);
     return dat;
 }
-void eepromTxByte(UI16_t address, UI08_t byte)
+void eepromTxByte(uint16_t address, uint8_t byte)
 {
     eepromTxBytes(address, &byte, 1);
 }

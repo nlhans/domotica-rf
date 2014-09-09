@@ -4,8 +4,8 @@
 
 void HandlePacketServer(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 {
-    bool_t sendMsg = FALSE;
-    bool_t sendAck = FALSE;
+    bool sendMsg = false;
+    bool sendAck = false;
 
     // Ping-pong
     switch (packet->packet.id)
@@ -22,7 +22,7 @@ void HandlePacketServer(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
             if (packet->packet.data[0] == 1)
             {
                 packet->packet.data[0] = 2;
-                sendMsg = TRUE;
+                sendMsg = true;
                 printf("Ping-pong\n");
             }
             else
@@ -33,24 +33,24 @@ void HandlePacketServer(Mrf49xaMac_t* inst, rfTrcvPacket_t* packet)
 
         case RF_POWER_STATUS:
             //TODO: Add node to client list
-            sendMsg = FALSE;
-            sendAck = TRUE;
+            sendMsg = false;
+            sendAck = true;
             break;
 
         case RF_TIME_SYNC:
             syncedTime = *((uint32_t*) packet->packet.data);
-            sendMsg = FALSE;
-            sendAck = TRUE;
+            sendMsg = false;
+            sendAck = true;
             break;
 
         case RF_APP_SAMPLE:
-            sendAck = TRUE;
+            sendAck = true;
             break;
     }
 
     // TODO: RF data response statemachine
     if (sendMsg)
-        Mrf49xaTxPacket(inst, packet, TRUE, sendAck);
+        Mrf49xaTxPacket(inst, packet, true, sendAck);
     else if (sendAck)
         Mrf49xaTxAck(inst, packet);
     else

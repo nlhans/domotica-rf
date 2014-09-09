@@ -14,30 +14,30 @@
 
 typedef struct CircBufDef_s
 {
-    UI08_t* bf;
-    UI16_t size;
-    UI16_t wrPt;
-    UI16_t rdPt;
-    UI08_t options;
-    UI08_t faults;
+    uint8_t* bf;
+    uint16_t size;
+    uint16_t wrPt;
+    uint16_t rdPt;
+    uint8_t options;
+    uint8_t faults;
 } CircBufDef_t;
 
-void CCBufInit(CircBufDef_t* CCDef, UI08_t* bf, UI16_t size, UI08_t options);
+void CCBufInit(CircBufDef_t* CCDef, uint8_t* bf, uint16_t size, uint8_t options);
 void CCBufReset(CircBufDef_t* CCDef);
-UI08_t CCBufGetFaultStatus(CircBufDef_t* CCDef);
+uint8_t CCBufGetFaultStatus(CircBufDef_t* CCDef);
 
-UI16_t CCBufCalcPt(CircBufDef_t* CCDef, UI16_t entry, I16_t move);
-bool_t CCBufCanWr(CircBufDef_t* CCDef);
-bool_t CCBufCanRd(CircBufDef_t* CCDef);
-UI16_t CCBufRdByte(CircBufDef_t* CCDef);
-UI16_t CCBufPeekByte(CircBufDef_t* CCDef);
-void CCBufRdReverse(CircBufDef_t* CCDef, UI16_t qty);
+uint16_t CCBufCalcPt(CircBufDef_t* CCDef, uint16_t entry, int16_t move);
+bool CCBufCanWr(CircBufDef_t* CCDef);
+bool CCBufCanRd(CircBufDef_t* CCDef);
+uint16_t CCBufRdByte(CircBufDef_t* CCDef);
+uint16_t CCBufPeekByte(CircBufDef_t* CCDef);
+void CCBufRdReverse(CircBufDef_t* CCDef, uint16_t qty);
 
-UI16_t CCBufRd(CircBufDef_t* CCDef, UI08_t* bf, UI16_t max);
-bool_t CCBufWrByte(CircBufDef_t* CCDef, UI08_t data);
-bool_t CCBufWr(CircBufDef_t* CCDef, UI08_t* bf, UI16_t count);
+uint16_t CCBufRd(CircBufDef_t* CCDef, uint8_t* bf, uint16_t max);
+bool CCBufWrByte(CircBufDef_t* CCDef, uint8_t data);
+bool CCBufWr(CircBufDef_t* CCDef, uint8_t* bf, uint16_t count);
 
-UI16_t CCBufGetRdCount(CircBufDef_t* CCDef);
+uint16_t CCBufGetRdCount(CircBufDef_t* CCDef);
 // TODO: CCBufGetWrCount
 
 #endif

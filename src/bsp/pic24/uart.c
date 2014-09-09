@@ -116,7 +116,7 @@ void uartTxDmaCompleted(uint8_t dma)
     }
 }
 
-bool_t UartTxDmaStatus(uint8_t port)
+bool UartTxDmaStatus(uint8_t port)
 {
     return DmaIsBusy(uartToDma[port]);
 }

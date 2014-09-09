@@ -77,7 +77,7 @@ void TimerInitPeriodic16Isr(uint8_t index, uint32_t period, TimerHandler_t callb
         // TODO: Error?
     }
     
-    hwTimers[index-1].used = TRUE;
+    hwTimers[index-1].used = true;
     hwTimers[index-1].type = Periodic16Isr;
     hwTimers[index-1].ISR.callback = callback;
     

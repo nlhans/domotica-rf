@@ -1,4 +1,5 @@
 #include "devices/mrf49xa.h"
+#if BUILD_TARGET != TARGET_SIMULATOR
 
 volatile const Mrf49InitReg_t const mrfRegset_Init[] = {
     REG(REG_FIFORSTREG,   FIFORST_RESET),
@@ -63,7 +64,7 @@ void mrf49xaCfg(Mrf49InitReg_t* regs, uint8_t count)
     SetupRegistersLoop(regs, count);
 }
 
-bool_t Mrf49xaSignalPresent(Mrf49xaMac_t* inst)
+bool Mrf49xaSignalPresent(Mrf49xaMac_t* inst)
 {
     Mrf49RxSts(mrf49Inst);
     if (mrf49Inst->status.flags.msb.signalPresent == 0)
@@ -177,3 +178,5 @@ void Mrf49xaInit(Mrf49xaMac_t* inst)
 #endif
     }
 }
+
+#endif

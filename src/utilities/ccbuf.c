@@ -1,7 +1,7 @@
 #include "utilities/ccbuf.h"
 
 
-void CCBufInit(CircBufDef_t* CCDef, UI08_t* bf, UI16_t size, UI08_t options)
+void CCBufInit(CircBufDef_t* CCDef, uint8_t* bf, uint16_t size, uint8_t options)
 {
     CCDef->size = size;
     CCDef->bf = bf;
@@ -18,14 +18,14 @@ void CCBufReset(CircBufDef_t* CCDef)
     CCDef->faults = 0;
 }
 
-UI08_t CCBufGetFaultStatus(CircBufDef_t* CCDef)
+uint8_t CCBufGetFaultStatus(CircBufDef_t* CCDef)
 {
     return CCDef->faults;
 }
 
-UI16_t CCBufCalcPt(CircBufDef_t* CCDef, UI16_t entry, I16_t move)
+uint16_t CCBufCalcPt(CircBufDef_t* CCDef, uint16_t entry, int16_t move)
 {
-    I32_t result = (I32_t)entry + (I32_t)move;
+    int32_t result = (int32_t)entry + (int32_t)move;
 
     if (result < 0) result += CCDef->size;
     if (result < 0) return CCBUF_CALC_ERROR_UNDER;
@@ -33,30 +33,30 @@ UI16_t CCBufCalcPt(CircBufDef_t* CCDef, UI16_t entry, I16_t move)
     if (result >= CCDef->size) result -= CCDef->size;
     if (result >= CCDef->size) return CCBUF_CALC_ERROR_OVER;
 
-    return (UI16_t) result;
+    return (uint16_t) result;
 }
 
-bool_t CCBufCanWr(CircBufDef_t* CCDef)
+bool CCBufCanWr(CircBufDef_t* CCDef)
 {
-    if ((CCDef->faults & CCBUF_FLT_OVERFLOW) != 0) return FALSE;
-    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return FALSE;
+    if ((CCDef->faults & CCBUF_FLT_OVERFLOW) != 0) return false;
+    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return false;
     if (CCDef->wrPt > CCDef->size)
     {
         CCDef->faults |= CCBUF_FLT_BF_ERR;
     }
 
-    if (CCDef->wrPt == CCDef->rdPt) return FALSE;
-    else return TRUE;
+    if (CCDef->wrPt == CCDef->rdPt) return false;
+    else return true;
 }
 
-void CCBufRdReverse(CircBufDef_t* CCDef, UI16_t qty)
+void CCBufRdReverse(CircBufDef_t* CCDef, uint16_t qty)
 {
     CCDef->rdPt = CCBufCalcPt(CCDef, CCDef->rdPt, 0-qty);
 }
 
-bool_t CCBufCanRd(CircBufDef_t* CCDef)
+bool CCBufCanRd(CircBufDef_t* CCDef)
 {
-    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return FALSE;
+    if ((CCDef->faults & CCBUF_FLT_BF_ERR) != 0) return false;
     if (CCDef->rdPt > CCDef->size)
     {
         CCDef->faults |= CCBUF_FLT_BF_ERR;
@@ -64,16 +64,16 @@ bool_t CCBufCanRd(CircBufDef_t* CCDef)
 
     // If RD pt is done +1, is it at WR pt?
     // If that is the case, then the buffer is empty.
-    if (CCBufCalcPt(CCDef, CCDef->rdPt, 1) == CCDef->wrPt) return FALSE;
-    else return TRUE;
+    if (CCBufCalcPt(CCDef, CCDef->rdPt, 1) == CCDef->wrPt) return false;
+    else return true;
 }
 
-UI16_t CCBufRdByte(CircBufDef_t* CCDef)
+uint16_t CCBufRdByte(CircBufDef_t* CCDef)
 {
     if (CCBufCanRd(CCDef))
     {
         CCDef->rdPt = CCBufCalcPt(CCDef, CCDef->rdPt, 1);
-        UI08_t res = CCDef->bf[CCDef->rdPt];
+        uint8_t res = CCDef->bf[CCDef->rdPt];
         CCDef->bf[CCDef->rdPt] = 0;
         return res;
     }
@@ -84,11 +84,11 @@ UI16_t CCBufRdByte(CircBufDef_t* CCDef)
     }
 }
 
-UI16_t CCBufPeekByte(CircBufDef_t* CCDef)
+uint16_t CCBufPeekByte(CircBufDef_t* CCDef)
 {
     if (CCBufCanRd(CCDef))
     {
-        UI08_t res = CCDef->bf[CCBufCalcPt(CCDef, CCDef->rdPt, 1)];
+        uint8_t res = CCDef->bf[CCBufCalcPt(CCDef, CCDef->rdPt, 1)];
         return res;
     }
     else
@@ -98,41 +98,41 @@ UI16_t CCBufPeekByte(CircBufDef_t* CCDef)
     }
 }
 
-UI16_t CCBufRd(CircBufDef_t* CCDef, UI08_t* bf, UI16_t max)
+uint16_t CCBufRd(CircBufDef_t* CCDef, uint8_t* bf, uint16_t max)
 {
-    UI16_t read = 0;
+    uint16_t read = 0;
 
     while (CCBufCanRd(CCDef) && read < max)
     {
-        bf[read] = (UI08_t) CCBufRdByte(CCDef);
+        bf[read] = (uint8_t) CCBufRdByte(CCDef);
         read++;
     }
 
     return read;
 }
 
-bool_t CCBufWrByte(CircBufDef_t* CCDef, UI08_t data)
+bool CCBufWrByte(CircBufDef_t* CCDef, uint8_t data)
 {
     if (CCBufCanWr(CCDef))
     {
         CCDef->bf[CCDef->wrPt] = data;
         CCDef->wrPt = CCBufCalcPt(CCDef, CCDef->wrPt, 1);
 
-        return TRUE;
+        return true;
     }
     else if ((CCDef->options & CCDEF_OPT_ALLOW_OVERFLOW) == 0)
     {
         printf("[CCBuf] Cannot write; overflow\n");
         CCDef->faults |= CCBUF_FLT_OVERFLOW;
     }
-    return FALSE;
+    return false;
 
 }
 
-bool_t CCBufWr(CircBufDef_t* CCDef, UI08_t* bf, UI16_t count)
+bool CCBufWr(CircBufDef_t* CCDef, uint8_t* bf, uint16_t count)
 {
-    bool_t result = TRUE;
-    UI16_t index = 0;
+    bool result = true;
+    uint16_t index = 0;
 
     while (result && index < count)
     {
@@ -143,9 +143,9 @@ bool_t CCBufWr(CircBufDef_t* CCDef, UI08_t* bf, UI16_t count)
     return result;
 }
 
-UI16_t CCBufGetRdCount(CircBufDef_t* CCDef)
+uint16_t CCBufGetRdCount(CircBufDef_t* CCDef)
 {
-    UI16_t distance = CCDef->wrPt - CCDef->rdPt;
+    uint16_t distance = CCDef->wrPt - CCDef->rdPt;
     if (CCDef->rdPt > CCDef->wrPt)
     {
         distance += CCDef->size;

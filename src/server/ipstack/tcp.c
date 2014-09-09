@@ -26,13 +26,13 @@ TcpListener_t tcpListeners[TCP_MAX_LISTEN_PORTS];
 TcpConnection_t tcpConnections[TCP_MAX_CONNECTIONS];
 
 TcpConnection_t* tcpPickFreeConnection();
-TcpConnection_t* tcpMatchPort(UI16_t localPort);
-TcpConnection_t* tcpMatchConnection(UI08_t* ip, UI16_t remotePort);
-void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags);
+TcpConnection_t* tcpMatchPort(uint16_t localPort);
+TcpConnection_t* tcpMatchConnection(uint8_t* ip, uint16_t remotePort);
+void tcpStatemachine(bool onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags);
 
 void tcpInit()
 {
-    UI08_t i = 0;
+    uint8_t i = 0;
 
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
@@ -40,7 +40,7 @@ void tcpInit()
     }
     for(i = 0; i < TCP_MAX_LISTEN_PORTS; i++)
     {
-        tcpListeners[i].InUse = FALSE;
+        tcpListeners[i].InUse = false;
     }
 }
 
@@ -65,7 +65,7 @@ void tcpHandlePacket(EthernetIpv4_t* ipv4)
 
     if (connection != NULL)
     {
-        INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+        INSIGHT(TCP_RX_CONNECTION, (uint8_t)(connection - tcpConnections), connection->state);
     }
     else
     {
@@ -77,7 +77,7 @@ void tcpHandlePacket(EthernetIpv4_t* ipv4)
             memcpy(connection->remoteMac, packet->ipv4.frame.srcMac, 6);
             connection->remotePort = packet->tcp.portSource;
             INSIGHT(TCP_RX_RESERVING);
-            INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+            INSIGHT(TCP_RX_CONNECTION, (uint8_t)(connection - tcpConnections), connection->state);
         }
         else
         {
@@ -86,13 +86,13 @@ void tcpHandlePacket(EthernetIpv4_t* ipv4)
         }
     }
 
-    tcpStatemachine(TRUE, packet, connection, flags);
+    tcpStatemachine(true, packet, connection, flags);
     
 }
 
 TcpConnection_t* tcpPickFreeConnection()
 {
-    UI08_t i;
+    uint8_t i;
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         if(tcpConnections[i].state == TcpClosed)
@@ -103,9 +103,9 @@ TcpConnection_t* tcpPickFreeConnection()
     }
     return NULL;
 }
-TcpConnection_t* tcpMatchConnection(UI08_t* ip, UI16_t remotePort)
+TcpConnection_t* tcpMatchConnection(uint8_t* ip, uint16_t remotePort)
 {
-    UI08_t i;
+    uint8_t i;
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         if(tcpConnections[i].state != TcpClosed
@@ -118,9 +118,9 @@ TcpConnection_t* tcpMatchConnection(UI08_t* ip, UI16_t remotePort)
     }
     return NULL;
 }
-TcpConnection_t* tcpMatchPort(UI16_t localPort)
+TcpConnection_t* tcpMatchPort(uint16_t localPort)
 {
-    UI08_t i;
+    uint8_t i;
     for(i = 0; i < TCP_MAX_CONNECTIONS; i++)
     {
         if(tcpConnections[i].state == TcpListen
@@ -133,9 +133,9 @@ TcpConnection_t* tcpMatchPort(UI16_t localPort)
     return NULL;
 }
 
-bool_t tcpListenMore(TcpListener_t* listener)
+bool tcpListenMore(TcpListener_t* listener)
 {
-    UI08_t i = 0, c = 0;
+    uint8_t i = 0, c = 0;
     TcpConnection_t* connection;
     
     for(; i < TCP_MAX_LISTEN_PORTS; i++)
@@ -151,41 +151,41 @@ bool_t tcpListenMore(TcpListener_t* listener)
         connection = tcpPickFreeConnection();
         if(connection == NULL)
         {
-            return FALSE;
+            return false;
         }
         connection->listener = listener;
         connection->state = TcpListen; // this is a server
         INSIGHT(TCP_LISTEN, listener->localPort);
 
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close)
+bool tcpListen(uint16_t port, uint8_t maxConnections, TcpConnectedHandler_t accept, TcpConnectedHandler_t close)
 {
-    UI08_t i;
+    uint8_t i;
     TcpConnection_t* connection;
 
     for(i = 0; i < TCP_MAX_LISTEN_PORTS; i++)
     {
         if(tcpListeners[i].localPort == port) 
         {
-            return FALSE; // error!
+            return false; // error!
         }
     }
     for(i = 0; i < TCP_MAX_LISTEN_PORTS; i++)
     {
-        if(tcpListeners[i].InUse == FALSE)
+        if(tcpListeners[i].InUse == false)
         {
             // Pick up 1 connection that listens at this port
             connection = tcpPickFreeConnection();
             if(connection == NULL)
             {
-                return FALSE;
+                return false;
             }
-            tcpListeners[i].InUse = TRUE;
+            tcpListeners[i].InUse = true;
             tcpListeners[i].localPort = port;
             tcpListeners[i].maxConnections = maxConnections;
             tcpListeners[i].acceptConnectionHandler = accept;
@@ -195,16 +195,16 @@ bool_t tcpListen(UI16_t port, UI08_t maxConnections, TcpConnectedHandler_t accep
             connection->listener = &(tcpListeners[i]);
             connection->state = TcpListen; // this is a server
             INSIGHT(TCP_LISTEN, port);
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
-void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags)
+void tcpStatemachine(bool onRx, TcpPacket_t *packet, TcpConnection_t *connection, TcpFlags_t flags)
 {
     EthernetIpv4_t* ipv4 = (EthernetIpv4_t*) packet;
-    UI32_t sequenceNumber = 0, acknowledgeNumber = 0;
+    uint32_t sequenceNumber = 0, acknowledgeNumber = 0;
 
     execProfile(TCP_STATE_MACHINE);
 
@@ -248,7 +248,7 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
                 packet->tcp.acknowledgement = sequenceNumber+1;
                 packet->tcp.sequenceNumber = 0xAA55AA55;
 
-                // Execute handler; if TRUE send ACK
+                // Execute handler; if true send ACK
                 // Otherwise send RST
                 if (connection->listener->acceptConnectionHandler((void*)connection))
                 {
@@ -309,13 +309,13 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
                 else if (packet->tcp.sequenceNumber >= connection->lastSequenceNumber)
                 {
                     // Record data.
-                    UI08_t headerOffset = 4*packet->tcp.flags.bits.dataOffset;
+                    uint8_t headerOffset = 4*packet->tcp.flags.bits.dataOffset;
                     INSIGHT(DATASIZE, headerOffset);
-                    UI16_t payloadSize = ipv4->header.length - sizeof(EthernetIpv4Header_t) - headerOffset;
+                    uint16_t payloadSize = ipv4->header.length - sizeof(EthernetIpv4Header_t) - headerOffset;
                     INSIGHT(DATASIZE, payloadSize);
-                    UI32_t ackNumber = payloadSize + sequenceNumber;
+                    uint32_t ackNumber = payloadSize + sequenceNumber;
                     INSIGHT(TCP_RX_DATA, 0);
-                    bool_t push = packet->tcp.flags.bits.psh;
+                    bool push = packet->tcp.flags.bits.psh;
 
                     flags.bits.ack = 1;
 
@@ -331,7 +331,7 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
                     //connection->lastSequenceNumber = packet->tcp.sequenceNumber;
 
                     execProfile(TCP_RX_DATA_B);
-                    connection->rxData(connection, push, ((UI08_t*)(&packet->tcp)) + headerOffset, payloadSize);
+                    connection->rxData(connection, push, ((uint8_t*)(&packet->tcp)) + headerOffset, payloadSize);
                     execProfile(TCP_RX_DATA_E);
                 }
             }
@@ -411,16 +411,16 @@ void tcpStatemachine(bool_t onRx, TcpPacket_t *packet, TcpConnection_t *connecti
             connection->state = TcpListen;//TcpClosed;
             break;
     }
-    INSIGHT(TCP_RX_CONNECTION, (UI08_t)(connection - tcpConnections), connection->state);
+    INSIGHT(TCP_RX_CONNECTION, (uint8_t)(connection - tcpConnections), connection->state);
 }
 
-UI16_t tcpCrc(TcpPacket_t* packet, UI08_t* data, UI16_t size)
+uint16_t tcpCrc(TcpPacket_t* packet, uint8_t* data, uint16_t size)
 {
-    UI08_t counts = 0;
-    volatile UI16_t b = 0;
-    volatile UI16_t* dataUI16 = (UI16_t*) (data);
-    volatile UI32_t crc = 0;
-    volatile UI32_t sum = 0;
+    uint8_t counts = 0;
+    volatile uint16_t b = 0;
+    volatile uint16_t* dataUI16 = (uint16_t*) (data);
+    volatile uint32_t crc = 0;
+    volatile uint32_t sum = 0;
 
     while (b < size/2)
     {
@@ -435,10 +435,10 @@ UI16_t tcpCrc(TcpPacket_t* packet, UI08_t* data, UI16_t size)
     sum += b;
     crc = ~sum;
 
-    return (UI16_t) crc;
+    return (uint16_t) crc;
 }
 
-void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection)
+void tcpTxReplyPacket(uint16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, TcpConnection_t* connection)
 {
     dataSize += 4 * flags.bits.dataOffset;
 
@@ -453,7 +453,7 @@ void tcpTxReplyPacket(UI16_t dataSize, TcpFlags_t flags, TcpPacket_t* packet, Tc
     packet->tcp.flags.data = htons(flags.data);
     packet->tcp.crc = 0;
     execProfile(TCP_CRC_S);
-    packet->tcp.crc = ipv4Crc((UI08_t*)&(packet->ipv4.header.sourceIp), dataSize + 8) - dataSize - 6; // +8 for IP's
+    packet->tcp.crc = ipv4Crc((uint8_t*)&(packet->ipv4.header.sourceIp), dataSize + 8) - dataSize - 6; // +8 for IP's
     execProfile(TCP_CRC_E);
     INSIGHT(TCP_TX_REPLY, connection->remoteIp[0], connection->remoteIp[1], connection->remoteIp[2], connection->remoteIp[3], dataSize, packet->tcp.crc, flags.data);
     packet->tcp.crc = htons(packet->tcp.crc);
@@ -470,7 +470,7 @@ char* tcpGetDataPtr()
     return (char*) (&(ethFrameBuffer[sizeof(EthernetIpv4_t)+20]));
 }
 
-void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
+void tcpTxPacket(uint16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
 {
     TcpPacket_t * packet = (TcpPacket_t*) ethFrameBuffer;
 
@@ -493,7 +493,7 @@ void tcpTxPacket(UI16_t dataSize, TcpFlags_t flags, TcpConnection_t* connection)
     packet->tcp.length = htons(1400);
     packet->tcp.flags.data = htons(flags.data);
     packet->tcp.crc = 0;
-    packet->tcp.crc = ipv4Crc((UI08_t*)&(packet->ipv4.header.sourceIp), dataSize + 8+1) - dataSize - 6; // +8 for IP's
+    packet->tcp.crc = ipv4Crc((uint8_t*)&(packet->ipv4.header.sourceIp), dataSize + 8+1) - dataSize - 6; // +8 for IP's
 
     INSIGHT(TCP_TX, connection->remoteIp[0], connection->remoteIp[1], connection->remoteIp[2], connection->remoteIp[3], dataSize, packet->tcp.crc, flags.data);
     
@@ -520,7 +520,7 @@ void tcpCloseObj(TcpConnection_t* connection)
 
 void tcpTick(void)
 {
-    UI08_t i = 0;
+    uint8_t i = 0;
     TcpFlags_t flags;
     flags.data = 0;
     // Tick each connection
@@ -529,7 +529,7 @@ void tcpTick(void)
         if(tcpConnections[i].state != TcpClosed &&
            tcpConnections[i].state != TcpListen)
         {
-            tcpStatemachine(FALSE, NULL, tcpConnections + i, flags);
+            tcpStatemachine(false, NULL, tcpConnections + i, flags);
         }
     }
 }
