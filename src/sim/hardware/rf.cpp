@@ -1,9 +1,9 @@
-#include <QDebug>
-
-#include "rf.h"
 #include "devices/mrf49xa.h"
+#include "hardware/rf.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*************************** RF HUB ******************************/
 
@@ -156,11 +156,11 @@ void HwRfClient::Tick()
             {
                 if (this->mac->hwRx->crc != this->main->airByte)
                 {
-                    qDebug() << this->id << "RX packet CRC fail!" << this->mac->hwRx->crc;
+                    fprintf(stderr, "RX packet CRC fail %02X expected %02X calculated!\r\n", this->main->airByte, this->mac->hwRx->crc);
                 }
                 else
                 {
-                    qDebug() << this->id << "RX packet!";
+                    fprintf(stdout, "RX packet!\r\n");
                 }
 
                 this->mac->state = RECV_IDLE;
@@ -168,7 +168,7 @@ void HwRfClient::Tick()
             }
             else if (this->main->dataQuality == 0)
             {
-                qDebug() << this->id <<"RX error; lost signal!" << this->mac->hwByte << "of"<<this->mac->hwRx->packet.size;
+                fprintf(stderr, "RX error; lost signal! %d of %d\r\n", this->mac->hwByte, this->mac->hwRx->packet.size);
 
                 memset(this->mac->hwRx->raw, 0, RF_PACKET_LENGTH);
                 this->mac->hwByte = 0;
@@ -207,7 +207,7 @@ void HwRfClient::Tick()
             if (this->mac->hwByte >= this->mac->txPacket.packet.size + 1 &&
                 this->mac->txPacket.packet.size != 0)
             {
-                qDebug() << this->id <<"TX packet!" << this->main->dataQuality << this->mac->txPacket.crc;
+                fprintf(stdout, "TX packet; quality %d, CRC %02X\r\n", this->mac->hwByte, this->mac->hwRx->packet.size);
 
                 this->SwitchBuffer(1);
                 this->mac->txPacket.state = PKT_FREE;

@@ -2,8 +2,7 @@
 #define HARDWARE_RF_BUS
 
 #include <stdint.h>
-#include <QString>
-#include <QThread>
+#include <unistd.h>
 
 #include "devices/mrf49xa.h"
 #include "devices/device.h"
@@ -80,7 +79,7 @@ class HwRfMain
 
         static void msleep(unsigned long msecs)
         {
-            QThread::msleep(msecs);
+		usleep(msecs*1000);
         }
 };
 

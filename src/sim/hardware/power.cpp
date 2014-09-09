@@ -1,8 +1,7 @@
-#include <QThread>
-
 #include "hardware/power.h"
 
 #include <math.h>
+#include <stdlib.h>
 
 void PwrI2cWake() {}
 void PwrI2cSleep() {}
@@ -19,7 +18,6 @@ void PwrAdcWake()
 }
 void PwrAdcSleep()
 {
-    //Qt::HANDLE threadID = QThread::currentThreadId();
 }
 
 void Mcp9800Start(uint8_t mode)

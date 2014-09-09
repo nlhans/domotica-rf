@@ -2,6 +2,7 @@
 #define DEVICES_MRF49XA_DEFS
 
 #include <stdint.h>
+#include "stddefs.h"
 
 #define RF_DATARATE 2400
 #define RF_DATARATE_SLOW
@@ -313,8 +314,8 @@ typedef struct Mrf49xaMac_s
     uint8_t nodeId;
     uint8_t hwByte:7;
     bool needsReset:1;
-#ifdef BSP_SIMULATOR
-    HwRfClient* client;
+#if BUILD_TARGET == TARGET_SIMULATOR
+    void* client;
 #endif
 } Mrf49xaMac_t;
 

@@ -17,14 +17,15 @@ int main(int argc, char *argv[])
     DomoticaSimulator w;
     w.show();
 
-    hardware = new DeviceHardware();
+    /*hardware = new DeviceHardware();
     hardware->start();
 
     master = new DeviceMaster(hardware);
-    master->start();
+    master->start();*/
 
     for (int k = 0; k < 1; k++)
     {
+fprintf(stdout, "Creating thread %d", k);
         slaves[k] = new DeviceSlave(k, hardware);
         slaves[k]->start();
     }

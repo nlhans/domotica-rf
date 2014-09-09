@@ -1,8 +1,7 @@
-#include "device_slave.h"
+#include "devices/device_slave.h"
 
 #include <stdio.h>
-
-#include <QDebug>
+#include <unistd.h>
 
 #include "hardware/rf.h"
 
@@ -14,6 +13,8 @@
 #include "hardware/power.h"
 #include "bsp/adc.h"
 
+void* device_run(void* arg);
+
 DeviceSlave::DeviceSlave(uint16_t id, DeviceHardware* hw)
 {
     this->hw = hw;
@@ -22,23 +23,35 @@ DeviceSlave::DeviceSlave(uint16_t id, DeviceHardware* hw)
     this->rf = new HwRfClient((Device*)hw, id, hw->rfBus);
 
     this->hw->rfBus->Connect(this->rf);
+    
+    // Create pthread
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_create(&this->simMain, &attr, device_run, (void*)this);
 }
 
 void DeviceSlave::Sleepy(uint16_t time)
 {
-    this->usleep(time*500);
+    usleep(time*500);
 }
 
-void DeviceSlave::run()
+void Sleepy(uint16_t time)
 {
-    uint16_t powerStatusTicker;
-    Mrf49xaMac_t* macPtr = this->rf->mac;
+    usleep(time*500);
+}
 
-    Sleepy(this->id*334);
+void* device_run(void* arg)
+{
+    DeviceSlave* thr = (DeviceSlave*) arg;
+
+    uint16_t powerStatusTicker;
+    Mrf49xaMac_t* macPtr = thr->rf->mac;
+    fprintf(stdout, "Hello from %d\r\n", thr->id);
+    Sleepy(thr->id*334);
 
     while(1)
     {
-        Mrf49xaTick(this->rf->mac);
+        Mrf49xaTick(thr->rf->mac);
         Sleepy(1);
     }
 
@@ -95,4 +108,6 @@ void DeviceSlave::run()
         PwrRfSleep();
         //Mrf49xaTick(this->rf->mac);
     }
+    pthread_exit(NULL);
+    return arg;
 }

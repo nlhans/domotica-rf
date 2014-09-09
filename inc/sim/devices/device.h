@@ -2,7 +2,6 @@
 #define DEVICE_H
 
 #include <stdint.h>
-#include <QThread>
 
 class Device
 {

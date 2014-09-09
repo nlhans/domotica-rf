@@ -7,7 +7,6 @@ BUILDDIR := build
 TARGETDIR   := bin/$(TARGET)
 
 MAPFILE := $(TARGETDIR)/$(TARGET).map
-DESIRED_EXEFILE := $(TARGETDIR)/$(TARGET).hex
 
 CXXFLAGS := -g
 
@@ -56,23 +55,31 @@ INCLUDES += -I"$(INCDIR)/bsp/$(ENV)/"
 # Set up compiler environment
 ifeq ($(ENV),sim)
 	CC := gcc
+	CXX := g++
+	CLK := g++
 	OBJEXT := o
 
 	# Compiler Configuration
-	CFLAGS += -Wall
+	CFLAGS += -Wall -pthread
 	CFLAGS += $(INCLUDES)
 
+	CXXFLAGS += -Wall
+	CXXFLAGS += $(INCLUDES)
+
 	# Linker configuration
+	LFLAGS += -lstdc++ -pthread
 	LFLAGS += $(INCLUDES)
 
 	# Elf > hex not needed
-	EXEFILE := $(TARGETDIR)/$(TARGET).hex
+	DESIRED_EXEFILE := $(TARGETDIR)/$(TARGET)
+	EXEFILE := $(TARGETDIR)/$(TARGET)
 	BIN2HEX := /dev/null
 else
 	ifeq ($(ENV),pic16)
 
 		# Compiler Configuration
 		CC := "/opt/microchip/xc8/v1.30/bin/xc8"
+		CLK := "/opt/microchip/xc8/v1.30/bin/xc8"
 		OBJEXT := p1
 
 		CFLAGS = --pass1 --chip=16LF1508 -Q -G  --double=24 --float=24 --opt=default,+asm,-asmfile,-speed,+space,-debug --addrqual=require --mode=pro -P -N255 --warn=0 --ext=IAR --asmlist --summary=default,-psect,-class,+mem,+hex,+file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,+download,-stackcall,+clib --output=-mcof,+elf:multilocs
@@ -84,11 +91,13 @@ else
 
 		# Elf > hex not needed
 		EXEFILE := $(TARGETDIR)/$(TARGET).hex
+		DESIRED_EXEFILE := $(TARGETDIR)/$(TARGET).hex
 		BIN2HEX := /dev/null
 	else
 		ifeq ($(ENV),pic24)
 			# Compiler Configuration
 			CC := /opt/microchip/xc16/v1.21/bin/xc16-gcc
+			CLK := /opt/microchip/xc16/v1.21/bin/xc16-gcc
 			CS := /opt/microchip/xc16/v1.21/bin/xc16-as
 			OBJEXT := d
 
@@ -100,6 +109,7 @@ else
 			
 			# Elf > hex step
 			EXEFILE := $(TARGETDIR)/$(TARGET).elf
+			DESIRED_EXEFILE := $(TARGETDIR)/$(TARGET).hex
 			BIN2HEX := /opt/microchip/xc16/v1.21/bin/xc16-bin2hex
 		else
 		endif
@@ -131,14 +141,14 @@ $(DESIRED_EXEFILE):
 	@echo "$(BIN2HEX) $(EXEFILE) -a  -omf=elf"
 	$(BIN2HEX) $(EXEFILE) -a  -omf=elf 
 
-$(EXEFILE): $(OBJECTS_C) $(OBJECTS_ASM) $(SOURCES_H)
+$(EXEFILE): $(OBJECTS_C) $(OBJECTS_ASM) $(OBJECTS_CPP) $(SOURCES_H)
 	@echo "Working directory: $(shell pwd)"
 	@echo "Build target $(TARGET), environment $(ENV), compiler $(CC)"	 
 	@echo "Sources path: $(SOURCES_DIR)"
 	@echo "Includes path: $(INCLUDES)"
 
 	$(MKPATH) $(TARGETDIR) $(BUILDDIR)
-	@echo " Linking..."; $(CC) $(LFLAGS) $^ -o$(EXEFILE) $(LIB)
+	@echo " Linking..."; $(CLK) $(LFLAGS) $^ -o$(EXEFILE) $(LIB)
 #	@echo " $(CC) $(LFLAGS) $^ -o $(TARGETDIR) $(LIB)";
 	
 	$(RM) -r $(BUILDDIR)
@@ -152,6 +162,10 @@ clean:
 build/%.$(OBJEXT) : src/%.$(SRCEXT_C)
 	@echo "\r\n**** Compiling file $^"; $(MKPATH) $(shell dirname $@)
 	@echo ""; $(CC) $(CFLAGS) $(DEFINES) -o$@ -c $^ 
+
+build/%.$(OBJEXT) : src/%.$(SRCEXT_CPP)
+	@echo "\r\n**** Compiling file $^"; $(MKPATH) $(shell dirname $@)
+	@echo ""; $(CXX) $(CXXFLAGS) $(DEFINES) -o$@ -c $^ 
 
 #	@echo " $(MKPATH) $(shell dirname $@)"; 
 #	@echo " $(CC) $(CFLAGS) $(DEFINES) -o$@ $^ "; 
